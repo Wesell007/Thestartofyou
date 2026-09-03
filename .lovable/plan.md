@@ -1,67 +1,56 @@
-# AIC-3 — Permissioned Companion Memory (controlled MVP)
+# AIC-4 — Conversation Continuity
 
-Build-mode approval is registered against this plan. Approving it starts implementation; no further planning pass follows.
+One conversation system shared by the site-wide companion panel and `/ask`. No new long-term memory. AIC-3 memory flags stay OFF. Persistent history ships behind its own OFF-by-default flags.
 
-## Pre-implementation audit (verified)
+## Audit findings (verified in code)
 
-- `/prototype/memory-settings` is front-end only: local state, synthetic items, no Supabase, no fetch, no storage, `noindex`, companion suppressed. It stays unchanged and unlinked.
-- No production memory storage exists. Nothing in `profiles` overlaps except `companion_name`, `companion_tone`, `baby_illustration_style`, which stay with `useCompanionIdentity`.
-- `/account` and `/account-settings` both render `AccountSettings.tsx`, already sectioned (Your companion, Download your data, Current journey, Delete account) — the production home for memory management.
-- `ai-search` is anonymous today: `useAISearch` sends the publishable key as `Authorization`, no user is verified, rate limiting is by hashed IP.
-- `delete-account` verifies the caller's JWT and calls `auth.admin.deleteUser`, so `on delete cascade` removes memory with the account.
-- AIC-2's `journeyContextContract.ts` / `aiJourneyContext.ts` stay the journey layer; memory never enters them.
-- The model runtime is plain SSE text with no structured tool/metadata channel, so companion-proposed memory is deferred (`confirmed_suggestion` not implemented, usage count 0).
+- `CompanionProvider` holds panel messages in local React state (`CompanionTurn[]`, `{id, role, text, clarification?}`), plus `lastQuestion`, a `committedRef` guard that commits a finished stream once, and `useAISearch` for streaming/abort/retry. State dies on provider unmount; it survives route changes because the provider is mounted globally, and it survives panel close (only `open` toggles).
+- `AskPage` has no message list at all. Each question is a fresh render driven by `?q`/router state; a `lastQueryRef` request key guards duplicate submits; `reset()` then `ask()` per question.
+- Pseudo-continuity lives in `AskPage.goToQuestion`: it concatenates `Previous question: …` / `Previous answer: …` into the freeform `context` string and passes `previousQuestion` in router state for a "Back to previous question" button. Three inline cards (`TTCAskCompanionCard`, `SectionAskAI`, `FirstYearAskCompanion`) do their own local `Previous answer:` append — those are inline single-shot CTAs, out of AIC-4 scope, and stay unchanged.
+- `askNavigation` carries `{question, context}` only. `companionRequest` builds `{query, context?, mode, journeyContext?}`. `useAISearch` posts to `ai-search` with the session JWT when signed in.
+- `ai-search` order today: CORS → body validation → rate limit → kill switch → urgent match → journey context → memory (flag-gated) → grounding → model → SSE. No conversation table exists in the database.
 
-## 1. Migration (one)
+## What gets built
 
-`public.companion_memories`: `id`, `user_id uuid not null references auth.users(id) on delete cascade`, `category companion_memory_category not null`, `value text not null`, `normalised_value text` **generated/derived server-side**, `source companion_memory_source not null`, `created_at`, `updated_at` (+ `set_updated_at` trigger).
+### 1. Shared conversation runtime (client)
 
-- Categories: `preference | personal_detail | plan | relationship | support_preference | other`. No clinical categories.
-- Sources: `explicit_command | settings` only.
-- `normalised_value` is derived by the database from `value` (stored generated column, or a `BEFORE INSERT OR UPDATE` trigger if the normalisation needs immutability-unsafe functions). The client never supplies it.
-- `CHECK` on trimmed `value` length 1–240.
-- Unique index on `(user_id, normalised_value)` for exact duplicate prevention.
-- Row cap of 50 per user, enforced by a trigger that takes a per-user advisory lock so concurrent writes cannot exceed it.
-- A narrow credential-shaped blocker trigger (obvious password/token/key/card patterns). Documented as a backstop only — the richer policy lives in the application, with no claim that regex classifies sensitive data completely.
-- `GRANT SELECT, INSERT, UPDATE, DELETE TO authenticated`, `GRANT ALL TO service_role`, no `anon`. RLS enabled with four owner-only policies on `auth.uid() = user_id` (with `WITH CHECK` on insert/update).
+- New `CompanionConversationProvider` mounted alongside `CompanionProvider` (or folded into it) owning: active conversation id, `CompanionMessage[]`, send, streaming assistant text, new conversation, clear/delete, restore.
+- Canonical contract: `{ id, role: "user" | "assistant", content, createdAt, status?: "streaming" | "complete" | "error", clientMessageId?, clarification? }`. Nothing hidden is stored — no prompts, journey context, memory, tokens.
+- `CompanionProvider` and `AskPage` both read/write this one runtime. No panel-local transcript, no `/ask`-only transcript.
+- `useAISearch` stays the only AI transport; the request gains an optional `conversationId` and, for anonymous users only, a bounded `sessionHistory` array.
 
-## 2. Application layers
+### 2. Anonymous continuity
 
-- `src/lib/companion/memory/companionMemoryPolicy.ts` — pure: normalisation, category validation, length rules, prohibited-content checks (credentials/secrets, and clinical/diagnostic content, including refusing to turn "I might have anxiety" into a stored fact), duplicate rules, deterministic update eligibility. No Supabase, React or AI.
-- `src/lib/companion/memory/memoryIntent.ts` — pure, precision-first detection of "remember that X", "please remember X", "forget X", "forget that". Ambiguous input never mutates; it either continues as ordinary conversation or asks.
-- `src/lib/companion/memory/companionMemoryRepository.ts` — the only browser Supabase memory CRUD: `list`, `create`, `update`, `delete`. Uses session identity plus RLS; never accepts a caller-supplied `userId`.
-- `src/lib/companion/memory/useCompanionMemoryInteraction.ts` — one shared conversational path used by both `CompanionPanel` and `AskPage`. No parsing duplicated per surface.
+Provider state covers route changes and panel close/reopen. Refresh is covered by one narrowly scoped `sessionStorage` key holding only visible user/assistant messages, capped (20 messages, 2000 chars each, ~20 KB total), cleared with the browser session. No `localStorage`, no server rows for anonymous users.
 
-## 3. Conversational flow
+### 3. Authenticated persistence (behind flags)
 
-Explicit command → intercepted before any model call → policy check → pending candidate in React state only → confirmation card ("Remember this" / "Cancel") → confirm writes exactly one row; cancel writes none. Prohibited commands are rejected locally and never sent to the model. Anonymous users get a plain sign-in explanation and no storage of any kind. Forget acts only on an unambiguously identified memory; otherwise it asks or points to the settings section. Contradiction replacement only when the target memory is matched exactly.
+New tables `public.companion_conversations` and `public.companion_messages`, AIC-3 ownership pattern (`user_id default auth.uid()`), owner-only RLS, GRANTs, cascade from conversation → messages and from `auth.users`. Active conversation = most recently active non-archived conversation, or the client-held id validated against ownership server-side.
 
-## 4. Server retrieval
+`ai-search` becomes server-authoritative for authenticated history: verify JWT, verify conversation ownership, load bounded prior messages under RLS, persist the user turn idempotently by `client_message_id`, persist the assistant turn only on a completed stream. Foreign `conversationId` → treated as no history (403-equivalent, documented), never a fallback read of another user's thread.
 
-`useAISearch` sends the current Supabase access token as `Authorization` when a session exists, keeping the publishable key as `apikey`; anonymous requests stay byte-identical to today. `ai-search` verifies the token with Supabase auth and, on success, queries `companion_memories` through a **user-scoped client carrying that token so RLS stays active** — no service role, no client-supplied user id. Invalid or expired tokens fall back to AI without memory; normal AI never fails because of memory.
+### 4. Prompt integration
 
-Bounded rendering: at most 8 memories, 240 chars each, 800 chars total; deterministic selection by category priority (`preference`, `support_preference`, then the rest) then `updated_at` descending, then `id` for stability. Rendered as a separate `<permissioned_memory>` block with narrow trusted instructions (user-approved details, use only when relevant, current message wins, authoritative journey context wins on stage facts, memory is not medical truth, never reveal internal metadata, safety overrides personalisation). No IDs, sources or timestamps. Precedence order preserved: current message → journey context → memory → page/entry context → general knowledge.
+Separate `<conversation_history>` block, escaped content, no internal ids. Bounded: 10 messages, 1200 chars per message, 4000 chars rendered. Trusted instructions state history is prior context and the current turn wins. Precedence unchanged: system/safety > current request > journey context > memory > history > page/entry context.
 
-## 5. Feature gating
+### 5. Pseudo-continuity removal
 
-Two minimal switches, no framework: `VITE_COMPANION_MEMORY_ENABLED` (client UX: settings section and conversational capture) and `AI_MEMORY_ENABLED` (server retrieval). Both default off, so the implementation can ship with production memory disabled until the privacy/legal release gate clears. They are read from one shared constant per side so the two can never disagree in a way that hides injected memory.
+Once real history parity passes, remove the `Previous question:` / `Previous answer:` concatenation and the `previousQuestion` router-state field from `AskPage`/`askNavigation`. Only one continuity mechanism runs.
 
-## 6. UI
+### 6. Minimal UI
 
-New "What your companion remembers" section in `AccountSettings.tsx` (serving both mounted paths): list, empty state, inline edit, delete via the existing `ConfirmDialog`, loading and error states, plain language, no IDs or provenance. Optional manual add using `source = settings` only if it fits the existing section pattern without extra scope; the report states whether it shipped. Confirmation card in the companion surfaces. No navbar, homepage or unrelated redesign. Verified at 1280px and 390x844 including wrapping, focus and overflow.
+`New conversation` and `Clear/Delete conversation` on both surfaces (panel footer replaces the existing "Start again"; `/ask` gets the same compact affordances), a restoring state, and a persistence-failure line. Single active conversation + New conversation is the MVP; no sidebar. No redesign of AskPage, panel, launcher, navbar or homepage.
 
-## 7. Docs and ADRs
+### 7. Flags, export, deletion
 
-New `docs/ai/companion-memory.md`; updates to `companion-architecture.md`; explicit supersession notes in `memory-design.md`, `memory-schema-rls-design.md`, `memory-mvp-readiness.md`, `release-gate.md` that separate the superseded product/engineering block from the still-outstanding production privacy/legal release gate. Nothing historical is erased. ADR-AIC3-01 … ADR-AIC3-08 recorded, including the deferral of model-proposed suggestions.
+`VITE_COMPANION_HISTORY_ENABLED` (client UX) and `AI_CONVERSATION_HISTORY_ENABLED` (server authority), both default OFF. Conversations added to the account data export and covered by account deletion cascade (verified against `delete-account`). No raw message content logged anywhere.
 
-## 8. Tests and proofs
+## Verification
 
-Focused tests across intent detection, no-write on ordinary messages, credential interception (and non-transmission to the model), clinical rejection, pending/confirm/cancel write counts, anonymous unavailability, settings list/edit/delete, duplicate prevention, deterministic update, ambiguous contradiction and ambiguous forget both refusing to guess, block separation, precedence instructions, prompt budget, no raw memory logging, and grounding/safety/identity unchanged. Cross-user SELECT/INSERT/UPDATE/DELETE rejection proven with two real test users, cleaned up afterwards. Runtime proofs that a deleted memory disappears from the next authenticated request and an edited memory replaces the old value.
+Two isolated test users prove no cross-user SELECT/INSERT/UPDATE/DELETE and no foreign-`conversationId` history leak; probe data cleaned. Runtime proofs for delete, double-submit idempotency, aborted stream, provider failure. Desktop 1280 and mobile 390x844 checks for handoff both directions, close/reopen, refresh, new/clear, streaming, no duplicates, no overflow.
 
-## Out of scope
+Focused tests per the AIC-4 list (runtime sharing, handoffs, anonymous session/refresh, authenticated restore, bounded history, escaping, idempotency, streaming persistence, RLS, export, cascade, separation of journey/memory, safety, grounding, identity). Then `npm test`, `npm run lint`, `npm run typecheck`, `npm run build` against the 79-file/776-test baseline with 0 new lint findings.
 
-AIC-4 conversation persistence, AIC-5 emotional modelling, AIC-6/7 voice, embeddings/pgvector, proactive nudges, grounding governance (`30B-source-routing-v1`, 0 candidates, 0 approvals), NHS routing, identity fields, journey tables, sitemap, robots.
+Docs: update `docs/ai/companion-architecture.md`, create `docs/ai/companion-conversations.md`, add ADR-AIC4-01 … ADR-AIC4-08. Deploy only `ai-search` (plus export/delete functions only if they genuinely change). Grounding, NHS routing, identity, journey context and memory gating stay untouched.
 
-## Validation and closure
-
-`npm test`, `npm run lint` (must remain 1 pre-existing error / 10 warnings), `npm run typecheck`, `npm run build`; one migration applied; only `ai-search` deployed. The report separates AIC-3 engineering closure from production memory enablement, which stays gated. AIC-4 is not started.
+Closes as `AIC-4 ENGINEERING — CLOSED PASS` with `PRODUCTION CONVERSATION HISTORY — GATED`. Full 77-point report returned; AIC-5 not started.

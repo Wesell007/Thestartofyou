@@ -82,7 +82,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const [lastQuestion, setLastQuestion] = useState<string | null>(null);
   const committedRef = useRef(false);
 
-  const mode = useMemo(() => resolveCompanionMode(location.pathname), [location.pathname]);
+  const mode = useMemo(() => resolvePanelMode(location.pathname), [location.pathname]);
   const visible = useMemo(
     () => suppressedCount === 0 && shouldShowCompanionLauncher(location.pathname),
     [location.pathname, suppressedCount],
@@ -137,8 +137,10 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      // Only the latest question, the bounded context and the mode.
-      void ask(trimmed, context, { mode });
+      // Only the latest question, the bounded context and the mode, built at
+      // the shared companion request boundary (AIC-1).
+      const request = buildCompanionRequest({ query: trimmed, context, mode });
+      void ask(request.query, request.context, { mode: request.mode });
     },
     [ask, context, isLoading, mode],
   );
@@ -146,7 +148,8 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const retry = useCallback(() => {
     if (!lastQuestion || isLoading) return;
     committedRef.current = false;
-    void ask(lastQuestion, context, { mode });
+    const request = buildCompanionRequest({ query: lastQuestion, context, mode });
+    void ask(request.query, request.context, { mode: request.mode });
   }, [ask, context, isLoading, lastQuestion, mode]);
 
   const stop = useCallback(() => {

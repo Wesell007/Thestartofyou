@@ -51,3 +51,14 @@
   eligibility gate, release-gated structured GREEN→AMBER classifier, trusted AMBER and
   cautious-uncertainty guidance, global no-definitive-medical-verdict rule). Engineering
   slice; production classifier release stays gated behind AI_AMBER_CLASSIFIER_ENABLED=OFF.
+
+- AIC-5D CLOSURE VALIDATION — CLOSED PASS. Route A direct isolated actual-module proof of
+  `_shared/amberClassifier.ts` against the real gateway (`google/gemini-2.5-flash`, stream false,
+  temperature 0, strict json_schema, max_tokens 512, 1500 ms AbortController, 0 retries):
+  green 999 ms, amber 1200 ms, amber 1104 ms; production config untouched, flag OFF throughout.
+  Closure tests added (12): first-year conflict + routine restraint + recap semantics, flag-OFF
+  semantics, real AbortController timeout branch, no-substring-censorship, exact guidance
+  injection counts. 86 files / 929 tests (from 86 / 917); 0 production source changes,
+  0 deployments, 0 migrations, 0 client changes. ADR-AIC5-11 ACCEPTED (engineering only);
+  PRODUCTION AMBER CLASSIFIER RELEASE — GATED, AI_AMBER_CLASSIFIER_ENABLED = OFF.
+  Next: AIC-5E. NOT STARTED.

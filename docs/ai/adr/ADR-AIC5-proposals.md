@@ -32,7 +32,7 @@ model.
 
 ## ADR-AIC5-02 — Five explicit safety states
 
-**Status: ACCEPTED (AIC-5A), partially implemented.** The five-state vocabulary is reserved in `_shared/safetyState.ts`; only `green`, `red` and `crisis` are emitted. `amber` (AIC-5D) and `unsupported` (AIC-5C) remain unimplemented.
+**Status: ACCEPTED (AIC-5A), partially implemented.** The five-state vocabulary is reserved in `_shared/safetyState.ts`; only `green`, `red` and `crisis` are emitted by the deterministic router. `unsupported` is served by the AIC-5C boundary layer and `amber` by the AIC-5D selective assessment, both outside the deterministic router and both additive only.
 
 
 **Decision.** Introduce GREEN, AMBER, RED, CRISIS and UNSUPPORTED as an explicit
@@ -171,10 +171,12 @@ no classifier, no persistence.
 
 ## ADR-AIC5-11 — AMBER is a selective hybrid, and caution may only rise
 
-**Status: ACCEPTED (AIC-5D) as an engineering decision.** Implemented in
-`_shared/amberEligibility.ts`, `_shared/amberClassifier.ts` and
-`_shared/amberGuidance.ts`. Production release is separately gated by
-`AI_AMBER_CLASSIFIER_ENABLED`, which is OFF.
+**Status: ACCEPTED (AIC-5D) as an engineering decision**, confirmed at AIC-5D
+closure validation. Implemented in `_shared/amberEligibility.ts`,
+`_shared/amberClassifier.ts` and `_shared/amberGuidance.ts`. Engineering
+acceptance is not a release: PRODUCTION AMBER CLASSIFIER RELEASE — GATED, with
+`AI_AMBER_CLASSIFIER_ENABLED` OFF in production and no ordinary user exposed to
+the assessment.
 
 **Decision.** AMBER is not a deterministic clinical threshold and not a
 universal classification of every turn. Deterministic rules decide only

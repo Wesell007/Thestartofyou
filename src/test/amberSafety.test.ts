@@ -15,6 +15,7 @@ import {
   parseAmberClassifierPayload,
   parseAmberClassifierText,
 } from "../../supabase/functions/_shared/amberClassifier";
+import { findBannedVerdicts, sanitiseAiAnswer } from "@/lib/aiAnswerSafety";
 import {
   AMBER_SAFETY_GUIDANCE,
   CAUTIOUS_UNCERTAINTY_GUIDANCE,
@@ -178,5 +179,73 @@ describe("trusted guidance blocks", () => {
   it("bans personal verdicts rather than ordinary words", () => {
     expect(GLOBAL_REASSURANCE_RULE).toMatch(/definitive personal medical verdict/);
     expect(GLOBAL_REASSURANCE_RULE).toMatch(/General factual statements/);
+  });
+});
+
+/**
+ * AIC-5D closure evidence — the real 1500 ms abort branch, exercised through
+ * the shipped `classifyAmber` timer rather than a generic 5xx stand-in.
+ */
+describe("timeout / abort path", () => {
+  it("aborts the in-flight request at the timeout and reports unavailable, with no retry", async () => {
+    vi.useFakeTimers();
+    try {
+      const fetchImpl = vi.fn(
+        (_url: unknown, init?: RequestInit) =>
+          new Promise<Response>((_resolve, reject) => {
+            const signal = init?.signal;
+            signal?.addEventListener("abort", () => {
+              const error = new Error("The operation was aborted.");
+              error.name = "AbortError";
+              reject(error);
+            });
+          }),
+      );
+      const pending = classifyAmber({
+        query: "my calf has been sore and swollen since yesterday",
+        journeyFamily: "pregnancy",
+        apiKey: "k",
+        fetchImpl: fetchImpl as unknown as typeof fetch,
+      });
+      await vi.advanceTimersByTimeAsync(AMBER_CLASSIFIER_TIMEOUT_MS);
+      const result = await pending;
+      expect(result.kind).toBe("unavailable");
+      expect(fetchImpl).toHaveBeenCalledTimes(1);
+      expect((fetchImpl.mock.calls[0][1] as RequestInit).signal?.aborted).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});
+
+/**
+ * AIC-5D closure evidence — the global reassurance rule is behavioural. There
+ * is no lexical ban on "normal", "fine" or "okay", and no output filter strips
+ * them from an answer.
+ */
+describe("no substring censorship", () => {
+  it("permits ordinary informational use of normal, fine and okay", () => {
+    const informational = [
+      "Mild swelling in the ankles is a normal part of later pregnancy, and many people notice it most in the evening.",
+      "It is fine to keep taking your usual pregnancy vitamin alongside this, and plenty of people carry on with it throughout.",
+      "Most babies are okay with a slightly later bedtime now and then, especially when the day has been unusually busy.",
+    ];
+    for (const sentence of informational) {
+      expect(findBannedVerdicts(sentence)).toEqual([]);
+      expect(sanitiseAiAnswer(sentence)).toContain(sentence);
+    }
+  });
+
+  it("targets unsupported personal verdicts, not vocabulary", () => {
+    expect(findBannedVerdicts("Your baby is fine, there is nothing to worry about.")).toContain(
+      "your baby is fine",
+    );
+    expect(findBannedVerdicts("Everything is okay.")).toContain("everything is okay");
+  });
+
+  it("keeps the guidance blocks free of any word ban", () => {
+    for (const block of [GLOBAL_REASSURANCE_RULE, AMBER_SAFETY_GUIDANCE, CAUTIOUS_UNCERTAINTY_GUIDANCE]) {
+      expect(block).not.toMatch(/never use the word|do not use the words?\b|banned words?/i);
+    }
   });
 });

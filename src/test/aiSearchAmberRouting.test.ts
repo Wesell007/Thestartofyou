@@ -158,3 +158,87 @@ describe("boundaries preserved", () => {
     expect(systemPrompts[0]).toContain(GLOBAL_REASSURANCE_RULE);
   });
 });
+
+const occurrences = (haystack: string, needle: string) => haystack.split(needle).length - 1;
+
+/**
+ * AIC-5D closure evidence — first-year restraint must never be able to defeat
+ * the trusted safety layer, and must stay intact when nothing raised caution.
+ */
+describe("first-year conflict", () => {
+  it("injects the trusted guidance exactly once in ordinary first-year mode", async () => {
+    await drain(
+      await post({ query: "i am worried about how hot my baby has felt today", mode: "first_year_companion" }),
+    );
+    expect(assessmentCalls).toBe(1);
+    expect(occurrences(systemPrompts[0], AMBER_SAFETY_GUIDANCE)).toBe(1);
+    expect(occurrences(systemPrompts[0], GLOBAL_REASSURANCE_RULE)).toBe(1);
+    expect(systemPrompts[0]).toMatch(/health visitor/i);
+  });
+
+  it("leaves routine first-year restraint untouched on a green assessment", async () => {
+    assessmentMode = "green";
+    await drain(await post({ query: "when do most babies start weaning", mode: "first_year_companion" }));
+    expect(assessmentCalls).toBe(0);
+    expect(systemPrompts[0]).not.toContain(AMBER_SAFETY_GUIDANCE);
+    expect(systemPrompts[0]).not.toContain(CAUTIOUS_UNCERTAINTY_GUIDANCE);
+  });
+
+  it("keeps day-recap semantics exactly as they were", async () => {
+    await drain(
+      await post({ query: "i am worried about how hot my baby has felt today", mode: "first_year_day_recap" }),
+    );
+    expect(systemPrompts[0]).not.toContain(AMBER_SAFETY_GUIDANCE);
+    expect(systemPrompts[0]).not.toContain(CAUTIOUS_UNCERTAINTY_GUIDANCE);
+    expect(systemPrompts[0]).not.toContain(GLOBAL_REASSURANCE_RULE);
+  });
+});
+
+/**
+ * AIC-5D closure evidence — OFF means intentionally disabled, not unavailable.
+ */
+describe("flag-off semantics", () => {
+  it("treats an eligible request as an ordinary answer with no cautious fallback", async () => {
+    delete env.AI_AMBER_CLASSIFIER_ENABLED;
+    const response = await drain(await post({ query: "i have had a headache since yesterday" }));
+    expect(response.status).toBe(200);
+    expect(assessmentCalls).toBe(0);
+    expect(systemPrompts).toHaveLength(1);
+    expect(systemPrompts[0]).not.toContain(AMBER_SAFETY_GUIDANCE);
+    expect(systemPrompts[0]).not.toContain(CAUTIOUS_UNCERTAINTY_GUIDANCE);
+    expect(systemPrompts[0]).toContain(GLOBAL_REASSURANCE_RULE);
+  });
+});
+
+/**
+ * AIC-5D closure evidence — exact guidance injection counts per outcome.
+ */
+describe("guidance injection counts", () => {
+  it("amber: one amber block, no cautious block", async () => {
+    await drain(await post({ query: "i am worried about how sore my back has been" }));
+    expect(occurrences(systemPrompts[0], AMBER_SAFETY_GUIDANCE)).toBe(1);
+    expect(occurrences(systemPrompts[0], CAUTIOUS_UNCERTAINTY_GUIDANCE)).toBe(0);
+  });
+
+  it("green: no trusted block beyond the global rule", async () => {
+    assessmentMode = "green";
+    await drain(await post({ query: "i am worried about how sore my back has been" }));
+    expect(occurrences(systemPrompts[0], AMBER_SAFETY_GUIDANCE)).toBe(0);
+    expect(occurrences(systemPrompts[0], CAUTIOUS_UNCERTAINTY_GUIDANCE)).toBe(0);
+    expect(occurrences(systemPrompts[0], GLOBAL_REASSURANCE_RULE)).toBe(1);
+  });
+
+  it("unavailable: exactly one cautious block and the answer still streams", async () => {
+    assessmentMode = "fail";
+    const response = await drain(await post({ query: "i have had a headache since yesterday" }));
+    expect(response.status).toBe(200);
+    expect(occurrences(systemPrompts[0], CAUTIOUS_UNCERTAINTY_GUIDANCE)).toBe(1);
+    expect(occurrences(systemPrompts[0], AMBER_SAFETY_GUIDANCE)).toBe(0);
+  });
+
+  it("disabled: no cautious block", async () => {
+    delete env.AI_AMBER_CLASSIFIER_ENABLED;
+    await drain(await post({ query: "i have had a headache since yesterday" }));
+    expect(occurrences(systemPrompts[0], CAUTIOUS_UNCERTAINTY_GUIDANCE)).toBe(0);
+  });
+});

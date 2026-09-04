@@ -100,7 +100,7 @@ afterEach(() => {
 describe("release gating", () => {
   it("makes no assessment call when the server flag is off", async () => {
     delete env.AI_AMBER_CLASSIFIER_ENABLED;
-    await drain(await post({ query: "i am worried about reduced movements" }));
+    await drain(await post({ query: "i am worried about how sore my back has been" }));
     expect(assessmentCalls).toBe(0);
     expect(systemPrompts[0]).not.toContain(AMBER_SAFETY_GUIDANCE);
   });
@@ -113,7 +113,7 @@ describe("selective eligibility at the endpoint", () => {
   });
 
   it("assesses an eligible personal concern and raises caution", async () => {
-    await drain(await post({ query: "i am worried about reduced movements" }));
+    await drain(await post({ query: "i am worried about how sore my back has been" }));
     expect(assessmentCalls).toBe(1);
     expect(systemPrompts[0]).toContain(AMBER_SAFETY_GUIDANCE);
   });
@@ -148,7 +148,7 @@ describe("boundaries preserved", () => {
   });
 
   it("adds no headers and keeps the client contract unchanged", async () => {
-    const response = await drain(await post({ query: "i am worried about reduced movements" }));
+    const response = await drain(await post({ query: "i am worried about how sore my back has been" }));
     expect(response.headers.get("X-Companion-Boundary")).toBeNull();
     expect([...response.headers.keys()].some((key) => key.toLowerCase().includes("amber"))).toBe(false);
   });

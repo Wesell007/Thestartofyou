@@ -87,3 +87,21 @@
   function runs under the Supabase Deno toolchain); carried forward as a type-only debt item.
   AIC-5D ENGINEERING — FORMALLY CLOSED PASS. PRODUCTION AMBER CLASSIFIER RELEASE — GATED.
   AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5E — SAFE TO BEGIN. NOT STARTED.
+
+- AIC-5D FINAL DENO TYPECHECK DEBT FIX — CLOSED PASS. Chronology preserved: (1) original AIC-5D
+  typecheck reported PASS, (2) stale incremental cache made that unreliable, (3) fresh app
+  typecheck exposed 18 cross-runtime errors, (4) the static-literal endpoint-test import was
+  identified, (5) the non-literal import boundary was restored, (6) clean app typecheck passed,
+  (7) Deno check then exposed one genuine `HeadersInit` TS2322 at ai-search/index.ts:642,
+  (8) `conversationHeader` was given the correct `Record<string, string>` annotation (type-only;
+  header still present with the same id when a conversation exists, absent otherwise; no empty or
+  "undefined" value), (9) `DENO_DIR=/tmp/denodir deno check --no-lock
+  supabase/functions/ai-search/index.ts` PASS / 0 errors, (10) clean-cache `npm run typecheck`
+  PASS and repeat run PASS, (11) 86 files / 931 tests PASS (929 + 2 focused conditional-header
+  assertions; 0 assertions weakened, 0 skips), lint baseline only (1 generated-file prefer-const
+  error, 10 react-refresh warnings), build PASS, (12) `ai-search` redeployed; smoke: ordinary
+  stream OK, clarify boundary headers unchanged, RED deterministic escalation unchanged.
+  Frozen: source routing `30B-source-routing-v1`, grounding 0/0, eligible slugs [], memory and
+  persistent-history flags OFF, telemetry/persistence/migrations/UI/quota changes 0.
+  AIC-5D FORMALLY CLOSED PASS. PRODUCTION AMBER CLASSIFIER RELEASE — GATED.
+  AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5E — SAFE TO BEGIN. NOT STARTED.

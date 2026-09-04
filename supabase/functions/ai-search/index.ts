@@ -500,7 +500,9 @@ serve(async (req) => {
   const setup = await openConversation();
   if (!setup.ok) return json(req, { error: setup.error }, setup.status);
   const conversation = setup.ctx;
-  const conversationHeader = conversation ? { "X-Conversation-Id": conversation.conversationId } : {};
+  const conversationHeader: Record<string, string> = conversation
+    ? { "X-Conversation-Id": conversation.conversationId }
+    : {};
 
   const controlledAnswer = (answer: string) => sendControlled(answer, conversation);
 

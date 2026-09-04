@@ -15,6 +15,7 @@ import {
   parseAmberClassifierPayload,
   parseAmberClassifierText,
 } from "../../supabase/functions/_shared/amberClassifier";
+import { findBannedVerdicts, sanitiseAiAnswer } from "@/lib/aiAnswerSafety";
 import {
   AMBER_SAFETY_GUIDANCE,
   CAUTIOUS_UNCERTAINTY_GUIDANCE,
@@ -223,12 +224,11 @@ describe("timeout / abort path", () => {
  * them from an answer.
  */
 describe("no substring censorship", () => {
-  it("permits ordinary informational use of normal, fine and okay", async () => {
-    const { findBannedVerdicts, sanitiseAiAnswer } = await import("@/lib/aiAnswerSafety");
+  it("permits ordinary informational use of normal, fine and okay", () => {
     const informational = [
-      "Mild swelling in the ankles is a normal part of later pregnancy for many people.",
-      "It is fine to keep taking your usual pregnancy vitamin alongside this.",
-      "Most babies are okay with a slightly later bedtime now and then.",
+      "Mild swelling in the ankles is a normal part of later pregnancy, and many people notice it most in the evening.",
+      "It is fine to keep taking your usual pregnancy vitamin alongside this, and plenty of people carry on with it throughout.",
+      "Most babies are okay with a slightly later bedtime now and then, especially when the day has been unusually busy.",
     ];
     for (const sentence of informational) {
       expect(findBannedVerdicts(sentence)).toEqual([]);

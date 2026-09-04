@@ -1,45 +1,47 @@
-# AIC-5D — AMBER build (approve to unlock Build Mode)
+# AIC-5D — Closure Validation Addendum: what can be answered now, and what is still missing
 
-The architecture gate is closed and Option C is approved. I am still held in plan mode, so
-this card exists only to release the build; approving it starts the implementation exactly as
-specified in your final build approval. No further planning pass will follow.
+Read-only inspection of the shipped AIC-5D code and tests shows the architecture is sound and unchanged, but the addendum cannot be returned as an all-PASS report yet. Five of the sixty-three points have no evidence in the repository today. This plan closes exactly those gaps and nothing else. No architecture redesign, no AIC-5E.
 
-## What gets built
+## Already verified read-only (no work needed)
 
-1. **ADR reconciliation (docs only, first).** Retitle to `ADR-AIC5-01 … 10`, delete the stale
-   blanket "everything PROPOSED" paragraph and the duplicate `Status: PROPOSED` lines, give
-   every record one authoritative status. ADR-07 (emotional continuity is ephemeral) reverts
-   to PROPOSED until AIC-5E. ADR-06 becomes RESOLVED-HISTORICAL (probe complete, not an open
-   dependency). New ADR-AIC5-11 records selective structured AMBER assessment, ACCEPTED on a
-   clean engineering build, release-gated.
+- Ordering: eligibility and classifier sit after the AIC-5C boundary and before grounding/model, in `ai-search/index.ts`.
+- Call matrix: endpoint tests already assert routine = 0, flag-OFF eligible = 0, flag-ON eligible = 1, RED/CRISIS = 0, clarify = 0, unsupported = 0; retries = 0 asserted in the unit tests.
+- Timeout mechanism: a real `AbortController` with a 1500 ms timer aborts the network request (not a promise race).
+- Failure contract: non-2xx, provider error, malformed JSON, invalid state, extra keys and missing state all resolve to `unavailable`, never `green`.
+- Client contract: no new headers, no AMBER label reaches the browser, `X-Companion-Boundary` and `X-Companion-Clarification-Topic` untouched.
+- Classifier inputs: broad journey family only, no pregnancy week, no baby age, no memory, no page context, no grounding, no IDs.
+- No persistence, no telemetry, no migration.
 
-2. **`_shared/amberEligibility.ts`** — deterministic gate returning
-   `{ eligibleForAmberAssessment: boolean }` from three signals: existing concern wording
-   (reused), a narrow first-person symptom/experience matcher, and urgent-family vocabulary
-   present without a RED match. No deterministic AMBER floor; new clinical thresholds: 0.
+## Gaps that must be closed before "CLOSED PASS"
 
-3. **`_shared/amberClassifier.ts`** — non-streaming strict `json_schema` call
-   (`google/gemini-2.5-flash`, temperature 0, one attempt, 1.5 s timeout, no retry) plus
-   mandatory application-side validation reusing the AIC-5B contract `{"state":"green"|"amber"}`.
-   Result is `green | amber | unavailable`. Inputs: query, broad journey family only, and a
-   prior turn only when a deterministic anaphoric/worsening check fires. Memory, page context,
-   grounding, ids, exact week/baby age: 0.
+1. **Classifier-enabled integration proof (addendum item 1).** No proof exists that the new `amberClassifier.ts` works against the live gateway. Requires an isolated run with the flag ON.
+2. **First-year conflict proof (item 9).** `GLOBAL_REASSURANCE_RULE` and the AMBER block are gated on `modeConfig.allowUrgentEscalationAnswer`. Only the recap mode sets that false; ordinary first-year answering keeps it true. No test proves the two required behaviours yet.
+3. **Flag-OFF semantics (item 13).** The gating test asserts no AMBER block, but does not assert that the cautious-uncertainty block is absent, i.e. that disabled is not treated as failure.
+4. **Timeout case (item 5).** Abort-path `unavailable` is not covered by a direct test.
+5. **No-substring-censorship proof (item 10).** No test yet shows that "normal", "fine" and "okay" remain usable in ordinary informational wording.
+6. **ADR-11 status (item 18).** Must be set to ACCEPTED (engineering) only once the above pass, with production release recorded separately as GATED.
 
-4. **`_shared/amberGuidance.ts` + `aiModes.ts`** — one trusted AMBER safety block and one
-   cautious-uncertainty fallback block, injected once, ranked above mode/tone/journey/memory/
-   history/page context, so first-year escalation suppression cannot defeat AMBER. Plus a
-   shared global no-definitive-medical-verdict rule applied across companion modes,
-   consolidating the TTC-only `noFalseHope` without disclaimer overload.
+## Work to perform (validation and evidence only)
 
-5. **`ai-search/index.ts`** — after AIC-5C `continue`: eligibility → flag
-   `AI_AMBER_CLASSIFIER_ENABLED` (default OFF, 0 calls when off) → optional classifier →
-   trusted block → existing grounding/context/streamed answer. One user-facing quota event per
-   request; no new headers, no client change, no persistence, no telemetry, no migration.
+- Add focused tests to the existing two AIC-5D test files:
+  - first-year ordinary mode + AMBER assessment → AMBER guidance present; routine first-year GREEN → no AMBER guidance, mode restraint intact; recap mode unchanged.
+  - flag OFF + eligible query → 0 classifier calls **and** no cautious-uncertainty block.
+  - classifier abort/timeout → `unavailable`, cautious block injected exactly once, answer stream still runs, one attempt only.
+  - guidance blocks contain no blanket ban on the words normal/fine/okay, and the rule is behavioural rather than a substring filter.
+  - injection-count assertions: AMBER exactly once, GREEN zero, unavailable exactly once.
+- No production source changes are expected. If a genuine defect surfaces, it is reported rather than silently redesigned.
+- ADR file: set ADR-AIC5-11 to ACCEPTED (engineering only), keep ADR-07 PROPOSED and ADR-06 historical/resolved.
+- Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`, and reconcile the 84/891 → final file and test arithmetic exactly.
 
-6. **Tests and evals** covering eligibility, bypass proofs (RED/CRISIS/clarify/unsupported/
-   routine/flag-off = 0 classifier calls), schema accept/reject, timeout and 5xx → unavailable,
-   prompt-injection-once assertions, no-emergency-wording, professional routes per journey, and
-   page-context/memory neutrality. Existing evals untouched.
+## Item 1 needs your decision
 
-7. **Validation and close** — `npm test`, lint (baseline only), typecheck, build, deploy only
-   `ai-search`, controlled synthetic smoke tests, then the 67-point completion report.
+The live classifier-enabled proof cannot be done without flipping `AI_AMBER_CLASSIFIER_ENABLED` somewhere real. Two options:
+
+- **A. Direct isolated gateway proof (recommended).** Call the deployed `amberClassifier` contract directly against `ai.gateway.lovable.dev` from a dev-only harness with a synthetic eligible fixture and a synthetic AMBER fixture. Production function config is never touched, so production stays OFF throughout. Proves the module, model, schema, token budget and latency end to end, but not the deployed endpoint wiring.
+- **B. Temporary flag-ON window on the deployed function.** Set the secret ON, run the two fixtures against the live endpoint, then set it back OFF. Proves the full deployed path, but ordinary traffic in that window would be exposed to the classifier.
+
+Everything else in this plan is unaffected by the choice.
+
+## Report
+
+After the work, return only the 63-point closure addendum, with item 1 answered by whichever proof route you approve, production `AI_AMBER_CLASSIFIER_ENABLED` recorded as OFF, and AIC-5E not started.

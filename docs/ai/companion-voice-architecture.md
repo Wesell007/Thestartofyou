@@ -540,7 +540,7 @@ No provider may be approved on voice quality or latency alone.
 
 | Slice | Content |
 | --- | --- |
-| AIC-7A | Voice infrastructure: two-sided feature gate, `VoiceSessionController` skeleton, state machine, ephemeral-credential edge function design |
+| AIC-7A | Voice infrastructure: two-sided feature gate, `VoiceSessionController`, state machine, contracts, provider seam (CLOSED — see §18; bootstrap endpoint deferred to provider selection) |
 | AIC-7B | Microphone capture, streaming STT adapter, partial/final transcript UI, permission and no-speech handling |
 | AIC-7C | Shared-conversation integration: final transcript → existing runtime → `ai-search`, one thread, no new IDs |
 | AIC-7D | Canonical chunk processing (§2), deterministic pronunciation layer, streaming TTS adapter, spoken-length prompt hint |
@@ -558,3 +558,113 @@ approvals 0, eligible slugs []; memory flags OFF; persistent-history flags OFF;
 safety-state persistence 0; emotion persistence 0; voice persistence 0; durable
 application raw-audio persistence 0; voice analytics 0; DB migrations 0;
 production voice code 0.
+
+---
+
+## 18. AIC-7A — implemented infrastructure foundation
+
+AIC-7A added the controlled foundation only. **No usable voice experience
+exists.** There is no microphone capture, no STT, no TTS, no provider, no
+transport, no voice UI, no `/voice` route, no prompt change, no `ai-search`
+change, no database change and no analytics.
+
+### 18.1 Terminology correction (documentation only)
+
+The invariant is **NO ASSISTANT AUDIO BEFORE SAFETY ROUTING RESOLVES**, not the
+ambiguous "no audio before safety routing resolves". User microphone audio must
+necessarily be captured and transmitted for STT before a final transcript
+exists. What must be zero is *assistant speech* until an authoritative
+transcript has passed through the shared AI/safety route and produced canonical
+assistant text. AIC-6 is not reopened by this clarification.
+
+### 18.2 Release gates
+
+| Gate | Value | Authority |
+| --- | --- | --- |
+| `VITE_COMPANION_VOICE_ENABLED` | OFF (default) | **NONE.** Controls whether voice UI/runtime is offered. Not a security boundary. |
+| `AI_COMPANION_VOICE_ENABLED` | Reserved, OFF | The authority for privileged voice capability. |
+
+- SERVER VOICE FLAG CONTRACT: DEFINED / RESERVED
+- SERVER VOICE FLAG RUNTIME ENFORCEMENT: DEFERRED UNTIL FIRST PRIVILEGED SERVER VOICE CAPABILITY
+- CURRENT PRIVILEGED SERVER VOICE CAPABILITY: 0
+- VOICE BOOTSTRAP ENDPOINT: DEFERRED TO PROVIDER SELECTION
+
+No backend code was written merely to read a variable that gates nothing yet.
+When the first privileged capability exists (ephemeral credential issuance,
+provider session creation, voice bootstrap), the server gate must enforce it;
+the browser flag may never substitute for it.
+
+Both gates are independent of `AI_AMBER_CLASSIFIER_ENABLED`, the memory flags,
+the persistent-history flags and grounding routing.
+
+### 18.3 Files
+
+| File | Role |
+| --- | --- |
+| `src/lib/companion/voice/voiceFlags.ts` | Client gate, server gate name, authority documentation |
+| `src/lib/companion/voice/voiceContracts.ts` | Transcript, canonical-text, speakable-chunk and committed-record contracts |
+| `src/lib/companion/voice/voiceState.ts` | Pure state machine and legal transition table |
+| `src/lib/companion/voice/voiceSessionController.ts` | Provider-neutral session lifecycle and cleanup |
+| `src/lib/companion/voice/voiceAdapters.ts` | Minimal input/output adapter seam plus no-op defaults |
+| `src/test/companionVoiceInfrastructure.test.ts` | 26 focused infrastructure tests |
+
+### 18.4 State machine
+
+States: `idle`, `requesting_permission`, `listening`, `thinking`, `speaking`,
+`interrupted`, `permission_denied`, `no_speech`, `network_error`,
+`speech_output_error`, `ended`. All eleven approved states are implemented; none
+were merged or added.
+
+An illegal transition returns the current state unchanged (no throw), and a test
+proves no single illegal transition can reach the privileged states `listening`
+or `speaking`. `ended` is terminal for a controller instance: a later voice
+session creates a new controller rather than reviving a finished one.
+
+### 18.5 Session controller and cleanup
+
+Responsibilities: `start`, `transition`, `abort`, `stopCapture`, `stopOutput`,
+`end`, `handleVisibilityHidden`, `handleUnmount`. Resources are injected, so
+cleanup is tested with fakes and no real `MediaStream` is ever created.
+
+Cleanup is idempotent: across visibility-hidden, unmount and repeated explicit
+end calls, capture stops at most once, output stops at most once, the active
+operation aborts at most once, nothing throws, nothing restarts, and the session
+converges on `ended`. No visibility listener is wired into the application yet —
+that arrives with the functional slice that needs it. No background listening,
+no wake word.
+
+### 18.6 Contracts
+
+- `PartialTranscript` — display only, structurally distinct, cannot be passed
+  where a `FinalTranscript` is required (proved with a `@ts-expect-error` test).
+- `FinalTranscript` — the authoritative user turn.
+- `CanonicalAssistantText` — a branded type constructible **only** through
+  `canonicaliseAssistantText`, which runs the existing `sanitiseAnswerForDisplay`
+  boundary. There is no `text as CanonicalAssistantText` helper.
+  CANONICAL ASSISTANT TEXT CONSTRUCTION ESCAPE HATCHES: 0.
+- `SpeakableChunk` — only obtainable from canonical text via
+  `toSpeakableChunk`. RAW SSE → SPEAKABLE CHUNK DIRECT PATH: 0.
+- `CommittedAssistantRecord` — `messageId`, `canonicalText`, `interrupted`
+  only. No `fullGeneratedAnswer`, `unsurfacedTail`, `hiddenCompletion` or
+  `remainingModelText`. HIDDEN UNSURFACED ASSISTANT TAIL REPRESENTABLE: NO.
+  The behavioural interruption integration remains AIC-7E.
+
+### 18.7 Conversation seam (documented, not wired)
+
+AIC-7C will pass `FinalTranscript.text` to the existing `send(question)` of
+`useCompanionConversation` — the same path typed input uses. No
+`sendVoiceMessage`, no `voiceConversation`, no `voiceHistory`, no
+`voiceThread`, no voice-specific conversation id, no duplicated conversation
+logic. Nothing in `useCompanionConversation` was changed in AIC-7A.
+
+### 18.8 Boundaries held
+
+Voice persistence 0 (no database, conversation metadata, memory or
+localStorage). Durable application raw-audio storage 0; Supabase raw-audio
+storage 0; voice audio archive 0. Voice analytics 0. No coupling to
+`SlotVoiceMemory`, `weekMedia` or `useWeekMedia` — journal voice notes and
+companion voice remain separate products. No `getUserMedia`, `MediaRecorder`,
+`SpeechRecognition`, `speechSynthesis`, WebRTC, WebSocket or provider SDK. No
+browser provider master secret. No voice biometrics, speaker identification,
+voiceprint, prosody emotion analysis, or health, age or gender inference from
+audio.

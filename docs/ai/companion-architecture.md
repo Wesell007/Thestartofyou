@@ -411,3 +411,18 @@ recap mode nor a paused companion can suppress them. GREEN keeps the previous
 path exactly, including 12/min and 100/hour limits. Safety state is
 request-runtime only: never persisted, never logged, never shown as a label.
 `amber` and `unsupported` are reserved names with no implementation.
+
+### AIC-6 — proposed voice transport layer (architecture gate, not implemented)
+
+Voice is a proposed **transport and presentation layer** over this same
+architecture: microphone → streaming speech-to-text → finalised transcript →
+the unchanged `ai-search` path (validation → `decideSafety` → AIC-5C → AIC-5D →
+AIC-5E → grounding → model) → canonical assistant text → display → chunked
+text-to-speech. No second brain, no second safety stack, no second conversation.
+
+One boundary matters for implementation: the committed assistant message today
+holds the raw accumulated SSE text, and `sanitiseAnswerForDisplay` runs at render
+time. Speech must render the *canonical* (sanitised, displayed) text, never raw
+tokens. Full detail, options assessment, state machine, failure behaviour and
+release gates: `docs/ai/companion-voice-architecture.md`. Production voice code
+at this gate: 0.

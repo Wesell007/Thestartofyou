@@ -190,3 +190,38 @@
   OFF, persistent-history flags OFF, emotion persistence 0, emotion analytics 0, emotion model
   calls 0.
   AIC-5F — CLOSED PASS. AIC-5 SAFETY PROGRAMME — COMPLETE. AIC-6 — SAFE TO BEGIN, NOT STARTED.
+
+- AIC-6 — VOICE UX & ARCHITECTURE GATE — CLOSED (architecture only).
+  Documentation and architecture only. Production source changed 0, tests changed 0,
+  DB migrations 0, production voice code 0, voice analytics 0, durable application
+  raw-audio persistence 0.
+  Audit: companion voice functionality 0; no audio/speech dependency in package.json; no
+  companion microphone, STT, TTS, WebSocket, WebRTC or AudioContext code. Existing speech/audio
+  code is journal-only and unrelated: `SlotVoiceMemory.tsx` (getUserMedia + MediaRecorder),
+  `SlotReflection.tsx` / `SlotReflectionAssistant.tsx` (browser SpeechRecognition dictation),
+  `weekMedia.ts` / `useWeekMedia.ts` (journal media, explicitly no transcription/AI).
+  Canonical-text finding: the committed assistant message is the raw accumulated SSE text, while
+  `sanitiseAnswerForDisplay` runs at render time (CompanionMessageList, AskPage,
+  TTCAskCompanionCard, FirstYearAskCompanion). Therefore RAW SSE TOKENS → TTS: NO. Speech renders
+  the canonical (sanitised, displayed) text; chunked speech canonicalises a completed sentence
+  first and reconciles at stream end.
+  Interrupted-turn rule: conversation context contains only canonical assistant text actually
+  committed/surfaced; generated-but-unsurfaced text is discarded; no hidden tail. Today `stop()`
+  discards all partial text — committing the surfaced portion is AIC-7E work, not done here.
+  Decisions: interaction model B (explicit tap-to-enter voice session); primary architecture B
+  (streaming STT → final transcript → ai-search → canonical streamed text → chunked TTS);
+  Option D (realtime transport with server safety orchestration) is the future upgrade candidate;
+  Option C rejected as response brain (cannot guarantee AIC-5 mediation before speech).
+  Manual barge-in for v1; final transcript authoritative; partial transcript display only;
+  no pre-safety audio; deterministic RED/CRISIS spoken verbatim with text always visible;
+  presentation-only pronunciation layer recommended for AIC-7D; browser-native STT = prototype
+  only, `speechSynthesis` = fallback only; two-sided gate `VITE_COMPANION_VOICE_ENABLED`
+  (no security authority) + `AI_COMPANION_VOICE_ENABLED` (authority, gates ephemeral credentials).
+  No voice biometrics, no prosody/emotion-from-tone, no diarisation, no background listening.
+  Docs added: `docs/ai/companion-voice-architecture.md`; ADR-AIC6-01..06 under `docs/ai/adr/`
+  (all PROPOSED). `docs/ai/companion-architecture.md` gained a proposed voice-transport section.
+  Frozen: AI_AMBER_CLASSIFIER_ENABLED OFF, AMBER release GATED, AI_SOURCE_ROUTING_VERSION
+  `30B-source-routing-v1`, grounding candidates 0 / approvals 0 / eligible slugs [], memory flags
+  OFF, persistent-history flags OFF, safety-state persistence 0, emotion persistence 0,
+  voice persistence 0.
+  AIC-6 ARCHITECTURE GATE — CLOSED. AIC-7 — SAFE TO APPROVE, NOT STARTED.

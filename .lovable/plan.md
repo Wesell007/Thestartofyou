@@ -1,39 +1,47 @@
-# AIC-6 — Voice UX & Architecture Gate
+# AIC-7A — Voice Infrastructure & Release Foundation
 
-Architecture only. No production voice code, no database changes, no prompt changes, no flag changes. Deliverables are documentation plus the completion report.
+Infrastructure only, behind two OFF gates. No microphone capture, no speech output, no provider selection, no visible UI, no backend changes.
 
-## What the audit already shows
+## What gets built
 
-- Companion voice functionality today: **none**. No voice mode, no TTS, no STT, no realtime transport, no audio dependency in `package.json`, no WebSocket/WebRTC/AudioContext use anywhere in the companion.
-- Audio code that does exist is unrelated to the companion and stays untouched:
-  - `src/components/myweek/SlotVoiceMemory.tsx` — journal voice notes via `MediaRecorder` + `getUserMedia` (production).
-  - `src/components/myweek/SlotReflection.tsx` and `SlotReflectionAssistant.tsx` — optional browser dictation via `SpeechRecognition`/`webkitSpeechRecognition` (production).
-  - `src/lib/weekMedia.ts` / `src/hooks/useWeekMedia.ts` — journal media capture and storage helpers; explicitly "no transcription, no AI".
-- Companion runtime is already single-brain and shared: both surfaces (panel and `/ask`) run `useCompanionConversation` → `useAISearch` → `ai-search`, with SSE streaming, `AbortController` cancellation, session-only transcript in `sessionStorage`, and server-owned `X-Conversation-Id` / boundary headers.
-- Flag convention exists and is two-sided: `VITE_*` client gate plus a server-authoritative edge secret (as with history and memory).
+**1. Two-sided release gate**
+- `src/lib/companion/voice/voiceFlags.ts` — `isCompanionVoiceUiEnabled()` reading `VITE_COMPANION_VOICE_ENABLED`, default OFF, documented as having no security authority (mirrors the existing `conversationFlags.ts` pattern).
+- Server flag `AI_COMPANION_VOICE_ENABLED` is documented as the sole authority for privileged voice capability. No server code is added in this slice because no provider exists to bootstrap.
+- Both gates are independent of AMBER, memory, history and grounding flags.
 
-## Decisions this gate will record
+**2. Voice runtime contracts** (`src/lib/companion/voice/voiceContracts.ts`)
+- `PartialTranscript` (display-only) vs `FinalTranscript` (authoritative, the only shape allowed to reach the shared send path) — distinguished by type so a partial can never be passed where a final is required.
+- `CanonicalAssistantText` branded type: only producible from the existing `sanitiseAnswerForDisplay` output, so raw SSE text cannot be typed as speakable.
+- `SpeakableChunk`: a completed, canonicalised chunk. Raw SSE token → TTS is structurally impossible.
+- `CommittedAssistantRecord`: only surfaced canonical text; no field exists for an unsurfaced tail.
 
-- **Voice is a transport and interaction mode, not a brain.** Every spoken assistant answer is a rendering of text produced by `ai-search`, after the AIC-5 safety path.
-- **Primary architecture: Option B** — streaming speech-to-text → finalised transcript → existing `ai-search` → streamed answer text → sentence-chunked text-to-speech. Option D (realtime transport with server safety orchestration) is recorded as a later upgrade; Option C (speech-to-speech as the brain) is rejected as a response brain because it cannot guarantee AIC-5 mediation before speech.
-- **Interaction model: Option B tap-to-enter session** — one explicit tap enters voice mode, then listen → end-of-turn → transcript → safety/AI → speak → listen, until the user ends it. No wake word, no background listening, microphone tracks stopped on exit, tab hide, navigation or panel close.
-- **Barge-in v1: manual** (tap to interrupt) — stops audio immediately and aborts the in-flight response stream; automatic voice-activity barge-in deferred.
-- **Only a finalised transcript is an authoritative request.** Partial transcript is display-only. Transcript correction: auto-send with easy correction afterwards, plus a visible transcript at all times.
-- **One conversation.** Spoken turns become ordinary visible user messages in the same thread with the same conversation ID semantics; no voice-only hidden turns, no second history, no voice-specific memory, grounding or journey context.
-- **RED/CRISIS** speak the canonical deterministic text verbatim and always keep it visible; TTS failure never suppresses safety text; a deterministic, tested, presentation-only pronunciation layer (999, A&E, NHS 111, URLs) is recommended for AIC-7 and not built here.
-- **No voice biometrics, no prosody or emotion-from-tone.** AIC-5E continues to read explicit user-authored language only.
-- **Audio is ephemeral**: memory/stream only, no app persistence, no uploads. External-provider retention, DPA, residency and training policy become AIC-7 release gates.
-- **Provider secrets never in the browser**; any direct provider session would need a server-issued ephemeral credential from a new edge function (designed, not built).
-- Feature gate: `VITE_COMPANION_VOICE_ENABLED` + server `AI_COMPANION_VOICE_ENABLED`, independent of every AIC-5 flag.
+**3. Provider adapter seam** (`src/lib/companion/voice/voiceAdapters.ts`)
+- Minimal `VoiceInputAdapter` and `VoiceOutputAdapter` interfaces plus no-op default implementations used for tests. No SDK, no plugin registry, no service locator, no provider endpoints or credential schemas.
 
-## Files this gate touches
+**4. State machine** (`src/lib/companion/voice/voiceState.ts`)
+- Pure reducer over `idle, requesting_permission, listening, thinking, speaking, interrupted, permission_denied, no_speech, network_error, speech_output_error, ended`. Invalid transitions are ignored and return the current state unchanged (documented contract). Fully testable without a provider.
 
-- Create `docs/ai/companion-voice-architecture.md` — UX objective, interaction model, state machine, options A–D assessment and choice, safety mediation, text/voice continuity, audio lifecycle, provider boundaries, failure and retry behaviour, interruption, accessibility, device matrix, latency and cost model, privacy/legal gates, proposed ADRs, AIC-7 slices (7A infrastructure/flag, 7B mic+STT, 7C shared-conversation integration, 7D streaming TTS, 7E turn-taking and interruption, 7F safety/failure validation, 7G device QA and release gate).
-- Append a short voice-transport section to `docs/ai/companion-architecture.md`.
-- Add six PROPOSED ADRs under `docs/ai/adr/` (voice is transport; text is canonical; no audio before safety; audio ephemeral; one shared conversation; no master provider secret in the browser).
-- Record the AIC-6 gate state in `roadmap.md`.
-- Production source changed: 0. Tests changed: 0. Migrations: 0. AMBER, grounding, memory, history flags unchanged.
+**5. Session controller** (`src/lib/companion/voice/voiceSessionController.ts`)
+- Plain class/factory over injected resources: `start`, `end`, `transition`, `abort`, `stopOutput`, `stopCapture`, `handleVisibilityHidden`, `handleUnmount`. Cleanup is idempotent, runs exactly once, always lands in a safe terminal state. Tested with fakes; no real media streams.
+- Holds runtime state only — nothing written to database, conversation metadata, memory, or localStorage.
 
-## Output
+**6. Integration seam (documented, not implemented)**
+- Confirmed seam: a final transcript will be passed to the existing `send(question)` of `useCompanionConversation`. No `sendVoiceMessage`, no duplicated conversation logic. Documented only; AIC-7C implements it.
 
-The 96-point completion report, then stop. AIC-7 is not started.
+## Tests
+
+New `src/test/companionVoiceInfrastructure.test.ts(x)` covering: client flag OFF → no voice capability; flag independence from AMBER/memory/history; valid and invalid transitions; end returns safe state; cleanup once and idempotent; abort idempotent; visibility/unmount contract; partial cannot be authoritative; final can; committed record has no hidden tail; no persistence, no analytics, no DB write, no secret exposure. No microphone permission required.
+
+## Explicitly not done
+
+Microphone/STT, TTS, turn-taking, interruption integration, UI controls, `/voice` route, provider selection or dependencies, voice bootstrap endpoint (recorded as `VOICE BOOTSTRAP ENDPOINT = DEFERRED TO PROVIDER SELECTION`), prompt changes, AIC-5 changes, `ai-search` changes, migrations, deployment.
+
+## Documentation
+
+- `docs/ai/companion-voice-architecture.md` — add the AIC-7A implemented boundary; correct the terminology to "no assistant audio before safety routing resolves".
+- `roadmap.md` — record exact state.
+- ADRs: accept only what this slice proves (candidates: 01 voice-is-transport, 05 one-conversation, 06 no-browser-master-secret). 02, 03, 04 stay PROPOSED pending functional validation. Exact statuses reported.
+
+## Validation
+
+`npm test` (baseline 89 files / 1036 tests, no weakened assertions), cache-defeated `npm run typecheck` twice, `deno check` on `ai-search`, `npm run lint` (baseline only), `npm run build`. Then the 64-point completion report. Stop before AIC-7B; stop and report if provider-specific work becomes necessary.

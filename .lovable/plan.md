@@ -1,46 +1,41 @@
-# Typecheck Baseline Restoration (AIC-5D closure blocker)
+# AIC-5D — Final Deno typecheck debt fix
 
-Validation tooling only. No production runtime, safety, classifier, prompt, flag, grounding, memory, history, UI or database change.
+## Confirmed root cause
 
-## Root cause (confirmed by read-only audit)
+`DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` reports exactly one error, TS2322 at line 642 (the streaming `new Response(...)` headers object).
 
-- `npm run typecheck` runs `tsc -b --pretty false`, building `tsconfig.app.json` (includes `src` only) and `tsconfig.node.json`.
-- Three endpoint tests already avoid dragging the Deno edge function into the browser TypeScript project by importing it through a **non-literal** specifier:
-  `src/test/aiSearchEndpoint.test.ts`, `aiSearchSafetyRouting.test.ts`, `aiSearchBoundaryRouting.test.ts` all use
-  `const endpointModule = "../../supabase/functions/ai-search/index.ts"; await import(/* @vite-ignore */ endpointModule);`
-  with an explicit comment stating why.
-- The AIC-5D test `src/test/aiSearchAmberRouting.test.ts:71` breaks that convention with a **static literal** dynamic import, so `tsc` pulls `supabase/functions/ai-search/index.ts` into the browser project graph.
-- All 18 errors come from that single inclusion:
-  - 1 x TS2307 — remote `https://deno.land/std@0.168.0/http/server.ts` import (resolved by Deno, not by browser tsc).
-  - 14 x TS2304 — `Cannot find name 'Deno'` (Deno globals absent from the browser lib set).
-  - 3 x TS2339 — `parsed.error`, `setup.status`, `setup.error`. The unions are correctly discriminated (`{ ok: true; ... } | { ok: false; ... }`); narrowing fails only because `tsconfig.app.json` sets `strict: false` / `strictNullChecks: false`, under which boolean-discriminant narrowing is not applied. The edge function's real Deno environment is strict, so these are environment artifacts, not production typing defects.
-- `src/test/aiVersions.test.ts` imports the same file with `?raw`, which is source-text only and does not add it to the type graph.
+At line 503:
+
+```ts
+const conversationHeader = conversation ? { "X-Conversation-Id": conversation.conversationId } : {};
+```
+
+TypeScript widens the ternary to a union whose second branch is inferred as `{ "X-Conversation-Id"?: undefined }`. When spread into the response headers object, the resulting union member carries an optional-undefined property, which is not assignable to `Record<string, string>` / `HeadersInit`.
 
 ## Fix
 
-Change one line of test code so it matches the existing, documented repository convention:
+Annotate the conditional header map as a plain string record so the absent case is an empty record rather than a record with an optional-undefined key:
 
-- `src/test/aiSearchAmberRouting.test.ts` — replace the static-literal dynamic import with the non-literal `endpointModule` pattern plus the same explanatory comment.
+```ts
+const conversationHeader: Record<string, string> = conversation
+  ? { "X-Conversation-Id": conversation.conversationId }
+  : {};
+```
 
-The test still imports and executes the real shipped `ai-search/index.ts` under Vitest through the existing Vite alias for the Deno `serve` stub. No mock substitution, no weakened assertions, no lost AIC-5A / AIC-5C / AIC-5D coverage.
+This is type-only, matches the existing `const headers: Record<string, string>` pattern at line 52, and uses no `as any`, `@ts-ignore`, or non-null assertion. Runtime output is byte-identical: header present with the same value when a conversation exists, absent otherwise. `X-Companion-Boundary`, `X-Companion-Clarification-Topic`, `Access-Control-Expose-Headers`, status codes, body and streaming are untouched.
 
-No production file is touched. If any genuine production typing defect surfaces, work stops and it is reported rather than fixed here.
+## Validation sequence
 
-## Validation
+1. `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` → must be 0 errors. If a different genuine error surfaces, stop and report.
+2. Remove `tsconfig.app.tsbuildinfo` / `tsconfig.node.tsbuildinfo` where present, then `npm run typecheck` twice → PASS both.
+3. `npm test` → reconcile against the 86 files / 929 tests baseline.
+4. Check whether endpoint tests already assert both the present and absent `X-Conversation-Id` cases; add the smallest focused assertion only if that exact behaviour is uncovered. No existing test weakened.
+5. `npm run lint` (baseline only: 1 generated-file `prefer-const` error, 10 react-refresh warnings) and `npm run build` → PASS.
 
-1. Delete `tsconfig.app.tsbuildinfo` and `tsconfig.node.tsbuildinfo` (the only TypeScript incremental caches; nothing else removed).
-2. `npm run typecheck` twice — both must PASS from clean state.
-3. `npm test` — expect 86 files / 929 tests, all passing, no test lost.
-4. `npm run lint` — known baseline only (1 generated-file `prefer-const` error, 10 react-refresh warnings), 0 new findings.
-5. `npm run build` — PASS.
-6. Edge-function check: the repository has no Deno/Supabase typecheck script (only `supabase/functions/process-email-queue/deno.json` exists; `ai-search` has none). If `deno check` is available it will be run read-only against `ai-search` and the result reported honestly; otherwise the absence is stated plainly. No deployment.
+## Deployment and closure
 
-## Documentation
-
-- `roadmap.md` / AIC-5D closure record: record that the original typecheck PASS was invalid due to a stale incremental cache, that the clean-cache run exposed 18 pre-existing errors owned by the Deno edge module, and that the repository validation boundary was corrected by restoring the non-literal test import convention. The historical finding is preserved, not erased.
-
-## Closure
-
-If all checks pass: AIC-5D ENGINEERING — CLOSED PASS; PRODUCTION AMBER CLASSIFIER RELEASE — GATED; `AI_AMBER_CLASSIFIER_ENABLED` — OFF; AIC-5E — SAFE TO BEGIN (not started).
-
-Deliverable: the 29-point typecheck closure report only.
+- Deploy `ai-search` only, after all validation passes.
+- Minimal smoke: ordinary query streams normally, clarification boundary unchanged, RED deterministic safety unchanged.
+- `AI_AMBER_CLASSIFIER_ENABLED` stays OFF; production AMBER classifier release remains GATED.
+- Update the closure record in `roadmap.md` preserving the full history (18 false cross-runtime app errors → test import boundary corrected → clean app typecheck → Deno check exposed one genuine `HeadersInit` defect → type-only correction → both typechecks pass).
+- Return only the 26-point final closure report. AIC-5E not started.

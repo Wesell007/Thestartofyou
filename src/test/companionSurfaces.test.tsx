@@ -74,13 +74,6 @@ describe("WC-4 navigation terminology", () => {
 
 describe("WC-4 companion panel", () => {
   it("opens the panel only from the launcher", async () => {
-    const [{ CompanionProvider }, { default: CompanionLauncher }, { default: CompanionPanel }] =
-      await Promise.all([
-        import("@/components/companion/CompanionProvider"),
-        import("@/components/companion/CompanionLauncher"),
-        import("@/components/companion/CompanionPanel"),
-      ]);
-
     window.localStorage.setItem("tsoy_consent_analytics_v1", "accepted");
 
     render(

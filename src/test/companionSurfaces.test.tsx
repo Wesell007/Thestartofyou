@@ -14,6 +14,10 @@ import { MemoryRouter } from "react-router-dom";
 
 import Footer from "@/components/layout/Footer";
 import JournalMoment from "@/components/home/JournalMoment";
+import Navbar from "@/components/layout/Navbar";
+import { CompanionProvider } from "@/components/companion/CompanionProvider";
+import CompanionLauncher from "@/components/companion/CompanionLauncher";
+import CompanionPanel from "@/components/companion/CompanionPanel";
 import { askDestination } from "@/lib/askNavigation";
 import { companionLauncherLabel } from "@/lib/companion/companionName";
 

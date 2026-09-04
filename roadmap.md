@@ -105,3 +105,22 @@
   persistent-history flags OFF, telemetry/persistence/migrations/UI/quota changes 0.
   AIC-5D FORMALLY CLOSED PASS. PRODUCTION AMBER CLASSIFIER RELEASE — GATED.
   AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5E — SAFE TO BEGIN. NOT STARTED.
+
+- AIC-5E — EMOTIONAL CONTINUITY — CLOSED PASS.
+  Option B shipped: `_shared/emotionalEvidence.ts` (deterministic, request-scoped, explicit
+  user-authored emotion only, tight experiencer binding, max two ordered categories, generic/
+  quoted/hypothetical/definitional exclusions, precision-first ellipses, narrow continuation
+  signals, most-recent-user-turn history only, current-turn and directional override, fail-open)
+  and `_shared/emotionalGuidance.ts` (fixed trusted guidance, zero raw user text, category tone
+  rules, overwhelm-only structural simplification, nuanced anti-repetition, explicit statement
+  that safety outranks tone). Wired into `ai-search` on the ordinary model path only, rendered
+  before the global reassurance rule and any AMBER block.
+  Unchanged: RED/CRISIS wording and routing, clarification and UNSUPPORTED answers and headers,
+  quota, kill switch, grounding `30B-source-routing-v1`, memory and persistent-history flags,
+  client contract. Added: 0 model calls, 0 migrations, 0 telemetry, 0 persistence, 0 UI changes.
+  Validation: 88 files / 990 tests PASS (47 detector/guidance + 12 endpoint tests added), clean
+  `npm run typecheck` PASS, `deno check` on ai-search PASS / 0 errors, lint baseline only
+  (1 generated-file prefer-const error, 10 react-refresh warnings), build PASS.
+  Deployed `ai-search` only; live smoke: emotional question answered with acknowledgement then
+  substance, neutral question unchanged, RED escalation deterministic and unchanged, clarify
+  headers unchanged. AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5F and AIC-6 — NOT STARTED.

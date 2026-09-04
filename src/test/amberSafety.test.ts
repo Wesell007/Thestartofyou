@@ -96,7 +96,11 @@ describe("strict structured contract", () => {
 
 describe("assessment call", () => {
   it("sends a bounded, non-streaming, schema-enforced request", async () => {
-    const fetchImpl = vi.fn(async () => gatewayReply(JSON.stringify({ state: "amber" })));
+    let sent: RequestInit | undefined;
+    const fetchImpl = vi.fn(async (_url: unknown, init?: RequestInit) => {
+      sent = init;
+      return gatewayReply(JSON.stringify({ state: "amber" }));
+    });
     const result = await classifyAmber({
       query: "my calf is sore and swollen",
       journeyFamily: "pregnancy",
@@ -104,7 +108,7 @@ describe("assessment call", () => {
       fetchImpl: fetchImpl as unknown as typeof fetch,
     });
     expect(result).toEqual({ kind: "amber" });
-    const body = JSON.parse((fetchImpl.mock.calls[0][1] as RequestInit).body as string);
+    const body = JSON.parse(sent?.body as string);
     expect(body.model).toBe(AMBER_CLASSIFIER_MODEL);
     expect(body.temperature).toBe(AMBER_CLASSIFIER_TEMPERATURE);
     expect(body.max_tokens).toBe(AMBER_CLASSIFIER_MAX_TOKENS);

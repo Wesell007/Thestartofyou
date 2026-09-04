@@ -225,3 +225,31 @@
   OFF, persistent-history flags OFF, safety-state persistence 0, emotion persistence 0,
   voice persistence 0.
   AIC-6 ARCHITECTURE GATE — CLOSED. AIC-7 — SAFE TO APPROVE, NOT STARTED.
+
+- AIC-7A — VOICE INFRASTRUCTURE & RELEASE FOUNDATION — CLOSED PASS.
+  Infrastructure only, behind OFF gates. No usable voice experience exists: microphone capture 0,
+  STT 0, TTS 0, provider 0, provider dependency 0, provider secret 0, voice UI 0, `/voice` route 0,
+  third AI surface 0, prompt changes 0, ai-search changes 0, AIC-5 source changes 0, DB changes 0,
+  analytics 0, deployment (edge) NONE.
+  Added: `src/lib/companion/voice/voiceFlags.ts` (client gate `VITE_COMPANION_VOICE_ENABLED`,
+  default OFF, SECURITY AUTHORITY = NONE; server gate `AI_COMPANION_VOICE_ENABLED` named and
+  documented), `voiceContracts.ts` (PartialTranscript display-only vs FinalTranscript
+  authoritative; branded CanonicalAssistantText constructible only via `canonicaliseAssistantText`
+  → `sanitiseAnswerForDisplay`; branded SpeakableChunk only from canonical text;
+  CommittedAssistantRecord with no hidden-tail field), `voiceState.ts` (11 approved states, legal
+  transition table, invalid transition returns current state, `ended` terminal),
+  `voiceSessionController.ts` (start/transition/abort/stopCapture/stopOutput/end/visibility/unmount,
+  injected resources, idempotent cleanup), `voiceAdapters.ts` (minimal input/output seam + no-ops),
+  `src/test/companionVoiceInfrastructure.test.ts` (26 tests).
+  SERVER VOICE FLAG CONTRACT: DEFINED / RESERVED. RUNTIME ENFORCEMENT: DEFERRED UNTIL FIRST
+  PRIVILEGED SERVER VOICE CAPABILITY. PRIVILEGED SERVER VOICE CAPABILITY: 0.
+  VOICE BOOTSTRAP ENDPOINT: DEFERRED TO PROVIDER SELECTION.
+  Terminology corrected in docs to NO ASSISTANT AUDIO BEFORE SAFETY ROUTING RESOLVES.
+  AIC-7C seam documented: FinalTranscript.text → existing `send(question)` in
+  `useCompanionConversation`; no voice send path, thread or conversation id.
+  ADR-AIC6-01..06 all remain PROPOSED (nothing functionally proven by this slice).
+  Frozen: AI_AMBER_CLASSIFIER_ENABLED OFF, AMBER release GATED, AI_SOURCE_ROUTING_VERSION
+  `30B-source-routing-v1`, grounding candidates 0 / approvals 0 / eligible slugs [], memory flags
+  OFF, persistent-history flags OFF, voice UI flag OFF, voice persistence 0, raw-audio persistence 0,
+  voice analytics 0.
+  AIC-7B — SAFE TO BEGIN, NOT STARTED.

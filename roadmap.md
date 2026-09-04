@@ -124,3 +124,32 @@
   Deployed `ai-search` only; live smoke: emotional question answered with acknowledgement then
   substance, neutral question unchanged, RED escalation deterministic and unchanged, clarify
   headers unchanged. AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5F and AIC-6 — NOT STARTED.
+
+- AIC-5E — TEST HARNESS STABILISATION (closure blocker) — CLOSED PASS.
+  History, retained in full: AIC-5E implementation added 59 passing tests (47
+  `emotionalEvidence`, 12 `aiSearchEmotionalContinuity`). The first formal full-suite closure run
+  exposed 3 timeouts across two pre-existing WC-era suites (`src/test/companionSurfaces.test.tsx`,
+  `src/pages/MemorySettingsPrototype.test.tsx`); isolated re-runs of those files passed 19/19. A
+  second default `npm test` run reproduced 1 timeout in the same harness family
+  (companionSurfaces, "opens the panel only from the launcher"). Diagnosis: heavy in-test dynamic
+  component imports (`CompanionProvider`, `CompanionLauncher`, `CompanionPanel`, `Navbar`) had
+  their Vite transform/import cost charged to the individual 5000 ms test budget under worker
+  contention (run aggregates: transform 99.6 s, import 218.8 s, environment 1416.9 s vs tests
+  48.6 s). AIC-5E production code was never implicated; no AIC-5E test ever failed.
+  Fix (test-only): the four dynamic imports in `companionSurfaces.test.tsx` were hoisted to
+  module scope so transformation happens during collection. Import-order audit confirmed this was
+  safe — the file's single `vi.mock("@/hooks/useCompanionIdentity")` is hoisted above imports by
+  Vitest and there is no `vi.doMock`, `vi.resetModules`, `vi.unmock`, module-cache assumption or
+  pre-import environment mutation. `MemorySettingsPrototype.test.tsx` was inspected and already
+  uses module-scope imports only, so it was left unchanged (no avoidable in-test import work).
+  No timeout increases, no worker/concurrency changes, no retries, no skips/todos, no assertion
+  or behaviour changes. Production files changed: 0. Deployment: none.
+  Validation: focused pair 2 files / 19 tests PASS in 7.11 s (companionSurfaces file 1060 ms);
+  standard `npm test` 88 files / 990 tests / 990 PASS / 0 failed / 0 timed out in 105.2 s;
+  `npm run typecheck` PASS / 0 errors; lint known baseline only (1 generated-file prefer-const
+  error, 10 react-refresh warnings), 0 new findings.
+  Frozen: AI_AMBER_CLASSIFIER_ENABLED OFF, AMBER production release GATED,
+  AI_SOURCE_ROUTING_VERSION `30B-source-routing-v1`, grounding candidates 0, approvals 0,
+  eligible slugs [], memory flags OFF, persistent-history flags OFF, emotion persistence 0,
+  emotion analytics 0, emotion model calls 0.
+  AIC-5E ENGINEERING — FORMALLY CLOSED PASS. AIC-5F — SAFE TO BEGIN, NOT STARTED. AIC-6 — NOT STARTED.

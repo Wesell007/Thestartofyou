@@ -14,6 +14,10 @@ import { MemoryRouter } from "react-router-dom";
 
 import Footer from "@/components/layout/Footer";
 import JournalMoment from "@/components/home/JournalMoment";
+import Navbar from "@/components/layout/Navbar";
+import { CompanionProvider } from "@/components/companion/CompanionProvider";
+import CompanionLauncher from "@/components/companion/CompanionLauncher";
+import CompanionPanel from "@/components/companion/CompanionPanel";
 import { askDestination } from "@/lib/askNavigation";
 import { companionLauncherLabel } from "@/lib/companion/companionName";
 
@@ -58,8 +62,7 @@ describe("WC-4 companion entry points", () => {
 });
 
 describe("WC-4 navigation terminology", () => {
-  it("points the desktop and mobile nav companion entries at /ask", async () => {
-    const { default: Navbar } = await import("@/components/layout/Navbar");
+  it("points the desktop and mobile nav companion entries at /ask", () => {
     renderAt(<Navbar />);
     const links = screen
       .getAllByRole("link", { name: /companion/i })
@@ -71,13 +74,6 @@ describe("WC-4 navigation terminology", () => {
 
 describe("WC-4 companion panel", () => {
   it("opens the panel only from the launcher", async () => {
-    const [{ CompanionProvider }, { default: CompanionLauncher }, { default: CompanionPanel }] =
-      await Promise.all([
-        import("@/components/companion/CompanionProvider"),
-        import("@/components/companion/CompanionLauncher"),
-        import("@/components/companion/CompanionPanel"),
-      ]);
-
     window.localStorage.setItem("tsoy_consent_analytics_v1", "accepted");
 
     render(

@@ -92,9 +92,23 @@ afterEach(() => {
   vi.clearAllMocks();
 });
 
+/** Decodes the SSE frames back into the visible answer text. */
 const drain = async (response: Response) => {
-  const text = await response.text();
-  return { response, text };
+  const raw = await response.text();
+  const text = raw
+    .split("\n")
+    .filter((line) => line.startsWith("data:"))
+    .map((line) => line.slice(5).trim())
+    .filter((payload) => payload && payload !== "[DONE]")
+    .map((payload) => {
+      try {
+        return JSON.parse(payload)?.choices?.[0]?.delta?.content ?? "";
+      } catch {
+        return "";
+      }
+    })
+    .join("");
+  return { response, text, raw };
 };
 
 describe("ordinary model path", () => {
@@ -157,7 +171,7 @@ describe("deterministic routes stay byte-identical", () => {
 
   it("leaves an unsupported boundary unchanged", async () => {
     const { response, text } = await drain(
-      await post({ query: "i am so frustrated, book me a midwife appointment" }),
+      await post({ query: "i am so frustrated, can you book a midwife appointment for me" }),
     );
     expect(response.headers.get("X-Companion-Boundary")).toBe("unsupported");
     expect(text).not.toContain(TONE_MARKER);

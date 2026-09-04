@@ -62,8 +62,7 @@ describe("WC-4 companion entry points", () => {
 });
 
 describe("WC-4 navigation terminology", () => {
-  it("points the desktop and mobile nav companion entries at /ask", async () => {
-    const { default: Navbar } = await import("@/components/layout/Navbar");
+  it("points the desktop and mobile nav companion entries at /ask", () => {
     renderAt(<Navbar />);
     const links = screen
       .getAllByRole("link", { name: /companion/i })

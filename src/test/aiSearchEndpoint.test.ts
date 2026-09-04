@@ -48,6 +48,19 @@ const fetchStub = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => 
     modelBodies.push(JSON.parse(String(init?.body ?? "{}")));
     return sse(modelAnswer);
   }
+  if (url.includes("/auth/v1/user")) {
+    return new Response(JSON.stringify({ id: "user-1" }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  if (url.includes("companion_conversations")) {
+    return new Response(JSON.stringify([{ id: "conv-1" }]), {
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  if (url.includes("companion_messages")) {
+    return new Response(JSON.stringify([]), { headers: { "Content-Type": "application/json" } });
+  }
   return new Response("<main>" + "grounding evidence. ".repeat(40) + "</main>", {
     headers: { "Content-Type": "text/html" },
   });
@@ -198,5 +211,32 @@ describe("Phase 29D expanded escalation at the endpoint", () => {
     expect(body).toMatch(ESCALATION_WORDING);
     expect(body).not.toMatch(/https?:\/\//);
     expect(modelBodies).toHaveLength(0);
+  });
+});
+
+// Conditional X-Conversation-Id header: present only when a persistent
+// conversation is actually established, absent otherwise.
+describe("X-Conversation-Id response header", () => {
+  afterEach(() => {
+    delete env.AI_CONVERSATION_HISTORY_ENABLED;
+    delete env.SUPABASE_ANON_KEY;
+  });
+
+  it("omits the header when no conversation is established", async () => {
+    const response = await post({ query: "What helps with heartburn?" });
+    expect(response.headers.has("X-Conversation-Id")).toBe(false);
+  });
+
+  it("includes the header when a persistent conversation exists", async () => {
+    env.AI_CONVERSATION_HISTORY_ENABLED = "true";
+    env.SUPABASE_ANON_KEY = "anon-key";
+    const response = await capturedHandler()(
+      new Request("https://backend.test/functions/v1/ai-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer user-token" },
+        body: JSON.stringify({ query: "What helps with heartburn?", historyMode: "persistent" }),
+      }),
+    );
+    expect(response.headers.get("X-Conversation-Id")).toBe("conv-1");
   });
 });

@@ -1,43 +1,52 @@
 # AIC-7B — Provider Selection & Streaming STT Architecture Gate
 
-Research is complete. This plan records the recommendation and the documentation-only work to close the gate. No provider integration, no microphone, no STT, no TTS, no production source changes.
+Documentation only. No provider integration, no dependency, no credential, no microphone, no STT, no TTS, no build, no production runtime changes.
 
-## Evidence base
+## Decisions being recorded
 
-Comparison date: 4 September 2026. Eight candidates reviewed from current official documentation: Deepgram, AssemblyAI, Speechmatics, Google Speech-to-Text v2/Chirp, Azure AI Speech, AWS Transcribe (incl. Medical), OpenAI Realtime transcription, ElevenLabs Scribe v2 Realtime. Google is eliminated on transport alone (gRPC only, no browser path). Unresolved items are recorded as UNKNOWN, not inferred.
+- **Selected provider: AssemblyAI — Streaming Speech-to-Text only.** The managed AssemblyAI Voice Agent API (STT + LLM + TTS) is explicitly rejected: `ai-search` and AIC-5 remain the sole response and safety authority.
+- **Exact speech model: BENCHMARK-GATED.** Universal-Streaming vs Universal-3.5 Pro Realtime is not locked; the price gap must be justified by measured accuracy on our own corpus.
+- **Primary transport: A — direct browser to provider Streaming WebSocket** using a short-lived, server-issued token. Server audio relay rejected (adds latency, bandwidth and audio-handling responsibility with no safety gain, since AIC-5 acts on the final transcript, never on audio).
+- **Runner-up: Speechmatics** (UK company, EU realtime endpoint, medical domain model), lost on enterprise-gated browser temporary keys, undocumented retention/training posture, and slower `max_delay` finalisation. Deepgram third.
+- Comparison date 4–5 September 2026, eight providers reviewed. Google eliminated on gRPC-only transport; ElevenLabs on default retention with enterprise-only ZDR; OpenAI Realtime on residency and vocabulary; AWS and Azure on domain fit and credential/SDK weight.
 
-## Recommendation
+## Files to write
 
-**Transport: Option A — direct browser WebSocket to the provider using a short-lived, server-issued token.** Server relay through an edge runtime adds latency, bandwidth and audio-handling responsibility for no safety gain: safety lives in `ai-search`, which only ever sees the final transcript, never audio.
+**1. `docs/ai/companion-voice-provider-review.md` (new)**
+- All eight providers, elimination reasons, 30-dimension shortlist comparison table (AssemblyAI / Speechmatics / Deepgram), source list, comparison date.
+- Pricing recorded per model: Universal-Streaming $0.15/hr, Universal-3.5 Pro Realtime $0.45/hr, Medical Mode add-on $0.15/hr, Pro + Medical $0.60/hr combined; Universal-Streaming + Medical Mode to be derived from current official pricing at build time. Session-based billing including idle connection time noted as a lifecycle constraint.
+- Temporary token contract recorded as KNOWN: `GET /v3/token`, `expires_in_seconds` 1–600, server-minted, passed as a query parameter; no invented scope or revocation properties.
+- EU-pinned endpoint `wss://streaming.eu.assemblyai.com/v3/ws`, to be re-confirmed for the selected model and Medical Mode at build time.
+- Retention stated conditionally: zero data retention for streaming **is conditional on the model-training opt-out**, with billing/logging metadata retained regardless. Free tier cannot opt out, so free/test behaviour does not establish production posture. Async artifact TTL kept explicitly separate from streaming ZDR.
+- Privacy/legal release gate checklist (DPA, EU/UK scope, training opt-out CONFIRMED, streaming ZDR CONFIRMED on contracted tier, metadata scope, subprocessors, deletion, security posture, tier terms).
+- UNKNOWN / REQUIRES VALIDATION register (iOS Safari vendor statements, UK-accent performance, real-device latency, household-noise accuracy, behaviour on our corpus, combined Universal-Streaming + Medical rate, EU-endpoint feature availability, contractual terms, subprocessors, ISO 27001, numeric VAD thresholds, en-GB number/date formatting).
+- Explicit statement that no provider eliminates transcription risk; negation and severity errors are input-quality risks handled by UX, never by tuning AIC-5.
 
-**Selected provider (technical recommendation): AssemblyAI Universal-Streaming.**
-- Direct browser WebSocket with a temporary token (`GET /v3/token`, query-param auth), master key stays server-side.
-- Clear `Turn` semantics: `end_of_turn:false` partial, `end_of_turn:true` final, plus `ForceEndpoint` — a clean match for our manual Done control.
-- EU residency endpoint (`streaming.eu.assemblyai.com`); data stated not to leave the region.
-- Documented Data Controls: training opt-out plus zero data retention for streaming production, and configurable TTL.
-- Medical Mode for streaming (medications, procedures, dosages), plus keyterm prompting for pregnancy/TTC/postpartum vocabulary.
-- Published P50 word latency 300 ms; $0.15/hour session-based.
+**2. `docs/ai/companion-voice-architecture.md` (update — new AIC-7B section)**
+- Provider selected at provider level; model benchmark-gated; Voice Agent API rejected as response brain.
+- Bootstrap flow: browser requests voice bootstrap → server checks `AI_COMPANION_VOICE_ENABLED` → server holds the master key → server mints a short-lived streaming token → browser receives only the token → browser connects directly. Client flag security authority NONE; master key in browser 0.
+- EU streaming endpoint as the production requirement, not default edge routing.
+- Transcript protocol mapping: `Turn end_of_turn:false` → `PartialTranscript` (display only, never `send(question)`, never `ai-search`, never AIC-5); `Turn end_of_turn:true` → `FinalTranscript` (authoritative, AIC-7C input); client `ForceEndpoint` → future manual **Done**, which remains mandatory regardless of provider endpointing.
+- Audio transport: PCM16 mono 16 kHz over binary WebSocket frames; capture via `getUserMedia` + Web Audio / AudioWorklet-style PCM pipeline, explicitly not MediaRecorder/WebM reuse from journal; platform verification required across iOS Safari, Android Chrome, desktop Chrome/Safari/Edge before locking capture.
+- Provider confidence is diagnostics only — never decides GREEN/AMBER/RED/CRISIS, severity, or user safety.
+- Keyterm prompting bounded: domain vocabulary only, no personal medical information, no memory, no conversation history injection.
+- Audio lifecycle: durable application raw-audio storage 0, Supabase audio storage 0, voice audio archive 0; capture → transient processing → active WebSocket → discard; no replay, no journal storage coupling.
+- Failure and reconnect behaviour: no automatic microphone-audio retry, at most one automatic session reconnect, never silently replay captured speech, no hidden buffering; fallback is "try voice again" or switch to text.
+- Mandatory AIC-7B BUILD benchmark (models, Medical Mode on/off, keyterm impact), synthetic UK corpus, and development metrics (WER, critical-term, medical/entity, negation, numbers, first-partial latency, final latency, endpointing delay, partial stability, bootstrap latency, connection failure rate) — development only, no production voice analytics.
+- Provider adapter mapping through `VoiceInputAdapter` so no provider event shape leaks into conversation logic.
 
-**Runner-up: Speechmatics.** UK company, EU realtime endpoint, an explicit medical domain model, `additional_vocab` with `sounds_like`. It loses because temporary keys for browser use are enterprise-gated (no self-serve path to a no-browser-secret architecture), retention/training posture is undocumented publicly, and `max_delay` finalisation (0.7–4 s) is slower. Deepgram is third: EU endpoint GA and a 30 s–1 h scoped JWT, but no documented medical model and no published retention default.
+**3. `roadmap.md` (update)** — AIC-7B provider gate outcome, frozen state, and the proposed AIC-7B build slice (transport, permission, capture, token bootstrap endpoint, adapter, transcript-only development UI, cleanup, no `send()`).
 
-**Stop conditions:** none triggered. Master browser secrets required: 0.
+**4. ADRs** — all six AIC-6 ADRs remain PROPOSED. ADR-AIC6-06 noted as evidence-strengthened but NOT ACCEPTED until server token issuance and browser integration actually prove it.
 
-## Documentation to write (build mode)
+## Not done
 
-1. **`docs/ai/companion-voice-provider-review.md`** (new) — full evidence table across all eight candidates over the 30 evaluation dimensions, with source URLs, per-provider retention/training/residency findings, and an explicit UNKNOWN register (AssemblyAI token TTL, VAD numeric thresholds, en-GB accent evidence, ISO 27001 status, iOS Safari vendor statements).
-2. **`docs/ai/companion-voice-architecture.md`** (update) — add an AIC-7B section: selected transport and provider, ephemeral credential flow (voice UI → server checks `AI_COMPANION_VOICE_ENABLED` → server mints temporary token → browser connects directly), audio capture recommendation (AudioWorklet raw PCM 16 kHz mono, **not** MediaRecorder/WebM — iOS Safari produces MP4/AAC), partial→`PartialTranscript` and final→`FinalTranscript` mapping through `VoiceInputAdapter`, mandatory manual Done, confidence as diagnostics only, audio lifecycle (capture → stream → discard; durable audio storage 0), failure and single-reconnect behaviour (never replay captured speech, never auto-retry audio; fall back to "try again" or text), latency benchmark plan and the synthetic UK-English quality corpus (negation, severity, gestational weeks, dosages, BP/temperature, 999 / NHS 111 / A&E, household noise, self-corrections), and the recommended development metrics.
-3. **Safety-critical transcription risk section** — explicitly states no provider removes mis-transcription risk; negation and severity errors are input-quality risks handled by UX (visible transcript, easy correction), never by tuning AIC-5.
-4. **`roadmap.md`** — record AIC-7B gate outcome and the proposed AIC-7B build slice (transport + permission + capture + bootstrap endpoint + adapter + transcript-only dev UI, no `send()`).
-5. **ADRs** — all six AIC-6 ADRs stay PROPOSED. ADR-AIC6-06 is noted as strengthened by evidence but not accepted until enforced in code.
+Provider integration or dependency, credentials, bootstrap endpoint, microphone, STT, TTS, conversation integration, prompt changes, AIC-5 changes, UI, routes, migrations, analytics, deployment. Production source files changed 0, tests changed 0, DB changes 0.
 
-## Explicitly not done
+## Frozen state to reconfirm
 
-Provider SDK, credentials, bootstrap endpoint, microphone, STT, TTS, conversation integration, prompt changes, AIC-5 changes, UI, routes, migrations, analytics, deployment. Production source files changed: 0. Tests changed: 0.
-
-## Release gating
-
-Technical recommendation is separate from production privacy approval. Before general release: signed DPA, confirmed EU/UK processing scope, confirmed zero-retention and training opt-out in the contracted tier, and subprocessor review.
+`VITE_COMPANION_VOICE_ENABLED` OFF; `AI_COMPANION_VOICE_ENABLED` OFF/reserved; `AI_AMBER_CLASSIFIER_ENABLED` OFF with production AMBER release GATED; grounding `30B-source-routing-v1` / 0 / 0 / []; memory OFF; persistent history OFF; microphone, STT, TTS, voice persistence, raw-audio persistence and voice analytics all 0.
 
 ## Validation
 
-Documentation only, so: `npm test` (expect 90 files / 1062 tests unchanged), `npm run typecheck`, `npm run lint` (baseline only), `npm run build`. Then the 95-point completion report. Stop before the AIC-7B build.
+Documentation only: `npm test` (expect 90 files / 1062 tests unchanged), `npm run typecheck`, `npm run lint` (baseline only), `npm run build`. Then the 95-point provider-gate report. Stop after the report; do not start the build.

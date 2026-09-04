@@ -1,17 +1,14 @@
-# ADR-AIC5-01 … 08 — Safety intelligence and emotional continuity
+ADR lifecycle at the time of writing (AIC-5D build):
 
-ADR-AIC5-01 and ADR-AIC5-02 are ACCEPTED as of AIC-5A. ADR-AIC5-08 is ACCEPTED as
-of AIC-5B. ADR-AIC5-06 remains PROPOSED as a decision record; its open question
-(can the gateway enforce strict structured output?) was answered SUPPORTED by the
-AIC-5B probe, but the decision to depend on it is still not taken.
-ADR-AIC5-07 is ACCEPTED in its ephemeral-continuity principle as of AIC-5C: the
-clarification/boundary layer reads bounded conversation turns in-request and
-persists no derived state. ADR-AIC5-03, 04 and 05 remain PROPOSED.
+- ACCEPTED: 01, 02 (partially implemented), 08, 09, 10
+- RESOLVED (historical): 06 — the probe question it raised was answered by AIC-5B
+- PROPOSED: 03, 04, 05, 07
 
-Status of every record below: **PROPOSED**. None is implemented. Accepting any
-of them requires the corresponding AIC-5 build slice and its own approval.
+Each record carries its own authoritative status line. There is no blanket status.
+Accepting a PROPOSED record requires the corresponding AIC-5 build slice and its
+own approval.
 
-Context shared by all eight: `docs/ai/companion-safety-emotional-continuity.md`
+Context shared by all records: `docs/ai/companion-safety-emotional-continuity.md`
 (AIC-5 audit).
 
 ---
@@ -20,7 +17,6 @@ Context shared by all eight: `docs/ai/companion-safety-emotional-continuity.md`
 
 **Status: ACCEPTED (AIC-5A).** Implemented as `decideSafety` in `_shared/safetyRouter.ts`, running before rate limiting, persistence, mode behaviour and the kill switch.
 
-**Status:** PROPOSED
 
 **Decision.** Safety routing is decided by deterministic server-side rules. A
 language model may never be the sole reason a high-risk turn is treated as safe.
@@ -38,7 +34,6 @@ model.
 
 **Status: ACCEPTED (AIC-5A), partially implemented.** The five-state vocabulary is reserved in `_shared/safetyState.ts`; only `green`, `red` and `crisis` are emitted. `amber` (AIC-5D) and `unsupported` (AIC-5C) remain unimplemented.
 
-**Status:** PROPOSED
 
 **Decision.** Introduce GREEN, AMBER, RED, CRISIS and UNSUPPORTED as an explicit
 shared runtime contract, defined in the audit document. RED maps to the existing
@@ -101,7 +96,6 @@ under adversarial synthetic input; malformed schema rejected with 400; plain
 `json_object` mode 0/8 valid). The gate the record demanded is satisfied; the
 prohibition on prose parsing stands permanently.
 
-**Status:** PROPOSED (original text below)
 
 **Decision.** No classifier ships before a dev/test-only probe establishes
 strict structured-output support on the current gateway model and path. Parsing

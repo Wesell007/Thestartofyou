@@ -11,6 +11,13 @@ import { AI_PAUSED_ANSWER, isAiDisabled } from "../_shared/urgentPatterns.ts";
 import { decideSafety } from "../_shared/safetyRouter.ts";
 import { isDeterministicSafetyDecision } from "../_shared/safetyState.ts";
 import { decideBoundary } from "../_shared/companionBoundaryRules.ts";
+import { decideAmberEligibility } from "../_shared/amberEligibility.ts";
+import { classifyAmber, isAmberClassifierEnabled } from "../_shared/amberClassifier.ts";
+import {
+  AMBER_SAFETY_GUIDANCE,
+  CAUTIOUS_UNCERTAINTY_GUIDANCE,
+  GLOBAL_REASSURANCE_RULE,
+} from "../_shared/amberGuidance.ts";
 
 import {
   MEMORY_INSTRUCTIONS,
@@ -535,6 +542,28 @@ serve(async (req) => {
     return json(req, { error: "Guidance is temporarily unavailable. Please try again." }, 503);
   }
 
+  // AIC-5D: optional structured GREEN → AMBER assessment. Deterministic
+  // eligibility first, then the release-gated classifier. Routine traffic never
+  // reaches the provider call, RED/CRISIS/clarify/unsupported never reach this
+  // line, and no result is persisted, logged with content or sent to the client.
+  const eligibility = decideAmberEligibility(query);
+  let amberGuidance = "";
+  if (eligibility.eligibleForAmberAssessment && isAmberClassifierEnabled(Deno.env.get("AI_AMBER_CLASSIFIER_ENABLED"))) {
+    // Only prior USER-authored turns may act as evidence, and only when the
+    // current wording deterministically depends on them.
+    const priorUserTurns = eligibility.needsPriorUserTurn
+      ? priorTurns.filter((turn) => turn.role === "user").slice(-2).map((turn) => turn.content)
+      : undefined;
+    const assessment = await classifyAmber({
+      query,
+      journeyFamily: journeyContext?.personal?.journey,
+      priorUserTurns,
+      apiKey,
+    });
+    if (assessment.kind === "amber") amberGuidance = AMBER_SAFETY_GUIDANCE;
+    if (assessment.kind === "unavailable") amberGuidance = CAUTIOUS_UNCERTAINTY_GUIDANCE;
+  }
+
 
   let evidence = "";
   if (modeConfig.useGrounding) {
@@ -581,7 +610,13 @@ serve(async (req) => {
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
               conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
+              // AIC-5D trusted safety layer, last so it outranks mode, tone,
+              // journey wording, memory, history and page context. Recap mode
+              // answers no health question, so it is left untouched.
+              modeConfig.allowUrgentEscalationAnswer ? GLOBAL_REASSURANCE_RULE : "",
+              modeConfig.allowUrgentEscalationAnswer ? amberGuidance : "",
             ].filter(Boolean).join("\n\n"),
+
           },
           { role: "user", content: userContent },
         ],

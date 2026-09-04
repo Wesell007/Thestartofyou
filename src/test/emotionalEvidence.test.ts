@@ -176,10 +176,10 @@ describe("fail-open behaviour", () => {
   });
 
   it("returns none when the input is malformed", () => {
-    // deno-lint-ignore no-explicit-any
-    expect(resolveEmotionalEvidence({ query: undefined as any, priorTurns: undefined as any }).kind).toBe(
-      "none",
-    );
+    const malformed = { query: undefined, priorTurns: undefined } as unknown as Parameters<
+      typeof resolveEmotionalEvidence
+    >[0];
+    expect(resolveEmotionalEvidence(malformed).kind).toBe("none");
   });
 });
 

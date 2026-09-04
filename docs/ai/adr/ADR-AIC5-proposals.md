@@ -196,3 +196,33 @@ content, or exposed to the client.
 **Consequences.** Routine traffic costs nothing extra. Eligible turns cost one
 bounded, non-streaming, single-attempt call with a 1500 ms budget. Provider
 failure degrades towards caution, never towards false reassurance.
+
+---
+
+## AIC-5F reconciliation (verification only, no status invented)
+
+Checked each decision against shipped code at AIC-5F. No ADR was reclassified
+to make the record look tidier.
+
+- **01 — ACCEPTED (AIC-5A).** Confirmed: `decideSafety` runs immediately after
+  validation, ahead of quota, kill switch, persistence and mode behaviour.
+- **02 — ACCEPTED (AIC-5A), partial.** Still partial and correctly so: the
+  deterministic router emits `green`/`red`/`crisis`; `unsupported` is served by
+  AIC-5C and `amber` by AIC-5D, both additive and outside the router.
+- **03 — PROPOSED.** Behaviour verified in code (caution may only rise: the
+  classifier can add AMBER or cautious guidance and can never downgrade a
+  deterministic decision), but the ADR is left PROPOSED because no phase has
+  formally adopted it as a standing principle.
+- **04 — PROPOSED.** AMBER now exists as a gated implementation (ADR-11); the
+  broader claim in 04 that AMBER is *the* principal missing state has not been
+  formally adopted and stays PROPOSED.
+- **05 — PROPOSED.** The shipped classifier is optional and additive, matching
+  the proposal, but adoption was recorded under ADR-11 rather than here.
+- **06 — RESOLVED (AIC-5B).** Confirmed by the structured-output probe.
+- **07 — ACCEPTED (AIC-5E).** Confirmed ephemeral: no persistence, analytics,
+  model call or client exposure.
+- **08 — ACCEPTED (AIC-5B).** Confirmed transport-independent: both surfaces
+  share one server-enforced path.
+- **09 — ACCEPTED (AIC-5C).** Confirmed server-owned clarification.
+- **10 — ACCEPTED (AIC-5C).** Confirmed precision-first UNSUPPORTED.
+- **11 — ACCEPTED (AIC-5D).** Confirmed selective, gated, caution-raising only.

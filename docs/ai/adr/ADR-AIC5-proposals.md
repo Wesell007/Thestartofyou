@@ -109,7 +109,10 @@ AMBER ships with deterministic rules and prompt contracts only.
 
 ## ADR-AIC5-07 — Emotional continuity is ephemeral
 
-**Status:** PROPOSED
+**Status: ACCEPTED (AIC-5E).** Implemented as a deterministic, request-scoped
+explicit-emotion evidence layer (`_shared/emotionalEvidence.ts`) plus fixed
+trusted tone guidance (`_shared/emotionalGuidance.ts`). No model call, no
+persistence, no analytics, no client exposure.
 
 **Decision.** Respond to emotion the person explicitly states, using only the
 current turn and the existing bounded conversation history. No emotion table, no

@@ -666,3 +666,58 @@ Unchanged: deterministic RED/CRISIS routing and wording, quota (one user-facing
 event), the kill switch, boundary headers and the client contract, grounding
 `30B-source-routing-v1`, memory and persistent-history flags, and all
 persistence and telemetry — the assessment writes and logs nothing.
+
+
+## AIC-5E — emotional continuity as implemented
+
+**Shipped.** Option B: deterministic explicit-emotion evidence plus fixed
+trusted tone guidance. Two shared modules, no new dependency, no extra model
+call, no measurable latency cost.
+
+### Evidence (`_shared/emotionalEvidence.ts`)
+
+Pure and request-scoped. Returns `{ kind: "none" }` or `{ kind: "explicit" }`
+with at most two categories (`fear`, `overwhelm`, `low`, `self_blame`,
+`frustration`, `positive`) in order of explicit mention, the source
+(`current` or `carried`), a continuity marker and an optional direction.
+
+Rules enforced:
+
+- Only explicit, user-authored self-report counts. Assistant text, page
+  context, JourneyContext, browsing, punctuation, typing style and the mere
+  presence of history are never evidence.
+- Tight experiencer binding: "I'm worried about my baby" is user fear; "My baby
+  seems worried", "My partner is anxious", "My friend is terrified" and "I can't
+  stop my baby crying and she seems worried" are not. An earlier first-person
+  token cannot claim a later third-party emotion.
+- Generic, quoted, hypothetical and definitional phrases do not match.
+  Standalone ellipses are precision-first and never sufficient alone.
+- Current explicit emotion or an explicit change overrides history. History is
+  read from the most recent qualifying user-authored turn only, carries only
+  through narrow deterministic continuation signals, and never accumulates old
+  categories.
+- Frustration stays distinct from overwhelm.
+- Fail-open: any malformed or unexpected input resolves to `none`.
+
+### Guidance (`_shared/emotionalGuidance.ts`)
+
+Fixed, trusted text. No raw user wording ever enters the prompt instructions.
+Category rules cover fear, overwhelm, low mood, self-blame, frustration and
+positive emotion; overwhelm alone also simplifies answer structure. Continuity
+wording differs for carried, continued and changed emotion so acknowledgement is
+not repeated identically. The block states explicitly that tone has lower
+authority than every safety rule.
+
+### Placement
+
+Resolved on the ordinary model path only, after the AIC-5D assessment and before
+grounding and model assembly, and rendered into the system prompt immediately
+before the global reassurance rule and any AMBER block, so safety remains the
+last and strongest instruction. RED, CRISIS, clarification and UNSUPPORTED
+answers return earlier and are byte-identical. Day-recap mode is excluded.
+
+### Explicit non-goals held
+
+No emotion model call, no persistence, no schema change, no hidden metadata, no
+client state or headers, no analytics, no raw emotional logging, no UI change,
+no voice work. AMBER remains OFF and, when active, outranks emotional tone.

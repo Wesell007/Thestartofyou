@@ -68,7 +68,10 @@ const fetchStub = vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => 
 
 vi.stubGlobal("fetch", fetchStub);
 
-await import(/* @vite-ignore */ "../../supabase/functions/ai-search/index.ts");
+// Loaded via a non-literal specifier so the Deno-targeted edge function stays
+// out of the browser TypeScript project while still running under Vitest.
+const endpointModule = "../../supabase/functions/ai-search/index.ts";
+await import(/* @vite-ignore */ endpointModule);
 
 const post = (body: Record<string, unknown>) =>
   capturedHandler()(

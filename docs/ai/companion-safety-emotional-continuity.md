@@ -635,3 +635,34 @@ Boundary results reach the browser as explicit headers —
 the visible answer, and the client never inspects assistant prose. No safety
 state, score or reasoning is transported. Nothing about the boundary decision is
 persisted, logged raw, or sent to analytics.
+
+## AIC-5D — AMBER, uncertainty and reassurance (implemented, release gated)
+
+The GREEN path gained a selective hybrid layer, placed after the AIC-5C boundary
+and before grounding, context, memory, history and the model:
+
+1. `decideAmberEligibility` (deterministic, no provider call, no severity
+   meaning): explicit concern wording, narrow first-person symptom framing, or
+   urgent-family vocabulary in a first-person message. A deterministic
+   continuation trigger decides whether the minimum prior user-authored turn(s)
+   may be included.
+2. `classifyAmber` (only when eligible and only when the authoritative server
+   flag `AI_AMBER_CLASSIFIER_ENABLED` is on): `google/gemini-2.5-flash`,
+   non-streaming, temperature 0, strict `json_schema` `{ "state":
+   "green" | "amber" }` plus application-side validation, one attempt, no retry,
+   1500 ms timeout. Every failure resolves to `unavailable`.
+3. Guidance: `amber` injects `AMBER_SAFETY_GUIDANCE`, `unavailable` injects
+   `CAUTIOUS_UNCERTAINTY_GUIDANCE`, `green` injects neither. Both blocks forbid
+   999/A&E/emergency framing and never name an internal state.
+
+`GLOBAL_REASSURANCE_RULE` now applies to every answering mode as a trusted block
+placed after the mode prompt, so it outranks mode, tone, journey wording,
+memory, history and page context. It bans definitive personal medical verdicts,
+not ordinary words such as "normal". AMBER guidance outranks the first-year
+"only when raised" suppression; stricter mode rules (for example the TTC
+no-false-hope rule) remain unchanged.
+
+Unchanged: deterministic RED/CRISIS routing and wording, quota (one user-facing
+event), the kill switch, boundary headers and the client contract, grounding
+`30B-source-routing-v1`, memory and persistent-history flags, and all
+persistence and telemetry — the assessment writes and logs nothing.

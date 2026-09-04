@@ -166,3 +166,28 @@ companion itself is asked to perform the act. Anything ambiguous continues to
 the model. Every boundary answer states plainly that nothing happened, names the
 real-world route, and offers what the companion can do instead. No model call,
 no classifier, no persistence.
+
+---
+
+## ADR-AIC5-11 — AMBER is a selective hybrid, and caution may only rise
+
+**Status: ACCEPTED (AIC-5D) as an engineering decision.** Implemented in
+`_shared/amberEligibility.ts`, `_shared/amberClassifier.ts` and
+`_shared/amberGuidance.ts`. Production release is separately gated by
+`AI_AMBER_CLASSIFIER_ENABLED`, which is OFF.
+
+**Decision.** AMBER is not a deterministic clinical threshold and not a
+universal classification of every turn. Deterministic rules decide only
+*eligibility* for an optional structured assessment; the assessment may return
+`green` or `amber` and nothing else. It can raise GREEN to AMBER and can never
+lower any state, never touches RED, CRISIS, clarify or unsupported, and an
+assessment that cannot be completed produces cautious guidance rather than
+reassurance. The assessment receives the user's message, the minimum
+user-authored prior turn(s) when the wording depends on them, and the broad
+journey family only — never memory, page context, grounding, detailed stage
+data or identifiers. Nothing about the assessment is persisted, logged with
+content, or exposed to the client.
+
+**Consequences.** Routine traffic costs nothing extra. Eligible turns cost one
+bounded, non-streaming, single-attempt call with a 1500 ms budget. Provider
+failure degrades towards caution, never towards false reassurance.

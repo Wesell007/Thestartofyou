@@ -62,3 +62,28 @@
   0 deployments, 0 migrations, 0 client changes. ADR-AIC5-11 ACCEPTED (engineering only);
   PRODUCTION AMBER CLASSIFIER RELEASE — GATED, AI_AMBER_CLASSIFIER_ENABLED = OFF.
   Next: AIC-5E. NOT STARTED.
+
+- TYPECHECK BASELINE RESTORATION — CLOSED PASS (validation tooling only; 0 production runtime
+  changes, 0 deployments, 0 migrations). Audit trail, preserved intentionally: the original
+  AIC-5D implementation report recorded `npm run typecheck` PASS; that result was invalid,
+  produced by stale `tsconfig.app.tsbuildinfo` incremental state. A clean-cache run exposed 18
+  errors, all in `supabase/functions/ai-search/index.ts` (1 x TS2307 remote Deno std import,
+  14 x TS2304 `Deno` global, 3 x TS2339 discriminated-union narrowing). Root cause: the AIC-5D
+  test `src/test/aiSearchAmberRouting.test.ts` used a static-literal dynamic import of the edge
+  function, pulling Deno code into the browser TypeScript project (`tsconfig.app.json`,
+  strict false), unlike the three existing endpoint tests which deliberately use a non-literal
+  `endpointModule` specifier. Fix: restored that established non-literal convention in the one
+  test; the real shipped `ai-search/index.ts` still executes under Vitest via the Deno `serve`
+  stub, 0 assertions weakened, 0 tests removed. Cache cleared: `tsconfig.app.tsbuildinfo`,
+  `tsconfig.node.tsbuildinfo`. Clean-cache typecheck PASS, repeat run PASS; 86 files / 929 tests
+  PASS; lint at known baseline (1 generated-file prefer-const error, 10 react-refresh warnings,
+  0 new); build PASS.
+  Deno-specific check (read-only, `deno check --no-lock supabase/functions/ai-search/index.ts`,
+  deno 2.6.10): the 3 TS2339 narrowing errors did NOT reproduce, confirming they were
+  wrong-project-environment artifacts. It did surface one separate strict-mode finding not
+  visible to the app project — TS2322 at index.ts:642, optional `X-Conversation-Id` header in an
+  object literal widened to `string | undefined` against `HeadersInit`. Reported, NOT fixed:
+  production source is out of scope for this slice. No runtime failure is implied (the deployed
+  function runs under the Supabase Deno toolchain); carried forward as a type-only debt item.
+  AIC-5D ENGINEERING — FORMALLY CLOSED PASS. PRODUCTION AMBER CLASSIFIER RELEASE — GATED.
+  AI_AMBER_CLASSIFIER_ENABLED — OFF. AIC-5E — SAFE TO BEGIN. NOT STARTED.

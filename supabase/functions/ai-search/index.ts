@@ -19,6 +19,8 @@ import {
   GLOBAL_REASSURANCE_RULE,
 } from "../_shared/amberGuidance.ts";
 
+import { resolveEmotionalEvidence } from "../_shared/emotionalEvidence.ts";
+import { renderEmotionalGuidance } from "../_shared/emotionalGuidance.ts";
 import {
   MEMORY_INSTRUCTIONS,
   renderMemoryBlock,
@@ -566,6 +568,13 @@ serve(async (req) => {
     if (assessment.kind === "unavailable") amberGuidance = CAUTIOUS_UNCERTAINTY_GUIDANCE;
   }
 
+  // AIC-5E: request-scoped emotional continuity. Deterministic, pure and
+  // fail-open: no model call, no storage, no logging, no client exposure. It
+  // runs only on the ordinary model path — RED, CRISIS, clarification and
+  // unsupported answers have already returned above and are untouched.
+  const emotionalGuidance = renderEmotionalGuidance(
+    resolveEmotionalEvidence({ query, priorTurns }),
+  );
 
   let evidence = "";
   if (modeConfig.useGrounding) {
@@ -612,6 +621,9 @@ serve(async (req) => {
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
               conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
+              // AIC-5E tone guidance, placed before the safety layer so the
+              // safety rules remain the last and strongest instructions.
+              modeConfig.allowUrgentEscalationAnswer ? emotionalGuidance : "",
               // AIC-5D trusted safety layer, last so it outranks mode, tone,
               // journey wording, memory, history and page context. Recap mode
               // answers no health question, so it is left untouched.

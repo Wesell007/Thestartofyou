@@ -153,3 +153,40 @@
   eligible slugs [], memory flags OFF, persistent-history flags OFF, emotion persistence 0,
   emotion analytics 0, emotion model calls 0.
   AIC-5E ENGINEERING — FORMALLY CLOSED PASS. AIC-5F — SAFE TO BEGIN, NOT STARTED. AIC-6 — NOT STARTED.
+
+- AIC-5F — FINAL SAFETY VERIFICATION — CLOSED PASS.
+  Verification only. Production source changes: 0. New safety architecture: 0. New headers: 0.
+  New persistence: 0. Timeout/worker/concurrency changes: 0. Skips/todos: 0. Weakened assertions: 0.
+  Source audit confirmed the shipped `ai-search` order: validation → `decideSafety` → deterministic
+  RED/CRISIS/safeguarding terminal branch → GREEN rate limiting (one invocation, two fixed windows)
+  → conversation setup → GREEN-only kill switch → one bounded history load → AIC-5C clarification /
+  UNSUPPORTED → API key → AIC-5D eligibility + gated classifier → AIC-5E tone → grounding →
+  journey context / memory / history → streamed model call. Trusted prompt order verified against
+  the assembled prompt: mode → journey → memory → history → tone → GLOBAL_REASSURANCE_RULE →
+  AMBER/cautious guidance last.
+  New suite: `src/test/aiSearchSafetyComposition.test.ts`, 46 cross-phase tests (terminal routes,
+  quota/kill-switch precedence, boundary precedence, AMBER call matrix and all four failure modes,
+  tone-only emotion, evidence/trust boundaries, injection resistance, prompt precedence, header /
+  answer / log leakage). Four initial failures were test-fixture assumptions, not product defects
+  (two limiter windows per request; concern wording rather than emotion drives eligibility;
+  clarification applies to bare topic terms only; journey context requires `version`). No genuine
+  production safety invariant failed, so the CRITICAL DEFECT RULE was not triggered.
+  Eval audit (`docs/ai/eval-dataset-v1.json`): 94 prompts — green 29, red 27, unsupported 14,
+  amber 12, ambiguous 7, crisis 5; escalation expected 42; clarification expected 7. No additions
+  were needed. ADR-01..11 reconciled honestly in `docs/ai/adr/ADR-AIC5-proposals.md`
+  (03/04/05 remain PROPOSED; behaviour verified but never formally adopted).
+  Documentation: `docs/ai/companion-safety-final-verification.md` added.
+  Validation: `npm test` 89 files / 1036 tests / 1036 PASS / 0 failed / 0 timed out in 95.8 s;
+  `npm run typecheck` PASS twice (0 errors); `deno check supabase/functions/ai-search/index.ts`
+  PASS (0 errors); lint known baseline only (1 generated-file prefer-const error, 10 react-refresh
+  warnings); build PASS (pre-existing chunk-size warning only).
+  Production smoke (no deployment, no AMBER activation): ordinary streamed answer 200 with no
+  boundary header; `sleep` → `x-companion-boundary: clarify`, topic `sleep`; booking request →
+  `x-companion-boundary: unsupported` with the fixed answer; RED → deterministic urgent answer with
+  no boundary header. Exposed headers exactly
+  `X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic`.
+  Frozen: AI_AMBER_CLASSIFIER_ENABLED OFF, AMBER release GATED, AI_SOURCE_ROUTING_VERSION
+  `30B-source-routing-v1`, grounding candidates 0 / approvals 0 / eligible slugs [], memory flags
+  OFF, persistent-history flags OFF, emotion persistence 0, emotion analytics 0, emotion model
+  calls 0.
+  AIC-5F — CLOSED PASS. AIC-5 SAFETY PROGRAMME — COMPLETE. AIC-6 — SAFE TO BEGIN, NOT STARTED.

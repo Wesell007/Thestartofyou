@@ -99,6 +99,7 @@ describe("AIC-7A — voice state machine", () => {
         "requesting_permission",
         "speaking",
         "speech_output_error",
+        "thinking",
       ].sort(),
     );
   });
@@ -248,7 +249,7 @@ describe("AIC-7A — transcript authority", () => {
 describe("AIC-7A — canonical assistant text", () => {
   it("produces canonical text only through the display sanitisation boundary", () => {
     const canonical = canonicaliseAssistantText(
-      "Based on the provided evidence, rest helps. Drinking water helps too.",
+      "Based on the provided evidence, rest often helps. Drinking water through the day helps too, and it is worth putting your feet up when you can.",
     );
     expect(String(canonical)).not.toMatch(/provided evidence/i);
     expect(String(canonical)).toMatch(/water/i);
@@ -262,8 +263,10 @@ describe("AIC-7A — canonical assistant text", () => {
   });
 
   it("only makes canonicalised text speakable", () => {
-    const canonical = canonicaliseAssistantText("Rest when you can.");
-    expect(toSpeakableChunk(canonical)).toBe("Rest when you can.");
+    const answer =
+      "Rest when you can, and drink water through the day. If it keeps happening, speak with your midwife.";
+    const canonical = canonicaliseAssistantText(answer);
+    expect(toSpeakableChunk(canonical)).toBe(answer);
     expect(toSpeakableChunk(canonicaliseAssistantText("   "))).toBeNull();
   });
 

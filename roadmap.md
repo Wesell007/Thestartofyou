@@ -46,3 +46,8 @@
   Next: AIC-5D AMBER / Reassurance / Uncertainty. NOT STARTED.
 
   Original scope: Move authoritative clarification decisions from `src/lib/askClarification.ts` into shared server modules consumed by `ai-search`; add a precision-first deterministic UNSUPPORTED capability boundary (diagnosis/prescribing action, unavailable external action); structured (non-prose) clarification metadata transport to the browser; client becomes display-only. No classifier, no AMBER, no UI redesign, no migration.
+
+- AIC-5D — AMBER, uncertainty & reassurance: selective hybrid build (deterministic
+  eligibility gate, release-gated structured GREEN→AMBER classifier, trusted AMBER and
+  cautious-uncertainty guidance, global no-definitive-medical-verdict rule). Engineering
+  slice; production classifier release stays gated behind AI_AMBER_CLASSIFIER_ENABLED=OFF.

@@ -610,7 +610,13 @@ serve(async (req) => {
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
               conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
+              // AIC-5D trusted safety layer, last so it outranks mode, tone,
+              // journey wording, memory, history and page context. Recap mode
+              // answers no health question, so it is left untouched.
+              modeConfig.allowUrgentEscalationAnswer ? GLOBAL_REASSURANCE_RULE : "",
+              modeConfig.allowUrgentEscalationAnswer ? amberGuidance : "",
             ].filter(Boolean).join("\n\n"),
+
           },
           { role: "user", content: userContent },
         ],

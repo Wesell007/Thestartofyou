@@ -31,17 +31,19 @@ Read-only inspection of the shipped AIC-5D code and tests shows the architecture
   - injection-count assertions: AMBER exactly once, GREEN zero, unavailable exactly once.
 - No production source changes are expected. If a genuine defect surfaces, it is reported rather than silently redesigned.
 - ADR file: set ADR-AIC5-11 to ACCEPTED (engineering only), keep ADR-07 PROPOSED and ADR-06 historical/resolved.
-- Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`, and reconcile the 84/891 → final file and test arithmetic exactly.
+- Run `npm test`, `npm run lint`, `npm run typecheck`, `npm run build`, and reconcile from the corrected 86 files / 917 tests baseline to the final counts.
 
-## Item 1 needs your decision
+## Item 1 — DONE (Route A, already executed)
 
-The live classifier-enabled proof cannot be done without flipping `AI_AMBER_CLASSIFIER_ENABLED` somewhere real. Two options:
+An isolated Deno harness imported the actual shipped `supabase/functions/_shared/amberClassifier.ts` (no re-implementation) and called the real gateway with `google/gemini-2.5-flash`, `stream:false`, temperature 0, strict json_schema, `max_tokens: 512`, 1500 ms AbortController, 0 retries. No production config was touched; the production flag stays OFF.
 
-- **A. Direct isolated gateway proof (recommended).** Call the deployed `amberClassifier` contract directly against `ai.gateway.lovable.dev` from a dev-only harness with a synthetic eligible fixture and a synthetic AMBER fixture. Production function config is never touched, so production stays OFF throughout. Proves the module, model, schema, token budget and latency end to end, but not the deployed endpoint wiring.
-- **B. Temporary flag-ON window on the deployed function.** Set the secret ON, run the two fixtures against the live endpoint, then set it back OFF. Proves the full deployed path, but ordinary traffic in that window would be exposed to the classifier.
+- Fixture A "what should i pack in my hospital bag" (pregnancy) -> `green`, 999 ms
+- Fixture B1 "my calf has been sore and swollen since yesterday" (pregnancy) -> `amber`, 1200 ms
+- Fixture B2 "i have had a headache since yesterday and my hands look puffy" (pregnancy) -> `amber`, 1104 ms
 
-Everything else in this plan is unaffected by the choice.
+Strict schema honoured, application validation accepted every result, no truncation at 512, no runtime error. Observation for the report only (no redesign): real latency is 1.0-1.2 s against a 1500 ms budget, so a slow provider run will legitimately land on the cautious-uncertainty fallback.
 
-## Report
+## Remaining work needs build mode
 
-After the work, return only the 63-point closure addendum, with item 1 answered by whichever proof route you approve, production `AI_AMBER_CLASSIFIER_ENABLED` recorded as OFF, and AIC-5E not started.
+All that is left is the focused closure tests, the ADR lifecycle edits, the roadmap note and the full validation run. Approve to proceed; the 63-point addendum follows.
+

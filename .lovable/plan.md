@@ -1,51 +1,68 @@
-# AIC-7B — Provider Selection & Streaming STT Architecture Gate
+# AIC-7B BUILD — Streaming STT (transcript-only slice)
 
-Documentation only. No provider integration, no dependency, no credential, no bootstrap endpoint, no microphone, no STT, no TTS, no `send()` integration, no UI, no routes, no prompt or AIC-5 changes, no migrations, no analytics, no deployment, no build.
+Build the first working voice-input path: explicit tap → microphone permission → PCM16 capture → AssemblyAI streaming WebSocket (EU) → visible partial and final transcript. It stops there. A final transcript never becomes a companion message in this slice.
 
-I need build mode to write these files. This plan is unchanged in substance from the approved card; approving it releases the documentation work.
+## Scope boundary
 
-## Decisions to record
+- No `send()`, no `useAISearch`, no `ai-search` call, no assistant response, no TTS, no persistence, no analytics, no prompt or AIC-5 change.
+- Voice stays a mode of the existing companion composer. No `/voice` route, no third surface.
+- Both production flags stay OFF. With `VITE_COMPANION_VOICE_ENABLED` off, the companion is byte-for-byte unchanged: no mic control, no bootstrap request, no permission prompt.
 
-- **Selected provider: AssemblyAI — Streaming Speech-to-Text only.** The managed AssemblyAI Voice Agent API is REJECTED as the response brain; `ai-search` is the intelligence authority and the AIC-5 stack the safety authority. No provider voice-agent brain may bypass `ai-search`.
-- **Exact model/config: BENCHMARK-GATED.** Universal-Streaming, Universal-3.5 Pro Realtime, Medical Mode OFF/ON, and bounded keyterm prompting must be measured on our own synthetic corpus against the models actually available at build time. Nothing written as though Universal-Streaming is the permanent production model.
-- **Primary transport: A — direct browser → provider Streaming WebSocket** with a short-lived server-issued token. Server audio relay not selected (latency, bandwidth, edge-runtime fit, audio-handling responsibility) and moves no safety decision, since AIC-5 acts on the final transcript.
-- **Runner-up Speechmatics, third Deepgram.**
-- Every "not selected" is phrased as *not selected for the approved Start of You direct-browser streaming architecture and our requirements* — never as an absolute judgement on the provider.
+## Server bootstrap
 
-## Files to write
+New edge function `supabase/functions/voice-bootstrap/index.ts`:
 
-**1. `docs/ai/companion-voice-provider-review.md` (new)**
-- Comparison date 4–5 September 2026, stated as a snapshot; all time-sensitive facts tied to official source, date and the exact product/model; explicitly not permanent or contractual; re-verification required at build time.
-- Eight providers reviewed; per-provider non-selection rationale phrased against our requirements (Google transport/client model, ElevenLabs unresolved retention/schema evidence, OpenAI residency and vocabulary, AWS credentialing and medical-model regional availability, Azure domain fit and SDK capture ownership).
-- Full 30-dimension comparison for AssemblyAI / Speechmatics / Deepgram; official source list.
-- Pricing per exact configuration: Universal-Streaming $0.15/hr, Universal-3.5 Pro Realtime $0.45/hr, Medical Mode add-on $0.15/hr, Pro + Medical $0.60/hr labelled **DERIVED FROM CURRENT DOCUMENTED COMPONENT PRICES**, Universal-Streaming + Medical Mode left UNKNOWN pending current pricing at build time. Session-based billing (idle connection charged) recorded as a lifecycle constraint.
-- Temporary token contract: `GET /v3/token`, `expires_in_seconds` 1–600, server-minted, query-parameter auth; no invented scope or revocation properties.
-- EU host `wss://streaming.eu.assemblyai.com/v3/ws`, with EU endpoint / model / Medical Mode feature compatibility marked MUST BE RECONFIRMED DURING BUILD.
-- Retention kept conditional: streaming ZDR depends on account/data-control configuration and the model-training opt-out; free/test behaviour does not establish production posture; billing/logging metadata may persist; async artifact TTL kept separate.
-- Safety-critical transcription section stating NO STT PROVIDER ELIMINATES MIS-TRANSCRIPTION RISK, listing the hazards (negation, severity, medications, dosages, weeks, dates, temperature, blood pressure, 999 / NHS 111 / A&E), with mitigation by UX and benchmarks and an explicit ban on tuning AIC-5.
-- Confidence metadata as development diagnostics only, never deciding GREEN/AMBER/RED/CRISIS, severity, diagnosis or safety.
-- Privacy/legal release gate checklist and the UNKNOWN / REQUIRES VALIDATION register.
+- Repository CORS conventions, `POST` + `OPTIONS` only, empty/minimal JSON body; malformed bodies rejected 400.
+- `AI_COMPANION_VOICE_ENABLED` is the security authority: when not enabled, refuse before any provider call (403), and never touch the AssemblyAI endpoint.
+- `ASSEMBLYAI_API_KEY` stored as an edge secret only, never returned, never logged, never in any `VITE_*`.
+- Separate voice-bootstrap rate-limit bucket reusing the existing `consume_ai_rate_limit` primitive with a distinct key so STT bootstrap never spends the answer quota. Existing anonymous/authenticated posture preserved.
+- Mints a short-lived AssemblyAI temporary streaming token (shortest practical lifetime, value + rationale documented). Response carries only the token, its expiry, and the EU WebSocket host. No audio, no transcript, no journey/memory/history data in either direction.
+- No audio relay of any kind.
 
-**2. `docs/ai/companion-voice-architecture.md` (update — AIC-7B section)**
-- Provider selected at provider level; model benchmark-gated; Voice Agent API rejected as response brain.
-- Bootstrap flow: browser voice bootstrap request → server checks `AI_COMPANION_VOICE_ENABLED` → server holds master credential → server mints temporary streaming token → browser receives only the token → browser connects directly. Client flag security authority NONE; server flag authoritative for bootstrap/token issuance; master provider secret in browser 0. No endpoint built.
-- EU-pinned transport as the production requirement rather than default edge routing.
-- Transcript mapping: `Turn end_of_turn:false` → `PartialTranscript` (display only; never `send()`, never `ai-search`, never AIC-5); `Turn end_of_turn:true` → `FinalTranscript` (authoritative, future AIC-7C input); `ForceEndpoint` → future manual **Done**, which stays mandatory regardless of provider endpointing.
-- Capture architecture: `getUserMedia` + Web Audio / AudioWorklet-style PCM pipeline, PCM16 mono 16 kHz, binary WebSocket frames; explicitly not coupled to the journal MediaRecorder/WebM architecture; real-device verification mandatory across iOS Safari, Android Chrome, desktop Chrome/Safari/Edge covering permission, capture, AudioWorklet behaviour, WebSocket lifecycle, tab/background behaviour, token bootstrap, partial/final events, manual endpoint and cleanup — support never claimed from API availability alone.
-- Keyterm prompting bounded and optional: domain vocabulary only; permissioned memory, full conversation history, personal medical profile and emotional state are forbidden inputs; it must not become another context or memory channel.
-- Audio lifecycle: durable application raw-audio storage 0, Supabase raw-audio storage 0, voice audio archive 0; capture → transient in-memory processing → active provider stream → discard; no hidden replay, no journal-storage coupling, no persistent microphone buffers.
-- Failure and reconnect: no automatic microphone-audio retry; at most one automatic session reconnect may be considered; captured speech never silently replayed; if the turn is lost, ask the user to repeat or switch to text.
-- Mandatory build benchmark and metrics: WER, critical-term error rate, negation error rate, medical/entity accuracy, number accuracy, date/week accuracy, first-partial latency, final-transcript latency, endpointing delay, partial stability, bootstrap latency, connection failure rate, Medical Mode effect, keyterm effect, cost per configuration — development metrics only, no production voice analytics; synthetic UK corpus only, no real user audio, ground-truth transcripts recorded.
-- Provider adapter mapping through `VoiceInputAdapter` so no provider event shape leaks into conversation logic.
+## Client provider adapter
 
-**3. `roadmap.md` (update)** — AIC-7B provider gate closed on AssemblyAI; primary transport direct browser with temporary credential; exact model benchmark-gated; production privacy approval gated; build not started; proposed next slice (transport, microphone permission, capture, server bootstrap, `VoiceInputAdapter`, partial/final, transcript-only development UI, cleanup/lifecycle, benchmark harness) with explicit NO `send()`, NO ai-search conversation integration, NO TTS.
+`src/lib/companion/voice/providers/assemblyai/` — a `VoiceInputAdapter` implementation plus a thin socket/frame module:
 
-**4. ADRs** — ADR-AIC6-01 through 06 all remain PROPOSED. ADR-AIC6-06 recorded as EVIDENCE STRENGTHENED but NOT ACCEPTED until token bootstrap and browser integration prove master provider secret in browser = 0.
+- `getUserMedia` only after explicit user action; Web Audio/AudioWorklet path producing PCM16 mono 16 kHz binary frames. No MediaRecorder, no journal audio coupling, no DSP beyond resampling.
+- Provider `Turn` events mapped at the adapter boundary: `end_of_turn:false` → `PartialTranscript`, `end_of_turn:true` → `FinalTranscript`, provider errors → neutral adapter errors, session events → neutral status. No provider payload escapes the adapter.
+- Manual **Done** uses the provider's endpoint-finalisation message and waits for the authoritative final turn; it never fabricates final text from a partial.
+- Automatic endpointing left at documented defaults (AIC-7E owns calibration).
+- Development/benchmark default model, clearly named as such; EU host pinned with no silent region fallback.
+- At most one reconnect; never replays audio; a lost turn asks the person to repeat.
 
-## Frozen state to reconfirm
+## Session lifecycle and UI
 
-`VITE_COMPANION_VOICE_ENABLED` OFF; `AI_COMPANION_VOICE_ENABLED` OFF/reserved; `AI_AMBER_CLASSIFIER_ENABLED` OFF with production AMBER release GATED; grounding `30B-source-routing-v1` / 0 candidates / 0 approvals / []; memory OFF; persistent history OFF; microphone capture, STT, TTS, provider dependency, provider credentials, bootstrap endpoint, conversation integration, voice persistence, raw-audio persistence, voice analytics, DB changes and production source changes all 0.
+- Reuse the AIC-7A `VoiceSessionController` as the only lifecycle authority; extend minimally (permission, capture start, finalising) without a second state machine. `speaking` is never entered.
+- Capture stops and resources release on explicit end, cancel, panel close, unmount, visibility hidden and provider fatal failure — idempotently.
+- Composer gains a mic entry control behind the client flag: listening state, live partial, final transcript, Done, cancel, retry, back to text, concise permission/error copy. No waveform polish.
+- Zero raw-audio persistence anywhere (no storage, DB, localStorage, sessionStorage, IndexedDB).
 
-## Validation
+## Benchmark harness (development only)
 
-`npm test` (expect 90 files / 1062 tests, all pass, 0 timeouts), `npm run typecheck` PASS, `npm run lint` known baseline only, `npm run build` PASS. No provider or voice deployment. Then the 95-point provider-gate report, and stop — the build is not started.
+- Dev-only harness plus ground-truth corpus manifest and fixture contract covering UK conversational English, pregnancy/TTC/postpartum/first-year terms, medications, dosages, gestational weeks, dates, temperature, blood pressure, 999/NHS 111/A&E, negation, severity, pauses, self-corrections, noise.
+- Compares base vs Medical Mode vs bounded static keyterms; no memory/history/journey/personal data ever feeds keyterms.
+- Synthetic/developer audio only. If fixtures are unavailable, the harness ships with the manifest and the report says BENCHMARK EXECUTION BLOCKED ON AUDIO FIXTURES. Results are never faked; the exact model stays benchmark-gated unless evidence closes it.
+
+## Tests
+
+Focused suites, no skips, no timeout or worker changes:
+
+- Bootstrap: flag OFF denies and never calls the provider; flag ON returns the credential path; master secret absent from every payload; malformed request rejected; rate-limit contract; token not persisted or logged.
+- Adapter: mocked provider events for partial/final/error mapping, no `Turn` leakage.
+- Capture: mocked `getUserMedia`/tracks/socket — permission only after user action, tracks stop once on cleanup, no permission request with the flag OFF.
+- Boundary: partial and final transcripts cause zero `send()`, zero `ai-search` calls, zero DB writes; visibility hidden and provider failure stop capture; no replay.
+- Client flag OFF renders no voice UI.
+
+## Validation and reporting
+
+`npm test` (default config, arithmetic reconciled from 90 files / 1062 tests), `npm run typecheck` twice with a cleared incremental cache, `deno check` on both `ai-search` and the new bootstrap function, `npm run lint` (known baseline only), `npm run build`.
+
+Before coding, re-verify the current AssemblyAI streaming docs (token endpoint and lifetime, WebSocket URL and query params, EU host, model ids, Turn/ForceEndpoint schema, PCM requirements, Medical Mode and keyterm params). Minor syntax updates are applied and documented; a material contract change stops the build with a report.
+
+Docs updated: `docs/ai/companion-voice-architecture.md` (actual implementation), `docs/ai/companion-voice-provider-review.md` (re-verification findings only), `roadmap.md`. ADR statuses: AIC6-04 and AIC6-06 may gain implementation evidence but stay PROPOSED unless clearly earned; AIC6-01/02/03/05 remain PROPOSED. AMBER OFF, grounding `30B-source-routing-v1` / 0 / 0 / [], memory and persistent history OFF, production voice unavailable.
+
+Closes with the 95-point completion report. AIC-7C is not started.
+
+## Needed from you
+
+An AssemblyAI API key to store as a server-side secret. Without it the code and tests land, but the live EU socket, device matrix and any benchmark execution stay blocked and will be reported as such.

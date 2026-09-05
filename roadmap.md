@@ -253,3 +253,31 @@
   OFF, persistent-history flags OFF, voice UI flag OFF, voice persistence 0, raw-audio persistence 0,
   voice analytics 0.
   AIC-7B — SAFE TO BEGIN, NOT STARTED.
+
+## AIC-7B — Provider selection & streaming STT architecture gate — CLOSED (documentation only)
+
+- AIC-7B PROVIDER GATE: **CLOSED on AssemblyAI** (Streaming Speech-to-Text only).
+- AssemblyAI managed Voice Agent API: REJECTED as the response brain. Intelligence
+  authority remains `ai-search`; safety authority remains AIC-5.
+- PRIMARY TRANSPORT: direct browser → provider Streaming WebSocket with a
+  short-lived server-issued credential. Master provider secret in browser: 0.
+- EXACT ASSEMBLYAI MODEL / CONFIGURATION: **BENCHMARK-GATED**.
+- PRODUCTION PRIVACY / CONTRACTUAL APPROVAL: **GATED** (DPA, EU/UK processing
+  scope, training opt-out, streaming ZDR on the contracted tier, metadata
+  retention, subprocessors, deletion terms, security posture, regional feature
+  availability).
+- Runner-up Speechmatics; third Deepgram. Non-selections are requirement-specific.
+- AIC-7B IMPLEMENTATION BUILD: **NOT STARTED**.
+- Documents: `docs/ai/companion-voice-provider-review.md` (new, snapshot dated
+  4–5 September 2026), `docs/ai/companion-voice-architecture.md` §19.
+- ADR-AIC6-01..06 remain PROPOSED; ADR-AIC6-06 evidence strengthened, not accepted.
+- Next proposed slice (requires separate approval): provider transport,
+  microphone permission, audio capture, server bootstrap endpoint,
+  `VoiceInputAdapter`, `PartialTranscript`, `FinalTranscript`, transcript-only
+  development UI, lifecycle/cleanup, benchmark harness. Explicitly **NO `send()`**,
+  **NO `ai-search` conversation integration**, **NO TTS**.
+- Frozen: voice flags OFF/reserved, AMBER OFF/GATED, grounding
+  `30B-source-routing-v1` (candidates 0, approvals 0, eligible []), memory OFF,
+  persistent history OFF, microphone/STT/TTS/dependency/credentials/bootstrap/
+  conversation-integration/voice-persistence/raw-audio/voice-analytics/DB/
+  production-runtime changes all 0.

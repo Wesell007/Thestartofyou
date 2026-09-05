@@ -668,3 +668,232 @@ companion voice remain separate products. No `getUserMedia`, `MediaRecorder`,
 browser provider master secret. No voice biometrics, speaker identification,
 voiceprint, prosody emotion analysis, or health, age or gender inference from
 audio.
+
+---
+
+## 19. AIC-7B — provider selection and streaming STT architecture (gate)
+
+Documentation only. Nothing in this section is implemented. Full provider
+evidence, the 30-dimension comparison and the dated snapshot of every
+time-sensitive provider fact live in
+[`companion-voice-provider-review.md`](./companion-voice-provider-review.md)
+(comparison snapshot 4–5 September 2026; a decision record, not permanent
+truth — re-verify at implementation and release time).
+
+### 19.1 Decisions
+
+```text
+SELECTED STT PROVIDER:              AssemblyAI
+APPROVED PRODUCT SCOPE:             Streaming Speech-to-Text only
+MANAGED VOICE AGENT API:            REJECTED as the response brain
+INTELLIGENCE AUTHORITY:             ai-search
+SAFETY AUTHORITY:                   AIC-5
+PRIMARY STT TRANSPORT:              A — direct browser → provider WebSocket
+                                    with a short-lived server-issued token
+RUNNER-UP:                          Speechmatics
+THIRD:                              Deepgram
+EXACT STREAMING MODEL / CONFIG:     BENCHMARK-GATED
+PRODUCTION PRIVACY APPROVAL:        GATED
+```
+
+The provider decision is closed. The model decision is not: Universal-Streaming
+is **not** declared the production model. The build benchmark must compare the
+production-relevant AssemblyAI streaming models and configurations actually
+available at implementation time (including Medical Mode OFF/ON and bounded
+keyterm prompting where justified) on our own synthetic corpus.
+
+### 19.2 The Voice Agent API is rejected
+
+```text
+APPROVED:  microphone → AssemblyAI Streaming STT → FinalTranscript
+                     → existing ai-search → AIC-5 → canonical assistant text
+                     → future independent TTS (AIC-7D)
+
+REJECTED:  provider STT → provider-managed LLM → provider response brain
+                       → provider-managed spoken answer
+```
+
+No external voice-agent brain may bypass `ai-search`. STT and TTS need not come
+from the same company.
+
+### 19.3 Temporary-token bootstrap (documented, not built)
+
+```text
+browser requests voice bootstrap
+  → server verifies AI_COMPANION_VOICE_ENABLED
+  → server retains the AssemblyAI master credential
+  → server obtains/mints the supported short-lived streaming token
+  → browser receives the temporary token only
+  → browser connects directly to the provider Streaming WebSocket
+```
+
+```text
+CLIENT VOICE FLAG SECURITY AUTHORITY:  NONE
+SERVER VOICE FLAG AUTHORITY:           bootstrap / privileged credential issuance
+MASTER PROVIDER SECRET IN BROWSER:     0
+BOOTSTRAP ENDPOINT IMPLEMENTED:        0
+```
+
+Documented token contract (snapshot 4–5 Sep 2026): `GET /v3/token` returns a
+temporary streaming token with `expires_in_seconds` in the range **1–600**,
+minted server-side and passed to the socket as a query parameter because
+browsers cannot set WebSocket headers. No additional scope, binding or
+revocation properties are claimed beyond what the provider documents.
+
+### 19.4 EU-pinned transport
+
+EU routing is a **production requirement**, not the default edge-routed host.
+Documented EU streaming host: `wss://streaming.eu.assemblyai.com/v3/ws`.
+
+```text
+selected model availability on the EU endpoint:   RECONFIRM DURING BUILD
+Medical Mode availability on the EU endpoint:     RECONFIRM DURING BUILD
+other relevant feature parity:                    RECONFIRM DURING BUILD
+```
+
+Regional feature parity is never inferred from the existence of the base
+endpoint.
+
+### 19.5 Transcript contract mapping
+
+| Provider event | Our contract | Authority |
+| --- | --- | --- |
+| `Turn` with `end_of_turn: false` | `PartialTranscript` | Display only |
+| `Turn` with `end_of_turn: true` | `FinalTranscript` | Authoritative user turn |
+| Client `ForceEndpoint` | Future manual **Done** | User-initiated finalisation |
+
+`PartialTranscript` never reaches `send(question)`, never reaches `ai-search`,
+and never becomes an AIC-5 request. `FinalTranscript` is the authoritative
+transcript representation and is the future AIC-7C input to the existing
+`send(question)`; there is no duplicated voice request path.
+
+**Manual Done remains required even when automatic endpointing works.**
+Automatic endpointing improves the experience; it never becomes the only way a
+person can finish a turn.
+
+### 19.6 Capture architecture (recommendation, not implemented)
+
+`getUserMedia` + a Web Audio / AudioWorklet-style PCM pipeline, producing
+**PCM16 mono 16 kHz** sent as binary WebSocket frames.
+
+The companion is **not** coupled to the journal `MediaRecorder`/WebM storage
+architecture: `MediaRecorder` timeslice fragments are not self-contained, and
+iOS Safari produces fragmented MP4 rather than WebM. Streaming STT needs a
+different capture model from journal voice notes.
+
+Real-device validation is mandatory before capture is locked — on iOS Safari,
+Android Chrome, desktop Chrome, desktop Safari and desktop Edge, covering
+microphone permission, capture, AudioWorklet/Web Audio behaviour, WebSocket
+lifecycle, tab/background behaviour, token bootstrap, partial and final
+transcript events, manual endpoint and cleanup. Support is never claimed from
+API availability alone.
+
+### 19.7 Audio lifecycle
+
+```text
+DURABLE APPLICATION RAW-AUDIO STORAGE:  0
+SUPABASE RAW-AUDIO STORAGE:             0
+VOICE AUDIO ARCHIVE:                    0
+```
+
+Future conceptual flow: capture → transient in-memory/browser processing →
+active provider stream → discard. No hidden audio replay, no persistent
+microphone buffer, no journal-storage coupling.
+
+### 19.8 Failure and reconnect policy
+
+```text
+automatic microphone-audio retry:   0
+automatic audio replay:             0
+automatic transcript fabrication:   0
+```
+
+Connection failure, credential failure, provider unavailability, stream
+disconnect, a missing final transcript and a malformed provider event all
+resolve to a calm, named state with two escapes: try voice again, or switch to
+text. At most **one** automatic provider-session reconnect may be considered in
+the future. Captured speech is never silently replayed; if a spoken turn is
+lost, the person is asked to repeat it.
+
+### 19.9 Provider confidence boundary
+
+Provider transcript confidence, where available, is a **development diagnostic
+only**. It must never determine GREEN, AMBER, RED or CRISIS, clinical severity,
+diagnosis, or whether a person is safe. No confidence threshold becomes hidden
+medical logic.
+
+### 19.10 Keyterm prompting boundary
+
+If keyterm prompting is evaluated later it stays bounded to approved domain
+vocabulary — pregnancy, TTC, postpartum, first-year, NHS and common domain
+terminology.
+
+Forbidden as STT keyterm context: full conversation history, permissioned
+memory, personal medical profile, hidden emotional state, safety-state metadata.
+**STT keyterms must never become another memory or context system.**
+
+### 19.11 Benchmark requirement (build slice, not run here)
+
+The AssemblyAI model/configuration may not be permanently locked without a
+benchmark. Synthetic corpus only — **no real user audio** — with ground-truth
+transcripts recorded for evaluation. Coverage: ordinary UK conversational
+English, pregnancy, TTC, postpartum, baby/first-year, medical terminology,
+medications, dosages, gestational weeks, dates, temperatures, blood pressure,
+999, NHS 111, A&E, negation, severity wording, natural pauses, self-corrections
+and household background noise. Testing covers a reasonable range of UK accents;
+no demographic voice profiling.
+
+Latency benchmarks: speech start → first partial, speech end → final transcript,
+provider endpointing delay, connection/bootstrap time, session reconnect time.
+Marketing latency claims are never release evidence.
+
+### 19.12 Development metrics
+
+WER, critical-term error rate, negation error rate, medical/entity accuracy
+where useful, number accuracy, date/week accuracy, first-partial latency,
+final-transcript latency, endpointing delay, partial stability, bootstrap
+latency, connection failure rate, Medical Mode effect, keyterm effect, and cost
+per configuration.
+
+```text
+PRODUCTION VOICE ANALYTICS: 0
+```
+
+These are development and provider-validation metrics only.
+
+### 19.13 Provider adapter mapping
+
+Provider events are translated at exactly one place — the AIC-7A
+`VoiceInputAdapter` — into our own `partial`, `final`, `error` and session-state
+contracts. Provider event structures must not leak into conversation logic,
+AIC-5, `JourneyContext`, future TTS, or the general companion runtime. Replacing
+the provider must not require rewriting conversation logic.
+
+### 19.14 Safety-critical transcription risk
+
+**NO STT PROVIDER ELIMINATES MIS-TRANSCRIPTION RISK.** Negation, severity
+wording, medication names, dosages, gestational weeks, dates, temperature, blood
+pressure, 999, NHS 111 and A&E are all mis-transcribable. Mitigation is a
+visible transcript, easy correction, a low-friction repeat flow, the provider
+benchmark and the synthetic safety corpus. **AIC-5 is not modified because of
+anticipated STT errors**; input-quality mitigation and safety architecture stay
+separate.
+
+### 19.15 ADR status after this gate
+
+ADR-AIC6-01 through ADR-AIC6-06 all remain **PROPOSED**. ADR-AIC6-06
+(no browser master secret) is recorded as **EVIDENCE STRENGTHENED but NOT
+ACCEPTED**: acceptance waits until server token issuance and browser integration
+actually prove master provider secret in browser = 0.
+
+### 19.16 Frozen state at the close of this gate
+
+```text
+VITE_COMPANION_VOICE_ENABLED: OFF        AI_COMPANION_VOICE_ENABLED: OFF / reserved
+microphone capture: 0                    STT implementation: 0
+TTS: 0                                   provider dependency: 0
+provider credentials: 0                  bootstrap endpoint: 0
+conversation integration: 0              voice persistence: 0
+raw-audio persistence: 0                 voice analytics: 0
+DB changes: 0                            production runtime changes: 0
+prompt changes: 0                        AIC-5 source changes: 0

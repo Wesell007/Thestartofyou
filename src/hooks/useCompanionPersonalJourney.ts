@@ -1,5 +1,6 @@
 /**
  * AIC-2 — deterministic readiness for personal journey context.
+ * AIC-J2 — freshness after authoritative journey mutations.
  *
  * Resolution starts once on mount and is shared through a module-level
  * in-flight promise, so the panel and `/ask` never resolve it twice. At submit
@@ -9,11 +10,19 @@
  *
  * There is no new loading UI: if resolution has not finished within the
  * timeout, or fails, the request proceeds with no personal context.
+ *
+ * Freshness (AIC-J2): this module owns the only cache and the only listener
+ * for `journeyStateSignal`. A signal bumps an epoch, which synchronously makes
+ * the cached value unusable. A resolution that completes under an obsolete
+ * epoch is neither cached nor returned to its awaiting caller: it chains onto
+ * the current-epoch resolution instead. A stale journey is never returned, and
+ * a failed refresh resolves to `null` rather than resurrecting the old journey.
  */
 
 import { useCallback, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { resolvePersonalJourneyContext } from "@/lib/companion/journeyPersonalSource";
+import { subscribeJourneyStateChanged } from "@/lib/journeyStateSignal";
 import type { PersonalJourneyContextV1 } from "../../supabase/functions/_shared/journeyContextContract";
 
 /** Maximum wait before a request proceeds without personal context. */
@@ -21,28 +30,52 @@ export const PERSONAL_JOURNEY_TIMEOUT_MS = 1_500;
 
 let inflight: Promise<PersonalJourneyContextV1 | null> | null = null;
 let resolved: { value: PersonalJourneyContextV1 | null } | null = null;
+/** Incremented by every invalidation; guards both write-back and return value. */
+let epoch = 0;
 
 const load = (): Promise<PersonalJourneyContextV1 | null> => {
   if (resolved) return Promise.resolve(resolved.value);
   if (!inflight) {
-    inflight = resolvePersonalJourneyContext()
-      .then((value) => {
-        resolved = { value };
-        return value;
-      })
-      .catch(() => null)
-      .finally(() => {
-        inflight = null;
-      });
+    const started = epoch;
+    const pending: Promise<PersonalJourneyContextV1 | null> =
+      resolvePersonalJourneyContext()
+        .catch(() => null)
+        .then((value) => {
+          if (inflight === pending) inflight = null;
+          if (started !== epoch) {
+            // Journey state changed while this read was in flight: the answer
+            // is already stale, so neither cache it nor hand it back. Resolve
+            // again under the current epoch.
+            return load();
+          }
+          resolved = { value };
+          return value;
+        });
+    inflight = pending;
   }
   return inflight;
 };
 
-/** Drop the cached value, for auth changes and tests. */
+
+/**
+ * Drop the cached value immediately. Used for auth changes, journey state
+ * changes and tests. Any resolution already in flight can no longer populate
+ * the cache or be returned to a caller.
+ */
 export const resetPersonalJourneyCache = () => {
+  epoch += 1;
   inflight = null;
   resolved = null;
 };
+
+// One module-level listener, however many companion surfaces are mounted, so
+// there are never duplicate listeners or duplicate database resolutions.
+// Invalidation is synchronous; the refresh is kicked off eagerly so the next
+// submit usually finds a completed fresh value.
+subscribeJourneyStateChanged(() => {
+  resetPersonalJourneyCache();
+  void load();
+});
 
 const withTimeout = async (
   promise: Promise<PersonalJourneyContextV1 | null>,
@@ -77,7 +110,8 @@ export function useCompanionPersonalJourney() {
 
   /**
    * Personal context for the request about to be sent. Never throws, never
-   * blocks indefinitely, and returns `null` rather than a guess.
+   * blocks indefinitely, and returns `null` rather than a guess or a stale
+   * journey.
    */
   const ensurePersonalJourney = useCallback(
     async (): Promise<PersonalJourneyContextV1 | null> => {

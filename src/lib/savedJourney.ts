@@ -1,6 +1,7 @@
 import { addDays, format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { parseDateOnly } from "@/lib/dateOnly";
+import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
 
 const PENDING_KEY = "pendingJourney";
 
@@ -114,6 +115,9 @@ const upsertPregnancyJourney = async (
   if (error) throw error;
 
   await mirrorToLegacy(userId, lmpDate, dueDate);
+  // AIC-J2: one notification per logical pregnancy save. Outer callers
+  // (commitPendingJourneyToDB, saveActivePregnancyJourney) must not emit again.
+  notifyJourneyStateChanged();
 };
 
 /** Persist the pending journey to the DB for the current user (idempotent upsert). */
@@ -254,6 +258,7 @@ export const deletePregnancyJourney = async (userId: string): Promise<void> => {
   if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
   const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "pregnancy" });
   if (error) throw error;
+  notifyJourneyStateChanged();
 };
 
 /** Human-readable labels for the current status chip / row. */
@@ -301,4 +306,5 @@ export const updatePregnancyJourneyStatus = async (
     })
     .eq("user_id", userId);
   if (error) throw error;
+  notifyJourneyStateChanged();
 };

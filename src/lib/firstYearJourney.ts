@@ -1,5 +1,6 @@
 import { supabase } from "@/integrations/supabase/client";
 import { getFirstYearAge, type FirstYearAge } from "@/lib/firstYearDates";
+import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
 
 /** Coarse First Year journey status. Never store free-text reasons alongside it. */
 export type FirstYearJourneyStatus = "active" | "paused" | "completed";
@@ -59,6 +60,9 @@ export const saveFirstYearJourney = async (babies: BabyInput[]): Promise<void> =
 
   const { error } = await supabase.rpc("save_first_year_journey", { p_babies: payload });
   if (error) throw error;
+  // One RPC writes journey, babies, primary baby and lifecycle together, so a
+  // successful logical save emits exactly one notification.
+  notifyJourneyStateChanged();
 };
 
 /**

@@ -142,22 +142,61 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
 
   const pathnameRef = useRef(location.pathname);
   pathnameRef.current = location.pathname;
+
+  // AIC-J4 — transient entry intent. `entryRef` is the authority for the next
+  // request; `entryIntent` only mirrors it so the panel can show the chips.
+  // Both are cleared the moment the shared runtime accepts the first user turn.
+  const entryRef = useRef<CompanionEntryIntent | null>(null);
+  const [entryIntent, setEntryIntent] = useState<CompanionEntryIntent | null>(null);
+
+  const clearEntry = useCallback(() => {
+    entryRef.current = null;
+    setEntryIntent((current) => (current ? null : current));
+  }, []);
+
   const resolveJourneyContext = useCallback(async () => {
     const personal = await ensurePersonalJourney();
+    // Consumed at the point the runtime accepts and commits the user turn,
+    // before any assistant reply. A later failure or retry does not revive it.
+    const intent = entryRef.current;
+    if (intent) clearEntry();
     return buildJourneyContext({
       personal,
       page: buildPageContext({ pathname: pathnameRef.current }),
+      ...(intent ? { entry: intent.entry } : {}),
     });
-  }, [ensurePersonalJourney]);
+  }, [clearEntry, ensurePersonalJourney]);
 
   // AIC-4 — the shared runtime. Ordering, streaming, bounds, clarification and
   // memory interception all live there rather than in this surface.
   const conversation = useCompanionConversation({ mode, context, resolveJourneyContext });
 
+  const openWithEntry = useCallback(
+    (intent: CompanionEntryIntent) => {
+      entryRef.current = intent;
+      setEntryIntent(intent);
+      setOpen(true);
+    },
+    [],
+  );
+
   // Close the panel when moving to a route where the companion is hidden.
   useEffect(() => {
     if (!visible) setOpen(false);
   }, [visible]);
+
+  // A route change clears any entry intent that was never used. Turns already
+  // in the conversation are untouched.
+  useEffect(() => {
+    clearEntry();
+  }, [location.pathname, clearEntry]);
+
+  // Closing the panel abandons an unconsumed entry: reopening the launcher is
+  // an ordinary open, not a contextual hand-off.
+  useEffect(() => {
+    if (!open) clearEntry();
+  }, [open, clearEntry]);
+
 
   const turns = useMemo<CompanionTurn[]>(
     () =>

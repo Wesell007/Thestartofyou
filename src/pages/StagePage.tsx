@@ -456,7 +456,7 @@ const StagePage = () => {
                   entry={{
                     stage: journey,
                     journey,
-                    topic: data.slug ?? undefined,
+                    topic: stage,
                     title: data.title,
                   }}
                   suggestions={data.aiPrompts}

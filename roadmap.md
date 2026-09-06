@@ -296,3 +296,24 @@ remain content families, not personal journeys.
   failure, coalesced fresh reads, auth invalidation preserved;
 - 30 focused tests added across three suites; no prompt, AIC-5, grounding,
   memory, history or voice change; no deployment.
+
+## AIC-J3 — journey-aware suggestion registry (closed)
+
+- new `src/lib/companion/journeySuggestions.ts`: the one canonical personal
+  starter source for TTC, pregnancy and first year; pure, deterministic, max 4;
+- personal starters require a real `JourneyContextV1.personal`; mode, page,
+  route and content-entry inference counts are all 0;
+- TTC by authoritative stage with `ivfInTreatment` as a non-lifecycle
+  refinement; pregnancy by trimester or the one canonical `trimesterFromWeek`;
+  first year by bands 0–2, 3–5, 6–8, 9–11 (month 12 unsupported);
+- `companionStarters.ts` reduced to a content/mode delegate; AskPage inline
+  generic starters removed; topic, week, article, hub and tool prompts kept as
+  content prompts; intentional empty arrays in TTCHub, FYAISupport and
+  SupportAISupport unchanged;
+- J2 cache/freshness architecture unchanged and still authoritative; the
+  published personal value is reactive, so stale personal chip exposure is 0
+  and duplicate resolver queries across surfaces are 0;
+- 41 focused tests added across `journeySuggestions.test.ts` and
+  `journeySuggestionFreshness.test.tsx`;
+- no prompt, AIC-5, grounding, memory, history, voice or `ai-search` change;
+  no deployment.

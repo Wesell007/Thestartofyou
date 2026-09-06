@@ -120,3 +120,41 @@ Invalidation semantics:
 Page and entry context stay per request: the panel reads a live pathname ref
 and `/ask` rebuilds entry context from the current authoritative parameters.
 Historical turns are never rewritten. Prompt assembly is unchanged.
+
+## AIC-J3 — journey-aware suggestion registry
+
+`src/lib/companion/journeySuggestions.ts` is the single canonical source of
+personal journey starters, for TTC, pregnancy and first year only.
+
+Authority:
+
+- personal starters are produced only from an authoritative
+  `JourneyContextV1.personal` object. There is no journey-family shortcut, so
+  a mode, page, route, hub, topic, entry or content string cannot reach them.
+  Inference count from mode, page, route and content entry: 0, 0, 0, 0;
+- `page` is accepted by the resolver and never consulted, so page content can
+  never create, refine or overwrite personal identity;
+- `resolveJourneySuggestions({ personal, entry, page, surface })` is pure and
+  deterministic for surfaces `companion | ask | hub`, capped at 4 chips: no
+  model calls, randomness, analytics, persistence, dates or identifiers.
+
+Stage handling:
+
+- TTC uses the four authoritative stages `preparing_to_try`,
+  `trying_naturally`, `considering_help`, `in_treatment`. `ivfInTreatment`
+  refines only when no saved stage says otherwise and never creates a
+  lifecycle;
+- pregnancy uses `trimester` when present, otherwise the single canonical
+  `trimesterFromWeek` helper. Trimester derivation implementations remain 1;
+- first year uses the non-overlapping bands 0–2, 3–5, 6–8, 9–11. Month 12 is
+  unsupported and resolves to journey level.
+
+Content and personal stay separate. Mode chips, hub prompts and topic, week,
+article and tool prompts remain CONTENT prompts and describe what someone is
+reading, never who they are. `companionStarters.ts` is now a thin delegate over
+the content/mode chips, so no duplicated personal journey copy remains.
+
+Freshness reuses J2 unchanged: one module cache, one listener, one resolver.
+The published personal value becomes unknown synchronously on invalidation, so
+stale personal starter exposure is 0 and duplicate resolver queries from
+multiple mounted surfaces are 0.

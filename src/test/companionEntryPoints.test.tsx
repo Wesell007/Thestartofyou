@@ -12,7 +12,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes, useNavigate } from "react-router-dom";
 
-const ask = vi.fn(async () => {});
+const ask = vi.fn(async (..._args: unknown[]) => {});
 
 vi.mock("@/hooks/useAISearch", () => ({
   useAISearch: () => ({
@@ -92,7 +92,7 @@ const mount = () =>
   );
 
 const lastEntry = () => {
-  const call = ask.mock.calls.at(-1);
+  const call = ask.mock.calls.at(-1) as unknown[] | undefined;
   const options = call?.[2] as { journeyContext?: { entry?: unknown } } | undefined;
   return options?.journeyContext?.entry;
 };

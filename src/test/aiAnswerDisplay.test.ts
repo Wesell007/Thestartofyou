@@ -81,7 +81,7 @@ const SOURCES = import.meta.glob("/src/**/*.{ts,tsx}", {
 const AI_SURFACES = [
   "/src/pages/AskPage.tsx",
   "/src/components/companion/CompanionMessageList.tsx",
-  "/src/components/firstyear/today/DaySummaryCard.tsx",
+  // AIC-J4 closure: DaySummaryCard is an entry point, not an answer surface.
 ];
 
 describe("output hygiene is consistent across surfaces", () => {

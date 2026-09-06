@@ -27,12 +27,26 @@ import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
-import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
+import { resolveJourneySuggestions, MAX_SUGGESTIONS } from "@/lib/companion/journeySuggestions";
+import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
 
 import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";
+
+/**
+ * AIC-J4 — a contextual hand-off into the one shared panel.
+ *
+ * `entry` is AIC-2 entry provenance (content, never identity). `suggestions`
+ * are transient presentation-only chips: they are never stored in
+ * JourneyContextV1, never persisted and never sent as a hidden user message.
+ */
+export interface CompanionEntryIntent {
+  entry: EntryJourneyContextV1;
+  suggestions?: string[];
+}
+
 
 export interface CompanionTurn {
   id: string;

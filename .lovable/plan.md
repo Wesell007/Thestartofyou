@@ -1,51 +1,47 @@
-# AIC-J1 — Journey-aware companion: audit and architecture gate
+# AIC-J2 — Journey context correctness and freshness
 
-Voice stays paused exactly where it is: AIC-6, AIC-7A and the AIC-7B provider gate are untouched, AssemblyAI remains the selected provider, no bootstrap endpoint, no microphone, no TTS, both voice flags OFF. Nothing below changes AIC-5, grounding (`30B-source-routing-v1` / 0 / 0 / []), memory or persistent history.
+Scope: TTC, pregnancy, first year only. No prompt rewrite, no new journey type, no safety, grounding, memory or history change, no voice work. AIC-J3 to J6 not started.
 
-## Audit findings
+## The one real defect
 
-**1. Journey inventory (what actually exists).** Saved, authenticated journeys: pregnancy (`pregnancy_journeys`, plus legacy `saved_journeys`), trying to conceive (`ttc_journeys`), first year (`babies`, `first_year_journeys`, `archived_journeys`). Content-only families with no personal state: IVF, toddler, family, postpartum (now redirected into First Year, legacy route kept), preparing for baby, support.
+Personal journey context is resolved once per browser session and cached in a module-level value, invalidated only when the auth session changes. Every in-app journey change therefore leaves stale context in place until reload: saving or editing a pregnancy (including the pending-journey commit after sign-up), changing pregnancy status (given birth, loss, no longer pregnant, paused), deleting a pregnancy, saving or deleting a TTC journey, and starting first year or changing baby details. A person who moves from TTC to pregnancy keeps sending TTC context to the companion.
 
-**2. Architecture.** One pointer, `journeys.lifecycle` (`pregnancy | ttc | first_year`), written atomically with the payload by SECURITY DEFINER RPCs. One resolver, one prompt renderer, one endpoint. Both surfaces (panel, `/ask`) share `useCompanionConversation` → `useAISearch` → `ai-search`.
+## Fix: an explicit journey-state change signal
 
-**3. JourneyContextV1.** Version 1 envelope with three separate layers. `personal` is a discriminated union limited to the three saved journeys (pregnancy week 1–42 and trimester; TTC stage plus `ivfInTreatment`; first-year month 0–11). `page` and `entry` use the broader content taxonomy with bounded page types, topics and titles. Every string is capped at 80 characters and stripped of control characters and angle brackets, so a title cannot forge the prompt block. The server re-validates and rejects unknown keys, wrong versions, bad enums and out-of-range numbers; an empty envelope is dropped entirely.
+Add a tiny shared notifier module, `src/lib/journeyStateSignal.ts`:
 
-**4. Resolver and provenance.** Session → lifecycle pointer → one column-scoped read of the relevant table. Non-active pregnancy statuses (given birth, loss, no longer pregnant, paused) never produce a stage. Multiple babies with no unique primary produce no age rather than a guess. Every failure path fails open to null. Page and entry are built from the route and from the authoritative `stage`/`journey`/`topic` query parameters only, and structurally cannot write into `personal`.
+- `notifyJourneyStateChanged()` and `subscribeJourneyStateChanged(listener)`, a plain in-memory emitter, no storage, no network, no payload. It carries no journey data, so it cannot become a second source of truth.
 
-**5–6. Unknown handling.** Unknown is already a first-class state everywhere: no stage is fabricated, and the prompt block simply omits absent lines.
+Call `notifyJourneyStateChanged()` from every authoritative write path, after the write succeeds:
 
-**7. Page coverage.** Mapped: TTC and its tools, IVF, pregnancy and its tools/weeks, preparing for baby, first year, postpartum, toddler, family, support. Unmapped (no page context at all): the homepage, about, product, account settings, privacy, terms, journal start, and any article not under a mapped prefix.
+- `savedJourney.ts`: `commitPendingJourneyToDB`, `saveActivePregnancyJourney`, `updatePregnancyJourneyStatus`, `deletePregnancyJourney`.
+- `savedTTCJourney.ts`: the TTC save path and `deleteTTCJourney`.
+- `firstYearJourney.ts`: first-year journey creation/update and the baby record write that determines age (including primary-baby selection).
 
-**8–9. Entry points and suggestions.** Entry points: global launcher/panel, `/ask`, and `HubAISupport`/`AskLink` affordances on hubs, topic pages, article pages and week pages. Suggested questions come from at least four parallel systems: mode-based starters (four modes only), per-topic `config.aiPrompts`, content-driven `data.aiPrompts` for articles and weeks, and two large suggestion maps written inline inside `/ask`. Several hubs pass an empty array and show no chips.
+`useCompanionPersonalJourney` subscribes on mount and, on each signal, clears the cache (`resetPersonalJourneyCache`) and re-resolves once. The existing auth-change reset stays. Resolution remains fail-open and bounded by the current 1.5s submit timeout.
 
-**10–11. Page versus journey precedence.** Already correct in principle: saved details, page content and entry are rendered as three labelled sections, and the trusted system-prompt rules state that the current message outranks saved details and that page/entry are content, never identity. Recommended explicit order, matching what the code already does: current message > `personal` > `entry` > `page` > unknown. Reassurance and safety rules are appended last so they outrank all of it.
+Atomic replacement: because resolution always starts from the single `journeys.lifecycle` pointer and returns one discriminated personal object, a re-resolve replaces the whole context. Nothing merges or accumulates across journeys, and no lifecycle is remembered after the pointer moves.
 
-**12–13. Transitions and refresh.** The pointer is single-valued, so a transition flips context wholesale with no lingering old-journey state and no inferred lifecycle memory. Journey context is re-resolved at send time from a live route ref, so a new question after navigation carries current context while past turns stay untouched. Personal resolution is cached per session and invalidated on auth change; it is not invalidated when someone changes their journey in-app.
+## Verification work (no behaviour change expected)
 
-**14–15. Gaps and duplication.** IVF has rich content and a timeline but only a single boolean of personal state. Toddler and family have no personal state at all, which is correct today because the product stores none. Unmapped routes give the companion nothing. Four suggestion systems can drift between a hub page and `/ask`. Starters exist for only four modes.
+- Confirm each of the three journeys' surfaces feeds the correct `JourneyContextV1`: pregnancy (my week, my journey, week pages, toolkit, due-date tools), TTC (TTC journey, hub and subtopics, ovulation tool), first year (my first year, today, memories, month and topic pages).
+- Confirm page and entry context can never overwrite personal lifecycle, including the named cases: pregnancy user on a family article, TTC user on IVF content, first-year user on postpartum content.
+- Confirm page and entry context refresh on navigation for both surfaces — the panel reads a live route ref; `/ask` builds its own entry context and needs the same check.
+- Confirm unknown stays unknown: signed out, no pointer, non-active pregnancy status, TTC with no stage recorded, first year with ambiguous babies, first year beyond twelve months.
 
-**16–18. Privacy, safety, inference risks.** No leak found: no names, dates, notes, identifiers or free user text enter the context; only derived enums and numbers. Residual risks are (a) content titles from sensitive support articles echoing into the prompt as page context, mitigated only by prompt instruction, (b) a stale primary-baby flag misattributing age, (c) the temptation to let journey data imply urgency. Journey data must never influence GREEN/AMBER/RED/CRISIS; today it only passes the journey family label to the gated AMBER classifier.
+## Tests
 
-**19–21. Frozen systems interaction.** Journey awareness needs no grounding, memory or persistent history change. Session continuity under existing semantics is sufficient.
+Focused additions, no weakening of existing suites:
 
-**30–32. Verdict.** The hypothesis holds: the companion is already mature enough to become journey-aware before voice, and voice will inherit it unchanged because transcripts will enter the same `send()` path. No blocker requires voice first. **AIC-J1 — SAFE TO BUILD.**
+- Signal: each write path emits exactly once on success and not on failure.
+- Hook: a signal clears the cache and the next request resolves fresh; auth change still resets; concurrent signals share one in-flight resolution.
+- Transition: TTC context followed by a pregnancy save yields pregnancy context on the next request, with no TTC field surviving.
+- Precedence: personal context wins over conflicting page/entry journeys in the three named cases.
+- Unknown: each of the unknown cases produces no personal layer rather than a guess.
+- Navigation: page context follows the current route on both surfaces without mutating earlier turns.
 
-## Recommended architecture (for approval, not yet built)
+## Validation
 
-- **Contract:** keep JourneyContextV1 as-is for personal. Extend only `page` coverage and, if approved later, add an IVF personal shape once the product actually stores IVF stage. No new hidden fields, no inference.
-- **Prompt strategy:** no prompt rewrite. Optionally strengthen the fixed rules so the model names the current stage only when it is known, and offers navigation rather than open-ended conversation.
-- **Suggested prompts:** one registry keyed by journey family plus optional stage, consumed by hubs, topic pages and `/ask` alike, replacing the inline maps in `/ask`. Journey-aware, never medical assertions, never prescriptive.
-- **Next actions:** only real destinations — journey section, calculators, toolkit checklists, journal, week/month pages, guidance pages, ask the companion. No booking, messaging, records or clinician contact; AIC-5C boundaries untouched.
-- **Entry points:** contextual affordances only, all opening the existing companion runtime. No third chat, no journey chat route, no new endpoint or store.
-- **Evaluation matrix:** no context, broad context, precise context, conflicting page versus journey, unknown stage, recent transition — scored for relevance, stage appropriateness, safety, unsupported assumptions, repetition, clarification behaviour, across pregnancy, TTC and first year.
+`npm test` (default config, arithmetic reconciled), `npm run typecheck` twice with the incremental cache cleared, `deno check` on `ai-search` unchanged, `npm run lint` at known baseline, `npm run build`. Docs and `roadmap.md` updated with the J2 outcome and the confirmed frozen states: AIC-5 unchanged, grounding `30B-source-routing-v1` / 0 / 0 / [], memory and persistent history OFF, AMBER OFF, voice paused with AssemblyAI selection preserved and both voice flags OFF.
 
-## Proposed slices (each separately approved)
-
-1. **J2 — page-context coverage:** map the unmapped routes, add tests. No prompt change.
-2. **J3 — suggestion registry:** single journey-aware source, remove the `/ask` inline duplicates.
-3. **J4 — contextual entry points:** consistent "ask about this stage" affordances that hand off into the existing companion.
-4. **J5 — next-action layer:** stage-appropriate real destinations surfaced alongside answers.
-5. **J6 — journey evaluation pass:** run the matrix and report before any prompt tuning.
-6. **J7 — resolver freshness:** invalidate cached personal context when journey state changes in-app.
-
-Files likely to change: journey context builders, the shared suggestion source and its consumers, hub/topic Ask components, `/ask`, focused tests, docs, roadmap. Files that must remain untouched: everything under AIC-5 (safety router, urgent patterns, AMBER, clarification, boundaries, emotional guidance), grounding and source routing, memory and history gating, all voice modules, ADRs and provider docs, and `ai-search` prompt assembly beyond what a slice explicitly approves.
+Files that must remain untouched: all AIC-5 modules, grounding and source routing, memory and history gating, every voice module and ADR, and `ai-search` prompt assembly.

@@ -164,3 +164,41 @@ describe("personal journey cache freshness", () => {
     expect(await ensure()).toBeNull();
   });
 });
+
+describe("navigation freshness on both surfaces", () => {
+  it("uses the current route for the next panel request and leaves history untouched", async () => {
+    const { buildJourneyContext, buildPageContext, buildEntryContext } = await import(
+      "@/lib/companion/journeyContext"
+    );
+    // Panel: a live pathname reference, exactly as CompanionProvider holds it.
+    const pathnameRef = { current: "/pregnancy/week/17" };
+    const resolvePanel = () =>
+      buildJourneyContext({
+        personal: PREGNANCY,
+        page: buildPageContext({ pathname: pathnameRef.current }),
+      });
+
+    const first = resolvePanel();
+    expect(first?.page).toMatchObject({ journey: "pregnancy", week: 17 });
+
+    pathnameRef.current = "/first-year/month/3";
+    const second = resolvePanel();
+    expect(second?.page).toMatchObject({ journey: "first-year" });
+    // The earlier turn's context object is not rewritten by navigation.
+    expect(first?.page).toMatchObject({ week: 17 });
+
+    // /ask: entry context comes from the current authoritative parameters.
+    const askFirst = buildJourneyContext({
+      personal: PREGNANCY,
+      entry: buildEntryContext({ stage: "third-trimester", topic: "sleep" }),
+    });
+    const askSecond = buildJourneyContext({
+      personal: PREGNANCY,
+      entry: buildEntryContext({ stage: "first-year", topic: "feeding" }),
+    });
+    expect(askFirst?.entry).toMatchObject({ stage: "third-trimester", topic: "sleep" });
+    expect(askSecond?.entry).toMatchObject({ stage: "first-year", topic: "feeding" });
+    expect(askFirst?.personal).toEqual(PREGNANCY);
+    expect(askSecond?.personal).toEqual(PREGNANCY);
+  });
+});

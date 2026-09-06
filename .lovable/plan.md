@@ -34,10 +34,12 @@ Empty-array surfaces audited: `TTCHub.tsx` (has its own `ttcAIChips` row — INT
    - Hub surfaces: editorial/content prompts stay where they add value; generic duplicated journey strings switch to the registry.
 
 3. Consumers updated:
-   - `CompanionProvider` resolves starters from the registry using the same `JourneyContextV1` it already builds (so J2 invalidation refreshes them; memoisation keyed on personal context).
-   - `AskPage` — remove the inline `welcomeSuggestions` and the TTC/pregnancy/first-year journey-level duplication; keep content/topic maps that carry genuine specificity (and non-personal families untouched).
-   - `companionStarters.ts` becomes a thin re-export/delegate so mode-based callers and existing tests keep working.
-   - Empty-array surfaces: fill only where it clearly helps TTC/Pregnancy/First Year; otherwise record as intentional empty.
+   - `useCompanionPersonalJourney` gains a reactive personal value from the existing module cache (no second resolver, no extra query) so starters refresh on the J2 signal.
+   - `CompanionProvider` resolves starters from the registry with that personal context; memoised on it, so a TTC → Pregnancy transition leaves zero stale chips.
+   - `AskPage` — inline `welcomeSuggestions` removed and replaced by the registry; the topic/content maps stay as content prompts.
+   - `TTCAISupport`, `FirstYearAISupport`, `TrimesterAISupport` — generic duplicated journey strings replaced by `journeyStarters(...)`; content-specific hub prompts (week/article/topic data) untouched.
+   - `companionStarters.ts` becomes a thin delegate over the registry (content/mode level only, never manufacturing a personal journey).
+
 
 4. Copy audit: every registry line reviewed for medical assertion, false reassurance, deterministic milestone claims, fertility promises, alarm, duplication, chip length.
 

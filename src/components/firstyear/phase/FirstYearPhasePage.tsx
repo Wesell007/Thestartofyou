@@ -306,7 +306,7 @@ const CommonQuestions = ({
                       topic,
                       title: phaseSlug,
                     }}
-                    suggestions={[qa.question]}
+                    suggestions={[qa.q]}
                     buttonClassName="inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
                     buttonStyle={{
                       borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",

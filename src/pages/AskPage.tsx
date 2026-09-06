@@ -495,12 +495,20 @@ const AskPage = () => {
 
   // ── Welcome state (no query yet) ──
   if (!hasQuery) {
-    const welcomeSuggestions = [
-      "Is what I'm feeling normal at 8 weeks?",
-      "When should I take a pregnancy test?",
-      "How do I know if I'm ovulating?",
-      "What should I expect after birth?",
-    ];
+    // AIC-J3 — one canonical source. Personal journey starters appear only
+    // when authoritative saved journey state exists; an explicit content entry
+    // (a pressed topic) lets the content prompts below lead instead.
+    const welcomeSuggestions = resolveJourneySuggestions({
+      personal: personalJourney,
+      entry: buildEntryContext({
+        stage: stageKey,
+        journey: journeyParam,
+        topic,
+        title: contextLabel,
+      }),
+      surface: "ask",
+    });
+
     const hasStageContext = Boolean(stageKey);
     const topicSuggestions = topic
       ? (((stageKey === "first-year" || stageKey === "recovery") && FIRST_YEAR_TOPIC_SUGGESTIONS[topic])

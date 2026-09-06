@@ -281,3 +281,18 @@
   persistent history OFF, microphone/STT/TTS/dependency/credentials/bootstrap/
   conversation-integration/voice-persistence/raw-audio/voice-analytics/DB/
   production-runtime changes all 0.
+
+## AIC-J2 — journey context correctness and freshness (closed)
+
+Journey-state freshness implemented for the three personal lifecycle journeys:
+TTC, pregnancy and first year. Toddler, family, support, IVF and postpartum
+remain content families, not personal journeys.
+
+- new `src/lib/journeyStateSignal.ts`, payload-free in-memory invalidation;
+- emits from the authoritative pregnancy, TTC and first-year write paths, once
+  per logical mutation, zero on failure;
+- epoch-guarded cache in `useCompanionPersonalJourney`: immediate invalidation,
+  no stale value returned to an awaiting caller, no stale fallback on refresh
+  failure, coalesced fresh reads, auth invalidation preserved;
+- 30 focused tests added across three suites; no prompt, AIC-5, grounding,
+  memory, history or voice change; no deployment.

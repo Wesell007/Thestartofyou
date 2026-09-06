@@ -77,3 +77,46 @@ content, not facts; safety and grounding behaviour are unchanged.
 No names, emails, free text, notes, reflections, cycle detail or identifiers
 are sent. Nothing is persisted, logged or sent to analytics; `ai-search` still
 logs no request body.
+
+## Freshness (AIC-J2)
+
+Personal context is cached once per session in `useCompanionPersonalJourney`.
+Two independent causes invalidate it: an auth state change, and an
+authoritative journey mutation announced through
+`src/lib/journeyStateSignal.ts`.
+
+The signal is payload-free and in-memory: no journey type, stage, week, age,
+identifier, storage, network or analytics. It means only "the cached personal
+journey context is no longer trustworthy", and is never a source of journey
+truth.
+
+Emitting paths, one notification per completed logical mutation, after success:
+
+- pregnancy — `upsertPregnancyJourney` (the single inner authority behind
+  `commitPendingJourneyToDB` and `saveActivePregnancyJourney`, so the outer
+  callers never emit again), `updatePregnancyJourneyStatus`,
+  `deletePregnancyJourney`;
+- TTC — `commitPendingTTCJourneyToDB`, `deleteTTCJourney`;
+- first year — `saveFirstYearJourney`, whose single RPC writes journey, babies,
+  primary baby and lifecycle together.
+
+The opportunistic legacy backfill inside `getActivePregnancyJourney` is a read
+path that cannot change the resolved journey, so it deliberately does not emit.
+Failed mutations throw before the emit, so they emit nothing. Listener failures
+are caught and logged: a committed journey write must never be reported as
+failed because a cache listener threw.
+
+Invalidation semantics:
+
+- one module-level cache and one module-level listener, however many companion
+  surfaces are mounted; no per-surface or per-journey caches;
+- a signal bumps an epoch and clears cache and in-flight reference
+  synchronously;
+- a resolution completing under an obsolete epoch is neither cached nor handed
+  to its awaiting caller: it chains onto the current-epoch resolution;
+- concurrent reads after a signal coalesce on one fresh resolution;
+- a failed refresh resolves to `null`. Stale context is never a fallback.
+
+Page and entry context stay per request: the panel reads a live pathname ref
+and `/ask` rebuilds entry context from the current authoritative parameters.
+Historical turns are never rewritten. Prompt assembly is unchanged.

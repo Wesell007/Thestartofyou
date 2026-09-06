@@ -63,6 +63,12 @@ export interface CompanionTurn {
 interface CompanionContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
+  /**
+   * AIC-J4 — open the one panel carrying entry provenance for what the person
+   * pressed Ask from. No model call happens here, and no user message is sent.
+   */
+  openWithEntry: (intent: CompanionEntryIntent) => void;
+
   mode: CompanionMode;
   visible: boolean;
   turns: CompanionTurn[];

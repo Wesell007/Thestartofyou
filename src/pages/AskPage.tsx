@@ -276,20 +276,36 @@ const AskPage = () => {
 
   // AIC-2 — /ask carries entry provenance: where the question was asked from.
   // It never becomes a personal fact.
+  // AIC-J4 — that provenance is consumed once, at the moment the shared
+  // runtime accepts and commits the first user turn. A failed answer, a retry
+  // or a follow-up on the same unchanged URL does not revive it; only a new
+  // material hand-off (different stage, journey, topic or label) does.
   const journeyParam = searchParams.get("journey");
   const contextLabel = navigationState?.contextLabel ?? null;
+  const entryConsumedRef = useRef(false);
+  const entrySignature = `${stageKey ?? ""}|${journeyParam ?? ""}|${topic ?? ""}|${contextLabel ?? ""}`;
+  const entrySignatureRef = useRef(entrySignature);
+  if (entrySignatureRef.current !== entrySignature) {
+    entrySignatureRef.current = entrySignature;
+    entryConsumedRef.current = false;
+  }
   const resolveJourneyContext = useCallback(async () => {
     const personal = await ensurePersonalJourney();
+    const entry = entryConsumedRef.current
+      ? undefined
+      : buildEntryContext({
+          stage: stageKey,
+          journey: journeyParam,
+          topic,
+          title: contextLabel,
+        });
+    entryConsumedRef.current = true;
     return buildJourneyContext({
       personal,
-      entry: buildEntryContext({
-        stage: stageKey,
-        journey: journeyParam,
-        topic,
-        title: contextLabel,
-      }),
+      ...(entry ? { entry } : {}),
     });
   }, [contextLabel, ensurePersonalJourney, journeyParam, stageKey, topic]);
+
 
   // AIC-4 — /ask runs on the same shared conversation runtime as the panel:
   // same ordering, streaming, bounds, clarification and memory interception.

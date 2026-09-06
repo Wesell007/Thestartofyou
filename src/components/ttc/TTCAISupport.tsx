@@ -28,18 +28,18 @@ const TTCAISupport = () => {
             When you need clarity
           </p>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-[1.85rem] text-foreground leading-tight mb-4">
-            Questions about your cycle,{" "}
+            Questions about cycles and timing,{" "}
             <span className="italic font-normal">gently answered.</span>
           </h2>
           <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-relaxed max-w-lg mx-auto">
             Ask anything about timing, ovulation, symptoms, or testing, and
-            get calm, practical guidance shaped to where you are.
+            get calm, practical guidance.
           </p>
         </div>
 
         <div className="mt-6">
           <AISearchBar
-            placeholder="Ask about your cycle, timing, or symptoms..."
+            placeholder="Ask about cycles, timing, or symptoms..."
             suggestions={[
               "When am I most fertile?",
               "Am I ovulating?",

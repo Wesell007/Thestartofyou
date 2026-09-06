@@ -1,17 +1,16 @@
-import { useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Sparkles, ArrowRight, Loader2 } from "lucide-react";
-import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
-import { useAISearch } from "@/hooks/useAISearch";
-import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
-import { toneLabel } from "@/lib/companion";
-import { COMPANION_CONTEXT_MAX_LENGTH } from "@/lib/companionContext";
-import {
-  buildPregnancyAiContext,
-  pregnancyToneHint,
-} from "@/lib/pregnancyAiContext";
+/**
+ * AIC-J4 — a contextual entry point into the one companion panel.
+ *
+ * This card is no longer an answer surface: it holds no transcript, calls no
+ * model and renders no answer. Pressing it opens the shared panel carrying
+ * entry provenance (pregnancy, this week) plus presentation-only suggestions.
+ * Nothing is sent on the person's behalf.
+ */
 
-import { navigateToAsk } from "@/lib/askNavigation";
+import { Sparkles } from "lucide-react";
+import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
+import { toneLabel } from "@/lib/companion";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 
 interface Props {
   week: number;
@@ -20,106 +19,21 @@ interface Props {
   dueDate?: Date | null;
 }
 
+const accent = "hsl(var(--stage-pregnancy-accent))";
 
-const CHIPS = [
-  "What should I remember about this week?",
+const suggestionsFor = (week: number): string[] => [
+  `What should I remember about week ${week}?`,
   "Help me write a reflection for this week.",
   "What could I ask my midwife at this stage?",
 ];
 
-const accent = "hsl(var(--stage-pregnancy-accent))";
-
-
-/** Renders inline markdown emphasis and bullet markers as plain typography. */
-const renderInline = (text: string) =>
-  text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
-    part.startsWith("**") && part.endsWith("**") && part.length > 4 ? (
-      <strong key={i} className="font-medium text-foreground">
-        {part.slice(2, -2)}
-      </strong>
-    ) : (
-      <span key={i}>{part}</span>
-    ),
-  );
-
-const renderAnswerLines = (body: string) =>
-  body
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line, i) => {
-      const bullet = line.match(/^[*-]\s+(.*)$/);
-      if (bullet) {
-        return (
-          <p key={i} className="pl-4 -indent-4">
-            <span aria-hidden="true">• </span>
-            {renderInline(bullet[1])}
-          </p>
-        );
-      }
-      return <p key={i}>{renderInline(line.replace(/^#+\s*/, ""))}</p>;
-    });
-
-
-/**
- * Inline AI companion card. Phase 29F: sends only the allowlisted pregnancy
- * context (week, trimester, page family, tone) built by
- * buildPregnancyAiContext — no due date, name, reflection, media or memory.
- */
-const SectionAskAI = ({ week, seed }: Props) => {
-  const navigate = useNavigate();
+const SectionAskAI = ({ week }: Props) => {
   const { name, tone } = useCompanionIdentity();
-  const { answer, isLoading, error, ask, reset } = useAISearch();
-  const [question, setQuestion] = useState("");
-  const [asked, setAsked] = useState("");
 
-  const context = useMemo(
-    () =>
-      buildPregnancyAiContext({
-        weekNumber: week,
-        pageFamily: "my-week",
-        toneHint: pregnancyToneHint(tone),
-        contextSource: "page",
-      }),
-    [week, tone],
-  );
-
-
-  const eyebrow = name ? `Ask ${name} about this week` : "Ask AI about this week";
+  const eyebrow = name ? `Ask ${name} about this week` : "Ask about this week";
   const heading = name
     ? `Ask ${name} a quiet question about week ${week}.`
     : `Ask a quiet question about week ${week}.`;
-
-  const submit = (text: string) => {
-    const trimmed = text.trim();
-    if (!trimmed || isLoading) return;
-    setAsked(trimmed);
-    setQuestion(trimmed);
-    ask(trimmed, context);
-  };
-
-  const askSomethingElse = () => {
-    reset();
-    setAsked("");
-    setQuestion("");
-  };
-
-  const continueInAsk = () => {
-    // The shared /ask function rejects context over 500 characters, so the
-    // carried context is stage context first, then whatever answer fits.
-    const room = COMPANION_CONTEXT_MAX_LENGTH - context.length - 20;
-    const carried =
-      answer && room > 60
-        ? `${context}\n\nPrevious answer: ${answer.slice(0, room).trimEnd()}`
-        : context;
-    navigateToAsk(navigate, asked || question || seed, {
-      stage: "pregnancy",
-      context: carried.slice(0, COMPANION_CONTEXT_MAX_LENGTH).trimEnd(),
-    });
-  };
-
-
-  const body = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
 
   return (
     <section className="relative pt-2 pb-11 sm:pb-12">
@@ -175,114 +89,16 @@ const SectionAskAI = ({ week, seed }: Props) => {
               {heading}
             </h2>
             <p className="font-sans text-[14.5px] sm:text-[15px] text-foreground/78 leading-[1.72] max-w-[46ch] mb-5">
-              Ask one question here and get a short answer. It is not a
-              substitute for medical care.
+              Your companion opens beside this page, so you keep your place. It is
+              not a substitute for medical care.
             </p>
 
-            {!answer && !isLoading && (
-              <div className="flex flex-wrap gap-2 mb-4">
-                {CHIPS.map((chip) => (
-                  <button
-                    key={chip}
-                    type="button"
-                    onClick={() => submit(chip)}
-                    className="inline-flex min-h-[44px] items-center rounded-full px-4 py-2.5 text-left font-sans text-[12.5px] leading-snug text-foreground/80 transition-colors hover:bg-[hsl(var(--stage-pregnancy-accent)/0.10)]"
-                    style={{
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.28)",
-                    }}
-                  >
-                    {chip}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                submit(question);
-              }}
-              className="flex flex-col sm:flex-row gap-2.5"
-            >
-              <label className="sr-only" htmlFor="companion-question">
-                Your question
-              </label>
-              <input
-                id="companion-question"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Ask something about this week"
-                maxLength={300}
-                className="flex-1 min-w-0 rounded-full bg-background/70 px-4 py-2.5 font-sans text-[14px] text-foreground placeholder:text-foreground/45 outline-none focus:ring-2"
-                style={{
-                  border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.3)",
-                }}
-              />
-              <button
-                type="submit"
-                disabled={isLoading || !question.trim()}
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-4 py-2.5 font-sans text-[11.5px] font-medium tracking-[0.2em] uppercase transition-colors disabled:opacity-50"
-                style={{
-                  color: accent,
-                  border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-                }}
-              >
-                {isLoading ? (
-                  <Loader2 size={13} className="animate-spin" />
-                ) : (
-                  <ArrowRight size={13} strokeWidth={1.8} />
-                )}
-                {isLoading ? "Thinking" : "Ask"}
-              </button>
-            </form>
-
-            <div aria-live="polite" className="mt-5">
-              {isLoading && !answer && (
-                <p className="font-sans text-[13.5px] text-foreground/60">
-                  Finding a quiet answer…
-                </p>
-              )}
-
-              {error && (
-                <p className="font-sans text-[13.5px] text-foreground/75 leading-relaxed">
-                  {error}. Your question is still here, so you can try again in a
-                  moment.
-                </p>
-              )}
-
-              {body && (
-                <div className="rounded-[18px] bg-background/60 px-4 py-4 sm:px-5">
-                  <div className="font-sans text-[14.5px] text-foreground/85 leading-[1.75] space-y-2">
-                    {renderAnswerLines(body)}
-                  </div>
-                </div>
-              )}
-
-              {(answer || error) && !isLoading && (
-                <div className="mt-4 flex flex-wrap gap-2.5">
-                  <button
-                    type="button"
-                    onClick={continueInAsk}
-                    className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-sans text-[11.5px] font-medium tracking-[0.2em] uppercase"
-                    style={{
-                      color: accent,
-                      border: "1px solid hsl(var(--stage-pregnancy-accent) / 0.42)",
-                    }}
-                  >
-                    Continue in Ask
-                    <ArrowRight size={13} strokeWidth={1.8} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={askSomethingElse}
-                    className="rounded-full px-4 py-1.5 font-sans text-[11.5px] font-medium tracking-[0.2em] uppercase text-foreground/55 hover:text-foreground/80"
-                    style={{ border: "1px solid hsl(var(--border))" }}
-                  >
-                    Ask something else
-                  </button>
-                </div>
-              )}
-            </div>
+            <AskAboutThis
+              label={name ? `Ask ${name} about week ${week}` : `Ask about week ${week}`}
+              entry={{ stage: "pregnancy", title: `Week ${week}` }}
+              suggestions={suggestionsFor(week)}
+              description="Nothing is asked until you write or choose a question."
+            />
           </div>
         </div>
       </div>

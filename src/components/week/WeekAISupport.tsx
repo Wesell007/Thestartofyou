@@ -23,7 +23,7 @@ const WeekAISupport = ({ data }: Props) => {
               "{data.aiContextPrompt}"
             </p>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-8">
-              If something feels unclear or you want to understand more about this stage, you can ask and get guidance tailored to you.
+              If something feels unclear or you want to understand more about this stage, you can ask and get general guidance about this stage.
             </p>
           </div>
 

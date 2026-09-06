@@ -73,13 +73,14 @@ const SOURCES = import.meta.glob("/src/**/*.{ts,tsx}", {
   eager: true,
 }) as Record<string, string>;
 
-/** Every component that renders a model answer must use the shared helper. */
+/**
+ * Every component that renders a model answer must use the shared helper.
+ * AIC-J4: the three journey cards are entry points, not answer surfaces, so
+ * they are deliberately absent from this list.
+ */
 const AI_SURFACES = [
   "/src/pages/AskPage.tsx",
   "/src/components/companion/CompanionMessageList.tsx",
-  "/src/components/myweek/SectionAskAI.tsx",
-  "/src/components/firstyear/journey/FirstYearAskCompanion.tsx",
-  "/src/components/ttc/journey/TTCAskCompanionCard.tsx",
   "/src/components/firstyear/today/DaySummaryCard.tsx",
 ];
 

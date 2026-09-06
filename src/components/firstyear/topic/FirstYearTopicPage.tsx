@@ -419,12 +419,12 @@ const FirstYearTopicPage = ({ config }: Props) => {
         <HubAISupport
           heading={
             config.side === "baby"
-              ? "Ask about your baby, any time"
-              : "Ask about your recovery, any time"
+              ? "Ask about this topic, any time"
+              : "Ask about recovery, any time"
           }
           description={
             config.side === "baby"
-              ? `If something about ${config.title.toLowerCase()} feels unclear, you can ask and get calm, stage-aware guidance.`
+              ? `If something about ${config.title.toLowerCase()} feels unclear, you can ask and get calm, general guidance.`
               : `If something about ${config.title.toLowerCase()} feels uncertain, you can ask and get gentle, honest guidance.`
           }
           suggestions={config.aiPrompts}

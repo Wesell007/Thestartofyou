@@ -27,12 +27,26 @@ import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
-import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
+import { resolveJourneySuggestions, MAX_SUGGESTIONS } from "@/lib/companion/journeySuggestions";
+import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
 
 import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";
+
+/**
+ * AIC-J4 — a contextual hand-off into the one shared panel.
+ *
+ * `entry` is AIC-2 entry provenance (content, never identity). `suggestions`
+ * are transient presentation-only chips: they are never stored in
+ * JourneyContextV1, never persisted and never sent as a hidden user message.
+ */
+export interface CompanionEntryIntent {
+  entry: EntryJourneyContextV1;
+  suggestions?: string[];
+}
+
 
 export interface CompanionTurn {
   id: string;
@@ -49,6 +63,12 @@ export interface CompanionTurn {
 interface CompanionContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
+  /**
+   * AIC-J4 — open the one panel carrying entry provenance for what the person
+   * pressed Ask from. No model call happens here, and no user message is sent.
+   */
+  openWithEntry: (intent: CompanionEntryIntent) => void;
+
   mode: CompanionMode;
   visible: boolean;
   turns: CompanionTurn[];
@@ -122,22 +142,61 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
 
   const pathnameRef = useRef(location.pathname);
   pathnameRef.current = location.pathname;
+
+  // AIC-J4 — transient entry intent. `entryRef` is the authority for the next
+  // request; `entryIntent` only mirrors it so the panel can show the chips.
+  // Both are cleared the moment the shared runtime accepts the first user turn.
+  const entryRef = useRef<CompanionEntryIntent | null>(null);
+  const [entryIntent, setEntryIntent] = useState<CompanionEntryIntent | null>(null);
+
+  const clearEntry = useCallback(() => {
+    entryRef.current = null;
+    setEntryIntent((current) => (current ? null : current));
+  }, []);
+
   const resolveJourneyContext = useCallback(async () => {
     const personal = await ensurePersonalJourney();
+    // Consumed at the point the runtime accepts and commits the user turn,
+    // before any assistant reply. A later failure or retry does not revive it.
+    const intent = entryRef.current;
+    if (intent) clearEntry();
     return buildJourneyContext({
       personal,
       page: buildPageContext({ pathname: pathnameRef.current }),
+      ...(intent ? { entry: intent.entry } : {}),
     });
-  }, [ensurePersonalJourney]);
+  }, [clearEntry, ensurePersonalJourney]);
 
   // AIC-4 — the shared runtime. Ordering, streaming, bounds, clarification and
   // memory interception all live there rather than in this surface.
   const conversation = useCompanionConversation({ mode, context, resolveJourneyContext });
 
+  const openWithEntry = useCallback(
+    (intent: CompanionEntryIntent) => {
+      entryRef.current = intent;
+      setEntryIntent(intent);
+      setOpen(true);
+    },
+    [],
+  );
+
   // Close the panel when moving to a route where the companion is hidden.
   useEffect(() => {
     if (!visible) setOpen(false);
   }, [visible]);
+
+  // A route change clears any entry intent that was never used. Turns already
+  // in the conversation are untouched.
+  useEffect(() => {
+    clearEntry();
+  }, [location.pathname, clearEntry]);
+
+  // Closing the panel abandons an unconsumed entry: reopening the launcher is
+  // an ordinary open, not a contextual hand-off.
+  useEffect(() => {
+    if (!open) clearEntry();
+  }, [open, clearEntry]);
+
 
   const turns = useMemo<CompanionTurn[]>(
     () =>
@@ -154,6 +213,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     () => ({
       open: visible ? open : false,
       setOpen: (next: boolean) => setOpen(next && visible),
+      openWithEntry,
       mode,
       visible,
       turns,
@@ -161,12 +221,19 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       isLoading: conversation.isLoading,
       error: conversation.error,
       isRateLimited: conversation.isRateLimited,
+      // AIC-J4 — presentation-only suggestions handed over with a contextual
+      // entry, while that entry is still unconsumed. They never displace the
+      // personal starter authority once the conversation is under way.
       // AIC-J3 — personal journey starters when saved journey state exists,
       // otherwise the existing CONTENT/MODE chips for this area of the site.
       // A mode never becomes a personal journey.
-      starters: personalJourney
-        ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
-        : companionStarters(mode),
+      starters:
+        entryIntent?.suggestions?.length && turns.length === 0
+          ? entryIntent.suggestions.slice(0, MAX_SUGGESTIONS)
+          : personalJourney
+            ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
+            : companionStarters(mode),
+
 
       companionName: identity.name,
       context,
@@ -185,6 +252,8 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     [
       suppress,
       open,
+      openWithEntry,
+      entryIntent,
       mode,
       visible,
       turns,
@@ -194,9 +263,15 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       personalJourney,
     ],
 
+
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;
+}
+
+/** AIC-J4 — the same value, or `null` outside the provider. Never throws. */
+export function useCompanionOptional(): CompanionContextValue | null {
+  return useContext(CompanionContext);
 }
 
 export function useCompanion(): CompanionContextValue {

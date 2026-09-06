@@ -269,6 +269,11 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;
 }
 
+/** AIC-J4 — the same value, or `null` outside the provider. Never throws. */
+export function useCompanionOptional(): CompanionContextValue | null {
+  return useContext(CompanionContext);
+}
+
 export function useCompanion(): CompanionContextValue {
   const ctx = useContext(CompanionContext);
   if (!ctx) throw new Error("useCompanion must be used inside CompanionProvider");

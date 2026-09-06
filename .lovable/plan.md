@@ -17,16 +17,16 @@ Authoritative context fields available (`journeyContextContract.ts`):
 - trying-to-conceive: `ttcStage` (`trying_naturally | preparing_to_try | considering_help | in_treatment`), `ivfInTreatment`
 - first-year: `ageMonths` (0–11)
 
-Empty-array surfaces to classify: `src/pages/TTCHub.tsx`, `src/components/firstyear/new/FYAISupport.tsx`, `src/components/support/SupportAISupport.tsx`.
+Empty-array surfaces audited: `TTCHub.tsx` (has its own `ttcAIChips` row — INTENTIONAL EMPTY), `FYAISupport.tsx` (has baby/recovery chip row — INTENTIONAL EMPTY), `SupportAISupport.tsx` (outside the three personal journeys — INTENTIONAL EMPTY). None filled.
 
 ## What will be built
 
 1. `src/lib/companion/journeySuggestions.ts` — the single canonical registry.
-   - `resolveJourneySuggestions({ personal, entry, page, surface })` returning up to 4 deterministic strings.
-   - Surfaces: `companion | ask | hub`.
-   - Journey-level sets for the three personal journeys, plus bounded stage-aware variants: pregnancy by trimester (derived from an already-known week/trimester only, never inferred), TTC by `ttcStage` (with an `ivfInTreatment` variant only where it adds relevance without medical assumption), First Year by month band (0–3, 3–6, 6–9, 9–12).
-   - Unknown stage → journey-level set. No personal journey → existing neutral/general set (migrated from `companionStarters.general`).
+   - `resolveJourneySuggestions({ personal, entry, page, surface })`, max 4 deterministic strings; surfaces `companion | ask | hub`.
+   - Journey-level sets for the three personal journeys, plus bounded stage variants: TTC by `ttcStage` (`ivfInTreatment` selects the existing in-treatment wording only), pregnancy by trimester (`trimester`, or `week` through the one canonical `trimesterFromWeek` helper), first year by non-overlapping bands **0–2, 3–5, 6–8, 9–11** (month 12 unsupported).
+   - Unknown stage → journey-level set. No personal journey → neutral general set. Mode and page never create personal journeys (inference count 0).
    - Pure data + pure function: no dates, no identifiers, no randomness, no model call, no analytics, no persistence.
+
 
 2. Precedence, per surface (documented and tested):
    - Global companion: personal journey (+ stage when known) → general fallback. Page/entry never assign a journey.

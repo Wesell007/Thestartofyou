@@ -25,11 +25,26 @@ Starting baseline: 96 test files / 1126 tests / 1126 passing / 0 timeouts.
 Reopen `roadmap.md`: "AIC-J4 — contextual journey AI entry points — IN PROGRESS /
 CLOSURE REMAINDER". Add the closure-remainder task list. Only mark closed after the gate.
 
-### 2. Lint architecture
-Move `useCompanionOptional` out of `CompanionProvider.tsx` into
-`src/components/companion/useCompanionOptional.ts` (re-exporting the raw context), keeping
-semantics identical. Provider is not redesigned. Target: 1 pre-existing error,
-10 pre-existing warnings, 0 new findings, no rule suppression.
+### 2. Lint architecture (binding correction 2)
+Split cleanly so `CompanionProvider.tsx` exports components only: `companionContext.ts` holds
+the context object and shared types, `useCompanionOptional.ts` and `useCompanion.ts` hold the
+hooks, `CompanionProvider.tsx` keeps the provider. Semantics unchanged, no rule suppression.
+Target: 1 pre-existing error, 10 pre-existing warnings, 0 new findings.
+
+### 2b. Contextual label accuracy (binding correction 1)
+Labels match the actual content type, never something more personal or specific:
+topic → "Ask about this topic", week → "this week", trimester → "this trimester",
+month → "this month", phase/stage → "this stage". `FirstYearTopicPage` is a topic surface,
+not a month surface. Displayed content never creates personal lifecycle state.
+
+### 2c. Full answer-path scan (binding correction 3)
+The two-surface invariant is verified against every independent execution route, not just
+`useAISearch`: `useCompanionConversation`, direct `ai-search` references, Supabase function
+invocations targeting `ai-search`, direct `/functions/v1/ai-search` fetches, and any
+independent answer state/rendering bound to them. Every occurrence is classified. Anything
+inside TTC/Pregnancy/First Year is converted; anything outside is reported as a blocker, never
+exempted.
+
 
 ### 3. Accessibility on surviving search inputs
 Add a visually hidden `<label>` (or `aria-label` where the design demands) to `AISearchBar`'s

@@ -252,6 +252,8 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     [
       suppress,
       open,
+      openWithEntry,
+      entryIntent,
       mode,
       visible,
       turns,
@@ -260,6 +262,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       context,
       personalJourney,
     ],
+
 
   );
 

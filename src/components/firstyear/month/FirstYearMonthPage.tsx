@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Sparkles, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, ExternalLink } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { MonthGuide, EditorialSection, FocusSection } from "@/data/firstYearMonthData";
@@ -18,9 +18,6 @@ const SectionLabel = ({ children }: { children: React.ReactNode }) => (
     {children}
   </p>
 );
-
-const askHref = (guide: MonthGuide, topic: string) =>
-  `/ask?stage=first-year&month=${guide.slug}&topic=${topic}`;
 
 /* ---------------------------------------------------------------- HERO */
 

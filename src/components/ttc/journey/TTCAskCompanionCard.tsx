@@ -9,7 +9,7 @@
  */
 
 import { useMemo } from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import type { TTCStage } from "@/lib/ttcDerived";
 import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
@@ -77,12 +77,7 @@ const TTCAskCompanionCard = ({
 
         <div className="flex flex-wrap items-start gap-3">
           <AskAboutThis
-            label={
-              <span className="inline-flex items-center gap-2">
-                <Sparkles size={14} aria-hidden="true" />
-                {askLabel}
-              </span> as unknown as string
-            }
+            label={askLabel}
             entry={{ stage: "ttc", topic, title: "Trying to conceive" }}
             suggestions={suggestions}
           />

@@ -1,43 +1,47 @@
-# AIC-J3 — Journey-Aware Suggestion Registry
+# AIC-J3 — Test Arithmetic Reconciliation (correction only, no code changes)
 
-Scope: TTC, Pregnancy, First Year only. No J4/J5/J6. Voice paused. No AIC-5, grounding, memory/history, prompt or `ai-search` changes.
+Verified against the actual test runner and the J3 commit diff.
 
-## Audit findings (pre-build)
+## Counts
 
-Personal-journey starter sources (fragmented):
-- `src/lib/companion/companionStarters.ts` — mode chips (`general`, `ttc_companion`, `pregnancy_week_companion`, `first_year_companion`), consumed by `CompanionProvider`. Classified CONTENT/MODE, not personal.
-- `src/pages/AskPage.tsx` — inline `welcomeSuggestions` (generic) plus five topic maps (first-year, family, toddler, TTC, pregnancy). Topic maps are genuine CONTENT prompts and stay.
-- Hub components with inline strings: `TTCAISupport`, `FirstYearAISupport`, `TrimesterAISupport`, `WeekAISupport` (week data), plus non-personal families. Classified CONTENT/HUB prompts for signed-out and non-personal readers — kept, not migrated, since a hub knowing its own family is not personal context.
+1. Starting test files: 93
+2. Starting tests: 1092
+3. Final test files: 95
+4. Final tests: 1119
+5. Net test-file increase: +2
+6. Net test increase: +27
 
-Content prompt data kept untouched: `weekData.ts`, `articleData.ts`, `stageData.ts`, `ttcTopicData.ts`, `pregnancyTopicData.ts`, `firstYearTopicData.ts`, `firstYearStageData.ts`, and non-personal families.
+## Files
 
-Empty arrays audited: `TTCHub.tsx` (own `ttcAIChips` row), `FYAISupport.tsx` (own baby/recovery chip row), `SupportAISupport.tsx` (outside scope) — all INTENTIONAL EMPTY, fill count 0.
+7. J3-created test files:
+   - `src/test/journeySuggestions.test.ts`
+   - `src/test/journeySuggestionFreshness.test.tsx`
+8. Tests per new file: journeySuggestions.test.ts = 24; journeySuggestionFreshness.test.tsx = 3 (total 27)
+9. Existing test files modified by J3: none
+10. Tests added to existing files: 0
+11. Tests removed or replaced: 0
+12. Tests renamed or merged: 0 (gross = net)
+13. Gross test cases authored: 27
+14. Pre-existing test cases removed/replaced: 0
+15. Net increase: +27
 
-Authoritative bounded fields: pregnancy `week`/`trimester`; TTC `ttcStage`, `ivfInTreatment`; first year `ageMonths` 0–11.
+## Verification
 
-## What will be built
+16. Final `npm test` output confirmed: 95 files / 1119 tests / all pass / 0 timeouts
+17. Code changes required for this reconciliation: none
+18. Corrected statement: AIC-J3 added 2 new test files containing 27 new tests, modified no existing suites, and removed no tests. Test totals moved 1092 to 1119. The earlier "41 new tests" figure was a reporting error, not a repository state; the "two mode-chip assertions folded in" note was also inaccurate — `companionMode.test.ts` was untouched.
 
-1. `src/lib/companion/journeySuggestions.ts` — canonical registry.
-   - `resolveJourneySuggestions({ personal, entry, page, surface })`, surfaces `companion | ask | hub`, max 4 deterministic strings.
-   - **No journey-family shortcut**: personal starters are unreachable without a real `JourneyContextV1.personal` object. `page` is accepted and never consulted.
-   - Stage variants: TTC by `ttcStage` (`ivfInTreatment` only selects existing in-treatment wording when no saved stage says otherwise); pregnancy by `trimester`, or `week` via the single canonical `trimesterFromWeek` helper (derivation implementations stay at 1); first year by non-overlapping bands **0–2, 3–5, 6–8, 9–11** (month 12 unsupported).
-   - Unknown stage → journey-level. No personal → neutral general.
-   - Also holds the content/mode chips so that copy lives in one file; clearly labelled as content, never personal.
-   - Pure data + pure function: no model calls, randomness, analytics, persistence, dates, identifiers.
+## Frozen systems (J3 commit touched 9 files only)
 
-2. Reactive personal value in `useCompanionPersonalJourney`, reusing the existing module cache, epoch and single signal owner — no second resolver, no extra query per mounted surface. Invalidation immediately publishes `null`, so stale personal chips are never visible while a fresh read is pending.
+19. Prompt changes: 0
+20. AIC-5 changes: 0
+21. Grounding changes: 0
+22. Memory/history changes: 0
+23. ai-search changes: 0
+24. Voice changes: 0
+25. Schema/backend changes: 0
 
-3. Consumers:
-   - `CompanionProvider` — starters from the registry when personal context exists, else the existing content/mode chips.
-   - `AskPage` — inline `welcomeSuggestions` removed and resolved from the registry; topic/content maps untouched.
-   - `companionStarters.ts` — thin delegate over the registry's content/mode chips; no second copy of journey strings.
+## Status
 
-4. Copy audit of every registry line: medical assertion, false reassurance, diagnosis, fertility promise, treatment assumption, alarm, deterministic milestone claims, duplication, chip length, tone.
-
-5. Tests (new focused suites): journey mapping, TTC stages, `ivfInTreatment`, trimester variants, first-year boundaries 0/2/3/5/6/8/9/11, unknown-stage fallback, no-personal fallback, determinism, max count, mode/page/route inference = 0, no-personal page cases (pregnancy, TTC, IVF, first year, postpartum), conflict cases (pregnancy+family, TTC+IVF, first year+postpartum), cross-surface parity, content-entry precedence, TTC → Pregnancy J2 freshness with zero stale visible chips, no duplicate resolver work from two mounted surfaces, legacy `companionStarters` compatibility.
-
-6. Docs + `roadmap.md`.
-
-## Validation
-
-Reconcile baseline (93 files / 1092 tests), focused suites, `npm test` (0 timeouts), two cache-defeated typechecks, `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts`, lint (known baseline only), build. No deployment. Then the full 78-point report, and stop.
+26. AIC-J3 — CLOSED PASS
+27. AIC-J4 — SAFE TO BEGIN (not started)

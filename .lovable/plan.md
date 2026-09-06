@@ -1,44 +1,51 @@
-# AIC-J2 — Journey context correctness and freshness
+# AIC-J3 — Journey-Aware Suggestion Registry
 
-Scope: TTC, pregnancy, first year only. No prompt change, no new journey type, no AIC-5, grounding, memory, history or voice change. J3 to J6 not started.
+Scope: TTC, Pregnancy, First Year only. No J4/J5/J6. Voice paused. No AIC-5, grounding, memory/history, prompt or `ai-search` changes.
 
-## Confirmed defect
+## Audit findings (pre-build)
 
-Personal journey context is cached at module level in `useCompanionPersonalJourney` and invalidated only on auth change. Any in-app journey mutation therefore leaves stale context until reload.
+Personal-journey starter sources (fragmented, to consolidate):
+- `src/lib/companion/companionStarters.ts` — mode-based chips (`general`, `ttc_companion`, `pregnancy_week_companion`, `first_year_companion`), consumed by `CompanionProvider` (`starters: companionStarters(mode)`).
+- `src/pages/AskPage.tsx` — inline `welcomeSuggestions` array plus five large inline topic maps (`FIRST_YEAR_/FAMILY_/TODDLER_/TTC_/PREGNANCY_TOPIC_SUGGESTIONS`).
+- Hub components passing generic starter strings inline: `TTCAISupport`, `FirstYearAISupport`, `FYAISupport`, `TrimesterAISupport`, `WeekAISupport`, plus non-personal families (`PostpartumAISupport`, `PreparingAISupport`, `ToddlerAISupport`, `FamilyAISupport`, `SupportAISupport`).
 
-Audited authoritative write paths (all of them, verified in the repository):
+Content-specific prompt data (KEEP as content context, not globalised):
+- `src/data/weekData.ts`, `articleData.ts`, `stageData.ts`, `ttcTopicData.ts`, `pregnancyTopicData.ts`, `firstYearTopicData.ts`, `firstYearStageData.ts`, and the non-personal families (`ivf*`, `postpartum*`, `toddler*`, `family*`).
 
-- `savedJourney.ts` — `upsertPregnancyJourney` (the single inner authority behind `commitPendingJourneyToDB` and `saveActivePregnancyJourney`), `updatePregnancyJourneyStatus`, `deletePregnancyJourney`.
-- `savedTTCJourney.ts` — `commitPendingTTCJourneyToDB`, `deleteTTCJourney`.
-- `firstYearJourney.ts` — `saveFirstYearJourney` (one RPC writes journey, babies, primary and lifecycle together, so one signal covers baby age and primary-baby changes). No other baby write path exists outside account deletion.
+Authoritative context fields available (`journeyContextContract.ts`):
+- pregnancy: `week` (1–42), `trimester`
+- trying-to-conceive: `ttcStage` (`trying_naturally | preparing_to_try | considering_help | in_treatment`), `ivfInTreatment`
+- first-year: `ageMonths` (0–11)
 
-## The change signal
+Empty-array surfaces to classify: `src/pages/TTCHub.tsx`, `src/components/firstyear/new/FYAISupport.tsx`, `src/components/support/SupportAISupport.tsx`.
 
-New `src/lib/journeyStateSignal.ts`: `notifyJourneyStateChanged()` and `subscribeJourneyStateChanged(listener)`, plus a test-only listener reset. In-memory emitter, no payload, no storage, no network, no analytics, no journey data. It means only "cached personal journey context is no longer trustworthy" and never becomes a second source of truth.
+## What will be built
 
-Emission rule: once per completed logical mutation, after success. Emission sits inside `upsertPregnancyJourney` (not in both callers), so the nested pregnancy path emits exactly once. Failures throw before the emit, so failed mutations emit zero. The opportunistic legacy backfill inside `getActivePregnancyJourney` is a read path that does not change the resolved journey, so it does not emit; this is documented.
+1. `src/lib/companion/journeySuggestions.ts` — the single canonical registry.
+   - `resolveJourneySuggestions({ personal, entry, page, surface })` returning up to 4 deterministic strings.
+   - Surfaces: `companion | ask | hub`.
+   - Journey-level sets for the three personal journeys, plus bounded stage-aware variants: pregnancy by trimester (derived from an already-known week/trimester only, never inferred), TTC by `ttcStage` (with an `ivfInTreatment` variant only where it adds relevance without medical assumption), First Year by month band (0–3, 3–6, 6–9, 9–12).
+   - Unknown stage → journey-level set. No personal journey → existing neutral/general set (migrated from `companionStarters.general`).
+   - Pure data + pure function: no dates, no identifiers, no randomness, no model call, no analytics, no persistence.
 
-## Immediate invalidation, no stale fallback
+2. Precedence, per surface (documented and tested):
+   - Global companion: personal journey (+ stage when known) → general fallback. Page/entry never assign a journey.
+   - `/ask` with explicit content entry (topic/week/article): content-specific prompts lead; otherwise personal journey → general.
+   - Hub surfaces: editorial/content prompts stay where they add value; generic duplicated journey strings switch to the registry.
 
-`useCompanionPersonalJourney` keeps the single cache and adds an epoch counter:
+3. Consumers updated:
+   - `CompanionProvider` resolves starters from the registry using the same `JourneyContextV1` it already builds (so J2 invalidation refreshes them; memoisation keyed on personal context).
+   - `AskPage` — remove the inline `welcomeSuggestions` and the TTC/pregnancy/first-year journey-level duplication; keep content/topic maps that carry genuine specificity (and non-personal families untouched).
+   - `companionStarters.ts` becomes a thin re-export/delegate so mode-based callers and existing tests keep working.
+   - Empty-array surfaces: fill only where it clearly helps TTC/Pregnancy/First Year; otherwise record as intentional empty.
 
-- invalidation bumps the epoch and clears cache and in-flight reference synchronously;
-- a resolution that started before an invalidation can no longer write back; it is discarded and a fresh resolution is started;
-- concurrent reads after a signal coalesce on one fresh in-flight resolution;
-- a failed refresh returns `null`, never the previous journey.
+4. Copy audit: every registry line reviewed for medical assertion, false reassurance, deterministic milestone claims, fertility promises, alarm, duplication, chip length.
 
-One module-level listener owns invalidation, so mounting both companion surfaces cannot create duplicate listeners or duplicate database work. Existing auth invalidation stays and is tested independently of the journey signal.
+5. Tests (`src/test/journeySuggestionRegistry.test.ts`, plus a small cross-surface/freshness spec):
+   journey→starter mapping, stage variants, unknown-stage fallback, no-personal fallback, determinism, no page-context inference (pregnancy/IVF/postpartum/family pages), cross-surface parity, content-entry precedence, and TTC→Pregnancy freshness after the J2 signal with zero stale TTC chips.
 
-No new caches anywhere. Personal remains a discriminated union from the `journeys.lifecycle` pointer, so TTC to pregnancy replaces rather than merges.
-
-## Verification (no behaviour change expected)
-
-Surfaces for the three journeys (TTC journey/hub/subtopics and ovulation tools; my week, my journey, week pages, toolkit, due-date tools; my first year, today, memories, month and topic pages). Personal versus page/entry separation for the three named conflicts. Page/entry freshness after navigation on both the panel and `/ask`, with no mutation of historical turns. Unknown stays unknown for signed out, no pointer, inactive pregnancy statuses, missing TTC stage, ambiguous babies and out-of-range age.
-
-## Tests
-
-New focused suite covering: exactly-one emission per logical mutation, zero on failure, no duplicate on the nested pregnancy path, subscribe/unsubscribe, payload-free signal; TTC cached then pregnancy save with zero TTC fields surviving; failed refresh after invalidation returning null; concurrent reads coalescing; auth and journey invalidation in both orders; the three precedence conflicts; navigation freshness.
+6. Docs: `docs/ai/companion-journey-context.md` (or a companion-suggestions section) + `roadmap.md`.
 
 ## Validation
 
-Reconcile the starting baseline, run the focused suite, then `npm test` (all pass, zero timeouts), `npm run typecheck` twice cache-defeated, `deno check` on `ai-search`, `npm run lint` at known baseline, `npm run build`. Update the journey/companion architecture doc and `roadmap.md`. No deployment; server source untouched.
+Reconcile baseline (93 files / 1092 tests), focused J3 tests, `npm test`, two cache-defeated typechecks, `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts`, lint (known baseline only), build. No redeployment. Then the 65-point completion report, and stop.

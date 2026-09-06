@@ -9,7 +9,6 @@
  */
 
 import {
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -22,19 +21,18 @@ import { useLocation } from "react-router-dom";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildJourneyContext, buildPageContext } from "@/lib/companion/journeyContext";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
-import type { CompanionMode } from "@/lib/companion/companionMode";
 import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
 import { resolveJourneySuggestions, MAX_SUGGESTIONS } from "@/lib/companion/journeySuggestions";
-import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
 
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import {
   CompanionContext,
   type CompanionContextValue,
   type CompanionEntryIntent,
+  type CompanionTurn,
 } from "./companionContext";
 
 export type { CompanionEntryIntent, CompanionTurn } from "./companionContext";
@@ -200,11 +198,6 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;
-}
-
-/** AIC-J4 — the same value, or `null` outside the provider. Never throws. */
-export function useCompanionOptional(): CompanionContextValue | null {
-  return useContext(CompanionContext);
 }
 
 export function useCompanion(): CompanionContextValue {

@@ -1,5 +1,4 @@
-import { MessageCircle } from "lucide-react";
-import AISearchBar from "@/components/shared/AISearchBar";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import type { WeekData } from "@/data/weekData";
 
 interface Props {
@@ -27,13 +26,18 @@ const WeekAISupport = ({ data }: Props) => {
             </p>
           </div>
 
-          {/* Right, search bar with stage-aware prompts */}
+          {/* Right, contextual hand-off into the one companion panel */}
           <div>
-            <AISearchBar
-              placeholder="What's on your mind this week?"
+            <AskAboutThis
+              label="Ask about this week"
+              entry={{
+                stage: "pregnancy",
+                journey: "pregnancy",
+                topic: `week-${data.week}`,
+                title: `Week ${data.week}`,
+              }}
               suggestions={data.aiPrompts.slice(0, 3)}
-              context={`Week ${data.week} of pregnancy`}
-              stage="pregnancy"
+              description="Opens your companion here on the page. Nothing is sent until you ask."
             />
           </div>
         </div>

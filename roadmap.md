@@ -317,3 +317,10 @@ remain content families, not personal journeys.
   `journeySuggestionFreshness.test.tsx`;
 - no prompt, AIC-5, grounding, memory, history, voice or `ai-search` change;
   no deployment.
+
+## AIC-J4 — contextual journey AI entry points (closed)
+
+Shared `AskAboutThis` hand-off, transient `openWithEntry` on the one panel,
+single-use entry consumption at first accepted turn, three inline journey
+answer surfaces removed, signed-out hub copy corrected. Scope: TTC, pregnancy,
+first year. Next: AIC-J5 (not started). Voice remains paused at AIC-7B.

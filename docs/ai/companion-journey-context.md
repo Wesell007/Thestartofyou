@@ -158,3 +158,34 @@ Freshness reuses J2 unchanged: one module cache, one listener, one resolver.
 The published personal value becomes unknown synchronously on invalidation, so
 stale personal starter exposure is 0 and duplicate resolver queries from
 multiple mounted surfaces are 0.
+
+## AIC-J4 — contextual journey entry points
+
+Entry points hand off to the one shared panel. They are not answer surfaces:
+the TTC, My Week and My First Year cards no longer call `useAISearch`, hold no
+transcript and render no answer. Direct `useAISearch` callers in those three
+cards: 0. Inline answer renderers in those three cards: 0.
+
+`CompanionProvider.openWithEntry({ entry, suggestions? })` is transient:
+
+- `entry` is AIC-2 entry provenance (content, never identity) built by the
+  single `buildEntryContext` helper. `JourneyContextV1` is unchanged;
+- `suggestions` are presentation-only chips shown while the thread is empty and
+  the entry is unconsumed. Content prompts stored in `JourneyContextV1`: 0;
+- opening an entry point performs 0 model calls and sends no hidden user
+  message. Nothing is asked until the person writes or chooses a question;
+- the entry is consumed inside `resolveJourneyContext`, which the shared
+  runtime calls only after it has accepted and committed the first user turn
+  and before any assistant reply. An assistant failure or a retry afterwards
+  does not revive it;
+- a route change clears an unconsumed entry, and closing the panel abandons it,
+  so an ordinary launcher reopen is not a contextual hand-off. Turns already in
+  the conversation are untouched;
+- a new contextual hand-off may activate a new entry at any time.
+
+`/ask` follows the same rule for its URL-derived entry: consumed by the first
+accepted turn, revived only when the stage, journey, topic or label changes.
+
+Routing rule: contextual hand-off opens the panel so the person keeps their
+place; broad or free-text search opens `/ask`. Answer surfaces remain exactly
+two, with one runtime, one endpoint and one renderer per surface.

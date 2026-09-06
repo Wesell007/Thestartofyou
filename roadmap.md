@@ -318,7 +318,7 @@ remain content families, not personal journeys.
 - no prompt, AIC-5, grounding, memory, history, voice or `ai-search` change;
   no deployment.
 
-## AIC-J4 — contextual journey AI entry points (IN PROGRESS / CLOSURE REMAINDER)
+## AIC-J4 — contextual journey AI entry points (CLOSED PASS)
 
 Delivered: shared `AskAboutThis` hand-off, transient `openWithEntry` on the one
 panel, single-use entry consumption at the first accepted turn, and the three

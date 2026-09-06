@@ -1,20 +1,23 @@
-import { useState } from "react";
-import { Loader2, Sparkles } from "lucide-react";
-import { useAISearch } from "@/hooks/useAISearch";
-import { sanitiseAnswerForDisplay } from "@/lib/aiAnswerSafety";
+/**
+ * AIC-J4 (closure) — the day recap is now an entry point, not an answer surface.
+ *
+ * Tapping "Look back over today" hands off to the one shared companion panel
+ * with entry provenance for the Today page. This file calls no model, holds no
+ * conversation state, renders no assistant answer and sends no hidden user
+ * message. Logged care events never leave the page from here.
+ */
+
+import { MessageCircle } from "lucide-react";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
 import { companionSentenceSubject } from "@/lib/companion/companionName";
+import { useCompanionEntryHandoff } from "@/components/companion/useCompanionEntryHandoff";
+import { useNavigate } from "react-router-dom";
 import {
   FY_CARD_RADIUS,
   FY_FOCUS_RING,
   FY_KICKER,
   FY_SHADOW_SOFT,
 } from "@/components/firstyear/journey/firstYearStyles";
-import {
-  buildDayRhythmDigest,
-  buildDaySummaryQuery,
-} from "@/lib/firstYearDaySummaryPrompt";
-import { buildFirstYearCompanionContext } from "@/lib/firstYearCompanionContext";
 import type { CareEvent } from "@/lib/firstYearCareEventsSchema";
 
 type Props = {
@@ -29,73 +32,34 @@ type Props = {
   babyCount: number;
 };
 
+/** Presentation-only starters. Never auto-sent, never persisted. */
+const SUGGESTIONS = [
+  "Help me look back over today",
+  "Is this rhythm normal at this age?",
+  "What might tonight look like?",
+];
 
-/**
- * The shared companion endpoint appends who to contact wording to every answer.
- * A day recap is a look back, so that wording is removed here and the fixed page
- * footer carries it instead.
- */
-const CONTACT_WORDING = /\b(nhs 111|999|a&e|emergency services|call your (midwife|gp)|speak to your (midwife|gp|health visitor)|contact your (midwife|gp|health visitor|maternity))/i;
-
-const HEADINGS = /^(#+\s*)?(\*\*)?(today at a glance|what was logged|little things to remember)(\*\*)?:?$/i;
-
-const stripContactWording = (body: string) => {
-  const lines = body
-    .split("\n")
-    .filter((line) => !CONTACT_WORDING.test(line))
-    .map((line) => line.trimEnd());
-  // A heading left with nothing beneath it reads as a gap, so drop it.
-  const kept = lines.filter((line, i) => {
-    if (!HEADINGS.test(line.trim())) return true;
-    return lines.slice(i + 1).some((next) => next.trim() && !HEADINGS.test(next.trim()));
-  });
-  return kept.join("\n").trim();
-};
-
-const renderLines = (body: string) =>
-  body
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line, i) => (
-      <p key={i}>
-        {line.replace(/^#+\s*/, "").replace(/^[*-]\s+/, "• ").replace(/\*\*/g, "")}
-      </p>
-    ));
-
-/**
- * The consent-based day recap. Nothing is built or sent until the parent taps
- * "Summarise today": there is no effect, no timer and no background call. The
- * payload carries only today's logged care events with neutral baby labels.
- */
-const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Props) => {
-  const { name, tone } = useCompanionIdentity();
-  const { answer, isLoading, error, ask } = useAISearch();
-  const [generatedAt, setGeneratedAt] = useState<string | null>(null);
+const DaySummaryCard = ({ events }: Props) => {
+  const { name } = useCompanionIdentity();
+  const handoff = useCompanionEntryHandoff();
+  const navigate = useNavigate();
 
   const companion = companionSentenceSubject(name);
   const hasEvents = events.length > 0;
 
-  const summarise = () => {
-    if (!hasEvents || isLoading) return;
-    const digest = buildDayRhythmDigest(events, day, { babyLabels });
-    const query = buildDaySummaryQuery(digest);
-    const context = buildFirstYearCompanionContext({
-      dateOfBirth,
-      babyCount,
-      tone,
-      pageHint: "The person is looking back over one logged day on their Today page.",
-      includeGuidanceHint: false,
-    });
-    setGeneratedAt("Generated just now");
-    ask(query, context, { mode: "first_year_day_recap" });
+  const open = () => {
+    const entry = {
+      stage: "first-year",
+      journey: "first_year",
+      topic: "today",
+      title: "Today",
+    };
+    if (handoff) {
+      handoff({ entry, suggestions: SUGGESTIONS });
+      return;
+    }
+    navigate("/ask?stage=first-year&topic=today");
   };
-
-  // Recap-only: the shared fallback line carries professional-help wording, so
-  // it is never allowed to appear here.
-  const body = stripContactWording(
-    sanitiseAnswerForDisplay(answer, { isStreaming: isLoading, allowFallback: false }),
-  );
 
   return (
     <section className="pb-8" aria-labelledby="fy-day-summary-heading">
@@ -123,8 +87,7 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
           Look back with {companion}
         </h2>
         <p className="font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))] mb-4 max-w-[54ch]">
-          {companion} can use today's logged feeds, sleep, nappies and moments to write a short
-          recap.
+          Open {companion} here on the page when you want to talk through how today went.
         </p>
 
         {!hasEvents ? (
@@ -138,56 +101,15 @@ const DaySummaryCard = ({ events, day, babyLabels, dateOfBirth, babyCount }: Pro
             </p>
             <button
               type="button"
-              onClick={summarise}
-              disabled={isLoading}
-              className={`inline-flex min-h-11 items-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-semibold transition-opacity hover:opacity-90 disabled:opacity-60 ${FY_FOCUS_RING}`}
+              onClick={open}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-pill px-6 py-2.5 font-sans text-[14px] font-semibold transition-opacity hover:opacity-90 ${FY_FOCUS_RING}`}
               style={{ backgroundColor: "hsl(var(--sage))", color: "hsl(var(--parchment))" }}
             >
-              {isLoading ? (
-                <Loader2 size={15} strokeWidth={1.8} className="animate-spin" aria-hidden="true" />
-              ) : (
-                <Sparkles size={15} strokeWidth={1.8} aria-hidden="true" />
-              )}
-              {answer || error ? "Try again" : "Summarise today"}
+              <MessageCircle size={15} strokeWidth={1.8} aria-hidden="true" />
+              Look back over today
             </button>
           </>
         )}
-
-        <div aria-live="polite">
-          {isLoading && !answer && (
-            <p className="mt-4 font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))]">
-              {companion} is looking over today's rhythm…
-            </p>
-          )}
-
-          {body && (
-            <div
-              className="mt-5 rounded-[18px] border px-4 py-4 sm:px-5"
-              style={{
-                borderColor: "hsl(var(--sage) / 0.28)",
-                backgroundColor: "hsl(var(--stage-firstyear-cream))",
-              }}
-            >
-              <p className="font-sans text-[11px] font-semibold tracking-[0.2em] uppercase text-[hsl(var(--stage-firstyear-text-soft))] mb-2">
-                {companion}
-              </p>
-              <div className="space-y-2.5 font-sans text-[14px] leading-[1.7] text-[hsl(var(--stage-firstyear-text))]">
-                {renderLines(body)}
-              </div>
-              {generatedAt && !isLoading && (
-                <p className="mt-3 font-sans text-[12px] text-[hsl(var(--stage-firstyear-text-soft))]">
-                  {generatedAt}
-                </p>
-              )}
-            </div>
-          )}
-
-          {error && !isLoading && (
-            <p className="mt-4 font-sans text-[13.5px] leading-[1.65] text-[hsl(var(--stage-firstyear-text))]">
-              {companion} could not summarise today just now. Try again in a moment.
-            </p>
-          )}
-        </div>
       </div>
     </section>
   );

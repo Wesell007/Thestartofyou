@@ -161,7 +161,13 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       isLoading: conversation.isLoading,
       error: conversation.error,
       isRateLimited: conversation.isRateLimited,
-      starters: companionStarters(mode),
+      // AIC-J3 — personal journey starters when saved journey state exists,
+      // otherwise the existing CONTENT/MODE chips for this area of the site.
+      // A mode never becomes a personal journey.
+      starters: personalJourney
+        ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
+        : companionStarters(mode),
+
       companionName: identity.name,
       context,
       send: conversation.send,

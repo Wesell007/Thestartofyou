@@ -92,7 +92,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const identity = useCompanionIdentity();
   // AIC-2 — one shared personal resolver, awaited at submit and never blocking
   // the send indefinitely.
-  const { ensurePersonalJourney } = useCompanionPersonalJourney();
+  const { ensurePersonalJourney, personalJourney } = useCompanionPersonalJourney();
 
   const [open, setOpen] = useState(false);
   // Pages that render a 404 suppress the companion for as long as they are

@@ -27,6 +27,8 @@ import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
+import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
+
 import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
@@ -90,7 +92,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const identity = useCompanionIdentity();
   // AIC-2 — one shared personal resolver, awaited at submit and never blocking
   // the send indefinitely.
-  const { ensurePersonalJourney } = useCompanionPersonalJourney();
+  const { ensurePersonalJourney, personalJourney } = useCompanionPersonalJourney();
 
   const [open, setOpen] = useState(false);
   // Pages that render a 404 suppress the companion for as long as they are
@@ -159,7 +161,13 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       isLoading: conversation.isLoading,
       error: conversation.error,
       isRateLimited: conversation.isRateLimited,
-      starters: companionStarters(mode),
+      // AIC-J3 — personal journey starters when saved journey state exists,
+      // otherwise the existing CONTENT/MODE chips for this area of the site.
+      // A mode never becomes a personal journey.
+      starters: personalJourney
+        ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
+        : companionStarters(mode),
+
       companionName: identity.name,
       context,
       send: conversation.send,
@@ -174,7 +182,18 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       memory: conversation.memory,
       suppress,
     }),
-    [suppress, open, mode, visible, turns, conversation, identity.name, context],
+    [
+      suppress,
+      open,
+      mode,
+      visible,
+      turns,
+      conversation,
+      identity.name,
+      context,
+      personalJourney,
+    ],
+
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;

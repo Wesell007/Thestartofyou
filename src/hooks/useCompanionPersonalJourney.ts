@@ -19,7 +19,7 @@
  * a failed refresh resolves to `null` rather than resurrecting the old journey.
  */
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { resolvePersonalJourneyContext } from "@/lib/companion/journeyPersonalSource";
 import { subscribeJourneyStateChanged } from "@/lib/journeyStateSignal";
@@ -32,6 +32,22 @@ let inflight: Promise<PersonalJourneyContextV1 | null> | null = null;
 let resolved: { value: PersonalJourneyContextV1 | null } | null = null;
 /** Incremented by every invalidation; guards both write-back and return value. */
 let epoch = 0;
+
+/**
+ * AIC-J3 — subscribers to the *published* value, so surfaces that render
+ * personal starters re-read the same module cache. No second cache, no second
+ * resolver: this only mirrors what `load()` has already resolved.
+ */
+const valueListeners = new Set<() => void>();
+const publish = () => {
+  for (const listener of [...valueListeners]) {
+    try {
+      listener();
+    } catch (err) {
+      console.warn("[personalJourney] listener failed (non-fatal):", err);
+    }
+  }
+};
 
 const load = (): Promise<PersonalJourneyContextV1 | null> => {
   if (resolved) return Promise.resolve(resolved.value);
@@ -49,6 +65,7 @@ const load = (): Promise<PersonalJourneyContextV1 | null> => {
             return load();
           }
           resolved = { value };
+          publish();
           return value;
         });
     inflight = pending;
@@ -66,6 +83,9 @@ export const resetPersonalJourneyCache = () => {
   epoch += 1;
   inflight = null;
   resolved = null;
+  // Published value becomes unknown synchronously, so no surface can keep
+  // showing personal starters for a journey that no longer applies.
+  publish();
 };
 
 // One module-level listener, however many companion surfaces are mounted, so
@@ -76,6 +96,7 @@ subscribeJourneyStateChanged(() => {
   resetPersonalJourneyCache();
   void load();
 });
+
 
 const withTimeout = async (
   promise: Promise<PersonalJourneyContextV1 | null>,
@@ -91,6 +112,17 @@ const withTimeout = async (
     if (timer) clearTimeout(timer);
   }
 };
+
+const subscribeToValue = (listener: () => void): (() => void) => {
+  valueListeners.add(listener);
+  return () => {
+    valueListeners.delete(listener);
+  };
+};
+
+/** Currently published value: `null` whenever it is unknown or invalidated. */
+const personalSnapshot = (): PersonalJourneyContextV1 | null =>
+  resolved ? resolved.value : null;
 
 export function useCompanionPersonalJourney() {
   const mounted = useRef(true);
@@ -109,6 +141,18 @@ export function useCompanionPersonalJourney() {
   }, []);
 
   /**
+   * AIC-J3 — the resolved personal journey for rendering (starter chips).
+   * It mirrors the single module cache: unknown until resolution completes,
+   * and unknown again the instant an invalidation happens, so a stale journey
+   * is never displayed.
+   */
+  const personalJourney = useSyncExternalStore(
+    subscribeToValue,
+    personalSnapshot,
+    personalSnapshot,
+  );
+
+  /**
    * Personal context for the request about to be sent. Never throws, never
    * blocks indefinitely, and returns `null` rather than a guess or a stale
    * journey.
@@ -125,5 +169,6 @@ export function useCompanionPersonalJourney() {
     [],
   );
 
-  return { ensurePersonalJourney };
+  return { ensurePersonalJourney, personalJourney };
 }
+

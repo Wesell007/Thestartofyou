@@ -182,7 +182,18 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       memory: conversation.memory,
       suppress,
     }),
-    [suppress, open, mode, visible, turns, conversation, identity.name, context],
+    [
+      suppress,
+      open,
+      mode,
+      visible,
+      turns,
+      conversation,
+      identity.name,
+      context,
+      personalJourney,
+    ],
+
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;

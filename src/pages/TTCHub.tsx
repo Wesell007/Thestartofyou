@@ -513,6 +513,7 @@ const AISupport = () => {
                 suggestions={[]}
                 context="Trying to conceive"
                 stage="ttc"
+                inputLabel="Ask about trying to conceive"
               />
             </div>
 

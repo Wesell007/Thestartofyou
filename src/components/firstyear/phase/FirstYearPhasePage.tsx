@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowLeft, BookOpen, Sparkles, ExternalLink } from "lucide-react";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SeoHead from "@/components/seo/SeoHead";
@@ -297,17 +298,22 @@ const CommonQuestions = ({
                       <ArrowUpRight size={11} />
                     </Link>
                   )}
-                  <Link
-                    to={`/ask?stage=first-year&phase=${phaseSlug}&topic=${topic}`}
-                    className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
-                    style={{
+                  <AskAboutThis
+                    label="Ask about this stage"
+                    entry={{
+                      stage: "first-year",
+                      journey: "first_year",
+                      topic,
+                      title: phaseSlug,
+                    }}
+                    suggestions={[qa.question]}
+                    buttonClassName="inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
+                    buttonStyle={{
                       borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",
                       color: "hsl(var(--stage-firstyear-deep))",
                     }}
-                  >
-                    <Sparkles size={12} strokeWidth={1.9} />
-                    Ask about this
-                  </Link>
+                    iconSize={12}
+                  />
                 </div>
               </div>
             </li>

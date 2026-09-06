@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import type { MonthGuide, EditorialSection, FocusSection } from "@/data/firstYearMonthData";
 import { getAdjacentMonths, getMonthImagery } from "@/data/firstYearMonthData";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
@@ -477,17 +478,23 @@ const CommonQuestions = ({ guide }: Props) => (
                   <BookOpen size={12} /> {q.readMore.label}
                 </Link>
               ) : null}
-              <Link
-                to={askHref(guide, q.askTopic)}
-                className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 font-sans text-[12px] font-light border transition-all hover:-translate-y-[1px]"
-                style={{
+              <AskAboutThis
+                label="Ask about this month"
+                entry={{
+                  stage: "first-year",
+                  journey: "first_year",
+                  topic: q.askTopic,
+                  title: guide.label,
+                }}
+                suggestions={[q.question]}
+                buttonClassName="inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3.5 py-2 font-sans text-[12px] font-light border transition-all hover:-translate-y-[1px]"
+                buttonStyle={{
                   backgroundColor: "hsl(var(--stage-recovery-soft) / 0.4)",
                   borderColor: "hsl(var(--stage-recovery-accent) / 0.3)",
                   color: "hsl(var(--stage-recovery-deep))",
                 }}
-              >
-                <Sparkles size={12} /> Ask about this
-              </Link>
+                iconSize={12}
+              />
             </div>
           </li>
         ))}

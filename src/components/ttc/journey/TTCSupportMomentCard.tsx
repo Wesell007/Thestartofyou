@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import { ArrowRight } from "lucide-react";
 import type { TTCLogType } from "@/lib/ttcLogs";
 import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
@@ -75,10 +76,25 @@ const TTCSupportMomentCard = ({ moment, onAddNote }: Props) => {
                 </button>
               );
             }
-            const href =
-              action.kind === "ask"
-                ? `/ask?stage=ttc&topic=${action.topic}`
-                : action.href;
+            if (action.kind === "ask") {
+              // AIC-J4 — contextual hand-off into the one shared panel. No
+              // model call, no hidden user message, no second answer surface.
+              return (
+                <AskAboutThis
+                  key={key}
+                  label={label}
+                  entry={{
+                    stage: "ttc",
+                    journey: "ttc",
+                    topic: action.topic,
+                    title: moment.heading,
+                  }}
+                  suggestions={action.prompts}
+                  buttonClassName={className}
+                />
+              );
+            }
+            const href = action.href;
             return (
               <Link key={key} to={href} className={className}>
                 {label}

@@ -1,68 +1,51 @@
-# AIC-7B BUILD — Streaming STT (transcript-only slice)
+# AIC-J1 — Journey-aware companion: audit and architecture gate
 
-Build the first working voice-input path: explicit tap → microphone permission → PCM16 capture → AssemblyAI streaming WebSocket (EU) → visible partial and final transcript. It stops there. A final transcript never becomes a companion message in this slice.
+Voice stays paused exactly where it is: AIC-6, AIC-7A and the AIC-7B provider gate are untouched, AssemblyAI remains the selected provider, no bootstrap endpoint, no microphone, no TTS, both voice flags OFF. Nothing below changes AIC-5, grounding (`30B-source-routing-v1` / 0 / 0 / []), memory or persistent history.
 
-## Scope boundary
+## Audit findings
 
-- No `send()`, no `useAISearch`, no `ai-search` call, no assistant response, no TTS, no persistence, no analytics, no prompt or AIC-5 change.
-- Voice stays a mode of the existing companion composer. No `/voice` route, no third surface.
-- Both production flags stay OFF. With `VITE_COMPANION_VOICE_ENABLED` off, the companion is byte-for-byte unchanged: no mic control, no bootstrap request, no permission prompt.
+**1. Journey inventory (what actually exists).** Saved, authenticated journeys: pregnancy (`pregnancy_journeys`, plus legacy `saved_journeys`), trying to conceive (`ttc_journeys`), first year (`babies`, `first_year_journeys`, `archived_journeys`). Content-only families with no personal state: IVF, toddler, family, postpartum (now redirected into First Year, legacy route kept), preparing for baby, support.
 
-## Server bootstrap
+**2. Architecture.** One pointer, `journeys.lifecycle` (`pregnancy | ttc | first_year`), written atomically with the payload by SECURITY DEFINER RPCs. One resolver, one prompt renderer, one endpoint. Both surfaces (panel, `/ask`) share `useCompanionConversation` → `useAISearch` → `ai-search`.
 
-New edge function `supabase/functions/voice-bootstrap/index.ts`:
+**3. JourneyContextV1.** Version 1 envelope with three separate layers. `personal` is a discriminated union limited to the three saved journeys (pregnancy week 1–42 and trimester; TTC stage plus `ivfInTreatment`; first-year month 0–11). `page` and `entry` use the broader content taxonomy with bounded page types, topics and titles. Every string is capped at 80 characters and stripped of control characters and angle brackets, so a title cannot forge the prompt block. The server re-validates and rejects unknown keys, wrong versions, bad enums and out-of-range numbers; an empty envelope is dropped entirely.
 
-- Repository CORS conventions, `POST` + `OPTIONS` only, empty/minimal JSON body; malformed bodies rejected 400.
-- `AI_COMPANION_VOICE_ENABLED` is the security authority: when not enabled, refuse before any provider call (403), and never touch the AssemblyAI endpoint.
-- `ASSEMBLYAI_API_KEY` stored as an edge secret only, never returned, never logged, never in any `VITE_*`.
-- Separate voice-bootstrap rate-limit bucket reusing the existing `consume_ai_rate_limit` primitive with a distinct key so STT bootstrap never spends the answer quota. Existing anonymous/authenticated posture preserved.
-- Mints a short-lived AssemblyAI temporary streaming token (shortest practical lifetime, value + rationale documented). Response carries only the token, its expiry, and the EU WebSocket host. No audio, no transcript, no journey/memory/history data in either direction.
-- No audio relay of any kind.
+**4. Resolver and provenance.** Session → lifecycle pointer → one column-scoped read of the relevant table. Non-active pregnancy statuses (given birth, loss, no longer pregnant, paused) never produce a stage. Multiple babies with no unique primary produce no age rather than a guess. Every failure path fails open to null. Page and entry are built from the route and from the authoritative `stage`/`journey`/`topic` query parameters only, and structurally cannot write into `personal`.
 
-## Client provider adapter
+**5–6. Unknown handling.** Unknown is already a first-class state everywhere: no stage is fabricated, and the prompt block simply omits absent lines.
 
-`src/lib/companion/voice/providers/assemblyai/` — a `VoiceInputAdapter` implementation plus a thin socket/frame module:
+**7. Page coverage.** Mapped: TTC and its tools, IVF, pregnancy and its tools/weeks, preparing for baby, first year, postpartum, toddler, family, support. Unmapped (no page context at all): the homepage, about, product, account settings, privacy, terms, journal start, and any article not under a mapped prefix.
 
-- `getUserMedia` only after explicit user action; Web Audio/AudioWorklet path producing PCM16 mono 16 kHz binary frames. No MediaRecorder, no journal audio coupling, no DSP beyond resampling.
-- Provider `Turn` events mapped at the adapter boundary: `end_of_turn:false` → `PartialTranscript`, `end_of_turn:true` → `FinalTranscript`, provider errors → neutral adapter errors, session events → neutral status. No provider payload escapes the adapter.
-- Manual **Done** uses the provider's endpoint-finalisation message and waits for the authoritative final turn; it never fabricates final text from a partial.
-- Automatic endpointing left at documented defaults (AIC-7E owns calibration).
-- Development/benchmark default model, clearly named as such; EU host pinned with no silent region fallback.
-- At most one reconnect; never replays audio; a lost turn asks the person to repeat.
+**8–9. Entry points and suggestions.** Entry points: global launcher/panel, `/ask`, and `HubAISupport`/`AskLink` affordances on hubs, topic pages, article pages and week pages. Suggested questions come from at least four parallel systems: mode-based starters (four modes only), per-topic `config.aiPrompts`, content-driven `data.aiPrompts` for articles and weeks, and two large suggestion maps written inline inside `/ask`. Several hubs pass an empty array and show no chips.
 
-## Session lifecycle and UI
+**10–11. Page versus journey precedence.** Already correct in principle: saved details, page content and entry are rendered as three labelled sections, and the trusted system-prompt rules state that the current message outranks saved details and that page/entry are content, never identity. Recommended explicit order, matching what the code already does: current message > `personal` > `entry` > `page` > unknown. Reassurance and safety rules are appended last so they outrank all of it.
 
-- Reuse the AIC-7A `VoiceSessionController` as the only lifecycle authority; extend minimally (permission, capture start, finalising) without a second state machine. `speaking` is never entered.
-- Capture stops and resources release on explicit end, cancel, panel close, unmount, visibility hidden and provider fatal failure — idempotently.
-- Composer gains a mic entry control behind the client flag: listening state, live partial, final transcript, Done, cancel, retry, back to text, concise permission/error copy. No waveform polish.
-- Zero raw-audio persistence anywhere (no storage, DB, localStorage, sessionStorage, IndexedDB).
+**12–13. Transitions and refresh.** The pointer is single-valued, so a transition flips context wholesale with no lingering old-journey state and no inferred lifecycle memory. Journey context is re-resolved at send time from a live route ref, so a new question after navigation carries current context while past turns stay untouched. Personal resolution is cached per session and invalidated on auth change; it is not invalidated when someone changes their journey in-app.
 
-## Benchmark harness (development only)
+**14–15. Gaps and duplication.** IVF has rich content and a timeline but only a single boolean of personal state. Toddler and family have no personal state at all, which is correct today because the product stores none. Unmapped routes give the companion nothing. Four suggestion systems can drift between a hub page and `/ask`. Starters exist for only four modes.
 
-- Dev-only harness plus ground-truth corpus manifest and fixture contract covering UK conversational English, pregnancy/TTC/postpartum/first-year terms, medications, dosages, gestational weeks, dates, temperature, blood pressure, 999/NHS 111/A&E, negation, severity, pauses, self-corrections, noise.
-- Compares base vs Medical Mode vs bounded static keyterms; no memory/history/journey/personal data ever feeds keyterms.
-- Synthetic/developer audio only. If fixtures are unavailable, the harness ships with the manifest and the report says BENCHMARK EXECUTION BLOCKED ON AUDIO FIXTURES. Results are never faked; the exact model stays benchmark-gated unless evidence closes it.
+**16–18. Privacy, safety, inference risks.** No leak found: no names, dates, notes, identifiers or free user text enter the context; only derived enums and numbers. Residual risks are (a) content titles from sensitive support articles echoing into the prompt as page context, mitigated only by prompt instruction, (b) a stale primary-baby flag misattributing age, (c) the temptation to let journey data imply urgency. Journey data must never influence GREEN/AMBER/RED/CRISIS; today it only passes the journey family label to the gated AMBER classifier.
 
-## Tests
+**19–21. Frozen systems interaction.** Journey awareness needs no grounding, memory or persistent history change. Session continuity under existing semantics is sufficient.
 
-Focused suites, no skips, no timeout or worker changes:
+**30–32. Verdict.** The hypothesis holds: the companion is already mature enough to become journey-aware before voice, and voice will inherit it unchanged because transcripts will enter the same `send()` path. No blocker requires voice first. **AIC-J1 — SAFE TO BUILD.**
 
-- Bootstrap: flag OFF denies and never calls the provider; flag ON returns the credential path; master secret absent from every payload; malformed request rejected; rate-limit contract; token not persisted or logged.
-- Adapter: mocked provider events for partial/final/error mapping, no `Turn` leakage.
-- Capture: mocked `getUserMedia`/tracks/socket — permission only after user action, tracks stop once on cleanup, no permission request with the flag OFF.
-- Boundary: partial and final transcripts cause zero `send()`, zero `ai-search` calls, zero DB writes; visibility hidden and provider failure stop capture; no replay.
-- Client flag OFF renders no voice UI.
+## Recommended architecture (for approval, not yet built)
 
-## Validation and reporting
+- **Contract:** keep JourneyContextV1 as-is for personal. Extend only `page` coverage and, if approved later, add an IVF personal shape once the product actually stores IVF stage. No new hidden fields, no inference.
+- **Prompt strategy:** no prompt rewrite. Optionally strengthen the fixed rules so the model names the current stage only when it is known, and offers navigation rather than open-ended conversation.
+- **Suggested prompts:** one registry keyed by journey family plus optional stage, consumed by hubs, topic pages and `/ask` alike, replacing the inline maps in `/ask`. Journey-aware, never medical assertions, never prescriptive.
+- **Next actions:** only real destinations — journey section, calculators, toolkit checklists, journal, week/month pages, guidance pages, ask the companion. No booking, messaging, records or clinician contact; AIC-5C boundaries untouched.
+- **Entry points:** contextual affordances only, all opening the existing companion runtime. No third chat, no journey chat route, no new endpoint or store.
+- **Evaluation matrix:** no context, broad context, precise context, conflicting page versus journey, unknown stage, recent transition — scored for relevance, stage appropriateness, safety, unsupported assumptions, repetition, clarification behaviour, across pregnancy, TTC and first year.
 
-`npm test` (default config, arithmetic reconciled from 90 files / 1062 tests), `npm run typecheck` twice with a cleared incremental cache, `deno check` on both `ai-search` and the new bootstrap function, `npm run lint` (known baseline only), `npm run build`.
+## Proposed slices (each separately approved)
 
-Before coding, re-verify the current AssemblyAI streaming docs (token endpoint and lifetime, WebSocket URL and query params, EU host, model ids, Turn/ForceEndpoint schema, PCM requirements, Medical Mode and keyterm params). Minor syntax updates are applied and documented; a material contract change stops the build with a report.
+1. **J2 — page-context coverage:** map the unmapped routes, add tests. No prompt change.
+2. **J3 — suggestion registry:** single journey-aware source, remove the `/ask` inline duplicates.
+3. **J4 — contextual entry points:** consistent "ask about this stage" affordances that hand off into the existing companion.
+4. **J5 — next-action layer:** stage-appropriate real destinations surfaced alongside answers.
+5. **J6 — journey evaluation pass:** run the matrix and report before any prompt tuning.
+6. **J7 — resolver freshness:** invalidate cached personal context when journey state changes in-app.
 
-Docs updated: `docs/ai/companion-voice-architecture.md` (actual implementation), `docs/ai/companion-voice-provider-review.md` (re-verification findings only), `roadmap.md`. ADR statuses: AIC6-04 and AIC6-06 may gain implementation evidence but stay PROPOSED unless clearly earned; AIC6-01/02/03/05 remain PROPOSED. AMBER OFF, grounding `30B-source-routing-v1` / 0 / 0 / [], memory and persistent history OFF, production voice unavailable.
-
-Closes with the 95-point completion report. AIC-7C is not started.
-
-## Needed from you
-
-An AssemblyAI API key to store as a server-side secret. Without it the code and tests land, but the live EU socket, device matrix and any benchmark execution stay blocked and will be reported as such.
+Files likely to change: journey context builders, the shared suggestion source and its consumers, hub/topic Ask components, `/ask`, focused tests, docs, roadmap. Files that must remain untouched: everything under AIC-5 (safety router, urgent patterns, AMBER, clarification, boundaries, emotional guidance), grounding and source routing, memory and history gating, all voice modules, ADRs and provider docs, and `ai-search` prompt assembly beyond what a slice explicitly approves.

@@ -37,6 +37,10 @@ export interface AskAboutThisProps {
   /** `panel` keeps the person on the page; `ask` opens the full page. */
   destination?: "panel" | "ask";
   className?: string;
+  /** Replaces the default button styling for inline/chip placements. */
+  buttonClassName?: string;
+  buttonStyle?: React.CSSProperties;
+  iconSize?: number;
 }
 
 const BASE_CLASS =
@@ -49,6 +53,9 @@ const AskAboutThis = ({
   description,
   destination = "panel",
   className,
+  buttonClassName,
+  buttonStyle,
+  iconSize = 15,
 }: AskAboutThisProps) => {
   const navigate = useNavigate();
   const handoff = useCompanionEntryHandoff();
@@ -72,9 +79,13 @@ const AskAboutThis = ({
       <button
         type="button"
         onClick={open}
-        className={`${BASE_CLASS} border border-border/60 text-foreground hover:bg-parchment/60`}
+        className={
+          buttonClassName ??
+          `${BASE_CLASS} border border-border/60 text-foreground hover:bg-parchment/60`
+        }
+        style={buttonStyle}
       >
-        <MessageCircle size={15} aria-hidden="true" />
+        <MessageCircle size={iconSize} aria-hidden="true" />
         {label}
       </button>
       {description && (

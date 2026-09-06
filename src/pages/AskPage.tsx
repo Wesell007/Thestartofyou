@@ -10,6 +10,8 @@ import { useCompanionConversation } from "@/lib/companion/conversation/useCompan
 import CompanionMemoryPrompt from "@/components/companion/CompanionMemoryPrompt";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
+import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
+
 import { buildCompanionRequest, resolveAskMode } from "@/lib/companion/companionRequest";
 import { BotanicalAccent, StageGlow, Sprig } from "@/components/shared/StageBotanical";
 import { getAiStageStyle, stageColors } from "@/lib/aiStageStyles";
@@ -263,7 +265,7 @@ const AskPage = () => {
   const stage = getAiStageStyle(stageKey);
   const sc = stageColors(stage);
   // AIC-2 — the same shared personal resolver the panel uses.
-  const { ensurePersonalJourney } = useCompanionPersonalJourney();
+  const { ensurePersonalJourney, personalJourney } = useCompanionPersonalJourney();
   const lastQueryRef = useRef("");
   const navigate = useNavigate();
   const isIVF = searchParams.get("journey") === "ivf";

@@ -36,7 +36,7 @@ type Props = {
 const TTCSupportMomentCard = ({ moment, onAddNote }: Props) => {
   const { name } = useCompanionIdentity();
   // Existing moment prompts, presentation-only. Never auto-sent.
-  const momentChips = ttcAskChipsFor(null, moment.id, 3).map((chip) => chip.label);
+  const momentChips = ttcAskChipsFor(null, moment.id, 3).map((chip) => chip.question);
 
   return (
     <section

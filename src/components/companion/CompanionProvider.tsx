@@ -213,6 +213,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     () => ({
       open: visible ? open : false,
       setOpen: (next: boolean) => setOpen(next && visible),
+      openWithEntry,
       mode,
       visible,
       turns,
@@ -220,12 +221,19 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       isLoading: conversation.isLoading,
       error: conversation.error,
       isRateLimited: conversation.isRateLimited,
+      // AIC-J4 — presentation-only suggestions handed over with a contextual
+      // entry, while that entry is still unconsumed. They never displace the
+      // personal starter authority once the conversation is under way.
       // AIC-J3 — personal journey starters when saved journey state exists,
       // otherwise the existing CONTENT/MODE chips for this area of the site.
       // A mode never becomes a personal journey.
-      starters: personalJourney
-        ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
-        : companionStarters(mode),
+      starters:
+        entryIntent?.suggestions?.length && turns.length === 0
+          ? entryIntent.suggestions.slice(0, MAX_SUGGESTIONS)
+          : personalJourney
+            ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
+            : companionStarters(mode),
+
 
       companionName: identity.name,
       context,

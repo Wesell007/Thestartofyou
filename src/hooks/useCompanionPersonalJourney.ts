@@ -113,6 +113,17 @@ const withTimeout = async (
   }
 };
 
+const subscribeToValue = (listener: () => void): (() => void) => {
+  valueListeners.add(listener);
+  return () => {
+    valueListeners.delete(listener);
+  };
+};
+
+/** Currently published value: `null` whenever it is unknown or invalidated. */
+const personalSnapshot = (): PersonalJourneyContextV1 | null =>
+  resolved ? resolved.value : null;
+
 export function useCompanionPersonalJourney() {
   const mounted = useRef(true);
 
@@ -128,6 +139,18 @@ export function useCompanionPersonalJourney() {
       sub.subscription.unsubscribe();
     };
   }, []);
+
+  /**
+   * AIC-J3 — the resolved personal journey for rendering (starter chips).
+   * It mirrors the single module cache: unknown until resolution completes,
+   * and unknown again the instant an invalidation happens, so a stale journey
+   * is never displayed.
+   */
+  const personalJourney = useSyncExternalStore(
+    subscribeToValue,
+    personalSnapshot,
+    personalSnapshot,
+  );
 
   /**
    * Personal context for the request about to be sent. Never throws, never
@@ -146,5 +169,6 @@ export function useCompanionPersonalJourney() {
     [],
   );
 
-  return { ensurePersonalJourney };
+  return { ensurePersonalJourney, personalJourney };
 }
+

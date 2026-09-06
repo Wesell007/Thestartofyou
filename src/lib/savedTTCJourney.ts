@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { deriveTTCDates, computeTTCStage } from "@/lib/ttcDerived";
+import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
 
 /**
  * Local-first TTC journey save.
@@ -130,6 +131,7 @@ export const commitPendingTTCJourneyToDB = async (
   if ((data as unknown) === "pregnancy_active") return { ok: false, reason: "pregnancy_active" };
 
   clearPendingTTCJourney();
+  notifyJourneyStateChanged();
   return { ok: true };
 };
 
@@ -163,4 +165,5 @@ export const deleteTTCJourney = async (userId: string): Promise<void> => {
   if (sessionData.session?.user.id !== userId) throw new Error("Your session no longer matches this journey.");
   const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "ttc" });
   if (error) throw error;
+  notifyJourneyStateChanged();
 };

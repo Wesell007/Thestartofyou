@@ -17,9 +17,11 @@ Scope: TTC, Pregnancy, First Year. Baseline 95 test files / 1119 tests. No backe
 - State lives in provider memory only: no localStorage, sessionStorage, database or analytics.
 
 Lifetime:
-- Activated on click; may lead the panel's starters and the first request.
-- Consumed after the first successful submission; later requests use live page context + personal context + conversation history only.
-- Cleared on route change while unconsumed, and on closing/abandoning the hand-off.
+- Activated on click; may lead the panel's starters and the first request. Opening never sends a message and never calls the model.
+- Consumed the moment the shared conversation runtime accepts and commits the first user turn — not when the assistant replies. A later assistant failure, abort or timeout does not reactivate it. If submission is rejected before the runtime accepts the turn, the entry stays active.
+- After consumption, later requests use the current message, live page context, J2 personal context and conversation history only.
+- Cleared on route change while unconsumed, and on closing/abandoning the hand-off; reopening via the normal launcher does not resurrect it. A materially new contextual hand-off may activate a new entry.
+- On `/ask`, unchanged URL parameters never reactivate a consumed entry on rerender or later requests; only a fresh page load or a new hand-off initialises one. No history rewriting.
 - Historical turns are never rewritten.
 
 `/ask` keeps its current URL/state compatibility (including the legacy `q`/`ctx` redirect) and gains the same runtime consumption rule: entry applies to the first successful submission, then stops dominating. A fresh page load reinitialises it.

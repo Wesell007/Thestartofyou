@@ -190,13 +190,13 @@ describe("navigation freshness on both surfaces", () => {
     // /ask: entry context comes from the current authoritative parameters.
     const askFirst = buildJourneyContext({
       personal: PREGNANCY,
-      entry: buildEntryContext({ stage: "third-trimester", topic: "sleep" }),
+      entry: buildEntryContext({ stage: "pregnancy", topic: "sleep" }),
     });
     const askSecond = buildJourneyContext({
       personal: PREGNANCY,
       entry: buildEntryContext({ stage: "first-year", topic: "feeding" }),
     });
-    expect(askFirst?.entry).toMatchObject({ stage: "third-trimester", topic: "sleep" });
+    expect(askFirst?.entry).toMatchObject({ stage: "pregnancy", topic: "sleep" });
     expect(askSecond?.entry).toMatchObject({ stage: "first-year", topic: "feeding" });
     expect(askFirst?.personal).toEqual(PREGNANCY);
     expect(askSecond?.personal).toEqual(PREGNANCY);

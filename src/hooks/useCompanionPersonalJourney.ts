@@ -37,23 +37,25 @@ const load = (): Promise<PersonalJourneyContextV1 | null> => {
   if (resolved) return Promise.resolve(resolved.value);
   if (!inflight) {
     const started = epoch;
-    inflight = resolvePersonalJourneyContext()
-      .catch(() => null)
-      .then((value) => {
-        if (inflight === current) inflight = null;
-        if (started !== epoch) {
-          // Journey state changed while this read was in flight: the answer is
-          // already stale, so neither cache it nor hand it back. Resolve again
-          // under the current epoch.
-          return load();
-        }
-        resolved = { value };
-        return value;
-      });
-    var current = inflight;
+    const pending: Promise<PersonalJourneyContextV1 | null> =
+      resolvePersonalJourneyContext()
+        .catch(() => null)
+        .then((value) => {
+          if (inflight === pending) inflight = null;
+          if (started !== epoch) {
+            // Journey state changed while this read was in flight: the answer
+            // is already stale, so neither cache it nor hand it back. Resolve
+            // again under the current epoch.
+            return load();
+          }
+          resolved = { value };
+          return value;
+        });
+    inflight = pending;
   }
   return inflight;
 };
+
 
 /**
  * Drop the cached value immediately. Used for auth changes, journey state

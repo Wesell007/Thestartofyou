@@ -1,35 +1,19 @@
 /**
  * Phase 29B — starter chips for the site-wide companion.
  *
- * Short, calm and non-diagnostic. No certainty, pressure, outcome or
- * diagnostic wording.
+ * AIC-J3: this file is now a thin compatibility delegate. It carries no copy
+ * of its own; the strings live once in `journeySuggestions.ts`.
+ *
+ * Classification: CONTENT / MODE STARTER BEHAVIOUR. A companion mode reflects
+ * the area of the site someone is reading, not their saved journey, so these
+ * chips are never personal journey starters. Personal starters come only from
+ * `resolveJourneySuggestions` with an authoritative `JourneyContextV1.personal`
+ * object.
  */
 
 import type { CompanionMode } from "./companionMode";
-
-const STARTERS: Record<CompanionMode, string[]> = {
-  general: [
-    "What can I find here?",
-    "Help me choose where to start",
-    "What should I read next?",
-  ],
-  ttc_companion: [
-    "What can help today?",
-    "How can I wait without overthinking?",
-    "When might testing make sense?",
-  ],
-  pregnancy_week_companion: [
-    "What might matter this week?",
-    "What can help me prepare?",
-    "When is it worth asking my midwife?",
-  ],
-  first_year_companion: [
-    "What can help today?",
-    "How can I support sleep?",
-    "When is it worth asking for help?",
-  ],
-};
+import { contentModeStarters } from "./journeySuggestions";
 
 export function companionStarters(mode: CompanionMode): string[] {
-  return STARTERS[mode] ?? STARTERS.general;
+  return contentModeStarters(mode);
 }

@@ -52,7 +52,8 @@ const FYAISupport = () => {
               Ask whatever's on your mind.
             </h2>
             <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed mb-7 max-w-xl">
-              Questions about your baby or about you, answered in the same place.
+              Questions about babies in the first year, or about recovering after
+              birth, answered in the same place.
             </p>
 
             <AISearchBar
@@ -60,6 +61,7 @@ const FYAISupport = () => {
               suggestions={[]}
               context="First year hub"
               stage="first-year"
+              inputLabel="Ask about the first year"
             />
 
             {/* Chip row — colour carries the meaning */}

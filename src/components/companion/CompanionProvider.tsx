@@ -9,7 +9,6 @@
  */
 
 import {
-  createContext,
   useCallback,
   useContext,
   useEffect,
@@ -22,90 +21,22 @@ import { useLocation } from "react-router-dom";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { buildJourneyContext, buildPageContext } from "@/lib/companion/journeyContext";
 import { useCompanionIdentity } from "@/hooks/useCompanionIdentity";
-import type { CompanionMode } from "@/lib/companion/companionMode";
 import { resolvePanelMode } from "@/lib/companion/companionRequest";
 import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
 import { resolveJourneySuggestions, MAX_SUGGESTIONS } from "@/lib/companion/journeySuggestions";
-import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
 
-import type { AskClarification } from "@/lib/companion/clarificationDisplay";
-import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
-import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";
+import {
+  CompanionContext,
+  type CompanionContextValue,
+  type CompanionEntryIntent,
+  type CompanionTurn,
+} from "./companionContext";
 
-/**
- * AIC-J4 — a contextual hand-off into the one shared panel.
- *
- * `entry` is AIC-2 entry provenance (content, never identity). `suggestions`
- * are transient presentation-only chips: they are never stored in
- * JourneyContextV1, never persisted and never sent as a hidden user message.
- */
-export interface CompanionEntryIntent {
-  entry: EntryJourneyContextV1;
-  suggestions?: string[];
-}
+export type { CompanionEntryIntent, CompanionTurn } from "./companionContext";
 
-
-export interface CompanionTurn {
-  id: string;
-  role: "user" | "assistant";
-  text: string;
-  /**
-   * Phase 29D — set when a short, broad question was met with a gentle
-   * clarifying question instead of a model call. Session-only, like every
-   * other turn: nothing is persisted.
-   */
-  clarification?: AskClarification;
-}
-
-interface CompanionContextValue {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  /**
-   * AIC-J4 — open the one panel carrying entry provenance for what the person
-   * pressed Ask from. No model call happens here, and no user message is sent.
-   */
-  openWithEntry: (intent: CompanionEntryIntent) => void;
-
-  mode: CompanionMode;
-  visible: boolean;
-  turns: CompanionTurn[];
-  streamingAnswer: string;
-  isLoading: boolean;
-  error: string | null;
-  isRateLimited: boolean;
-  starters: string[];
-  /** The chosen companion name, or null when the person never set one. */
-  companionName: string | null;
-  context: string;
-  send: (question: string) => void;
-  retry: () => void;
-  stop: () => void;
-  clear: () => void;
-  /** AIC-4 — end this thread and begin a new one. */
-  newConversation: () => void;
-  /** AIC-4 — true when this thread is being stored against the account. */
-  historyEnabled: boolean;
-  /** AIC-4 — the stored thread being continued, when there is one. */
-  conversationId: string | null;
-  /** AIC-4 — reopen a stored thread the person picked from their history. */
-  restoreConversation: (conversationId: string, messages: CompanionMessage[]) => void;
-  lastQuestion: string | null;
-  /** AIC-3 — explicit memory command state for this surface. */
-  memory: {
-    state: MemoryInteractionState;
-    busy: boolean;
-    confirm: () => void;
-    cancel: () => void;
-    dismiss: () => void;
-  };
-  /** Register a 404 surface; returns the release function. */
-  suppress: () => () => void;
-}
-
-const CompanionContext = createContext<CompanionContextValue | null>(null);
 
 export function CompanionProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
@@ -267,11 +198,6 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;
-}
-
-/** AIC-J4 — the same value, or `null` outside the provider. Never throws. */
-export function useCompanionOptional(): CompanionContextValue | null {
-  return useContext(CompanionContext);
 }
 
 export function useCompanion(): CompanionContextValue {

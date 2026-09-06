@@ -318,9 +318,27 @@ remain content families, not personal journeys.
 - no prompt, AIC-5, grounding, memory, history, voice or `ai-search` change;
   no deployment.
 
-## AIC-J4 — contextual journey AI entry points (closed)
+## AIC-J4 — contextual journey AI entry points (CLOSED PASS)
 
-Shared `AskAboutThis` hand-off, transient `openWithEntry` on the one panel,
-single-use entry consumption at first accepted turn, three inline journey
-answer surfaces removed, signed-out hub copy corrected. Scope: TTC, pregnancy,
-first year. Next: AIC-J5 (not started). Voice remains paused at AIC-7B.
+Delivered: shared `AskAboutThis` hand-off, transient `openWithEntry` on the one
+panel, single-use entry consumption at the first accepted turn, and the three
+originally named inline journey cards converted to entry points.
+
+Closure remainder (must pass before this phase may be marked closed):
+
+- lint architecture: `useCompanionOptional` moved out of `CompanionProvider.tsx`
+  so the file exports components only;
+- `AISearchBar` free-text input gains a programmatic accessible name;
+- TTC: hub AI sections 2 -> 1, content-safe public copy, topic/subtopic and
+  stage contextual Ask converted to the panel hand-off, `StagePage` bare
+  `/ask` link and `TTCSupportMomentCard` raw ask link replaced;
+- pregnancy: `WeekAISupport` and `TrimesterAISupport` converted to the panel
+  hand-off, signed-out copy corrected (hub AI sections remain 1 -> 1);
+- first year: hub AI entry consolidated, topic/month/phase hand-offs added with
+  content-accurate labels, signed-out copy corrected;
+- `DaySummaryCard` converted: 0 direct `useAISearch`, 0 inline answer renderer,
+  0 independent conversation state;
+- full answer-path scan proving exactly two AI answer surfaces.
+
+Scope: TTC, pregnancy, first year. Next: AIC-J5 (not started). Voice remains
+paused at AIC-7B.

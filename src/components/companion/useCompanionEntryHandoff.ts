@@ -6,7 +6,7 @@
  * No second runtime is ever created here.
  */
 
-import { useCompanionOptional } from "./CompanionProvider";
+import { useCompanionOptional } from "./useCompanionOptional";
 import { buildEntryContext } from "@/lib/companion/journeyContext";
 import type { AskAboutThisEntry } from "./AskAboutThis";
 

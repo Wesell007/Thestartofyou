@@ -10,6 +10,7 @@ import { postpartumStages } from "@/data/postpartumStageData";
 import { ivfStages } from "@/data/ivfStageData";
 import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -450,13 +451,17 @@ const StagePage = () => {
                 <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8">
                   If something feels unclear, you can ask about what you're experiencing right now.
                 </p>
-                <Link
-                  to="/ask"
-                  className="flex items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all w-fit"
-                >
-                  <MessageCircle size={15} />
-                  Ask now
-                </Link>
+                <AskAboutThis
+                  label="Ask about this stage"
+                  entry={{
+                    stage: journey,
+                    journey,
+                    topic: stage,
+                    title: data.title,
+                  }}
+                  suggestions={data.aiPrompts}
+                  buttonClassName="inline-flex min-h-[44px] items-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all w-fit"
+                />
               </div>
               <div className="bg-card border border-border/50 rounded-lg p-7 shadow-card-brand space-y-4">
                 <p className="font-sans text-xs font-light tracking-[0.15em] uppercase text-sage-muted">

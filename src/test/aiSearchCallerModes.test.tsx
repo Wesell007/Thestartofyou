@@ -18,8 +18,9 @@ const UNCHANGED_CALLERS = [
 ];
 
 describe("AI mode callers", () => {
-  it("only the Today recap card passes a mode", () => {
-    expect(daySummaryCardSource).toContain('ask(query, context, { mode: "first_year_day_recap" })');
+  it("no longer runs the Today recap as its own AI surface (AIC-J4 closure)", () => {
+    expect(daySummaryCardSource).not.toContain("useAISearch");
+    expect(daySummaryCardSource).not.toContain("mode: \"first_year_day_recap\"");
   });
 
   it("leaves the other companion surfaces on the default behaviour", () => {

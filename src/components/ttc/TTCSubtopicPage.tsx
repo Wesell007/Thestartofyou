@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AISearchBar from "@/components/shared/AISearchBar";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import {
   TTCPageConfig,
   TTC_SUBTOPIC_ORDER,
@@ -536,14 +536,18 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
                   Ask anything specific
                 </h2>
                 <p className="mt-3 font-serif italic text-[14px] text-muted-foreground/85 max-w-md mx-auto leading-relaxed">
-                  Personal answers, grounded in this guide.
+                  Calm, general guidance about this guide.
                 </p>
-                <div className="mt-7">
-                  <AISearchBar
-                    placeholder={`Ask anything about ${config.eyebrow.toLowerCase()}…`}
+                <div className="mt-7 flex justify-center">
+                  <AskAboutThis
+                    label="Ask about this topic"
+                    entry={{
+                      stage: "ttc",
+                      journey: "ttc",
+                      topic: config.slug,
+                      title: config.eyebrow,
+                    }}
                     suggestions={config.aiPrompts}
-                    context={`TTC · ${config.eyebrow}`}
-                    stage="ttc"
                   />
                 </div>
               </div>

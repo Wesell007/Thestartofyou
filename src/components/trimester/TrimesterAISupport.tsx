@@ -1,4 +1,4 @@
-import AISearchBar from "@/components/shared/AISearchBar";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import type { TrimesterData } from "@/data/trimesterData";
 
 interface Props {
@@ -18,18 +18,24 @@ const TrimesterAISupport = ({ data, bg = "bg-sage-bg/30" }: Props) => {
         </h2>
         <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed max-w-lg mx-auto mb-8">
           If something feels unclear or unexpected during the {data.shortLabel.toLowerCase()} trimester,
-          you can ask a question and get guidance that helps you understand what's happening at your stage.
+          you can ask a question and get calm, general guidance about this trimester.
         </p>
-        <AISearchBar
-          placeholder="What's on your mind?"
-          suggestions={[
-            "Is this normal right now?",
-            "What should I expect next?",
-            "Something feels different",
-          ]}
-          context={`${data.shortLabel} trimester of pregnancy`}
-          stage="pregnancy"
-        />
+        <div className="flex justify-center">
+          <AskAboutThis
+            label="Ask about this trimester"
+            entry={{
+              stage: "pregnancy",
+              journey: "pregnancy",
+              topic: `${data.shortLabel.toLowerCase()}-trimester`,
+              title: `${data.shortLabel} trimester`,
+            }}
+            suggestions={[
+              "Is this common in this trimester?",
+              "What tends to change next?",
+              "What is worth asking a midwife about?",
+            ]}
+          />
+        </div>
       </div>
     </section>
   );

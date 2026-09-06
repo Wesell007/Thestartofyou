@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import AskAboutThis from "@/components/companion/AskAboutThis";
+import { ttcAskChipsFor } from "@/lib/ttcAskContext";
 import { ArrowRight } from "lucide-react";
 import type { TTCLogType } from "@/lib/ttcLogs";
 import type { TTCSupportMoment } from "@/lib/ttcSupportMoment";
@@ -34,6 +35,8 @@ type Props = {
 
 const TTCSupportMomentCard = ({ moment, onAddNote }: Props) => {
   const { name } = useCompanionIdentity();
+  // Existing moment prompts, presentation-only. Never auto-sent.
+  const momentChips = ttcAskChipsFor(null, moment.id, 3).map((chip) => chip.label);
 
   return (
     <section
@@ -89,7 +92,7 @@ const TTCSupportMomentCard = ({ moment, onAddNote }: Props) => {
                     topic: action.topic,
                     title: moment.heading,
                   }}
-                  suggestions={action.prompts}
+                  suggestions={momentChips}
                   buttonClassName={className}
                 />
               );

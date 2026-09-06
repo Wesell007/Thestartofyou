@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Search, Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { navigateToAsk } from "@/lib/askNavigation";
@@ -12,6 +12,11 @@ interface AISearchBarProps {
   stageAccent?: string;
   /** Stage key (e.g. "toddler"). When set, appended as &stage=... so /ask re-tones to match. */
   stage?: string;
+  /**
+   * Programmatic name for the free-text field. A placeholder is not an
+   * accessible name, so this is rendered as a visually hidden label.
+   */
+  inputLabel?: string;
 }
 
 const AISearchBar = ({
@@ -25,7 +30,9 @@ const AISearchBar = ({
   variant = "section",
   stageAccent,
   stage,
+  inputLabel = "Ask a question",
 }: AISearchBarProps) => {
+  const inputId = useId();
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
   const [searching, setSearching] = useState(false);
@@ -86,7 +93,11 @@ const AISearchBar = ({
             className={stageAccent ? "shrink-0" : "text-sage-muted shrink-0"}
             style={stageAccent ? { color: accentColor } : undefined}
           />
+          <label htmlFor={inputId} className="sr-only">
+            {inputLabel}
+          </label>
           <input
+            id={inputId}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

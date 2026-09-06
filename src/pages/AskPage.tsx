@@ -580,7 +580,7 @@ const AskPage = () => {
                 </button>
               </div>
 
-              {!hasStageContext && (
+              {!hasStageContext && welcomeSuggestions.length > 0 && (
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
                   <span className="font-sans text-[12px] font-light text-muted-foreground/80">Examples:</span>
                   {welcomeSuggestions.map((s) => (

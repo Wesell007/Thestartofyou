@@ -58,25 +58,14 @@ const AskAboutThis = ({
       handoff({ entry, suggestions });
       return;
     }
-    navigate({
-      pathname: "/ask",
-      search: new URLSearchParams(
-        Object.entries({
-          stage: entry.stage ?? "",
-          journey: entry.journey ?? "",
-          topic: entry.topic ?? "",
-        }).filter(([, value]) => value) as [string, string][],
-      ).toString()
-        ? `?${new URLSearchParams(
-            Object.entries({
-              stage: entry.stage ?? "",
-              journey: entry.journey ?? "",
-              topic: entry.topic ?? "",
-            }).filter(([, value]) => value) as [string, string][],
-          ).toString()}`
-        : "",
-    });
+    const params = new URLSearchParams();
+    if (entry.stage) params.set("stage", entry.stage);
+    if (entry.journey) params.set("journey", entry.journey);
+    if (entry.topic) params.set("topic", entry.topic);
+    const search = params.toString();
+    navigate({ pathname: "/ask", search: search ? `?${search}` : "" });
   };
+
 
   return (
     <div className={className}>

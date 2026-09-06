@@ -6,8 +6,7 @@
  * No second runtime is ever created here.
  */
 
-import { useContext } from "react";
-import { CompanionEntryContext } from "./companionEntryContext";
+import { useCompanionOptional } from "./CompanionProvider";
 import { buildEntryContext } from "@/lib/companion/journeyContext";
 import type { AskAboutThisEntry } from "./AskAboutThis";
 
@@ -19,9 +18,9 @@ export interface CompanionHandoffInput {
 export type CompanionHandoff = (input: CompanionHandoffInput) => void;
 
 export function useCompanionEntryHandoff(): CompanionHandoff | null {
-  const openWithEntry = useContext(CompanionEntryContext);
-  if (!openWithEntry) return null;
-  return ({ entry, suggestions }) => {
+  const companion = useCompanionOptional();
+  if (!companion) return null;
+  return ({ entry, suggestions }: CompanionHandoffInput) => {
     const built = buildEntryContext({
       stage: entry.stage ?? undefined,
       journey: entry.journey ?? undefined,
@@ -29,6 +28,6 @@ export function useCompanionEntryHandoff(): CompanionHandoff | null {
       title: entry.title ?? undefined,
     });
     if (!built) return;
-    openWithEntry({ entry: built, suggestions });
+    companion.openWithEntry({ entry: built, ...(suggestions ? { suggestions } : {}) });
   };
 }

@@ -12,10 +12,14 @@ import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import type { PersonalJourneyContextV1 } from "../../supabase/functions/_shared/journeyContextContract";
 
-const resolvePersonalJourneyContext = vi.fn();
 type AuthListener = (event: string, session: { user?: { id: string } } | null) => void;
-const authListeners: AuthListener[] = [];
-let session: { user: { id: string } } | null = null;
+
+const harness = vi.hoisted(() => ({
+  resolvePersonalJourneyContext: vi.fn(),
+  authListeners: [] as ((event: string, session: unknown) => void)[],
+  session: null as { user: { id: string } } | null,
+}));
+const { resolvePersonalJourneyContext, authListeners } = harness;
 
 import { CompanionProvider, useCompanion } from "@/components/companion/CompanionProvider";
 import { CompanionNextActions } from "@/components/companion/CompanionNextActions";
@@ -28,9 +32,9 @@ vi.mock("@/lib/companion/journeyPersonalSource", () => ({
 vi.mock("@/integrations/supabase/client", () => ({
   supabase: {
     auth: {
-      getSession: async () => ({ data: { session } }),
-      onAuthStateChange: (cb: AuthListener) => {
-        authListeners.push(cb);
+      getSession: async () => ({ data: { session: harness.session } }),
+      onAuthStateChange: (cb: (event: string, session: unknown) => void) => {
+        harness.authListeners.push(cb);
         return { data: { subscription: { unsubscribe: () => {} } } };
       },
     },
@@ -124,7 +128,7 @@ const send = async () => {
 
 beforeEach(() => {
   authListeners.length = 0;
-  session = { user: { id: "user-1" } };
+  harness.session = { user: { id: "user-1" } };
   resolvePersonalJourneyContext.mockReset();
   resolvePersonalJourneyContext.mockResolvedValue(PREGNANCY);
   window.sessionStorage.clear();
@@ -191,7 +195,7 @@ describe("auth sign-out mid-answer", () => {
     await mount();
     await send();
     await act(async () => {
-      session = null;
+      harness.session = null;
       for (const listener of authListeners) listener("SIGNED_OUT", null);
       await Promise.resolve();
     });

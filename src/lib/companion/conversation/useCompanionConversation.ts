@@ -59,6 +59,8 @@ export interface CompanionConversationRuntime {
    * eligible for the ordinary journey next-action layer. Fails closed.
    */
   nextActionsAllowed: boolean;
+  /** True when an account session is active on this device. */
+  signedIn: boolean;
 
   lastQuestion: string | null;
   /** The account-owned conversation this thread joined, when persisting. */
@@ -313,6 +315,7 @@ export function useCompanionConversation({
       error,
       isRateLimited: looksRateLimited(error),
       nextActionsAllowed,
+      signedIn,
 
       lastQuestion,
       conversationId,
@@ -343,6 +346,7 @@ export function useCompanionConversation({
       memory,
       messages,
       nextActionsAllowed,
+      signedIn,
 
       newConversation,
       restoreConversation,

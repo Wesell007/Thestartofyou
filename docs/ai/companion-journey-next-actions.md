@@ -51,9 +51,17 @@ comes only from the authoritative J2 resolver.
 | TTC, any stage (treatment included) | `Open My TTC Journey` → `/my-ttc-journey` |
 | Pregnancy, valid saved week N | `View My Week` → `/my-week`, `Read week N guidance` → `/pregnancy/week/N` |
 | Pregnancy, unknown week | `Open My Journey` → `/my-journey` |
-| First year, unambiguous saved month N | `Open Today` → `/my-first-year/today`, `Read month N guidance` → the existing month route |
-| First year, ambiguous or unknown month | `Open My First Year` → `/my-first-year` |
+| First year, unambiguous saved month 0–11 | `Open Today` → `/my-first-year/today`, `Read month N guidance` → the existing month route |
+| First year, month 12 or any ambiguous/unknown month | `Open My First Year` → `/my-first-year` |
 | Signed out, or no saved journey | none |
+
+### First year month boundary (AIC-J6-R2)
+
+The saved PERSONAL first-year journey is 0–11 whole months. Twelve-month
+guidance remains valid PUBLIC CONTENT at `/first-year/12-months`, reachable
+through normal navigation, but it is never produced from personal state: a
+saved age of 12, or anything out of range or ambiguous, falls back to
+`Open My First Year`. This matches the J3 starter bands, which also stop at 11.
 
 At most two actions (`MAX_NEXT_ACTIONS`), stable registry order, deduplicated
 by exact destination.

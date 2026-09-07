@@ -1,148 +1,55 @@
-# AIC-J4 — Closure Remainder
+# AIC-J4 — Final Two Closure Fixes
 
-AIC-J4 stays OPEN until this pass passes the full gate. No J5, no J6, voice stays paused.
-Frozen: AIC-5, grounding, memory, persistent history, AMBER, `ai-search`, prompt assembly,
-`JourneyContextV1` schema, backend, schema/RLS, voice, AssemblyAI decision. No deployment.
+Scope: FirstYearTopicPage contextual entry point + full-suite test stability. No J5, no J6, voice stays paused. No product behaviour changes beyond item 1.
 
-Starting baseline: 96 test files / 1126 tests / 1126 passing / 0 timeouts.
+## 1. FirstYearTopicPage → contextual entry point
 
-## Repository truth confirmed before planning
+Current state (verified): `src/components/firstyear/topic/FirstYearTopicPage.tsx` renders `HubAISupport` (which embeds `AISearchBar`, a broad `/ask` hand-off) with `suggestions={config.aiPrompts}` and `context={config.title}`.
 
-- TTC hub: `TTCAISupport` (full section) + a second inline `AISearchBar` in `TTCHub.tsx:511`.
-- Pregnancy hub (`Pregnancy.tsx`): renders `PregnancyAIPanel` only. `GuidanceAndQuestions`
-  and `HubAISupport` are used on other pregnancy surfaces, not stacked on the hub.
-- First Year hub (`FirstYear.tsx`): renders `FYAISupport` + `FYCommonQuestions`.
-  `FirstYearAISupport` (a `HubAISupport` wrapper) is a separate unused-on-hub component.
-- `AISearchBar` input is placeholder-only, no programmatic label.
-- `DaySummaryCard` calls `useAISearch` and renders an answer inline.
-- `TTCSupportMomentCard:80` and `StagePage:454` use raw `/ask` links.
-- `WeekAISupport`, `TrimesterAISupport`, `TTCTopicPage`, `TTCSubtopicPage`,
-  `FirstYearTopicPage`, `FYAISupport` all use `AISearchBar`.
+Change:
+- Replace the `HubAISupport` block with the same section shell used by the already-converted month and phase templates, rendering `AskAboutThis`.
+- Visible label: `Ask about this topic` (both baby and recovery sides; recovery keeps its own supporting copy but not a different label).
+- Entry descriptor (bounded, content-only, no schema change):
+  `{ stage: "first-year", journey: "first_year", topic: config.slug, title: config.title }`
+- `suggestions={config.aiPrompts}` — reused verbatim as transient, presentation-only chips.
+- `destination` stays the default `panel`.
+- Keep the existing heading/description copy and the stage tint tokens (`theme.aiBg` / `theme.aiAccent`) so the section still reads as the current AI support band.
+- Remove the now-unused `HubAISupport` import. `HubAISupport` itself is left untouched (other families still use it).
 
-## Order of work
+Guarantees preserved by reusing `AskAboutThis` unchanged: zero personal First Year inference, zero hidden user turns, zero model calls on open, zero new conversation runtime, J2 remains sole personal journey authority, J3 remains sole personal starter authority.
 
-### 1. Roadmap first
-Reopen `roadmap.md`: "AIC-J4 — contextual journey AI entry points — IN PROGRESS /
-CLOSURE REMAINDER". Add the closure-remainder task list. Only mark closed after the gate.
+## 2. Test timeouts — inspect before adjusting
 
-### 2. Lint architecture (binding correction 2)
-Split cleanly so `CompanionProvider.tsx` exports components only: `companionContext.ts` holds
-the context object and shared types, `useCompanionOptional.ts` and `useCompanion.ts` hold the
-hooks, `CompanionProvider.tsx` keeps the provider. Semantics unchanged, no rule suppression.
-Target: 1 pre-existing error, 10 pre-existing warnings, 0 new findings.
+Three suites time out only in the full run: `companionEntryPoints`, `companionSurfaces`, `sharedTemplateSeo`. Vitest currently sets no `testTimeout`, so each test gets the 5s default.
 
-### 2b. Contextual label accuracy (binding correction 1)
-Labels match the actual content type, never something more personal or specific:
-topic → "Ask about this topic", week → "this week", trimester → "this trimester",
-month → "this month", phase/stage → "this stage". `FirstYearTopicPage` is a topic surface,
-not a month surface. Displayed content never creates personal lifecycle state.
+Inspection order (repository evidence, before any timeout change):
+- `companionSurfaces.test.tsx`: no `afterEach(cleanup)` and it writes `localStorage` consent without resetting — check for cross-test leakage and duplicated mounted trees.
+- `companionEntryPoints.test.tsx`: check provider async work (session lookups, conversation checks) settling after unmount, and that `sessionStorage`/mock resets cover every path.
+- `sharedTemplateSeo.test.tsx`: `it.each` renders nine full page templates with Helmet `waitFor`; check for retained DOM between cases and repeated expensive setup that can be hoisted.
+- Shared infra `src/test/setup.ts`: confirm a global `afterEach` cleanup / unhandled-work guard is appropriate.
 
-### 2c. Full answer-path scan (binding correction 3)
-The two-surface invariant is verified against every independent execution route, not just
-`useAISearch`: `useCompanionConversation`, direct `ai-search` references, Supabase function
-invocations targeting `ai-search`, direct `/functions/v1/ai-search` fetches, and any
-independent answer state/rendering bound to them. Every occurrence is classified. Anything
-inside TTC/Pregnancy/First Year is converted; anything outside is reported as a blocker, never
-exempted.
+Fix real defects found (missing cleanup, leaked storage/state, unawaited work, duplicated renders). Only if the suites are then behaviourally clean and still exceed 5s purely from legitimate load, apply a narrowly scoped timeout — per affected file/suite (e.g. `describe(..., { timeout: 10000 })` or a file-level `vi.setConfig({ testTimeout: 10000 })`) — never the global Vitest default, and never above 10s.
 
+No production files are touched for test stability. If verification exposes a genuine product defect, stop and report before expanding scope.
 
-### 3. Accessibility on surviving search inputs
-Add a visually hidden `<label>` (or `aria-label` where the design demands) to `AISearchBar`'s
-input, driven by an optional `inputLabel` prop with a sensible default. This clears every
-surviving J4-touched free-text input in one place. No unrelated site-wide remediation.
-Preserve the existing 44px behaviour in `AskAboutThis`; check chip wrap on the consolidated
-sections. No sticky UI, no launcher position change.
+## 3. Tests for the topic hand-off
 
-### 4. TTC
-- Collapse to one primary hub AI section: keep `TTCAISupport` (stronger copy, botanical
-  treatment, broad free-text `/ask` behaviour via `AISearchBar`); remove the duplicate inline
-  bar at `TTCHub.tsx:511`, folding any unique copy/suggestions into `TTCAISupport`.
-- Public wording: replace false personalisation ("your cycle", "where you are") with
-  content-safe phrasing on public TTC surfaces. Keep warmth; only remove implied knowledge.
-- `TTCTopicPage` / `TTCSubtopicPage`: contextual Ask becomes `AskAboutThis` → panel, carrying
-  a bounded entry (`stage: "ttc"`, `topic`, content `title`) and their existing prompts as
-  transient suggestions. Broad free-text stays on `/ask`.
-- `TTCSupportMomentCard`: replace the raw `/ask?stage=ttc&topic=...` link with the shared
-  hand-off; moment prompts stay CONTENT/MOMENT suggestions, never entering the J3 registry.
-- `StagePage`: replace the bare `Link to="/ask"` with either `AskAboutThis` (contextual) or
-  `askNavigation` (broad), whichever matches the actual intent; collapse the competing AI CTA
-  where the section and the suggested-question list duplicate the same purpose. The suggested
-  question list is navigation content and is retained.
+Add focused coverage (extending `src/test/companionEntryRemainder.test.ts` or a small companion test file) proving:
+- FirstYearTopicPage exposes `Ask about this topic` and no `Ask about this month`.
+- Clicking it opens the companion panel and publishes the topic's `aiPrompts` as transient starters.
+- No model call (`useAISearch.ask`) and no hidden user turn on open.
+- No personal First Year resolution triggered by the topic route.
 
-### 5. Pregnancy
-- Hub: `Pregnancy.tsx` renders one AI section already; confirm via render test and keep
-  `PregnancyAIPanel` as the single primary hub affordance. Report before/after honestly (1 → 1)
-  rather than inventing a consolidation.
-- Public wording: correct "your pregnancy", "shaped to your stage", "tailored to you" on
-  signed-out surfaces (including `WeekAISupport`) to "this stage" / "this week" /
-  "general guidance about this stage". Saved My Pregnancy / My Week wording is untouched.
-- `WeekAISupport`: convert to `AskAboutThis` → panel, entry
-  `{ stage: "pregnancy", title: "Week N" }`, with `data.aiPrompts.slice(0, 3)` as transient
-  suggestions. No `entry.week` schema change; the week travels in the existing bounded `title`.
-- `TrimesterAISupport`: same conversion, entry `{ stage: "pregnancy", topic: <trimester> }`,
-  existing trimester prompts reused, content-safe wording.
-- `ArticleAISupport` and the due-date result Ask stay unchanged.
+## 4. Answer-surface invariant re-scan
 
-### 6. First Year
-- Hub: consolidate `FYAISupport` + `FYCommonQuestions` down to one AI entry affordance —
-  keep `FYAISupport` as the search/Ask surface and strip the duplicate Ask entry from
-  `FYCommonQuestions`, retaining its questions as navigation content.
-  `FirstYearAISupport` (the `HubAISupport` wrapper) is removed if nothing renders it.
-- Public wording: content-safe "babies", "the first year", "this month", "recovery" where no
-  personal state exists.
-- `FirstYearTopicPage` and month/phase surfaces: `AskAboutThis` → panel with
-  "Ask about this month", reusing existing month/stage prompt data. Route month never implies
-  a baby age.
-- `DaySummaryCard`: convert to the shared architecture. It stops calling `useAISearch`, stops
-  rendering an answer, and stops holding conversation state. The button becomes a contextual
-  hand-off into the panel carrying a bounded entry plus its existing day-recap prompt as a
-  transient suggestion. No new Supabase query, no new age calculation, no personal resolver —
-  it consumes only what J2 already publishes.
+Re-run the full scan (`useAISearch`, `useCompanionConversation`, `ai-search` string, `supabase.functions.invoke`, `/functions/v1/ai-search`, independent answer state/renderers). Required: exactly two answer surfaces (global panel, `/ask`), zero TTC/Pregnancy/First-Year inline answer surfaces, zero DaySummaryCard AI execution, no third runtime/endpoint/renderer.
 
-### 7. Repository-wide surface scan
-Enumerate and classify every `useAISearch` caller. Post-pass, the only legitimate answer
-execution paths are the shared runtime behind the global panel and `/ask`. Any remaining
-journey-specific inline answer surface is converted or reported as a blocker, never exempted.
+## 5. Roadmap
 
-### 8. Entry lifecycle — no regressions
-All existing semantics stay exactly as built: 0 model calls on open, 0 hidden turns, entry
-consumed on the first accepted turn before the assistant outcome, no reactivation on failure /
-abort / timeout, blank submissions do not consume, route change and close clear, launcher
-reopen does not resurrect, unchanged `/ask` URL does not reactivate, a new material hand-off
-can activate a new entry.
+Set `roadmap.md` back to `AIC-J4 — IN PROGRESS / FINAL CLOSURE`. Mark `CLOSED PASS` only after the whole gate passes.
 
-### 9. J2 / J3 authority
-0 new personal resolvers, 0 new personal caches, 0 new starter registries, 0 route → personal
-lifecycle inference.
+## 6. Validation
 
-### 10. Tests
-Add focused coverage in new files alongside `companionEntryPoints.test.tsx`:
-- TTC: one primary hub AI section; StagePage hand-off preserves bounded entry; moment card
-  opens the panel; public wording needs no personal state.
-- Pregnancy: hub AI entry count; `WeekAISupport` and `TrimesterAISupport` open the panel with
-  their existing prompts; route → personal inference 0; signed-out wording content-safe.
-- First Year: hub consolidated; month/phase hand-off opens the panel; route month inference 0;
-  `DaySummaryCard` has 0 `useAISearch` calls and 0 inline answer renderers; wording content-safe.
-- Architecture: journey inline answer surfaces 0; total answer surfaces 2.
-- Lint architecture: `CompanionProvider.tsx` exports components only.
-- Accessibility: surviving free-text inputs expose an accessible name.
+`npm test` (all pass, 0 timeouts) → typecheck twice (cache-defeated) → `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` → `npm run lint` (must be exactly the 1 pre-existing error / 10 pre-existing warnings baseline, 0 new J4 findings) → `npm run build`. No deployment.
 
-Test arithmetic will be reported as new files, new tests, modified files, removed/replaced
-tests, gross and net additions against 96 / 1126.
-
-### 11. Validation gate
-`npm test` (all pass, 0 timeouts) → typecheck twice with the verified no-build-info procedure →
-`DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` →
-`npm run lint` (1 error, 10 warnings, 0 new) → `npm run build`. No deployment.
-
-### 12. Documentation and closure
-Update `docs/ai/companion-journey-context.md` for the final route/surface architecture and
-`roadmap.md` to closed only if every check passes. Then return the 78-point closure report.
-Stop after the report.
-
-## Risk notes
-
-- Removing hub sections touches public layout; each removal keeps its useful copy by folding it
-  into the surviving section rather than deleting it.
-- Wording changes are the largest diff surface; they are limited to public/signed-out strings on
-  J4 surfaces and will be enumerated in the report.
+Then return the 34-point delta report and stop.

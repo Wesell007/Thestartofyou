@@ -464,12 +464,18 @@ serve(async (req) => {
     return { ok: true as const, ctx: setup.ctx };
   };
 
+  // AIC-J5: every controlled answer — deterministic RED/CRISIS, the paused
+  // kill-switch answer and the clarify/unsupported boundaries — suppresses the
+  // ordinary next-action layer. The header is a UI permission derived from a
+  // decision that has already been taken; it adds no classification of its own.
   const sendControlled = async (answer: string, ctx: ConversationContext | null) => {
     if (ctx) await persistMessage(req, ctx, "assistant", answer);
     const response = sseAnswer(req, answer);
     if (ctx) response.headers.set("X-Conversation-Id", ctx.conversationId);
+    response.headers.set("X-Companion-Next-Actions", "suppress");
     return response;
   };
+
 
   if (isDeterministicSafetyDecision(safety)) {
     // No model call, no grounding fetch, no journey/memory/history enrichment,

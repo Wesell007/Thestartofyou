@@ -981,6 +981,12 @@ const AskPage = () => {
             </section>
           )}
 
+          {/* AIC-J5 — the action layer belongs to the completed answer itself,
+              not to one optional section of it, so a short answer shows it too. */}
+          {isDone && <CompanionNextActions actions={nextActions} surface="ask" />}
+
+
+
           {/* Streaming indicator */}
           {isLoading && answer && (
             <div className="flex items-center gap-2.5">

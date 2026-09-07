@@ -518,9 +518,13 @@ const AskPage = () => {
   const lastPersonalRef = useRef(personalJourney);
   useEffect(() => {
     if (lastPersonalRef.current === personalJourney) return;
+    const previous = lastPersonalRef.current;
     lastPersonalRef.current = personalJourney;
-    setJourneyInvalidated(true);
+    // The first resolution of an unknown journey is not a transition: nothing
+    // stale existed. Only a change away from a known journey invalidates.
+    if (previous !== null) setJourneyInvalidated(true);
   }, [personalJourney]);
+
   useEffect(() => {
     if (!conversation.nextActionsAllowed) setJourneyInvalidated(false);
   }, [conversation.nextActionsAllowed]);
@@ -963,7 +967,7 @@ const AskPage = () => {
 
                 <EditorialAnswer markdown={parsed.rest} disableLinks />
 
-                {!isLoading && <CompanionNextActions actions={nextActions} surface="ask" />}
+
 
                 {!isLoading && (
                   <div className="mt-7 border-t border-border/30 pt-5 text-center">
@@ -976,6 +980,12 @@ const AskPage = () => {
               </div>
             </section>
           )}
+
+          {/* AIC-J5 — the action layer belongs to the completed answer itself,
+              not to one optional section of it, so a short answer shows it too. */}
+          {isDone && <CompanionNextActions actions={nextActions} surface="ask" />}
+
+
 
           {/* Streaming indicator */}
           {isLoading && answer && (
@@ -1043,10 +1053,10 @@ const AskPage = () => {
                 </div>
               </section>
 
-              {/* ── Continue your journey ── */}
+              {/* ── Keep exploring — generic destinations, never personalised ── */}
               <section>
                 <div className="mb-3 flex items-center gap-3">
-                  <span className={labelClass}>Continue your journey</span>
+                  <span className={labelClass}>Keep exploring</span>
                   <span className="h-px flex-1 bg-border/25" />
                 </div>
                 <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">

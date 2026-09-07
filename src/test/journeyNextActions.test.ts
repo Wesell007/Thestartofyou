@@ -110,7 +110,40 @@ describe("resolveJourneyNextActions — First Year", () => {
       ]);
     }
   });
+
+  it("keeps month 11 as the last personal month", () => {
+    const actions = resolveJourneyNextActions({
+      personal: { journey: "first-year", ageMonths: 11 },
+      signedIn: true,
+    });
+    expect(actions[1]).toEqual({
+      id: "first-year-read-month",
+      label: "Read month 11 guidance",
+      to: "/first-year/11-months",
+    });
+  });
+
+  it("never produces the twelve-month page from saved personal state", () => {
+    // AIC-J6-R2 — twelve-month guidance stays public CONTENT. The saved
+    // personal journey is 0–11 months, so month 12 falls back to the home.
+    const actions = resolveJourneyNextActions({
+      personal: { journey: "first-year", ageMonths: 12 },
+      signedIn: true,
+    });
+    expect(actions).toEqual([
+      { id: "first-year-open-journey", label: "Open My First Year", to: "/my-first-year" },
+    ]);
+    for (const personal of [
+      { journey: "first-year", ageMonths: 11 } as const,
+      { journey: "first-year", ageMonths: 12 } as const,
+      { journey: "first-year", ageMonths: 13 } as const,
+    ]) {
+      const resolved = resolveJourneyNextActions({ personal, signedIn: true });
+      expect(resolved.some((action) => action.to === "/first-year/12-months")).toBe(false);
+    }
+  });
 });
+
 
 describe("resolveJourneyNextActions — bounds", () => {
   it("never exceeds the shared maximum and never repeats a destination", () => {

@@ -377,4 +377,29 @@ Validation: 15 new focused tests; full suite, typechecks, Deno `ai-search`
 check, lint at the known baseline and build all recorded below. No deployment:
 engineering completion is not production activation.
 
-Voice remains paused at AIC-7B. AIC-J6 not started.
+Voice remains paused at AIC-7B.
+
+## AIC-J6 — full journey AI evaluation + remediation (closure pass)
+
+Audit: J1–J5 engineering PASS, no P0/P1. Remediation delivered:
+
+- R1 copy: `ArticleAISupport`, `IVFAISupport` and the `/ask` tail section no
+  longer imply personal journey state on content surfaces.
+- R2 boundary: the saved PERSONAL first-year journey is months 0–11. Month 12
+  (and anything ambiguous) falls back to `Open My First Year`. The public
+  `/first-year/12-months` content page is unchanged and still reachable.
+- R3 tests: month-11/12 boundary cases, a real eligibility → runtime → UI
+  composition suite (allow / suppress / missing / malformed / failed /
+  streaming), sign-out mid-answer, journey transition during a stream, and
+  mobile structural invariants.
+- R4 runtime (local browser, 390px and 1440px, `ai-search` intercepted
+  deterministically; PRODUCTION WRITE = NO, DEPLOYMENT = NO) found and fixed
+  two real defects: first-resolution of an unknown journey wrongly invalidated
+  the layer on the first answer, and `/ask` rendered the layer inside the
+  optional "More on this" section so short answers never showed it.
+
+R4 proves visual and runtime composition only. It is not production J5
+end-to-end verification: the matching `ai-search` is still not deployed, and
+release remains backend-first through the normal gate.
+
+Voice remains paused at AIC-7B.

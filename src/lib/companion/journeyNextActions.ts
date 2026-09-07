@@ -50,14 +50,23 @@ export const MAX_NEXT_ACTIONS = 2;
 const MIN_WEEK = 1;
 const MAX_WEEK = 42;
 
-/** Saved baby age in whole months, newborn through the end of the first year. */
+/**
+ * Saved baby age in whole months. The saved PERSONAL first-year journey is
+ * 0–11 months only. Twelve-month guidance exists as public CONTENT
+ * (`/first-year/12-months`), but it is never produced from personal state: a
+ * saved age of 12 or anything invalid falls through to the journey home.
+ */
 const MIN_MONTH = 0;
-const MAX_MONTH = 12;
+const MAX_MONTH = 11;
 
 const isWholeNumber = (value: unknown): value is number =>
   typeof value === "number" && Number.isInteger(value);
 
-/** The existing public month routes, keyed by saved age in whole months. */
+/**
+ * The existing public month routes, keyed by saved age in whole months.
+ * Deliberately stops at 11: the twelve-month page is content, not a
+ * destination the saved personal journey can produce.
+ */
 const FIRST_YEAR_MONTH_ROUTES: Record<number, JourneyNextActionRoute> = {
   0: "/first-year/newborn",
   1: "/first-year/1-month",
@@ -71,7 +80,6 @@ const FIRST_YEAR_MONTH_ROUTES: Record<number, JourneyNextActionRoute> = {
   9: "/first-year/9-months",
   10: "/first-year/10-months",
   11: "/first-year/11-months",
-  12: "/first-year/12-months",
 };
 
 const monthLabel = (months: number) =>

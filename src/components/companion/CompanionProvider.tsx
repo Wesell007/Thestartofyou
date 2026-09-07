@@ -137,9 +137,13 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   const lastPersonalRef = useRef(personalJourney);
   useEffect(() => {
     if (lastPersonalRef.current === personalJourney) return;
+    const previous = lastPersonalRef.current;
     lastPersonalRef.current = personalJourney;
-    setJourneyInvalidated(true);
+    // The first resolution of an unknown journey is not a transition: nothing
+    // stale existed. Only a change away from a known journey invalidates.
+    if (previous !== null) setJourneyInvalidated(true);
   }, [personalJourney]);
+
   useEffect(() => {
     // Every new turn clears eligibility first, which also clears the block.
     if (!conversation.nextActionsAllowed) setJourneyInvalidated(false);

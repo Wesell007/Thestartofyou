@@ -88,6 +88,13 @@ describe("contextual labels describe the content, not the person", () => {
     );
   });
 
+  it("uses topic wording on the first year topic surface", () => {
+    const body = read("components/firstyear/topic/FirstYearTopicPage.tsx");
+    expect(body).toContain('label="Ask about this topic"');
+    expect(body).not.toContain("Ask about this month");
+    expect(body).not.toMatch(/HubAISupport/);
+  });
+
   it("uses topic wording on TTC topic surfaces", () => {
     for (const rel of [
       "components/ttc/TTCTopicPage.tsx",

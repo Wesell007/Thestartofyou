@@ -167,6 +167,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
         role: message.role,
         text: message.content,
         ...(message.clarification ? { clarification: message.clarification } : {}),
+        ...(message.journalContextUsed ? { journalContextUsed: true } : {}),
       })),
     [conversation.messages],
   );

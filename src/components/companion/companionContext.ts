@@ -37,6 +37,11 @@ export interface CompanionTurn {
    * other turn: nothing is persisted.
    */
   clarification?: AskClarification;
+  /**
+   * AIC-JA2 — transparency for this one completed answer. Display-only, never
+   * persisted, and it says nothing about what the journal contained.
+   */
+  journalContextUsed?: boolean;
 }
 
 export interface CompanionContextValue {

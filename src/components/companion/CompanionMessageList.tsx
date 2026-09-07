@@ -13,6 +13,7 @@ import {
 } from "@/lib/aiAnswerSafety";
 import { useCompanion } from "./CompanionProvider";
 import { CompanionNextActions } from "./CompanionNextActions";
+import { CompanionJournalNote } from "./CompanionJournalNote";
 import { companionStyles } from "./companionStyles";
 
 export const COMPANION_ERROR_COPY =
@@ -72,6 +73,7 @@ export default function CompanionMessageList() {
             <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/70">
               {APPROVED_SOURCES_TRUST_LINE}
             </p>
+            <CompanionJournalNote used={turn.journalContextUsed} />
             {turn.id === latestAnswerId && !isLoading && !streamingAnswer ? (
               <CompanionNextActions actions={nextActions} surface="companion" />
             ) : null}

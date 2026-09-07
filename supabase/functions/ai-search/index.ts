@@ -27,6 +27,12 @@ import {
   type MemoryRecord,
 } from "../_shared/aiMemory.ts";
 import {
+  JOURNAL_ANSWER_RULES,
+  JOURNAL_CONTEXT_HEADER,
+  resolveJournalContext,
+} from "../_shared/aiJournalContext.ts";
+import { JOURNAL_CONTEXT_INSTRUCTIONS } from "../_shared/enrichmentRendering.ts";
+import {
   CONVERSATION_HISTORY_INSTRUCTIONS,
   HISTORY_MAX_MESSAGES,
   renderConversationHistory,
@@ -59,7 +65,8 @@ const responseHeaders = (req: Request) => {
     // ordinary journey next-action UI may render, and never carries a safety
     // state, category, score, rule, reason or classifier result.
     "Access-Control-Expose-Headers":
-      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions",
+      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions, " +
+      JOURNAL_CONTEXT_HEADER,
 
 
 
@@ -610,10 +617,21 @@ serve(async (req) => {
   // AIC-4: exactly one history block, rendered from the turns already loaded
   // above.
   const conversationHistory = renderConversationHistory(priorTurns);
+  // AIC-JA2: background journal awareness, on the ordinary GREEN generative
+  // path only. RED, CRISIS, rate limiting, the kill switch, clarification and
+  // unsupported have all returned above, so reaching this line is the whole
+  // eligibility test — except AMBER, which stays a separate cautious path and
+  // never uses background journal material, and recap mode, which answers no
+  // question of its own. Anything ineligible performs zero journal reads.
+  const journalEligible = modeConfig.allowUrgentEscalationAnswer && !amberGuidance;
+  const journal = journalEligible
+    ? await resolveJournalContext(req, { personal: journeyContext?.personal })
+    : { block: "", used: false };
 
   const userContent = [
     "<user_question>", query, "</user_question>",
     structuredJourneyContext,
+    journal.block,
     permissionedMemory,
     conversationHistory,
     context ? `<journey_context>\n${context}\n</journey_context>` : "",
@@ -635,6 +653,8 @@ serve(async (req) => {
             content: [
               modeConfig.systemPrompt,
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
+              journal.used ? JOURNAL_CONTEXT_INSTRUCTIONS : "",
+              journal.used ? JOURNAL_ANSWER_RULES : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
               conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
               // AIC-5E tone guidance, placed before the safety layer so the
@@ -678,6 +698,10 @@ serve(async (req) => {
         // permitted when no AMBER or cautious-uncertainty guidance was applied
         // to this answer. The value carries nothing about which of those it was.
         "X-Companion-Next-Actions": amberGuidance ? "suppress" : "allow",
+        // AIC-JA2: transparency metadata only. It has no authority over
+        // safety, journey state, next actions, memory, history or any later
+        // request, and it says nothing about what the journal contained.
+        [JOURNAL_CONTEXT_HEADER]: journal.used ? "used" : "none",
       },
     });
 

@@ -11,6 +11,7 @@ import CompanionMemoryPrompt from "@/components/companion/CompanionMemoryPrompt"
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
 import { resolveJourneyNextActions } from "@/lib/companion/journeyNextActions";
 import { CompanionNextActions } from "@/components/companion/CompanionNextActions";
+import { CompanionJournalNote } from "@/components/companion/CompanionJournalNote";
 import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
 import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
 
@@ -427,6 +428,14 @@ const AskPage = () => {
     const last = [...conversation.messages].reverse().find((message) => message.role === "assistant");
     return last?.clarification ?? null;
   }, [conversation.messages, isLoading]);
+
+  // AIC-JA2 — transparency belongs to the completed assistant answer only.
+  // It is display metadata and grants nothing.
+  const journalContextUsed = useMemo(() => {
+    if (isLoading || conversation.streamingAnswer) return false;
+    const last = [...conversation.messages].reverse().find((message) => message.role === "assistant");
+    return last?.journalContextUsed === true && !last?.clarification;
+  }, [conversation.messages, conversation.streamingAnswer, isLoading]);
 
   // Label shown to the reader. Conversation context carried for the model is
   // never displayed, so no previous answer text can leak into the page.
@@ -983,6 +992,8 @@ const AskPage = () => {
 
           {/* AIC-J5 — the action layer belongs to the completed answer itself,
               not to one optional section of it, so a short answer shows it too. */}
+          {isDone && <CompanionJournalNote used={journalContextUsed} />}
+
           {isDone && <CompanionNextActions actions={nextActions} surface="ask" />}
 
 

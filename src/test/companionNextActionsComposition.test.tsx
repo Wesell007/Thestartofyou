@@ -17,6 +17,10 @@ type AuthListener = (event: string, session: { user?: { id: string } } | null) =
 const authListeners: AuthListener[] = [];
 let session: { user: { id: string } } | null = null;
 
+import { CompanionProvider, useCompanion } from "@/components/companion/CompanionProvider";
+import { CompanionNextActions } from "@/components/companion/CompanionNextActions";
+import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
+
 vi.mock("@/lib/companion/journeyPersonalSource", () => ({
   resolvePersonalJourneyContext: (...args: unknown[]) => resolvePersonalJourneyContext(...args),
 }));
@@ -86,8 +90,6 @@ const mockResponse = ({
 
 /** Minimal consumer of the real provider: the shared action UI plus a send. */
 const Harness = () => {
-  const { useCompanion } = require("@/components/companion/companionContext") as typeof import("@/components/companion/companionContext");
-  const { CompanionNextActions } = require("@/components/companion/CompanionNextActions") as typeof import("@/components/companion/CompanionNextActions");
   const companion = useCompanion();
   return (
     <div>
@@ -100,8 +102,6 @@ const Harness = () => {
 };
 
 const mount = async () => {
-  vi.resetModules();
-  const { CompanionProvider } = await import("@/components/companion/CompanionProvider");
   const view = render(
     <MemoryRouter initialEntries={["/pregnancy"]}>
       <CompanionProvider>
@@ -128,6 +128,8 @@ beforeEach(() => {
   resolvePersonalJourneyContext.mockReset();
   resolvePersonalJourneyContext.mockResolvedValue(PREGNANCY);
   window.sessionStorage.clear();
+  // The personal journey cache is module-level: force a fresh resolution.
+  notifyJourneyStateChanged();
 });
 
 afterEach(() => {
@@ -206,7 +208,6 @@ describe("journey transition during a stream", () => {
     mockResponse({ eligibility: "allow", complete: false });
     await mount();
     await send();
-    const { notifyJourneyStateChanged } = await import("@/lib/journeyStateSignal");
     resolvePersonalJourneyContext.mockResolvedValue(PREGNANCY);
     await act(async () => {
       notifyJourneyStateChanged();

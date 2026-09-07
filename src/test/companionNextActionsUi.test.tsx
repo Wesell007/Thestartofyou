@@ -61,5 +61,25 @@ describe("CompanionNextActions", () => {
       .getAllByRole("link")
       .map((link) => `${link.textContent}|${link.getAttribute("href")}`);
     expect(askLinks).toEqual(panelLinks);
+});
+
+describe("mobile structure", () => {
+  // AIC-J6-R3 — structural invariants that keep the layer usable on a narrow
+  // screen: comfortable tap targets, wrapping rather than overflow, and a
+  // single navigation group per surface.
+  it("keeps comfortable, wrapping tap targets and one navigation group", () => {
+    const actions = resolveJourneyNextActions({
+      personal: { journey: "trying-to-conceive", ttcStage: "trying_naturally" },
+      signedIn: true,
+    });
+    renderActions(actions);
+    expect(screen.getAllByRole("navigation")).toHaveLength(1);
+    const list = screen.getByRole("list");
+    expect(list.className).toContain("flex-wrap");
+    for (const link of screen.getAllByRole("link")) {
+      expect(link.className).toContain("min-h-[44px]");
+      expect(link.className).not.toContain("whitespace-nowrap");
+    }
   });
 });
+

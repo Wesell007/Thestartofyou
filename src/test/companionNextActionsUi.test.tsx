@@ -85,3 +85,13 @@ describe("mobile structure", () => {
   });
 });
 
+
+describe("ask page placement", () => {
+  // AIC-J6-R4 — regression: the layer used to live inside the optional
+  // "More on this" section, so a short answer never showed it.
+  it("attaches the layer to the completed answer, not to one optional section", async () => {
+    const source = (await import("@/pages/AskPage.tsx?raw")).default;
+    expect(source).toContain("{isDone && <CompanionNextActions actions={nextActions} surface=\"ask\" />}");
+    expect(source).not.toContain("{!isLoading && <CompanionNextActions");
+  });
+});

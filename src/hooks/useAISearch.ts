@@ -38,12 +38,25 @@ export type AISearchOptions = {
    * unknown or malformed values fail closed as `suppress`.
    */
   onNextActions?: (eligibility: NextActionsEligibility) => void;
+  /**
+   * AIC-JA2 — opaque transparency metadata. It reports only whether a journal
+   * block was supplied to the model for this response. It has no authority
+   * over safety, journey state, next actions, memory, history or any later
+   * request. Missing, unknown or malformed values fail closed as unused.
+   */
+  onJournalContext?: (used: boolean) => void;
 };
 
 /** AIC-J5 — the only two values the browser will ever act on. */
 export type NextActionsEligibility = "allow" | "suppress";
 
 export const NEXT_ACTIONS_HEADER = "X-Companion-Next-Actions";
+
+export const JOURNAL_CONTEXT_HEADER = "X-Companion-Journal-Context";
+
+/** Fail closed: anything that is not exactly `used` counts as no journal. */
+export const readJournalContextUsage = (value: string | null | undefined): boolean =>
+  value?.trim().toLowerCase() === "used";
 
 /** Fail closed: anything that is not exactly `allow` suppresses the layer. */
 export const readNextActionsEligibility = (
@@ -130,6 +143,12 @@ export function useAISearch() {
       // once this same response commits as a completed assistant answer.
       options?.onNextActions?.(
         readNextActionsEligibility(resp.headers.get(NEXT_ACTIONS_HEADER)),
+      );
+
+      // AIC-JA2 — recorded now, displayed only once this same response commits
+      // as a completed assistant answer.
+      options?.onJournalContext?.(
+        readJournalContextUsage(resp.headers.get(JOURNAL_CONTEXT_HEADER)),
       );
 
 

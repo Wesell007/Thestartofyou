@@ -33,6 +33,12 @@ export interface CompanionMessage {
    * hidden conversation metadata.
    */
   clarification?: AskClarification;
+  /**
+   * AIC-JA2 — transparency for this one completed answer: a journal block was
+   * supplied to the model for it. Session-only and display-only. No journal
+   * text, id, source name or date is ever carried here or persisted.
+   */
+  journalContextUsed?: boolean;
 }
 
 /**

@@ -13,6 +13,7 @@ import { toast } from "@/hooks/use-toast";
 import JourneyStatusSection from "@/components/journey-status/JourneyStatusSection";
 import BabyIllustrationStyleField from "@/components/settings/BabyIllustrationStyleField";
 import CompanionMemorySection from "@/components/settings/CompanionMemorySection";
+import CompanionJournalSection from "@/components/settings/CompanionJournalSection";
 import {
   SUGGESTED_NAMES,
   TONE_OPTIONS,
@@ -407,6 +408,7 @@ const AccountSettings = () => {
 
           {/* AIC-3 — visible, editable, removable. Gated by the client flag. */}
           <CompanionMemorySection />
+          <CompanionJournalSection />
 
           <section className="rounded-2xl border border-border/50 bg-card p-6">
             <h2 className="font-serif text-xl mb-2">Download your data</h2>

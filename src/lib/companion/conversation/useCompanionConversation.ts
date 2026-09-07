@@ -114,6 +114,9 @@ export function useCompanionConversation({
   // answer, and it never leaks into another request.
   const eligibilityRef = useRef<NextActionsEligibility>("suppress");
   const [nextActionsAllowed, setNextActionsAllowed] = useState(false);
+  // AIC-JA2 — transparency metadata for the one in-flight request. It is
+  // attached to that response's completed answer and to nothing else.
+  const journalUsedRef = useRef(false);
 
 
   const historyUi = isCompanionHistoryUiEnabled();
@@ -163,6 +166,7 @@ export function useCompanionConversation({
         createdAt: new Date().toISOString(),
         status: "complete",
         ...(clarification ? { clarification } : {}),
+        ...(journalUsedRef.current && !clarification ? { journalContextUsed: true } : {}),
       },
     ]);
     // AIC-J5 — only a completed canonical answer may host the action layer,
@@ -200,6 +204,10 @@ export function useCompanionConversation({
         onNextActions: (eligibility) => {
           eligibilityRef.current = eligibility;
         },
+        // AIC-JA2 — never a global state: it belongs to this response alone.
+        onJournalContext: (used) => {
+          journalUsedRef.current = used;
+        },
 
       });
     },
@@ -216,6 +224,7 @@ export function useCompanionConversation({
       // AIC-J5 — a new accepted turn clears the previous action layer at once.
       eligibilityRef.current = "suppress";
       setNextActionsAllowed(false);
+      journalUsedRef.current = false;
 
       memory.dismiss();
       setLastQuestion(trimmed);
@@ -254,6 +263,7 @@ export function useCompanionConversation({
     boundaryRef.current = null;
     eligibilityRef.current = "suppress";
     setNextActionsAllowed(false);
+    journalUsedRef.current = false;
 
     // The same idempotency key is reused, so a retry cannot store the question
     // twice.

@@ -443,5 +443,31 @@ the digest inside `query`, so `decideSafety` already sees it, and the recap path
 has had no production caller since AIC-J4. `ai-search`, the safety router, AIC-5
 wording, precedence, J2–J5, memory, history, grounding, media, schema, RLS,
 analytics and voice are all unchanged. No deployment. See
-`docs/ai/companion-journal-enrichment-safety.md`. AIC-JA2 not started; voice
-remains paused at AIC-7B.
+`docs/ai/companion-journal-enrichment-safety.md`. Voice remains paused at
+AIC-7B.
+
+## AIC-JA2 — Permissioned background journal awareness (ENGINEERING COMPLETE, NOT ACTIVE)
+
+Text-only background journal awareness through the existing runtime and the same
+two answer surfaces. Server resolver `aiJournalContext.ts` behind two gates —
+`AI_JOURNAL_CONTEXT_ENABLED` plus the person's own
+`profiles.companion_journal_context_enabled` opt-in — reading only under the
+caller's verified token so RLS is the boundary. Server-authoritative lifecycle,
+fail-closed episode isolation, allowlisted user-written text only (no ids, tags,
+titles, tracker values or media), S1 filtering and the S1 bounded renderer.
+
+Invariant: journal may be resolved on the ordinary GREEN model path only;
+RED, CRISIS, rate limiting, kill switch, clarification, unsupported, recap and
+AMBER all perform zero journal reads and report
+`X-Companion-Journal-Context: none`. AIC-5 semantics unchanged. Transparency is
+opaque header metadata plus one line on a completed answer, with no authority
+over anything and nothing persisted.
+
+Stated limitation: `reflections` carries no journey id, so a week row edited
+across pregnancies cannot be proved to belong to the current episode and is
+excluded. Recall is deliberately incomplete rather than possibly wrong.
+
+Not active: both flags OFF, the profiles migration is written up in the doc but
+not applied, nothing deployed. J2–J5, AIC-5, grounding, memory, persistent
+history, media, analytics, schema/RLS elsewhere and voice all unchanged. JA3 not
+started. See `docs/ai/aic-ja2-journal-context.md`.

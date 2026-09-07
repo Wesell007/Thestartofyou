@@ -73,6 +73,18 @@ surfaces show identical IDs, labels, order and destinations. It is a compact
 secondary `nav` labelled "Next steps", with wrapping ~44px link targets and no
 nested interactive controls.
 
+## AIC-J6-R4 runtime findings (local, intercepted)
+
+Verified in a local browser at 390px and 1440px with the `ai-search` response
+boundary intercepted deterministically (no deployment, no production write).
+Two defects were found and fixed:
+
+1. The first resolution of a previously unknown personal journey was treated as
+   a journey transition, which blanked the layer on the first answer of a
+   session. Only a change away from a *known* journey invalidates now.
+2. On `/ask` the layer was rendered inside the optional "More on this" section,
+   so a short answer never showed it. It now belongs to the completed answer.
+
 ## Boundaries
 
 Navigation only. No persistence, no message metadata, no analytics, no schema

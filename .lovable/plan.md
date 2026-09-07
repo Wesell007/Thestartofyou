@@ -35,10 +35,12 @@ No production files are touched for test stability. If verification exposes a ge
 ## 3. Tests for the topic hand-off
 
 Add focused coverage (extending `src/test/companionEntryRemainder.test.ts` or a small companion test file) proving:
-- FirstYearTopicPage exposes `Ask about this topic` and no `Ask about this month`.
+- FirstYearTopicPage exposes `Ask about this topic` and never uses `Ask about this month` as its contextual CTA.
 - Clicking it opens the companion panel and publishes the topic's `aiPrompts` as transient starters.
 - No model call (`useAISearch.ask`) and no hidden user turn on open.
-- No personal First Year resolution triggered by the topic route.
+- Personal-inference invariant (not a "no resolution" invariant): the topic route/content contributes zero personal lifecycle inference — with no saved journey the personal context stays unknown/null, and with a genuine J2-resolved saved First Year journey that personal context is still available and is neither manufactured nor erased by the content entry. No new resolver, cache, Supabase lookup or duplicate personal query.
+- Month page keeps `Ask about this month`; phase page keeps `Ask about this stage`.
+
 
 ## 4. Answer-surface invariant re-scan
 
@@ -52,4 +54,4 @@ Set `roadmap.md` back to `AIC-J4 — IN PROGRESS / FINAL CLOSURE`. Mark `CLOSED 
 
 `npm test` (all pass, 0 timeouts) → typecheck twice (cache-defeated) → `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` → `npm run lint` (must be exactly the 1 pre-existing error / 10 pre-existing warnings baseline, 0 new J4 findings) → `npm run build`. No deployment.
 
-Then return the 34-point delta report and stop.
+Then return the full 43-point delta report (topic hand-off evidence, timeout diagnosis and override scope, test arithmetic, two typechecks, Deno check, lint baseline, build, two-surface invariant, DaySummaryCard status, personal-inference count, contextual labels, unresolved debt, roadmap status, J4/J5 gate) and stop.

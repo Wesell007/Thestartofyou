@@ -468,6 +468,12 @@ serve(async (req) => {
   // kill-switch answer and the clarify/unsupported boundaries — suppresses the
   // ordinary next-action layer. The header is a UI permission derived from a
   // decision that has already been taken; it adds no classification of its own.
+  const suppressNextActions = (response: Response) => {
+    response.headers.set("X-Companion-Next-Actions", "suppress");
+    return response;
+  };
+
+
   const sendControlled = async (answer: string, ctx: ConversationContext | null) => {
     if (ctx) await persistMessage(req, ctx, "assistant", answer);
     const response = sseAnswer(req, answer);

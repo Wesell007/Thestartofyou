@@ -1,105 +1,51 @@
-# AIC-J5 — Journey Next-Action Layer: audit and architecture
+# AIC-J5 — Journey Next-Action Layer (revised V1)
 
-Audit only. No code changed. Scope: TTC, Pregnancy, First Year saved journeys only.
+Saved-journey only. Personal authority through the existing J2 resolver. No content or page actions, no entry/action seed, no text parsing.
 
-## A. Existing saved-journey destinations (repository truth)
+## J5-1 — Opaque eligibility contract
 
-All below are real routes in `src/App.tsx`. Every `/my-*`, `/journey-support`, `/pregnancy-toolkit/*` and `/account*` route is wrapped in `ProtectedRoute` (auth required). Public content routes need no auth.
+- `supabase/functions/ai-search/index.ts`: set `X-Companion-Next-Actions: allow` only on an ordinary completed generative response; set `suppress` on the deterministic RED/CRISIS branch, on clarify/unsupported boundaries, on the kill-switch/controlled answers, and whenever the AMBER path applied. Add the header name to the existing `Access-Control-Expose-Headers` list.
+- No safety category, score, reason, rule or classification is exposed. AIC-5 rules, wording, thresholds and ordering are untouched; the header only reads the decision already made.
+- `useAISearch`: read the header, call a new `onNextActions(eligibility)` option. Unknown, malformed or missing value → `suppress`.
+- `useCompanionConversation`: hold it in a ref for the in-flight request, and expose `nextActionsAllowed` only once the assistant message commits with `status: "complete"`. Cleared on send, retry, stop, error, clear/new conversation and restore.
+- If plumbing reveals a safety architecture conflict, stop before J5-2.
 
-### TTC
-| Action | Route | Auth | Needs saved journey | Type | J5 candidate |
-| --- | --- | --- | --- | --- | --- |
-| Back to My TTC Journey | `/my-ttc-journey` | yes | yes | navigate | YES |
-| Ovulation calculator | `/ovulation-calculator` | no | no | navigate (tool, user submits) | YES |
-| Trying to conceive hub | `/trying-to-conceive` | no | no | navigate | YES (content) |
-| Cycle tracking / ovulation / two-week-wait / tests / fertility / conditions / IVF-and-treatment topics | `/trying-to-conceive/<topic>` | no | no | navigate | YES (content only) |
-| Journey support | `/journey-support` | yes | yes | navigate | YES |
-| Setup TTC | `/setup/trying-to-conceive` | no | n/a | write-initiating | NO (setup, not a next step after an answer) |
+## J5-2 — Registry and resolver
 
-### Pregnancy
-| Action | Route | Auth | Needs saved journey | Type | J5 candidate |
-| --- | --- | --- | --- | --- | --- |
-| View My Week | `/my-week` | yes | yes | navigate | YES |
-| A kept week chapter | `/my-week/:week` | yes | yes + week | navigate | NO for V1 (needs kept-state check) |
-| My Journey | `/my-journey` | yes | yes | navigate | YES |
-| My pregnancy chapter | `/my-pregnancy-chapter` | yes | yes | navigate | secondary |
-| Pregnancy toolkit | `/pregnancy-toolkit` | yes | yes | navigate (tools inside are write flows) | YES |
-| Toolkit items: birth plan, hospital bag, appointments, baby movements, contraction timer, symptom notes, questions for midwife | `/pregnancy-toolkit/<tool>` | yes | yes | navigate to a write flow | secondary, not V1 default |
-| Week guidance | `/pregnancy/week/:week` | no | no | navigate | YES (content) |
-| Trimester pages, pregnancy topic pages | `/pregnancy/...` | no | no | navigate | YES (content) |
-| Due date calculator | `/due-date-calculator` | no | no | navigate | YES (content) |
-| Journal | `/journal`, `/journal-start` | no | no | navigate | secondary |
+`src/lib/companion/journeyNextActions.ts`, pure, closed union of route strings:
 
-### First Year
-| Action | Route | Auth | Needs saved journey | Type | J5 candidate |
-| --- | --- | --- | --- | --- | --- |
-| Open Today | `/my-first-year/today` | yes | yes | navigate | YES |
-| My First Year | `/my-first-year` | yes | yes | navigate | YES |
-| Memories | `/my-first-year/memories` | yes | yes | navigate | YES |
-| Month page | `/first-year/<n>-months` | no | no | navigate | YES (only when age band is unambiguous) |
-| Phase page | `/first-year/0-3-months` etc. | no | no | navigate | YES |
-| Topic pages (feeding, sleep, development, care and safety, recovery, emotional wellbeing, checkups) | `/first-year/<topic>` | no | no | navigate | YES (content) |
-| First Year setup | `/setup/first-year` | yes | n/a | write-initiating | NO |
+```ts
+type JourneyNextAction = { id: JourneyNextActionId; label: string; to: JourneyNextActionRoute };
+resolveJourneyNextActions({ personal, signedIn }): JourneyNextAction[]
+```
 
-Not personal journeys, content only: IVF, postpartum (redirects into First Year), toddler, family, support, preparing for baby.
+- `MAX_NEXT_ACTIONS = 2`, shared across layouts. Deduplicate by exact destination, stable registry order.
+- TTC (any saved stage, `ivfInTreatment` included): `Open My TTC Journey` → `/my-ttc-journey`. Max 1.
+- Pregnancy with valid saved week: `View My Week` → `/my-week`, plus `Read week N guidance` → `/pregnancy/week/N`. Week only from personal context. Unknown week: `Open My Journey` → `/my-journey` only.
+- First Year with unambiguous valid age month: `Open Today` → `/my-first-year/today`, plus `Read month N guidance` → the existing month route. Ambiguous or unknown: `Open My First Year` → `/my-first-year` only.
+- Signed out, or `personal` null/unknown: `[]`. No memories, journal, toolkit, calculator or support actions.
 
-Future opportunity, do not build in J5: no route exists for "add a reflection" as a direct deep link; reflections live inside `/my-week` and First Year Today surfaces. So J5 offers the containing page, never a reflection write.
+## J5-3 — Latest-answer transient state
 
-## B. Post-answer runtime
+- Lives in `CompanionProvider` runtime state only. No storage, no history, no message metadata, no analytics.
+- A new accepted turn clears the action layer immediately, before the next answer arrives.
+- A J2 journey-state change clears the layer; it does not recompute actions for the new lifecycle under the old answer. The next eligible completed answer produces fresh actions.
+- Failed, aborted, timed-out, streaming or suppressed responses produce no actions.
 
-- One shared runtime: `useCompanionConversation` (panel and `/ask`). Completion is committed once in a single effect (`!isLoading && answer.trim() && !committedRef.current`) into `messages` with `status: "complete"`.
-- Aborted (`stop`) and failed requests never commit a message; `error` is separate state. So "completed canonical assistant message" is already an available, shared, unambiguous signal.
-- The panel renders turns via `CompanionMessageList`; `/ask` renders its own layout from the same runtime messages. A shared resolver is therefore feasible with no runtime change.
+## J5-4 / J5-5 — Shared UI and integration
 
-## C. Safety disposition — the one blocker
+`src/components/companion/CompanionNextActions.tsx`, consumed by `CompanionMessageList` (panel) and `/ask`. Compact secondary row using existing companion tokens, group label "Next steps", `nav` with an accessible name, router links, ~44px targets, wraps on mobile, no nested interactive controls. One registry, one resolver, identical IDs and order on both surfaces.
 
-`ai-search` returns structured metadata in headers only: `X-Conversation-Id`, `X-Companion-Boundary` (`clarify` | `unsupported`), `X-Companion-Clarification-Topic`. The deterministic RED/CRISIS branch returns fixed text with **no header**. AMBER is model-side guidance only and is deliberately invisible to the client.
+## J5-6 — Tests and validation
 
-Consequence: the client can identify clarification and unsupported, but **cannot** identify RED/CRISIS without parsing text, which is forbidden.
+Focused suites for: eligibility mapping (standard allow; RED, CRISIS, AMBER, clarify, unsupported, missing/unknown → suppress), authority (saved vs content-only cases for all three journeys, including saved week 24 while reading week 20 and saved month 7 while reading month 4), signed-out and unknown, ambiguous baby age, freshness on TTC → Pregnancy, response lifecycle (clear on send, none on fail/abort/partial/suppressed), panel vs `/ask` parity, dedup/limit/order, zero model, Supabase, mutation and storage effects, and accessibility.
 
-Recommended smallest safe change (proposed, not part of this audit): add one response header `X-Companion-Disposition: urgent | boundary | standard` set on the existing deterministic branch. It exposes no score, no category, no reasoning, no AMBER classification, and no private safety text. That is an `ai-search` contract addition and must be approved as its own slice before J5 UI can ship the safety rule. AMBER stays invisible; ordinary navigation after an AMBER answer is safe because the answer itself carries the escalation wording.
+Then reconcile the 98 files / 1138 tests baseline, `npm test` (all pass, 0 timeouts), two cache-defeated typechecks, `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts`, `npm run lint` (known baseline only), `npm run build`. No deployment.
 
-Blocker count: 1 (RED/CRISIS disposition).
+## Documentation
 
-## D. Recommended architecture
+Update the companion architecture docs with the saved-journey-only V1 scope, personal authority, opaque eligibility contract, latest-answer lifecycle, transition invalidation, parity, navigation-only and the zero-persistence/analytics stance. Update `roadmap.md`.
 
-- Fully client-side and deterministic. No model call, no answer parsing, no question parsing.
-- Registry `src/lib/companion/journeyNextActions.ts` — fixed IDs, fixed destinations from a closed route union. Correct approach: yes.
-- Resolver `resolveJourneyNextActions({ personal, seed, page, signedIn, disposition })` in the same module. Nothing else is passed: no conversation, no answer, no records.
-- Contract: `{ id, label, to, source: "personal" | "entry" | "page" | "generic" }`. `kind` is dropped for V1 because every action is navigation. No arbitrary URLs: `to` comes from the registry only.
-- Precedence: 1) safety disposition gate, 2) authoritative personal journey action, 3) explicit entry/content action, 4) page context action, 5) nothing. Personal outranks content because personal is authoritative; content still contributes at most one action.
-- Deduplication: by destination path first, then by `source` rank (personal wins), then stable registry order.
-- Maximum 3 on desktop, 2 on mobile; prefer 1–2.
-- Applies to the latest completed assistant answer only. No per-turn metadata, no persistence.
+## Untouched
 
-## E. Transient action seed
-
-Needed: YES, small. J4 consumes entry context on the first accepted turn, so J5 needs the origin of the current answer. Recommendation: a `useRef` inside `CompanionProvider` capturing the bounded entry descriptor at submit time and mirrored into provider state for the latest answer only. Replaced on the next send, cleared on route change, close, clear/new conversation, and on a J2 journey-state change. Never sessionStorage, never history, never memory, never database.
-
-## F. Behaviour rules
-
-- Signed out or unknown personal state: zero personal actions; at most one content action from page/entry; otherwise none.
-- Multiple babies or unresolvable age: generic First Year action only, never a month-specific one.
-- RED/CRISIS: all J5 actions suppressed. Clarification: suppressed until resolved. Unsupported: suppressed. Failure/abort/timeout: no actions.
-- TTC → Pregnancy transition: the resolver reads the live J2 personal snapshot through the existing reactive cache, so stale TTC actions disappear immediately with no reload.
-- No writes, no auto-navigation, no analytics, no schema/RLS change, no changes to JourneyContextV1, J2, J3, J4, AIC-5, memory, history, or voice.
-
-## G. UI
-
-A compact row directly beneath the latest completed assistant answer, above the composer, using existing chip/button tokens from `companionStyles`. Visually secondary, labelled as next steps, distinct from J3 starter questions. Keyboard operable links, 44px targets, accessible group label.
-
-## H. Implementation slices (after approval)
-
-1. Safety disposition header in `ai-search` + client plumbing through `useAISearch` → runtime (needs explicit approval).
-2. `journeyNextActions.ts` registry + resolver + unit tests.
-3. Transient action seed in `CompanionProvider`.
-4. Shared `CompanionNextActions` component consumed by panel and `/ask`.
-5. Focused tests: authority, freshness, surface parity, zero model calls, zero mutations, safety suppression, unknown/ambiguous state, limits and dedup, accessibility.
-
-Files likely to change: `src/lib/companion/journeyNextActions.ts` (new), `CompanionProvider.tsx`, `companionContext.ts`, `CompanionMessageList.tsx`, `src/pages/AskPage.tsx`, a new component and tests, plus slice 1 files if approved.
-
-Must remain untouched: `journeySuggestions.ts`, `journeyContext.ts`, `useCompanionPersonalJourney.ts`, `AskAboutThis.tsx`, safety modules, memory, history, voice, schema.
-
-## Verdict
-
-AIC-J5 is SAFE TO BUILD for everything except the RED/CRISIS suppression rule, which depends on slice 1. Recommend approving slice 1 alongside J5, or shipping J5 with actions suppressed for all non-standard responses that the client can already detect and deferring RED-specific handling.
+`journeySuggestions.ts`, `journeyContext.ts`, `useCompanionPersonalJourney.ts`, `AskAboutThis.tsx` and J4 entry semantics, safety modules, prompts, grounding, memory, persistent history, schema/RLS, voice.

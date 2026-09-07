@@ -125,6 +125,14 @@ export function useAISearch() {
         });
       }
 
+      // AIC-J5 — opaque UI permission for the journey next-action layer. It is
+      // reported as soon as the headers arrive, but the runtime only acts on it
+      // once this same response commits as a completed assistant answer.
+      options?.onNextActions?.(
+        readNextActionsEligibility(resp.headers.get(NEXT_ACTIONS_HEADER)),
+      );
+
+
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let buffer = "";

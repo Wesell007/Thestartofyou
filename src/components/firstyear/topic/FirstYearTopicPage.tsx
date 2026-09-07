@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Check, ShieldCheck, ChevronRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import HubAISupport from "@/components/shared/HubAISupport";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import {
   FirstYearTopicConfig,
   FirstYearTopicSlug,

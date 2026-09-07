@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft, Check, ShieldCheck, ChevronRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import HubAISupport from "@/components/shared/HubAISupport";
+import AskAboutThis from "@/components/companion/AskAboutThis";
 import {
   FirstYearTopicConfig,
   FirstYearTopicSlug,
@@ -416,23 +416,49 @@ const FirstYearTopicPage = ({ config }: Props) => {
         })()}
 
         {/* ─── 4. AI SUPPORT ─────────────────────────────────────────── */}
-        <HubAISupport
-          heading={
-            config.side === "baby"
-              ? "Ask about this topic, any time"
-              : "Ask about recovery, any time"
-          }
-          description={
-            config.side === "baby"
-              ? `If something about ${config.title.toLowerCase()} feels unclear, you can ask and get calm, general guidance.`
-              : `If something about ${config.title.toLowerCase()} feels uncertain, you can ask and get gentle, honest guidance.`
-          }
-          suggestions={config.aiPrompts}
-          context={config.title}
-          stageBg={theme.aiBg}
-          stageAccent={theme.aiAccent}
-          stage={config.side === "recovery" ? "recovery" : "first-year"}
-        />
+        {/* AIC-J4: contextual hand-off only. Opens the one companion panel
+            with a bounded CONTENT entry. No inline answer surface, no personal
+            lifecycle inference, no model call merely on open. */}
+        <section
+          className="relative section-spacing overflow-hidden"
+          style={{ backgroundColor: `hsl(var(${theme.aiBg}) / 0.45)` }}
+        >
+          <div
+            className="absolute top-0 left-1/4 w-[500px] h-[400px] rounded-full blur-3xl opacity-30"
+            style={{ backgroundColor: `hsl(var(${theme.aiAccent}) / 0.2)` }}
+            aria-hidden="true"
+          />
+          <div className="container mx-auto px-6 md:px-10 max-w-4xl relative z-10">
+            <p className="stage-label mb-5">Your companion</p>
+            <h2 className="font-serif text-3xl sm:text-4xl text-foreground leading-tight mb-5">
+              {config.side === "baby"
+                ? "Ask about this topic, any time"
+                : "Ask about recovery, any time"}
+            </h2>
+            <p className="font-sans text-base font-light text-muted-foreground leading-relaxed mb-8 max-w-2xl">
+              {config.side === "baby"
+                ? `If something about ${config.title.toLowerCase()} feels unclear, you can ask and get calm, general guidance.`
+                : `If something about ${config.title.toLowerCase()} feels uncertain, you can ask and get gentle, honest guidance.`}
+            </p>
+            <AskAboutThis
+              label="Ask about this topic"
+              entry={{
+                stage: "first-year",
+                journey: "first_year",
+                topic: config.slug,
+                title: config.title,
+              }}
+              suggestions={config.aiPrompts}
+              buttonClassName="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 py-3 font-sans text-[13.5px] font-medium border transition-all hover:-translate-y-[1px]"
+              buttonStyle={{
+                backgroundColor: `hsl(var(${theme.softToken}) / 0.45)`,
+                borderColor: `hsl(var(${theme.aiAccent}) / 0.32)`,
+                color: `hsl(var(${theme.deepToken}))`,
+              }}
+            />
+          </div>
+        </section>
+
 
         {/* ─── 5. RELATED TOPICS ─────────────────────────────────────── */}
         <section className="py-16 md:py-24 bg-parchment">

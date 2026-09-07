@@ -318,7 +318,7 @@ remain content families, not personal journeys.
 - no prompt, AIC-5, grounding, memory, history, voice or `ai-search` change;
   no deployment.
 
-## AIC-J4 — contextual journey AI entry points (CLOSED PASS)
+## AIC-J4 — contextual journey AI entry points (CLOSED PASS — final gate met)
 
 Delivered: shared `AskAboutThis` hand-off, transient `openWithEntry` on the one
 panel, single-use entry consumption at the first accepted turn, and the three
@@ -339,6 +339,17 @@ Closure remainder (must pass before this phase may be marked closed):
 - `DaySummaryCard` converted: 0 direct `useAISearch`, 0 inline answer renderer,
   0 independent conversation state;
 - full answer-path scan proving exactly two AI answer surfaces.
+
+Final closure fixes (complete): `FirstYearTopicPage` converted from the broad
+`HubAISupport` / `AISearchBar` band to the shared `AskAboutThis` hand-off
+("Ask about this topic", panel destination, `config.aiPrompts` as transient
+chips, content-only entry, 0 personal lifecycle inference); `companionSurfaces`
+test suite given the missing `cleanup()` + `localStorage` reset that was
+retaining heavy trees and consent state across cases. No timeout override was
+needed: global Vitest timeout unchanged. Full gate: 98 files / 1138 tests, all
+pass, 0 timeouts; typecheck x2 PASS; Deno `ai-search` check PASS; lint at the
+1 pre-existing error / 10 pre-existing warnings baseline with 0 new findings;
+build PASS; no deployment. AIC-J5 not started; voice paused at AIC-7B.
 
 Scope: TTC, pregnancy, first year. Next: AIC-J5 (not started). Voice remains
 paused at AIC-7B.

@@ -7,8 +7,8 @@
  * personalised naming keeps coming from useCompanionIdentity.
  */
 
-import { describe, expect, it, vi } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 
@@ -29,6 +29,14 @@ const renderAt = (ui: React.ReactElement) =>
   render(<MemoryRouter>{ui}</MemoryRouter>);
 
 const hrefOf = (el: HTMLElement) => el.getAttribute("href");
+
+// Each case mounts a heavy tree (Navbar / Footer / companion provider). Without
+// an explicit unmount the trees accumulate for the whole file, which both slows
+// later cases down and leaves consent state behind for them.
+afterEach(() => {
+  cleanup();
+  window.localStorage.clear();
+});
 
 describe("WC-4 companion entry points", () => {
   it("keeps /ask as the shared destination for inline Ask navigation", () => {

@@ -403,3 +403,27 @@ end-to-end verification: the matching `ai-search` is still not deployed, and
 release remains backend-first through the normal gate.
 
 Voice remains paused at AIC-7B.
+
+AIC-J6 — CLOSED PASS.
+
+## AIC-R1 — Journey AI production activation (CLOSED PASS)
+
+Journey AI — PRODUCTION RELEASED. AIC-J5 — PRODUCTION ACTIVATED.
+
+Backend first: `supabase/functions/ai-search` deployed from validated revision
+`e35d39a0` and verified live (ordinary `allow`; RED, CRISIS, clarify and
+unsupported `suppress`; `X-Companion-Next-Actions` exposed through CORS; no
+safety category, score, rule or reason exposed). Backend rollback target: the
+previous `ai-search` deployment at commit `c2d4264b`.
+
+Matching frontend published to `thestartofyou.com` on 2026-09-07 from HEAD
+`3f2c272f` (a merge of validated `e35d39a0` into `c2d4264b`; the only delta
+against the validated state is the archival rename of the release plan file).
+Frontend rollback target: the previously published build (pre-`3f2c272f`).
+
+Production smoke PASS — see `docs/ai/aic-r1-production-release.md` for the
+recorded checks, evidence and NOT RUNTIME-VERIFIED items.
+
+Unchanged: memory OFF/gated, persistent history OFF/gated, AMBER OFF/gated,
+kill switch untouched, grounding parked at `30B-source-routing-v1`, voice OFF
+and paused at AIC-7B. No schema, RLS, secrets, analytics or persistence added.

@@ -32,6 +32,8 @@ Panel and `/ask` at ~390px and ~1440px, across TTC, Pregnancy with a known week,
 
 Genuine P2 layout defect → minimal fix plus regression coverage. Architectural or safety defect → stop and report before expanding scope.
 
+Environment is binding: the local preview only, with deterministic network interception of the answer response to render representative completed states and eligibility headers. No production data is written, no `ai-search` deployment happens, and the result is reported as runtime composition and interaction proof, never as production end-to-end J5 verification.
+
 ## P3 and documentation
 
 - The duplicate suppress-header assignment in `ai-search` stays as documented accepted debt. No safety-path edit.

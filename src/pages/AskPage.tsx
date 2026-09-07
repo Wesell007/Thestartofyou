@@ -967,7 +967,7 @@ const AskPage = () => {
 
                 <EditorialAnswer markdown={parsed.rest} disableLinks />
 
-                {!isLoading && <CompanionNextActions actions={nextActions} surface="ask" />}
+
 
                 {!isLoading && (
                   <div className="mt-7 border-t border-border/30 pt-5 text-center">

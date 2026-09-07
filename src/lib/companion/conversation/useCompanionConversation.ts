@@ -54,6 +54,12 @@ export interface CompanionConversationRuntime {
   isLoading: boolean;
   error: string | null;
   isRateLimited: boolean;
+  /**
+   * AIC-J5 — true only when the latest committed assistant answer was reported
+   * eligible for the ordinary journey next-action layer. Fails closed.
+   */
+  nextActionsAllowed: boolean;
+
   lastQuestion: string | null;
   /** The account-owned conversation this thread joined, when persisting. */
   conversationId: string | null;
@@ -101,6 +107,12 @@ export function useCompanionConversation({
   // request. Display metadata only; the browser never decides it.
   const boundaryRef = useRef<{ kind: "clarify" | "unsupported"; clarificationTopic?: string } | null>(null);
   const lastClientMessageIdRef = useRef<string | null>(null);
+  // AIC-J5 — the opaque presentation permission for the one in-flight request.
+  // It is never acted on until that same response commits as a completed
+  // answer, and it never leaks into another request.
+  const eligibilityRef = useRef<NextActionsEligibility>("suppress");
+  const [nextActionsAllowed, setNextActionsAllowed] = useState(false);
+
 
   const historyUi = isCompanionHistoryUiEnabled();
   const historyEnabled = historyUi && signedIn;
@@ -151,7 +163,11 @@ export function useCompanionConversation({
         ...(clarification ? { clarification } : {}),
       },
     ]);
+    // AIC-J5 — only a completed canonical answer may host the action layer,
+    // and only when the server permitted it for this very response.
+    setNextActionsAllowed(eligibilityRef.current === "allow" && !clarification);
   }, [isLoading, answer]);
+
 
   const runRequest = useCallback(
     async (question: string, priorMessages: CompanionMessage[], clientMessageId: string) => {
@@ -190,6 +206,10 @@ export function useCompanionConversation({
       committedRef.current = false;
       // AIC-5C — any boundary metadata belongs to one request only.
       boundaryRef.current = null;
+      // AIC-J5 — a new accepted turn clears the previous action layer at once.
+      eligibilityRef.current = "suppress";
+      setNextActionsAllowed(false);
+
       memory.dismiss();
       setLastQuestion(trimmed);
 
@@ -225,6 +245,9 @@ export function useCompanionConversation({
     if (!lastQuestion || isLoading) return;
     committedRef.current = false;
     boundaryRef.current = null;
+    eligibilityRef.current = "suppress";
+    setNextActionsAllowed(false);
+
     // The same idempotency key is reused, so a retry cannot store the question
     // twice.
     const clientMessageId = lastClientMessageIdRef.current ?? newMessageId();
@@ -276,6 +299,8 @@ export function useCompanionConversation({
       isLoading,
       error,
       isRateLimited: looksRateLimited(error),
+      nextActionsAllowed,
+
       lastQuestion,
       conversationId,
       historyEnabled,

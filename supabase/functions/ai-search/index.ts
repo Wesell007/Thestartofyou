@@ -491,7 +491,7 @@ serve(async (req) => {
     try {
       return await sendControlled(safety.answer, ctx);
     } catch {
-      return sseAnswer(req, safety.answer);
+      return suppressNextActions(sseAnswer(req, safety.answer));
     }
   }
 
@@ -668,8 +668,13 @@ serve(async (req) => {
         ...conversationHeader,
         "Content-Type": "text/event-stream",
         "X-Content-Type-Options": "nosniff",
+        // AIC-J5: the ordinary generative path. The next-action layer is only
+        // permitted when no AMBER or cautious-uncertainty guidance was applied
+        // to this answer. The value carries nothing about which of those it was.
+        "X-Companion-Next-Actions": amberGuidance ? "suppress" : "allow",
       },
     });
+
 
   } catch (error) {
     if (req.signal.aborted) return json(req, { error: "Request cancelled." }, 499);

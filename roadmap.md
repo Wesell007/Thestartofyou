@@ -427,3 +427,21 @@ recorded checks, evidence and NOT RUNTIME-VERIFIED items.
 Unchanged: memory OFF/gated, persistent history OFF/gated, AMBER OFF/gated,
 kill switch untouched, grounding parked at `30B-source-routing-v1`, voice OFF
 and paused at AIC-7B. No schema, RLS, secrets, analytics or persistence added.
+
+## AIC-JA-S1 — Journal & enrichment safety pre-flight (CLOSED PASS)
+
+Trust-boundary hardening ahead of journal retrieval. Shipped two shared,
+deliberately unwired modules: `enrichmentSafety.ts` (fail-closed
+`assessEnrichmentText` / `filterBackgroundEntries` over the existing
+`decideSafety` authority; background material is only ever used or dropped,
+never escalated) and `enrichmentRendering.ts` (bounded, escaped
+`JournalContextV1` renderer plus the trusted "observation, not instruction"
+rules). 19 focused tests.
+
+JA1's day-recap bypass finding did not reproduce: `buildDaySummaryQuery` puts
+the digest inside `query`, so `decideSafety` already sees it, and the recap path
+has had no production caller since AIC-J4. `ai-search`, the safety router, AIC-5
+wording, precedence, J2–J5, memory, history, grounding, media, schema, RLS,
+analytics and voice are all unchanged. No deployment. See
+`docs/ai/companion-journal-enrichment-safety.md`. AIC-JA2 not started; voice
+remains paused at AIC-7B.

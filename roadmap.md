@@ -351,5 +351,30 @@ pass, 0 timeouts; typecheck x2 PASS; Deno `ai-search` check PASS; lint at the
 1 pre-existing error / 10 pre-existing warnings baseline with 0 new findings;
 build PASS; no deployment. AIC-J5 not started; voice paused at AIC-7B.
 
-Scope: TTC, pregnancy, first year. Next: AIC-J5 (not started). Voice remains
-paused at AIC-7B.
+Scope: TTC, pregnancy, first year. Next: AIC-J5. Voice remains paused at
+AIC-7B.
+
+## AIC-J5 — journey next-action layer (revised V1, engineering complete)
+
+Delivered: an opaque `X-Companion-Next-Actions: allow | suppress` permission on
+every `ai-search` response (suppress for deterministic RED/CRISIS, kill-switch
+and controlled answers, clarify/unsupported boundaries and AMBER; allow only on
+an ordinary generative response), fail-closed client reading, response-specific
+eligibility exposed only after the same answer commits complete, the closed
+deterministic registry and pure resolver in
+`src/lib/companion/journeyNextActions.ts` (saved TTC / pregnancy / first year
+only, max 2, exact-destination dedupe, navigation only), transient latest-answer
+state cleared on send, retry, stop, error, new/cleared conversation, restore and
+any J2 journey change, and the shared `CompanionNextActions` UI on both the
+panel and `/ask` with identical IDs, labels and order.
+
+No safety category, score, rule or reason reaches the browser. No content or
+page actions, no J4 entry/action seed, no question or answer parsing, no
+model-generated actions, no persistence, no message metadata, no analytics, no
+schema/RLS, prompt, grounding, memory, history, J2/J3/J4 or voice change.
+
+Validation: 15 new focused tests; full suite, typechecks, Deno `ai-search`
+check, lint at the known baseline and build all recorded below. No deployment:
+engineering completion is not production activation.
+
+Voice remains paused at AIC-7B. AIC-J6 not started.

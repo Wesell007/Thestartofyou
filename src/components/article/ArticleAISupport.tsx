@@ -22,7 +22,7 @@ const ArticleAISupport = ({ data }: Props) => {
               Still unsure about something?
             </h2>
             <p className="font-sans text-[13px] sm:text-[14px] font-light text-muted-foreground leading-relaxed max-w-md mx-auto">
-              Ask anything about this topic and get guidance tailored to your stage.
+              Ask anything about this topic and get general guidance on what you are reading.
             </p>
           </div>
 

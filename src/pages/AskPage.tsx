@@ -1043,10 +1043,10 @@ const AskPage = () => {
                 </div>
               </section>
 
-              {/* ── Continue your journey ── */}
+              {/* ── Keep exploring — generic destinations, never personalised ── */}
               <section>
                 <div className="mb-3 flex items-center gap-3">
-                  <span className={labelClass}>Continue your journey</span>
+                  <span className={labelClass}>Keep exploring</span>
                   <span className="h-px flex-1 bg-border/25" />
                 </div>
                 <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">

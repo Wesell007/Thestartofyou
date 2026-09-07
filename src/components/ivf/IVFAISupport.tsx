@@ -37,7 +37,7 @@ const IVFAISupport = () => {
               Ask anything about your IVF journey
             </h2>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-6">
-              IVF can bring more questions than answers, especially during waiting periods. Ask about your stage, what to expect, or anything that has been on your mind.
+              IVF can bring more questions than answers, especially during waiting periods. Ask about this stage, what to expect, or anything that has been on your mind.
             </p>
 
             {/* Pull-quote */}

@@ -518,9 +518,13 @@ const AskPage = () => {
   const lastPersonalRef = useRef(personalJourney);
   useEffect(() => {
     if (lastPersonalRef.current === personalJourney) return;
+    const previous = lastPersonalRef.current;
     lastPersonalRef.current = personalJourney;
-    setJourneyInvalidated(true);
+    // The first resolution of an unknown journey is not a transition: nothing
+    // stale existed. Only a change away from a known journey invalidates.
+    if (previous !== null) setJourneyInvalidated(true);
   }, [personalJourney]);
+
   useEffect(() => {
     if (!conversation.nextActionsAllowed) setJourneyInvalidated(false);
   }, [conversation.nextActionsAllowed]);

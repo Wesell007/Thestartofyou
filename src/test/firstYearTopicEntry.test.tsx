@@ -11,6 +11,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 const ask = vi.fn(async (..._args: unknown[]) => {});
 const resolvePersonal = vi.fn(async () => null as unknown);
@@ -75,6 +76,7 @@ const Probe = () => {
 
 const mount = () =>
   render(
+    <HelmetProvider>
     <MemoryRouter initialEntries={["/first-year/feeding"]}>
       <CompanionProvider>
         <Routes>
@@ -89,7 +91,8 @@ const mount = () =>
           />
         </Routes>
       </CompanionProvider>
-    </MemoryRouter>,
+    </MemoryRouter>
+    </HelmetProvider>,
   );
 
 const lastContext = () => {

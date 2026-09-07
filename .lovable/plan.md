@@ -1,38 +1,40 @@
-# AIC-JA2 — Closure Remediation Only
+# AIC-JA2-M1 — Inert Schema Readiness
 
-Two missing closure artefacts, no behaviour change, no deployment, no migration execution, both journal flags stay OFF.
+One additive column, nothing else. No deployment, no flag change, no behaviour change.
 
-## 1. Migration file as a source artefact
-
-Create one new file in `supabase/migrations/`, matching the existing timestamp naming convention (`YYYYMMDDHHMMSS_<uuid>.sql`), containing exactly:
+## 1. Managed migration (single statement)
 
 ```sql
 ALTER TABLE public.profiles
   ADD COLUMN companion_journal_context_enabled boolean NOT NULL DEFAULT false;
 ```
 
-Nothing else: no table, policy, grant, trigger, function, index, or unrelated change. Written with the file-write tool only — the migration execution tool will not be used, so nothing runs against the database. Migration applied: NO.
+No tables, policies, grants, triggers, functions or indexes. Not batched with anything else. Applied through the platform migration workflow only.
 
-## 2. Canonical Supabase type
+## 2. Post-migration verification
 
-In `src/integrations/supabase/types.ts`, add to the `profiles` block only:
+Read back from the database: column exists, type boolean, NOT NULL yes, default false, all existing profile rows false, `profiles` policies unchanged, no unrelated schema drift. No customer journal text is read; no profile preference values are modified.
 
-- `Row`: `companion_journal_context_enabled: boolean`
-- `Insert`: `companion_journal_context_enabled?: boolean`
-- `Update`: `companion_journal_context_enabled?: boolean`
+## 3. Canonical types
 
-Alphabetical placement after `companion_tone`, matching generated-type conventions. No other table or definition touched.
+Let the managed workflow regenerate `src/integrations/supabase/types.ts`. Expected material change: `companion_journal_context_enabled` as `boolean` in Row and optional in Insert/Update on the `profiles` block only. If regeneration also alters unrelated generated definitions because the checked-in file is stale, stop and report the exact diff before accepting it.
 
-Then remove the temporary local shape in `src/lib/companion/journal/journalPermission.ts` (the `JournalPermissionRow` / `JournalPermissionTable` interfaces and the `as unknown as` cast), calling `supabase.from("profiles")` directly with the same select, `.eq("user_id", ...)`, `.maybeSingle()`, and the same one-column `.update()`. Same runtime behaviour, same thrown errors, same narrow single-column write. Existing tests mock this module, so their expectations are unchanged. If removing the workaround changes typing behaviour in any way, the workaround stays and the reason is reported.
+## 4. Remove the temporary type workaround
 
-## 3. Explicitly unchanged
+In `src/lib/companion/journal/journalPermission.ts`, delete `JournalPermissionRow`, `JournalPermissionTable` and the `as unknown as` cast, calling `supabase.from("profiles")` directly with the identical select, `.eq("user_id", ...)`, `.maybeSingle()`, one-column update and thrown-error semantics. If canonical typing does not permit clean removal, the workaround stays and the exact compiler reason is reported. Typing is never weakened to force removal.
 
-`aiJournalContext.ts`, `enrichmentSafety.ts`, `enrichmentRendering.ts`, pregnancy week logic, `ai-search` safety ordering, allowlists, episode isolation, header semantics, Account copy, transparency UI, J2–J5, memory, history, grounding, voice, media, analytics.
+## 5. Documentation
 
-## 4. Revalidation
+Update `docs/ai/aic-ja2-journal-context.md` so schema readiness and feature activation are clearly distinct: schema ready YES, migration applied YES, feature active NO, server flag OFF, client flag OFF, backend deployed NO, frontend deployed NO, legal/privacy gate OPEN.
 
-`npm test` (report before/after counts and timeouts), typecheck twice, direct Deno checks of `ai-search/index.ts`, `aiJournalContext.ts`, `pregnancyWeek.ts`, `enrichmentSafety.ts`, `enrichmentRendering.ts`, lint (expect the known baseline: 1 error, 10 warnings, 0 new), and build.
+## 6. Explicitly unchanged
 
-## 5. Report
+`aiJournalContext.ts`, `enrichmentSafety.ts`, `enrichmentRendering.ts`, pregnancy week logic, `ai-search` ordering, AIC-5, allowlists, episode isolation, header and transparency semantics, J2–J5, memory, history, grounding, media, analytics, voice. JA3 not started. Voice paused. Neither journal flag is enabled, not even temporarily.
 
-Return the full 105-field AIC-JA2 completion report, then stop. Target closure: AIC-JA2 — ENGINEERING CLOSED PASS; journal text awareness engineering-ready, production OFF, migration not applied, nothing deployed.
+## 7. Revalidation
+
+`npm test` (before/after arithmetic, 0 timeouts), typecheck twice, direct Deno checks of `ai-search/index.ts`, `aiJournalContext.ts`, `pregnancyWeek.ts`, `enrichmentSafety.ts`, `enrichmentRendering.ts`, lint against the known baseline (1 error, 10 warnings, 0 new), and build.
+
+## 8. Report
+
+Return the full 105-field AIC-JA2 report plus the schema-readiness evidence, then stop.

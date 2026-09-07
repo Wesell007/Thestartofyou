@@ -17,7 +17,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAISearch } from "@/hooks/useAISearch";
+import { useAISearch, type NextActionsEligibility } from "@/hooks/useAISearch";
 import { buildCompanionRequest, type CompanionMode } from "@/lib/companion/companionRequest";
 import { clarificationDisplay } from "@/lib/companion/clarificationDisplay";
 import {
@@ -194,6 +194,11 @@ export function useCompanionConversation({
         onBoundary: (boundary) => {
           boundaryRef.current = boundary;
         },
+        // AIC-J5 — recorded for this response only; acted on after it commits.
+        onNextActions: (eligibility) => {
+          eligibilityRef.current = eligibility;
+        },
+
       });
     },
     [ask, context, conversationId, historyEnabled, mode, resolveJourneyContext],
@@ -259,11 +264,16 @@ export function useCompanionConversation({
   const stop = useCallback(() => {
     reset();
     committedRef.current = true;
+    // AIC-J5 — an aborted stream never commits, so it never shows actions.
+    eligibilityRef.current = "suppress";
+    setNextActionsAllowed(false);
   }, [reset]);
 
   const endThread = useCallback(() => {
     reset();
     committedRef.current = true;
+    eligibilityRef.current = "suppress";
+    setNextActionsAllowed(false);
     setMessages([]);
     setLastQuestion(null);
     setConversationId(null);
@@ -284,6 +294,8 @@ export function useCompanionConversation({
     (id: string, restored: CompanionMessage[]) => {
       reset();
       committedRef.current = true;
+      eligibilityRef.current = "suppress";
+      setNextActionsAllowed(false);
       setMessages(restored);
       setConversationId(id);
       setLastQuestion(null);
@@ -291,6 +303,7 @@ export function useCompanionConversation({
     },
     [reset],
   );
+
 
   return useMemo(
     () => ({
@@ -329,6 +342,8 @@ export function useCompanionConversation({
       lastQuestion,
       memory,
       messages,
+      nextActionsAllowed,
+
       newConversation,
       restoreConversation,
       retry,

@@ -61,7 +61,9 @@ describe("CompanionNextActions", () => {
       .getAllByRole("link")
       .map((link) => `${link.textContent}|${link.getAttribute("href")}`);
     expect(askLinks).toEqual(panelLinks);
+  });
 });
+
 
 describe("mobile structure", () => {
   // AIC-J6-R3 — structural invariants that keep the layer usable on a narrow

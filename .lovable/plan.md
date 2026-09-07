@@ -35,10 +35,12 @@ No production files are touched for test stability. If verification exposes a ge
 ## 3. Tests for the topic hand-off
 
 Add focused coverage (extending `src/test/companionEntryRemainder.test.ts` or a small companion test file) proving:
-- FirstYearTopicPage exposes `Ask about this topic` and no `Ask about this month`.
+- FirstYearTopicPage exposes `Ask about this topic` and never uses `Ask about this month` as its contextual CTA.
 - Clicking it opens the companion panel and publishes the topic's `aiPrompts` as transient starters.
 - No model call (`useAISearch.ask`) and no hidden user turn on open.
-- No personal First Year resolution triggered by the topic route.
+- Personal-inference invariant (not a "no resolution" invariant): the topic route/content contributes zero personal lifecycle inference — with no saved journey the personal context stays unknown/null, and with a genuine J2-resolved saved First Year journey that personal context is still available and is neither manufactured nor erased by the content entry. No new resolver, cache, Supabase lookup or duplicate personal query.
+- Month page keeps `Ask about this month`; phase page keeps `Ask about this stage`.
+
 
 ## 4. Answer-surface invariant re-scan
 

@@ -55,8 +55,12 @@ const responseHeaders = (req: Request) => {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
     // AIC-4: lets the browser learn which stored conversation an answer joined.
     // AIC-5C: explicit structured boundary metadata — never encoded in prose.
+    // AIC-J5: an opaque presentation permission. It says only whether the
+    // ordinary journey next-action UI may render, and never carries a safety
+    // state, category, score, rule, reason or classifier result.
     "Access-Control-Expose-Headers":
-      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic",
+      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions",
+
 
 
     "Access-Control-Allow-Methods": "POST, OPTIONS",

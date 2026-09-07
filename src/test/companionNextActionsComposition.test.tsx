@@ -153,6 +153,27 @@ describe("eligibility → runtime → UI", () => {
     expect(screen.getByRole("link", { name: "Read week 24 guidance" })).toBeInTheDocument();
   });
 
+  it("shows actions on the very first answer after a cold personal-journey cache", async () => {
+    // AIC-J6-R4 — regression: the first resolution of a previously unknown
+    // journey is not a transition, so it must not blank the action layer.
+    mockResponse({ eligibility: "allow" });
+    let resolvePersonal: (value: PersonalJourneyContextV1) => void = () => {};
+    resolvePersonalJourneyContext.mockImplementation(
+      () => new Promise((resolve) => {
+        resolvePersonal = resolve as (value: PersonalJourneyContextV1) => void;
+      }),
+    );
+    await mount();
+    await send();
+    await act(async () => {
+      resolvePersonal(PREGNANCY);
+      await Promise.resolve();
+    });
+    await waitFor(() =>
+      expect(screen.getByRole("link", { name: "View My Week" })).toBeInTheDocument(),
+    );
+  });
+
   it("renders nothing when the server suppressed this response", async () => {
     mockResponse({ eligibility: "suppress" });
     await mount();

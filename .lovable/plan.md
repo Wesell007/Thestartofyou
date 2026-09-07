@@ -54,4 +54,4 @@ Set `roadmap.md` back to `AIC-J4 — IN PROGRESS / FINAL CLOSURE`. Mark `CLOSED 
 
 `npm test` (all pass, 0 timeouts) → typecheck twice (cache-defeated) → `DENO_DIR=/tmp/denodir deno check --no-lock supabase/functions/ai-search/index.ts` → `npm run lint` (must be exactly the 1 pre-existing error / 10 pre-existing warnings baseline, 0 new J4 findings) → `npm run build`. No deployment.
 
-Then return the 34-point delta report and stop.
+Then return the full 43-point delta report (topic hand-off evidence, timeout diagnosis and override scope, test arithmetic, two typechecks, Deno check, lint baseline, build, two-surface invariant, DaySummaryCard status, personal-inference count, contextual labels, unresolved debt, roadmap status, J4/J5 gate) and stop.

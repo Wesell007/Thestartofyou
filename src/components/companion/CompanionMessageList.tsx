@@ -12,6 +12,7 @@ import {
   sanitiseAnswerForDisplay,
 } from "@/lib/aiAnswerSafety";
 import { useCompanion } from "./CompanionProvider";
+import { CompanionNextActions } from "./CompanionNextActions";
 import { companionStyles } from "./companionStyles";
 
 export const COMPANION_ERROR_COPY =
@@ -20,7 +21,18 @@ export const COMPANION_RATE_LIMIT_COPY =
   "You have asked a few questions quickly. Give it a moment, then try again.";
 
 export default function CompanionMessageList() {
-  const { turns, streamingAnswer, isLoading, error, isRateLimited, retry, send } = useCompanion();
+  const {
+    turns,
+    streamingAnswer,
+    isLoading,
+    error,
+    isRateLimited,
+    retry,
+    send,
+    nextActions,
+  } = useCompanion();
+  // AIC-J5 — the layer belongs to the latest completed answer only.
+  const latestAnswerId = [...turns].reverse().find((turn) => turn.role === "assistant")?.id ?? null;
   const endRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -60,6 +72,9 @@ export default function CompanionMessageList() {
             <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/70">
               {APPROVED_SOURCES_TRUST_LINE}
             </p>
+            {turn.id === latestAnswerId && !isLoading && !streamingAnswer ? (
+              <CompanionNextActions actions={nextActions} surface="companion" />
+            ) : null}
           </div>
         ),
       )}

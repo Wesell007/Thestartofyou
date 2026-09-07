@@ -8,6 +8,7 @@
  */
 
 import { createContext } from "react";
+import type { JourneyNextAction } from "@/lib/companion/journeyNextActions";
 import type { CompanionMode } from "@/lib/companion/companionMode";
 import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
@@ -55,6 +56,11 @@ export interface CompanionContextValue {
   error: string | null;
   isRateLimited: boolean;
   starters: string[];
+  /**
+   * AIC-J5 — saved-journey navigation shown under the latest completed answer
+   * only, and only when the server permitted the layer for that response.
+   */
+  nextActions: JourneyNextAction[];
   /** The chosen companion name, or null when the person never set one. */
   companionName: string | null;
   context: string;

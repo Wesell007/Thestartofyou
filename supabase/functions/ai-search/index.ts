@@ -55,8 +55,12 @@ const responseHeaders = (req: Request) => {
     "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
     // AIC-4: lets the browser learn which stored conversation an answer joined.
     // AIC-5C: explicit structured boundary metadata — never encoded in prose.
+    // AIC-J5: an opaque presentation permission. It says only whether the
+    // ordinary journey next-action UI may render, and never carries a safety
+    // state, category, score, rule, reason or classifier result.
     "Access-Control-Expose-Headers":
-      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic",
+      "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions",
+
 
 
     "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -460,12 +464,24 @@ serve(async (req) => {
     return { ok: true as const, ctx: setup.ctx };
   };
 
+  // AIC-J5: every controlled answer — deterministic RED/CRISIS, the paused
+  // kill-switch answer and the clarify/unsupported boundaries — suppresses the
+  // ordinary next-action layer. The header is a UI permission derived from a
+  // decision that has already been taken; it adds no classification of its own.
+  const suppressNextActions = (response: Response) => {
+    response.headers.set("X-Companion-Next-Actions", "suppress");
+    return response;
+  };
+
+
   const sendControlled = async (answer: string, ctx: ConversationContext | null) => {
     if (ctx) await persistMessage(req, ctx, "assistant", answer);
     const response = sseAnswer(req, answer);
     if (ctx) response.headers.set("X-Conversation-Id", ctx.conversationId);
+    response.headers.set("X-Companion-Next-Actions", "suppress");
     return response;
   };
+
 
   if (isDeterministicSafetyDecision(safety)) {
     // No model call, no grounding fetch, no journey/memory/history enrichment,
@@ -481,7 +497,7 @@ serve(async (req) => {
     try {
       return await sendControlled(safety.answer, ctx);
     } catch {
-      return sseAnswer(req, safety.answer);
+      return suppressNextActions(sseAnswer(req, safety.answer));
     }
   }
 
@@ -658,8 +674,13 @@ serve(async (req) => {
         ...conversationHeader,
         "Content-Type": "text/event-stream",
         "X-Content-Type-Options": "nosniff",
+        // AIC-J5: the ordinary generative path. The next-action layer is only
+        // permitted when no AMBER or cautious-uncertainty guidance was applied
+        // to this answer. The value carries nothing about which of those it was.
+        "X-Companion-Next-Actions": amberGuidance ? "suppress" : "allow",
       },
     });
+
 
   } catch (error) {
     if (req.signal.aborted) return json(req, { error: "Request cancelled." }, 499);

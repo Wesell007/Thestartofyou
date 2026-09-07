@@ -26,6 +26,7 @@ import { shouldShowCompanionLauncher } from "@/lib/companion/companionSurface";
 import { buildCompanionPanelContext } from "@/lib/companion/companionPanelContext";
 import { companionStarters } from "@/lib/companion/companionStarters";
 import { resolveJourneySuggestions, MAX_SUGGESTIONS } from "@/lib/companion/journeySuggestions";
+import { resolveJourneyNextActions } from "@/lib/companion/journeyNextActions";
 
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import {
@@ -129,6 +130,32 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   }, [open, clearEntry]);
 
 
+  // AIC-J5 — a J2 journey change invalidates the layer for the answer already
+  // on screen. Actions for a new lifecycle are never attached retroactively to
+  // an older answer; the next eligible completed answer produces fresh ones.
+  const [journeyInvalidated, setJourneyInvalidated] = useState(false);
+  const lastPersonalRef = useRef(personalJourney);
+  useEffect(() => {
+    if (lastPersonalRef.current === personalJourney) return;
+    lastPersonalRef.current = personalJourney;
+    setJourneyInvalidated(true);
+  }, [personalJourney]);
+  useEffect(() => {
+    // Every new turn clears eligibility first, which also clears the block.
+    if (!conversation.nextActionsAllowed) setJourneyInvalidated(false);
+  }, [conversation.nextActionsAllowed]);
+
+  const nextActions = useMemo(
+    () =>
+      conversation.nextActionsAllowed && !journeyInvalidated
+        ? resolveJourneyNextActions({
+            personal: personalJourney,
+            signedIn: conversation.signedIn,
+          })
+        : [],
+    [conversation.nextActionsAllowed, conversation.signedIn, journeyInvalidated, personalJourney],
+  );
+
   const turns = useMemo<CompanionTurn[]>(
     () =>
       conversation.messages.map((message) => ({
@@ -166,6 +193,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
             : companionStarters(mode),
 
 
+      nextActions,
       companionName: identity.name,
       context,
       send: conversation.send,
@@ -188,6 +216,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       mode,
       visible,
       turns,
+      nextActions,
       conversation,
       identity.name,
       context,

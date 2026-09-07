@@ -31,7 +31,25 @@ export type AISearchOptions = {
    * and no safety state, score or reasoning is transported here.
    */
   onBoundary?: (boundary: { kind: "clarify" | "unsupported"; clarificationTopic?: string }) => void;
+  /**
+   * AIC-J5 — opaque presentation permission for the journey next-action layer.
+   * It answers only "may the ordinary next-action UI render for this response?"
+   * and carries no safety state, category, score, rule or reason. Missing,
+   * unknown or malformed values fail closed as `suppress`.
+   */
+  onNextActions?: (eligibility: NextActionsEligibility) => void;
 };
+
+/** AIC-J5 — the only two values the browser will ever act on. */
+export type NextActionsEligibility = "allow" | "suppress";
+
+export const NEXT_ACTIONS_HEADER = "X-Companion-Next-Actions";
+
+/** Fail closed: anything that is not exactly `allow` suppresses the layer. */
+export const readNextActionsEligibility = (
+  value: string | null | undefined,
+): NextActionsEligibility => (value?.trim().toLowerCase() === "allow" ? "allow" : "suppress");
+
 
 export function useAISearch() {
   const [answer, setAnswer] = useState("");
@@ -106,6 +124,14 @@ export function useAISearch() {
           clarificationTopic: resp.headers.get("X-Companion-Clarification-Topic") ?? undefined,
         });
       }
+
+      // AIC-J5 — opaque UI permission for the journey next-action layer. It is
+      // reported as soon as the headers arrive, but the runtime only acts on it
+      // once this same response commits as a completed assistant answer.
+      options?.onNextActions?.(
+        readNextActionsEligibility(resp.headers.get(NEXT_ACTIONS_HEADER)),
+      );
+
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();

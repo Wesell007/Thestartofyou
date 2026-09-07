@@ -516,7 +516,7 @@ describe("nothing internal leaks to the client", () => {
       }
       const exposed = response.headers.get("Access-Control-Expose-Headers") ?? "";
       expect(exposed).toBe(
-        "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic",
+        "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions",
       );
     }
   });

@@ -1,0 +1,71 @@
+# Companion journey next actions (AIC-J5, V1)
+
+Engineering status: implemented and validated. Production activation status:
+the layer is live in code but only ever renders for a signed-in person with a
+saved journey, on an answer the server explicitly permitted. Nothing about the
+existing answer path, safety, grounding, memory or history changed.
+
+## Scope
+
+Strictly the three saved personal lifecycles: trying to conceive, pregnancy,
+first year. Content families (IVF, preparing for baby, postpartum, toddler,
+family, support) never produce actions. There is no content or page action
+layer, no entry/action seed, no question parsing, no answer parsing and no
+model-generated action.
+
+## Eligibility — an opaque permission
+
+`ai-search` sets `X-Companion-Next-Actions: allow | suppress` (exposed through
+CORS). It is a UI permission derived from a decision already taken, and never
+carries a safety state, category, score, rule, threshold or reason.
+
+- `allow`: an ordinary generative response with no AMBER or cautious
+  uncertainty guidance applied.
+- `suppress`: deterministic RED/CRISIS answers, the kill-switch/controlled
+  answers, clarify and unsupported boundaries, and AMBER responses.
+
+The browser fails closed: missing, unknown or malformed values are `suppress`
+(`readNextActionsEligibility` in `useAISearch`).
+
+## Lifecycle
+
+Eligibility is held for one in-flight request only, in a ref. Actions become
+visible only when that same response commits as a completed assistant message.
+
+- A new accepted turn, a retry, a stop, a new/cleared conversation and a
+  restored thread all clear the layer immediately.
+- Failed, aborted, timed-out, streaming, partial and suppressed responses
+  render no actions.
+- A J2 journey-state change clears the layer. Actions for a new lifecycle are
+  never attached retroactively to an older answer; the next eligible completed
+  answer produces fresh ones.
+
+## Registry and resolver
+
+`src/lib/companion/journeyNextActions.ts` is a closed registry with a pure
+resolver, `resolveJourneyNextActions({ personal, signedIn })`. Personal state
+comes only from the authoritative J2 resolver.
+
+| Saved state | Actions |
+| --- | --- |
+| TTC, any stage (treatment included) | `Open My TTC Journey` → `/my-ttc-journey` |
+| Pregnancy, valid saved week N | `View My Week` → `/my-week`, `Read week N guidance` → `/pregnancy/week/N` |
+| Pregnancy, unknown week | `Open My Journey` → `/my-journey` |
+| First year, unambiguous saved month N | `Open Today` → `/my-first-year/today`, `Read month N guidance` → the existing month route |
+| First year, ambiguous or unknown month | `Open My First Year` → `/my-first-year` |
+| Signed out, or no saved journey | none |
+
+At most two actions (`MAX_NEXT_ACTIONS`), stable registry order, deduplicated
+by exact destination.
+
+## Presentation
+
+`CompanionNextActions` is shared by the panel message list and `/ask`, so both
+surfaces show identical IDs, labels, order and destinations. It is a compact
+secondary `nav` labelled "Next steps", with wrapping ~44px link targets and no
+nested interactive controls.
+
+## Boundaries
+
+Navigation only. No persistence, no message metadata, no analytics, no schema
+or RLS change, no prompt, grounding, memory, history, J2/J3/J4 or voice change.

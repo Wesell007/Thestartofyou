@@ -9,6 +9,8 @@ import Footer from "@/components/layout/Footer";
 import { useCompanionConversation } from "@/lib/companion/conversation/useCompanionConversation";
 import CompanionMemoryPrompt from "@/components/companion/CompanionMemoryPrompt";
 import { useCompanionPersonalJourney } from "@/hooks/useCompanionPersonalJourney";
+import { resolveJourneyNextActions } from "@/lib/companion/journeyNextActions";
+import { CompanionNextActions } from "@/components/companion/CompanionNextActions";
 import { buildEntryContext, buildJourneyContext } from "@/lib/companion/journeyContext";
 import { resolveJourneySuggestions } from "@/lib/companion/journeySuggestions";
 
@@ -509,6 +511,35 @@ const AskPage = () => {
   const safeAnswer = sanitiseAnswerForDisplay(answer, { isStreaming: isLoading });
   const parsed = safeAnswer ? parseAnswer(safeAnswer) : null;
   const isDone = answer && !isLoading;
+
+  // AIC-J5 — identical registry, resolver and ordering as the panel. A J2
+  // journey change invalidates the layer for the answer already on screen.
+  const [journeyInvalidated, setJourneyInvalidated] = useState(false);
+  const lastPersonalRef = useRef(personalJourney);
+  useEffect(() => {
+    if (lastPersonalRef.current === personalJourney) return;
+    lastPersonalRef.current = personalJourney;
+    setJourneyInvalidated(true);
+  }, [personalJourney]);
+  useEffect(() => {
+    if (!conversation.nextActionsAllowed) setJourneyInvalidated(false);
+  }, [conversation.nextActionsAllowed]);
+  const nextActions = useMemo(
+    () =>
+      conversation.nextActionsAllowed && !journeyInvalidated && !isLoading
+        ? resolveJourneyNextActions({
+            personal: personalJourney,
+            signedIn: conversation.signedIn,
+          })
+        : [],
+    [
+      conversation.nextActionsAllowed,
+      conversation.signedIn,
+      isLoading,
+      journeyInvalidated,
+      personalJourney,
+    ],
+  );
   const hasQuery = Boolean(query);
 
   // ── Welcome state (no query yet) ──
@@ -931,6 +962,8 @@ const AskPage = () => {
                 </div>
 
                 <EditorialAnswer markdown={parsed.rest} disableLinks />
+
+                {!isLoading && <CompanionNextActions actions={nextActions} surface="ask" />}
 
                 {!isLoading && (
                   <div className="mt-7 border-t border-border/30 pt-5 text-center">

@@ -505,3 +505,6 @@ coverage). Full suite 111 files / 1262 tests, zero timeouts; typecheck twice,
 Deno check, build clean; lint at known baseline. Both flags OFF, not deployed,
 no schema change. Activation and rollback runbooks prepared, not executed.
 See `docs/ai/aic-ja4-text-journal-release-gate.md`.
+
+Journal Awareness Human Review Package — PREPARED / AWAITING HUMAN LEGAL-PRIVACY REVIEW
+See `docs/ai/journal-awareness-human-review-package.md`.

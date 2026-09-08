@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import { MemoryRouter } from "react-router-dom";
 
@@ -61,5 +61,17 @@ describe("homepage journey evolution", () => {
       "content",
       "Personalised guidance, journalling and a companion for trying to conceive, pregnancy and your baby's first year.",
     );
+  });
+
+  it("scrolls and focuses the selector from the hero action", async () => {
+    const scrollIntoView = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = vi.fn();
+    renderAt(<Index />);
+
+    fireEvent.click(within(screen.getByRole("main")).getByRole("link", { name: "Start your journey" }));
+    const heading = screen.getByRole("heading", { name: "Start where you are" });
+    await waitFor(() => expect(heading).toHaveFocus());
+    expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
+    Element.prototype.scrollIntoView = scrollIntoView;
   });
 });

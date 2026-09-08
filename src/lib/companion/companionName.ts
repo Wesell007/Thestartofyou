@@ -47,9 +47,24 @@ export function companionAskLabel(raw: string | null | undefined): string {
 }
 
 
-/** AI disclosure plus safety and privacy line shown in the panel. */
-export function companionSafetyLine(raw: string | null | undefined): string {
+/**
+ * AI disclosure plus safety and privacy line shown in the panel.
+ *
+ * AIC-JA4 — the privacy clause must match what the product actually does. With
+ * journal awareness switched off, the companion never reads a person's own
+ * writing, and the line says so plainly. Once journal awareness is available,
+ * that promise would be untrue, so the line instead states the two ways their
+ * writing can be used: only with permission, or only when they pick an entry.
+ */
+export function companionSafetyLine(
+  raw: string | null | undefined,
+  journalAware = false,
+): string {
   const name = companionDisplayName(raw);
   const subject = name ?? "Your companion";
-  return `${subject} is AI. It can share general guidance and help you find the right support, and it does not read your private notes. It does not replace your midwife, GP, health visitor or urgent care.`;
+  const privacy = journalAware
+    ? "it only uses your own journal writing when you allow it or choose an entry to ask about"
+    : "it does not read your private notes";
+  return `${subject} is AI. It can share general guidance and help you find the right support, and ${privacy}. It does not replace your midwife, GP, health visitor or urgent care.`;
 }
+

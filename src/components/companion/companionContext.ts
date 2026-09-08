@@ -14,6 +14,7 @@ import type { AskClarification } from "@/lib/companion/clarificationDisplay";
 import type { MemoryInteractionState } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import type { CompanionMessage } from "@/lib/companion/conversation/conversationTypes";
 import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
+import type { JournalEntryRef } from "@/lib/companion/journal/journalEntryRef";
 
 /**
  * AIC-J4 — a contextual hand-off into the one shared panel.
@@ -24,6 +25,18 @@ import type { EntryJourneyContextV1 } from "../../../supabase/functions/_shared/
  */
 export interface CompanionEntryIntent {
   entry: EntryJourneyContextV1;
+  suggestions?: string[];
+}
+
+/**
+ * AIC-JA3 — a hand-off carrying one journal entry the person explicitly chose
+ * to ask about. Only the typed reference travels: never the entry text, and
+ * never a second identifier. The label is a generic source name shown in the
+ * pending indicator, never the person's own words.
+ */
+export interface CompanionJournalEntryIntent {
+  ref: JournalEntryRef;
+  label: string;
   suggestions?: string[];
 }
 
@@ -42,6 +55,11 @@ export interface CompanionTurn {
    * persisted, and it says nothing about what the journal contained.
    */
   journalContextUsed?: boolean;
+  /**
+   * AIC-JA3 — transparency for this one completed answer: the entry the person
+   * selected was used. Display-only, never persisted.
+   */
+  selectedJournalEntryUsed?: boolean;
 }
 
 export interface CompanionContextValue {
@@ -52,6 +70,16 @@ export interface CompanionContextValue {
    * pressed Ask from. No model call happens here, and no user message is sent.
    */
   openWithEntry: (intent: CompanionEntryIntent) => void;
+  /**
+   * AIC-JA3 — open the one panel carrying a reference to a journal entry the
+   * person explicitly selected. No model call happens here, no message is
+   * sent, and the reference is used for the next question only.
+   */
+  openWithJournalEntry: (intent: CompanionJournalEntryIntent) => void;
+  /** The pending selected entry, for the panel indicator. Null when none. */
+  journalEntry: CompanionJournalEntryIntent | null;
+  /** Remove a pending selected entry without asking anything. */
+  clearJournalEntry: () => void;
 
   mode: CompanionMode;
   visible: boolean;

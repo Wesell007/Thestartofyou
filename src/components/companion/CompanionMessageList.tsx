@@ -73,7 +73,10 @@ export default function CompanionMessageList() {
             <p className="mt-4 font-sans text-[11px] font-light text-muted-foreground/70">
               {APPROVED_SOURCES_TRUST_LINE}
             </p>
-            <CompanionJournalNote used={turn.journalContextUsed} />
+            <CompanionJournalNote
+              used={turn.journalContextUsed}
+              entryUsed={turn.selectedJournalEntryUsed}
+            />
             {turn.id === latestAnswerId && !isLoading && !streamingAnswer ? (
               <CompanionNextActions actions={nextActions} surface="companion" />
             ) : null}

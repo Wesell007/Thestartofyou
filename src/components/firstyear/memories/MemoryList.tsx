@@ -1,3 +1,4 @@
+import AskAboutThisEntry from "@/components/companion/AskAboutThisEntry";
 import { format } from "date-fns";
 import { parseDateOnly } from "@/lib/dateOnly";
 import type { BabyRecord } from "@/lib/firstYearJourney";
@@ -142,6 +143,11 @@ const MemoryList = ({ memories, babies, onEdit, onRemove, photoUrls, onOpenPhoto
                     >
                       Edit
                     </button>
+                    {/* AIC-JA3 — only the stored note travels, and only when
+                        the person presses this. Photos never do. */}
+                    {memory.note?.trim() && (
+                      <AskAboutThisEntry source="first_year_memory" entryId={memory.id} />
+                    )}
                     <button
                       type="button"
                       onClick={() => onRemove(memory)}

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { AiMode } from "../../supabase/functions/_shared/aiModes";
 import type { JourneyContextV1 } from "../../supabase/functions/_shared/journeyContextContract";
+import type { JournalEntryRef } from "@/lib/companion/journal/journalEntryRef";
 
 export type AISearchOptions = {
   /** Surface mode. Omitted means the shared endpoint uses its general behaviour. */
@@ -45,6 +46,17 @@ export type AISearchOptions = {
    * request. Missing, unknown or malformed values fail closed as unused.
    */
   onJournalContext?: (used: boolean) => void;
+  /**
+   * AIC-JA3 — the typed reference to one journal entry the person explicitly
+   * chose for this message. Only version, source and id travel: never the
+   * text, and never any other identifier. The server re-authorises it.
+   */
+  journalEntryRef?: JournalEntryRef;
+  /**
+   * AIC-JA3 — opaque transparency metadata for that selected entry, separate
+   * from the background journal signal. Fails closed as unused.
+   */
+  onJournalEntry?: (used: boolean) => void;
 };
 
 /** AIC-J5 — the only two values the browser will ever act on. */
@@ -53,6 +65,8 @@ export type NextActionsEligibility = "allow" | "suppress";
 export const NEXT_ACTIONS_HEADER = "X-Companion-Next-Actions";
 
 export const JOURNAL_CONTEXT_HEADER = "X-Companion-Journal-Context";
+
+export const JOURNAL_ENTRY_HEADER = "X-Companion-Journal-Entry";
 
 /** Fail closed: anything that is not exactly `used` counts as no journal. */
 export const readJournalContextUsage = (value: string | null | undefined): boolean =>
@@ -111,6 +125,7 @@ export function useAISearch() {
             ...(options?.conversationId ? { conversationId: options.conversationId } : {}),
             ...(options?.clientMessageId ? { clientMessageId: options.clientMessageId } : {}),
             ...(options?.sessionHistory?.length ? { sessionHistory: options.sessionHistory } : {}),
+            ...(options?.journalEntryRef ? { journalEntryRef: options.journalEntryRef } : {}),
           }),
           signal: controller.signal,
         }
@@ -149,6 +164,12 @@ export function useAISearch() {
       // as a completed assistant answer.
       options?.onJournalContext?.(
         readJournalContextUsage(resp.headers.get(JOURNAL_CONTEXT_HEADER)),
+      );
+
+      // AIC-JA3 — the same rule for the explicitly selected entry: a missing
+      // or unexpected value counts as unused.
+      options?.onJournalEntry?.(
+        readJournalContextUsage(resp.headers.get(JOURNAL_ENTRY_HEADER)),
       );
 
 

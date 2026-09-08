@@ -25,6 +25,7 @@ import {
   type MemoryInteractionState,
 } from "@/lib/companion/memory/useCompanionMemoryInteraction";
 import type { JourneyContextV1 } from "../../../../supabase/functions/_shared/journeyContextContract";
+import type { JournalEntryRef } from "@/lib/companion/journal/journalEntryRef";
 import {
   buildSessionHistory,
   conversationTitleFrom,
@@ -44,6 +45,13 @@ export interface CompanionConversationOptions {
   context?: string;
   /** Resolves the AIC-2 structured journey context for this request. */
   resolveJourneyContext: () => Promise<JourneyContextV1 | undefined>;
+  /**
+   * AIC-JA3 — hands over the entry the person explicitly selected, if any, for
+   * the next accepted turn only. Called once per request; the surface clears
+   * its pending selection when it hands one over, so a selection can never
+   * silently attach to a later question.
+   */
+  resolveJournalEntryRef?: () => JournalEntryRef | null;
   /** Restore the session transcript on mount. Both surfaces do. */
   restoreSession?: boolean;
 }
@@ -93,6 +101,7 @@ export function useCompanionConversation({
   mode,
   context,
   resolveJourneyContext,
+  resolveJournalEntryRef,
   restoreSession = true,
 }: CompanionConversationOptions): CompanionConversationRuntime {
   const { answer, isLoading, error, ask, reset } = useAISearch();
@@ -117,6 +126,12 @@ export function useCompanionConversation({
   // AIC-JA2 — transparency metadata for the one in-flight request. It is
   // attached to that response's completed answer and to nothing else.
   const journalUsedRef = useRef(false);
+  // AIC-JA3 — the same, for an entry the person explicitly chose. Separate
+  // from the background signal, and equally scoped to one response.
+  const selectedJournalUsedRef = useRef(false);
+  // The reference attached to the in-flight request, so a retry of that same
+  // question asks about the same entry and nothing else does.
+  const pendingEntryRefRef = useRef<JournalEntryRef | null>(null);
 
 
   const historyUi = isCompanionHistoryUiEnabled();
@@ -167,6 +182,9 @@ export function useCompanionConversation({
         status: "complete",
         ...(clarification ? { clarification } : {}),
         ...(journalUsedRef.current && !clarification ? { journalContextUsed: true } : {}),
+        ...(selectedJournalUsedRef.current && !clarification
+          ? { selectedJournalEntryUsed: true }
+          : {}),
       },
     ]);
     // AIC-J5 — only a completed canonical answer may host the action layer,
@@ -188,6 +206,7 @@ export function useCompanionConversation({
         clientMessageId,
         // The current turn is never included: only what came before it.
         sessionHistory: buildSessionHistory(priorMessages),
+        journalEntryRef: pendingEntryRefRef.current,
       });
       await ask(request.query, request.context, {
         mode: request.mode,
@@ -196,6 +215,7 @@ export function useCompanionConversation({
         conversationId: request.conversationId,
         clientMessageId: request.clientMessageId,
         sessionHistory: request.sessionHistory,
+        journalEntryRef: request.journalEntryRef,
         onConversationId: (id) => setConversationId(id),
         onBoundary: (boundary) => {
           boundaryRef.current = boundary;
@@ -207,6 +227,10 @@ export function useCompanionConversation({
         // AIC-JA2 — never a global state: it belongs to this response alone.
         onJournalContext: (used) => {
           journalUsedRef.current = used;
+        },
+        // AIC-JA3 — likewise belongs to this response alone.
+        onJournalEntry: (used) => {
+          selectedJournalUsedRef.current = used;
         },
 
       });
@@ -225,6 +249,11 @@ export function useCompanionConversation({
       eligibilityRef.current = "suppress";
       setNextActionsAllowed(false);
       journalUsedRef.current = false;
+      selectedJournalUsedRef.current = false;
+      // AIC-JA3 — take the selection at the moment a turn is accepted. The
+      // surface hands it over exactly once, so it attaches to this question
+      // and never drifts onto a later one.
+      pendingEntryRefRef.current = resolveJournalEntryRef?.() ?? null;
 
       memory.dismiss();
       setLastQuestion(trimmed);
@@ -254,7 +283,7 @@ export function useCompanionConversation({
         await runRequest(trimmed, priorMessages, clientMessageId);
       })();
     },
-    [isLoading, memory, messages, runRequest],
+    [isLoading, memory, messages, resolveJournalEntryRef, runRequest],
   );
 
   const retry = useCallback(() => {
@@ -264,6 +293,7 @@ export function useCompanionConversation({
     eligibilityRef.current = "suppress";
     setNextActionsAllowed(false);
     journalUsedRef.current = false;
+    selectedJournalUsedRef.current = false;
 
     // The same idempotency key is reused, so a retry cannot store the question
     // twice.

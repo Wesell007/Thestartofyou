@@ -295,6 +295,14 @@ const ttcEntries = async (ctx: ReadContext, now: Date): Promise<JournalObservati
 export interface ResolveJournalContextOptions {
   /** The AIC-2 personal journey for this request, when there is one. */
   personal?: PersonalJourneyContextV1;
+  /**
+   * AIC-JA3 — the sanitised text of an entry the person explicitly selected
+   * for this same request, so the background reader does not repeat it. This
+   * is deterministic text matching only: no id, source or other internal
+   * identifier enters this module, JournalContextV1, the prompt, the headers
+   * or anything the browser can see.
+   */
+  excludeText?: string;
   /** Injected for tests; defaults to now. */
   now?: Date;
 }
@@ -351,13 +359,17 @@ export const resolveJournalContext = async (
           ? await firstYearEntries(ctx, now, personal)
           : await ttcEntries(ctx, now);
 
-    // 5. Normalise, order and de-duplicate.
+    // 5. Normalise, order and de-duplicate, including against an entry the
+    //    person explicitly selected for this same request.
+    const dedupeKey = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
     const seen = new Set<string>();
+    const excluded = options.excludeText ? dedupeKey(options.excludeText) : "";
+    if (excluded) seen.add(excluded);
     const normalised = raw
       .map((entry) => ({ ...entry, text: (entry.text ?? "").trim() }))
       .filter((entry) => {
         if (!entry.text || !entry.date) return false;
-        const key = entry.text.toLowerCase().replace(/\s+/g, " ");
+        const key = dedupeKey(entry.text);
         if (seen.has(key)) return false;
         seen.add(key);
         return true;

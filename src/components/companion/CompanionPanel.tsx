@@ -28,6 +28,8 @@ export default function CompanionPanel() {
     mode,
     turns,
     starters,
+    journalEntry,
+    clearJournalEntry,
     companionName,
     context,
     lastQuestion,
@@ -116,6 +118,22 @@ export default function CompanionPanel() {
               onDismiss={memory.dismiss}
             />
           </div>
+          {/* AIC-JA3 — a visible, removable reminder of the entry the person
+              chose. Only a generic source name is shown, never their words. */}
+          {journalEntry && (
+            <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[hsl(var(--stage-ttc-sage-soft))] px-3 py-2">
+              <span className="font-sans text-[12.5px] font-light text-muted-foreground">
+                Asking about: {journalEntry.label}
+              </span>
+              <button
+                type="button"
+                onClick={clearJournalEntry}
+                className="min-h-[44px] px-2 font-sans text-[12.5px] font-medium text-foreground underline underline-offset-4"
+              >
+                Remove
+              </button>
+            </div>
+          )}
           <CompanionComposer />
           {/* Both footer actions keep a 44px clickable height for touch. */}
           <div className="mt-1 flex items-center justify-between">

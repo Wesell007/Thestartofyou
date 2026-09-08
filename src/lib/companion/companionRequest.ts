@@ -15,6 +15,7 @@
 
 import { resolveCompanionMode, type CompanionMode } from "./companionMode";
 import type { JourneyContextV1 } from "../../../supabase/functions/_shared/journeyContextContract";
+import type { JournalEntryRef } from "./journal/journalEntryRef";
 
 export type { CompanionMode };
 
@@ -37,6 +38,12 @@ export interface CompanionRequest {
   conversationId?: string;
   clientMessageId?: string;
   sessionHistory?: Array<{ role: "user" | "assistant"; content: string }>;
+  /**
+   * AIC-JA3 — a reference to one entry the person explicitly selected for this
+   * message. Never journal text, and never an extra identifier: the server
+   * loads and re-authorises the record itself.
+   */
+  journalEntryRef?: JournalEntryRef;
 }
 
 /**
@@ -86,6 +93,7 @@ export function buildCompanionRequest({
   conversationId,
   clientMessageId,
   sessionHistory,
+  journalEntryRef,
 }: {
   query: string;
   context?: string | null;
@@ -95,6 +103,7 @@ export function buildCompanionRequest({
   conversationId?: string | null;
   clientMessageId?: string | null;
   sessionHistory?: Array<{ role: "user" | "assistant"; content: string }> | null;
+  journalEntryRef?: JournalEntryRef | null;
 }): CompanionRequest {
   const trimmedContext = context?.trim();
   // A browser transcript is only meaningful in session mode. Persistent mode
@@ -109,5 +118,6 @@ export function buildCompanionRequest({
     ...(historyMode === "persistent" && conversationId ? { conversationId } : {}),
     ...(clientMessageId ? { clientMessageId } : {}),
     ...(history.length ? { sessionHistory: history } : {}),
+    ...(journalEntryRef ? { journalEntryRef } : {}),
   };
 }

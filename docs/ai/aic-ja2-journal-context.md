@@ -1,7 +1,20 @@
 # AIC-JA2 — Permissioned background journal awareness
 
-Engineering complete. **Not active in production.** Both flags are off, the
-schema change has not been applied, and nothing has been deployed.
+Engineering complete. **Not active in production.** Both flags are off and
+nothing has been deployed. The schema column exists (AIC-JA2-M1) and is inert:
+a database column is not a live feature.
+
+| Gate | State |
+| --- | --- |
+| Schema ready | YES |
+| Migration applied | YES (additive column only) |
+| Journal feature active | NO |
+| `AI_JOURNAL_CONTEXT_ENABLED` | OFF |
+| `VITE_COMPANION_JOURNAL_ENABLED` | OFF |
+| Backend deployed | NO |
+| Frontend deployed | NO |
+| Legal/privacy activation | OPEN |
+
 
 ## What it is
 

@@ -67,15 +67,16 @@
 - Keep the existing floating Ask launcher and the two answer surfaces unchanged.
 
 
-### 6. Refine Physical and Digital
+### 7. Refine Physical and Digital
 
-- Preserve `journal-flatlay.jpg` and the existing `/journal` destination.
+- Preserve the existing real journal photograph and the `/journal` destination. No generated journal product image.
 - Change the eyebrow and heading to the approved Physical + Digital story and use concise copy that clearly separates the Pregnancy only physical journal from the TTC to Pregnancy to First Year digital journey.
 - Remove the redundant Companion link from this final section because Companion now has its own dedicated section.
 
-### 7. Composition and responsive behaviour
+### 8. Composition and responsive behaviour
 
 - Keep the final order: hero, promises, Start, Inside Your Journey, Guidance, Companion, Physical + Digital, footer.
+- Vary geometry deliberately: photographic chapters, then a product showcase, then a magazine guidance layout, then copy with a conversation panel, then image with copy.
 - Preserve the existing brand type, cream, sage, lavender, terracotta, charcoal and botanical restraint.
 - At 390px, stack the photographic chapters, keep the selected product preview readable, simplify the guidance composition, and ensure the Companion preview and Ask launcher do not collide.
 - At 1440px, make the product showcase materially larger than the current cards and preserve generous editorial whitespace.
@@ -84,8 +85,9 @@
 
 - No hero, route, lifecycle, database, migration, RLS, sitemap, robots, article data, AI, prompt, safety, grounding, journal awareness, memory, history, voice, analytics or deployment changes.
 - Exactly three saved lifecycles remain: `ttc`, `pregnancy`, `first_year`.
-- Reuse repository assets only. Planned new image assets: 0. Planned remote assets: 0.
+- New photography is allowed for the three stages and only for genuinely missing wider hub imagery. Generated product or companion interface: none. Remote image assets: none.
 - Keep homepage SEO and shared navigation behaviour unchanged.
+- Record this work as a roadmap item as the first build step.
 
 ## Tests and verification
 
@@ -95,4 +97,5 @@
 - Run lint and require exactly the known baseline with no new findings.
 - Run the production build.
 - Inspect at approximately 390px and 1440px for all requested sections, every link, image loading, product controls, keyboard focus, launcher clearance, footer, overflow, collisions, layout stability and console errors.
-- Do not deploy. Return the requested 58 field completion report and stop.
+- Do not deploy. Return the requested 58 field completion report plus the 18 additional imagery and product source fields, then stop.
+

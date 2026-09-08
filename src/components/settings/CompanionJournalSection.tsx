@@ -22,9 +22,10 @@ import {
 export const JOURNAL_SECTION_HEADING = "Journal-aware companion";
 export const JOURNAL_TOGGLE_LABEL = "Use my journal to personalise the companion";
 export const JOURNAL_SUPPORTING_COPY =
-  "Allow the companion to use a small amount of your recent journal text as context when answering.";
+  "Allow the companion to draw on a small amount of your recent journal text automatically when it answers.";
 export const JOURNAL_REVOCATION_COPY =
-  "You can turn this off at any time. Future answers will stop using your journal. Previous answers are not rewritten.";
+  "You can turn this off at any time. Future answers will stop drawing on your recent journal automatically. You can still choose a single entry to ask about whenever you want, and previous answers are not rewritten.";
+
 export const JOURNAL_SAVE_ERROR_COPY =
   "That could not be saved. Your setting has not changed. Please try again.";
 

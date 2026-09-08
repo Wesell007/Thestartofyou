@@ -9,11 +9,30 @@
 export const JOURNAL_CONTEXT_NOTE =
   "Your recent journal was included as context.";
 
-export function CompanionJournalNote({ used }: { used?: boolean }) {
-  if (!used) return null;
+/** AIC-JA3 — the entry the person chose, and nothing else. */
+export const JOURNAL_ENTRY_NOTE =
+  "The journal entry you selected was included as context.";
+
+/** AIC-JA3 — both, said once. */
+export const JOURNAL_ENTRY_AND_CONTEXT_NOTE =
+  "The journal entry you selected, and your recent journal, were included as context.";
+
+export function CompanionJournalNote({
+  used,
+  entryUsed,
+}: {
+  used?: boolean;
+  entryUsed?: boolean;
+}) {
+  if (!used && !entryUsed) return null;
+  const note = entryUsed
+    ? used
+      ? JOURNAL_ENTRY_AND_CONTEXT_NOTE
+      : JOURNAL_ENTRY_NOTE
+    : JOURNAL_CONTEXT_NOTE;
   return (
     <p className="mt-3 font-sans text-[11px] font-light text-muted-foreground/70">
-      {JOURNAL_CONTEXT_NOTE}
+      {note}
     </p>
   );
 }

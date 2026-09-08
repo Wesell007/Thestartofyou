@@ -332,6 +332,13 @@ const AskPage = () => {
     return last?.content ?? "";
   }, [conversation.messages, conversation.streamingAnswer, isLoading]);
 
+  // AIC-JA3 — the same rule for an entry the person explicitly selected.
+  const journalEntryUsed = useMemo(() => {
+    if (isLoading || conversation.streamingAnswer) return false;
+    const last = [...conversation.messages].reverse().find((message) => message.role === "assistant");
+    return last?.selectedJournalEntryUsed === true && !last?.clarification;
+  }, [conversation.messages, conversation.streamingAnswer, isLoading]);
+
   // Everything said before the question now on screen, shown compactly so the
   // thread is visible rather than implied.
   const earlierTurns = useMemo(() => {
@@ -992,7 +999,9 @@ const AskPage = () => {
 
           {/* AIC-J5 — the action layer belongs to the completed answer itself,
               not to one optional section of it, so a short answer shows it too. */}
-          {isDone && <CompanionJournalNote used={journalContextUsed} />}
+          {isDone && (
+            <CompanionJournalNote used={journalContextUsed} entryUsed={journalEntryUsed} />
+          )}
 
           {isDone && <CompanionNextActions actions={nextActions} surface="ask" />}
 

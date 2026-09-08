@@ -33,10 +33,15 @@ import {
   CompanionContext,
   type CompanionContextValue,
   type CompanionEntryIntent,
+  type CompanionJournalEntryIntent,
   type CompanionTurn,
 } from "./companionContext";
 
-export type { CompanionEntryIntent, CompanionTurn } from "./companionContext";
+export type {
+  CompanionEntryIntent,
+  CompanionJournalEntryIntent,
+  CompanionTurn,
+} from "./companionContext";
 
 
 export function CompanionProvider({ children }: { children: ReactNode }) {
@@ -86,6 +91,24 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
     setEntryIntent((current) => (current ? null : current));
   }, []);
 
+  // AIC-JA3 — a pending explicitly selected journal entry. Like the AIC-J4
+  // hand-off it is transient, and it is handed to the runtime exactly once,
+  // for the next accepted question only.
+  const journalEntryRef = useRef<CompanionJournalEntryIntent | null>(null);
+  const [journalEntry, setJournalEntry] = useState<CompanionJournalEntryIntent | null>(null);
+
+  const clearJournalEntry = useCallback(() => {
+    journalEntryRef.current = null;
+    setJournalEntry((current) => (current ? null : current));
+  }, []);
+
+  const resolveJournalEntryRef = useCallback(() => {
+    const intent = journalEntryRef.current;
+    if (!intent) return null;
+    clearJournalEntry();
+    return intent.ref;
+  }, [clearJournalEntry]);
+
   const resolveJourneyContext = useCallback(async () => {
     const personal = await ensurePersonalJourney();
     // Consumed at the point the runtime accepts and commits the user turn,
@@ -101,12 +124,30 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
 
   // AIC-4 — the shared runtime. Ordering, streaming, bounds, clarification and
   // memory interception all live there rather than in this surface.
-  const conversation = useCompanionConversation({ mode, context, resolveJourneyContext });
+  const conversation = useCompanionConversation({
+    mode,
+    context,
+    resolveJourneyContext,
+    resolveJournalEntryRef,
+  });
 
   const openWithEntry = useCallback(
     (intent: CompanionEntryIntent) => {
       entryRef.current = intent;
       setEntryIntent(intent);
+      setOpen(true);
+    },
+    [],
+  );
+
+  const openWithJournalEntry = useCallback(
+    (intent: CompanionJournalEntryIntent) => {
+      // An explicit entry selection is the more specific hand-off, so it
+      // replaces any generic page-level entry context waiting alongside it.
+      entryRef.current = null;
+      setEntryIntent(null);
+      journalEntryRef.current = intent;
+      setJournalEntry(intent);
       setOpen(true);
     },
     [],
@@ -121,13 +162,23 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   // in the conversation are untouched.
   useEffect(() => {
     clearEntry();
-  }, [location.pathname, clearEntry]);
+    clearJournalEntry();
+  }, [location.pathname, clearEntry, clearJournalEntry]);
 
   // Closing the panel abandons an unconsumed entry: reopening the launcher is
   // an ordinary open, not a contextual hand-off.
   useEffect(() => {
-    if (!open) clearEntry();
-  }, [open, clearEntry]);
+    if (!open) {
+      clearEntry();
+      clearJournalEntry();
+    }
+  }, [open, clearEntry, clearJournalEntry]);
+
+  // A journey change, or signing in or out, abandons a pending selection: it
+  // belonged to a state that no longer holds.
+  useEffect(() => {
+    clearJournalEntry();
+  }, [personalJourney, conversation.signedIn, clearJournalEntry]);
 
 
   // AIC-J5 — a J2 journey change invalidates the layer for the answer already
@@ -168,6 +219,7 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
         text: message.content,
         ...(message.clarification ? { clarification: message.clarification } : {}),
         ...(message.journalContextUsed ? { journalContextUsed: true } : {}),
+        ...(message.selectedJournalEntryUsed ? { selectedJournalEntryUsed: true } : {}),
       })),
     [conversation.messages],
   );
@@ -177,6 +229,9 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       open: visible ? open : false,
       setOpen: (next: boolean) => setOpen(next && visible),
       openWithEntry,
+      openWithJournalEntry,
+      journalEntry,
+      clearJournalEntry,
       mode,
       visible,
       turns,
@@ -191,7 +246,9 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       // otherwise the existing CONTENT/MODE chips for this area of the site.
       // A mode never becomes a personal journey.
       starters:
-        entryIntent?.suggestions?.length && turns.length === 0
+        journalEntry?.suggestions?.length && turns.length === 0
+          ? journalEntry.suggestions.slice(0, MAX_SUGGESTIONS)
+          : entryIntent?.suggestions?.length && turns.length === 0
           ? entryIntent.suggestions.slice(0, MAX_SUGGESTIONS)
           : personalJourney
             ? resolveJourneySuggestions({ personal: personalJourney, surface: "companion" })
@@ -217,6 +274,9 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
       suppress,
       open,
       openWithEntry,
+      openWithJournalEntry,
+      journalEntry,
+      clearJournalEntry,
       entryIntent,
       mode,
       visible,

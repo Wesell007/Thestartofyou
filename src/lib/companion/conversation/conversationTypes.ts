@@ -39,6 +39,13 @@ export interface CompanionMessage {
    * text, id, source name or date is ever carried here or persisted.
    */
   journalContextUsed?: boolean;
+  /**
+   * AIC-JA3 — transparency for this one completed answer: an entry the person
+   * explicitly selected was supplied to the model for it. Session-only and
+   * display-only. No journal text, id, source name or date is carried here,
+   * and nothing about the selection is ever persisted.
+   */
+  selectedJournalEntryUsed?: boolean;
 }
 
 /**

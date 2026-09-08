@@ -9,6 +9,12 @@ import {
 } from "../_shared/aiJourneyContext.ts";
 import { AI_PAUSED_ANSWER, isAiDisabled } from "../_shared/urgentPatterns.ts";
 import { decideSafety } from "../_shared/safetyRouter.ts";
+import {
+  resolveSelectedJournalEntry,
+  SELECTED_JOURNAL_ENTRY_HEADER,
+  type SelectedJournalEntryResult,
+} from "../_shared/aiSelectedJournalEntry.ts";
+import { SELECTED_JOURNAL_INSTRUCTIONS } from "../_shared/enrichmentRendering.ts";
 import { isDeterministicSafetyDecision } from "../_shared/safetyState.ts";
 import { decideBoundary } from "../_shared/companionBoundaryRules.ts";
 import { decideAmberEligibility } from "../_shared/amberEligibility.ts";
@@ -66,7 +72,11 @@ const responseHeaders = (req: Request) => {
     // state, category, score, rule, reason or classifier result.
     "Access-Control-Expose-Headers":
       "X-Conversation-Id, X-Companion-Boundary, X-Companion-Clarification-Topic, X-Companion-Next-Actions, " +
-      JOURNAL_CONTEXT_HEADER,
+      JOURNAL_CONTEXT_HEADER +
+      ", " +
+      // AIC-JA3: separate transparency metadata for an entry the person chose
+      // for this one message. Opaque, and never a safety signal.
+      SELECTED_JOURNAL_ENTRY_HEADER,
 
 
 
@@ -451,8 +461,17 @@ serve(async (req) => {
   const parsed = parseAiSearchBody(rawBody);
   if (!parsed.ok) return json(req, { error: parsed.error }, 400);
 
-  const { query, context, mode, journeyContext, historyMode, conversationId, clientMessageId, sessionHistory } =
-    parsed.value;
+  const {
+    query,
+    context,
+    mode,
+    journeyContext,
+    journalEntryRef,
+    historyMode,
+    conversationId,
+    clientMessageId,
+    sessionHistory,
+  } = parsed.value;
   const modeConfig = getAiModeConfig(mode);
 
   // AIC-5A: the deterministic safety decision is taken immediately after body
@@ -507,6 +526,43 @@ serve(async (req) => {
       return suppressNextActions(sseAnswer(req, safety.answer));
     }
   }
+
+  // AIC-JA3: the entry the person explicitly selected for this message. It is
+  // resolved here, before ordinary quota, for one reason only: the same AIC-5A
+  // invariant that already protects the typed question — a deterministic
+  // urgent result can never be suppressed by rate limiting. Background journal
+  // awareness is untouched by this and still happens far below, on the
+  // ordinary generative path alone.
+  let selected: SelectedJournalEntryResult = { kind: "none" };
+  if (journalEntryRef) {
+    try {
+      selected = await resolveSelectedJournalEntry(req, { ref: journalEntryRef });
+    } catch {
+      selected = { kind: "none" };
+    }
+  }
+  if (selected.kind === "terminal") {
+    // The existing deterministic wording, unchanged. No model call, no
+    // background journal read, no next actions, and nothing anywhere that
+    // could reveal whether the question, the entry or an internal rule
+    // produced this answer.
+    let ctx: ConversationContext | null = null;
+    try {
+      const opened = await openConversation();
+      if (opened.ok) ctx = opened.ctx;
+    } catch {
+      ctx = null;
+    }
+    let response: Response;
+    try {
+      response = await sendControlled(selected.answer, ctx);
+    } catch {
+      response = suppressNextActions(sseAnswer(req, selected.answer));
+    }
+    response.headers.set(SELECTED_JOURNAL_ENTRY_HEADER, "none");
+    return response;
+  }
+  const selectedReady = selected.kind === "ready" ? selected : null;
 
   // GREEN only: ordinary generative rate limiting is unchanged (12/min, 100/hour).
   try {
@@ -624,13 +680,23 @@ serve(async (req) => {
   // never uses background journal material, and recap mode, which answers no
   // question of its own. Anything ineligible performs zero journal reads.
   const journalEligible = modeConfig.allowUrgentEscalationAnswer && !amberGuidance;
+  // AIC-JA3: an explicitly selected entry follows the same path eligibility.
+  // AMBER stays a separate cautious path with no journal material of any kind,
+  // and recap mode answers no question of its own.
+  const selectedBlock = journalEligible && selectedReady ? selectedReady.block : "";
   const journal = journalEligible
-    ? await resolveJournalContext(req, { personal: journeyContext?.personal })
+    ? await resolveJournalContext(req, {
+        personal: journeyContext?.personal,
+        // Deterministic text-level de-duplication only, so the same entry is
+        // never presented twice. No id or source crosses this boundary.
+        excludeText: selectedBlock && selectedReady ? selectedReady.text : undefined,
+      })
     : { block: "", used: false };
 
   const userContent = [
     "<user_question>", query, "</user_question>",
     structuredJourneyContext,
+    selectedBlock,
     journal.block,
     permissionedMemory,
     conversationHistory,
@@ -653,8 +719,9 @@ serve(async (req) => {
             content: [
               modeConfig.systemPrompt,
               structuredJourneyContext ? JOURNEY_CONTEXT_INSTRUCTIONS : "",
+              selectedBlock ? SELECTED_JOURNAL_INSTRUCTIONS : "",
               journal.used ? JOURNAL_CONTEXT_INSTRUCTIONS : "",
-              journal.used ? JOURNAL_ANSWER_RULES : "",
+              selectedBlock || journal.used ? JOURNAL_ANSWER_RULES : "",
               permissionedMemory ? MEMORY_INSTRUCTIONS : "",
               conversationHistory ? CONVERSATION_HISTORY_INSTRUCTIONS : "",
               // AIC-5E tone guidance, placed before the safety layer so the
@@ -702,6 +769,10 @@ serve(async (req) => {
         // safety, journey state, next actions, memory, history or any later
         // request, and it says nothing about what the journal contained.
         [JOURNAL_CONTEXT_HEADER]: journal.used ? "used" : "none",
+        // AIC-JA3: separate transparency metadata for the selected entry.
+        // "used" means a non-empty selected block genuinely entered the
+        // prompt. It carries no id, no source and no safety meaning.
+        [SELECTED_JOURNAL_ENTRY_HEADER]: selectedBlock ? "used" : "none",
       },
     });
 

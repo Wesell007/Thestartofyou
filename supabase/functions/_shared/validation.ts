@@ -3,6 +3,10 @@ import {
   type JourneyContextV1,
   parseJourneyContext,
 } from "./journeyContextContract.ts";
+import {
+  parseJournalEntryRef,
+  type JournalEntryRefV1,
+} from "./journalEntryRefContract.ts";
 
 export const AI_QUERY_MAX_LENGTH = 1_000;
 export const AI_CONTEXT_MAX_LENGTH = 500;
@@ -67,6 +71,7 @@ export const parseAiSearchBody = (
   context?: string;
   mode: AiMode;
   journeyContext?: JourneyContextV1;
+  journalEntryRef?: JournalEntryRefV1;
   historyMode: AiHistoryMode;
   conversationId?: string;
   clientMessageId?: string;
@@ -86,6 +91,13 @@ export const parseAiSearchBody = (
   const journeyContext = parseJourneyContext(body.journeyContext);
   if (journeyContext.ok === false) return { ok: false, error: journeyContext.error };
   const journeyPart = journeyContext.value ? { journeyContext: journeyContext.value } : {};
+
+  // AIC-JA3: the typed reference to one entry the person explicitly selected.
+  // A malformed reference is never an error — the ordinary question continues
+  // with no selected context at all — and only version, source and id are ever
+  // read, so no text or identifier from the browser can travel with it.
+  const journalEntryRef = parseJournalEntryRef(body.journalEntryRef);
+  const journalPart = journalEntryRef ? { journalEntryRef } : {};
 
   // AIC-4: conversation continuity. `session` is the default, so a caller
   // written before AIC-4 behaves exactly as it did before.
@@ -120,13 +132,20 @@ export const parseAiSearchBody = (
   };
 
   if (body.context === undefined || body.context === null || body.context === "") {
-    return { ok: true, value: { query: query.value, mode, ...journeyPart, ...conversationPart } };
+    return { ok: true, value: { query: query.value, mode, ...journeyPart, ...journalPart, ...conversationPart } };
   }
   const context = boundedString(body.context, "Context", 1, AI_CONTEXT_MAX_LENGTH);
   if (context.ok === false) return { ok: false, error: context.error };
   return {
     ok: true,
-    value: { query: query.value, context: context.value, mode, ...journeyPart, ...conversationPart },
+    value: {
+      query: query.value,
+      context: context.value,
+      mode,
+      ...journeyPart,
+      ...journalPart,
+      ...conversationPart,
+    },
   };
 };
 

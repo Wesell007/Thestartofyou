@@ -475,3 +475,12 @@ carry the column and the temporary local type workaround is removed. J2–J5,
 AIC-5, grounding, memory, persistent history, media, analytics and voice all
 unchanged. JA3 not started. See `docs/ai/aic-ja2-journal-context.md`.
 
+
+## AIC-JA3 — Explicit "Ask about this entry" — ENGINEERING COMPLETE
+Typed selected-entry reference (version/source/id only), server-authoritative
+strict parser, RLS-scoped resolver with lifecycle/episode/baby isolation and
+fail-closed pregnancy episode proof (immutable created_at vs saved journey
+start), deterministic safety on the exact rendered string (no AMBER model
+call), bounded transient prompt block, separate completed-only transparency
+header/UI, one-request handoff with no persistence, analytics or logging.
+Both journal flags remain OFF. Not deployed. Legal/privacy gate OPEN.

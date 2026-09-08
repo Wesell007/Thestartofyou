@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { Pencil, Trash2, Loader2 } from "lucide-react";
+import AskAboutThisEntry from "@/components/companion/AskAboutThisEntry";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -98,6 +99,10 @@ const TTCLogList = ({ logs, onEdit, onDeleted }: Props) => {
                   </p>
                 )}
               </div>
+              {/* AIC-JA3 — offered only where a real owned note exists. */}
+              {log.log_type === "note" && log.notes?.trim() && (
+                <AskAboutThisEntry source="ttc_note" entryId={log.id} className="flex-shrink-0" />
+              )}
               <div className="flex items-center gap-1 flex-shrink-0">
                 <button
                   type="button"

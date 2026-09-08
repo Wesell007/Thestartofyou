@@ -32,6 +32,7 @@
   Deferred by design: `confirmed_suggestion` source, suggested memories, conversation history (AIC-4), emotional modelling (AIC-5), voice (AIC-6/7).
 
 ## In progress
+- HOMEPAGE JOURNEY EVOLUTION — CLOSED PASS (engineering only; not deployed). Homepage now centres exactly three personal lifecycles: TTC, Pregnancy and First Year, with canonical starts, generic static previews, accessible selector handoff and unchanged production hero media. IVF, Toddler and Family remain secondary support. Shared signed-out Start CTA now returns to the neutral homepage selector; authenticated lifecycle resolution is unchanged.
 - AIC-4 — CLOSED PASS (implementation; persistent history remains flag-gated OFF). Conversation Continuity: one shared conversation runtime across CompanionPanel and /ask; session continuity for anonymous and signed-in-with-persistence-off; flag-gated account-owned persistent history (`companion_conversations` / `companion_messages`, owner-only RLS with parent-conversation ownership enforcement); bounded escaped `<conversation_history>` prompt block; AskPage pseudo-continuity removal; New/Clear/Delete conversation UI; docs + ADR-AIC4-01…11.
 
 - AIC-5 AUDIT — CLOSED PASS (audit/documentation only; no production safety or AI runtime code changed). Deliverables: `docs/ai/companion-safety-emotional-continuity.md`, `docs/ai/companion-architecture.md` safety section, `docs/ai/adr/ADR-AIC5-proposals.md` (ADR-AIC5-01…08, all PROPOSED).

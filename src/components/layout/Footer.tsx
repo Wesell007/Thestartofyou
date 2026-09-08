@@ -37,7 +37,7 @@ const Footer = () => {
               />
             </Link>
             <p className="font-sans text-[14px] font-light text-foreground/50 leading-relaxed max-w-xs">
-              Your trusted companion from trying to conceive through the early years, offering calm guidance and space for reflection.
+              Calm, personal guidance through trying to conceive, Pregnancy and your baby's First Year, with space for reflection.
             </p>
           </div>
 
@@ -98,7 +98,7 @@ const Footer = () => {
             <div className="flex items-center gap-4">
               <ConsentLink />
               <span className="font-sans text-[11px] sm:text-xs font-light text-foreground/35 flex items-center gap-1.5">
-                <span className="text-sage">♡</span> Made with care for expecting parents
+                <span className="text-sage">♡</span> Made with care for growing families
               </span>
             </div>
           </div>

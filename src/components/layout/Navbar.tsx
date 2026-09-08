@@ -144,7 +144,7 @@ const Navbar = () => {
                 Sign in
               </Link>
               <Link
-                to="/due-date-calculator"
+                to="/#start-where-you-are"
                 onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" })}
                 className="font-sans text-[13px] font-medium bg-terracotta text-terracotta-foreground px-6 py-2.5 rounded-pill hover:bg-terracotta-hover hover:shadow-lg transition-all duration-300 shadow-cta"
               >
@@ -202,7 +202,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link
-                to="/due-date-calculator"
+                to="/#start-where-you-are"
                 className="mt-4 text-center font-sans text-sm font-medium bg-terracotta text-terracotta-foreground px-6 py-3.5 rounded-pill hover:bg-terracotta-hover transition-all shadow-cta"
                 onClick={() => {
                   trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "navbar" });
@@ -219,7 +219,7 @@ const Navbar = () => {
                 }}
                 className="mt-2 text-center font-sans text-sm font-light text-foreground/75 hover:text-foreground py-3 transition-colors"
               >
-                Already saving your journey? Sign in
+                Already using your journey? Sign in
               </Link>
             </>
           )}

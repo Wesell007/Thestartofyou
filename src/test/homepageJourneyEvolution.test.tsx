@@ -5,6 +5,8 @@ import { MemoryRouter } from "react-router-dom";
 
 import JourneyBrandedSection from "@/components/home/JourneyBrandedSection";
 import JourneyPreviewSection from "@/components/home/JourneyPreviewSection";
+import LifecycleEcosystemSection from "@/components/home/LifecycleEcosystemSection";
+import CompanionMomentSection from "@/components/home/CompanionMomentSection";
 import Index from "@/pages/Index";
 
 afterEach(cleanup);
@@ -42,13 +44,51 @@ describe("homepage journey evolution", () => {
     await waitFor(() => expect(heading).toHaveFocus());
   });
 
-  it("shows generic public demonstrations for TTC, Pregnancy and First Year", () => {
+  it("shows a switchable, clearly illustrative preview for each of the three journeys", () => {
     renderAt(<JourneyPreviewSection />);
 
-    expect(screen.getByText("TTC")).toBeInTheDocument();
-    expect(screen.getByText("Pregnancy")).toBeInTheDocument();
-    expect(screen.getByText("First Year")).toBeInTheDocument();
-    expect(screen.getAllByText("A typical view")).toHaveLength(3);
+    expect(screen.getAllByRole("tab")).toHaveLength(3);
+    expect(screen.getByRole("tab", { name: "Pregnancy" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    expect(screen.getByText("Second trimester · Week 24")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "TTC" }));
+    expect(screen.getByText("Your cycle path")).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("tab", { name: "First Year" }));
+    expect(screen.getByText("Four months old")).toBeInTheDocument();
+    expect(screen.getByText(/An illustration of the saved journey/i)).toBeInTheDocument();
+  });
+
+  it("lists the three primary guidance hubs and the four wider hubs", () => {
+    renderAt(<LifecycleEcosystemSection />);
+
+    const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"));
+    expect(hrefs).toEqual([
+      "/trying-to-conceive",
+      "/pregnancy",
+      "/first-year",
+      "/ivf",
+      "/preparing-for-baby",
+      "/toddler",
+      "/family",
+    ]);
+  });
+
+  it("tells the companion story without starting a second companion runtime", () => {
+    renderAt(<CompanionMomentSection />);
+
+    expect(
+      screen.getByRole("heading", { name: "Questions change. Your companion stays close." }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /ask your companion/i })).toHaveAttribute(
+      "href",
+      "/ask",
+    );
+    expect(screen.queryByRole("textbox")).toBeNull();
+    expect(screen.queryByRole("button")).toBeNull();
   });
 
   it("publishes the approved homepage title and description", async () => {

@@ -509,3 +509,5 @@ See `docs/ai/aic-ja4-text-journal-release-gate.md`.
 
 Journal Awareness Human Review Package — PREPARED / AWAITING HUMAN LEGAL-PRIVACY REVIEW
 See `docs/ai/journal-awareness-human-review-package.md`.
+
+- HOMEPAGE STORY REFINEMENT — COMPLETE. Below-hero story rebuild: image-led Start Where You Are, real-product Inside Your Journey previews, editorial guidance hierarchy across 7 audited hubs, dedicated Companion section, Physical + Digital journal close. Hero unchanged. Validated: 112 test files / 1270 tests passing, 0 timeouts; typecheck x2 clean; lint at known baseline (1 error, 10 warnings, 0 new); build passed; 390px and 1440px QA clean. Imagery and product-source direction in `docs/homepage/story-refinement-imagery.md`. Not deployed.

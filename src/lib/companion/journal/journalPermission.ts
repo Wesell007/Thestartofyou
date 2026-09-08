@@ -40,7 +40,8 @@ export const writeJournalPermission = async (enabled: boolean): Promise<void> =>
   const userId = await currentUserId();
   if (!userId) throw new Error("No account session");
 
-  const { error } = await profiles()
+  const { error } = await supabase
+    .from("profiles")
     .update({ companion_journal_context_enabled: enabled })
     .eq("user_id", userId);
   if (error) throw error;

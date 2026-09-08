@@ -108,6 +108,21 @@ describe("companion naming", () => {
     expect(line).toMatch(/is AI/);
     expect(line).toMatch(/does not replace/);
   });
+
+  /**
+   * AIC-JA4 — the privacy promise has to track what the product does, so the
+   * "never reads your notes" wording only survives while journal awareness is
+   * switched off.
+   */
+  it("only promises never to read notes while journal awareness is off", () => {
+    expect(companionSafetyLine(null)).toMatch(/does not read your private notes/);
+    const aware = companionSafetyLine(null, true);
+    expect(aware).not.toMatch(/does not read your private notes/);
+    expect(aware).toMatch(/only uses your own journal writing/);
+    expect(aware).toMatch(/allow it or choose an entry/);
+    expect(aware).toMatch(/is AI/);
+    expect(aware).toMatch(/does not replace/);
+  });
 });
 
 describe("buildCompanionPanelContext", () => {

@@ -488,3 +488,20 @@ call), bounded transient prompt block, separate completed-only transparency
 header/UI, one-request handoff with no persistence, analytics or logging.
 Both journal flags remain OFF. Not deployed. Legal/privacy gate OPEN.
 See `docs/ai/aic-ja3-selected-journal-entry.md`.
+
+## AIC-JA4 — ENGINEERING RELEASE GATE CLOSED PASS / PRODUCTION HOLD
+
+Journal Text Awareness — TECHNICALLY RELEASE READY / PRODUCTION OFF
+Legal/privacy activation gate — OPEN
+
+JA2 and JA3 evaluated as one system across exactly two surfaces and one
+runtime: flag authority, permission matrix, RLS ownership, lifecycle/episode/
+baby isolation, source allowlists, S1 bounds and containment, safety ordering
+with zero background reads on controlled branches, prompt composition,
+J2–J5 composition, handoff lifecycle, transparency headers and privacy
+boundaries. P0/P1/P2/P3 = 0 after in-scope remediation (account setting copy,
+panel privacy line now conditional on the journal gate, endpoint and CTA
+coverage). Full suite 111 files / 1262 tests, zero timeouts; typecheck twice,
+Deno check, build clean; lint at known baseline. Both flags OFF, not deployed,
+no schema change. Activation and rollback runbooks prepared, not executed.
+See `docs/ai/aic-ja4-text-journal-release-gate.md`.

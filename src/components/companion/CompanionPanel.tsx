@@ -17,6 +17,7 @@ import CompanionComposer from "./CompanionComposer";
 import CompanionMemoryPrompt from "./CompanionMemoryPrompt";
 import CompanionHistoryList from "./CompanionHistoryList";
 import { companionPanelTitle, companionSafetyLine } from "@/lib/companion/companionName";
+import { isCompanionJournalUiEnabled } from "@/lib/companion/journal/journalFlags";
 import { companionAskStage } from "@/lib/companion/companionMode";
 import { askDestination, askRouteState } from "@/lib/askNavigation";
 
@@ -69,7 +70,7 @@ export default function CompanionPanel() {
             {companionPanelTitle(companionName)}
           </SheetTitle>
           <SheetDescription className={`${companionStyles.safetyLine} mt-2`}>
-            {companionSafetyLine(companionName)}
+            {companionSafetyLine(companionName, isCompanionJournalUiEnabled())}
           </SheetDescription>
         </div>
 

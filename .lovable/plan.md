@@ -1,45 +1,73 @@
-# Journal Awareness — Human Review Package (documentation only)
+# Homepage Journey Evolution
 
-Documentation only. No application code, no tests, no flags, no deployment, no activation, no production QA, no media, no voice.
+## Goal
+Broaden the homepage from a pregnancy first experience into one calm story spanning Trying to Conceive, Pregnancy and First Year, using the approved direction board as a visual reference while preserving the existing brand, video, routes, saved journey flows and companion architecture.
 
-## Deliverable
+## Verified starting point
 
-Create `docs/ai/journal-awareness-human-review-package.md`, written for a non-engineering legal/privacy reviewer, drawn only from verified repository behaviour.
+- The homepage currently renders the hero, three brand promises, a pregnancy only date entry, a pregnancy only journey carousel, wider lifecycle links, the physical journal section and the shared footer.
+- Both current homepage start actions point to the pregnancy due date flow.
+- The hero already has the required background video, still poster, autoplay fallback, tap to play recovery and reduced motion still image.
+- Existing journey entry paths are available for TTC, Pregnancy and First Year. No new route, onboarding flow or saved data model is required.
+- Existing local imagery can support all three stages and the physical pregnancy journal without adding remote assets.
+- The current 1440px and 390px homepage has no horizontal overflow or console errors.
 
-## Contents
+## Implementation
 
-1. **Plain-language summary** — what journal awareness does in its two modes: automatic recent-journal personalisation (permission-based, default off) and explicit "ask about this entry" (deliberate, one request only).
-2. **Exactly what data can reach the AI model** — allowlisted user-written text only: pregnancy reflections, First Year notes and memories, TTC notes. No titles, tags, tracker values, care events, appointments, captions, photos, video, audio, file paths, ids or URLs.
-3. **Limits** — at most 5 recent entries, 300 characters each, 1,200 total; one selected entry up to 1,800 characters.
-4. **Permission and user control** (not "consent"; no legal conclusion) — factual behaviour only: background personalisation is default OFF, the person deliberately turns it ON, can turn it OFF again, and future background retrieval stops when OFF. Explicit "ask about this entry" is separate from the background setting, a deliberate action applying to one request via a transient typed reference consumed after the accepted request. No UK GDPR lawful-basis, special-category, explicit-consent, legitimate-interest or DPIA conclusions — those are the reviewer's decisions.
-5. **Retention** — precise, qualified wording: the source journal entry remains stored normally in the journal; JA2/JA3 create no separate persistent copy of journal text for AI personalisation; journal text is not written to AI memory, persistent journal-specific conversation metadata, analytics, or (intentionally) application logs; selected references are request-scoped; background context is freshly retrieved when permitted; revoking permission affects future retrieval and does not rewrite past answers; completed answers follow the platform's existing conversation/session behaviour and are not described as auto-deleted.
-6. **Access control — narrow and provable** — scoped to the JA2/JA3 AI processing path only: bearer-token verification, server-side identity resolution, PostgREST under the caller's token, RLS as the data boundary, request-body user id has no authority, no service-role journal reads, wrong-user/wrong-baby/wrong-lifecycle fails closed. No broad claim that administrators can never access journal data.
-7. **Separation guarantees** — pregnancy episodes, individual babies and TTC journeys kept apart; ambiguity dropped rather than guessed.
-8. **Safety** — urgent and crisis wording unchanged and takes priority; journal text can never instruct the AI.
-9. **Transparency shown to the person after a completed answer** — the exact note strings.
-10. **AI processing pathway** (new) — plain-English trace: journal record → authorised server retrieval → safety/bounding → existing ai-search pathway → the existing model pathway (Lovable AI Gateway chat completions endpoint; declared model identifier `google/gemini-2.5-flash`) → answer. No keys, tokens or credentials. Where an operational fact (processor terms, processing region, contractual retention) cannot be verified from repository evidence, state exactly: "Operational confirmation required before legal/privacy approval." Explicitly state AssemblyAI is for the paused future voice/STT programme and is NOT part of JA2/JA3 text journal awareness.
-11. **Current state** — exact status block:
-    - AIC-JA4 — ENGINEERING RELEASE GATE CLOSED PASS / PRODUCTION HOLD
-    - Journal Text Awareness — TECHNICALLY RELEASE READY / PRODUCTION OFF
-    - AI_JOURNAL_CONTEXT_ENABLED — OFF
-    - VITE_COMPANION_JOURNAL_ENABLED — OFF
-    - Legal/privacy activation gate — OPEN
-    - Schema readiness — APPLIED / INERT
-    - Journal AI production processing — NOT ACTIVE
-    - Media journal processing — NOT IMPLEMENTED
-    - Voice — PAUSED
-    - Note: creating this document performs no deployment or activation.
-12. **Decisions requested from the reviewer** — two primary questions: (1) is the described text-journal AI processing approved for production activation from a legal/privacy perspective; (2) is the customer-facing journal-awareness and privacy wording approved, or what changes are required. Allowed outcomes: APPROVED / APPROVED WITH CONDITIONS OR COPY CHANGES / NOT APPROVED / MORE INFORMATION REQUIRED. State that legal/privacy approval does NOT itself activate the feature — technical activation remains a separate controlled release step.
-13. **Stop/rollback summary** — server switch off is the immediate authoritative stop; interface switch off is the follow-up; no schema drop, no preference deletion, no journal deletion, no historical answer deletion.
+### 1. Reframe the first screen
+- Keep the current full bleed pregnancy video, poster, fallback and playback behaviour unchanged.
+- Replace only the hero wording with:
+  - Eyebrow: `THE START OF YOU`
+  - Headline: `From trying to conceive` / `to their first year.` / `Yours to keep.`
+  - Supporting copy: `Personalised guidance, private journalling and a companion that stays with you through trying to conceive, pregnancy and your baby's first year.`
+  - Primary action: `Start your journey`
+  - Secondary action: `Already using your journey? Sign in`
+- Make the primary action lead to the new three stage selector rather than assume pregnancy.
+- Preserve a clear single H1, readable contrast, reduced motion behaviour and the current mobile image framing.
 
-## Roadmap
+### 2. Keep the three quiet promises
+- Retain the existing three item promise band and its restrained presentation.
+- Update the wording only where needed so it accurately describes guidance across TTC, Pregnancy and First Year, without advertising journal awareness, voice, memory or media.
 
-Add one factual line: `Journal Awareness Human Review Package — PREPARED / AWAITING HUMAN LEGAL-PRIVACY REVIEW`. Do not change the AIC-JA4 status or `Legal/privacy activation gate — OPEN`. Name no reviewer.
+### 3. Replace the pregnancy only start block
+- Rebuild the pale lilac section as `Start where you are` with exactly three choices: Trying to Conceive, Pregnancy and First Year.
+- Each choice will use the repository authoritative existing journey entry:
+  - TTC: the existing TTC setup and saved journey flow
+  - Pregnancy: the existing due date and LMP calculator flow
+  - First Year: the existing journey aware First Year start flow
+- Preserve signed out authentication handling and signed in lifecycle safeguards already owned by those flows.
+- Do not add onboarding, calculations, data writes, routes or backend behaviour.
 
-## Return report
+### 4. Show the real three stage product story
+- Replace the pregnancy only carousel with a responsive three stage preview for TTC, Pregnancy and First Year.
+- Build each preview from the visual language and capabilities already present in the corresponding saved journey:
+  - TTC: cycle orientation, a current focus and a quiet note or log affordance
+  - Pregnancy: current week guidance and a kept moment
+  - First Year: age aware guidance and a quiet daily note
+- Use clearly generic static demonstration copy, no names, exact dates, private records, private queries or invented performance statistics.
+- Reuse existing stage tokens and local imagery. Images below the first screen will be lazy loaded and given stable dimensions.
+- Keep interaction keyboard accessible and restrained, with no autoplaying carousel.
 
-15 fields: document path; created; behaviour re-verified; exact customer-facing wording captured; AI processing pathway documented; unverified operational facts explicitly marked; legal conclusions invented (must be NO); roadmap line added; application code changes; test changes; flag changes; deployments; legal/privacy gate state; journal production state; voice state.
+### 5. Rebalance wider support and the journal
+- Rework the wider support section so TTC, Pregnancy and First Year are the primary journey sequence, with IVF, Toddler and Family visibly secondary.
+- Keep all destinations on their current canonical public routes.
+- Preserve the physical journal as Pregnancy only and update its wording to make the distinction explicit. Keep the current journal photograph and product route.
+- Keep the companion mention quiet and truthful. Do not mention journal awareness, voice, memory or media.
 
-## Out of scope
+### 6. Align shared framing and search copy
+- Update the homepage title and description to reflect TTC, Pregnancy and First Year while retaining the existing canonical URL.
+- Adjust only homepage relevant shared header and footer wording or start destinations where pregnancy first wording would contradict the new selector.
+- Preserve the existing navigation hierarchy, authenticated journey resolution, companion link, legal links and footer structure.
+- Change the footer byline from pregnancy specific wording to inclusive journey wording.
 
-No code, tests, flags, deployment, publish, QA, media, voice, or claim of approval.
+## Files and structure
+
+Expected edits are limited to the homepage page and its existing homepage sections, with small consistency edits in the shared header and footer. A small homepage only helper or preview component may be introduced if it keeps the three stage content focused and testable. Existing global tokens will be reused; no new design system or generated imagery is planned.
+
+## Validation
+
+- Add focused tests for the exact hero copy, exactly three start choices, canonical destinations, truthful preview boundaries and absence of restricted capability claims.
+- Run the relevant tests, then the full test suite.
+- Run TypeScript checking twice, the existing lint command and compare against the known baseline of 1 error and 10 warnings, and run the production build.
+- Inspect the completed homepage at approximately 390px and 1440px, including video fallback, selector links, carousel or tab keyboard behaviour, focus states, image cropping, overflow, companion launcher, consent banner and console output.
+- Confirm no AI, journal implementation, feature flag, memory, history, grounding, voice, database, migration, RLS, article, route, sitemap, robots or deployment changes.

@@ -72,6 +72,15 @@ const NewHeroSection = () => {
     }
   }, []);
 
+  const handleStartJourney = useCallback((event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" });
+    window.history.pushState(null, "", "#start-where-you-are");
+    const heading = document.getElementById("start-where-you-are-heading");
+    heading?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    window.requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
+  }, [reducedMotion]);
+
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">
       {/* Video background — always render, overlay tap-to-play if paused.
@@ -151,7 +160,7 @@ const NewHeroSection = () => {
           <div className="flex flex-col items-start gap-5">
             <a
               href="#start-where-you-are"
-              onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" })}
+              onClick={handleStartJourney}
               className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-[18px] font-sans text-[14px] font-medium tracking-wide shadow-cta hover:bg-terracotta-hover hover:shadow-lg hover:-translate-y-[1px] transition-all duration-300"
             >
               Start your journey

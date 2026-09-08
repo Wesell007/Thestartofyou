@@ -25,13 +25,14 @@ const stubContext = (openWithJournalEntry: CompanionContextValue["openWithJourna
 const renderCta = (
   Cta: Awaited<ReturnType<typeof loadCta>>,
   open: CompanionContextValue["openWithJournalEntry"],
-  props: Record<string, unknown>,
+  props: { entryId: string | null | undefined },
 ) =>
   render(
     <CompanionContext.Provider value={stubContext(open)}>
-      <Cta source="first_year_memory" {...props} />
+      <Cta source="first_year_memory" entryId={props.entryId} />
     </CompanionContext.Provider>,
   );
+
 
 afterEach(() => {
   vi.unstubAllEnvs();

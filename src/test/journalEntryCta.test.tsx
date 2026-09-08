@@ -9,29 +9,38 @@
 
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { CompanionContext, type CompanionContextValue } from "@/components/companion/companionContext";
+import { type CompanionContextValue } from "@/components/companion/companionContext";
 
 const ENTRY_ID = "11111111-1111-4111-8111-111111111111";
 
+/**
+ * Both modules come from the same freshly reset graph, so the component reads
+ * the context the test provides rather than a stale duplicate of it.
+ */
 const loadCta = async () => {
   vi.resetModules();
-  const module = await import("@/components/companion/AskAboutThisEntry");
-  return module.default;
+  const [component, context] = await Promise.all([
+    import("@/components/companion/AskAboutThisEntry"),
+    import("@/components/companion/companionContext"),
+  ]);
+  return { Cta: component.default, Context: context.CompanionContext };
 };
 
 const stubContext = (openWithJournalEntry: CompanionContextValue["openWithJournalEntry"]) =>
   ({ openWithJournalEntry }) as unknown as CompanionContextValue;
 
 const renderCta = (
-  Cta: Awaited<ReturnType<typeof loadCta>>,
+  loaded: Awaited<ReturnType<typeof loadCta>>,
   open: CompanionContextValue["openWithJournalEntry"],
   props: { entryId: string | null | undefined },
-) =>
-  render(
-    <CompanionContext.Provider value={stubContext(open)}>
+) => {
+  const { Cta, Context } = loaded;
+  return render(
+    <Context.Provider value={stubContext(open)}>
       <Cta source="first_year_memory" entryId={props.entryId} />
-    </CompanionContext.Provider>,
+    </Context.Provider>,
   );
+};
 
 
 afterEach(() => {

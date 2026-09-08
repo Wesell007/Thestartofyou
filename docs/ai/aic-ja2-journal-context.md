@@ -108,26 +108,27 @@ both and asserts they never disagree.
 
 ## Schema
 
-The permission is one boolean on the existing owner-scoped `profiles` row:
+The permission is one boolean on the existing owner-scoped `profiles` row,
+applied as AIC-JA2-M1:
 
 ```sql
 ALTER TABLE public.profiles
-  ADD COLUMN IF NOT EXISTS companion_journal_context_enabled boolean NOT NULL DEFAULT false;
+  ADD COLUMN companion_journal_context_enabled boolean NOT NULL DEFAULT false;
 ```
 
 No new table and no new policy: `profiles` already has owner-only policies keyed
-on `auth.uid() = user_id`, and existing grants cover the new column. **This has
-not been applied**, so `src/lib/companion/journal/journalPermission.ts` declares
-the one narrow shape it needs locally instead of editing the generated database
-types; that declaration can be deleted once the migration is applied and the
-types regenerate.
+on `auth.uid() = user_id`, and existing grants cover the new column. Every
+existing row defaults to `false`. The column is inert while the server flag is
+off: even a manually enabled preference yields zero journal reads. The generated
+database types now carry the column, so `journalPermission.ts` uses
+`supabase.from("profiles")` directly with no local type workaround.
 
-## Activation checklist (not done)
+## Activation checklist (remaining)
 
 1. Legal and privacy approval.
-2. Apply the migration above.
-3. `AI_JOURNAL_CONTEXT_ENABLED=true`, deploy `ai-search`.
-4. `VITE_COMPANION_JOURNAL_ENABLED=true`, publish the frontend.
+2. `AI_JOURNAL_CONTEXT_ENABLED=true`, deploy `ai-search`.
+3. `VITE_COMPANION_JOURNAL_ENABLED=true`, publish the frontend.
+
 
 Out of scope and untouched: JA3, voice, media, grounding, memory, persistent
 history and analytics.

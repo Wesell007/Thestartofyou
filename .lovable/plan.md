@@ -49,21 +49,23 @@
 - Keep the interface genuinely legible: large, unblurred and not hidden behind decorative layers. Accessible tabs, keyboard navigation, visible focus, stable dimensions, no autoplay.
 
 
-### 4. Create Guidance for the Journey
+### 5. Create Guidance for the Journey
 
 - Replace the small wider support band with a complete editorial guidance composition using the approved eyebrow, heading and copy.
-- Give TTC, Pregnancy and First Year the strongest photographic hierarchy.
+- Give TTC, Pregnancy and First Year the strongest photographic hierarchy, reusing the new stage set where it suits the composition.
 - Present IVF, Preparing for Baby, Toddler and Family as smaller, quieter wider guidance links with short truthful descriptors.
-- Use an asymmetric magazine layout, not six identical cards or an icon directory.
+- Audit existing photography for the four wider hubs first and reuse strong on brand assets. Generate a replacement only where an image is genuinely missing or off brand, using the same photographic direction, and report generated versus reused.
+- Use an asymmetric magazine layout, not seven identical cards or an icon directory.
 - Link every item to its verified canonical public route and add tests ensuring all seven audited hubs are represented once with the correct hierarchy.
 
-### 5. Add the Companion story
+### 6. Add the Companion story
 
 - Add a dedicated editorial section between Guidance and the physical journal using the approved eyebrow, heading and copy.
-- Build a static visual crop from the real Companion panel tokens and message styling rather than mounting the live runtime.
-- Show the approved generic question and a short calm stage aware answer, with a subtle TTC to Pregnancy to First Year continuity cue.
+- Use the real Companion panel design: either a safe static capture of the actual panel with demonstration content, or a faithful static preview built from its real components and tokens. No generated or invented chat interface, and no second live runtime on the homepage.
+- Show the approved demonstration question and a short calm stage aware answer, with a subtle TTC to Pregnancy to First Year continuity cue.
 - Make no journal awareness, memory, history, voice, media or unsupported capability claims.
 - Keep the existing floating Ask launcher and the two answer surfaces unchanged.
+
 
 ### 6. Refine Physical and Digital
 

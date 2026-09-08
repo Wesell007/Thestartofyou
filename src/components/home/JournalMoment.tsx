@@ -27,10 +27,10 @@ const JournalMoment = () => {
               Physical + Digital
             </p>
             <h2 className="font-serif text-[1.5rem] sm:text-[1.75rem] text-foreground leading-tight mb-4">
-              Your pregnancy story, kept
+              A companion you can hold
             </h2>
             <p className="font-sans text-[14.5px] font-light text-muted-foreground leading-[1.75] mb-7">
-              Capture your pregnancy experiences week by week. A private, thoughtful record designed to become a physical journal you can hold.
+              Our pregnancy journal gives you a private place to capture the weeks in print, while your digital journey can begin before pregnancy and continue into your baby's first year.
             </p>
             <Link
               to="/journal"

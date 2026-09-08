@@ -32,6 +32,7 @@ const Index = () => {
         <JourneyBrandedSection />
         <JourneyPreviewSection />
         <LifecycleEcosystemSection />
+        <CompanionMomentSection />
         <JournalMoment />
       </main>
       <Footer />

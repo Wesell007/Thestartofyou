@@ -26,7 +26,8 @@ export const readJournalPermission = async (): Promise<boolean | null> => {
   const userId = await currentUserId();
   if (!userId) return null;
 
-  const { data, error } = await profiles()
+  const { data, error } = await supabase
+    .from("profiles")
     .select(JOURNAL_PERMISSION_COLUMN)
     .eq("user_id", userId)
     .maybeSingle();

@@ -17,9 +17,10 @@ Answer surfaces stay at exactly two (companion panel, `/ask`) and one runtime
 (`useCompanionConversation` → `useAISearch` → `ai-search`). No new route, modal, inline
 answer card or model endpoint.
 
-### 1. Typed reference contract (client + server shared)
+### 1. Typed reference contract
 
-New `supabase/functions/_shared/journalEntryRefContract.ts`:
+The authoritative strict parser lives in the server layer, in new
+`supabase/functions/_shared/journalEntryRefContract.ts`:
 
 ```
 JournalEntryRefV1 = {
@@ -32,6 +33,12 @@ JournalEntryRefV1 = {
 Strict parser: unknown source, malformed/missing id, extra fields → no selected context.
 Never infers source from an id. No text, user id, baby id, journey id, date, week, month,
 path, URL or media accepted from the browser.
+
+To avoid a Vite ↔ Deno runtime dependency, the browser gets a minimal construction-only
+mirror at `src/lib/companion/journal/journalEntryRef.ts` — same version, same source enum,
+same uuid requirement, no text/user-id/baby-id/journey-id fields, no parsing logic. A
+parity test proves the two agree; the server parser stays authoritative and is not
+weakened to make sharing easy.
 
 `parseAiSearchBody` gains one optional field `journalEntryRef`. `JourneyContextV1` is
 unchanged. An invalid ref never fails the request — the ordinary question continues.
@@ -99,8 +106,10 @@ so quota can never suppress a deterministic urgent response — the same invaria
 already holds for the query. This is the smallest possible composition change; rate
 limiting itself is untouched.
 
-Existing AMBER eligibility is also evaluated against the bounded selected text, reusing
-`decideAmberEligibility` and the release-gated classifier. Protection may increase, never
+Selected-entry safety is **deterministic only**. Selected journal text is never sent to
+the AMBER model classifier and causes no additional model call of any kind. The existing
+AMBER system keeps operating on the current user question under its existing semantics.
+New safety classifiers: 0. New safety model calls: 0. Protection may increase, never
 decrease; the current question can never be downgraded by the entry.
 
 If explicit safety terminalises, JA2 background reads are 0.

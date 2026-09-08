@@ -7,6 +7,7 @@ import ValueProofSection from "@/components/home/ValueProofSection";
 import JourneyBrandedSection from "@/components/home/JourneyBrandedSection";
 import JourneyPreviewSection from "@/components/home/JourneyPreviewSection";
 import LifecycleEcosystemSection from "@/components/home/LifecycleEcosystemSection";
+import CompanionMomentSection from "@/components/home/CompanionMomentSection";
 import JournalMoment from "@/components/home/JournalMoment";
 import { trackEvent } from "@/lib/analytics";
 import { EVENTS } from "@/lib/analyticsEvents";

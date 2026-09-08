@@ -446,7 +446,7 @@ analytics and voice are all unchanged. No deployment. See
 `docs/ai/companion-journal-enrichment-safety.md`. Voice remains paused at
 AIC-7B.
 
-## AIC-JA2 — Permissioned background journal awareness (ENGINEERING COMPLETE, NOT ACTIVE)
+## AIC-JA2 — Permissioned background journal awareness (ENGINEERING CLOSED PASS, NOT ACTIVE)
 
 Text-only background journal awareness through the existing runtime and the same
 two answer surfaces. Server resolver `aiJournalContext.ts` behind two gates —
@@ -467,7 +467,11 @@ Stated limitation: `reflections` carries no journey id, so a week row edited
 across pregnancies cannot be proved to belong to the current episode and is
 excluded. Recall is deliberately incomplete rather than possibly wrong.
 
-Not active: both flags OFF, the profiles migration is written up in the doc but
-not applied, nothing deployed. J2–J5, AIC-5, grounding, memory, persistent
-history, media, analytics, schema/RLS elsewhere and voice all unchanged. JA3 not
-started. See `docs/ai/aic-ja2-journal-context.md`.
+AIC-JA2-M1: the additive `profiles.companion_journal_context_enabled` column is
+applied in production (boolean, NOT NULL, default false, every existing row
+false, zero policy/grant changes). Schema ready, feature inert — both flags OFF,
+nothing deployed, legal/privacy activation gate OPEN. Canonical Supabase types
+carry the column and the temporary local type workaround is removed. J2–J5,
+AIC-5, grounding, memory, persistent history, media, analytics and voice all
+unchanged. JA3 not started. See `docs/ai/aic-ja2-journal-context.md`.
+

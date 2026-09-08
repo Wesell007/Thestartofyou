@@ -901,6 +901,7 @@ export type Database = {
           baby_illustration_style:
             | Database["public"]["Enums"]["baby_illustration_style"]
             | null
+          companion_journal_context_enabled: boolean
           companion_name: string | null
           companion_tone: string | null
           created_at: string
@@ -913,6 +914,7 @@ export type Database = {
           baby_illustration_style?:
             | Database["public"]["Enums"]["baby_illustration_style"]
             | null
+          companion_journal_context_enabled?: boolean
           companion_name?: string | null
           companion_tone?: string | null
           created_at?: string
@@ -925,6 +927,7 @@ export type Database = {
           baby_illustration_style?:
             | Database["public"]["Enums"]["baby_illustration_style"]
             | null
+          companion_journal_context_enabled?: boolean
           companion_name?: string | null
           companion_tone?: string | null
           created_at?: string

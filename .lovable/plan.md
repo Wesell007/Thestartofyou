@@ -180,11 +180,15 @@ voice, analytics (no new event, no entry identifiers), schema (0 migrations).
 Focused suites covering: typed-ref parsing; ownership and wrong-user/wrong-baby/
 cross-lifecycle zero-leak; pregnancy week authority (saved Week 36 beats selected Week 34,
 invalid week rejected); First Year baby isolation and `all_babies` exclusion; TTC journey
-and `log_type` rules; safety matrix (current RED/CRISIS, selected RED/CRISIS/AMBER);
-background+selected combination and dedupe; handoff lifecycle; header semantics and CORS;
-transparency copy across streaming/abort/failure/terminal on both surfaces; prompt
-composition; structural injection containment; privacy (no text/id in logs, analytics,
-headers, memory or history).
+and `log_type` rules; safety matrix (current RED/CRISIS, selected RED/CRISIS) with proof
+that selected text never reaches the AMBER classifier and adds zero safety model calls;
+client/server ref parity; explicit safety beating ordinary rate limiting; selected terminal
+and every controlled non-generative branch leaving background reads at 0; the
+assessed-text-equals-rendered-text invariant; background+selected combination and dedupe;
+handoff lifecycle including a pending J4 entry being replaced and the ref consumed once;
+no raw journal text in the browser request; header semantics and CORS; transparency copy
+across streaming/abort/failure/terminal on both surfaces; prompt composition; structural
+injection containment; privacy (no text/id in logs, analytics, headers, memory or history).
 
 ## Validation
 

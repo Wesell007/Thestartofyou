@@ -19,27 +19,35 @@
 - Leave the hero video, crop, gradient, headline, supporting copy, CTA, poster, tap to play and reduced motion behaviour untouched.
 - Keep the three quiet promises immediately below it.
 
-### 2. Redesign Start Where You Are
+### 2. Create the new stage photography first
 
-- Replace the white card treatment with three connected, image led editorial chapters using existing local photography:
-  - TTC: `guidance-ttc.jpg`
-  - Pregnancy: `guidance-featured-pregnancy.jpg`
-  - First Year: `guidance-firstyear.jpg`
+- Before building sections, generate three coordinated production photographs with Nano Banana: Trying to Conceive, Pregnancy and First Year.
+- One art-directed set: matching warm natural light, cream and muted earth grading, soft depth of field, realistic skin, understated styling, portrait editorial crops with negative space.
+- No text, logos, typography or interface inside the photographs.
+- Save them as local repository assets with meaningful names and record the prompts in a short documentation note.
+- No Nano Banana generated product interface or companion interface at any point.
+
+### 3. Redesign Start Where You Are
+
+- Replace the white card treatment with three connected, image led editorial chapters using the three newly generated photographs.
 - Keep the approved eyebrow, heading and copy exactly.
 - Add restrained chapter numbers, short supporting text and subtle links to the existing canonical starts:
   - TTC `/setup/trying-to-conceive`
   - Pregnancy `/due-date-calculator`
   - First Year `/setup/first-year`
-- Change the section surface from the stronger `lavender` token to the existing pale `lavender-bg` token. No new purple token or image asset.
+- Change the section surface from the stronger `lavender` token to the existing pale `lavender-bg` token. No new purple token.
 - Preserve the existing hash target and keyboard focus handoff from the hero and shared signed out Start link.
 
-### 3. Rebuild Inside Your Journey
+### 4. Rebuild Inside Your Journey from the real product
 
-- Replace the current three text cards with one substantial static product showcase based on the actual visual language of My TTC Journey, My Week and First Year Today.
-- Use a three stage segmented control. Desktop will show one large active preview with adjacent stage context rather than three small cards. Mobile will show one readable preview at a time.
-- Use only safe, generic copy and fixed illustrative states. Do not mount protected journey components or call their hooks.
-- Keep all previews local and presentational: zero customer reads, zero homepage database reads, no probabilities, scores, real dates, names, journal text or health statistics.
-- Implement accessible tabs with keyboard navigation, visible focus, stable dimensions and no autoplay.
+- First inspect the actual My TTC Journey, My Week and First Year Today screens for layout, typography, cards, spacing, stage indicators and chips.
+- Preferred method A: capture static marketing screenshots of those real screens locally using safe demonstration state only, and use them as homepage preview assets.
+- If capture of the authenticated screens is not achievable safely, use fallback B: homepage only static previews built directly from the real product components, tokens, labels and spacing with fixed demonstration content. Report which method was used.
+- Demonstration state only: illustrative stage guidance for TTC, week 24 second trimester for Pregnancy, four months Today for First Year. No customer names, journal text, real dates, records, scores or probabilities.
+- Never mount authenticated components that fetch data. Homepage customer reads and database reads stay at zero.
+- Compose one substantial product showcase with TTC, Pregnancy and First Year controls: a large readable active preview on desktop and one preview at a time on mobile, with purpose built mobile crops if needed.
+- Keep the interface genuinely legible: large, unblurred and not hidden behind decorative layers. Accessible tabs, keyboard navigation, visible focus, stable dimensions, no autoplay.
+
 
 ### 4. Create Guidance for the Journey
 

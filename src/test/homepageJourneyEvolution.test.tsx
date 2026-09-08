@@ -5,6 +5,8 @@ import { MemoryRouter } from "react-router-dom";
 
 import JourneyBrandedSection from "@/components/home/JourneyBrandedSection";
 import JourneyPreviewSection from "@/components/home/JourneyPreviewSection";
+import LifecycleEcosystemSection from "@/components/home/LifecycleEcosystemSection";
+import CompanionMomentSection from "@/components/home/CompanionMomentSection";
 import Index from "@/pages/Index";
 
 afterEach(cleanup);

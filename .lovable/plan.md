@@ -1,46 +1,82 @@
-# AIC-JA3 — Documentation Closure Only
+# AIC-JA4 — Text Journal Evaluation & Production Release Gate
 
-No behaviour, test, deployment or flag changes. Two artefacts only.
+Evaluation-only phase. No deployment, no publish, no flag changes, no media, no voice, no legal conclusions.
 
-## 1. Create `docs/ai/aic-ja3-selected-journal-entry.md`
+## Objective
 
-The file does not exist; it was omitted from the change list. Create it documenting the final implemented state (verified against the actual code):
+Evaluate JA2 (background journal awareness) and JA3 (explicit "Ask about this entry") as one integrated system, decide technical release readiness, and prepare activation and rollback runbooks without executing them.
 
-- Explicit one-request permission semantics (typed click → transient handoff → consumed on next request → cleared)
-- `JournalEntryRefV1` contract: `version: 1`, `source`, `id` only; exactly 3 keys; UUID id
-- Server-authoritative strict parser (`journalEntryRefContract.ts`), construction-only client mirror with parity tests
-- No raw journal text ever sent from the browser
-- RLS/user-token ownership; server re-authorises under the caller's session
-- Source allowlist: `pregnancy_reflection`, `first_year_entry`, `first_year_memory`, `ttc_note`
-- Pregnancy lifecycle/week authority (canonical pregnancy-week logic, immutable `created_at` vs saved journey start; never `updated_at`; fail-closed cross-episode)
-- First Year baby isolation (current baby only; `all_babies` excluded; parent/family distinction)
-- TTC journey isolation
-- Deterministic selected-entry safety composition on the exact rendered string; zero selected input to AMBER; zero new model calls/classifiers
-- Selected safety evaluated before ordinary rate limiting; background reads remain zero on all controlled branches
-- Selected/background precedence and sanitized-text dedupe (no internal ids in model contract, headers, metadata or logs)
-- J4 pending-context replacement behaviour
-- Handoff consume/clear lifecycle (one request, session-only)
-- Selected transparency header (`X-Companion-Journal-Entry: used|none`, completed answers only, CORS-exposed)
-- Combined transparency UI (`CompanionJournalNote` wording)
-- Privacy/logging/persistence boundaries: nothing persisted, logged or sent to analytics
-- Flags OFF; production OFF; legal/privacy gate OPEN
+## Step 1 — Baseline confirmation (before any change)
 
-Also record the accepted JA3 V1 UI coverage limitation:
+- Record current revision.
+- Run the full test suite and confirm the expected baseline: 109 files, 1238 tests, 1238 passing, 0 timeouts.
+- Record lint baseline (expected 1 error, 10 warnings).
+- If the baseline has drifted, stop and report before any remediation.
 
-- CTA present: First Year memory items, TTC note/log items
-- Not exposed: Pregnancy reflection surfaces, First Year Today entry surfaces
-- Reason: those render surfaces do not expose a stable authoritative persistent row id suitable for the typed-ref contract; no ids fabricated or derived
-- Classified as a release-coverage limitation, not an engineering safety failure
+## Step 2 — Static architecture audit (read-only)
 
-## 2. Roadmap touch-up
+Verified against repository truth, not against earlier plans:
 
-Update the existing `## AIC-JA3` section title/body minimally to record:
+- Exactly two answer surfaces (CompanionPanel, /ask) and one runtime (useCompanionConversation → useAISearch → ai-search); count any journal-specific endpoint, inline card, modal chat, second runtime or direct model call (expected 0).
+- Both journal flags from definition to runtime use; server flag authoritative, client flag UI-only, no request or profile value able to bypass server OFF, no second flag family, no committed override enabling production.
+- Data flow for both paths: table, selected fields, ownership mechanism, lifecycle check, baby check, sanitisation, bounds, safety assessment, rendered block, prompt placement, transparency.
+- Identity and ownership: verified bearer token, PostgREST under caller token, RLS, zero service-role journal reads, zero request-body user-id authority.
+- Isolation: Pregnancy episode boundary on immutable created_at with updated_at never used for episode proof; First Year baby isolation and all_babies exclusion; TTC current-journey-only note scoping.
+- Source allowlist regression: confirm no titles, tags, tracker values, care-event fields, appointments, captions, media, paths, ids or URLs have crept into model-visible text.
+- Media boundary: zero photo, video, audio, transcription or image-model paths.
+- S1 bounds: background 5 entries / 300 chars / 1200 total; selected 1800 chars; the assessed string is exactly the rendered string.
+- Prompt authority: safety > saved journey > selected journal > background journal > memory/history/page/grounding. Record the actual order rather than rewriting it.
+- Selected/background dedupe: server-internal identifiers only, zero model, header, metadata, analytics or log visibility.
+- Composition with J2 (journey state authoritative), J3 (zero journal-derived starters), J4 (explicit selection replaces pending generic handoff), J5 (saved-journey actions only).
+- Memory (AIC-3) and persistent history (AIC-4): zero journal writes of text, ids, source or metadata.
+- Handoff lifecycle: pending, replace, remove, consume-once, clear on close/route/auth/lifecycle change, no localStorage, sessionStorage or cross-tab carry-over.
+- Transparency headers and copy, exact strings from the repository, and the completed-answer-only rule.
+- Query bounds: finite reads, single-entry selected, no N+1; record worst-case query counts per composition.
 
-- `AIC-JA3 — ENGINEERING CLOSED PASS / PRODUCTION OFF`
-- `Journal Text Awareness — BACKGROUND + EXPLICIT ENTRY ENGINEERING READY / PRODUCTION OFF`
+## Step 3 — Isolated on-state evaluation
 
-No other roadmap edits.
+Exercised locally with test flags ON and fixtures only. Production configuration stays OFF; no customer journal content or preferences are used.
 
-## Validation
+Permission matrix evidence for all seven combinations of server flag, background permission and selected entry, including the terminal-selected case (background reads 0, ordinary model calls 0).
 
-- Re-read the created doc against the code for accuracy; confirm roadmap lines present. No test run needed (docs only).
+Safety matrix: current RED, current CRISIS, selected RED, selected CRISIS, background risky-entry drop (not terminal), rate limit, kill switch, clarification, unsupported, recap, AMBER and other controlled branches — recording selected reads, background reads, model calls, headers, transparency and next-actions for each.
+
+Mutation cases: edit before send uses the newest server value; delete, ownership change, lifecycle change or disallowed log_type yields zero selected context; never a client-captured text fallback.
+
+Failure cases with mocks: auth lookup, profile read, lifecycle read, journal row read, malformed response, timeout — all fail closed for enrichment, with no database internals exposed.
+
+Prompt-injection regression on both blocks with structural payloads (angle tags, closing delimiters, fenced system blocks, instruction text).
+
+## Step 4 — Runtime UI verification
+
+Local preview with test flags ON, at roughly 390px and 1440px, on both surfaces: account setting, CTA hierarchy and touch targets, panel opening, pending indicator and Remove, composer, streaming, completed transparency, J5 next steps, bottom navigation and launcher. Record overflow, collisions, clipped controls and layout shifts.
+
+## Step 5 — CTA coverage decision
+
+Re-inspect current render surfaces for stable authoritative row ids. If Pregnancy reflection and First Year Today surfaces still lack them, keep coverage unchanged and classify as an accepted release-coverage limitation (not P0/P1). No fabricated or derived ids.
+
+## Step 6 — Remediation (only if needed)
+
+Smallest safe fixes strictly inside JA2/JA3 text scope. No schema change, no new surface or endpoint, no media, no voice, no unrelated cleanup. Anything requiring schema redesign, new lifecycle architecture or broader redesign stops and is reported instead.
+
+Focused tests added only where evaluation exposes a real coverage gap, across flags, permission, ownership, per-journey isolation, safety, composition, handoff, transparency, privacy and structural containment.
+
+## Step 7 — Final validation
+
+Full test suite (all passing, 0 timeouts), typecheck twice, Deno check on ai-search and every journal server module, lint (baseline only), build. Exact arithmetic reported.
+
+## Step 8 — Documentation and verdict
+
+Create `docs/ai/aic-ja4-text-journal-release-gate.md` covering architecture, combined flow, flag and permission matrices, safety matrix, isolation results, prompt composition, privacy boundaries, runtime verification, CTA coverage, findings by severity, remediation, legal gate state, activation runbook (Phase A code release with flags OFF; Phase B post-approval activation), rollback runbook (server flag OFF first, then client flag; no schema drop, no data deletion), and the release verdict.
+
+Update the roadmap only after the verdict. On a technical pass:
+
+- `AIC-JA4 — ENGINEERING RELEASE GATE CLOSED PASS / PRODUCTION HOLD`
+- `Journal Text Awareness — TECHNICALLY RELEASE READY / PRODUCTION OFF`
+- `Legal/privacy activation gate — OPEN`
+
+Then return the full 171-field completion report and stop.
+
+## Boundaries
+
+No deployment, no publish, no production flag change, no production QA, no schema or migration, no media, no voice, no legal or privacy conclusion, no changes to AIC-5, grounding, memory, history or J2–J5 semantics.

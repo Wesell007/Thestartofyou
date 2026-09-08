@@ -509,3 +509,5 @@ See `docs/ai/aic-ja4-text-journal-release-gate.md`.
 
 Journal Awareness Human Review Package — PREPARED / AWAITING HUMAN LEGAL-PRIVACY REVIEW
 See `docs/ai/journal-awareness-human-review-package.md`.
+
+- HOMEPAGE STORY REFINEMENT — IN PROGRESS. Below-hero story rebuild: image-led Start Where You Are, real-product Inside Your Journey previews, editorial guidance hierarchy across 7 audited hubs, dedicated Companion section, Physical + Digital journal close. Hero unchanged.

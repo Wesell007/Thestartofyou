@@ -8,21 +8,21 @@ const journeyChoices = [
     description: "Understand your cycle and keep your TTC journey in one place.",
     href: "/setup/trying-to-conceive",
     icon: Sprout,
-    tone: "ttc",
+    iconClassName: "bg-stage-ttc text-stage-ttc-accent",
   },
   {
     label: "Pregnancy",
     description: "Begin with your dates, then follow calm guidance week by week.",
     href: "/due-date-calculator",
     icon: CalendarHeart,
-    tone: "pregnancy",
+    iconClassName: "bg-stage-pregnancy text-stage-pregnancy-accent",
   },
   {
     label: "First Year",
     description: "Start an age aware space for your baby and your own recovery.",
     href: "/setup/first-year",
     icon: Baby,
-    tone: "firstyear",
+    iconClassName: "bg-stage-firstyear text-stage-firstyear-accent",
   },
 ] as const;
 
@@ -60,21 +60,14 @@ const JourneyBrandedSection = () => {
         </div>
 
         <div className="grid gap-4 md:grid-cols-3 md:gap-5">
-          {journeyChoices.map(({ label, description, href, icon: Icon, tone }) => (
+          {journeyChoices.map(({ label, description, href, icon: Icon, iconClassName }) => (
             <Link
               key={label}
               to={href}
               className="group flex min-h-[218px] flex-col border border-lavender-foreground/10 bg-card/75 p-6 text-left shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-lavender-foreground/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-lavender"
             >
-              <span
-                className="mb-8 flex h-10 w-10 items-center justify-center rounded-full"
-                style={{ backgroundColor: `hsl(var(--stage-${tone}) / 0.55)` }}
-              >
-                <Icon
-                  size={18}
-                  aria-hidden="true"
-                  style={{ color: `hsl(var(--stage-${tone}-accent))` }}
-                />
+              <span className={`mb-8 flex h-10 w-10 items-center justify-center rounded-full ${iconClassName}`}>
+                <Icon size={18} aria-hidden="true" />
               </span>
               <h3 className="font-serif text-xl text-foreground">{label}</h3>
               <p className="mt-2 flex-1 font-sans text-[13.5px] font-light leading-relaxed text-muted-foreground">

@@ -239,7 +239,7 @@ describe("ownership and lifecycle isolation", () => {
   it("never lets a selected entry establish the current week", async () => {
     await drain(await post({ query: "What helps with heartburn?", journalEntryRef: REF }));
     // The saved journey says week 36; the entry is described as week 34.
-    expect(modelBodies[0]).toContain("week 36");
+    expect(modelBodies[0]).toContain("Pregnancy week: 36");
     expect(modelBodies[0]).toContain("week 34");
     expect(modelBodies[0]).toContain("Saved journey details remain the only source");
   });

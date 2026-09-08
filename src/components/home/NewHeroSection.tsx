@@ -133,30 +133,32 @@ const NewHeroSection = () => {
             </p>
           </div>
 
-          {/* Headline — tighter tracking, stronger weight presence */}
+          {/* Headline — the full journey, while the pregnancy film stays as the brand anchor */}
           <h1 className="font-serif text-[2.625rem] sm:text-[3rem] md:text-[3.5rem] lg:text-[4rem] text-foreground leading-[1.04] tracking-[-0.012em] mb-6 md:mb-7">
-            Week by week. Stage by stage.
+            From trying to conceive
+            <br />
+            to their first year.
             <br />
             <span className="italic text-foreground/85">Yours to keep.</span>
           </h1>
 
           {/* Supporting line — slightly darker for confidence */}
           <p className="font-sans text-[15.5px] md:text-[17px] font-light text-foreground/65 leading-[1.7] mb-10 md:mb-12 max-w-[28rem]">
-            Start with your due date. Weekly guidance that changes with your pregnancy and stays with you as you go.
+            Personalised guidance, private journalling and a companion that stays with you through trying to conceive, pregnancy and your baby's first year.
           </p>
 
           {/* Primary CTA — grounded with stronger spacing */}
           <div className="flex flex-col items-start gap-5">
-            <Link
-              to="/due-date-calculator"
+            <a
+              href="#start-where-you-are"
               onClick={() => trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" })}
               className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-[18px] font-sans text-[14px] font-medium tracking-wide shadow-cta hover:bg-terracotta-hover hover:shadow-lg hover:-translate-y-[1px] transition-all duration-300"
             >
               Start your journey
               <ArrowRight size={15} />
-            </Link>
+            </a>
             <p className="font-sans text-[12.5px] font-light text-foreground/55">
-              Already saving your journey?{" "}
+              Already using your journey?{" "}
               <Link
                 to="/auth?intent=sign_in"
                 onClick={() => trackEvent(EVENTS.SIGN_IN_CLICKED, { location: "home_hero" })}

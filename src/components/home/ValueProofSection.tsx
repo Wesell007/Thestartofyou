@@ -1,7 +1,7 @@
 const values = [
   {
     title: "Personalised by stage",
-    desc: "Guidance that follows your timeline, week by week.",
+    desc: "Guidance shaped around where you are right now.",
   },
   {
     title: "Calm, clear information",
@@ -9,7 +9,7 @@ const values = [
   },
   {
     title: "A space to return to",
-    desc: "Reflect, track milestones, and feel supported.",
+    desc: "Reflect, keep the moments that matter, and pick up where you left off.",
   },
 ];
 

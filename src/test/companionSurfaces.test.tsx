@@ -78,6 +78,13 @@ describe("WC-4 navigation terminology", () => {
     expect(links.length).toBeGreaterThan(0);
     expect(new Set(links)).toEqual(new Set(["/ask"]));
   });
+
+  it("routes signed-out journey starts to the neutral homepage selector", () => {
+    renderAt(<Navbar />);
+    const links = screen.getAllByRole("link", { name: /start your journey/i }).map(hrefOf);
+    expect(links.length).toBeGreaterThan(0);
+    expect(new Set(links)).toEqual(new Set(["/#start-where-you-are"]));
+  });
 });
 
 describe("WC-4 companion panel", () => {

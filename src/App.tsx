@@ -9,6 +9,7 @@ import PageLoadState from "./components/shared/PageLoadState.tsx";
 import JourneyBottomNav from "./components/layout/JourneyBottomNav.tsx";
 import PregnancyWeekRoute from "./pages/PregnancyWeekRoute.tsx";
 const Index = lazy(() => import("./pages/Index.tsx"));
+const StartYourJourney = lazy(() => import("./pages/StartYourJourney.tsx"));
 
 const Pregnancy = lazy(() => import("./pages/Pregnancy.tsx"));
 const BodyTopic = lazy(() => import("./pages/pregnancy/BodyTopic.tsx"));
@@ -223,6 +224,9 @@ const App = () => (
 
         <Routes>
           <Route path="/" element={<Index />} />
+          {/* Public decision page for the three saved journeys. */}
+          <Route path="/start-your-journey" element={<StartYourJourney />} />
+          
           
           <Route path="/pregnancy" element={<Pregnancy />} />
           <Route path="/pregnancy/body" element={<BodyTopic />} />

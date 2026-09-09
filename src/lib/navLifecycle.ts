@@ -95,12 +95,19 @@ export const resolveHeaderLinks = (
   ];
 };
 
-/** The authed call to action shown in the public navbar. */
+/**
+ * The authed call to action shown in the public navbar.
+ *
+ * Saved-journey resolution is unchanged. The no-active-journey fallback points
+ * at the neutral explanatory page rather than a pregnancy-specific tool, so
+ * someone without a saved journey is never nudged towards one stage. Nothing
+ * here creates, selects or writes a lifecycle.
+ */
 export const resolvePublicAccountLink = (
   lifecycle: NavLifecycle | null,
 ): { href: string; label: string } => {
   if (lifecycle === "first_year") return { href: "/my-first-year", label: "My First Year" };
   if (lifecycle === "ttc") return { href: "/my-ttc-journey", label: "My TTC Journey" };
   if (lifecycle === "pregnancy") return { href: "/my-week", label: "My Week" };
-  return { href: "/due-date-calculator", label: "Set up journey" };
+  return { href: "/start-your-journey", label: "Start your journey" };
 };

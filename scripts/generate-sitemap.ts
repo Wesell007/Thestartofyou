@@ -10,7 +10,14 @@ import { resolve } from "node:path";
 const BASE_URL = "https://thestartofyou.com";
 
 // ── Static route groups ────────────────────────────────────────────────
-const core = ["/", "/about", "/support", "/journal", "/preparing-for-baby"];
+const core = [
+  "/",
+  "/start-your-journey",
+  "/about",
+  "/support",
+  "/journal",
+  "/preparing-for-baby",
+];
 
 const pregnancyStatic = [
   "/pregnancy",

@@ -109,15 +109,12 @@ describe("homepage journey evolution", () => {
     );
   });
 
-  it("scrolls and focuses the selector from the hero action", async () => {
-    const scrollIntoView = Element.prototype.scrollIntoView;
-    Element.prototype.scrollIntoView = vi.fn();
+  it("sends the generic hero action to the public journey decision page", () => {
     renderAt(<Index />);
 
-    fireEvent.click(within(screen.getByRole("main")).getByRole("link", { name: "Start your journey" }));
-    const heading = screen.getByRole("heading", { name: "Start where you are" });
-    await waitFor(() => expect(heading).toHaveFocus());
-    expect(Element.prototype.scrollIntoView).toHaveBeenCalled();
-    Element.prototype.scrollIntoView = scrollIntoView;
+    const heroCta = within(screen.getByRole("main")).getAllByRole("link", {
+      name: "Start your journey",
+    })[0];
+    expect(heroCta).toHaveAttribute("href", "/start-your-journey");
   });
 });

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight, CalendarDays } from "lucide-react";
+import { BookOpen, CalendarDays, ChevronRight, Heart, NotebookPen, Sparkles } from "lucide-react";
 
 import {
   TTC_EYEBROW,
@@ -16,17 +15,7 @@ import {
   FY_KICKER,
 } from "@/components/firstyear/journey/firstYearStyles";
 
-/**
- * Homepage Story Refinement — chapter two: Inside your journey.
- *
- * Still, illustrative renderings of the real saved-journey surfaces (My TTC
- * Journey, My Week, First Year Today), built from the same shared style
- * constants those screens use so the marketing story matches the product.
- *
- * Privacy: this is a public marketing surface. It performs no Supabase reads
- * of any kind — no journey, journal, baby or TTC data — and every value shown
- * is fixed illustrative copy, not a person's record.
- */
+/** Static product compositions. No journey, journal, baby or TTC data is read. */
 
 const stages = ["TTC", "Pregnancy", "First Year"] as const;
 type Stage = (typeof stages)[number];
@@ -40,73 +29,41 @@ const cyclePath = [
 ] as const;
 
 const TtcPreview = () => (
-  <div className={`${TTC_PAPER_CARD} px-5 py-6 sm:px-7 sm:py-8`}>
-    <p className={`${TTC_EYEBROW} mb-2`}>Your cycle path</p>
-    <p className={`${TTC_HELPER} mb-6 max-w-[52ch]`}>
-      A soft sense of where you may be and what may come next, based on the dates you saved.
-    </p>
-    <ol className="space-y-3">
-      {cyclePath.map(({ label, state }) => (
-        <li key={label} className="flex items-center gap-3">
-          <span
-            className="h-2.5 w-2.5 shrink-0 rounded-full"
-            style={{
-              background:
-                state === "ahead"
-                  ? "hsl(var(--stage-ttc-olive) / 0.28)"
-                  : "hsl(var(--stage-ttc-olive))",
-              boxShadow:
-                state === "here" ? "0 0 0 5px hsl(var(--stage-ttc-olive) / 0.16)" : undefined,
-            }}
-          />
-          <span className="font-serif text-[15px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">
-            {label}
-          </span>
-        </li>
-      ))}
-    </ol>
-    <div
-      className={`${TTC_INNER_RADIUS} mt-6 border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-cream-soft)/0.6)] px-5 py-4`}
-    >
-      <p className="font-serif italic text-[15px] leading-[1.6] text-[hsl(var(--stage-ttc-text-soft))]">
-        Estimates only, never a certainty. Your own notes stay private to you.
-      </p>
+  <article className={`${TTC_PAPER_CARD} overflow-hidden px-5 py-7 sm:px-9 sm:py-10`}>
+    <header className="border-b border-[hsl(var(--stage-ttc-edge))] pb-7">
+      <p className={TTC_EYEBROW}>My TTC journey</p>
+      <div className="mt-3 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <div><h3 className="font-serif text-[2rem] leading-tight text-[hsl(var(--stage-ttc-text))] sm:text-[2.6rem]">Today</h3><p className={`${TTC_HELPER} mt-2`}>A gentle view of this cycle, based on the dates you saved.</p></div>
+        <span className="self-start rounded-full border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-sage-tint))] px-4 py-2 font-sans text-[12px] text-[hsl(var(--stage-ttc-olive))]">Current cycle</span>
+      </div>
+    </header>
+    <div className="grid gap-5 py-7 lg:grid-cols-[1.1fr_0.9fr]">
+      <section className={`${TTC_INNER_RADIUS} border border-[hsl(var(--stage-ttc-edge))] bg-[hsl(var(--stage-ttc-cream-soft)/0.68)] p-5`} aria-label="TTC cycle path preview">
+        <p className={`${TTC_EYEBROW} mb-4`}>Your cycle path</p>
+        <ol className="space-y-3.5">
+          {cyclePath.map(({ label, state }) => <li key={label} className="flex items-center gap-3"><span className={`h-2.5 w-2.5 shrink-0 rounded-full ${state === "ahead" ? "bg-[hsl(var(--stage-ttc-olive)/0.25)]" : "bg-[hsl(var(--stage-ttc-olive))]"}`} /><span className="font-serif text-[15px] leading-[1.5] text-[hsl(var(--stage-ttc-text))]">{label}</span>{state === "here" && <span className="ml-auto font-sans text-[10px] uppercase text-[hsl(var(--stage-ttc-accent))]">Around now</span>}</li>)}
+        </ol>
+      </section>
+      <section className="border-l-0 border-[hsl(var(--stage-ttc-edge))] lg:border-l lg:pl-6" aria-label="TTC guidance preview">
+        <p className={TTC_EYEBROW}>What matters now</p>
+        <h4 className="mt-3 font-serif text-[1.45rem] text-[hsl(var(--stage-ttc-text))]">Notice without pressure</h4>
+        <p className={`${TTC_HELPER} mt-3`}>Cycle signs can offer context, but no single sign confirms ovulation. Keep only what helps.</p>
+        <div className="mt-5 flex items-center gap-3 border-t border-[hsl(var(--stage-ttc-edge))] pt-4"><CalendarDays size={17} aria-hidden="true" className="text-stage-ttc-accent" /><span className="font-sans text-[12px] text-[hsl(var(--stage-ttc-text-soft))]">A possible fertile window is an estimate</span></div>
+      </section>
     </div>
-  </div>
+    <div className="grid gap-4 border-t border-[hsl(var(--stage-ttc-edge))] pt-6 sm:grid-cols-2">
+      <div className={`${TTC_INNER_RADIUS} bg-[hsl(var(--stage-ttc-sage-tint))] p-5`}><NotebookPen size={18} aria-hidden="true" className="text-stage-ttc-accent" /><p className="mt-3 font-serif text-[1.15rem] text-[hsl(var(--stage-ttc-text))]">Your private cycle notes</p><p className={`${TTC_HELPER} mt-2`}>A quiet place for symptoms, tests, feelings or a simple note.</p></div>
+      <div className={`${TTC_INNER_RADIUS} border border-[hsl(var(--stage-ttc-edge))] p-5`}><BookOpen size={18} aria-hidden="true" className="text-stage-ttc-accent" /><p className="mt-3 font-serif text-[1.15rem] text-[hsl(var(--stage-ttc-text))]">Guidance for this point</p><p className={`${TTC_HELPER} mt-2`}>Clear reading for the questions that often come with waiting.</p></div>
+    </div>
+  </article>
 );
 
 const PregnancyPreview = () => (
-  <div className="rounded-[26px] pregnancy-paper px-6 py-8 sm:px-9 sm:py-10">
-    <p
-      className="mb-4 font-sans text-[10.5px] font-medium uppercase tracking-[0.3em]"
-      style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-    >
-      Second trimester · Week 24
-    </p>
-    <p className="font-serif font-medium leading-[1.02] tracking-tight text-foreground text-[2rem] sm:text-[2.6rem]">
-      A steadier stretch
-    </p>
-    <p className="mt-4 max-w-[36ch] font-serif italic text-[1.05rem] leading-[1.45] text-[hsl(var(--stage-pregnancy-text-soft))]">
-      Movement becomes more familiar, and your next appointment comes into view.
-    </p>
-    <span className="mt-7 inline-flex items-center gap-3 rounded-full bg-background/70 px-5 py-2.5">
-      <CalendarDays
-        size={14}
-        strokeWidth={1.7}
-        aria-hidden="true"
-        style={{ color: "hsl(var(--stage-pregnancy-accent))" }}
-      />
-      <span className="font-serif text-[15px] text-foreground/85">Due in the autumn</span>
-      <span
-        aria-hidden="true"
-        className="block h-4 w-px"
-        style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.24)" }}
-      />
-      <span className="font-sans text-[12px] font-light tracking-wide text-foreground/60">
-        16 weeks to go
-      </span>
-    </span>
-  </div>
+  <article className="pregnancy-paper overflow-hidden rounded-[26px] border border-[hsl(var(--stage-pregnancy-edge))] px-5 py-7 shadow-soft sm:px-9 sm:py-10">
+    <header className="border-b border-[hsl(var(--stage-pregnancy-edge))] pb-7"><p className="font-sans text-[10.5px] font-medium uppercase text-stage-pregnancy-accent">My week</p><div className="mt-3 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h3 className="font-serif text-[2rem] leading-tight text-foreground sm:text-[2.7rem]">Week 24</h3><p className="mt-2 font-serif italic text-[16px] text-[hsl(var(--stage-pregnancy-text-soft))]">Second trimester · A steadier stretch</p></div><span className="self-start rounded-full bg-background/75 px-4 py-2 font-sans text-[12px] text-foreground/65">16 weeks to go</span></div></header>
+    <section className="grid gap-6 py-7 md:grid-cols-[1.15fr_0.85fr]" aria-label="Pregnancy weekly guidance preview"><div><p className="font-sans text-[10.5px] font-medium uppercase text-stage-pregnancy-accent">This week</p><h4 className="mt-3 font-serif text-[1.55rem] text-foreground">Movement becomes more familiar</h4><p className="mt-3 font-sans text-[14px] font-light leading-[1.75] text-muted-foreground">Your baby is growing steadily. You may notice clearer patterns of movement as the days pass.</p><div className="mt-5 flex items-center gap-3 border-t border-[hsl(var(--stage-pregnancy-edge))] pt-4"><CalendarDays size={17} aria-hidden="true" className="text-stage-pregnancy-accent" /><span className="font-sans text-[12px] text-muted-foreground">Your next routine appointment comes into view</span></div></div><div className="rounded-[16px] border border-[hsl(var(--stage-pregnancy-edge))] bg-background/65 p-5"><p className="font-sans text-[10.5px] font-medium uppercase text-stage-pregnancy-accent">Current focus</p><p className="mt-3 font-serif text-[1.2rem] text-foreground">Getting to know your pattern</p><p className="mt-2 font-sans text-[13px] font-light leading-relaxed text-muted-foreground">There is no set number of movements. What matters is becoming familiar with what is usual for you.</p></div></section>
+    <div className="grid gap-4 border-t border-[hsl(var(--stage-pregnancy-edge))] pt-6 sm:grid-cols-2"><div className="rounded-[16px] bg-background/65 p-5"><Heart size={18} aria-hidden="true" className="text-stage-pregnancy-accent" /><p className="mt-3 font-serif text-[1.15rem] text-foreground">A meaningful moment</p><p className="mt-2 font-sans text-[13px] font-light leading-relaxed text-muted-foreground">Keep a thought, a photograph or something you want to remember.</p></div><div className="rounded-[16px] border border-[hsl(var(--stage-pregnancy-edge))] p-5"><BookOpen size={18} aria-hidden="true" className="text-stage-pregnancy-accent" /><p className="mt-3 font-serif text-[1.15rem] text-foreground">Supporting this week</p><p className="mt-2 font-sans text-[13px] font-light leading-relaxed text-muted-foreground">Appointments, your body and practical preparation in one calm place.</p></div></div>
+  </article>
 );
 
 const FirstYearPreview = () => {
@@ -117,7 +74,7 @@ const FirstYearPreview = () => {
   };
 
   return (
-    <div
+    <article
       className={`${FY_CARD_RADIUS} border px-6 py-8 sm:px-9 sm:py-10`}
       style={{
         borderColor: "hsl(var(--stage-firstyear-accent) / 0.45)",
@@ -125,66 +82,39 @@ const FirstYearPreview = () => {
           "linear-gradient(158deg, hsl(var(--stage-firstyear-soft)) 0%, hsl(var(--stage-firstyear)) 58%, hsl(var(--stage-firstyear-cream)) 100%)",
       }}
     >
-      <div className="mb-5 flex flex-wrap items-center gap-2">
-        <span
-          className={FY_KICKER}
-          style={{
-            color: "hsl(var(--parchment))",
-            backgroundColor: "hsl(var(--stage-firstyear-ink))",
-          }}
-        >
-          Today
-        </span>
-        <span className={FY_CHIP} style={chip}>
-          Four months old
-        </span>
-      </div>
-      <p className="mb-2.5 font-serif text-[1.85rem] leading-[1.1] text-foreground sm:text-[2.25rem]">
-        A note for your baby
-      </p>
-      <p className={`${FY_CARD_BODY} max-w-[50ch]`}>
-        Write as much or as little as you like. There is nothing to keep up with.
-      </p>
-      <div
-        className={`${FY_INNER_RADIUS} mt-5 px-5 py-5`}
+      <header className="border-b border-[hsl(var(--stage-firstyear-accent)/0.22)] pb-7"><p className={FY_KICKER} style={{ color: "hsl(var(--stage-firstyear-ink))" }}>My first year</p><div className="mt-3 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><h3 className="font-serif text-[2rem] leading-tight text-foreground sm:text-[2.6rem]">Today</h3><p className="mt-2 font-serif italic text-[16px] text-muted-foreground">A calm place for baby and for you</p></div><span className={FY_CHIP} style={chip}>Four months old</span></div></header>
+       <div className="mt-5 grid gap-5 md:grid-cols-[1.1fr_0.9fr]"><section><p className={FY_KICKER}>Today's orientation</p><p className="mt-3 font-serif text-[1.55rem] leading-tight text-foreground">More reaching, rolling and conversation</p><p className={`${FY_CARD_BODY} mt-3`}>At this age, everyday play and familiar voices support connection. Development is individual, never a race.</p></section><section className={`${FY_INNER_RADIUS} px-5 py-5`} style={{ backgroundColor: "hsl(var(--stage-firstyear-cream))", border: "1px solid hsl(var(--stage-firstyear-accent) / 0.2)" }}><p className={FY_KICKER}>For baby and parent</p><div className="mt-4 space-y-3 font-sans text-[13px] text-muted-foreground"><p>Feeding and sleep rhythms</p><p>Development and play</p><p>Your recovery and wellbeing</p></div></section></div>
+       <div className="mt-6 grid gap-4 border-t border-[hsl(var(--stage-firstyear-accent)/0.22)] pt-6 sm:grid-cols-2"><div
+         className={`${FY_INNER_RADIUS} px-5 py-5`}
         style={{
           backgroundColor: "hsl(var(--stage-firstyear-cream))",
           border: "1px solid hsl(var(--stage-firstyear-accent) / 0.2)",
         }}
       >
-        <p className="max-w-[48ch] font-serif text-[16px] leading-[1.72] text-foreground">
-          Something you noticed, how the day is going, a note about your own recovery, or a question
-          to remember for your next appointment.
-        </p>
-      </div>
-    </div>
+         <NotebookPen size={18} aria-hidden="true" className="text-stage-firstyear-accent" /><p className="mt-3 font-serif text-[1.15rem] text-foreground">A note for today</p><p className={`${FY_CARD_BODY} mt-2`}>Something you noticed, how the day is going or a question to remember.</p>
+       </div><div className={`${FY_INNER_RADIUS} border border-[hsl(var(--stage-firstyear-accent)/0.22)] px-5 py-5`}><Sparkles size={18} aria-hidden="true" className="text-stage-firstyear-accent" /><p className="mt-3 font-serif text-[1.15rem] text-foreground">A memory to keep</p><p className={`${FY_CARD_BODY} mt-2`}>Hold onto one small moment, without anything to keep up with.</p></div></div>
+    </article>
   );
 };
 
-const detail: Record<Stage, { title: string; body: string; href: string; linkLabel: string }> = {
+const detail: Record<Stage, { title: string; body: string }> = {
   TTC: {
     title: "Your cycle, with context",
     body: "Your saved dates become a soft path through the cycle, with guidance that arrives when it is useful rather than all at once.",
-    href: "/trying-to-conceive",
-    linkLabel: "Explore TTC support",
   },
   Pregnancy: {
     title: "Guidance for this week",
     body: "Your own dates shape a calm weekly chapter: what is changing, what is coming and what is worth asking about.",
-    href: "/pregnancy",
-    linkLabel: "Explore pregnancy",
   },
   "First Year": {
     title: "Today, in one place",
     body: "An age aware home for the day: feeding, sleep, development and your recovery, with a quiet place to note what you want to keep.",
-    href: "/first-year",
-    linkLabel: "Explore the first year",
   },
 };
 
 const JourneyPreviewSection = () => {
   const [active, setActive] = useState<Stage>("Pregnancy");
-  const { title, body, href, linkLabel } = detail[active];
+  const { title, body } = detail[active];
 
   return (
     <section className="bg-background py-20 md:py-28" aria-labelledby="journey-preview-heading">
@@ -235,33 +165,15 @@ const JourneyPreviewSection = () => {
           id="journey-preview-panel"
           role="tabpanel"
           aria-labelledby={`journey-preview-tab-${active.replace(/\s/g, "-").toLowerCase()}`}
-          className="grid items-center gap-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] md:gap-14"
+           className="mx-auto max-w-5xl"
         >
-          <div>
+           <div className="relative before:absolute before:inset-x-5 before:-bottom-3 before:top-6 before:-z-10 before:rounded-[28px] before:border before:border-border/50 before:bg-card/60">
             {active === "TTC" && <TtcPreview />}
             {active === "Pregnancy" && <PregnancyPreview />}
             {active === "First Year" && <FirstYearPreview />}
           </div>
 
-          <div>
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              An illustration of the saved journey
-            </p>
-            <h3 className="mt-3 font-serif text-[1.6rem] leading-tight text-foreground">{title}</h3>
-            <p className="mt-4 font-sans text-[14px] font-light leading-relaxed text-muted-foreground">
-              {body}
-            </p>
-            <Link
-              to={href}
-              className="mt-6 inline-flex items-center gap-2 font-sans text-[12.5px] font-medium text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
-            >
-              {linkLabel} <ArrowRight size={13} aria-hidden="true" />
-            </Link>
-            <p className="mt-6 font-sans text-[12.5px] font-light leading-relaxed text-muted-foreground">
-              Illustrative only. Nothing personal is shown here, and your own journey stays private
-              to you.
-            </p>
-          </div>
+           <div className="mt-8 flex flex-col justify-between gap-3 border-t border-border/60 pt-5 sm:flex-row sm:items-center"><div><p className="font-serif text-[1.2rem] text-foreground">{title}</p><p className="mt-1 max-w-2xl font-sans text-[13px] font-light leading-relaxed text-muted-foreground">{body}</p></div><p className="shrink-0 font-sans text-[11px] text-muted-foreground">Illustrative only · Nothing personal shown</p></div>
         </div>
       </div>
     </section>

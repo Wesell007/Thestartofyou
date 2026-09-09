@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Leaf } from "lucide-react";
 
 import { companionStyles } from "@/components/companion/companionStyles";
 
 /**
- * Homepage Story Refinement — chapter four: Your companion.
+ * Homepage Story Refinement: Your companion.
  *
  * A still, non-interactive rendering of the real companion surface, built from
  * the shared `companionStyles` tokens so the marketing story matches the
@@ -13,10 +13,10 @@ import { companionStyles } from "@/components/companion/companionStyles";
  */
 
 const CompanionMomentSection = () => (
-  <section className="bg-background py-20 md:py-28" aria-labelledby="companion-moment-heading">
+   <section className="overflow-hidden bg-background py-20 md:py-28" aria-labelledby="companion-moment-heading">
     <div className="container mx-auto max-w-6xl px-5 sm:px-6 md:px-10">
-      <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-        <div>
+       <div className="grid items-center gap-12 md:grid-cols-[0.82fr_1.18fr] md:gap-16">
+         <div className="md:pl-4">
           <div className="mb-6 h-px w-10 bg-sage/40" />
           <p className="mb-4 font-sans text-[10.5px] font-medium uppercase tracking-[0.22em] text-sage">
             Your companion
@@ -43,16 +43,18 @@ const CompanionMomentSection = () => (
           </p>
         </div>
 
-        <div
+         <div className="relative pb-4 pr-0 sm:pr-4">
+         <div aria-hidden="true" className="absolute inset-x-4 bottom-0 top-5 rounded-[28px] border border-[hsl(var(--stage-ttc-sage-soft))] bg-[hsl(var(--stage-ttc-sage-tint))]" />
+         <div
           aria-hidden="true"
-          className="rounded-3xl border border-[hsl(var(--stage-ttc-sage-soft))] bg-[hsl(var(--stage-ttc-cream))] p-5 shadow-soft sm:p-6"
+           className="relative rounded-[24px] border border-[hsl(var(--stage-ttc-sage-soft))] bg-[hsl(var(--stage-ttc-cream))] p-6 shadow-elevated sm:p-9"
         >
-          <p className={companionStyles.panelHeading}>Ask your companion</p>
-          <p className={`${companionStyles.safetyLine} mt-1`}>
+           <div className="flex items-start justify-between gap-5"><div><p className={companionStyles.panelHeading}>Ask your companion</p>
+           <p className={`${companionStyles.safetyLine} mt-1`}>
             Calm guidance, shaped around where you are.
-          </p>
+           </p></div><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[hsl(var(--stage-ttc-sage-tint))]"><Leaf size={17} className="text-[hsl(var(--stage-ttc-olive))]" /></span></div>
 
-          <div className="mt-5 space-y-3">
+           <div className="mt-7 space-y-4 border-t border-[hsl(var(--stage-ttc-sage-soft))] pt-6">
             <p className={companionStyles.userBubble}>
               What can I expect in the second trimester?
             </p>
@@ -68,10 +70,11 @@ const CompanionMomentSection = () => (
             </div>
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-2">
+           <div className="mt-6 flex flex-wrap gap-2">
             <span className={companionStyles.chip}>What should I ask at my next appointment?</span>
             <span className={companionStyles.chip}>Is this tiredness normal?</span>
           </div>
+         </div>
         </div>
       </div>
     </div>

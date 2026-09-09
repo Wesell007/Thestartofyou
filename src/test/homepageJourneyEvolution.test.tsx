@@ -35,6 +35,7 @@ describe("homepage journey evolution", () => {
       "/setup/first-year",
     );
     expect(screen.getAllByRole("link")).toHaveLength(3);
+    expect(screen.queryByText(/chapter 0[1-3]/i)).toBeNull();
   });
 
   it("moves keyboard focus to the selector heading when opened by its anchor", async () => {
@@ -52,17 +53,21 @@ describe("homepage journey evolution", () => {
       "aria-selected",
       "true",
     );
-    expect(screen.getByText("Second trimester · Week 24")).toBeInTheDocument();
+    expect(screen.getByText("My week")).toBeInTheDocument();
+    expect(screen.getByText("A meaningful moment")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("tab", { name: "TTC" }));
-    expect(screen.getByText("Your cycle path")).toBeInTheDocument();
+    expect(screen.getByText("My TTC journey")).toBeInTheDocument();
+    expect(screen.getByText("Your private cycle notes")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("tab", { name: "First Year" }));
     expect(screen.getByText("Four months old")).toBeInTheDocument();
-    expect(screen.getByText(/An illustration of the saved journey/i)).toBeInTheDocument();
+    expect(screen.getByText("My first year")).toBeInTheDocument();
+    expect(screen.getByText("A memory to keep")).toBeInTheDocument();
+    expect(screen.getByText(/Illustrative only/i)).toBeInTheDocument();
   });
 
-  it("lists the three primary guidance hubs and the four wider hubs", () => {
+  it("lists exactly three primary and three wider image-led guidance hubs", () => {
     renderAt(<LifecycleEcosystemSection />);
 
     const hrefs = screen.getAllByRole("link").map((link) => link.getAttribute("href"));
@@ -71,10 +76,11 @@ describe("homepage journey evolution", () => {
       "/pregnancy",
       "/first-year",
       "/ivf",
-      "/preparing-for-baby",
       "/toddler",
       "/family",
     ]);
+    expect(screen.getAllByRole("img")).toHaveLength(6);
+    expect(screen.queryByText(/preparing for baby/i)).toBeNull();
   });
 
   it("tells the companion story without starting a second companion runtime", () => {

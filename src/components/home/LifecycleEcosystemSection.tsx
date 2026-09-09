@@ -5,7 +5,7 @@ import pregnancyImage from "@/assets/guidance-featured-pregnancy.jpg";
 import firstYearImage from "@/assets/guidance-firstyear.jpg";
 import ivfImage from "@/assets/guidance-ivf.jpg";
 import toddlerImage from "@/assets/toddler-article-connection-hero.jpg";
-import familyImage from "@/assets/family-hero-everyday.jpg.asset.json";
+import familyImage from "@/assets/guidance-editorial-4.jpg";
 
 /**
  * Homepage Story Refinement: Guidance for the journey.
@@ -41,7 +41,7 @@ const primaryHubs = [
 const wider = [
   { label: "IVF", href: "/ivf", description: "Treatment steps and what to expect.", image: ivfImage, alt: "A quiet moment during fertility treatment" },
   { label: "Toddler", href: "/toddler", description: "Growing independence and change.", image: toddlerImage, alt: "A parent and toddler connecting through play" },
-  { label: "Family", href: "/family", description: "Life, relationships and the wider picture.", image: familyImage.url, alt: "A family sharing an everyday moment" },
+  { label: "Family", href: "/family", description: "Life, relationships and the wider picture.", image: familyImage, alt: "A family sharing an everyday moment" },
 ] as const;
 
 const LifecycleEcosystemSection = () => (

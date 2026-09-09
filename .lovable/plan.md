@@ -36,7 +36,6 @@ Only pregnancy-committed entry points move to `/setup/pregnancy` (for example "S
 
 
 ### First Year
-The protected wrapper is removed and every existing signed-in guard branch is applied inside the page unchanged, so the public route cannot become a way to create a conflicting journey. Three steps: about your baby (count, shared date of birth, optional names, existing validation); what your First Year space will support (explanatory only, no new preference fields); ready to save, with current age from existing date logic and a static Today glimpse.
 
 The protected wrapper is removed and every existing signed-in guard branch is applied inside the page unchanged, so the public route cannot become a way to create a conflicting journey. The signed-out steps are: about your baby (count, shared date of birth, optional names, existing validation); what your First Year space will support (explanatory only, no new preference fields); ready to save, with current age from existing date logic and a static Today glimpse.
 

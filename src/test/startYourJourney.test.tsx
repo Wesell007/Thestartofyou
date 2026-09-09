@@ -58,7 +58,7 @@ describe("start your journey page", () => {
     );
     expect(main.getByRole("link", { name: /start my pregnancy journey/i })).toHaveAttribute(
       "href",
-      "/due-date-calculator",
+      "/setup/pregnancy",
     );
     expect(main.getByRole("link", { name: /start my first year journey/i })).toHaveAttribute(
       "href",
@@ -80,8 +80,10 @@ describe("start your journey page", () => {
     // No setup route exists for anything outside the three saved journeys.
     expect(hrefs.filter((href) => href?.startsWith("/setup/"))).toEqual([
       "/setup/trying-to-conceive",
+      "/setup/pregnancy",
       "/setup/first-year",
       "/setup/trying-to-conceive",
+      "/setup/pregnancy",
       "/setup/first-year",
     ]);
   });

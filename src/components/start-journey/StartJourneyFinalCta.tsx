@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const options = [
   { label: "Trying to Conceive", href: "/setup/trying-to-conceive" },
-  { label: "Pregnancy", href: "/due-date-calculator" },
+  { label: "Pregnancy", href: "/setup/pregnancy" },
   { label: "First Year", href: "/setup/first-year" },
 ] as const;
 

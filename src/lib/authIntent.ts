@@ -38,6 +38,16 @@ export const isProtectedPath = (pathname: string): boolean =>
   );
 
 /**
+ * Public setup routes that are still valid places to return to after signing
+ * in. They carry no setup answers in the URL: the flow restores its own state
+ * from the existing pending mechanism.
+ */
+export const SETUP_RETURN_PREFIXES = ["/setup/pregnancy"];
+
+const isSetupReturnPath = (pathname: string): boolean =>
+  SETUP_RETURN_PREFIXES.some((p) => pathname === p);
+
+/**
  * Only allow internal, protected paths as return targets. This blocks
  * open-redirect abuse via ?return_to=https://evil.example and prevents
  * bouncing the user back to public marketing pages after they've signed in.
@@ -46,7 +56,7 @@ const isSafeReturnTo = (value: string | null): value is string => {
   if (!value) return false;
   if (!value.startsWith("/")) return false;
   if (value.startsWith("//")) return false;
-  return isProtectedPath(value);
+  return isProtectedPath(value) || isSetupReturnPath(value);
 };
 
 /** Build the auth URL for a given intent, preserving a safe return target. */

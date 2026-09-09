@@ -49,11 +49,11 @@ Strengths: 42 indexable week pages plus trimester and topic pages give this doma
 
 Gaps that matter: caesarean birth (no article anywhere), gestational diabetes as a condition, itching in pregnancy (potential obstetric cholestasis — safety-critical), leg cramps, digestive upset, and an explicit weeks-to-months answer on week pages.
 
-Status note: `/preparing-for-baby` resolves, is indexable and is in the sitemap, while the brief states Preparing for Baby is not an active hub. Evidence conflicts, so it is recorded as `UNKNOWN_OR_UNRESOLVED` pending an editorial decision. No change was made.
+Status note: `/preparing-for-baby` is a supporting editorial surface: live, public, indexable and eligible to own relevant organic intent, but not a saved lifecycle, not a fourth journey, and not an active primary product hub. It supports Pregnancy, First Year and Family where relevant. Editorial direction resolved its status after the audit; no technical change was made.
 
 Cannibalisation risk: MEDIUM. Discharge intent is split across `discharge-in-pregnancy` and `watery-discharge-in-pregnancy`; early-symptom intent across `early-pregnancy-symptoms-explained` and `symptoms-stopping-early-pregnancy`.
 
-Verdict: **TARGETED_TOP_UPS** — Q1 yes · Q2 yes · Q3 no · Q4 yes (11) · Q5 yes · Q6 yes (`/preparing-for-baby`) · Q7 yes.
+Verdict: **TARGETED_TOP_UPS** — Q1 yes · Q2 yes · Q3 no · Q4 yes (11) · Q5 yes · Q6 no · Q7 yes.
 
 ---
 

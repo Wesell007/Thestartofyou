@@ -34,7 +34,7 @@ Non-article live surfaces: 134 indexable structured pages and tools, plus 42 pre
 
 Non-owning surfaces by design: 31 page components emit `noindex` (saved journeys, setup routes, toolkit, results, auth, account, 404, legacy postpartum hub). None appear in the sitemap. Five legacy postpartum and TTC routes redirect into live destinations.
 
-One unresolved surface: `/preparing-for-baby` is live, indexable and in the sitemap, while the brief states Preparing for Baby is not an active hub. Classified `UNKNOWN_OR_UNRESOLVED`. No change made.
+`/preparing-for-baby` is classified as a **supporting editorial surface**: live, public, indexable and eligible to own relevant organic intent, but not a saved lifecycle, not a fourth journey, and not an active primary product hub. It supports Pregnancy, First Year and Family where relevant. This classification was made by editorial direction after completion of the audit; no technical change was made.
 
 ## 4. Method
 
@@ -83,7 +83,7 @@ P0 set: itching in pregnancy · caesarean birth · gestational diabetes · colic
 
 ## 9. Existing content actions
 
-52 actions against live surfaces: `phase31-existing-content-actions.csv` — 28 expansions, 16 no-action confirmations, 5 internal-linking improvements, 2 tool content improvements, 1 canonical confirmation. Zero `PUBLISH_OR_RESOLVE_EXISTING_CONTENT` items were required: no useful content was found trapped in a draft, preview or unresolved state. The one status question, `/preparing-for-baby`, is a possible over-exposure rather than a hidden asset.
+52 actions against live surfaces: `phase31-existing-content-actions.csv` — 28 expansions, 16 no-action confirmations, 5 internal-linking improvements, 2 tool content improvements, 1 canonical confirmation. Zero `PUBLISH_OR_RESOLVE_EXISTING_CONTENT` items were required: no useful content was found trapped in a draft, preview or unresolved state. The status of `/preparing-for-baby` was resolved by editorial direction as a supporting editorial surface; no duplicate or publish action was needed.
 
 ## 10. Skips
 
@@ -119,7 +119,7 @@ P0 set: itching in pregnancy · caesarean birth · gestational diabetes · colic
 | 16 | Other structured/tool pages (live) | 134 |
 | 17 | `noindex` page components | 31 |
 | 18 | `noindex` pages present in sitemap | 0 |
-| 19 | Surfaces classified `UNKNOWN_OR_UNRESOLVED` | 1 |
+| 19 | Surfaces classified `UNKNOWN_OR_UNRESOLVED` | 0 |
 | 20 | Intent clusters mapped | 89 |
 | 21 | `COVERED_STRONG` | 22 |
 | 22 | `COVERED_PARTIAL` | 21 |

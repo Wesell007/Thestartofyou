@@ -1,0 +1,53 @@
+cluster_id,domain,intent_cluster,action,target_surface,target_status,priority,wte_evidence_urls,example_keyword,notes
+C008,Pregnancy,Week-by-week index,IMPROVE_INTERNAL_LINKING,/pregnancy,LIVE_INDEXABLE,P2,/pregnancy/week-by-week,12 weeks from today,Hub exists; ensure a clear week index entry point.
+C006,Pregnancy,Week-by-week pregnancy,IMPROVE_INTERNAL_LINKING,/pregnancy/week/1..42,LIVE_INDEXABLE,P0,/pregnancy/week-by-week/,12 weeks from today,42 indexable week pages already own this. Strongest structural asset.
+C001,Pregnancy,Due date calculation,IMPROVE_TOOL_CONTENT,/due-date-calculator,LIVE_INDEXABLE,P0,/due-date-calculator,date calculator,Largest single demand cluster. Tool exists and is indexable; add UK-framed supporting copy and week-page links.
+C010,Pregnancy,Early pregnancy signs,NO_ACTION,/articles/early-pregnancy-symptoms-explained,LIVE_INDEXABLE,P3,early-signs-of-pregnancy-before-missed-period,pregnancy symptoms,Also /articles/symptoms-stopping-early-pregnancy; watch overlap.
+C007,Pregnancy,Weeks to months conversion,EXPAND_EXISTING,/pregnancy/week/1..42,LIVE_INDEXABLE,P1,/pregnancy/pregnancy-health/understanding-pregnancy-week,a month is how many weeks,High-volume conversion intent (weeks in months) not explicitly answered on week pages.
+C051,TTC,Implantation bleeding and timing,NO_ACTION,/articles/implantation-bleeding,LIVE_INDEXABLE,P3,/getting-pregnant/implantation-bleeding; /getting-pregnant/ovulation/implantation,implantation bleeding,Also /articles/how-long-implantation-takes.
+C066,First Year,Month-by-month baby,IMPROVE_INTERNAL_LINKING,/first-year/1-month..12-months,LIVE_INDEXABLE,P1,/first-year/month-by-month,new newborn,13 month pages exist and are indexable.
+C085,Toddler,Toddler hub,NO_ACTION,/toddler,LIVE_INDEXABLE,P3,/toddler,potty training,
+C052,TTC,Signs of ovulation,RESOLVE_CANONICAL,/articles/ovulation-signs,LIVE_INDEXABLE,P1,five-ways-to-tell-you-are-ovulating,ovulation,"/articles/signs-of-ovulation redirects to ovulation-signs and is excluded from the sitemap: correct, document only."
+C031,Pregnancy,Signs of labour and contractions,NO_ACTION,/articles/signs-of-labour,LIVE_INDEXABLE,P3,/pregnancy/labor-signs; labor-contractions,maternity sign,Also /articles/stages-of-labour and /articles/when-to-go-in-for-labour.
+C082,Postpartum,Postnatal mental health,IMPROVE_INTERNAL_LINKING,/first-year/emotional-wellbeing/when-parenthood-feels-heavy,LIVE_INDEXABLE,P1,/postpartum; postpartum-depression,sitz bath,Legacy /postpartum hub redirects into First Year: correct. /postpartum/legacy is noindex and must stay non-owning.
+C013,Pregnancy,Braxton Hicks,NO_ACTION,/articles/braxton-hicks-contractions,LIVE_INDEXABLE,P3,/pregnancy/symptoms-and-solutions/braxton-hicks,braxton hicks,
+C002,TTC,Ovulation / fertile window calculation,IMPROVE_TOOL_CONTENT,/ovulation-calculator,LIVE_INDEXABLE,P1,/ovulation-calculator,ovulation calculator,Duplicate TTC route already redirects; keep single canonical tool.
+C053,TTC,Faint positive test,NO_ACTION,/articles/faint-positive-pregnancy-test,LIVE_INDEXABLE,P3,faint-line-pregnancy-test,positive pregnancy test,
+C038,Pregnancy,Placenta position,NO_ACTION,/articles/anterior-placenta,LIVE_INDEXABLE,P3,/pregnancy/placenta; anterior-placenta,placenta,Also /articles/low-lying-placenta-in-pregnancy.
+C027,Pregnancy,Discharge in pregnancy,EXPAND_EXISTING,/articles/discharge-in-pregnancy,LIVE_INDEXABLE,P1,/pregnancy/brown-discharge; vaginal-discharge; yellow-discharge,brown secretion during pregnancy,Also /articles/watery-discharge-in-pregnancy: overlap requires one canonical hub.
+C061,First Year,Baby vision and eye colour,EXPAND_EXISTING,/first-year/development/baby-development-in-the-first-year,LIVE_INDEXABLE,P3,baby-eye-color; baby-vision,when do babies eyes change color,
+C014,Pregnancy,Breathlessness,NO_ACTION,/articles/shortness-of-breath-in-pregnancy,LIVE_INDEXABLE,P3,/pregnancy/symptoms-and-solutions/short-breath,pregnancy short breath,
+C018,Pregnancy,Rib and round ligament pain,EXPAND_EXISTING,/articles/round-ligament-pain,LIVE_INDEXABLE,P2,rib-pain-pregnancy; abdominal-achiness,ribs hurt pregnancy,Rib pain not addressed.
+C020,Pregnancy,Bump and skin changes,EXPAND_EXISTING,/pregnancy/body,LIVE_INDEXABLE,P3,linea-nigra; protruding-navel,negra linea,
+C083,Toddler,Potty training,EXPAND_EXISTING,/toddler/potty-learning/potty-training-without-pressure,LIVE_INDEXABLE,P1,/toddler/potty-training/,potty training,Competitor '3-day' framing is off-brand; keep pressure-free angle.
+C017,Pregnancy,SPD and pelvic girdle pain,EXPAND_EXISTING,/articles/pelvic-pain-in-pregnancy,LIVE_INDEXABLE,P0,symphysis-pubis-dysfunction; pelvic-discomfort,symphysis pubis dysfunction,UK terminology is PGP/SPD; existing article should own both terms.
+C011,Pregnancy,Morning sickness,NO_ACTION,/articles/complete-guide-morning-sickness,LIVE_INDEXABLE,P3,/pregnancy/morning-sickness,when does morning sickness start,
+C009,Pregnancy,Fetal development and heartbeat,NO_ACTION,/articles/how-your-baby-develops-in-pregnancy,LIVE_INDEXABLE,P3,/pregnancy/fetal-development,when can i know the sex of the baby,
+C042,TTC,Chemical pregnancy,NO_ACTION,/articles/chemical-pregnancy,LIVE_INDEXABLE,P3,/pregnancy/chemical-pregnancy,chemical pregnancy,
+C070,First Year,Growth spurts and cluster feeding,EXPAND_EXISTING,/first-year/feeding/newborn-feeding-rhythms,LIVE_INDEXABLE,P1,baby-growth-spurts; cluster-feeding,growth spurt,
+C003,IVF,Due date after IVF transfer,EXPAND_EXISTING,/due-date-calculator,LIVE_INDEXABLE,P1,/ivf-due-date-calculator,due date calculator after ivf,Calculator supports transfer dates but no IVF-specific explanatory surface ranks for it.
+C044,Pregnancy,Twins and multiples,EXPAND_EXISTING,/articles/twins-and-multiples-in-pregnancy,LIVE_INDEXABLE,P2,signs-of-twin-pregnancy; chances-of-having-twins,can twins cause false negative pregnancy test,
+C032,Pregnancy,Mucus plug and show,NO_ACTION,/articles/mucus-plug,LIVE_INDEXABLE,P3,mucous-plug,mucus plug,
+C034,Pregnancy,Hospital bag checklist,NO_ACTION,/articles/hospital-bag-and-what-to-pack,LIVE_INDEXABLE,P3,hospital-packing,hospital bag checklist,Signed-in toolkit version is deliberately noindex.
+C040,Pregnancy,Colds in pregnancy,NO_ACTION,/articles/cold-and-flu-in-pregnancy,LIVE_INDEXABLE,P3,colds-during-pregnancy,pregnant and cold symptoms,
+C064,First Year,Sleep environment and sounds,EXPAND_EXISTING,/first-year/sleep/newborn-sleep-expectations,LIVE_INDEXABLE,P3,white-noise-sound-for-babies; baby-lullaby,white noise baby,
+C073,First Year,Breastfeeding practicalities,EXPAND_EXISTING,/first-year/feeding/bottle-and-breastfeeding-questions,LIVE_INDEXABLE,P2,storing-breast-milk; fenugreek-breastfeeding,mother milk storage,Skip supplement claims; cover expressing and storage.
+C046,Postpartum,Pelvic floor exercises,IMPROVE_INTERNAL_LINKING,/articles/pelvic-floor-exercises-in-pregnancy,LIVE_INDEXABLE,P1,/womens-health/kegels,kegel exercises,Postpartum users need this from First Year recovery too.
+C071,First Year,Feeding amounts and routines,EXPAND_EXISTING,/first-year/feeding/bottle-and-breastfeeding-questions,LIVE_INDEXABLE,P1,how-to-get-baby-on-feeding-schedule,infant food intake chart,UK volumes and NHS framing.
+C076,First Year,Sun safety for babies,EXPAND_EXISTING,/first-year/care-and-safety/safe-sleep-and-home-safety,LIVE_INDEXABLE,P3,sunscreen-for-babies,sunscreen on a newborn,
+C021,Pregnancy,Metallic taste,EXPAND_EXISTING,/articles/cravings-and-aversions-in-pregnancy,LIVE_INDEXABLE,P3,metallic-taste,dysgeusia,
+C033,Pregnancy,Bringing on labour,EXPAND_EXISTING,/articles/induction-of-labour,LIVE_INDEXABLE,P2,natural-ways-to-induce-labor,how to induce naturally,UK framing: avoid unsafe DIY induction claims.
+C087,Family,Travelling with a baby,EXPAND_EXISTING,/family/travel-days-out/travelling-with-young-children,LIVE_INDEXABLE,P2,do-babies-need-passports,baby passport,UK passport process differs entirely from the US source.
+C056,TTC,Conception chance questions,EXPAND_EXISTING,/articles/can-you-get-pregnant-on-your-period,LIVE_INDEXABLE,P2,can-you-get-pregnant-from-precum,can you get pregnant from pre sperm,
+C023,Pregnancy,Pregnancy fatigue,NO_ACTION,/articles/fatigue-in-early-pregnancy,LIVE_INDEXABLE,P3,pregnancy-fatigue,pregnancy exhaustion,
+C080,Postpartum,Lochia and postnatal bleeding,EXPAND_EXISTING,/first-year/postpartum-recovery/healing-after-birth,LIVE_INDEXABLE,P0,postpartum-bleeding,lochia,Safety-critical; ensure red flags are explicit.
+C030,Pregnancy,Bleeding after sex,EXPAND_EXISTING,/articles/bleeding-in-early-pregnancy,LIVE_INDEXABLE,P2,bleeding-after-sex-during-pregnancy,bleeding after sx,
+C055,TTC,Cycle cramps and timing,EXPAND_EXISTING,/trying-to-conceive/understanding-your-cycle,LIVE_INDEXABLE,P2,cramps-after-period,post menstrual cramps,
+C005,Pregnancy,Weight gain in pregnancy,EXPAND_EXISTING,/articles/weight-changes-in-pregnancy,LIVE_INDEXABLE,P2,/pregnancy-weight-gain-calculator,pregnancy gain calculator,Article exists; UK guidance differs from US ranges. Tool optional.
+C054,TTC,Ovulation tests edge cases,EXPAND_EXISTING,/articles/using-ovulation-tests,LIVE_INDEXABLE,P2,can-ovulation-tests-detect-pregnancy,will ovulation test be positive if pregnant,
+C026,Pregnancy,Cramping in pregnancy,NO_ACTION,/articles/when-to-worry-about-cramps-in-pregnancy,LIVE_INDEXABLE,P3,abdominal-cramps,pregnancy sore tummy,
+C024,Pregnancy,Breast changes,EXPAND_EXISTING,/pregnancy/body,LIVE_INDEXABLE,P3,breast-tenderness,breast pain pregnancy,
+C075,First Year,Bathing a newborn,EXPAND_EXISTING,/first-year/care-and-safety/baby-care-basics,LIVE_INDEXABLE,P2,/first-year/first-bath,temperature for bath for newborn,
+C025,Pregnancy,Sciatica in pregnancy,EXPAND_EXISTING,/articles/back-pain-in-pregnancy,LIVE_INDEXABLE,P2,/pregnancy/sciatica,pregnancy and sciatica nerve,
+C035,Pregnancy,Nesting,EXPAND_EXISTING,/pregnancy/third-trimester,LIVE_INDEXABLE,P3,nesting-phase,nesting,
+C069,First Year,Safe sleep and SIDS,EXPAND_EXISTING,/first-year/care-and-safety/safe-sleep-and-home-safety,LIVE_INDEXABLE,P1,/first-year/sids,sids,Align with UK Lullaby Trust guidance wording.

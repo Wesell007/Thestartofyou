@@ -223,6 +223,9 @@ const App = () => (
 
         <Routes>
           <Route path="/" element={<Index />} />
+          {/* Public decision page for the three saved journeys. */}
+          <Route path="/start-your-journey" element={<StartYourJourney />} />
+          
           
           <Route path="/pregnancy" element={<Pregnancy />} />
           <Route path="/pregnancy/body" element={<BodyTopic />} />

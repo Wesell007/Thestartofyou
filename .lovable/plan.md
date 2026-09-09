@@ -5,7 +5,7 @@
 - No `/start-your-journey` route or equivalent explanatory page exists; the closest thing is the homepage `#start-where-you-are` section.
 - The generic signed-out `Start your journey` actions all point at `/#start-where-you-are`: homepage hero (`NewHeroSection`), desktop header and mobile drawer (`Navbar`).
 - Signed-in visitors see a different header action resolved by `resolvePublicAccountLink`: TTC → `/my-ttc-journey`, Pregnancy → `/my-week`, First Year → `/my-first-year`.
-- Signed in with no active journey currently resolves to `Set up journey` → `/due-date-calculator`, which presumes Pregnancy rather than being stage-neutral. Per the brief this is reported, not changed, and no resolver logic is touched in this work.
+- Signed in with no active journey currently resolves to `Set up journey` → `/due-date-calculator`, which presumes Pregnancy rather than being stage-neutral. This single fallback destination will be made neutral (see below).
 - Canonical starts are TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator`, First Year `/setup/first-year`.
 - Static, safe product preview compositions for all three journeys already exist in `JourneyPreviewSection`, alongside the coordinated stage photography (`home-stage-ttc`, `home-stage-pregnancy`, `home-stage-first-year`) and guidance imagery (`guidance-editorial-1..4`).
 - Active public guidance hubs: TTC, Pregnancy, First Year, IVF, Toddler, Family. Preparing for Baby is not an active hub.
@@ -31,7 +31,11 @@ The attached board is the north star for composition only: editorial opening, un
 
 ## Call-to-action routing
 
-Generic signed-out `Start your journey` in the homepage hero, desktop header and mobile drawer moves from `/#start-where-you-are` to `/start-your-journey`, keeping existing analytics events. Stage-committed calls to action (TTC, IVF, First Year, trimester strips, postpartum) stay stage-specific and unchanged. No signed-in resolution logic is edited.
+Generic signed-out `Start your journey` in the homepage hero, desktop header and mobile drawer moves from `/#start-where-you-are` to `/start-your-journey`, keeping existing analytics events. Stage-committed calls to action (TTC, IVF, First Year, trimester strips, postpartum) stay stage-specific and unchanged.
+
+One narrowly scoped fallback correction: in `resolvePublicAccountLink`, the signed-in no-active-journey destination changes from `/due-date-calculator` to `/start-your-journey`, with the label `Start your journey`. Nothing else in that resolver changes: lifecycle detection, saved-journey resolution and the TTC, Pregnancy and First Year destinations are untouched, no resolver state is added, and no lifecycle is created, selected or written.
+
+Final behaviour: signed out → `/start-your-journey`; TTC → `/my-ttc-journey`; Pregnancy → `/my-week`; First Year → `/my-first-year`; signed in with no active journey → `/start-your-journey`.
 
 ## Technical notes
 
@@ -42,11 +46,12 @@ Generic signed-out `Start your journey` in the homepage hero, desktop header and
 
 ## Out of scope
 
-Lifecycle model, journey resolver, TTC/Pregnancy/First Year setup logic, database, migrations, RLS, AI runtime and prompts, AIC-5, Journey AI, journal awareness, memory, history, grounding, voice, article data, homepage/article/topic SEO, and deployment.
+Lifecycle model and semantics, saved-journey resolution, TTC/Pregnancy/First Year setup logic, database, migrations, RLS, AI runtime and prompts, AIC-5, Journey AI, journal awareness, memory, history, grounding, voice, article data, homepage/article/topic SEO, and deployment. The only resolver edit is the single no-active-journey fallback destination and its label.
 
 ## Tests and validation
 
-- Focused tests: route renders; exactly three saved journeys presented; each call to action resolves to its canonical setup route; IVF, Toddler and Family not presented as saved journeys; Preparing for Baby absent; decision helper performs zero writes and zero private reads; no unsupported Companion claims; signed-in resolution unchanged.
+- Focused tests: route renders; exactly three saved journeys presented; each call to action resolves to its canonical setup route; IVF, Toddler and Family not presented as saved journeys; Preparing for Baby absent; decision helper performs zero writes and zero private reads; no unsupported Companion claims.
+- Focused routing test: signed in with no active journey resolves to `/start-your-journey`, while TTC, Pregnancy and First Year still resolve to `/my-ttc-journey`, `/my-week` and `/my-first-year`.
 - Confirm the exact pre-change baseline (112 files, 1270 tests, 1270 passing, 0 timeouts; lint 1 error / 10 warnings) and stop with exact drift if it differs.
 - After edits: full suite, typecheck twice, lint with zero new findings, production build, and runtime QA at ~390px and ~1440px checking overflow, launcher collision and console errors.
 - No deployment. Finish with the 30-field completion report plus the additional direction, hub, writes, reads, routing and resolver statements requested.

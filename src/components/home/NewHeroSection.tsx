@@ -72,14 +72,11 @@ const NewHeroSection = () => {
     }
   }, []);
 
-  const handleStartJourney = useCallback((event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
+  // The generic hero action now leads to the public journey decision page
+  // rather than scrolling to the on-page selector. Analytics is unchanged.
+  const handleStartJourney = useCallback(() => {
     trackEvent(EVENTS.START_JOURNEY_CLICKED, { location: "home_hero" });
-    window.history.pushState(null, "", "#start-where-you-are");
-    const heading = document.getElementById("start-where-you-are-heading");
-    heading?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
-    window.requestAnimationFrame(() => heading?.focus({ preventScroll: true }));
-  }, [reducedMotion]);
+  }, []);
 
   return (
     <section className="relative min-h-[92vh] md:min-h-screen overflow-hidden flex items-end md:items-center">

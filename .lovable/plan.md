@@ -1,57 +1,43 @@
-# Start Your Journey — Journey Decision Page
+# Journey Setup Experience — TTC, Pregnancy, First Year
 
-## Confirmed current state
+## Audit findings (confirmed in the repository)
 
-- No `/start-your-journey` route or equivalent explanatory page exists; the closest thing is the homepage `#start-where-you-are` section.
-- The generic signed-out `Start your journey` actions all point at `/#start-where-you-are`: homepage hero (`NewHeroSection`), desktop header and mobile drawer (`Navbar`).
-- Signed-in visitors see a different header action resolved by `resolvePublicAccountLink`: TTC → `/my-ttc-journey`, Pregnancy → `/my-week`, First Year → `/my-first-year`.
-- Signed in with no active journey currently resolves to `Set up journey` → `/due-date-calculator`, which presumes Pregnancy rather than being stage-neutral. This single fallback destination will be made neutral (see below).
-- Canonical starts are TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator`, First Year `/setup/first-year`.
-- Static, safe product preview compositions for all three journeys already exist in `JourneyPreviewSection`, alongside the coordinated stage photography (`home-stage-ttc`, `home-stage-pregnancy`, `home-stage-first-year`) and guidance imagery (`guidance-editorial-1..4`).
-- Active public guidance hubs: TTC, Pregnancy, First Year, IVF, Toddler, Family. Preparing for Baby is not an active hub.
-- The sitemap script assembles from explicit route groups, so the new page needs an entry in the `core` group.
+**Trying to Conceive** — `/setup/trying-to-conceive` is public (it is listed as protected for return-to purposes but is not wrapped in a protected route). It is a single long form validated by a Zod schema, saving via `commitPendingTTCJourneyToDB`. Supported fields: last period date, cycle length, period length, cycle regularity, actively trying, ovulation tests, symptom tracking, support status, IVF consideration. Signed out it stashes only dates locally and sends the person to sign in with a return route; signed in it saves and lands on `/my-ttc-journey`. An active pregnancy journey blocks setup.
 
-## Visual direction
+**Pregnancy** — `/due-date-calculator` is a public, indexed page using the shared calculator form (last period, conception, IVF transfer, ultrasound). It navigates to `/due-date-results?lmp=<timestamp>`, where the result panel offers saving: signed out it stores the pending date locally and sends to sign in; signed in it saves and lands on `/my-week`.
 
-The attached board is the north star for composition only: editorial opening, understated TTC → Pregnancy → First Year continuity, alternating photography and product-glimpse sections, a calm branching decision helper, restrained More Guidance strip, a small Companion reassurance and a simple closing choice. Its generated app screens, invented values, malformed copy, missing hubs and invented routes are not reproduced. All surfaces use the existing Start of You tokens, typography, photography and the real product design language.
+**First Year** — `/setup/first-year` is wrapped in the protected route, so a signed-out visitor is sent to sign in before seeing anything. This is the main inconsistency. Behind sign-in there is already a six-step flow: intro, babies, stage, value, companion, review. Supported fields: baby count (one to four), one shared date of birth, optional baby name per baby, plus optional companion name and tone. Saving goes through the existing `save_first_year_journey` function and lands on `/my-first-year`. Baby age is derived by existing date logic.
 
-## Page build
+**No backend gap.** Everything needed for a pre-sign-in First Year setup already exists. No new database fields, migrations or policy changes are required.
 
-1. **Opening** — eyebrow `YOUR JOURNEY`, H1 `Start where you are`, the approved supporting copy and reassurance, a `Already have a journey? Sign in to continue where you left off` link to the existing sign-in route, and a fine-line three-stage continuity marker (not a clinical timeline).
-2. **Three editorial journey sections**, alternating on desktop (TTC photo left, Pregnancy photo right, First Year photo left), each with positioning, who it is for, a short grounded expectations list, a static product glimpse, a primary call to action and a secondary guidance link.
-   - Trying to Conceive — covers trying naturally, learning a cycle, tracking, waiting, and fertility treatment before pregnancy. IVF stays wider guidance via a visually subordinate `Explore IVF guidance` link. Primary `/setup/trying-to-conceive`, secondary `/trying-to-conceive`.
-   - Pregnancy — includes the line about beginning with dates so the journey can place them in the right week. Primary `/due-date-calculator`, secondary `/pregnancy`.
-   - First Year — after baby arrives, through the first year. Primary `/setup/first-year`, secondary `/first-year`.
-3. **Product glimpses** — derived from the real My TTC Journey, My Week and Today / My First Year design language, reusing the existing static homepage preview patterns. Demonstration content only: zero customer data, zero private reads, zero protected components mounted, no medical scoring or development ranking.
-4. **Not sure where to start?** — eyebrow, heading `Choose what feels closest to today`, and a calm three-question explanatory flow (pregnant now → Pregnancy; baby here and in their first year → First Year; trying or in treatment before pregnancy → Trying to Conceive), closing with the line that guidance can still be explored without a saved journey. Keyboard usable, visible focus, no wizard or triage styling, zero writes of any kind.
-5. **Overlap reassurance** — wording to the effect of choosing the journey to focus on right now, with no permanent identity implied and no technical lifecycle terminology exposed.
-6. **More guidance** — restrained thumbnail-and-text strip covering all six active hubs, three primary and three wider, visually distinct from saved journeys. Preparing for Baby excluded.
-7. **Companion reassurance** — small static panel in the real Companion visual language, one `/ask` link, no runtime, model call or hidden turn, and no journal, memory, history, voice or media claims.
-8. **Ready when you are** — heading, supporting line, three compact choices to the same canonical setup flows, and a closing sign-in line. Not styled as pricing cards.
+**One constraint worth stating up front:** TTC deliberately keeps only dates on the device before sign-in, so the more personal answers reset after the sign-in round trip. You chose to keep that behaviour, so the flow will say plainly that a couple of answers need re-confirming after signing in, rather than widening what is stored.
 
-## Call-to-action routing
+## What gets built
 
-Generic signed-out `Start your journey` in the homepage hero, desktop header and mobile drawer moves from `/#start-where-you-are` to `/start-your-journey`, keeping existing analytics events. Stage-committed calls to action (TTC, IVF, First Year, trimester strips, postpartum) stay stage-specific and unchanged.
+### Shared setup design language
+A small set of reusable setup pieces: a two-column editorial shell (form on one side, stage photography, "what this shapes" copy and a static product glimpse on the other), a restrained step indicator ("1 of 3" with named steps), a paper-like form surface, fine rules and subtle botanicals. On mobile everything collapses to one column, form first, with contextual material beneath and comfortable tap targets. Existing tokens, type and photography only.
 
-One narrowly scoped fallback correction: in `resolvePublicAccountLink`, the signed-in no-active-journey destination changes from `/due-date-calculator` to `/start-your-journey`, with the label `Start your journey`. Nothing else in that resolver changes: lifecycle detection, saved-journey resolution and the TTC, Pregnancy and First Year destinations are untouched, no resolver state is added, and no lifecycle is created, selected or written.
+### Trying to Conceive
+Same page, same questions, same validation, same save. Reorganised into three steps: Your cycle; How you're trying; Ready to save, with a summary and a static My TTC Journey glimpse. Signed-out ends with "Continue, sign in to save"; signed in saves directly with no extra sign-in. The existing pregnancy-active and error states are preserved.
 
-Final behaviour: signed out → `/start-your-journey`; TTC → `/my-ttc-journey`; Pregnancy → `/my-week`; First Year → `/my-first-year`; signed in with no active journey → `/start-your-journey`.
+### Pregnancy
+New route `/setup/pregnancy` (not indexed), reusing the existing calculator form and date logic untouched. Three steps: choose a method; enter dates; your starting point, showing the estimated due date, current week and trimester from existing logic plus a static My Week preview and a clear note that this is an estimate, not a medical confirmation. Save reuses the existing pending-stash and save functions. `/due-date-calculator` stays exactly as it is for search. Journey-led entry points (Start Your Journey page, the no-active-journey fallback and the pregnancy setup calls to action) point at `/setup/pregnancy`; the calculator's own links are unchanged. The IVF transfer method keeps its existing timeline destination.
+
+### First Year
+Route becomes public, with the same guards applied inside the page rather than at the door. Three steps: about your baby (count, date of birth, optional names, using existing validation); what your First Year space will focus on (explanatory only, no new preferences); ready to save, showing baby's current age derived by existing logic and a static Today glimpse. Signed out, answers are held in the same style of pending device storage the pregnancy flow already uses, and the person signs in to save; nothing is written to the account before an authorised save. Signed in, the flow continues straight into the existing save. The existing companion step stays available after sign-in only, since it writes to the profile.
+
+### Sign-in handoff
+All three use the existing intent and return-to mechanism, so people come back to the same setup route and resume. Signed-in people are never asked to sign in again. The sign-in page gains a short contextual line derived from the existing return route only ("Sign in to save your First Year journey"). No setup answers in URLs, analytics or logs.
 
 ## Technical notes
 
-- New `src/pages/StartYourJourney.tsx` with section components under `src/components/start-journey/`, route registered in `src/App.tsx` above the generic patterns.
-- `SeoHead`: title `Start Your Journey | The Start of You`, the approved description, canonical `https://thestartofyou.com/start-your-journey`. No other SEO edits.
-- Add only `/start-your-journey` to the `core` group in `scripts/generate-sitemap.ts`.
-- Accessibility: one H1, semantic section headings, labelled decision controls with visible focus, meaningful alt text, botanicals hidden from assistive technology, no colour-only meaning, comfortable tap targets.
-
-## Out of scope
-
-Lifecycle model and semantics, saved-journey resolution, TTC/Pregnancy/First Year setup logic, database, migrations, RLS, AI runtime and prompts, AIC-5, Journey AI, journal awareness, memory, history, grounding, voice, article data, homepage/article/topic SEO, and deployment. The only resolver edit is the single no-active-journey fallback destination and its label.
+- New: `src/pages/setup/PregnancySetup.tsx`, setup shell and step-indicator components under `src/components/setup/`, a First Year pending-journey helper mirroring `savedJourney.ts`.
+- Changed: `SetupTTC.tsx` (presentation and step composition), `FirstYearSetup.tsx` (public entry, pre-auth steps), `App.tsx` routes, sitemap core group, journey-led pregnancy links, `Auth` contextual line.
+- Unchanged: `pregnancyDates.ts`, `ttcDerived.ts`, `firstYearDates.ts`, all schemas, `save_first_year_journey`, save/commit helpers, lifecycle model, database, RLS, AI, journal, memory, voice.
+- Previews reuse the existing static preview compositions; no protected components, no private reads.
 
 ## Tests and validation
 
-- Focused tests: route renders; exactly three saved journeys presented; each call to action resolves to its canonical setup route; IVF, Toddler and Family not presented as saved journeys; Preparing for Baby absent; decision helper performs zero writes and zero private reads; no unsupported Companion claims.
-- Focused routing test: signed in with no active journey resolves to `/start-your-journey`, while TTC, Pregnancy and First Year still resolve to `/my-ttc-journey`, `/my-week` and `/my-first-year`.
-- Confirm the exact pre-change baseline (112 files, 1270 tests, 1270 passing, 0 timeouts; lint 1 error / 10 warnings) and stop with exact drift if it differs.
-- After edits: full suite, typecheck twice, lint with zero new findings, production build, and runtime QA at ~390px and ~1440px checking overflow, launcher collision and console errors.
-- No deployment. Finish with the 30-field completion report plus the additional direction, hub, writes, reads, routing and resolver statements requested.
+Baseline recorded first (currently 113 files / 1277 tests passing; lint one pre-existing error and 10 warnings). Then focused tests for: TTC inputs, validation and save unchanged and sign-in continuation preserved; pregnancy calculation, methods and result unchanged with the setup handoff intact; First Year setup visible before sign-in, age derived by existing logic, nothing persisted to the account before authorised save, post-sign-in continuation works; plus no new lifecycle states, no sensitive data in URLs, no private reads for previews, and no repeat sign-in for signed-in people.
+
+Full suite, typecheck twice, lint against baseline, production build, and runtime QA of all three at about 1440px and 390px. No deployment. Finishes with the 30-point report.

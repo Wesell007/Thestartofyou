@@ -162,7 +162,7 @@ const NewHeroSection = () => {
             >
               Start your journey
               <ArrowRight size={15} />
-            </a>
+            </Link>
             <p className="font-sans text-[12.5px] font-light text-foreground/55">
               Already using your journey?{" "}
               <Link

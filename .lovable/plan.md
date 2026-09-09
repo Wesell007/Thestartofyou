@@ -1,101 +1,67 @@
-# Homepage Story Refinement
+# Homepage Story Refinement Round 2
 
-## Confirmed starting point
+## Confirmed current state
 
-- Revision: `7157af17`.
-- Baseline: 112 test files, 1268 passing tests, 0 timeouts.
-- Lint baseline: 1 existing error and 10 existing warnings.
-- The approved video hero remains unchanged.
-- The attached Nano board is a visual reference only and will not be embedded.
-- Audited public guidance hubs:
-  - Primary saved journey and guidance: Trying to Conceive `/trying-to-conceive`, Pregnancy `/pregnancy`, First Year `/first-year`.
-  - Wider guidance: IVF `/ivf`, Preparing for Baby `/preparing-for-baby`, Toddler `/toddler`, Family `/family`.
-  - Excluded from the guidance hub list: redirects, topic pages, calculators, protected journey pages, the Journal product page, Companion, About and customer Support.
+- The opening is already separated into the approved video hero followed by three quiet promise blocks. Both will remain unchanged.
+- `Start where you are` currently uses the stronger `lavender` surface and labels its three entries `Chapter 01`, `Chapter 02` and `Chapter 03`.
+- Its canonical starts are already correct: TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator`, First Year `/setup/first-year`.
+- `Inside your journey` currently has accessible TTC, Pregnancy and First Year tabs, but each active state shows only one compact card rather than the fuller saved journey structure.
+- The current static previews already perform no private data reads. The real product patterns available to mirror include TTC Today, cycle path, cycle details and notes; Pregnancy My Week orientation and guidance; First Year Today, age context and saved moments.
+- Guidance currently represents the seven approved hubs once, with TTC, Pregnancy and First Year primary and IVF, Preparing for Baby, Toddler and Family secondary.
+- The Companion section is a non-interactive rendering using shared Companion styles and links to `/ask`; it does not start another runtime.
 
-## Build
+## Implementation
 
 ### 1. Preserve the approved opening
 
-- Leave the hero video, crop, gradient, headline, supporting copy, CTA, poster, tap to play and reduced motion behaviour untouched.
-- Keep the three quiet promises immediately below it.
+- Make no changes to the video hero, poster and fallback, tap to play, reduced motion handling, hero copy, hero actions or the three promise blocks.
+- Preserve the existing accessible scroll and focus handoff to `Start where you are`.
 
-### 2. Create the new stage photography first
+### 2. Lighten `Start where you are`
 
-- Before building sections, generate three coordinated production photographs with Nano Banana: Trying to Conceive, Pregnancy and First Year.
-- One art-directed set: matching warm natural light, cream and muted earth grading, soft depth of field, realistic skin, understated styling, portrait editorial crops with negative space.
-- No text, logos, typography or interface inside the photographs.
-- Save them as local repository assets with meaningful names and record the prompts in a short documentation note.
-- No Nano Banana generated product interface or companion interface at any point.
+- Change the section to the existing pale `lavender-bg` surface and rebalance foreground tones for an airy, near-white lilac treatment.
+- Remove every chapter label, chapter number and chapter-oriented comment or presentation detail.
+- Keep the eyebrow, heading, supporting copy, three coordinated photographs and exact canonical links.
+- Refine the three entries as unboxed, image-led editorial links with calmer proportions, more breathing room and restrained stage accents.
+- Tighten the stage descriptions to communicate:
+  - TTC: cycle understanding and a private place to track the journey.
+  - Pregnancy: date-based weekly guidance and meaningful moments.
+  - First Year: age-aware support for baby and recovery in one place.
 
-### 3. Redesign Start Where You Are
+### 3. Rebuild `Inside your journey` as a fuller product showcase
 
-- Replace the white card treatment with three connected, image led editorial chapters using the three newly generated photographs.
-- Keep the approved eyebrow, heading and copy exactly.
-- Add restrained chapter numbers, short supporting text and subtle links to the existing canonical starts:
-  - TTC `/setup/trying-to-conceive`
-  - Pregnancy `/due-date-calculator`
-  - First Year `/setup/first-year`
-- Change the section surface from the stronger `lavender` token to the existing pale `lavender-bg` token. No new purple token.
-- Preserve the existing hash target and keyboard focus handoff from the hero and shared signed out Start link.
+- Keep one accessible segmented tab control for TTC, Pregnancy and First Year, with clear selected and keyboard-focus states.
+- Replace the compact preview cards with larger homepage-only static screen compositions faithfully derived from the real saved journey design language. Do not mount protected screens or data-fetching components.
+- Show enough structure to explain each system:
+  - TTC: saved journey header, Today context, cycle path, a guidance area and private notes affordance.
+  - Pregnancy: My Week header, week and trimester context, current guidance and a visible keeping/reflection area.
+  - First Year: current age and Today context, age-aware guidance, plus visible note or memory structure.
+- Use fixed, generic demonstration content only. Include no names, real dates, IDs, private notes, records, scores, probabilities or customer data.
+- Make the active preview the dominant object on desktop, with the supporting explanation integrated beneath or beside it without competing for attention.
+- On mobile, render one full-width, legible preview at a time with stable dimensions and no miniature screenshot treatment.
+- Tighten the section copy around a private saved space that changes with the user and keeps information organised by stage.
+- Preserve zero homepage private journey, journal, baby or TTC reads.
 
-### 4. Rebuild Inside Your Journey from the real product
+### 4. Maintain the story after the showcase
 
-- First inspect the actual My TTC Journey, My Week and First Year Today screens for layout, typography, cards, spacing, stage indicators and chips.
-- Preferred method A: capture static marketing screenshots of those real screens locally using safe demonstration state only, and use them as homepage preview assets.
-- If capture of the authenticated screens is not achievable safely, use fallback B: homepage only static previews built directly from the real product components, tokens, labels and spacing with fixed demonstration content. Report which method was used.
-- Demonstration state only: illustrative stage guidance for TTC, week 24 second trimester for Pregnancy, four months Today for First Year. No customer names, journal text, real dates, records, scores or probabilities.
-- Never mount authenticated components that fetch data. Homepage customer reads and database reads stay at zero.
-- Compose one substantial product showcase with TTC, Pregnancy and First Year controls: a large readable active preview on desktop and one preview at a time on mobile, with purpose built mobile crops if needed.
-- Keep the interface genuinely legible: large, unblurred and not hidden behind decorative layers. Accessible tabs, keyboard navigation, visible focus, stable dimensions, no autoplay.
-
-
-### 5. Create Guidance for the Journey
-
-- Replace the small wider support band with a complete editorial guidance composition using the approved eyebrow, heading and copy.
-- Give TTC, Pregnancy and First Year the strongest photographic hierarchy, reusing the new stage set where it suits the composition.
-- Present IVF, Preparing for Baby, Toddler and Family as smaller, quieter wider guidance links with short truthful descriptors.
-- Audit existing photography for the four wider hubs first and reuse strong on brand assets. Generate a replacement only where an image is genuinely missing or off brand, using the same photographic direction, and report generated versus reused.
-- Use an asymmetric magazine layout, not seven identical cards or an icon directory.
-- Link every item to its verified canonical public route and add tests ensuring all seven audited hubs are represented once with the correct hierarchy.
-
-### 6. Add the Companion story
-
-- Add a dedicated editorial section between Guidance and the physical journal using the approved eyebrow, heading and copy.
-- Use the real Companion panel design: either a safe static capture of the actual panel with demonstration content, or a faithful static preview built from its real components and tokens. No generated or invented chat interface, and no second live runtime on the homepage.
-- Show the approved demonstration question and a short calm stage aware answer, with a subtle TTC to Pregnancy to First Year continuity cue.
-- Make no journal awareness, memory, history, voice, media or unsupported capability claims.
-- Keep the existing floating Ask launcher and the two answer surfaces unchanged.
-
-
-### 7. Refine Physical and Digital
-
-- Preserve the existing real journal photograph and the `/journal` destination. No generated journal product image.
-- Change the eyebrow and heading to the approved Physical + Digital story and use concise copy that clearly separates the Pregnancy only physical journal from the TTC to Pregnancy to First Year digital journey.
-- Remove the redundant Companion link from this final section because Companion now has its own dedicated section.
-
-### 8. Composition and responsive behaviour
-
-- Keep the final order: hero, promises, Start, Inside Your Journey, Guidance, Companion, Physical + Digital, footer.
-- Vary geometry deliberately: photographic chapters, then a product showcase, then a magazine guidance layout, then copy with a conversation panel, then image with copy.
-- Preserve the existing brand type, cream, sage, lavender, terracotta, charcoal and botanical restraint.
-- At 390px, stack the photographic chapters, keep the selected product preview readable, simplify the guidance composition, and ensure the Companion preview and Ask launcher do not collide.
-- At 1440px, make the product showcase materially larger than the current cards and preserve generous editorial whitespace.
+- Keep Guidance editorial and preserve all seven hubs exactly once, with TTC, Pregnancy and First Year primary and the four wider hubs visibly secondary.
+- Keep the dedicated Companion section non-interactive and secondary to the saved journey story. If needed, lightly refine its copy to name calm support across TTC, Pregnancy and First Year without making journal-awareness, memory, history, voice or media claims.
+- Keep Physical + Digital and the Pregnancy-only physical journal distinction unchanged unless a minor copy adjustment is required for a smooth transition.
+- Preserve the section order: opening, promises, Start, Inside Your Journey, Guidance, Companion, Physical + Digital, footer.
 
 ## Scope safeguards
 
-- No hero, route, lifecycle, database, migration, RLS, sitemap, robots, article data, AI, prompt, safety, grounding, journal awareness, memory, history, voice, analytics or deployment changes.
+- Homepage presentation and focused homepage tests only.
+- No route, lifecycle, saved journey logic, AI architecture, journal awareness, memory, history, grounding, voice, analytics, database, migration, RLS, sitemap, robots, article data or deployment changes.
 - Exactly three saved lifecycles remain: `ttc`, `pregnancy`, `first_year`.
-- New photography is allowed for the three stages and only for genuinely missing wider hub imagery. Generated product or companion interface: none. Remote image assets: none.
-- Keep homepage SEO and shared navigation behaviour unchanged.
-- Record this work as a roadmap item as the first build step.
+- No generated product or Companion UI, no live protected components and no new image generation.
 
-## Tests and verification
+## Tests and validation
 
-- Extend focused homepage tests for exact section order and copy, canonical journey starts, seven audited hubs and hierarchy, tab keyboard behaviour, safe static preview boundaries, Companion claims and physical journal distinction.
-- Run the full suite and require all tests passing with 0 timeouts.
+- Update focused homepage tests to prove chapter labels are absent, all three canonical start links remain correct, each tab exposes its fuller stage-specific structure, static previews contain no interactive private-data functionality, seven hub links remain correct and Companion still starts no runtime.
+- Run the full test suite and require zero failures and zero timeouts.
 - Run TypeScript checking twice.
-- Run lint and require exactly the known baseline with no new findings.
+- Run lint and compare it with the existing baseline, accepting no new findings.
 - Run the production build.
-- Inspect at approximately 390px and 1440px for all requested sections, every link, image loading, product controls, keyboard focus, launcher clearance, footer, overflow, collisions, layout stability and console errors.
-- Do not deploy. Return the requested 58 field completion report plus the 18 additional imagery and product source fields, then stop.
-
+- Inspect at approximately 390px and 1440px, verifying the pale Start surface, absent chapter labels, readable full previews for all three tabs, correct links, focus behaviour, launcher clearance, no overflow, no layout collisions and no console errors.
+- Do not deploy. Return a concise completion report and stop.

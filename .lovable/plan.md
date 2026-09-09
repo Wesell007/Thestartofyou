@@ -15,7 +15,7 @@ Exactly six records carry `domain = Postpartum`. No cluster IDs are guessed.
 | C046 | Pelvic floor exercises | COVERED_STRONG | `/articles/pelvic-floor-exercises-in-pregnancy` | P1 | 22,200 | 4 | 28,020 |
 | C082 | Postnatal mental health | COVERED_STRONG | `/first-year/emotional-wellbeing/when-parenthood-feels-heavy` | P1 | 12,100 | 158 | 109,690 |
 
-P0 = 2, P1 = 4, P2 = 0, unrelated = 0. C082 stays outside the physical-recovery scope of this phase (section 19) and receives an internal-link note only.
+Reported arithmetic: Phase 31 Postpartum records reviewed = 6, consolidated intents represented = 6, P0 = 2, P1 = 4, P2 = 0, unrelated = 0. Separately: physical remediation intents = 5; mental-health intent reviewed and out of physical scope = 1 (C082, `INTERNAL_LINK_ACTION` only, never counted as a physical page or expansion). Repository cross-checks — hair loss and night sweats, generic recovery, caesarean recovery — are reported outside the Phase 31 cluster arithmetic.
 
 ## Confirmed repository truth
 

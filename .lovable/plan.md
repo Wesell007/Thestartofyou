@@ -19,14 +19,13 @@ Reported arithmetic: Phase 31 Postpartum records reviewed = 6, consolidated inte
 
 ## Confirmed repository truth
 
-Postpartum coverage is broader than Phase 31's owner column implies. All of these are `status: "ready"` and medically reviewed:
+Postpartum coverage is broader than Phase 31's owner column implies. Publication state and review state are reported separately for each dataset, and never inferred.
 
-- First Year `postpartum-recovery` topic: `healing-after-birth`, `what-recovery-can-feel-like`
-- First Year `body-and-hormones` and related: `body-changes-after-birth`, `hormones-sweat-and-hair-loss`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`, `feeling-like-yourself-again`, `when-parenthood-feels-heavy`
-- Legacy: `/articles/postpartum-recovery-timeline` (cornerstone, covers lochia, hormones, pelvic floor at overview depth) and `/articles/your-body-after-birth` (already names night sweats, hair loss, diastasis recti, pelvic floor at one-line depth)
-- Legacy pregnancy: `/articles/pelvic-floor-exercises-in-pregnancy`, `/articles/pelvic-pain-in-pregnancy`
+**First Year dataset (`src/data/firstYearArticleData.ts`) — explicit fields exist.** These eight records each carry `status: "ready"` and `medicallyReviewed: true`, confirmed by direct read: `healing-after-birth`, `what-recovery-can-feel-like`, `feeling-like-yourself-again`, `when-parenthood-feels-heavy`, `body-changes-after-birth`, `hormones-sweat-and-hair-loss`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`.
 
-`src/data/articleInventory.ts` still marks `healing-after-birth` and `what-recovery-can-feel-like` as draft placeholders; the live dataset says otherwise. The evidence pack will record the dataset as authoritative and flag the stale inventory rows as a note, not a change.
+**Legacy dataset (`src/data/articleData.ts`) — no editorial-status field.** `/articles/postpartum-recovery-timeline` (broad cornerstone recovery owner), `/articles/your-body-after-birth` (broad body-change owner, mentions night sweats, hair loss, diastasis recti and pelvic floor at one-line depth), `/articles/pelvic-floor-exercises-in-pregnancy` and `/articles/pelvic-pain-in-pregnancy`. Their publication state will be resolved during 32C.1 from actual behaviour — record present, route resolves, public, self-canonical, in the sitemap, not redirected — and reported as `LIVE_INDEXABLE` or the appropriate evidence-based state. Their review state will be reported as `UNKNOWN / NOT EXPLICITLY RECORDED` unless a review field genuinely exists on the record.
+
+`src/data/articleInventory.ts` still describes `healing-after-birth` and `what-recovery-can-feel-like` as draft placeholders while the authoritative First Year dataset says `status: "ready"`. Recorded as stale inventory metadata drift only; the runtime dataset wins and nothing is changed in this phase.
 
 Consequence: the generic "postpartum recovery" and "your body after birth" intents are already owned. No new generic recovery article will be proposed.
 

@@ -1,79 +1,55 @@
-# Homepage Story Refinement Round 3
+# Start Your Journey — Journey Decision Page
 
 ## Confirmed current state
 
-- The approved video opening and three promise blocks are separate from the requested correction area and will remain unchanged.
-- `Start where you are` currently uses the stronger lavender surface and still renders `Chapter 01`, `Chapter 02` and `Chapter 03`.
-- Its canonical starts are TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator` and First Year `/setup/first-year`.
-- `Inside your journey` has accessible TTC, Pregnancy and First Year tabs, but each state currently renders one compact illustrative panel.
-- Guidance currently contains seven links, including the now excluded `/preparing-for-baby`, and has no thumbnail imagery.
-- The Companion preview is static, uses shared Companion styles, links to `/ask` and starts no runtime.
-- Suitable local imagery already exists for TTC, Pregnancy, First Year, IVF, Toddler and Family, so no new image generation is required.
+- No `/start-your-journey` route or equivalent explanatory page exists in the route table; the closest thing is the homepage `#start-where-you-are` section.
+- The signed-out `Start your journey` calls to action currently point at `/#start-where-you-are`: homepage hero (`NewHeroSection`), desktop header and mobile drawer (`Navbar`).
+- Signed-in visitors already see a different header button resolved by `resolvePublicAccountLink` (My TTC Journey / My Week / My First Year, or Set up journey when nothing is saved). That resolution is untouched by this work.
+- The three saved journeys and their canonical starts are TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator`, First Year `/setup/first-year`.
+- Static homepage preview compositions for the three journeys already exist inside `JourneyPreviewSection`, together with the coordinated photography (`home-stage-ttc`, `home-stage-pregnancy`, `home-stage-first-year`) and guidance imagery (`guidance-editorial-1..4`).
+- The active public guidance hubs are TTC, Pregnancy, First Year, IVF, Toddler and Family; Preparing for Baby is no longer an active hub.
+- The sitemap script builds from explicit route groups, so a new public page needs an entry added.
 
-## Visual direction
+## What gets built
 
-Use the selected Editorial Lavender Narrative for its editorial scale, asymmetric balance, layered product canvas and visual depth. Apply the existing Start of You typography, semantic colours, local imagery and restrained shadows rather than the prototype’s fonts, raw colours, generated imagery, numbering or unsupported copy.
+A single new public page at `/start-your-journey` that explains the three saved journeys and hands the visitor into the existing setup flows. Nothing about lifecycles, setup logic, the backend or the AI stack changes.
 
-## Implementation
+### Page story
 
-### 1. Preserve the approved opening
+1. Opening: eyebrow `YOUR JOURNEY`, H1 `Start where you are`, supporting copy, a quiet reassurance that the journey can change, a subtle continuous TTC → Pregnancy → First Year line, and an `Already have a journey? Sign in to continue where you left off` link to the existing sign-in route.
+2. Three substantial editorial journey sections, alternating image and text on desktop, each with: who it is for, what the saved experience centres on, a short expectations list, a compact static product glimpse, a primary call to action, and a subordinate guidance link.
+   - Trying to Conceive — includes people in fertility treatment before pregnancy; IVF stays wider guidance with a visually subordinate `Explore IVF guidance` link. Primary: `/setup/trying-to-conceive`. Secondary: `/trying-to-conceive`.
+   - Pregnancy — begins with dates so the journey can place them in pregnancy. Primary: `/due-date-calculator`. Secondary: `/pregnancy`.
+   - First Year — from birth through the first year, in customer-friendly language. Primary: `/setup/first-year`. Secondary: `/first-year`.
+3. `Not sure where to start?` — a calm, keyboard-accessible three-step decision guide (pregnant now → Pregnancy; baby already here → First Year; trying or in treatment before pregnancy → TTC), with a closing line that guidance can be explored without starting a saved journey. Pure local component state; no writes, no account, no lifecycle selection.
+4. `More guidance when you need it` — a restrained strip naming the six active hubs, no directory.
+5. One small Companion reassurance with a single `/ask` link, limited to live capabilities.
+6. `Ready when you are` — the same three choices, compact, linking to the same canonical setup flows, plus the sign-in line.
 
-- Do not change the hero, video, poster, fallback, controls, reduced motion behaviour, actions or three promise blocks.
-- Preserve the existing accessible anchor and focus handoff into `Start where you are`.
+### Copy safeguards
 
-### 2. Correct `Start where you are`
+Wording makes clear the visitor chooses what the product focuses on right now, not a permanent identity. No fertility prediction, probability, medical monitoring or development scoring claims. No mention of journal awareness, memory, history, voice or media understanding.
 
-- Change the surface to the existing pale `lavender-bg` treatment.
-- Remove chapter labels, numbers and all chapter-specific rendering logic.
-- Keep the three existing photographs, eyebrow, heading, supporting copy and exact canonical links.
-- Present the entries as unboxed editorial image links with lighter spacing, subtle depth and restrained stage accents.
-- Tighten descriptions around cycle understanding and private tracking, date-based weekly guidance and meaningful moments, and age-aware baby and recovery support.
+### Call-to-action routing
 
-### 3. Rebuild `Inside your journey`
+Signed-out `Start your journey` in the homepage hero, desktop header and mobile drawer changes from `/#start-where-you-are` to `/start-your-journey`. Existing analytics events stay. Other stage-specific final calls to action (TTC, IVF, First Year, trimester strips, postpartum) are audited and reported, changed only where they are generic rather than stage-committed.
 
-- Keep one accessible segmented tab control and one active preview at a time.
-- Replace each compact panel with a large homepage-only static page composition derived from the real product patterns, without mounting protected screens or making data reads.
-- TTC will show a saved journey heading, Today/current-cycle context, cycle path, current guidance and private notes/log structure.
-- Pregnancy will show My Week, trimester and week orientation, current guidance, a meaningful-moment/reflection area and supporting weekly structure.
-- First Year will show Today and age context, stage-aware guidance, baby/recovery organisation and a note or memory area.
-- Use only generic demonstration copy. Show no real names, dates, IDs, notes, appointments, scores, probabilities or customer information.
-- Make the preview dominant and readable on desktop. On mobile, show one full-width composition with simplified stacking rather than scaling a desktop screen into a miniature.
-- Preserve zero public homepage private journey, journal, baby and TTC reads.
+Resulting behaviour to report: signed out → `/start-your-journey`; signed in with TTC → `/my-ttc-journey`; Pregnancy → `/my-week`; First Year → `/my-first-year`; signed in with no active journey → unchanged current resolution. No signed-in resolution logic is edited.
 
-### 4. Upgrade `Guidance for the journey`
+## Technical notes
 
-- Remove `Preparing for baby` and its link completely.
-- Keep only six active hubs: TTC, Pregnancy and First Year as primary; IVF, Toddler and Family as secondary.
-- Add cohesive local thumbnail imagery to every hub.
-- Use an asymmetric editorial hierarchy: larger image-led primary entries and smaller varied secondary links, rather than six identical cards or a plain directory.
-- Preserve exact existing destinations for the six retained hubs.
+- New `src/pages/StartYourJourney.tsx`, route registered in `src/App.tsx` above the generic patterns, with `SeoHead` (title `Start Your Journey | The Start of You`, self-referencing canonical `https://thestartofyou.com/start-your-journey`).
+- Add the route to the `core` group in `scripts/generate-sitemap.ts`.
+- Page sections live in a new `src/components/start-journey/` folder, reusing existing design tokens, stage palettes, botanical accents and the current photography. The product glimpses reuse the existing static homepage preview language; no protected components, no data reads, no new product UI system.
+- Accessibility: single H1, semantic section headings, labelled decision-guide controls with visible focus, meaningful alt text, decorative botanicals hidden from assistive technology, no colour-only meaning.
 
-### 5. Elevate `Your companion`
+## Out of scope
 
-- Keep the section non-interactive with one `/ask` link and no runtime, model call or hidden turn.
-- Retain safe generic guidance and the shared Companion visual language.
-- Improve balance, spacing, hierarchy, layered paper surfaces, restrained shadows and subtle existing botanical detail.
-- Do not mention or imply journal awareness, memory, history, voice, media or unsupported personal knowledge.
-
-### 6. Finish the below-hero story
-
-- Harmonise spacing, rules, image treatment and shadow depth across the four corrected sections without turning every section into a card grid.
-- Preserve the Physical + Digital section and Pregnancy-only physical journal distinction.
-- Keep the page calm, warm and editorial, with restrained interaction and reduced-motion support.
-
-## Scope safeguards
-
-- Homepage presentation and focused homepage tests only.
-- No route, saved journey, lifecycle, AI, journal awareness, memory, history, grounding, voice, analytics, database, migration, RLS, sitemap, robots, article data or deployment changes.
-- Exactly three saved lifecycles remain: `ttc`, `pregnancy`, `first_year`.
-- No generated product UI, new generated imagery, live protected screens or private data.
+Lifecycle model, journey resolver, TTC/Pregnancy/First Year setup logic, database, migrations, RLS, AI runtime and prompts, journal awareness, memory, history, grounding, voice, article data, homepage/article/topic SEO, and deployment.
 
 ## Tests and validation
 
-- Update focused homepage tests for zero chapter labels, pale lavender treatment, unchanged canonical starts, fuller stage-specific structures, six active hubs only, thumbnail presence and a static one-runtime Companion preview.
-- Run the full test suite and require zero failures and zero timeouts.
-- Run TypeScript checking twice.
-- Run lint against the existing `1 error / 10 warnings` baseline and require zero new findings.
-- Run the production build.
-- Inspect at approximately 390px and 1440px across all three preview tabs. Verify readable previews, six hub links, imagery, `/ask`, no overflow, no collisions, clear launcher space, no broken links and zero console errors.
-- Do not deploy. Return the requested concise ten-point completion report.
+- Focused tests: route renders; exactly three saved journeys presented; each call to action resolves to its canonical setup route; IVF, Toddler and Family are not presented as saved journeys; Preparing for Baby absent; decision guide performs zero writes and zero private reads; no unsupported Companion claims; signed-in resolution unchanged.
+- Confirm the exact pre-change baseline (112 files, 1270 tests, 1270 passing, 0 timeouts; lint 1 error / 10 warnings) and stop with exact drift if it differs.
+- After edits: full suite, typecheck twice, lint against baseline with zero new findings, production build, and runtime QA at ~390px and ~1440px for overflow, launcher collision and console errors.
+- No deployment. Finish with the requested 30-point completion report.

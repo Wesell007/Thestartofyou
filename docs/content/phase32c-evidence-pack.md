@@ -124,7 +124,7 @@ None.
 #### Review classification
 SAFETY_REVIEW_REQUIRED.
 
-#### Evidence sufficient to build: YES
+#### EVIDENCE SUFFICIENT TO BUILD: YES
 
 ---
 
@@ -174,7 +174,7 @@ Internal link from `healing-after-birth`; documented in the expansions file.
 #### Review classification
 SAFETY_REVIEW_REQUIRED.
 
-#### Evidence sufficient to build: YES
+#### EVIDENCE SUFFICIENT TO BUILD: YES
 
 ---
 
@@ -218,7 +218,7 @@ Internal link from `body-changes-after-birth`; documented in the expansions file
 #### Review classification
 HEALTH_REVIEW_REQUIRED.
 
-#### Evidence sufficient to build: YES
+#### EVIDENCE SUFFICIENT TO BUILD: YES
 
 ---
 
@@ -267,7 +267,7 @@ Internal link from `postnatal-checks-and-appointments`; documented in the expans
 #### Review classification
 HEALTH_REVIEW_REQUIRED.
 
-#### Evidence sufficient to build: YES
+#### EVIDENCE SUFFICIENT TO BUILD: YES
 
 ---
 
@@ -313,7 +313,7 @@ INTERNAL_LINK_ACTION — link from the First Year recovery articles to `/article
 #### Review classification
 HEALTH_REVIEW_REQUIRED.
 
-#### Evidence sufficient to build: YES
+#### EVIDENCE SUFFICIENT TO BUILD: YES
 
 ---
 
@@ -331,7 +331,7 @@ INTERNAL_LINK_ACTION only. Reviewed for ownership and confirmed strongly owned. 
 #### Review classification
 Not applicable — no content change proposed.
 
-#### Evidence sufficient to build: not applicable (no build proposed)
+#### EVIDENCE SUFFICIENT TO BUILD: NOT APPLICABLE (no build proposed)
 
 ---
 

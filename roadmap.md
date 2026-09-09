@@ -512,8 +512,8 @@ See `docs/ai/journal-awareness-human-review-package.md`.
 
 - HOMEPAGE STORY REFINEMENT — COMPLETE. Below-hero story rebuild: image-led Start Where You Are, real-product Inside Your Journey previews, editorial guidance hierarchy across 7 audited hubs, dedicated Companion section, Physical + Digital journal close. Hero unchanged. Validated: 112 test files / 1270 tests passing, 0 timeouts; typecheck x2 clean; lint at known baseline (1 error, 10 warnings, 0 new); build passed; 390px and 1440px QA clean. Imagery and product-source direction in `docs/homepage/story-refinement-imagery.md`. Not deployed.
 
-## Homepage Story Refinement Round 3 — IN PROGRESS
+## Homepage Story Refinement Round 3 — CLOSED PASS
 - Preserve the approved opening and all runtime, privacy, route, SEO and data boundaries.
 - Remove all chapter language; rebuild three static saved-journey previews as page-like compositions.
 - Present exactly six image-led guidance hubs and elevate the static zero-runtime Companion preview.
-- Validate 112 / 1270 starting baseline, focused and full tests, typecheck twice, lint baseline, build, 1440px and 390px QA. Do not deploy.
+- Validated 112 / 1270 starting and final baseline, focused and full tests, typecheck twice, lint baseline, build, 1440px and 390px QA. Not deployed.

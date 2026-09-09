@@ -69,13 +69,21 @@ describe("start your journey page", () => {
   it("keeps IVF, Toddler and Family as guidance rather than a fourth journey", () => {
     renderPage();
     const main = within(screen.getByRole("main"));
+    const hrefs = main.getAllByRole("link").map((link) => link.getAttribute("href"));
 
-    expect(main.getByRole("link", { name: /^ivf$/i })).toHaveAttribute("href", "/ivf");
-    expect(main.getByRole("link", { name: /^toddler$/i })).toHaveAttribute("href", "/toddler");
-    expect(main.getByRole("link", { name: /^family$/i })).toHaveAttribute("href", "/family");
+    expect(hrefs).toContain("/ivf");
+    expect(hrefs).toContain("/toddler");
+    expect(hrefs).toContain("/family");
     expect(main.queryByText(/start my ivf journey/i)).toBeNull();
     expect(main.queryByText(/start my toddler journey/i)).toBeNull();
     expect(main.queryByText(/start my family journey/i)).toBeNull();
+    // No setup route exists for anything outside the three saved journeys.
+    expect(hrefs.filter((href) => href?.startsWith("/setup/"))).toEqual([
+      "/setup/trying-to-conceive",
+      "/setup/first-year",
+      "/setup/trying-to-conceive",
+      "/setup/first-year",
+    ]);
   });
 
   it("offers sign in only to signed-out visitors", () => {

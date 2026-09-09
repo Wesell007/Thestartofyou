@@ -87,4 +87,25 @@ None generated in this phase. The evidence pack records per article: hero requir
 
 ## Validation
 
-Confirm: Phase 31 clusters reviewed = 5 · unrelated clusters = 0 · runtime records added = 0 · public articles created = 0 · existing article statuses changed = 0 · new lifecycle states = 0 · route, sitemap, SEO, AI, grounding, journal, database and deployment changes = 0 · files changed = only the Phase 32B documentation files. Run 32B.1 first and stop on any meaningful ambiguity; proceed to 32B.2 drafting only for items gated YES. Close with the 30-point return report and stop.
+Confirm:
+
+- Phase 31 cluster records reviewed = 6 (C067, C059, C058, C072, C062, C065)
+- Consolidated First Year intents reviewed = 5
+- Unrelated clusters reviewed = 0
+- Runtime records added = 0
+- Public articles created = 0
+- Existing article statuses changed = 0
+- New lifecycle states = 0
+- Routes changed = 0
+- Sitemap changes = 0
+- SEO architecture changes = 0
+- AI changes = 0
+- Grounding changes = 0
+- Journal changes = 0
+- Memory changes = 0
+- Voice changes = 0
+- Database/schema/RLS changes = 0
+- Deployments = 0
+- Files changed = only the required Phase 32B documentation files
+
+Execution order: build the evidence pack, resolve ownership for all five intents, record `EVIDENCE SUFFICIENT TO BUILD: YES/NO` per intent, confirm the primary content action and any supporting structured-page action separately, stop on meaningful ambiguity, draft in 32B.2 only for items gated YES, then return the 30-point report and stop. No deployment.

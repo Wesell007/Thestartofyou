@@ -155,8 +155,8 @@ const NewHeroSection = () => {
 
           {/* Primary CTA — grounded with stronger spacing */}
           <div className="flex flex-col items-start gap-5">
-            <a
-              href="#start-where-you-are"
+            <Link
+              to="/start-your-journey"
               onClick={handleStartJourney}
               className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-10 py-[18px] font-sans text-[14px] font-medium tracking-wide shadow-cta hover:bg-terracotta-hover hover:shadow-lg hover:-translate-y-[1px] transition-all duration-300"
             >

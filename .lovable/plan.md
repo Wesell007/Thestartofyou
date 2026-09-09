@@ -1,111 +1,67 @@
-# Phase 32B — First Year Core Gap Remediation (32B.1 evidence + ownership, then 32B.2 drafting)
+# Phase 32C — Postpartum / Recovery Gap Remediation
 
-Scope: exactly five Phase 31 First Year intents — teething, colic, weaning/solids, sleep regressions, milestone timing. Documentation only. No runtime records, routes, sitemap, SEO, AI, grounding, journal, memory, voice, schema or deployment changes. No publication.
+Documentation only. No runtime records, routes, navigation, sitemap, SEO, AI, grounding, journal, memory, voice or database changes. No deployment. Phases 32A and 32B stay closed.
 
-## Confirmed Phase 31 records
+## Confirmed Phase 31 records (read from `phase31-opportunity-clusters.csv`)
 
-| Cluster | Working title | Phase 31 classification | Closest owner | Top volume | Keywords | Directional volume | Priority | Cannibalisation | Review level |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| C067 | Teething | NEW_ARTICLE_GAP | none | 14,800 | 35 | 48,080 | P0 | LOW | LOW_RISK_GENERAL |
-| C059 | Colic and evening crying | NEW_ARTICLE_GAP | none | 18,100 | 10 | 38,050 | P0 | LOW | HEALTH_REVIEW_REQUIRED |
-| C058 | Colic remedies and gripe water | NEW_ARTICLE_GAP | none | 27,100 | 30 | 52,350 | P1 | LOW | SAFETY_REVIEW_REQUIRED |
-| C072 | Starting solids and weaning | NEW_ARTICLE_GAP | none | 8,100 | 7 | 15,130 | P0 | LOW | SAFETY_REVIEW_REQUIRED |
-| C062 | Sleep regressions | COVERED_PARTIAL | /first-year/sleep/helping-your-baby-settle (LIVE_INDEXABLE) | 9,900 | 35 | 50,510 | P0 | MEDIUM | LOW_RISK_GENERAL |
-| C065 | Milestone timing questions | COVERED_PARTIAL | /first-year/development/baby-development-in-the-first-year (LIVE_INDEXABLE) | 14,800 | 69 | 150,420 | P0 | MEDIUM | NEEDS_HUMAN_EDITORIAL_REVIEW |
+Exactly six records carry `domain = Postpartum`. No cluster IDs are guessed.
 
-C058 and C059 are consolidated into one colic intent (gripe water is a remedy sub-intent, not a second page). Arithmetic carried into validation and the final report: Phase 31 cluster records reviewed = 6 · consolidated First Year intents reviewed = 5 · unrelated clusters = 0.
+| ID | Intent | Classification | Owner in Phase 31 | Priority | Top vol | Keywords | Directional |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| C080 | Lochia and postnatal bleeding | COVERED_PARTIAL | `/first-year/postpartum-recovery/healing-after-birth` | P0 | 4,400 | 12 | 17,720 |
+| C078 | Diastasis recti | NEW_ARTICLE_GAP | none | P0 | 3,600 | 24 | 29,080 |
+| C081 | Perineal care after birth | NEW_ARTICLE_GAP | none | P1 | 12,100 | 1 | 12,100 |
+| C079 | Sex and recovery after birth | NEW_ARTICLE_GAP | none | P1 | 1,300 | 27 | 19,440 |
+| C046 | Pelvic floor exercises | COVERED_STRONG | `/articles/pelvic-floor-exercises-in-pregnancy` | P1 | 22,200 | 4 | 28,020 |
+| C082 | Postnatal mental health | COVERED_STRONG | `/first-year/emotional-wellbeing/when-parenthood-feels-heavy` | P1 | 12,100 | 158 | 109,690 |
 
-## Repository truth recomputed
+P0 = 2, P1 = 4, P2 = 0, unrelated = 0. C082 stays outside the physical-recovery scope of this phase (section 19) and receives an internal-link note only.
 
-- `src/data/firstYearArticleData.ts` holds **16** article records, all `status: "ready"`. No teething, colic or weaning record exists. Sleep is covered by `newborn-sleep-expectations` and `helping-your-baby-settle`; development by `baby-development-in-the-first-year` and `when-milestones-feel-uneven`.
-- 13 month pages (`newborn` … `12-months`) plus phase pages and topic pages already own age-specific context.
+## Confirmed repository truth
 
-## Draft-architecture finding (decisive)
+Postpartum coverage is broader than Phase 31's owner column implies. All of these are `status: "ready"` and medically reviewed:
 
-`SAFE FIRST YEAR DRAFT CAPABILITY: NO`
+- First Year `postpartum-recovery` topic: `healing-after-birth`, `what-recovery-can-feel-like`
+- First Year `body-and-hormones` and related: `body-changes-after-birth`, `hormones-sweat-and-hair-loss`, `postnatal-checks-and-appointments`, `when-to-ask-for-help-after-birth`, `feeling-like-yourself-again`, `when-parenthood-feels-heavy`
+- Legacy: `/articles/postpartum-recovery-timeline` (cornerstone, covers lochia, hormones, pelvic floor at overview depth) and `/articles/your-body-after-birth` (already names night sweats, hair loss, diastasis recti, pelvic floor at one-line depth)
+- Legacy pregnancy: `/articles/pelvic-floor-exercises-in-pregnancy`, `/articles/pelvic-pain-in-pregnancy`
 
-- `status: "draft" | "ready"` exists and `scripts/generate-sitemap.ts` emits only `ready` articles; draft cards render unlinked in topic listings.
-- But `src/pages/firstyear/FirstYearArticle.tsx` renders **any** matching record by direct URL with a self-referencing canonical and no `noindex`. A draft URL is therefore publicly reachable and indexable.
-- Adding `noindex`/preview gating would be a route/SEO architecture change, which Phase 32B forbids.
+`src/data/articleInventory.ts` still marks `healing-after-birth` and `what-recovery-can-feel-like` as draft placeholders; the live dataset says otherwise. The evidence pack will record the dataset as authoritative and flag the stale inventory rows as a note, not a change.
 
-So Phase 32B follows the Phase 32A pattern: all drafts live in `docs/`, runtime data untouched.
+Consequence: the generic "postpartum recovery" and "your body after birth" intents are already owned. No new generic recovery article will be proposed.
 
-## Planned action table (to be confirmed by the evidence pack)
+## Proposed actions (to be confirmed by the evidence stage)
 
-| Topic | Phase 31 classification | Current owner | Proposed final action | Why |
-| --- | --- | --- | --- | --- |
-| Teething | NEW_ARTICLE_GAP | none | NEW_ARTICLE | No owner anywhere; clean evergreen intent |
-| Colic | NEW_ARTICLE_GAP | none | NEW_ARTICLE | No owner; highest unmet First Year need; absorbs gripe-water sub-intent |
-| Weaning / solids | NEW_ARTICLE_GAP | none | NEW_ARTICLE | Core UK 6-month intent with no coverage |
-| Sleep regressions | COVERED_PARTIAL | helping-your-baby-settle | NEW_ARTICLE | Concept is distinct from settling technique; no per-age regression pages |
-| Milestone timing | COVERED_PARTIAL | baby-development-in-the-first-year, when-milestones-feel-uneven | EXPAND_EXISTING_ARTICLE | Intent substantially answered; a third milestone page would cannibalise |
+| Intent | Current owner | Primary action | Review level |
+| --- | --- | --- | --- |
+| Lochia / postnatal bleeding (C080) | `healing-after-birth` | EXPAND_EXISTING_ARTICLE — explicit bleeding pattern and urgent red flags | SAFETY_REVIEW_REQUIRED |
+| Perineal care, stitches, tears (C081) | none | NEW_ARTICLE in First Year postpartum-recovery | SAFETY_REVIEW_REQUIRED |
+| Diastasis recti / abdominal recovery (C078) | one line in `your-body-after-birth` | NEW_ARTICLE, high-level, no exercise programme | HEALTH_REVIEW_REQUIRED |
+| Sex and intimacy after birth (C079) | none | NEW_ARTICLE, includes contraception and pain routing | HEALTH_REVIEW_REQUIRED |
+| Pelvic floor / bladder / bowel (C046) | pregnancy-framed article | INTERNAL_LINK_ACTION plus a postnatal section in an existing recovery article; no fragmented symptom pages | HEALTH_REVIEW_REQUIRED |
+| Hair loss, night sweats, body change | `hormones-sweat-and-hair-loss`, `body-changes-after-birth` | NO_NEW_PAGE_REQUIRED | n/a |
+| Caesarean recovery | `healing-after-birth` covers both routes | Tested during the evidence stage; a separate page is proposed only if evidence and demand support it, and it stays distinct from the 32A `caesarean-birth` birth-route draft | SAFETY_REVIEW_REQUIRED if created |
+| Postnatal mental health (C082) | `when-parenthood-feels-heavy` | INTERNAL_LINK_ACTION only, out of physical scope | n/a |
 
-The table records the PRIMARY CONTENT ACTION only. Supporting structured-page actions are recorded separately so nothing is double-counted:
+Expected outcome: 3 new articles (plus a possible fourth if caesarean recovery is justified), 2 to 3 existing-article expansions, 0 new hubs, 0 new lifecycles.
 
-| Topic | Supporting structured-page action |
-| --- | --- |
-| Sleep regressions | EXPAND_MONTH_PAGE — brief age-context and internal-link additions only |
-| Teething | EXPAND_MONTH_PAGE — short age-context link where the evidence supports it |
+## Stage 32C.1 — evidence and ownership
 
-The evergreen article owns the broad concept; month and phase pages own only age-specific context. No article body is duplicated into a structured page.
+Create `docs/content/phase32c-evidence-pack.md` with the exact section structure requested: Phase 31 findings, current inventory, intent ownership map, one section per consolidated intent (Phase 31 evidence, current owner, UK sources, supported points, safety and escalation boundaries, excluded claims, cannibalisation finding, primary action, supporting action, review classification, `Evidence sufficient to build: YES / NO`), then cross-intent overlaps, cannibalisation risks, First Year ownership, conflicts, human review requirements, image requirements and publication recommendation.
 
-The milestone decision is confirmed by the section 12 A–D test recorded in the evidence pack; a new milestone article is only proposed if D (genuinely distinct uncovered intent) is YES, which the current reading says it is not.
+Sources are UK-first and fetched live with checked dates: NHS your body just after birth, NHS bleeding after birth, NHS stitches and perineal healing, NHS caesarean recovery, NHS pelvic floor exercises, NHS sex and contraception after birth, NHS postnatal checks, plus NICE NG194 postnatal care and RCOG patient information where national guidance needs support. What to Expect stays demand evidence only.
 
-## Review classifications
+Also reconfirm publication architecture: both the legacy dataset and the First Year dataset render a matching direct URL indexably, so safe non-public draft capability remains NO for both.
 
-Each item carries its own evidence-derived classification, starting from Phase 31 and escalated (never downgraded) if the final proposed claims justify it:
+## Stage 32C.2 — drafting
 
-| Topic | Starting classification | Escalation trigger |
-| --- | --- | --- |
-| Teething | LOW_RISK_GENERAL | HEALTH_REVIEW_REQUIRED if the draft materially covers symptom differentiation, illness or medicines |
-| Colic | SAFETY_REVIEW_REQUIRED (stricter of C059/C058) | — |
-| Weaning / solids | SAFETY_REVIEW_REQUIRED | — |
-| Sleep regressions | LOW_RISK_GENERAL | SAFETY_REVIEW_REQUIRED if the draft makes substantive safe-sleep recommendations |
-| Milestone timing | NEEDS_HUMAN_EDITORIAL_REVIEW | DEVELOPMENT_REVIEW_REQUIRED if developmental-concern wording goes beyond general ranges |
+Only for intents gated YES:
 
-Every documentation draft carries `PUBLICATION STATUS: NOT PUBLISHED` and `REVIEW STATUS: [actual final classification]`. No item claims medically reviewed, safety reviewed or editorially reviewed.
+- `docs/content/phase32c-article-drafts.md` — full drafts, each headed `PUBLICATION STATUS: NOT PUBLISHED` and its own evidence-derived `REVIEW STATUS`.
+- `docs/content/phase32c-existing-content-expansions.md` — for each expansion: current owner, uncovered intent, exact new sections, content to preserve, content not to duplicate, search-intent effect, internal links, review classification.
 
-## Deliverables
+Content boundaries: no bleeding thresholds beyond what NHS wording supports, no false reassurance, no procedural or hygiene manuals, no diastasis measurement thresholds or exercise prescriptions, no timetable for resuming sex, no standalone fear-based warning-signs page (safety routing sits inside each relevant page), no drift into postnatal depression or trauma content, no imagery generated.
 
-1. `docs/content/phase32b-evidence-pack.md` — the exact prescribed heading structure per topic (Phase 31 intent · existing owner · UK sources · supported factual points · safety/escalation boundaries · claims excluded · cannibalisation finding · recommended content action · `EVIDENCE SUFFICIENT TO BUILD: YES/NO`), then cross-topic overlaps, month-page ownership, evidence uncertainties, editorial/health-review requirements, publication recommendation. Also carries the action table, the draft-architecture finding and per-article image requirements.
-2. `docs/content/phase32b-article-drafts.md` — full drafts only for items whose primary action is NEW_ARTICLE and whose evidence gate is YES. Each carries title, slug, description, read time, topic, body, related guidance (repository-verified routes only), source list, cannibalisation note, `PUBLICATION STATUS: NOT PUBLISHED` and `REVIEW STATUS: [that item's final classification]`.
-3. `docs/content/phase32b-existing-content-expansions.md` — exact proposed expansion plan for the milestone-timing intent (and any month-page age-context additions), section by section, as a proposal only. Not created if no expansions are recommended.
+## Then
 
-## Evidence rules
-
-UK-first sources only: NHS, NHS Start for Life, NICE where directly applicable, RCPCH where appropriate. What to Expect is demand evidence only, never a factual source. Every substantive claim maps to a named source with organisation, title, URL, checked date and claims supported. Any claim without a clear current UK source is dropped into that topic's excluded-claims register, never filled from general knowledge.
-
-Named safety boundaries: teething must not be credited with fever, diarrhoea or significant illness beyond what UK guidance states; colic must not be diagnosed from symptoms and unproven remedies must not be presented as treatment; weaning must avoid rigid schedules, unsafe choking advice and unsupported allergy-prevention claims, and must link out for choking first aid; sleep regressions must be framed as a common parent term rather than fixed developmental events, with UK safe-sleep guidance preserved; milestone content must stay range-based and non-competitive.
-
-## Tone and language
-
-Calm, practical, parent-facing First Year voice, not clinical. British English and UK terminology (GP, health visitor, NHS 111, cot, introducing solids). Where local NHS pathways differ, say so. Each topic carries a brief "what this can feel like for you" beat without becoming wellbeing content.
-
-## Images
-
-None generated in this phase. The evidence pack records per article: hero required, body images required, reusable asset available, new asset required.
-
-## Validation
-
-Confirm:
-
-- Phase 31 cluster records reviewed = 6 (C067, C059, C058, C072, C062, C065)
-- Consolidated First Year intents reviewed = 5
-- Unrelated clusters reviewed = 0
-- Runtime records added = 0
-- Public articles created = 0
-- Existing article statuses changed = 0
-- New lifecycle states = 0
-- Routes changed = 0
-- Sitemap changes = 0
-- SEO architecture changes = 0
-- AI changes = 0
-- Grounding changes = 0
-- Journal changes = 0
-- Memory changes = 0
-- Voice changes = 0
-- Database/schema/RLS changes = 0
-- Deployments = 0
-- Files changed = only the required Phase 32B documentation files
-
-Execution order: build the evidence pack, resolve ownership for all five intents, record `EVIDENCE SUFFICIENT TO BUILD: YES/NO` per intent, confirm the primary content action and any supporting structured-page action separately, stop on meaningful ambiguity, draft in 32B.2 only for items gated YES, then return the 30-point report and stop. No deployment.
+Report the full 30-point return with exact validation arithmetic and stop. Nothing is published or deployed.

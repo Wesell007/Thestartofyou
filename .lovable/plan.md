@@ -50,3 +50,15 @@ Analysis scripts run in a scratch directory; the raw competitor export never ent
 ## Validation before handover
 
 Confirm zero changes to application source, article records, routes, sitemap, AI, grounding and database; zero deployments. Validate every CSV for column consistency, unique cluster IDs, unique proposed slugs, an evidence reference and gap reason on each proposal, a reason on each skip, and a cannibalisation check on each P0/P1. Report the 30 required numbers with reconciling arithmetic, then stop.
+
+## Added rule: repository existence is not live search coverage
+
+Every surface gets a real status taken from the data and routes, never invented: live and indexable, live but noindex, draft or preview, redirect or legacy, not public, or unknown. Initial check: the three hub datasets carry explicit statuses (Family 18 ready / 1 draft, First Year 16 ready / 1 draft, Toddler 16 ready / 1 draft) while the 157 legacy records carry no status field, so their live state is resolved from routing and sitemap behaviour rather than assumed.
+
+Consequences carried through the whole audit:
+
+- A draft, preview-only or unknown-status page never counts as strong or structured coverage for organic search.
+- Non-indexed setup, personalised journey and private result surfaces may be noted as product support, never as a search owner.
+- Where good content exists but is not publicly usable, the recommended action is to publish or resolve its status, not to propose a duplicate page. Nothing is published in this phase.
+- The executive report states both total article records and live public article coverage, with the actual status breakdown of the current 210 records, and repeats the split for structured surfaces where it matters.
+- The completeness verdict is never argued from the article count. Each domain answers separately: what exists, how much is live, whether the important intents are covered, what must be created, what should be improved, what needs publishing or status resolution, and what is deliberately skipped.

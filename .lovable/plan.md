@@ -5,7 +5,7 @@
 - No `/start-your-journey` route or equivalent explanatory page exists; the closest thing is the homepage `#start-where-you-are` section.
 - The generic signed-out `Start your journey` actions all point at `/#start-where-you-are`: homepage hero (`NewHeroSection`), desktop header and mobile drawer (`Navbar`).
 - Signed-in visitors see a different header action resolved by `resolvePublicAccountLink`: TTC → `/my-ttc-journey`, Pregnancy → `/my-week`, First Year → `/my-first-year`.
-- Signed in with no active journey currently resolves to `Set up journey` → `/due-date-calculator`, which presumes Pregnancy rather than being stage-neutral. Per the brief this is reported, not changed, and no resolver logic is touched in this work.
+- Signed in with no active journey currently resolves to `Set up journey` → `/due-date-calculator`, which presumes Pregnancy rather than being stage-neutral. This single fallback destination will be made neutral (see below).
 - Canonical starts are TTC `/setup/trying-to-conceive`, Pregnancy `/due-date-calculator`, First Year `/setup/first-year`.
 - Static, safe product preview compositions for all three journeys already exist in `JourneyPreviewSection`, alongside the coordinated stage photography (`home-stage-ttc`, `home-stage-pregnancy`, `home-stage-first-year`) and guidance imagery (`guidance-editorial-1..4`).
 - Active public guidance hubs: TTC, Pregnancy, First Year, IVF, Toddler, Family. Preparing for Baby is not an active hub.

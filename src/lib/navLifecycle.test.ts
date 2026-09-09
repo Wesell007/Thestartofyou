@@ -93,8 +93,8 @@ describe("navLifecycle", () => {
     expect(resolveHomeHref(null)).toBe("/my-week");
     expect(resolveHeaderLinks(null).map((l) => l.href)).toEqual(["/my-week", "/my-journey"]);
     expect(resolvePublicAccountLink(null)).toEqual({
-      href: "/due-date-calculator",
-      label: "Set up journey",
+      href: "/start-your-journey",
+      label: "Start your journey",
     });
   });
 

@@ -40,10 +40,14 @@ Consequence: the generic "postpartum recovery" and "your body after birth" inten
 | Sex and intimacy after birth (C079) | none | NEW_ARTICLE, includes contraception and pain routing | HEALTH_REVIEW_REQUIRED |
 | Pelvic floor / bladder / bowel (C046) | pregnancy-framed article | INTERNAL_LINK_ACTION plus a postnatal section in an existing recovery article; no fragmented symptom pages | HEALTH_REVIEW_REQUIRED |
 | Hair loss, night sweats, body change | `hormones-sweat-and-hair-loss`, `body-changes-after-birth` | NO_NEW_PAGE_REQUIRED | n/a |
-| Caesarean recovery | `healing-after-birth` covers both routes | Tested during the evidence stage; a separate page is proposed only if evidence and demand support it, and it stays distinct from the 32A `caesarean-birth` birth-route draft | SAFETY_REVIEW_REQUIRED if created |
+| Caesarean recovery (no Phase 31 record) | `healing-after-birth` covers both birth routes | Boundary check only. A new article is drafted solely if a documented Phase 31 evidence record demonstrates a clearly separate intent. Otherwise recorded as `NO_NEW_PAGE_REQUIRED` / `EXPAND_EXISTING`, or `FUTURE CONTENT VALIDATION REQUIRED`. No competitor research is widened to justify a URL. | SAFETY_REVIEW_REQUIRED if ever created |
 | Postnatal mental health (C082) | `when-parenthood-feels-heavy` | INTERNAL_LINK_ACTION only, out of physical scope | n/a |
 
-Expected outcome: 3 new articles (plus a possible fourth if caesarean recovery is justified), 2 to 3 existing-article expansions, 0 new hubs, 0 new lifecycles.
+Preserved generic owners: `/articles/postpartum-recovery-timeline` stays the broad cornerstone recovery owner and `/articles/your-body-after-birth` stays the broad body-change owner. No competing generic page is proposed.
+
+Review floor, not to be downgraded: lochia SAFETY_REVIEW_REQUIRED; perineal SAFETY_REVIEW_REQUIRED; diastasis HEALTH_REVIEW_REQUIRED; sex after birth HEALTH_REVIEW_REQUIRED; postnatal pelvic-floor/bladder-bowel expansion HEALTH_REVIEW_REQUIRED. Human review completed stays 0.
+
+Expected outcome: 3 new articles, 2 to 3 existing-article expansions, internal-link actions for C046 and C082, 0 new hubs, 0 new lifecycles.
 
 ## Stage 32C.1 — evidence and ownership
 

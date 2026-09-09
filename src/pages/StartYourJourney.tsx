@@ -80,7 +80,7 @@ const StartYourJourney = () => {
           imageAlt="A pregnant woman resting quietly by a window"
           preview={<PregnancyPreview />}
           previewLabel="A glimpse of the Pregnancy journey"
-          primary={{ label: "Start my Pregnancy journey", href: "/due-date-calculator" }}
+          primary={{ label: "Start my Pregnancy journey", href: "/setup/pregnancy" }}
           secondary={{ label: "Explore pregnancy guidance", href: "/pregnancy" }}
           reverse
         />

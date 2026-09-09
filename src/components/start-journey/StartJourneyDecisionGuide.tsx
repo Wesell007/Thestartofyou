@@ -16,7 +16,7 @@ const questions = [
     question: "Are you pregnant now?",
     suggestion: "Pregnancy is likely to be the best fit.",
     journey: "Pregnancy",
-    href: "/due-date-calculator",
+    href: "/setup/pregnancy",
     cta: "Start my Pregnancy journey",
   },
   {

@@ -100,6 +100,7 @@ const Auth = lazy(() => import("./pages/Auth.tsx"));
 const Setup = lazy(() => import("./pages/Setup.tsx"));
 const SetupTTC = lazy(() => import("./pages/SetupTTC.tsx"));
 const FirstYearSetup = lazy(() => import("./pages/setup/FirstYearSetup.tsx"));
+const PregnancySetup = lazy(() => import("./pages/setup/PregnancySetup.tsx"));
 const MyFirstYear = lazy(() => import("./pages/firstyear/MyFirstYear.tsx"));
 const FirstYearToday = lazy(() => import("./pages/firstyear/FirstYearToday.tsx"));
 const FirstYearMemories = lazy(() => import("./pages/firstyear/FirstYearMemories.tsx"));
@@ -373,7 +374,9 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/setup" element={<Setup />} />
           <Route path="/setup/trying-to-conceive" element={<SetupTTC />} />
-          <Route path="/setup/first-year" element={<ProtectedRoute><FirstYearSetup /></ProtectedRoute>} />
+          <Route path="/setup/pregnancy" element={<PregnancySetup />} />
+          {/* Public route: every signed-in guard is applied inside the page. */}
+          <Route path="/setup/first-year" element={<FirstYearSetup />} />
           {/*
             Phase 29I — hidden design prototype. Mounted above /:journey/:stage
             so the generic stage route cannot swallow it. No navigation links

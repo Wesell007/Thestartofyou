@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import SeoHead from "@/components/seo/SeoHead";
 import PageLoadState from "@/components/shared/PageLoadState";
 import MyWeekHeader from "@/components/myweek/MyWeekHeader";
+import Navbar from "@/components/layout/Navbar";
 import { supabase } from "@/integrations/supabase/client";
 import { canEnterFirstYearSetup, saveFirstYearJourney } from "@/lib/firstYearJourney";
 import {
@@ -20,6 +21,12 @@ import StepCompanion, {
 import StepReview from "@/components/firstyear/setup/StepReview";
 import { resolveFirstYearStage } from "@/lib/firstYearStage";
 import { isCompanionTone, validateCompanionName } from "@/lib/companion";
+import { firstYearAuthHref } from "@/lib/firstYearEntry";
+import {
+  clearPendingFirstYearSetup,
+  readPendingFirstYearSetup,
+  stashPendingFirstYearSetup,
+} from "@/lib/firstYearPendingSetup";
 import {
   FIRST_YEAR_POST_SAVE_DESTINATION,
   TOTAL_STEPS,
@@ -51,6 +58,8 @@ const FirstYearSetup = () => {
   const navigate = useNavigate();
   const [screen, setScreen] = useState<Screen>("loading");
   const [mode, setMode] = useState<FirstYearSetupMode>("transition");
+  /** Signed-out visitors get the simplified pre-auth setup. */
+  const [signedOut, setSignedOut] = useState(false);
   const [step, setStep] = useState(1);
   const [draft, setDraft] = useState<FirstYearSetupDraft>(createEmptyDraft);
   const [errors, setErrors] = useState<FirstYearSetupErrors>({});
@@ -72,10 +81,27 @@ const FirstYearSetup = () => {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data, error } = await supabase.auth.getUser();
+      // Restore only the minimal pre-auth setup: baby count, the shared date
+      // of birth and any names typed. Anything older than 24 hours is gone.
+      const pending = readPendingFirstYearSetup();
+      if (pending) {
+        setDraft({
+          babyCount: pending.babyCount,
+          dateOfBirth: pending.dateOfBirth,
+          babies: Array.from({ length: pending.babyCount }, (_, index) => ({
+            name: pending.names[index] ?? "",
+          })),
+        });
+      }
+
+      const { data } = await supabase.auth.getUser();
       if (cancelled) return;
-      if (error || !data.user) {
-        setScreen("error");
+      if (!data?.user) {
+        // Public pre-auth setup. No account read, no write.
+        setSignedOut(true);
+        setMode("direct");
+        setScreen("ready");
+        if (pending) setStep(2);
         return;
       }
       const userId = data.user.id;
@@ -170,10 +196,31 @@ const FirstYearSetup = () => {
     headingRef.current?.focus();
   }, [step]);
 
-  const goTo = useCallback((next: number) => {
-    setSaveError(null);
-    setStep(Math.min(TOTAL_STEPS, Math.max(1, next)));
-  }, []);
+  /** Signed out ends at the sign-in step; signed in keeps companion + review. */
+  const totalSteps = signedOut ? 5 : TOTAL_STEPS;
+
+  const goTo = useCallback(
+    (next: number) => {
+      setSaveError(null);
+      setStep(Math.min(totalSteps, Math.max(1, next)));
+    },
+    [totalSteps],
+  );
+
+  /** Persist only the minimal pre-auth setup, then hand over to sign in. */
+  const handleSignInToSave = () => {
+    stashPendingFirstYearSetup({
+      babyCount: draft.babyCount,
+      dateOfBirth: draft.dateOfBirth,
+      names: draft.babies.map((baby) => baby.name),
+    });
+    navigate(firstYearAuthHref());
+  };
+
+  const handleCancel = () => {
+    clearPendingFirstYearSetup();
+    navigate(FIRST_YEAR_SETUP_COPY[mode].exitHref);
+  };
 
   const stage = resolveFirstYearStage(draft.dateOfBirth);
 
@@ -218,6 +265,8 @@ const FirstYearSetup = () => {
     setSaveError(null);
     try {
       await saveFirstYearJourney(buildBabyPayload(draft));
+      // The authorised save is done: the device copy is no longer needed.
+      clearPendingFirstYearSetup();
       if (userId) {
         // Display-only personalisation. A failure here must not lose the
         // journey that has already saved.
@@ -268,7 +317,7 @@ const FirstYearSetup = () => {
         canonical="https://thestartofyou.com/setup/first-year"
         noindex
       />
-      <MyWeekHeader />
+      {signedOut ? <Navbar /> : <MyWeekHeader />}
       <main className="relative mx-auto w-full max-w-[720px] px-4 sm:px-8 md:px-10 pt-16 sm:pt-20 pb-20">
         <p
           className="font-sans text-[10.5px] font-medium tracking-[0.3em] uppercase mb-3"
@@ -284,10 +333,10 @@ const FirstYearSetup = () => {
         >
           <div className="mb-6">
             <p className="font-sans text-[12.5px] text-foreground/55" aria-live="polite">
-              Step {step} of {TOTAL_STEPS}
+              Step {step} of {totalSteps}
             </p>
             <div className="mt-2.5 flex gap-1.5" aria-hidden="true">
-              {Array.from({ length: TOTAL_STEPS }, (_, index) => (
+              {Array.from({ length: totalSteps }, (_, index) => (
                 <span
                   key={index}
                   className="h-[3px] w-7 rounded-full transition-colors"
@@ -354,7 +403,46 @@ const FirstYearSetup = () => {
                 onContinue={() => goTo(5)}
               />
             )}
-            {step === 5 && (
+            {step === 5 && signedOut && (
+              <div>
+                <h2
+                  ref={headingRef}
+                  tabIndex={-1}
+                  className="font-serif text-[1.6rem] text-foreground outline-none"
+                >
+                  Ready to save
+                </h2>
+                <p className="mt-3 font-sans text-[14px] font-light leading-relaxed text-muted-foreground">
+                  {stage.label
+                    ? `Your First Year space will open on ${stage.label.toLowerCase()}.`
+                    : "Your First Year space will open on where your baby is now."}{" "}
+                  Signing in saves it to your account. Until then, only your
+                  baby's date of birth and any names you typed stay on this
+                  device, and only for a day.
+                </p>
+                <p className="mt-4 font-sans text-[13px] font-light leading-relaxed text-muted-foreground/80">
+                  After you sign in you can name your companion if you would
+                  like to, and check everything before it saves.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={() => goTo(4)}
+                    className="rounded-pill border border-border/60 px-5 py-3 font-sans text-sm text-foreground/70 hover:text-foreground"
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleSignInToSave}
+                    className="rounded-pill bg-terracotta px-6 py-3 font-sans text-sm font-medium text-terracotta-foreground shadow-cta hover:bg-terracotta-hover"
+                  >
+                    Continue, sign in to save
+                  </button>
+                </div>
+              </div>
+            )}
+            {step === 5 && !signedOut && (
               <StepCompanion
                 ref={headingRef}
                 hasSavedName={hasSavedName}
@@ -390,7 +478,7 @@ const FirstYearSetup = () => {
           <div className="pt-8">
             <button
               type="button"
-              onClick={() => navigate(copy.exitHref)}
+              onClick={handleCancel}
               className="font-sans text-[13px] text-foreground/60 underline underline-offset-4 decoration-foreground/25 hover:text-foreground"
             >
               Cancel

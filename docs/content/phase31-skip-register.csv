@@ -1,0 +1,11 @@
+cluster_id,domain,intent_cluster,reason,wte_evidence_urls,directional_cluster_volume,notes
+C050,Family,Baby names,SKIP_BRAND_MISMATCH,/baby-names/,1131830,Enormous demand but a separate database product; out of current strategy.
+C089,First Year,Product reviews and buying guides,SKIP_BRAND_MISMATCH,/baby-products/,224280,Affiliate review model; not part of current strategy. /articles/what-to-buy-for-a-new-baby covers the calm essentials angle.
+C048,Pregnancy,Gender prediction and reveals,SKIP_BRAND_MISMATCH,chinese-gender-predictor; predicting-sex-of-baby; nub-theory; gender-reveal-ideas,204140,Very high demand but non-evidence-based novelty; conflicts with brand.
+C086,Family,"Birthdays, star signs, celebrations",SKIP_BRAND_MISMATCH,/family/celebrations/; birth-signs-symbols,85700,Astrology and celebration filler; no brand fit.
+C049,Pregnancy,Announcements and celebrations,SKIP_BRAND_MISMATCH,pregnancy-announcement-captions; baby-shower-games,43370,
+C039,Pregnancy,Tilted uterus,OUT_OF_SCOPE,/pregnancy/tilted-uterus,34920,Narrow anatomical curiosity; low brand fit.
+C043,Pregnancy,Cryptic pregnancy,SKIP_BRAND_MISMATCH,cryptic-pregnancy,22400,Sensational intent; poor fit with calm clinical tone.
+C084,Toddler,Minor injuries and first aid,OUT_OF_SCOPE,splinters-in-children,17700,First-aid procedural content requires clinical ownership.
+C088,Family,Child height prediction,OUT_OF_SCOPE,predict-height,14110,Novelty calculator.
+C057,TTC,Conception biology,OUT_OF_SCOPE,what-is-a-zygote,12000,Encyclopaedic definition intent.

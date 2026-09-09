@@ -13,7 +13,7 @@ Scope: exactly five Phase 31 First Year intents — teething, colic, weaning/sol
 | C062 | Sleep regressions | COVERED_PARTIAL | /first-year/sleep/helping-your-baby-settle (LIVE_INDEXABLE) | 9,900 | 35 | 50,510 | P0 | MEDIUM | LOW_RISK_GENERAL |
 | C065 | Milestone timing questions | COVERED_PARTIAL | /first-year/development/baby-development-in-the-first-year (LIVE_INDEXABLE) | 14,800 | 69 | 150,420 | P0 | MEDIUM | NEEDS_HUMAN_EDITORIAL_REVIEW |
 
-C058 and C059 are treated as one colic intent (gripe water is a remedy sub-intent, not a second page).
+C058 and C059 are consolidated into one colic intent (gripe water is a remedy sub-intent, not a second page). Arithmetic carried into validation and the final report: Phase 31 cluster records reviewed = 6 · consolidated First Year intents reviewed = 5 · unrelated clusters = 0.
 
 ## Repository truth recomputed
 
@@ -37,15 +37,38 @@ So Phase 32B follows the Phase 32A pattern: all drafts live in `docs/`, runtime 
 | Teething | NEW_ARTICLE_GAP | none | NEW_ARTICLE | No owner anywhere; clean evergreen intent |
 | Colic | NEW_ARTICLE_GAP | none | NEW_ARTICLE | No owner; highest unmet First Year need; absorbs gripe-water sub-intent |
 | Weaning / solids | NEW_ARTICLE_GAP | none | NEW_ARTICLE | Core UK 6-month intent with no coverage |
-| Sleep regressions | COVERED_PARTIAL | helping-your-baby-settle | NEW_ARTICLE + EXPAND_MONTH_PAGE (age context only) | Concept is distinct from settling technique; no per-age regression pages |
+| Sleep regressions | COVERED_PARTIAL | helping-your-baby-settle | NEW_ARTICLE | Concept is distinct from settling technique; no per-age regression pages |
 | Milestone timing | COVERED_PARTIAL | baby-development-in-the-first-year, when-milestones-feel-uneven | EXPAND_EXISTING_ARTICLE | Intent substantially answered; a third milestone page would cannibalise |
 
+The table records the PRIMARY CONTENT ACTION only. Supporting structured-page actions are recorded separately so nothing is double-counted:
+
+| Topic | Supporting structured-page action |
+| --- | --- |
+| Sleep regressions | EXPAND_MONTH_PAGE — brief age-context and internal-link additions only |
+| Teething | EXPAND_MONTH_PAGE — short age-context link where the evidence supports it |
+
+The evergreen article owns the broad concept; month and phase pages own only age-specific context. No article body is duplicated into a structured page.
+
 The milestone decision is confirmed by the section 12 A–D test recorded in the evidence pack; a new milestone article is only proposed if D (genuinely distinct uncovered intent) is YES, which the current reading says it is not.
+
+## Review classifications
+
+Each item carries its own evidence-derived classification, starting from Phase 31 and escalated (never downgraded) if the final proposed claims justify it:
+
+| Topic | Starting classification | Escalation trigger |
+| --- | --- | --- |
+| Teething | LOW_RISK_GENERAL | HEALTH_REVIEW_REQUIRED if the draft materially covers symptom differentiation, illness or medicines |
+| Colic | SAFETY_REVIEW_REQUIRED (stricter of C059/C058) | — |
+| Weaning / solids | SAFETY_REVIEW_REQUIRED | — |
+| Sleep regressions | LOW_RISK_GENERAL | SAFETY_REVIEW_REQUIRED if the draft makes substantive safe-sleep recommendations |
+| Milestone timing | NEEDS_HUMAN_EDITORIAL_REVIEW | DEVELOPMENT_REVIEW_REQUIRED if developmental-concern wording goes beyond general ranges |
+
+Every documentation draft carries `PUBLICATION STATUS: NOT PUBLISHED` and `REVIEW STATUS: [actual final classification]`. No item claims medically reviewed, safety reviewed or editorially reviewed.
 
 ## Deliverables
 
 1. `docs/content/phase32b-evidence-pack.md` — the exact prescribed heading structure per topic (Phase 31 intent · existing owner · UK sources · supported factual points · safety/escalation boundaries · claims excluded · cannibalisation finding · recommended content action · `EVIDENCE SUFFICIENT TO BUILD: YES/NO`), then cross-topic overlaps, month-page ownership, evidence uncertainties, editorial/health-review requirements, publication recommendation. Also carries the action table, the draft-architecture finding and per-article image requirements.
-2. `docs/content/phase32b-article-drafts.md` — full drafts only for items whose final action is NEW_ARTICLE and whose evidence gate is YES. Each carries title, slug, description, read time, topic, body, related guidance (repository-verified routes only), source list, review classification, cannibalisation note, `PUBLICATION STATUS: NOT PUBLISHED`, `AWAITING HUMAN HEALTH/SAFETY REVIEW`.
+2. `docs/content/phase32b-article-drafts.md` — full drafts only for items whose primary action is NEW_ARTICLE and whose evidence gate is YES. Each carries title, slug, description, read time, topic, body, related guidance (repository-verified routes only), source list, cannibalisation note, `PUBLICATION STATUS: NOT PUBLISHED` and `REVIEW STATUS: [that item's final classification]`.
 3. `docs/content/phase32b-existing-content-expansions.md` — exact proposed expansion plan for the milestone-timing intent (and any month-page age-context additions), section by section, as a proposal only. Not created if no expansions are recommended.
 
 ## Evidence rules

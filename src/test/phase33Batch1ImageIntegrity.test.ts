@@ -10,12 +10,13 @@ describe("Phase 33 Batch 1 image integrity", () => {
   it("keeps sleep imagery attached to the intended section titles", () => {
     const article = firstYearArticles.find((item) => item.slug === SLEEP_SLUG);
     const images = firstYearArticleImageMap[SLEEP_SLUG];
+    const bodyImages = images?.body ?? [];
 
     expect(article).toBeDefined();
     expect(images).toBeDefined();
     expect(images?.body).toHaveLength(2);
 
-    const placements = images?.body.map((image) => ({
+    const placements = bodyImages.map((image) => ({
       heading: article?.sections[image.afterSectionIndex]?.heading,
       src: image.src,
       alt: image.alt,
@@ -26,7 +27,7 @@ describe("Phase 33 Batch 1 image integrity", () => {
       "What tends to help",
     ]);
     expect(placements?.every(({ src, alt }) => Boolean(src && alt))).toBe(true);
-    expect(new Set([images?.hero.src, ...images?.body.map(({ src }) => src)])).toHaveProperty(
+    expect(new Set([images?.hero.src, ...bodyImages.map(({ src }) => src)])).toHaveProperty(
       "size",
       3,
     );

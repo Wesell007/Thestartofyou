@@ -1047,8 +1047,8 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
         answer:
           "Yes, in the sense that many babies change how they cycle through sleep around now, and nights often feel harder for a stretch. It is a shift in development rather than a lost skill. Keeping basics steady usually helps most.",
         readMore: {
-          label: "Read: helping your baby settle",
-          href: "/first-year/sleep/helping-your-baby-settle",
+          label: "Read: when your baby's sleep suddenly changes",
+          href: "/first-year/sleep/when-sleep-suddenly-changes",
         },
         askTopic: "four-month-sleep",
       },

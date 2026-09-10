@@ -8,6 +8,9 @@ import bodyComfort from "@/assets/guidance-card-comfort.jpg";
 import bodySafety from "@/assets/guidance-card-safety.jpg";
 import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
+import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes.jpg";
+import bodyNightWaking from "@/assets/firstyear-body-night-waking.jpg";
+
 import heroHealing from "@/assets/postpartum-stage-early-days.jpg";
 import bodyHealing from "@/assets/postpartum-scene.jpg";
 import heroRecoveryFeel from "@/assets/postpartum-stage-early-weeks.jpg";
@@ -73,6 +76,21 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       },
     ],
   },
+  "when-sleep-suddenly-changes": {
+    hero: {
+      src: heroSleepChanges,
+      alt: "A calm bedroom at night with a baby sleeping on their back in a clear, flat cot",
+    },
+    body: [
+      {
+        afterSectionIndex: 2,
+        src: bodyNightWaking,
+        alt: "A parent holding an awake baby calmly at home in low evening light",
+        caption: "A settled pattern can change for a while without anything being wrong.",
+      },
+    ],
+  },
+
   // bespoke future: safe cot detail with breathable bedding
   "safe-sleep-and-home-safety": {
     hero: {

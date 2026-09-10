@@ -412,7 +412,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
         q: "Should I worry about a 12 month sleep regression?",
         a: "Sleep often shifts again around big developmental change. Gentle consistency usually carries you through.",
         askTopic: "twelve-month-sleep",
-        readMore: { label: "Helping your baby settle", href: "/first-year/sleep/helping-your-baby-settle" },
+        readMore: { label: "When your baby's sleep suddenly changes", href: "/first-year/sleep/when-sleep-suddenly-changes" },
       },
     ],
     feelsHard: [

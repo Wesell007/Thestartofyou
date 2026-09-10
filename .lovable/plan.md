@@ -35,48 +35,70 @@ For all 19: title, proposed slug, source phase, domain, review status,
 sources, excluded claims, image metadata and suggested links, taken from the
 documents rather than memory.
 
-### 3. Decide the target dataset per article from repository truth
-Inspect the legacy dataset (`src/data/articleData.ts`, `/articles/:slug`),
-the First Year dataset (`src/data/firstYearArticleData.ts`,
-`/first-year/:topic/:slug`), and the Toddler/Family datasets, including which
+### 3. Decide the target dataset and existing template per article
+Inspect the legacy dataset (`src/data/articleData.ts`, `/articles/:slug`, with
+`ArticlePage.tsx` dispatching to `ArticleFlagshipTemplate`, `ArticleDeepTemplate`
+or `ArticleLegacyPage` by content shape), the First Year dataset
+(`src/data/firstYearArticleData.ts`, `/first-year/:topic/:slug`,
+`FirstYearArticlePage`), and the Toddler/Family datasets, including which
 fields exist (`status`, `medicallyReviewed`, `reviewedBy`, `sources`,
-`crossLinks`, section shapes) and how each renderer selects a template. Record
-the correct owning dataset and topic for all 19 before any publication is
-proposed. No new framework.
+`crossLinks`, section shapes). Repository ownership decides the dataset, not
+convenience: First Year baby, feeding, sleep, development and recovery content
+goes to the First Year system; Pregnancy and TTC content to the legacy article
+system. No new renderer, no new design, no one-off layout.
+
+Record per article: dataset, renderer/template component, topic, expected
+route, and `TEMPLATE COMPATIBLE: YES/NO`. If NO, stop that article for a
+separate architecture decision rather than building anything new.
 
 ### 4. Per-article readiness checks
 Slug collision check against every existing dataset and the sitemap; SEO
-readiness (title, description, canonical shape, indexability rule); image
-readiness against what the target template needs and whether a suitable
-existing asset exists; cannibalisation check against the closest live page
-using the 32F register and ownership map; and whether a 32F publication link
-migration is attached.
+readiness (title, description, canonical shape, indexability rule);
+cannibalisation check against the closest live page using the 32F register and
+ownership map; and whether a 32F publication link migration is attached.
 
-### 5. Build the publication register
-`docs/content/phase33-publication-register.md` with one row per article and
-all the required columns, using only the allowed final statuses. Expected
-shape given zero completed human reviews: 17 `HOLD_HUMAN_REVIEW`, and the two
-low-risk articles resolved to `READY_TO_PUBLISH` or a specific hold
-(`HOLD_IMAGE`, `HOLD_CANNIBALISATION`, `HOLD_EDITORIAL_QA`,
-`HOLD_TECHNICAL`) based on the checks, not assumed ready.
+### 5. Image production register (audit only, nothing generated)
+Derive the hero placement, aspect ratio and mobile crop behaviour from the
+actual templates (`ArticleHeroImage`, the flagship hero, and the First Year
+equivalent) rather than assuming. For all 19 record: hero image required, body
+image required and count, existing suitable approved asset, new Nano Banana
+asset required, visual purpose, aspect ratio, crop/focal requirement, alt-text
+intent, `GENERATION STATUS: NOT YET GENERATED`, and approval status.
 
-### 6. Editorial QA on the two low-risk candidates
+Missing artwork is `IMAGE PREPARATION REQUIRED`, never `HOLD_IMAGE`;
+`HOLD_IMAGE` is reserved for an unresolved template or visual problem. Record
+the shared visual direction (premium, warm, calm, editorial, UK-appropriate,
+supportive not clinical) and the health/safety rule that sensitive articles get
+calm lifestyle imagery, never symptom depiction.
+
+### 6. Build the publication register
+`docs/content/phase33-publication-register.md` with one row per article, all
+required columns plus the template and image sections, using only the allowed
+final statuses. Expected shape given zero completed human reviews: 17
+`HOLD_HUMAN_REVIEW`, and the two low-risk articles resolved to
+`READY_TO_PUBLISH` or a specific hold based on the checks, not assumed ready.
+
+
+### 7. Editorial QA on the two low-risk candidates
 Full QA pass on sleep regressions and hair dye: opening answer, heading
 structure, no placeholder or editor text, UK terminology, no unsupported
 statistics, no fear framing, no duplication of a live page, source integrity.
 Record the outcome; QA failure means a hold, not a rewrite of clinical
 content.
 
-### 7. Human review pack for the other 17
+### 8. Human review pack for the other 17
 `docs/content/phase33-human-review-pack.md`: per article the title, phase,
 classification, full draft copy, authoritative sources, supported claims,
 deliberately excluded claims, escalation wording, the specific points the
 reviewer must approve, and an empty reviewer outcome section. No pre-filled
 approval, reviewer name or date.
 
-### 8. Report and stop
-Return the 20-point 33.1 output, including the files publication would touch,
-the expected new public URLs, blockers, and recommended batches. Stop there.
+### 9. Report and stop
+Return the 20-point 33.1 output plus the added template and image totals:
+target template for all 19, template compatibility count, new hero images
+needed, body images needed, reusable existing assets, and unresolved
+template/image blockers. No images generated, nothing published. Stop there.
+
 
 ## Milestones canonical
 

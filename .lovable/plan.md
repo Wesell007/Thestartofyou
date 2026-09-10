@@ -1,96 +1,97 @@
-# Phase 32F — Reconciliation and correction pass (documentation only)
+# Phase 33.1 — Publication readiness audit (audit only, nothing published)
 
-Verification pass. No runtime, route, canonical, sitemap, publication or
-deployment changes. Only `docs/content/phase32f-*` files are edited.
+No runtime source changes, no article records, no links, no images, no
+deployment. Output is documentation plus the 33.1 report.
 
-## Confirmed cause of the failed equation
+## What the draft documents already show
 
-The action register in `docs/content/phase32f-implementation-report.md`
-contains eleven rows, A1 to A11:
+Confirmed by reading the four draft files:
 
-- ALREADY_RESOLVED: A1 (C008), A2 (C006) = 2
-- IMPLEMENTED: A3, A4, A5, A6, A7, A8, A9 = **7**
-- DEFER_SEO_ARCHITECTURE: A10 = 1
-- NO_ACTION_REQUIRED: A11 = 1
+- 32A = 3 drafts (`itching-in-pregnancy`, `caesarean-birth`,
+  `gestational-diabetes`), all held awaiting human health/safety review.
+- 32B = 4 drafts (`teething` HEALTH, `colic-and-evening-crying` SAFETY,
+  `introducing-solid-foods` SAFETY, `when-sleep-suddenly-changes`
+  LOW_RISK_GENERAL).
+- 32C = 3 drafts (SAFETY, HEALTH, HEALTH).
+- 32D = 9 drafts (`hair-dye-and-beauty-treatments-in-pregnancy`
+  LOW_RISK_GENERAL; the other eight HEALTH or SAFETY).
 
-7 + 2 + 1 + 1 = 11 = GROSS. The register is already correct; only the summary
-sentence beneath it mis-states IMPLEMENTED as 8. The correction is to the
-summary text, not to the action model or to any runtime work.
+3 + 4 + 3 + 9 = 19. The two LOW_RISK_GENERAL articles are sleep regressions
+(`when-sleep-suddenly-changes`) and hair dye, exactly as expected. Human
+reviews completed remain 0 in every source document, so no article can carry
+a genuine health/safety approval yet.
 
-Derived: GUARANTEED 5, NEWLY_DISCOVERED 6 (A6 grouped broken destinations,
-A7 grouped redirect-source link, A8 grouped orphan remediation, A9 topic-group
-truncation, A10 milestones canonical, A11 `/` and `/about` weak connectivity),
-GROSS 11.
+## Work in 33.1
 
-## Work to do
+### 1. Verify the baseline first
+Run tests, typecheck twice, lint and build, and count public URLs from the
+generated sitemap. Compare against the recorded post-32F state (117 files /
+1,297 tests, lint 1 error + 10 warnings, 331 public URLs). Report drift
+rather than forcing the numbers; stop before any later stage if drift is
+material.
 
-### 1. Correct the terminal arithmetic
-Fix the equation line in the implementation report to
-`IMPLEMENTED 7 + ALREADY_RESOLVED 2 + MERGED 0 + BLOCKED 0 + REVIEW_HOLD 0 +
-DEFER_SEO_ARCHITECTURE 1 + NO_ACTION_REQUIRED 1 = 11 = GROSS`.
+### 2. Read every draft in full and record verbatim metadata
+For all 19: title, proposed slug, source phase, domain, review status,
+sources, excluded claims, image metadata and suggested links, taken from the
+documents rather than memory.
 
-### 2. Expand the register to the required column set
-Rewrite the A1–A11 table with one row per gross action and the columns:
-Action ID, Source, Description, Guaranteed/New, Terminal status, Runtime
-change, Evidence. Add an explicit note that A6 (six broken destinations),
-A7 (one redirect-source link across four surfaces) and A8 (five orphaned
-guides) were each defined in 32F.1 as a single systematic remediation, so
-affected-URL counts are not action counts.
+### 3. Decide the target dataset per article from repository truth
+Inspect the legacy dataset (`src/data/articleData.ts`, `/articles/:slug`),
+the First Year dataset (`src/data/firstYearArticleData.ts`,
+`/first-year/:topic/:slug`), and the Toddler/Family datasets, including which
+fields exist (`status`, `medicallyReviewed`, `reviewedBy`, `sources`,
+`crossLinks`, section shapes) and how each renderer selects a template. Record
+the correct owning dataset and topic for all 19 before any publication is
+proposed. No new framework.
 
-### 3. Evidence rows for C008 and C006
-State each issue, the evidence that the week index entry point and the 42
-week-page architecture were already in place before 32F, and confirm zero
-runtime change for both. They stay two separate guaranteed rows.
+### 4. Per-article readiness checks
+Slug collision check against every existing dataset and the sitemap; SEO
+readiness (title, description, canonical shape, indexability rule); image
+readiness against what the target template needs and whether a suitable
+existing asset exists; cannibalisation check against the closest live page
+using the 32F register and ownership map; and whether a 32F publication link
+migration is attached.
 
-### 4. Evidence rows for C066, C082, C046
-Record for each the exact remediation already shipped: phase-to-month
-navigation on four First Year phase pages; neutral routing from the two
-physical-recovery articles to `when-parenthood-feels-heavy`; reciprocal
-pelvic-floor and postnatal body-change links. Confirm no new health, safety
-or developmental claim, and no Phase 32E held content, was introduced.
+### 5. Build the publication register
+`docs/content/phase33-publication-register.md` with one row per article and
+all the required columns, using only the allowed final statuses. Expected
+shape given zero completed human reviews: 17 `HOLD_HUMAN_REVIEW`, and the two
+low-risk articles resolved to `READY_TO_PUBLISH` or a specific hold
+(`HOLD_IMAGE`, `HOLD_CANNIBALISATION`, `HOLD_EDITORIAL_QA`,
+`HOLD_TECHNICAL`) based on the checks, not assumed ready.
 
-### 5. Cannibalisation reconciliation table
-Rewrite `docs/content/phase32f-cannibalisation-register.md` with the columns:
-Intent family, Severity before, Primary owner, Supporting owner(s), 32F
-action, Final status, Residual risk. Replace the blanket "REMEDIATED" with
-precise terminal statuses, so CAN-04 (milestones) reads
-`DEFERRED_SEO_ARCHITECTURE` rather than resolved, and add totals that
-reconcile to 7.
+### 6. Editorial QA on the two low-risk candidates
+Full QA pass on sleep regressions and hair dye: opening answer, heading
+structure, no placeholder or editor text, UK terminology, no unsupported
+statistics, no fear framing, no duplication of a live page, source integrity.
+Record the outcome; QA failure means a hold, not a rewrite of clinical
+content.
 
-### 6. Milestone canonical residual issue
-Record the two routes involved, the intended primary owner, the current
-canonical state (each route self-canonical, both indexed, inventory role
-`needs-decision`), why 32F did not touch canonical architecture, and the
-residual duplicate-intent risk. Keep it as explicit future work.
+### 7. Human review pack for the other 17
+`docs/content/phase33-human-review-pack.md`: per article the title, phase,
+classification, full draft copy, authoritative sources, supported claims,
+deliberately excluded claims, escalation wording, the specific points the
+reviewer must approve, and an empty reviewer outcome section. No pre-filled
+approval, reviewer name or date.
 
-### 7. Nineteen-draft future-publication reconciliation
-`phase32f-intent-ownership-map.md` currently has only a short narrative.
-Add a full section covering all 19 held drafts (3 from 32A, 4 from 32B,
-3 from 32C, 9 from 32D), each with: draft title, current live owner, future
-owner, links to add after publication, links to retarget, coverage that must
-stay live until publication, and a launch-time cannibalisation check. Report
-totals for "changes ownership" versus "no link migration", reconciling to 19.
-No links are added now; the drafts stay NOT PUBLISHED.
+### 8. Report and stop
+Return the 20-point 33.1 output, including the files publication would touch,
+the expected new public URLs, blockers, and recommended batches. Stop there.
 
-### 8. Metrics and validation
-Graph, inventory and validation figures are preserved as reported unless a
-targeted re-read of the repository contradicts them. Since no runtime file
-changes, no re-run of the full suite is manufactured; a targeted verification
-of the final repository state is recorded instead.
+## Milestones canonical
 
-## Files changed by this pass
+The 32F `DEFERRED_SEO_ARCHITECTURE` residual stays untouched.
 
-- `docs/content/phase32f-implementation-report.md`
-- `docs/content/phase32f-cannibalisation-register.md`
-- `docs/content/phase32f-intent-ownership-map.md`
+## Boundaries held
 
-`docs/content/phase32f-link-graph-audit.md` unchanged unless verification
-disproves a value.
+Lifecycles remain `ttc | pregnancy | first_year`. No new hub, redesign, AI,
+grounding, journal, memory, voice, database, schema or RLS change. No
+deployment. If a publication dependency requires a schema change, stop and
+report it.
 
-## Closure
+## Files created by 33.1
 
-If all three reconciliations (terminal equation = 11, cannibalisation = 7,
-drafts = 19) are exact, close as
-`PHASE 32F — INTERNAL LINKING + INTENT OWNERSHIP + CANNIBALISATION
-REMEDIATION CLOSED PASS`. Otherwise report
-`PHASE 32F — RECONCILIATION HOLD`. No next phase, no deployment.
+- `docs/content/phase33-publication-register.md`
+- `docs/content/phase33-human-review-pack.md`
+
+No runtime files change during 33.1.

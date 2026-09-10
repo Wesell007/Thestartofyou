@@ -94,7 +94,7 @@ const LIVE = {
   pregnancyTests: "/trying-to-conceive/pregnancy-tests",
   twoWeekWait: "/trying-to-conceive/two-week-wait",
   conditions: "/trying-to-conceive/conditions",
-  calculator: "/trying-to-conceive/ovulation-calculator",
+  calculator: "/ovulation-calculator",
   ivfPage: "/ivf",
   ivfTimelinePage: "/ivf-timeline",
   ask: "/ask",

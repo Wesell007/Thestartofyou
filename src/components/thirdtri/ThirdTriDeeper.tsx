@@ -25,7 +25,7 @@ const links: DeeperLink[] = [
   { label: "Practical planning", href: "/preparing-for-baby", Icon: ListChecks },
   { label: "Emotional support", href: "/articles/anxiety-in-pregnancy", Icon: HeartHandshake },
   { label: "Health & safety", href: "/pregnancy/health-and-safety", Icon: ShieldCheck },
-  { label: "Postpartum thoughts", href: "/postpartum", Icon: Sparkles },
+  { label: "Postpartum thoughts", href: "/first-year#recovery-topics", Icon: Sparkles },
 ];
 
 const ThirdTriDeeper = () => {

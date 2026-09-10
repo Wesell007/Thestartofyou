@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { ArticleData } from "@/data/articleData";
 import { getRelatedArticles } from "@/data/articleData";
 import Navbar from "@/components/layout/Navbar";
@@ -63,6 +64,29 @@ const ArticleFlagshipTemplate = ({ data }: Props) => {
       {related.length > 0 && (
         <ArticleRelatedReads articles={related} variant="calm" />
       )}
+      {(data.crossLinks?.length ?? 0) > 0 && (
+        <section className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl pb-4">
+          <ul className="flex flex-col gap-2">
+            {data.crossLinks?.map((link) => (
+              <li key={link.href}>
+                <Link
+                  to={link.href}
+                  className="font-sans text-[14px] font-light text-foreground/85 hover:text-foreground underline underline-offset-4 decoration-foreground/30"
+                >
+                  {link.label}
+                </Link>
+                {link.context && (
+                  <span className="font-sans text-[13px] font-light text-muted-foreground">
+                    {" "}
+                    — {link.context}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <ArticleTopicReturn data={data} />
 
       <Footer />

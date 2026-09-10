@@ -552,7 +552,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
                       </div>
 
                       <ul className="flex flex-col mt-1">
-                        {group.links.slice(0, 4).map((link) => {
+                        {group.links.map((link) => {
                           const thumb = resolveRowThumb(resolveImage(link.href, link.image));
                           return (
                             <li

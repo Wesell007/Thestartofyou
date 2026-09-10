@@ -879,7 +879,7 @@ const Next = () => (
           Read forward to the early days of life with your baby.
         </p>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 max-w-sm sm:max-w-none mx-auto">
-          <Link to="/postpartum"
+          <Link to="/first-year#recovery-topics"
             className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
             Explore the early days <ArrowRight size={14} />
           </Link>

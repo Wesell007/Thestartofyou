@@ -13,7 +13,7 @@ const pathways = [
     label: "Postpartum",
     title: "Postpartum hub",
     sub: "Recovery, adjustment, and the early weeks",
-    href: "/postpartum",
+    href: "/first-year#recovery-topics",
     color: "--stage-postpartum-accent",
   },
   {

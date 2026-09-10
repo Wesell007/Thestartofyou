@@ -401,7 +401,7 @@ export const firstYearStages: Record<string, StageData> = {
           label: "Guide",
           title: "Development articles",
           sub: "Practical guidance for this stage",
-          href: "/articles/first-year-development",
+          href: "/first-year/development",
         },
       ],
     }

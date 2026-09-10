@@ -24,6 +24,8 @@ export interface FirstYearArticle {
   sections?: { heading: string; body: string[] }[];
   keyTakeaways?: string[];
   relatedSlugs?: string[];
+  /** Links out to published surfaces in other parts of the site. */
+  crossLinks?: { label: string; href: string; context?: string }[];
   sources?: {
     label: string;
     publisher: string;
@@ -327,6 +329,13 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "safe-sleep-and-home-safety",
       "newborn-feeding-rhythms",
     ],
+    crossLinks: [
+      {
+        label: "Baby sleep in the first year",
+        href: "/articles/baby-sleep-first-year",
+        context: "How sleep changes across the whole first year.",
+      },
+    ],
     sources: [
       {
         label: "Helping your baby to sleep",
@@ -524,6 +533,13 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "when-milestones-feel-uneven",
       "baby-care-basics",
       "newborn-sleep-expectations",
+    ],
+    crossLinks: [
+      {
+        label: "Baby milestones in the first year",
+        href: "/articles/baby-milestones-first-year",
+        context: "The full milestone guide, month by month.",
+      },
     ],
     sources: [
       {
@@ -938,6 +954,14 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "what-recovery-can-feel-like",
       "body-changes-after-birth",
       "postnatal-checks-and-appointments",
+      "when-parenthood-feels-heavy",
+    ],
+    crossLinks: [
+      {
+        label: "Postpartum recovery timeline",
+        href: "/articles/postpartum-recovery-timeline",
+        context: "The wider recovery guide this sits inside.",
+      },
     ],
     sources: [
       {
@@ -1041,6 +1065,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "healing-after-birth",
       "feeling-like-yourself-again",
       "body-changes-after-birth",
+      "when-parenthood-feels-heavy",
     ],
     sources: [
       {
@@ -1360,6 +1385,18 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "healing-after-birth",
       "hormones-sweat-and-hair-loss",
       "what-recovery-can-feel-like",
+    ],
+    crossLinks: [
+      {
+        label: "Pelvic floor exercises in pregnancy",
+        href: "/articles/pelvic-floor-exercises-in-pregnancy",
+        context: "The same exercises many people return to after birth.",
+      },
+      {
+        label: "Your body after birth",
+        href: "/articles/your-body-after-birth",
+        context: "The fuller guide to physical changes after birth.",
+      },
     ],
     sources: [
       {

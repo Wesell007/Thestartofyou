@@ -160,13 +160,13 @@ export const postpartumStages: Record<string, StageData> = {
           label: "Next Stage",
           title: "Early weeks",
           sub: "From immediate recovery into new rhythms",
-          href: "/postpartum/early-weeks",
+          href: "/first-year/postpartum-recovery/what-recovery-can-feel-like",
         },
         {
           label: "Hub",
           title: "Postpartum hub",
           sub: "See the full postpartum journey",
-          href: "/postpartum",
+          href: "/first-year#recovery-topics",
         },
         {
           label: "Support",
@@ -275,19 +275,19 @@ export const postpartumStages: Record<string, StageData> = {
           label: "Next Stage",
           title: "Ongoing adjustment",
           sub: "Building confidence over time",
-          href: "/postpartum/ongoing-adjustment",
+          href: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
         },
         {
           label: "Previous",
           title: "Early days",
           sub: "Immediate recovery and transition",
-          href: "/postpartum/early-days",
+          href: "/first-year/postpartum-recovery/healing-after-birth",
         },
         {
           label: "Hub",
           title: "Postpartum hub",
           sub: "Return to the full journey overview",
-          href: "/postpartum",
+          href: "/first-year#recovery-topics",
         },
       ],
     }
@@ -390,7 +390,7 @@ export const postpartumStages: Record<string, StageData> = {
           label: "Hub",
           title: "Postpartum hub",
           sub: "Return to the full postpartum guide",
-          href: "/postpartum",
+          href: "/first-year#recovery-topics",
         },
         {
           label: "Next Journey",

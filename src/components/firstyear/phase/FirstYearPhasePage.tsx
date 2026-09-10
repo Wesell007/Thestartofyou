@@ -36,8 +36,23 @@ const QuietRule = () => (
   <div className="h-px w-full" style={{ backgroundColor: "hsl(var(--border) / 0.55)" }} />
 );
 
+// "Newborn" / "4 months" → the published month-guide routes, so each phase
+// page links directly into the months it covers.
+const monthHref = (age: string): string | undefined => {
+  const key = age.trim().toLowerCase();
+  if (key === "newborn") return "/first-year/newborn";
+  const match = key.match(/^(\d+)\s+months?$/);
+  if (!match) return undefined;
+  const n = Number(match[1]);
+  if (n < 1 || n > 12) return undefined;
+  return `/first-year/${n === 1 ? "1-month" : `${n}-months`}`;
+};
+
 const PhaseHero = ({ config }: Props) => {
   const imgSrc = resolveHero(config.heroImage);
+  const monthLinks = config.ages
+    .map((age) => ({ label: age, href: monthHref(age) }))
+    .filter((m): m is { label: string; href: string } => Boolean(m.href));
 
   // Single authoritative crumb array: feeds the visible trail and the schema.
   const breadcrumbItems: BreadcrumbItem[] = [
@@ -83,6 +98,20 @@ const PhaseHero = ({ config }: Props) => {
             <p className="font-sans text-[12px] font-light tracking-[0.2em] uppercase text-foreground/50 mt-7">
               {config.ageRange}
             </p>
+            {monthLinks.length > 0 && (
+              <nav aria-label="Month guides in this phase" className="mt-4 flex flex-wrap gap-2">
+                {monthLinks.map((m) => (
+                  <Link
+                    key={m.href}
+                    to={m.href}
+                    className="font-sans text-[13px] font-light text-foreground/80 hover:text-foreground border rounded-full px-3 py-1.5 transition-colors"
+                    style={{ borderColor: "hsl(var(--border) / 0.8)" }}
+                  >
+                    {m.label}
+                  </Link>
+                ))}
+              </nav>
+            )}
           </div>
 
           <div className="hidden md:block">

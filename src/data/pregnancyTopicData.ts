@@ -511,6 +511,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Preparing emotionally for birth", href: "/articles/preparing-emotionally-for-birth" },
           { label: "Baby clothes and newborn essentials", href: "/articles/baby-clothes-and-newborn-essentials" },
           { label: "Preparing siblings for a new baby", href: "/articles/preparing-siblings-for-a-new-baby" },
+          { label: "What to buy for a new baby", href: "/articles/what-to-buy-for-a-new-baby" },
+          { label: "Preparing for baby: a calm, complete guide", href: "/articles/preparing-for-baby-complete-guide" },
         ],
       },
       {

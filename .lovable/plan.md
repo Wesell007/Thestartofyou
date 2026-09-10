@@ -79,23 +79,26 @@ final statuses. Expected shape given zero completed human reviews: 17
 `READY_TO_PUBLISH` or a specific hold based on the checks, not assumed ready.
 
 
-### 6. Editorial QA on the two low-risk candidates
+### 7. Editorial QA on the two low-risk candidates
 Full QA pass on sleep regressions and hair dye: opening answer, heading
 structure, no placeholder or editor text, UK terminology, no unsupported
 statistics, no fear framing, no duplication of a live page, source integrity.
 Record the outcome; QA failure means a hold, not a rewrite of clinical
 content.
 
-### 7. Human review pack for the other 17
+### 8. Human review pack for the other 17
 `docs/content/phase33-human-review-pack.md`: per article the title, phase,
 classification, full draft copy, authoritative sources, supported claims,
 deliberately excluded claims, escalation wording, the specific points the
 reviewer must approve, and an empty reviewer outcome section. No pre-filled
 approval, reviewer name or date.
 
-### 8. Report and stop
-Return the 20-point 33.1 output, including the files publication would touch,
-the expected new public URLs, blockers, and recommended batches. Stop there.
+### 9. Report and stop
+Return the 20-point 33.1 output plus the added template and image totals:
+target template for all 19, template compatibility count, new hero images
+needed, body images needed, reusable existing assets, and unresolved
+template/image blockers. No images generated, nothing published. Stop there.
+
 
 ## Milestones canonical
 

@@ -1,119 +1,29 @@
-# Phase 33.1 — Publication readiness audit (audit only, nothing published)
+# Phase 33.2 — Batch 1 image production and publication
 
-No runtime source changes, no article records, no links, no images, no
-deployment. Output is documentation plus the 33.1 report.
+Publish exactly two approved low-risk articles using existing systems, generate their imagery, apply only their documented link migration, validate, and stop at READY FOR DEPLOYMENT. No deployment. The other 17 drafts are untouched.
 
-## What the draft documents already show
+## Batch 1 scope (from the Phase 33 register)
 
-Confirmed by reading the four draft files:
+| Article | Dataset | Template | Route | Images |
+| --- | --- | --- | --- | --- |
+| When your baby's sleep suddenly changes (`when-sleep-suddenly-changes`) | First Year, topic `sleep` | `HubArticleView` | `/first-year/sleep/when-sleep-suddenly-changes` | hero + 1 body, portrait |
+| Hair dye and beauty treatments in pregnancy (`hair-dye-and-beauty-treatments-in-pregnancy`) | Legacy `articleData` | existing content-shape dispatch | `/articles/hair-dye-and-beauty-treatments-in-pregnancy` | hero only, 4:3 → 16:9 |
 
-- 32A = 3 drafts (`itching-in-pregnancy`, `caesarean-birth`,
-  `gestational-diabetes`), all held awaiting human health/safety review.
-- 32B = 4 drafts (`teething` HEALTH, `colic-and-evening-crying` SAFETY,
-  `introducing-solid-foods` SAFETY, `when-sleep-suddenly-changes`
-  LOW_RISK_GENERAL).
-- 32C = 3 drafts (SAFETY, HEALTH, HEALTH).
-- 32D = 9 drafts (`hair-dye-and-beauty-treatments-in-pregnancy`
-  LOW_RISK_GENERAL; the other eight HEALTH or SAFETY).
+Register-confirmed migrations: sleep = `CHANGES_LINK_OR_INTENT_OWNERSHIP`; hair dye = `NO_LINK_MIGRATION_REQUIRED`.
 
-3 + 4 + 3 + 9 = 19. The two LOW_RISK_GENERAL articles are sleep regressions
-(`when-sleep-suddenly-changes`) and hair dye, exactly as expected. Human
-reviews completed remain 0 in every source document, so no article can carry
-a genuine health/safety approval yet.
+## Steps
 
-## Work in 33.1
+1. **Baseline.** Run tests, typecheck twice, lint, build, and the sitemap URL count. Expect 117 files / 1297 tests / 331 URLs, 1 existing lint error and 10 warnings. Stop and report if there is unexplained drift.
+2. **Re-read the approved copy** in `phase32b-article-drafts.md` (sleep) and `phase32d-article-drafts.md` (hair dye), plus the intent-ownership and cannibalisation registers. No factual changes during conversion.
+3. **Field-mapping check before writing records.** The legacy `ArticleData` shape is heavily structured (quick answer, how this feels, what's happening, timing, sources). Confirm the hair-dye draft maps onto an existing legacy shape and renderer through the existing dispatch. If it cannot map without substantive rewriting, stop that article as `HOLD_EDITORIAL_QA` and continue with the sleep article only.
+4. **Images with Nano Banana.** Generate 3 assets total: sleep hero and body (portrait, night-lit bedroom, safe-sleep compliant cot, no loose bedding) and hair-dye hero (landscape, bright unbranded salon or bathroom, lifestyle, no warning or chemical cues). Shared direction: premium, warm, calm, editorial, natural, UK-appropriate, realistic, no embedded text. QA each output for realism, hands and faces, crop, focal point and artefacts; regenerate rather than accept a weak asset. Save into the existing article asset structure with descriptive filenames and register them through the existing image maps.
+5. **Records.** Add the First Year record with truthful metadata: `status: "ready"`, no `medicallyReviewed`, no invented reviewer or review date. Add the legacy record via the existing dataset conventions only. If the First Year schema forces misleading review metadata, stop as `HOLD_TECHNICAL`.
+6. **Link migration (sleep only).** Point the sleep primary and relevant month or topic surfaces at the new sub-intent article, keeping the existing settling and sleep-primary pages as supporting owners with their content intact. No site-wide link audit. Hair dye gets no manufactured links.
+7. **Discovery and SEO.** Verify both appear through the existing topic/article discovery, resolve, are indexable and self-canonical, and enter the sitemap through the existing generator. No SEO, canonical, route or sitemap architecture changes.
+8. **Focused tests** for route resolution, lookup, sitemap inclusion, slug uniqueness, First Year discovery, and absence of links to the 17 held drafts.
+9. **Responsive QA** at desktop, tablet and mobile via a browser pass: hero height and crop, focal point, title wrapping, measure, body image placement, related guidance, sources block, no horizontal overflow.
+10. **Validation and link integrity**, then documentation: update `docs/content/phase33-publication-register.md` for the two rows and create `docs/content/phase33-batch1-publication-report.md`.
 
-### 1. Verify the baseline first
-Run tests, typecheck twice, lint and build, and count public URLs from the
-generated sitemap. Compare against the recorded post-32F state (117 files /
-1,297 tests, lint 1 error + 10 warnings, 331 public URLs). Report drift
-rather than forcing the numbers; stop before any later stage if drift is
-material.
+## Boundaries
 
-### 2. Read every draft in full and record verbatim metadata
-For all 19: title, proposed slug, source phase, domain, review status,
-sources, excluded claims, image metadata and suggested links, taken from the
-documents rather than memory.
-
-### 3. Decide the target dataset and existing template per article
-Inspect the legacy dataset (`src/data/articleData.ts`, `/articles/:slug`, with
-`ArticlePage.tsx` dispatching to `ArticleFlagshipTemplate`, `ArticleDeepTemplate`
-or `ArticleLegacyPage` by content shape), the First Year dataset
-(`src/data/firstYearArticleData.ts`, `/first-year/:topic/:slug`,
-`FirstYearArticlePage`), and the Toddler/Family datasets, including which
-fields exist (`status`, `medicallyReviewed`, `reviewedBy`, `sources`,
-`crossLinks`, section shapes). Repository ownership decides the dataset, not
-convenience: First Year baby, feeding, sleep, development and recovery content
-goes to the First Year system; Pregnancy and TTC content to the legacy article
-system. No new renderer, no new design, no one-off layout.
-
-Record per article: dataset, renderer/template component, topic, expected
-route, and `TEMPLATE COMPATIBLE: YES/NO`. If NO, stop that article for a
-separate architecture decision rather than building anything new.
-
-### 4. Per-article readiness checks
-Slug collision check against every existing dataset and the sitemap; SEO
-readiness (title, description, canonical shape, indexability rule);
-cannibalisation check against the closest live page using the 32F register and
-ownership map; and whether a 32F publication link migration is attached.
-
-### 5. Image production register (audit only, nothing generated)
-Derive the hero placement, aspect ratio and mobile crop behaviour from the
-actual templates (`ArticleHeroImage`, the flagship hero, and the First Year
-equivalent) rather than assuming. For all 19 record: hero image required, body
-image required and count, existing suitable approved asset, new Nano Banana
-asset required, visual purpose, aspect ratio, crop/focal requirement, alt-text
-intent, `GENERATION STATUS: NOT YET GENERATED`, and approval status.
-
-Missing artwork is `IMAGE PREPARATION REQUIRED`, never `HOLD_IMAGE`;
-`HOLD_IMAGE` is reserved for an unresolved template or visual problem. Record
-the shared visual direction (premium, warm, calm, editorial, UK-appropriate,
-supportive not clinical) and the health/safety rule that sensitive articles get
-calm lifestyle imagery, never symptom depiction.
-
-### 6. Build the publication register
-`docs/content/phase33-publication-register.md` with one row per article, all
-required columns plus the template and image sections, using only the allowed
-final statuses. Expected shape given zero completed human reviews: 17
-`HOLD_HUMAN_REVIEW`, and the two low-risk articles resolved to
-`READY_TO_PUBLISH` or a specific hold based on the checks, not assumed ready.
-
-
-### 7. Editorial QA on the two low-risk candidates
-Full QA pass on sleep regressions and hair dye: opening answer, heading
-structure, no placeholder or editor text, UK terminology, no unsupported
-statistics, no fear framing, no duplication of a live page, source integrity.
-Record the outcome; QA failure means a hold, not a rewrite of clinical
-content.
-
-### 8. Human review pack for the other 17
-`docs/content/phase33-human-review-pack.md`: per article the title, phase,
-classification, full draft copy, authoritative sources, supported claims,
-deliberately excluded claims, escalation wording, the specific points the
-reviewer must approve, and an empty reviewer outcome section. No pre-filled
-approval, reviewer name or date.
-
-### 9. Report and stop
-Return the 20-point 33.1 output plus the added template and image totals:
-target template for all 19, template compatibility count, new hero images
-needed, body images needed, reusable existing assets, and unresolved
-template/image blockers. No images generated, nothing published. Stop there.
-
-
-## Milestones canonical
-
-The 32F `DEFERRED_SEO_ARCHITECTURE` residual stays untouched.
-
-## Boundaries held
-
-Lifecycles remain `ttc | pregnancy | first_year`. No new hub, redesign, AI,
-grounding, journal, memory, voice, database, schema or RLS change. No
-deployment. If a publication dependency requires a schema change, stop and
-report it.
-
-## Files created by 33.1
-
-- `docs/content/phase33-publication-register.md`
-- `docs/content/phase33-human-review-pack.md`
-
-No runtime files change during 33.1.
+2 new article records and 2 new URLs (expected 331 → 333, derived from the generated sitemap). Zero new hubs, lifecycles, canonical/route/navigation/sitemap architecture changes, and zero AI, grounding, journal, memory, voice, database, schema or RLS changes. The 17 remaining drafts stay `NOT PUBLISHED`. No deployment; final state is READY FOR DEPLOYMENT.

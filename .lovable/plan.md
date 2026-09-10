@@ -12,25 +12,27 @@ Bring the two implemented Batch 1 guides up to the approved Start of You editori
 
 ## Implementation
 
-### 1. Produce exactly three additional Batch 1 images
+### 1. Produce exactly three approved additional Batch 1 images
 
 Use Nano Banana inside Lovable with the established premium, warm, calm, realistic, UK editorial direction.
+
+Rejected or regenerated attempts do not count towards the production inventory and will not be retained. The report will state approved new assets = 3 and rejected or regenerated attempts separately.
 
 - **Sleep body image 2**
   - Supports: `What tends to help`
   - Subject: a quiet, non-sleeping evening wind-down routine between parent and baby
-  - Placement: after section index 3, leaving the existing night-waking image after section index 2
+  - Placement: resolve the current section index from the authoritative title `What tends to help`, leaving the existing night-waking image associated with `Things that commonly disturb a settled pattern`
   - Format: landscape body image, designed for the existing responsive 4:3 to 16:10 crop
   - Safety: no unsafe sleep position, loose bedding, cot accessories, or implied sleep instruction
 
 - **Hair dye body image 1**
   - Supports: `Ways to feel more comfortable about it`
   - Subject: thoughtful home colour preparation in a bright, ventilated domestic setting, with unbranded materials and no application instruction
-  - Placement: explicit image on the early section through the existing `EditorialSection.image` field
+  - Placement: explicit image on the authoritative section title `Ways to feel more comfortable about it` through the existing `EditorialSection.image` field
   - Format: portrait editorial composition for the existing flagship section placement and mobile 4:3 crop
 
 - **Hair dye body image 2**
-  - Supports: `Nails, lashes and brows` or `Massage, facials and saunas`, selected after checking visual separation from the hero and first body image
+  - Supports: `Nails, lashes and brows` or `Massage, facials and saunas`, selected after checking visual separation from the hero, first body image, section spacing and article pacing
   - Subject: understated pregnancy self-care or calm treatment consultation, fully clothed and non-clinical
   - Placement: later in the article through the same existing section image capability
   - Format: portrait editorial composition with a mobile-safe central focal point
@@ -39,7 +41,7 @@ Inspect every generated image for malformed anatomy, unsafe details, brands, tex
 
 ### 2. Wire images through existing article capabilities
 
-- Add the new sleep image to the existing First Year article image map with purposeful alt text and a section-specific caption.
+- Add the new sleep image to the existing First Year article image map with purposeful alt text and a section-specific caption because the current map contract already supports captions.
 - Add both hair-dye images directly to the relevant existing editorial sections.
 - Preserve all article copy, routes, metadata, image components, templates, renderers, design tokens, and navigation architecture.
 - Do not add a new layout component or change shared article styling.
@@ -63,15 +65,16 @@ Replace the old estimate with:
 
 Keep all 17 review-held articles unpublished and ungenerated. Record no exceptions unless repository compatibility proves one is necessary.
 
-Create `docs/content/phase33-batch1-publication-report.md` with the corrected two-article asset inventory, section support, placement, aspect ratio, focal point, mobile crop, alt-text intent, generation and QA outcomes, responsive checks, route and sitemap checks, link migration result, and deployment state.
+Create `docs/content/phase33-batch1-publication-report.md` with the two Batch 1 articles, previous image count, three newly approved assets, six final approved article images, Nano Banana provenance, rejected or regenerated attempts, section support, placement, actual asset paths, actual alt text, supported captions, aspect ratio, focal point, mobile crop, generation and QA outcomes, template confirmation, responsive checks, route and indexability checks, sitemap result, sleep link migration confirmation, hair-dye no-migration confirmation, technical validation and deployment state.
 
 ### 4. Validate the complete result
 
-- Inspect both guides from top to bottom at desktop, tablet, and mobile widths.
+- Inspect both guides from hero to footer at recorded desktop, tablet, and mobile viewport sizes.
 - Compare their overall pacing with the Cervical mucus benchmark: distribution, whitespace, text density, alternating compositions, section transitions, hero relationship, stacking, crops, and overflow.
 - Confirm each Batch 1 guide has exactly one hero plus at least two meaningful body images and no clustered image dumping.
 - Confirm the sleep image remains safe and the beauty images imply neither diagnosis nor medical endorsement.
 - Confirm both routes remain clean and indexable, sitemap remains at the expected two-guide increase, the documented sleep migration remains intact, and no hair-dye migration was introduced.
+- Confirm links to the remaining 17 unpublished drafts remain zero and every one remains `NOT PUBLISHED` with no generated imagery.
 - Run focused image/publication integrity tests, the full test suite, typecheck twice, lint against its recorded baseline, and a production build.
 
 ## Boundaries
@@ -81,4 +84,4 @@ Create `docs/content/phase33-batch1-publication-report.md` with the corrected tw
 - No substantive copy changes
 - No new article, URL, route, renderer, template, lifecycle, navigation, canonical, sitemap architecture, AI, journal, memory, voice, database, schema, or RLS work
 - No deployment
-- Stop after the Phase 33.2 Batch 1 closure report, ready for deployment only if every gate passes
+- Stop after the Phase 33.2 Batch 1 closure report. Close as `PHASE 33.2 — BATCH 1 PUBLICATION IMPLEMENTATION CLOSED PASS / VISUAL STANDARD CORRECTED / READY FOR DEPLOYMENT` only if every gate passes, stating repository-published articles = 2 and production-deployed articles = 0. Otherwise close on visual verification hold.

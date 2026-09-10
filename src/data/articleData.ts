@@ -2108,6 +2108,13 @@ const articleDatabase: ArticleData[] = [
     sources: ["NHS: Helping your baby to sleep", "The Lullaby Trust", "BASIS, Durham University"],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",
+    crossLinks: [
+      {
+        label: "When your baby's sleep suddenly changes",
+        href: "/first-year/sleep/when-sleep-suddenly-changes",
+        context: "What is behind a settled pattern changing, and what helps.",
+      },
+    ],
     faq: [
       { question: "When do babies sleep through the night?", answer: "There is no single answer. Some from 3-4 months; others take much longer. Sleeping through at 12 months or later is normal." },
       { question: "What is the 4-month sleep regression?", answer: "Around 4 months, sleep cycles mature and become more adult-like, temporarily increasing night waking. It is developmental, not a step backwards." },
@@ -4268,6 +4275,215 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+
+  // ─── HAIR DYE AND BEAUTY TREATMENTS IN PREGNANCY ──────────────────────────
+  {
+    slug: "hair-dye-and-beauty-treatments-in-pregnancy",
+    title: "Hair dye and beauty treatments in pregnancy",
+    metaDescription:
+      "Can you colour your hair, have your nails done or book a treatment while pregnant? A calm guide to hair dye, nails, lashes, fake tan, massage and facials.",
+    quickAnswer:
+      "For most people, yes. Most research indicates that dyeing or colouring your hair in pregnancy is safe. Hair dyes do contain chemicals, but your scalp absorbs very little of them, so the amount that reaches you is low. Concerns raised in research relate to very high doses, not to the exposure of an ordinary salon appointment or a home colour. Some people still prefer to wait until after the first twelve weeks, when they feel more settled. That is a personal decision rather than a rule.",
+    howThisFeels: [
+      "Sitting in the salon chair wondering whether you should have asked first",
+      "Reading conflicting advice about a treatment you have had for years",
+      "Feeling like looking after yourself has become a decision to justify",
+      "Worrying about something you booked before you knew you were pregnant",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Very little dye reaches you",
+          body: "Hair dyes do contain chemicals, but your scalp absorbs very little of them, so the amount that reaches you is low.",
+        },
+        {
+          heading: "Research concerns relate to very high doses",
+          body: "Concerns raised in research relate to very high doses, not to the exposure of an ordinary salon appointment or a home colour.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Pregnancy changes your hair and skin",
+          body: "Pregnancy hormones change hair texture, thickness and how it takes colour. A shade you have used for years can lift differently or fade faster, and skin can react differently than it used to.",
+        },
+        {
+          heading: "Fumes and nausea",
+          body: "Salons should be well ventilated because fumes from nail treatments and spray tanning can make nausea worse.",
+        },
+      ],
+      whyItVaries:
+        "Comfort levels differ. Some people carry on exactly as before, and some prefer to wait until after the first twelve weeks. There is nothing you need to undo if you have already coloured your hair.",
+    },
+    timing: {
+      whenStarts:
+        "These questions usually come up as soon as a booking or a root touch-up is due.",
+      whenEases:
+        "Hair texture and how colour takes often settle again after birth, though this varies from person to person.",
+    },
+    whatItFeelsLike: [
+      "A small decision that takes up more headspace than it should",
+      "Wanting to feel like yourself while everything else is changing",
+    ],
+    whatThisMeans:
+      "Most everyday beauty treatments are generally considered fine in pregnancy, with a little more attention to ventilation, patch testing and temperature.",
+    normal: [
+      "Colouring your hair at a salon or at home",
+      "Choosing highlights, balayage or semi-permanent colour, which put less dye on the scalp",
+      "Manicures, gel and acrylic nails in a well-ventilated salon",
+      "Fake tan lotions and mousses, patch tested first",
+      "Waiting until after twelve weeks if that feels more comfortable",
+    ],
+    seekSupport: [
+      "A nail bed or lash line that becomes sore, swollen or infected",
+      "A reaction to a product, such as a spreading rash or swelling",
+      "Difficulty breathing after a reaction, which needs urgent medical help",
+      "Before starting any prescribed or strong skin treatment in pregnancy",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Ask your midwife, GP or a pharmacist if you are unsure about a treatment, and seek urgent help for a severe reaction.",
+    whatYouCanDo: [
+      {
+        action: "Consider highlights, balayage or a semi-permanent colour",
+        reason: "These put less dye on the scalp than a full permanent head colour.",
+      },
+      {
+        action: "Colour in a well-ventilated room and follow the packet timings",
+        reason: "Leaving colour on longer than directed is not recommended.",
+      },
+      {
+        action: "Wear gloves for home colour and rinse thoroughly",
+        reason: "It keeps contact with the product to a minimum.",
+      },
+      {
+        action: "Do the patch test, even with a familiar product",
+        reason: "Pregnancy can change how your skin reacts.",
+      },
+      {
+        action: "Tell your colourist you are pregnant",
+        reason: "They can adjust, and a strand test helps before committing to a big change.",
+      },
+    ],
+    whatHappensNext:
+      "Most people find a version of their usual routine that still feels comfortable, with a few small adjustments.",
+    relatedStage: {
+      intro: "This sits alongside the rest of staying well in pregnancy:",
+      links: [
+        {
+          label: "Health and safety in pregnancy",
+          href: "/pregnancy/health-and-safety",
+          context: "The wider picture of what is worth checking.",
+        },
+        {
+          label: "Medicines in pregnancy",
+          href: "/articles/medicines-in-pregnancy",
+          context: "What to check before taking or applying something.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Can I dye my hair in pregnancy?",
+      "Are gel nails okay while pregnant?",
+      "Is fake tan fine in pregnancy?",
+    ],
+    captureIntro:
+      "Small choices about looking after yourself can carry more weight in pregnancy than they used to. Worth noting how this one felt.",
+    trimester: [1, 2, 3],
+    relatedSlugs: [
+      "medicines-in-pregnancy",
+      "foods-to-avoid-in-pregnancy",
+      "eating-well-in-pregnancy",
+    ],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support"],
+    keyTakeaways: [
+      "Most research indicates that dyeing or colouring your hair in pregnancy is safe, because the scalp absorbs very little dye.",
+      "Waiting until after twelve weeks is a personal preference, not a rule.",
+      "Patch test even familiar products, because pregnancy can change how your skin reacts.",
+      "Manicures, lash and brow tints and fake tan are generally considered fine, with good ventilation and a patch test.",
+      "Sunbeds are not recommended, and anything that raises your core temperature a lot is best skipped.",
+      "Check prescribed or strong skin treatments with your midwife, GP or a pharmacist.",
+    ],
+    sources: [
+      {
+        label: "Using hair dye in pregnancy: is it safe?",
+        publisher: "NHS Best Start in Life",
+        url: "https://www.nhs.uk/best-start-in-life/pregnancy/using-hair-dye-in-pregnancy-is-it-safe/",
+      },
+    ],
+    topic: "health-and-safety",
+    standfirst:
+      "Colour, nails, lashes, tan and treatments. What is generally fine in pregnancy, what needs a little more care, and when to ask someone.",
+    hero: {
+      src: new URL("../assets/article-hero-hair-dye-beauty-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman sitting by a bright window in a calm salon while a stylist gently combs her hair.",
+    },
+    editorialSections: [
+      {
+        id: "can-you-dye-your-hair-in-pregnancy",
+        heading: "Can you dye your hair in pregnancy?",
+        lead: "For most people, yes.",
+        paragraphs: [
+          "Most research indicates that dyeing or colouring your hair in pregnancy is safe. Hair dyes do contain chemicals, but your scalp absorbs very little of them, so the amount that reaches you is low. Concerns raised in research relate to very high doses, not to the exposure of an ordinary salon appointment or a home colour.",
+          "Some people still prefer to wait until after the first twelve weeks, when they feel more settled. That is a personal decision rather than a rule, and there is nothing you need to undo if you have already coloured your hair.",
+        ],
+      },
+      {
+        id: "ways-to-feel-more-comfortable",
+        heading: "Ways to feel more comfortable about it",
+        paragraphs: [
+          "Highlights, balayage or a semi-permanent colour put less dye on the scalp than a full permanent head colour.",
+          "Colour in a well-ventilated room, and follow the timings on the packet rather than leaving colour on longer. Wear gloves for home colour and rinse thoroughly.",
+          "Do the patch test even if you have used the same product for years. Pregnancy can change how your skin reacts.",
+        ],
+      },
+      {
+        id: "your-hair-may-behave-differently",
+        heading: "Your hair may behave differently anyway",
+        paragraphs: [
+          "Pregnancy hormones change hair texture, thickness and how it takes colour. A shade you have used for years can lift differently or fade faster.",
+          "Tell your colourist you are pregnant so they can adjust, and consider a strand test before committing to a big change.",
+        ],
+      },
+      {
+        id: "nails-lashes-and-brows",
+        heading: "Nails, lashes and brows",
+        paragraphs: [
+          "Manicures, gel and acrylic nails are generally considered fine, though salons should be well ventilated because the fumes can make nausea worse.",
+          "Lash and brow tints use the same patch-test logic as hair dye. If a nail bed or lash line becomes sore, swollen or infected, see your GP or pharmacist rather than treating it yourself.",
+        ],
+      },
+      {
+        id: "fake-tan-and-sunbeds",
+        heading: "Fake tan and sunbeds",
+        paragraphs: [
+          "Fake tan lotions and mousses sit on the surface of the skin and are generally considered fine, although skin can be more sensitive in pregnancy, so patch test first. Spray tan salons should be well ventilated because of the mist.",
+          "Sunbeds are not recommended in pregnancy, or at any other time, because of the skin cancer risk, and pregnancy skin can burn and pigment more easily.",
+        ],
+      },
+      {
+        id: "massage-facials-and-saunas",
+        heading: "Massage, facials and saunas",
+        paragraphs: [
+          "Many spas ask you to wait until after twelve weeks and to use a therapist trained in pregnancy massage, which is about positioning and comfort as much as anything else.",
+          "Skip anything that raises your core temperature a lot, including saunas, steam rooms and very hot baths. Strong facial peels and certain acne treatments are best checked with your midwife or a pharmacist, because some skin ingredients are avoided in pregnancy.",
+        ],
+      },
+      {
+        id: "when-to-ask-someone",
+        heading: "When to ask someone",
+        paragraphs: [
+          "Ask your midwife, GP or a pharmacist before starting any prescribed or strong skin treatment in pregnancy.",
+          "If you have a reaction to a product, a spreading rash, swelling, or difficulty breathing needs urgent medical help.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Wanting to feel like yourself is a good enough reason to book something. Most everyday treatments only need a little extra care.",
+        },
+      },
+    ],
+  },
+
+
 
   // ─── EATING WELL IN PREGNANCY ─────────────────────────────────────────────
   {

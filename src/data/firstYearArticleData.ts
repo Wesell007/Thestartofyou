@@ -452,6 +452,110 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       },
     ],
   },
+  {
+    slug: "when-sleep-suddenly-changes",
+    topic: "sleep",
+    title: "When your baby's sleep suddenly changes",
+    description:
+      "Why a settled baby can start waking again, what tends to be behind it, and what actually helps, without treating sleep regressions as fixed stages.",
+    readTime: "6 min read",
+    status: "ready",
+    lastUpdated: "September 2026",
+    seoTitle: "When your baby's sleep suddenly changes | The Start of You",
+    seoDescription:
+      "Why a settled baby can start waking again in the first year, what commonly disturbs a sleep pattern, and what tends to help.",
+    intro:
+      "Sleep can suddenly feel different, even when you thought you had found a rhythm. A baby who was settling well starts waking again, naps shorten, bedtime unravels. It is disorientating, and it is one of the most searched-for things in the first year.",
+    sections: [
+      {
+        heading: "About the phrase \"sleep regression\"",
+        body: [
+          "You will see \"four month sleep regression\" and similar phrases everywhere. It is a useful shorthand parents use for a patch of disrupted sleep, and if it describes your week then it describes your week.",
+          "It is worth knowing that it is not a medical or developmental diagnosis, and UK health guidance does not set out fixed regressions at particular ages or say how long they last. So rather than working out which regression you are in, it is usually more useful to look at what has actually changed.",
+        ],
+      },
+      {
+        heading: "Sleep was always going to change",
+        body: [
+          "Babies' sleep patterns vary from birth, just as adults' do. Some need more sleep than others, and how much they need changes across the first year.",
+          "A settled few weeks is not a permanent state you can lose; it is one part of a pattern that keeps moving.",
+        ],
+      },
+      {
+        heading: "Things that commonly disturb a settled pattern",
+        body: [
+          "New skills. Rolling, sitting, pulling up and other new abilities often bubble up at night. Babies practise them at the least convenient hour.",
+          "Being unwell, or teething discomfort.",
+          "Changes in routine or surroundings, such as travel, a new room, or a return to work.",
+          "Changing sleep needs, as naps drop or shift and daytime sleep rebalances.",
+          "Hunger or feeding changes. Worth saying clearly: starting solids will not make your baby sleep through the night, and extra night waking is not a sign your baby is ready for solids.",
+        ],
+      },
+      {
+        heading: "What tends to help",
+        body: [
+          "Keep day and night distinct. During the day, open the curtains, play and do not worry too much about noise. At night, keep lights low, keep your voice quiet, avoid playing, and settle them again without much stimulation.",
+          "Keep a simple bedtime routine. A bath, fresh nappy and night clothes, a story, dimmed lights, a song, a goodnight cuddle. Familiar order does more than any single step.",
+          "Wind down beforehand. Excitement close to bedtime can wake a baby up again.",
+          "Stay consistent for longer than feels natural. Patches of disrupted sleep usually pass, and constant changes of approach make it harder to tell what is working.",
+        ],
+      },
+      {
+        heading: "Safe sleep stays the same",
+        body: [
+          "Whatever is happening with sleep, the safe-sleep basics do not change. Your baby should sleep in the same room as you for at least the first six months, day and night, which reduces the risk of sudden infant death syndrome.",
+          "Follow the NHS safe-sleep advice and the Lullaby Trust guidance rather than any settling suggestion that conflicts with it, and if you use a sling, use it safely.",
+          "If your baby falls asleep in the car seat during a drive, take them out and put them on a firm, flat surface as soon as you can.",
+        ],
+      },
+      {
+        heading: "When to ask for advice",
+        body: [
+          "Speak to your health visitor, GP or NHS 111 if your baby seems unwell, if feeding or weight gain is a worry, if the change in sleep is accompanied by anything that concerns you, or if broken nights are affecting how you are coping.",
+          "Health visitors talk about sleep constantly; you do not need a serious reason to ask.",
+        ],
+      },
+      {
+        heading: "How this can feel for you",
+        body: [
+          "Broken sleep after a settled stretch hits harder than broken sleep you were braced for. It is normal to feel resentful, foggy and less patient than you want to be.",
+          "Sharing nights where you can, lowering your standards for a while and telling someone how tired you are all count as strategies.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Sleep patterns vary and keep changing through the first year.",
+      "\"Sleep regression\" is a common parent term, not a fixed developmental stage, and there is no set age or duration.",
+      "New skills, illness, teething, routine changes and shifting sleep needs are common reasons a pattern changes.",
+      "Solids will not make your baby sleep through the night.",
+      "Clear day and night cues plus a simple, consistent bedtime routine help most.",
+      "Safe-sleep guidance, including room-sharing for at least six months, does not change.",
+    ],
+    relatedSlugs: [
+      "helping-your-baby-settle",
+      "newborn-sleep-expectations",
+      "baby-development-in-the-first-year",
+    ],
+    sources: [
+      {
+        label: "Helping your baby to sleep",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/",
+      },
+      {
+        label: "Your baby's first solid foods",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/weaning-and-feeding/babys-first-solid-foods/",
+      },
+      {
+        label: "Baby development",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/baby-development/",
+      },
+    ],
+  },
+
+
 
   // Development
   {

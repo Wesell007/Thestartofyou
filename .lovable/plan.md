@@ -28,7 +28,16 @@ Known overlaps to test, merging only where the same page change is required: C08
 
 Before any edit each surviving action is re-tested against current repository content: what the page owns now, the exact remaining gap, whether another page has absorbed the intent, whether the expansion is still needed, and whether the edit would create overlap.
 
-Arithmetic reported in full: 52, 32B additions, 32C additions, 32D additions = 5, C065 double-count prevented, gross, merged, no-longer-required, 32F deferrals, SEO/canonical deferrals, tool deferrals, final unique actions, then the Lane A / Lane B split by review type. If it does not reconcile, the phase stops there.
+Three equations must all hold before any runtime edit, and the phase stops if any fails:
+
+```text
+GROSS - MERGED_WITH_ANOTHER_ACTION            = UNIQUE_RECONCILED_ACTIONS
+UNIQUE_RECONCILED_ACTIONS - NO_LONGER_REQUIRED = ACTIVE_DECISION_SET
+LANE_A + LANE_B + DEFER_TO_32F + DEFER_SEO + DEFER_TOOL + OTHER = ACTIVE_DECISION_SET
+```
+
+Lane A = READY_TO_IMPLEMENT_LOW_RISK + READY_TO_IMPLEMENT_EDITORIAL. Lane B = the four hold statuses. The two lanes are subsets only; 32F, SEO/canonical and tool deferrals plus NO_LONGER_REQUIRED and OTHER sit outside both and are reported separately. The 16 NO_ACTION rows count in the unique total, never in the active set or in Lane A. Completion also reports contextual links added incidentally in 32E and systematic link actions deferred to 32F as separate numbers.
+
 
 ## Lane assignment
 

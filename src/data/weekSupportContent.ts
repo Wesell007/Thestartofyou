@@ -102,12 +102,37 @@ export const slugifyTopic = (q: string): string =>
     .replace(/^-+|-+$/g, "")
     .slice(0, 60) || "question";
 
+/**
+ * Weeks-to-months context (Phase 32E, action C007).
+ *
+ * Calendar arithmetic only: an average month is about 4.35 weeks. This adds no
+ * clinical claim and does not change how pregnancy dates are counted anywhere
+ * in the product — weeks remain the single source of truth.
+ */
+const WEEKS_PER_MONTH = 4.345;
+
+export const monthsLabelForWeek = (week: number): string => {
+  const halves = Math.round((week / WEEKS_PER_MONTH) * 2) / 2;
+  if (halves <= 0.5) return "under a month";
+  const whole = Math.floor(halves);
+  const isHalf = halves - whole === 0.5;
+  if (whole === 0) return "about half a month";
+  const unit = whole === 1 && !isHalf ? "month" : "months";
+  return `about ${whole}${isHalf ? "\u00bd" : ""} ${unit}`;
+};
+
+export const buildWeeksToMonthsQuestion = (week: number): WeekQuestion => ({
+  q: `How many months is ${week} weeks pregnant?`,
+  answer: `Week ${week} works out at ${monthsLabelForWeek(week)}. Pregnancy is counted in weeks rather than calendar months, because months vary in length and weeks keep everyone — you, your midwife and your notes — talking about the same point. Treat the months figure as a rough translation for anyone who asks.`,
+  askTopic: slugifyTopic(`how many months is ${week} weeks pregnant`),
+});
+
 export const buildWeekQuestions = (
   week: number,
   rawFaqs: Array<{ q: string; a: string }>
 ): WeekQuestion[] => {
   const overrides = CURATED_QUESTION_OVERRIDES[week] ?? [];
-  return rawFaqs.map((f) => {
+  const questions = rawFaqs.map((f) => {
     const ov = overrides.find((o) => f.q.toLowerCase().includes(o.match.toLowerCase()));
     return {
       q: f.q,
@@ -116,4 +141,9 @@ export const buildWeekQuestions = (
       askTopic: slugifyTopic(f.q),
     };
   });
+
+  const alreadyCovered = questions.some((q) => /how many months/i.test(q.q));
+  if (alreadyCovered) return questions;
+
+  return [...questions, buildWeeksToMonthsQuestion(week)];
 };

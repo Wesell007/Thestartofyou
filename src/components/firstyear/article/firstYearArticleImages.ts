@@ -10,6 +10,7 @@ import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
 import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes.jpg";
 import bodyNightWaking from "@/assets/firstyear-body-night-waking.jpg";
+import bodyBedtimeWindDown from "@/assets/firstyear-body-bedtime-wind-down-approved.jpg";
 
 import heroHealing from "@/assets/postpartum-stage-early-days.jpg";
 import bodyHealing from "@/assets/postpartum-scene.jpg";
@@ -87,6 +88,12 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
         src: bodyNightWaking,
         alt: "A parent holding an awake baby calmly at home in low evening light",
         caption: "A settled pattern can change for a while without anything being wrong.",
+      },
+      {
+        afterSectionIndex: 3,
+        src: bodyBedtimeWindDown,
+        alt: "A parent sharing a quiet picture book with an awake baby before bedtime",
+        caption: "A calm, familiar wind-down can help mark the move from daytime to night.",
       },
     ],
   },

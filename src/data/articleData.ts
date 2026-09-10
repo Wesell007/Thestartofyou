@@ -4430,6 +4430,10 @@ const articleDatabase: ArticleData[] = [
       {
         id: "ways-to-feel-more-comfortable",
         heading: "Ways to feel more comfortable about it",
+        image: {
+          src: new URL("../assets/article-body-hair-dye-comfort.jpg", import.meta.url).href,
+          alt: "A pregnant woman preparing unbranded hair-colouring items beside an open window at home",
+        },
         paragraphs: [
           "Highlights, balayage or a semi-permanent colour put less dye on the scalp than a full permanent head colour.",
           "Colour in a well-ventilated room, and follow the timings on the packet rather than leaving colour on longer. Wear gloves for home colour and rinse thoroughly.",
@@ -4447,6 +4451,10 @@ const articleDatabase: ArticleData[] = [
       {
         id: "nails-lashes-and-brows",
         heading: "Nails, lashes and brows",
+        image: {
+          src: new URL("../assets/article-body-pregnancy-nail-care.jpg", import.meta.url).href,
+          alt: "A pregnant woman having a quiet manicure in a bright, unbranded nail studio",
+        },
         paragraphs: [
           "Manicures, gel and acrylic nails are generally considered fine, though salons should be well ventilated because the fumes can make nausea worse.",
           "Lash and brow tints use the same patch-test logic as hair dye. If a nail bed or lash line becomes sore, swollen or infected, see your GP or pharmacist rather than treating it yourself.",

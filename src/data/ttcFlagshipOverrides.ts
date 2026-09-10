@@ -67,12 +67,12 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       "Tommy's — Ovulation, fertile days and getting pregnant",
       "HFEA — Understanding ovulation and fertility",
     ],
-    relatedSlugs: ["fertile-window", "signs-of-ovulation", "two-week-wait"],
+    relatedSlugs: ["fertile-window", "how-to-know-when-you-are-ovulating", "two-week-wait"],
     relatedStage: {
       intro: "Related TTC guidance:",
       links: [
         { label: "Fertile window", href: "/articles/fertile-window" },
-        { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
         { label: "TTC Hub", href: "/trying-to-conceive" },
       ],
     },
@@ -1061,7 +1061,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       intro: "Related TTC guidance:",
       links: [
         { label: "Ovulation signs", href: "/articles/ovulation-signs" },
-        { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
         { label: "TTC Hub", href: "/trying-to-conceive" },
       ],
     },
@@ -1247,7 +1247,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     relatedStage: {
       intro: "Explore TTC from here:",
       links: [
-        { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" },
+        { label: "Ovulation calculator", href: "/ovulation-calculator" },
         { label: "Ovulation signs", href: "/articles/ovulation-signs" },
         { label: "TTC Hub", href: "/trying-to-conceive" },
       ],

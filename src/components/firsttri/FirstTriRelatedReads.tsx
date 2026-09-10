@@ -27,7 +27,7 @@ const articles: ArticleCard[] = [
   {
     tag: "Nausea",
     title: "Morning sickness: what helps",
-    href: "/articles/complete-guide-to-morning-sickness",
+    href: "/articles/complete-guide-morning-sickness",
     blurb: "Why nausea hits, what genuinely eases it, and when to seek support.",
     image: imgNausea,
   },

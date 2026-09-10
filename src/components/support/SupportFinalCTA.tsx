@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 const pathways = [
   { label: "Your journey", href: "/pregnancy", accent: "bg-[hsl(var(--stage-support)/0.4)]" },
   { label: "Pregnancy", href: "/pregnancy", accent: "bg-[hsl(var(--stage-pregnancy)/0.4)]" },
-  { label: "Postpartum", href: "/postpartum", accent: "bg-[hsl(var(--stage-postpartum)/0.4)]" },
+  { label: "Postpartum", href: "/first-year#recovery-topics", accent: "bg-[hsl(var(--stage-postpartum)/0.4)]" },
 ];
 
 const SupportFinalCTA = () => {

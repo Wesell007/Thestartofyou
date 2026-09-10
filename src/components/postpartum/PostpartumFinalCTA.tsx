@@ -49,7 +49,7 @@ const PostpartumFinalCTA = () => {
 
             <div className="flex flex-col sm:flex-row items-start gap-3 mb-6">
               <Link
-                to="/postpartum/early-days"
+                to="/first-year/postpartum-recovery/healing-after-birth"
                 className="inline-flex items-center gap-2.5 bg-terracotta text-terracotta-foreground rounded-pill px-8 py-4 font-sans text-sm font-medium shadow-cta hover:bg-terracotta-hover transition-all"
               >
                 Start your journey

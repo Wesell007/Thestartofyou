@@ -20,7 +20,7 @@ const pathways = [
     label: "Postpartum",
     title: "Postpartum guidance",
     sub: "Recovery, adjustment, and early weeks",
-    href: "/postpartum",
+    href: "/first-year#recovery-topics",
     accent: "bg-[hsl(var(--stage-postpartum)/0.4)]",
   },
 ];

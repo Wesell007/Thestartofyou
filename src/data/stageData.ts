@@ -191,7 +191,7 @@ export const ttcStages: Record<string, StageData> = {
 
     pathways: [
       { label: "Next Stage", title: "Timing and tracking", sub: "Identifying your fertile window", href: "/trying-to-conceive/timing-and-tracking" },
-      { label: "Guide", title: "Ovulation basics", sub: "How ovulation works", href: "/articles/ovulation-basics" },
+      { label: "Guide", title: "Ovulation basics", sub: "How ovulation works", href: "/articles/how-to-know-when-you-are-ovulating" },
       { label: "Hub", title: "TTC Hub", sub: "Your full TTC guide", href: "/trying-to-conceive" },
     ],
 
@@ -437,7 +437,7 @@ export const ttcStages: Record<string, StageData> = {
 
     pathways: [
       { label: "Previous", title: "Timing and tracking", sub: "Understanding your fertile window", href: "/trying-to-conceive/timing-and-tracking" },
-      { label: "Guide", title: "When to test", sub: "Testing timing explained", href: "/articles/when-to-test" },
+      { label: "Guide", title: "When to test", sub: "Testing timing explained", href: "/articles/when-to-take-a-pregnancy-test" },
       { label: "Next Journey", title: "Early pregnancy", sub: "What happens after a positive test", href: "/pregnancy" },
     ],
 

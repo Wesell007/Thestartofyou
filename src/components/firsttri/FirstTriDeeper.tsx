@@ -24,8 +24,8 @@ const links: DeeperLink[] = [
   { label: "Exercise & movement", href: "/pregnancy/diet-and-exercise", Icon: Footprints },
   { label: "Mental health", href: "/articles/anxiety-in-pregnancy", Icon: Brain },
   { label: "Partner support", href: "/pregnancy/feelings", Icon: Users },
-  { label: "Back to work", href: "/articles/working-through-pregnancy", Icon: Briefcase },
-  { label: "Postpartum", href: "/postpartum", Icon: Sparkles },
+  { label: "Maternity leave", href: "/articles/maternity-leave-planning", Icon: Briefcase },
+  { label: "Postpartum", href: "/first-year#recovery-topics", Icon: Sparkles },
 ];
 
 const FirstTriDeeper = () => {

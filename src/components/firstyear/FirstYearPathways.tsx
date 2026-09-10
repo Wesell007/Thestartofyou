@@ -5,7 +5,7 @@ const featured = {
   label: "Previous Stage",
   title: "Postpartum hub",
   sub: "Looking back at the early weeks, recovery, and adjustment. Many of those patterns still inform where you are now.",
-  href: "/postpartum",
+  href: "/first-year#recovery-topics",
   stat: { n: "12", label: "weeks covered" },
 };
 

@@ -883,7 +883,7 @@ const Next = () => (
             className="inline-flex items-center justify-center gap-2 bg-terracotta text-terracotta-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium shadow-cta hover:bg-terracotta-hover transition-colors">
             Continue to week 42 <ArrowRight size={14} />
           </Link>
-          <Link to="/postpartum"
+          <Link to="/first-year#recovery-topics"
             className="inline-flex items-center justify-center gap-2 border border-foreground/25 text-foreground rounded-pill px-7 py-3.5 font-sans text-[14px] font-medium hover:bg-parchment-dark transition-colors">
             Explore the early days
           </Link>

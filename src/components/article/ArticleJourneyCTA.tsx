@@ -24,7 +24,7 @@ const journeyRoutes: Record<string, { label: string; href: string; description: 
   },
   postpartum: {
     label: "Start your postpartum journey",
-    href: "/postpartum",
+    href: "/first-year#recovery-topics",
     description: "Week-by-week recovery guidance designed for the reality of postpartum life.",
   },
   "first-year": {

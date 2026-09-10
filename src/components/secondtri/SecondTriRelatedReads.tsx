@@ -34,7 +34,7 @@ const articles: ArticleCard[] = [
   {
     tag: "Your body",
     title: "How your body changes in the second trimester",
-    href: "/articles/how-your-body-changes-in-pregnancy",
+    href: "/pregnancy/body",
     blurb: "Bump, posture, skin, and what to expect as pregnancy becomes visible.",
     image: imgBody,
   },

@@ -116,6 +116,8 @@ export interface ArticleData {
   trimester?: (1 | 2 | 3)[];
   relatedWeeks?: number[];
   relatedSlugs?: string[];
+  /** Links out to published surfaces in other parts of the site. */
+  crossLinks?: { label: string; href: string; context?: string }[];
 
   // FAQ for AEO
   faq?: ArticleFAQItem[];
@@ -1701,7 +1703,7 @@ const articleDatabase: ArticleData[] = [
     relatedStage: {
       intro: "Explore the postpartum journey in more detail:",
       links: [
-        { label: "Postpartum Hub", href: "/postpartum", context: "Your complete guide to the postpartum period." },
+        { label: "Postpartum Hub", href: "/first-year#recovery-topics", context: "Your complete guide to the postpartum period." },
         { label: "First Year Hub", href: "/first-year", context: "What comes next as your baby grows." },
         { label: "Support Hub", href: "/support", context: "If you need emotional or practical support." },
       ],
@@ -2088,7 +2090,7 @@ const articleDatabase: ArticleData[] = [
       intro: "Explore the first year:",
       links: [
         { label: "First Year Hub", href: "/first-year" },
-        { label: "Postpartum Hub", href: "/postpartum" },
+        { label: "Postpartum Hub", href: "/first-year#recovery-topics" },
       ],
     },
     aiPrompts: ["Is it normal for my baby to still wake at night?", "What is the 4-month sleep regression?", "How can I help my baby sleep better?"],
@@ -2409,7 +2411,7 @@ const articleDatabase: ArticleData[] = [
       intro: "Continue exploring:",
       links: [
         { label: "Pregnancy Hub", href: "/pregnancy" },
-        { label: "Postpartum Hub", href: "/postpartum" },
+        { label: "Postpartum Hub", href: "/first-year#recovery-topics" },
         { label: "Preparing for Baby", href: "/preparing-for-baby" },
       ],
     },
@@ -2917,7 +2919,7 @@ const articleDatabase: ArticleData[] = [
     relatedStage: {
       intro: "Related guidance:",
       links: [
-        { label: "Postpartum Hub", href: "/postpartum" },
+        { label: "Postpartum Hub", href: "/first-year#recovery-topics" },
         { label: "First Year Hub", href: "/first-year" },
         { label: "Baby Sleep Guide", href: "/articles/baby-sleep-first-year" },
       ],
@@ -3229,7 +3231,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Don't rush back to pre-pregnancy exercise", reason: "Your 6-week check is a minimum, not a green light for everything." },
     ],
     whatHappensNext: "Physical recovery continues for months. Be patient with the process.",
-    relatedStage: { intro: "Related:", links: [{ label: "Postpartum Hub", href: "/postpartum" }, { label: "Recovery Timeline", href: "/articles/postpartum-recovery-timeline" }] },
+    relatedStage: { intro: "Related:", links: [{ label: "Postpartum Hub", href: "/first-year#recovery-topics" }, { label: "Recovery Timeline", href: "/articles/postpartum-recovery-timeline" }] },
     aiPrompts: ["Is my body normal after birth?", "When will bleeding stop after birth?"],
     captureIntro: "Your postpartum body deserves recognition, not comparison.",
     journey: ["postpartum"],
@@ -14807,12 +14809,12 @@ const articleDatabase: ArticleData[] = [
       { action: "Step back if tracking is making things worse", reason: "Loose attention beats anxious surveillance." },
     ],
     whatHappensNext: "Once ovulation has happened, the two-week wait begins. A pregnancy test is most accurate from the day of your expected period.",
-    relatedStage: { intro: "Related:", links: [{ label: "Fertile window", href: "/articles/fertile-window" }, { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    relatedStage: { intro: "Related:", links: [{ label: "Fertile window", href: "/articles/fertile-window" }, { label: "Ovulation calculator", href: "/ovulation-calculator" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
     aiPrompts: ["How do I know if I've ovulated?", "Are ovulation signs reliable?", "Can I ovulate without noticing?"],
     captureIntro: "Each cycle carries its own quiet attention. Worth recording, gently.",
     journey: ["trying-to-conceive"],
     topics: ["body-changes", "timelines"],
-    relatedSlugs: ["fertile-window", "signs-of-ovulation", "two-week-wait", "can-you-get-pregnant-on-your-period"],
+    relatedSlugs: ["fertile-window", "how-to-know-when-you-are-ovulating", "two-week-wait", "can-you-get-pregnant-on-your-period"],
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     faq: [
@@ -14854,12 +14856,12 @@ const articleDatabase: ArticleData[] = [
       { action: "Try the ovulation calculator", reason: "It gives a reasonable starting estimate based on your cycle dates." },
     ],
     whatHappensNext: "If conception has happened, implantation usually follows 6–12 days later. A pregnancy test is most reliable from the day of your expected period.",
-    relatedStage: { intro: "Related:", links: [{ label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
+    relatedStage: { intro: "Related:", links: [{ label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "Ovulation calculator", href: "/ovulation-calculator" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
     aiPrompts: ["When is my fertile window?", "How often should we try in the fertile window?", "Can the fertile window shift?"],
     captureIntro: "The shape of your cycle is worth remembering, beyond just the dates.",
     journey: ["trying-to-conceive"],
     topics: ["timelines"],
-    relatedSlugs: ["ovulation-signs", "signs-of-ovulation", "can-you-get-pregnant-on-your-period", "two-week-wait"],
+    relatedSlugs: ["ovulation-signs", "how-to-know-when-you-are-ovulating", "can-you-get-pregnant-on-your-period", "two-week-wait"],
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     faq: [
@@ -15135,12 +15137,12 @@ const articleDatabase: ArticleData[] = [
       { action: "Use contraception if you're not trying to conceive", reason: "Period sex is not a reliable form of contraception." },
     ],
     whatHappensNext: "If conception has happened, implantation typically follows 6–12 days after ovulation. A test from the day of your expected period is most reliable.",
-    relatedStage: { intro: "Related:", links: [{ label: "Fertile window", href: "/articles/fertile-window" }, { label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "Ovulation calculator", href: "/trying-to-conceive/ovulation-calculator" }] },
+    relatedStage: { intro: "Related:", links: [{ label: "Fertile window", href: "/articles/fertile-window" }, { label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "Ovulation calculator", href: "/ovulation-calculator" }] },
     aiPrompts: ["Can you get pregnant on your period?", "How early can ovulation happen?", "Is period sex safe contraception?"],
     captureIntro: "Cycles tell their own quiet story when you start to notice them.",
     journey: ["trying-to-conceive"],
     topics: ["timelines"],
-    relatedSlugs: ["fertile-window", "ovulation-signs", "signs-of-ovulation", "two-week-wait"],
+    relatedSlugs: ["fertile-window", "ovulation-signs", "how-to-know-when-you-are-ovulating", "two-week-wait"],
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     faq: [
@@ -19981,6 +19983,13 @@ const articleDatabase: ArticleData[] = [
         { label: "Pelvic pain in pregnancy", href: "/articles/pelvic-pain-in-pregnancy", context: "When to think beyond pelvic floor exercises alone." },
       ],
     },
+    crossLinks: [
+      {
+        label: "Body changes after birth",
+        href: "/first-year/body-and-hormones/body-changes-after-birth",
+        context: "Where pelvic floor work continues once your baby is here.",
+      },
+    ],
     aiPrompts: [
       "How do I do pelvic floor exercises correctly?",
       "Is it too late to start pelvic floor exercises in pregnancy?",

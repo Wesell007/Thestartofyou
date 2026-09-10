@@ -1,42 +1,96 @@
-# Phase 32F — Internal linking, intent ownership and cannibalisation
+# Phase 32F — Reconciliation and correction pass (documentation only)
 
-Audit first, then implement only the link changes that are genuinely safe. No new pages, no new URLs, no publishing of the 19 held drafts, no deployment.
+Verification pass. No runtime, route, canonical, sitemap, publication or
+deployment changes. Only `docs/content/phase32f-*` files are edited.
 
-## Stage 32F.1 — Audit only (no runtime edits)
+## Confirmed cause of the failed equation
 
-1. **Read the authoritative inputs**: the Phase 31 opportunity clusters, existing-content actions, master audit and hub scorecard; the three Phase 32E documents; and the 32B–32D ownership/evidence documents where topics overlap.
-2. **Recompute the live/indexable inventory from repository truth** by walking the route table and the content datasets (legacy articles, First Year, Toddler, Family article sets, topic and hub pages, 42 week pages, trimester pages, 13 month pages, First Year phase pages, Toddler age pages, IVF pages, Preparing for Baby, and tools that act as content destinations). Exclude unpublished drafts, setup/authenticated routes, redirects and private utility routes. Report the actual count rather than the Phase 31 figure.
-3. **Build the link graph** by extracting every internal link from the runtime datasets and components, separating structural/navigation links from contextual editorial links. Classify each page as TRUE_ORPHAN, WEAKLY_CONNECTED or WELL_CONNECTED using the definitions given.
-4. **Resolve the five guaranteed deferrals from source truth** (verified Phase 31 records):
-   - C008 — `/pregnancy`, ensure a clear week index entry point.
-   - C006 — the 42 week pages, systematic linking architecture around them.
-   - C066 — the 13 First Year month pages, discoverability and progression.
-   - C082 — routing from physical postpartum/recovery surfaces to `when-parenthood-feels-heavy`.
-   - C046 — cross-routing between `pelvic-floor-exercises-in-pregnancy` and `body-changes-after-birth`.
-   Each gets cluster ID, domain, original intent, current owner, current problem, target pages, link direction, current state and one terminal disposition.
-5. **Map intent ownership** for the named families: pregnancy dating, bleeding/discharge, pelvic pain, body changes, milestones/development, baby sleep, feeding, postpartum recovery, pelvic floor, postnatal mental health. Record primary, supporting, structured-context and future-after-publication owners.
-6. **Register cannibalisation** only where user intent materially overlaps, with severity NONE/LOW/MEDIUM/HIGH, reason, current link signals, recommended remediation, runtime-safe flag and final status.
-7. **Verify the baseline** (expected 116 test files, 1293 tests, lint 1 error / 10 warnings). If it has drifted, stop after 32F.1 and report the exact difference.
-8. **Gate every action** with exactly one terminal status: READY_TO_IMPLEMENT_LINK, ALREADY_RESOLVED, MERGED_WITH_ANOTHER_ACTION, BLOCKED_BY_UNPUBLISHED_TARGET, REVIEW_HOLD, DEFER_SEO_ARCHITECTURE, NO_ACTION_REQUIRED. Stop if `5 + newly discovered = sum of terminal statuses` fails.
+The action register in `docs/content/phase32f-implementation-report.md`
+contains eleven rows, A1 to A11:
 
-Documents produced: `phase32f-link-graph-audit.md`, `phase32f-intent-ownership-map.md`, `phase32f-cannibalisation-register.md`.
+- ALREADY_RESOLVED: A1 (C008), A2 (C006) = 2
+- IMPLEMENTED: A3, A4, A5, A6, A7, A8, A9 = **7**
+- DEFER_SEO_ARCHITECTURE: A10 = 1
+- NO_ACTION_REQUIRED: A11 = 1
 
-## Stage 32F.2 — Link implementation
+7 + 2 + 1 + 1 = 11 = GROSS. The register is already correct; only the summary
+sentence beneath it mis-states IMPLEMENTED as 8. The correction is to the
+summary text, not to the action model or to any runtime work.
 
-Only READY_TO_IMPLEMENT_LINK actions, using the smallest useful edit and preferring one shared data/component change over repeating an edit across 42 or 13 pages. Allowed: contextual internal links, related-guidance references, parent/child links, previous/next progression consistent with existing design, neutral anchor clarification, and tiny non-clinical positioning copy that distinguishes two existing owners. Anchors are natural editorial phrases, never keyword-stuffed or "click here". No arbitrary link quotas, no SEO-looking link blocks, no repeated identical paragraph across every week or month.
+Derived: GUARANTEED 5, NEWLY_DISCOVERED 6 (A6 grouped broken destinations,
+A7 grouped redirect-source link, A8 grouped orphan remediation, A9 topic-group
+truncation, A10 milestones canonical, A11 `/` and `/about` weak connectivity),
+GROSS 11.
 
-## Stage 32F.3 — Cannibalisation remediation
+## Work to do
 
-Runtime-safe actions only: clarify the primary owner, adjust supporting-page link direction, remove duplicated positioning, strengthen the route toward the primary owner. No deletions, redirects, slug changes, canonical changes, merges, noindex or draft publication.
+### 1. Correct the terminal arithmetic
+Fix the equation line in the implementation report to
+`IMPLEMENTED 7 + ALREADY_RESOLVED 2 + MERGED 0 + BLOCKED 0 + REVIEW_HOLD 0 +
+DEFER_SEO_ARCHITECTURE 1 + NO_ACTION_REQUIRED 1 = 11 = GROSS`.
 
-## Link integrity and validation
+### 2. Expand the register to the required column set
+Rewrite the A1–A11 table with one row per gross action and the columns:
+Action ID, Source, Description, Guaranteed/New, Terminal status, Runtime
+change, Evidence. Add an explicit note that A6 (six broken destinations),
+A7 (one redirect-source link across four surfaces) and A8 (five orphaned
+guides) were each defined in 32F.1 as a single systematic remediation, so
+affected-URL counts are not action counts.
 
-Verify every new href resolves, no links point at unpublished drafts, setup/private routes or known redirect sources, no malformed relative or accidental external links, no unintended self-links. Then run the full test suite, typecheck twice, lint against baseline and a production build. Add focused tests only where they carry weight: generated week/month links, absence of links to unpublished routes, destination validity.
+### 3. Evidence rows for C008 and C006
+State each issue, the evidence that the week index entry point and the 42
+week-page architecture were already in place before 32F, and confirm zero
+runtime change for both. They stay two separate guaranteed rows.
 
-## Reporting
+### 4. Evidence rows for C066, C082, C046
+Record for each the exact remediation already shipped: phase-to-month
+navigation on four First Year phase pages; neutral routing from the two
+physical-recovery articles to `when-parenthood-feels-heavy`; reciprocal
+pelvic-floor and postnatal body-change links. Confirm no new health, safety
+or developmental claim, and no Phase 32E held content, was introduced.
 
-`docs/content/phase32f-implementation-report.md` records each changed runtime surface (route, page type, previous state, action, destination, anchor, why useful, cannibalisation impact, risk, files changed). The chat reply returns the full 40-point Phase 32F report including graph metrics before/after, cannibalisation metrics, reconciliation arithmetic and the architecture zeros.
+### 5. Cannibalisation reconciliation table
+Rewrite `docs/content/phase32f-cannibalisation-register.md` with the columns:
+Intent family, Severity before, Primary owner, Supporting owner(s), 32F
+action, Final status, Residual risk. Replace the blanket "REMEDIATED" with
+precise terminal statuses, so CAN-04 (milestones) reads
+`DEFERRED_SEO_ARCHITECTURE` rather than resolved, and add totals that
+reconcile to 7.
 
-## Boundaries
+### 6. Milestone canonical residual issue
+Record the two routes involved, the intended primary owner, the current
+canonical state (each route self-canonical, both indexed, inventory role
+`needs-decision`), why 32F did not touch canonical architecture, and the
+residual duplicate-intent risk. Keep it as explicit future work.
 
-Saved lifecycles stay exactly `ttc | pregnancy | first_year`. The 19 drafts stay NOT PUBLISHED and never become link destinations; where publication would change ownership, the future link migration is documented instead. Phase 32E review holds are not bypassed through copy changes — anything requiring health, safety, developmental, escalation or clinical wording is classified REVIEW_HOLD. `/preparing-for-baby` stays a supporting editorial surface. IVF completeness stays deferred. Nothing deploys, and no further phase begins.
+### 7. Nineteen-draft future-publication reconciliation
+`phase32f-intent-ownership-map.md` currently has only a short narrative.
+Add a full section covering all 19 held drafts (3 from 32A, 4 from 32B,
+3 from 32C, 9 from 32D), each with: draft title, current live owner, future
+owner, links to add after publication, links to retarget, coverage that must
+stay live until publication, and a launch-time cannibalisation check. Report
+totals for "changes ownership" versus "no link migration", reconciling to 19.
+No links are added now; the drafts stay NOT PUBLISHED.
+
+### 8. Metrics and validation
+Graph, inventory and validation figures are preserved as reported unless a
+targeted re-read of the repository contradicts them. Since no runtime file
+changes, no re-run of the full suite is manufactured; a targeted verification
+of the final repository state is recorded instead.
+
+## Files changed by this pass
+
+- `docs/content/phase32f-implementation-report.md`
+- `docs/content/phase32f-cannibalisation-register.md`
+- `docs/content/phase32f-intent-ownership-map.md`
+
+`docs/content/phase32f-link-graph-audit.md` unchanged unless verification
+disproves a value.
+
+## Closure
+
+If all three reconciliations (terminal equation = 11, cannibalisation = 7,
+drafts = 19) are exact, close as
+`PHASE 32F — INTERNAL LINKING + INTENT OWNERSHIP + CANNIBALISATION
+REMEDIATION CLOSED PASS`. Otherwise report
+`PHASE 32F — RECONCILIATION HOLD`. No next phase, no deployment.

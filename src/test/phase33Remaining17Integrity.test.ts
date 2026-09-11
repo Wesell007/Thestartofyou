@@ -52,7 +52,12 @@ const MIGRATION_INTENTS = [
   },
   {
     intent: "teething",
-    source: { system: "first-year", slug: "when-sleep-suddenly-changes" },
+    source: { system: "month-guide", slug: "4-months" },
+    href: "/first-year/care-and-safety/teething",
+  },
+  {
+    intent: "teething",
+    source: { system: "month-guide", slug: "5-months" },
     href: "/first-year/care-and-safety/teething",
   },
   {

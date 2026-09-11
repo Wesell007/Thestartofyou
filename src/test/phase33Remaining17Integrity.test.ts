@@ -3,6 +3,7 @@ import { firstYearArticleImageMap } from "@/components/firstyear/article/firstYe
 import { getArticle } from "@/data/articleData";
 import type { FirstYearArticleTopic } from "@/data/firstYearArticleData";
 import { firstYearArticles, getFirstYearArticlesByTopic } from "@/data/firstYearArticleData";
+import { getMonthGuide } from "@/data/firstYearMonthData";
 import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
 
 /**
@@ -42,34 +43,53 @@ const REMAINING_FIRST_YEAR = Object.keys(FIRST_YEAR_SLUGS).filter(
   (slug) => slug !== "when-sleep-suddenly-changes",
 );
 
-/** The five approved Phase 32F ownership migration intents. */
+/**
+ * The five approved Phase 32F ownership migration intents. An intent is an
+ * ownership decision, not a hyperlink count: teething is one intent carried on
+ * both approved month-guide surfaces.
+ */
 const MIGRATION_INTENTS = [
   {
     intent: "caesarean-birth",
-    source: { system: "legacy", slug: "signs-of-labour" },
+    sources: [{ system: "legacy", slug: "signs-of-labour" }],
     href: "/articles/caesarean-birth",
   },
   {
     intent: "teething",
-    source: { system: "first-year", slug: "when-sleep-suddenly-changes" },
+    sources: [
+      { system: "month-guide", slug: "4-months" },
+      { system: "month-guide", slug: "5-months" },
+    ],
     href: "/first-year/care-and-safety/teething",
   },
   {
     intent: "introducing-solid-foods",
-    source: { system: "legacy", slug: "feeding-your-baby-complete-guide" },
+    sources: [{ system: "legacy", slug: "feeding-your-baby-complete-guide" }],
     href: "/first-year/feeding/introducing-solid-foods",
   },
   {
     intent: "stitches-tears-and-perineal-healing",
-    source: { system: "first-year", slug: "healing-after-birth" },
+    sources: [{ system: "first-year", slug: "healing-after-birth" }],
     href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
   },
   {
     intent: "separated-tummy-muscles",
-    source: { system: "legacy", slug: "your-body-after-birth" },
+    sources: [{ system: "legacy", slug: "your-body-after-birth" }],
     href: "/first-year/body-and-hormones/separated-tummy-muscles",
   },
 ];
+
+const linksForSource = (source: { system: string; slug: string }): string[] => {
+  if (source.system === "legacy") {
+    return (getArticle(source.slug)?.crossLinks ?? []).map((link) => link.href);
+  }
+  if (source.system === "month-guide") {
+    return (getMonthGuide(source.slug as never)?.related ?? []).map((link) => link.href);
+  }
+  return (
+    firstYearArticles.find((item) => item.slug === source.slug)?.crossLinks ?? []
+  ).map((link) => link.href);
+};
 
 const CLAIM_LIKE_ALT =
   /\b(safe|unsafe|risky?|should|must|always|never|cures?|treats?|diagnos\w*)\b/i;
@@ -164,13 +184,9 @@ describe("Phase 33 normal category discovery", () => {
 
 describe("Phase 32F approved migration intents", () => {
   it("satisfies all five approved intents and introduces no others", () => {
-    const satisfied = MIGRATION_INTENTS.filter(({ source, href }) => {
-      const crossLinks =
-        source.system === "legacy"
-          ? (getArticle(source.slug)?.crossLinks ?? [])
-          : (firstYearArticles.find((item) => item.slug === source.slug)?.crossLinks ?? []);
-      return crossLinks.some((link) => link.href === href);
-    });
+    const satisfied = MIGRATION_INTENTS.filter(({ sources, href }) =>
+      sources.every((source) => linksForSource(source).includes(href)),
+    );
 
     expect(MIGRATION_INTENTS).toHaveLength(5);
     expect(satisfied).toHaveLength(5);
@@ -181,7 +197,9 @@ describe("Phase 32F approved migration intents", () => {
       ...Object.entries(FIRST_YEAR_SLUGS).map(([slug, topic]) => `/first-year/${topic}/${slug}`),
     ]);
 
-    const sourceSlugs = new Set<string>(MIGRATION_INTENTS.map(({ source }) => source.slug));
+    const sourceSlugs = new Set<string>(
+      MIGRATION_INTENTS.flatMap(({ sources }) => sources.map((source) => source.slug)),
+    );
     const unapproved: string[] = [];
     for (const article of firstYearArticles) {
       if (sourceSlugs.has(article.slug) || FIRST_YEAR_SLUGS[article.slug]) continue;
@@ -192,6 +210,25 @@ describe("Phase 32F approved migration intents", () => {
       }
     }
     expect(unapproved).toEqual([]);
+  });
+
+  it("carries the teething intent on both approved month-guide surfaces", () => {
+    for (const slug of ["4-months", "5-months"]) {
+      const related = getMonthGuide(slug as never)?.related ?? [];
+      expect(
+        related.filter((link) => link.href === "/first-year/care-and-safety/teething"),
+        slug,
+      ).toHaveLength(1);
+    }
+  });
+
+  it("keeps the sleep guide link as an additional contextual occurrence only", () => {
+    const sleep = firstYearArticles.find((item) => item.slug === "when-sleep-suddenly-changes");
+    expect(
+      (sleep?.crossLinks ?? []).some(
+        (link) => link.href === "/first-year/care-and-safety/teething",
+      ),
+    ).toBe(true);
   });
 });
 

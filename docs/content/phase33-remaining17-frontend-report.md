@@ -54,35 +54,47 @@ through the existing First Year article page.
 ## 3. Phase 32F migration intents — exactly 5
 
 Intents are ownership decisions, not hyperlink counts. Each was implemented
-through the existing `crossLinks` field on an existing article record.
+through an existing link mechanism on an existing record.
 
-| # | Intent | Source record (system) | Destination | Mechanism |
+| # | Intent | Approved source surface(s) | Destination | Mechanism |
 | --- | --- | --- | --- | --- |
 | 1 | Caesarean birth | `signs-of-labour` (Legacy) | `/articles/caesarean-birth` | existing `crossLinks` |
-| 2 | Teething | `when-sleep-suddenly-changes` (First Year) | `/first-year/care-and-safety/teething` | existing `crossLinks` |
+| 2 | Teething | `4-months` and `5-months` month guides | `/first-year/care-and-safety/teething` | existing month `related` |
 | 3 | Introducing solid foods | `feeding-your-baby-complete-guide` (Legacy) | `/first-year/feeding/introducing-solid-foods` | existing `crossLinks` |
 | 4 | Perineal healing | `healing-after-birth` (First Year) | `/first-year/postpartum-recovery/stitches-tears-and-perineal-healing` | existing `crossLinks` |
 | 5 | Separated tummy muscles | `your-body-after-birth` (Legacy) | `/first-year/body-and-hormones/separated-tummy-muscles` | existing `crossLinks` |
 
 ```text
-Approved migration intents            5
-Intents implemented                   5
-Contextual hyperlink occurrences      5
-Unapproved Phase 33 cross-links       0
+Migration intents required                 5
+Migration intents satisfied as approved    5
+Implementation exceptions                  0
+Unapproved migration intents               0
+Actual contextual link occurrences         7
 ```
 
-Deviation recorded: the teething intent was originally scoped against the
-`4-months` / `5-months` month records. Those month editorial subsections
-expose no link field, and no new field was invented. The intent was therefore
-satisfied on the existing sleep article, which is the surface that raises
-teething as a cause. No month data was changed.
+TEETHING MIGRATION = **SATISFIED_AS_APPROVED**, on the originally approved
+`4-months` and `5-months` month-guide surfaces, using the existing `related`
+mechanism already rendered by the month page. No `readMore` destination was
+replaced and no new field, component, renderer or template was added.
+
+The existing `when-sleep-suddenly-changes` to teething link remains and is
+recorded as an ADDITIONAL EDITORIALLY RELEVANT CONTEXTUAL LINK only. It is not
+an intent owner, is not category discovery, and does not replace the approved
+month-page migration.
 
 ## 4. Discovery cleanup
 
 `caesarean-birth` appeared twice as a normal Pregnancy category entry. The
 duplicate was removed; the Birth planning entry remains. Every other Phase 33
-Legacy slug appears exactly once. Contextual cross-links are not counted as
-category discovery.
+Legacy slug appears exactly once.
+
+```text
+Normal category discovery      19/19
+Duplicate normal discovery         0
+```
+
+Cross-links, editorial contextual links, Phase 32F migrations and month-guide
+related links are not counted as normal category discovery.
 
 ## 5. Imagery
 
@@ -92,6 +104,13 @@ images, First Year `firstYearArticleImageMap` hero + two body images placed
 after named sections. Alt text is descriptive and factual; no alt text makes a
 safety, risk or treatment claim. No stock, placeholder or reused unrelated
 imagery. No defects were found, so nothing was regenerated.
+
+```text
+Heroes            19
+Body images       38
+Approved assets   57
+Broken images      0
+```
 
 ## 6. Review metadata safeguard
 
@@ -105,17 +124,39 @@ New First Year records omit `medicallyReviewed` and `reviewedBy`; the review
 badge therefore does not render. New Legacy records carry no review metadata.
 `status: "ready"` is runtime renderability only.
 
-## 7. Governance registry
+## 7. Grounding registry coverage exception
 
-The 17 new slugs were added to the article grounding registry as
-`editorialStatus: "draft"` / `approvalStatus: "blocked_draft"`. Registry total
-is now 225 with zero approved records and zero grounding-eligible slugs.
+**APPROVED PHASE 33.3 BOUNDARY EXCEPTION — REGISTRY COVERAGE / DEFAULT-DENY
+METADATA ONLY.**
+
+17 default-deny metadata rows were added to
+`src/lib/grounding/articleGroundingRegistry.ts` because the existing drift
+integrity guard requires a registry record for every runtime article slug. All
+17 rows are `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`,
+`archived: false`, `deprecated: false`, with no approval metadata.
+
+```text
+GROUNDING REGISTRY METADATA CHANGES   17 default-deny coverage rows added
+GROUNDING RUNTIME BEHAVIOUR CHANGES   0
+
+Runtime grounding behaviour changed    NO
+Grounding eligibility changed          NO
+AI routing changed                     NO
+Approved / candidate records added     NO
+
+Registry records                      225
+Grounding approvals                     0
+Grounding candidates                    0
+listGroundingEligibleSlugs()           []
+AI_SOURCE_ROUTING_VERSION   30B-source-routing-v1
+Drift guard                          PASS
+```
 
 ## 8. Validation
 
 ```text
-Focused Phase 33.3 integrity tests   PASS (7)
-Full test suite                      PASS — 119 files / 1307 tests
+Focused Phase 33 + grounding tests   PASS (5 files / 79 tests)
+Full test suite                      PASS — 119 files / 1309 tests, 0 timeouts
 Typecheck                            PASS (x2, clean)
 Lint                                 BASELINE UNCHANGED (1 error, 10 warnings)
 Production build                     PASS
@@ -125,18 +166,46 @@ Responsive QA 1280x1800 / 768x1200 / 390x844   PASS across all 19 routes
     0 horizontal overflow, 0 page-level console errors
 ```
 
-## 9. Architecture zeros
+## 9. Boundary reconciliation
 
 ```text
-New routes types / renderers / datasets / hubs   0
-New lifecycles                                    0
-Backend, schema, RLS, AI, grounding, journal,
-memory or voice behaviour changes                 0
-Deployments                                       0
+New hub                          0
+Navigation architecture          0
+Renderer                         0
+Template                         0
+Design tokens                    0
+Database                         0
+Schema                           0
+RLS                              0
+AI runtime                       0
+Grounding registry metadata      17 default-deny coverage rows
+Grounding runtime behaviour      0
+Grounding approvals              0
+Grounding eligibility changes    0
+Routing changes                  0
+Journal                          0
+Memory                           0
+Voice                            0
+Saved lifecycle changes          0
+Deployment                       0
 ```
+
+Saved lifecycles remain exactly: `ttc`, `pregnancy`, `first_year`.
 
 ## 10. Closure
 
-All 19 Phase 33 articles remain `HOLD_HUMAN_REVIEW`, 0 reviews completed, 0
-deployment eligible. Phase 33.3 is closed as
-**CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**.
+```text
+Runtime records                 19/19  (Legacy 9, First Year 10)
+Direct routes                   19/19
+Normal discovery                19/19
+Duplicate normal discovery          0
+Human reviews completed             0
+Deployment eligible                 0
+Production deployed                 0
+```
+
+All 19 Phase 33 articles remain `HOLD_HUMAN_REVIEW`. Human-review governance is
+unchanged.
+
+**PHASE 33.3 — CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**
+**GLOBAL PHASE 33 DEPLOYMENT BLOCK = ACTIVE**

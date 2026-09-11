@@ -2,9 +2,13 @@ import { describe, expect, it } from "vitest";
 import { firstYearArticleImageMap } from "@/components/firstyear/article/firstYearArticleImages";
 import { getArticle } from "@/data/articleData";
 import { firstYearArticles } from "@/data/firstYearArticleData";
+import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
+import { resolveArticleHeroBySlug } from "@/lib/articleHeroImage";
+import { resolveRowThumb } from "@/lib/pregnancyRowThumbnails";
 
 const SLEEP_SLUG = "when-sleep-suddenly-changes";
 const HAIR_DYE_SLUG = "hair-dye-and-beauty-treatments-in-pregnancy";
+const HAIR_DYE_HREF = `/articles/${HAIR_DYE_SLUG}`;
 
 describe("Phase 33 Batch 1 image integrity", () => {
   it("keeps sleep imagery attached to the intended section titles", () => {
@@ -51,5 +55,20 @@ describe("Phase 33 Batch 1 image integrity", () => {
     expect(
       new Set([article?.hero?.src, ...imagedSections.map(({ image }) => image?.src)]),
     ).toHaveProperty("size", 3);
+  });
+
+  it("exposes exactly one hair-dye discovery entry on Pregnancy health and safety", () => {
+    const config = pregnancyTopicConfigs["health-and-safety"]!;
+    const matches = config.groups.flatMap((group) =>
+      group.links
+        .filter((link) => link.href === HAIR_DYE_HREF)
+        .map((link) => ({ group: group.label, label: link.label })),
+    );
+
+    expect(matches).toHaveLength(1);
+    expect(matches[0].group).toBe("Staying well day to day");
+    expect(matches[0].label).toBe("Hair dye and beauty treatments in pregnancy");
+    expect(getArticle(HAIR_DYE_SLUG)?.slug).toBe(HAIR_DYE_SLUG);
+    expect(resolveRowThumb(resolveArticleHeroBySlug(HAIR_DYE_SLUG)!.src)).toBeTruthy();
   });
 });

@@ -198,3 +198,34 @@ deployments **0**.
 No deployment was performed and Batch 2 did not begin.
 
 **PHASE 33.2 — BATCH 1 VISUAL IMPLEMENTATION CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**
+
+## 9. Post-closure discovery correction (hair dye)
+
+**POST-CLOSURE DEFECT:** the hair-dye article route existed and rendered
+correctly, but it lacked normal Pregnancy Health and safety discovery.
+
+**ROOT CAUSE:** the Health and safety topic/category configuration did not
+include the article in any group, so no grouped article row was rendered.
+
+**FIX:** added to the existing `Staying well day to day` group using the
+existing grouped article-row mechanism, with the already approved hair-dye
+hero registered in the existing thumbnail map. No new section, topic, card,
+navigation item, route, renderer or article record.
+
+| Check | Result |
+| --- | --- |
+| Health and safety discovery entries for this article | 1 |
+| Destination | `/articles/hair-dye-and-beauty-treatments-in-pregnancy` |
+| Phase 32F migration | still NO (`NO_PHASE_32F_LINK_MIGRATION_REQUIRED`) |
+| New URLs | 0 |
+| Sitemap URL count | 333 |
+| Deployment | 0 |
+
+Governance state is unchanged: review classification
+`HEALTH_REVIEW_REQUIRED`, human review REQUIRED / NOT COMPLETED, Phase 33
+production status `HOLD_HUMAN_REVIEW`, production deployment eligible NO,
+runtime record present YES, safe non-public runtime draft capability NO.
+
+Files changed in this correction: `src/data/pregnancyTopicData.ts`,
+`src/components/pregnancy/PregnancyTopicPage.tsx`,
+`src/test/phase33Batch1ImageIntegrity.test.ts`, this report.

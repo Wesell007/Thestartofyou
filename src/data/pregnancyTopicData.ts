@@ -386,6 +386,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         description: "The wider, in-between guidance for ordinary pregnancy days.",
         links: [
           { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
+          { label: "Hair dye and beauty treatments in pregnancy", href: "/articles/hair-dye-and-beauty-treatments-in-pregnancy" },
         ],
       },
     ],

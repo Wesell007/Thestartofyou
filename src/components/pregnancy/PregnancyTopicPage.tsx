@@ -82,6 +82,7 @@ import imgCarSeatBasics from "@/assets/article-hero-car-seat-basics.jpg";
 import imgNewbornEssentials from "@/assets/article-hero-newborn-essentials.jpg";
 import imgPreparingSiblings from "@/assets/article-hero-preparing-siblings.jpg";
 import imgMaternityLeave from "@/assets/article-hero-maternity-leave.jpg";
+import imgHairDyeBeauty from "@/assets/article-hero-hair-dye-beauty-pregnancy.jpg";
 
 
 interface Props {
@@ -246,6 +247,7 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   // Health & safety — staying well
   "/articles/foods-to-avoid-in-pregnancy": imgFoodsToAvoid,
   "/articles/weight-changes-in-pregnancy": imgBodyShifts,
+  "/articles/hair-dye-and-beauty-treatments-in-pregnancy": imgHairDyeBeauty,
   // Diet & exercise
   "/articles/eating-well-in-pregnancy": imgEatingWell,
   "/articles/key-nutrients-in-pregnancy": imgKeyNutrients,

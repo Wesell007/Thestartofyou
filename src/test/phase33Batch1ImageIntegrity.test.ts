@@ -27,6 +27,11 @@ describe("Phase 33 Batch 1 image integrity", () => {
       "What tends to help",
     ]);
     expect(placements?.every(({ src, alt }) => Boolean(src && alt))).toBe(true);
+    expect(images?.hero.src).toContain("firstyear-hero-sleep-changes-safe");
+    expect(images?.hero.alt).toBe(
+      "Baby lying on their back in a fitted sleep bag, in a clear wooden cot with a fitted sheet",
+    );
+    expect(images?.hero.alt).not.toMatch(/safe sleep|should|risk|always|never/i);
     expect(new Set([images?.hero.src, ...bodyImages.map(({ src }) => src)])).toHaveProperty(
       "size",
       3,

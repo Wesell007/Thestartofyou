@@ -1,17 +1,28 @@
-# Phase 33.1 — Human Review Pack
+# Phase 33 — Human Review Pack
 
-17 articles. Human reviews completed: **0**. Nothing in this pack is
-published, and nothing may be published until a named human reviewer
-completes the record below it.
+**19 articles.** Human reviews completed: **0**. Nothing in this pack is
+approved for production, and nothing may be deployed until a named human
+reviewer completes the record below it.
 
-The two `LOW_RISK_GENERAL` drafts (`when-sleep-suddenly-changes`,
-`hair-dye-and-beauty-treatments-in-pregnancy`) are not in this pack; they
-passed editorial QA in 33.1 and are recorded in the publication register.
+Records 1–17 are documentation-only drafts: runtime record present **NO**,
+publication status **NOT PUBLISHED**, images generated **0**.
 
-**Draft text.** Each record points to the verbatim draft in its source
-document with an exact line range. The drafts are deliberately not copied
-here: a second copy would drift from the source, and every reviewer decision
-must be made against the single authoritative text.
+Records 18–19 are the two Batch 1 articles. Their runtime records are
+**present** and render in repository/build preview, but they were
+reclassified in the Phase 33.2 governance correction and are **not**
+production approved:
+
+- `when-sleep-suddenly-changes` — `SAFETY_REVIEW_REQUIRED`
+- `hair-dye-and-beauty-treatments-in-pregnancy` — `HEALTH_REVIEW_REQUIRED`
+
+Both are `HOLD_HUMAN_REVIEW` for Phase 33 production purposes and
+deployment eligible **NO**.
+
+**Draft text.** Records 1–17 point to the verbatim draft in the source
+document with an exact line range, so every reviewer decision is made
+against the single authoritative text. Records 18–19 instead reproduce the
+**current runtime copy**, because runtime conversion changed the wording
+from the original documentation drafts.
 
 Shared reviewer checkpoints, applied to every record below:
 
@@ -536,6 +547,400 @@ Reviewer notes:
   999 for chest pain, severe breathlessness or collapse.
 - Specific checkpoints: the ectopic paragraph; that the pre-eclampsia
   symptoms are complete and correctly urgent.
+
+Reviewer:
+
+Review date:
+
+Outcome:
+
+Reviewer notes:
+
+---
+
+## 18. When your baby's sleep suddenly changes (Batch 1)
+
+- Slug: `when-sleep-suddenly-changes` · Phase 32B · **SAFETY_REVIEW_REQUIRED**
+  (corrected from `LOW_RISK_GENERAL` in the Phase 33.2 governance correction)
+- Runtime record: PRESENT — `src/data/firstYearArticleData.ts`, First Year
+  dataset, topic `sleep`, rendered by `FirstYearArticlePage` →
+  `HubArticleView` at `/first-year/sleep/when-sleep-suddenly-changes`
+- Runtime record state: `status: "ready"` — the existing dataset value that
+  makes the record renderable. It does not mean human reviewed, safety
+  approved, production approved or deployment eligible.
+- Human review: REQUIRED / NOT COMPLETED
+- Phase 33 production status: HOLD_HUMAN_REVIEW · Deployment eligible: NO
+- Deployment blocker: HUMAN REVIEW REQUIRED · Safe non-public runtime draft
+  state: NO · Accidental deployment risk: YES
+- Sources (as held in the runtime record): NHS, Helping your baby to sleep —
+  https://www.nhs.uk/baby/caring-for-a-newborn/helping-your-baby-to-sleep/ ·
+  NHS, Your baby's first solid foods —
+  https://www.nhs.uk/baby/weaning-and-feeding/babys-first-solid-foods/ ·
+  NHS Start for Life, Baby development —
+  https://www.nhs.uk/start-for-life/baby/baby-development/
+
+### Current runtime copy
+
+**Title:** When your baby's sleep suddenly changes
+
+**Description:** Why a settled baby can start waking again, what tends to be
+behind it, and what actually helps, without treating sleep regressions as
+fixed stages.
+
+**Intro:** Sleep can suddenly feel different, even when you thought you had
+found a rhythm. A baby who was settling well starts waking again, naps
+shorten, bedtime unravels. It is disorientating, and it is one of the most
+searched-for things in the first year.
+
+**About the phrase "sleep regression"**
+
+You will see "four month sleep regression" and similar phrases everywhere.
+It is a useful shorthand parents use for a patch of disrupted sleep, and if
+it describes your week then it describes your week.
+
+It is worth knowing that it is not a medical or developmental diagnosis, and
+UK health guidance does not set out fixed regressions at particular ages or
+say how long they last. So rather than working out which regression you are
+in, it is usually more useful to look at what has actually changed.
+
+**Sleep was always going to change**
+
+Babies' sleep patterns vary from birth, just as adults' do. Some need more
+sleep than others, and how much they need changes across the first year.
+
+A settled few weeks is not a permanent state you can lose; it is one part of
+a pattern that keeps moving.
+
+**Things that commonly disturb a settled pattern**
+
+New skills. Rolling, sitting, pulling up and other new abilities often bubble
+up at night. Babies practise them at the least convenient hour.
+
+Being unwell, or teething discomfort.
+
+Changes in routine or surroundings, such as travel, a new room, or a return
+to work.
+
+Changing sleep needs, as naps drop or shift and daytime sleep rebalances.
+
+Hunger or feeding changes. Worth saying clearly: starting solids will not
+make your baby sleep through the night, and extra night waking is not a sign
+your baby is ready for solids.
+
+**What tends to help**
+
+Keep day and night distinct. During the day, open the curtains, play and do
+not worry too much about noise. At night, keep lights low, keep your voice
+quiet, avoid playing, and settle them again without much stimulation.
+
+Keep a simple bedtime routine. A bath, fresh nappy and night clothes, a
+story, dimmed lights, a song, a goodnight cuddle. Familiar order does more
+than any single step.
+
+Wind down beforehand. Excitement close to bedtime can wake a baby up again.
+
+Stay consistent for longer than feels natural. Patches of disrupted sleep
+usually pass, and constant changes of approach make it harder to tell what
+is working.
+
+**Safe sleep stays the same**
+
+Whatever is happening with sleep, the safe-sleep basics do not change. Your
+baby should sleep in the same room as you for at least the first six months,
+day and night, which reduces the risk of sudden infant death syndrome.
+
+Follow the NHS safe-sleep advice and the Lullaby Trust guidance rather than
+any settling suggestion that conflicts with it, and if you use a sling, use
+it safely.
+
+If your baby falls asleep in the car seat during a drive, take them out and
+put them on a firm, flat surface as soon as you can.
+
+**When to ask for advice**
+
+Speak to your health visitor, GP or NHS 111 if your baby seems unwell, if
+feeding or weight gain is a worry, if the change in sleep is accompanied by
+anything that concerns you, or if broken nights are affecting how you are
+coping.
+
+Health visitors talk about sleep constantly; you do not need a serious reason
+to ask.
+
+**How this can feel for you**
+
+Broken sleep after a settled stretch hits harder than broken sleep you were
+braced for. It is normal to feel resentful, foggy and less patient than you
+want to be.
+
+Sharing nights where you can, lowering your standards for a while and telling
+someone how tired you are all count as strategies.
+
+**Key takeaways**
+
+- Sleep patterns vary and keep changing through the first year.
+- "Sleep regression" is a common parent term, not a fixed developmental
+  stage, and there is no set age or duration.
+- New skills, illness, teething, routine changes and shifting sleep needs are
+  common reasons a pattern changes.
+- Solids will not make your baby sleep through the night.
+- Clear day and night cues plus a simple, consistent bedtime routine help
+  most.
+- Safe-sleep guidance, including room-sharing for at least six months, does
+  not change.
+
+### Supported claims
+
+Sleep patterns vary and keep changing; "sleep regression" is a parent term
+rather than a fixed developmental stage; the listed common causes of a
+changed pattern; day/night cues and a consistent bedtime routine as general
+help; solids do not improve night sleep and extra waking is not a readiness
+sign; room-sharing for at least the first six months reduces SIDS risk;
+deferring to NHS and Lullaby Trust safe-sleep guidance; safe sling use;
+moving a baby who falls asleep in a car seat onto a firm, flat surface;
+routing concerns to a health visitor, GP or NHS 111.
+
+### Excluded claims
+
+No age-specific regression stages or durations; no sleep-training method or
+prescribed settling technique; no claim that any approach will make a baby
+sleep through; no diagnosis of illness, reflux or teething from sleep
+change; no co-sleeping instruction; no reassurance that a change in sleep is
+always harmless.
+
+### Reviewer checkpoints
+
+1. Room-sharing wording — "same room as you for at least the first six
+   months, day and night".
+2. SIDS risk-reduction wording — that reducing risk is stated accurately and
+   without overstating or understating it.
+3. NHS alignment — the safe-sleep deferral matches current NHS guidance.
+4. Lullaby Trust alignment — the reference is accurate and current.
+5. Sleep-surface wording — "firm, flat surface" phrasing is correct and
+   complete for the context in which it appears.
+6. Car-seat transfer guidance — the instruction and its urgency are correct.
+7. Sling wording — "if you use a sling, use it safely" is sufficient, or
+   should route explicitly to safe-sling guidance.
+8. Solids-and-sleep statement — the claim and the readiness statement are
+   both supported.
+9. Professional-advice routing — health visitor, GP and NHS 111 are the right
+   routes, in the right order, with nothing that invites delay.
+10. Hero and body imagery imply nothing beyond the guidance in the copy.
+
+Reviewer:
+
+Review date:
+
+Outcome:
+
+Reviewer notes:
+
+---
+
+## 19. Hair dye and beauty treatments in pregnancy (Batch 1)
+
+- Slug: `hair-dye-and-beauty-treatments-in-pregnancy` · Phase 32D ·
+  **HEALTH_REVIEW_REQUIRED** (corrected from `LOW_RISK_GENERAL` in the Phase
+  33.2 governance correction)
+- Runtime record: PRESENT — `src/data/articleData.ts`, legacy dataset, topic
+  `health-and-safety`, rendered by the existing flagship dispatch at
+  `/articles/hair-dye-and-beauty-treatments-in-pregnancy`
+- Runtime record state: the legacy dataset has **no editorial status field**,
+  and none was invented. The record is renderable because it exists in the
+  dataset.
+- Human review: REQUIRED / NOT COMPLETED
+- Phase 33 production status: HOLD_HUMAN_REVIEW · Deployment eligible: NO
+- Deployment blocker: HUMAN REVIEW REQUIRED · Safe non-public runtime draft
+  state: NO · Accidental deployment risk: YES
+- Source (as held in the runtime record): NHS Best Start in Life, Using hair
+  dye in pregnancy: is it safe? —
+  https://www.nhs.uk/best-start-in-life/pregnancy/using-hair-dye-in-pregnancy-is-it-safe/
+- Classification note: not escalated to `SAFETY_REVIEW_REQUIRED`. The
+  claim-level review found pregnancy-specific health claims and precautions
+  throughout, and one urgent-escalation statement, but not the sustained
+  emergency or high-consequence instruction pattern that meets this
+  project's safety threshold. The urgent statement is checkpoint 12 below.
+
+### Current runtime copy
+
+**Title:** Hair dye and beauty treatments in pregnancy
+
+**Standfirst:** Colour, nails, lashes, tan and treatments. What is generally
+fine in pregnancy, what needs a little more care, and when to ask someone.
+
+**Quick answer:** For most people, yes. Most research indicates that dyeing
+or colouring your hair in pregnancy is safe. Hair dyes do contain chemicals,
+but your scalp absorbs very little of them, so the amount that reaches you is
+low. Concerns raised in research relate to very high doses, not to the
+exposure of an ordinary salon appointment or a home colour. Some people still
+prefer to wait until after the first twelve weeks, when they feel more
+settled. That is a personal decision rather than a rule.
+
+**What is happening — common:** Very little dye reaches you. Hair dyes do
+contain chemicals, but your scalp absorbs very little of them, so the amount
+that reaches you is low. Research concerns relate to very high doses, not to
+the exposure of an ordinary salon appointment or a home colour.
+
+**What is happening — less common:** Pregnancy hormones change hair texture,
+thickness and how it takes colour, and skin can react differently than it
+used to. Salons should be well ventilated because fumes from nail treatments
+and spray tanning can make nausea worse.
+
+**Why it varies:** Comfort levels differ. Some people carry on exactly as
+before, and some prefer to wait until after the first twelve weeks. There is
+nothing you need to undo if you have already coloured your hair.
+
+**What this means:** Most everyday beauty treatments are generally considered
+fine in pregnancy, with a little more attention to ventilation, patch testing
+and temperature.
+
+**Normally expected:** Colouring your hair at a salon or at home; highlights,
+balayage or semi-permanent colour, which put less dye on the scalp;
+manicures, gel and acrylic nails in a well-ventilated salon; fake tan lotions
+and mousses, patch tested first; waiting until after twelve weeks if that
+feels more comfortable.
+
+**Seek support:** A nail bed or lash line that becomes sore, swollen or
+infected; a reaction to a product, such as a spreading rash or swelling;
+difficulty breathing after a reaction, which needs urgent medical help;
+before starting any prescribed or strong skin treatment in pregnancy.
+
+**Disclaimer:** This is general information, not medical advice. Ask your
+midwife, GP or a pharmacist if you are unsure about a treatment, and seek
+urgent help for a severe reaction.
+
+**Can you dye your hair in pregnancy?**
+
+For most people, yes.
+
+Most research indicates that dyeing or colouring your hair in pregnancy is
+safe. Hair dyes do contain chemicals, but your scalp absorbs very little of
+them, so the amount that reaches you is low. Concerns raised in research
+relate to very high doses, not to the exposure of an ordinary salon
+appointment or a home colour.
+
+Some people still prefer to wait until after the first twelve weeks, when
+they feel more settled. That is a personal decision rather than a rule, and
+there is nothing you need to undo if you have already coloured your hair.
+
+**Ways to feel more comfortable about it**
+
+Highlights, balayage or a semi-permanent colour put less dye on the scalp
+than a full permanent head colour.
+
+Colour in a well-ventilated room, and follow the timings on the packet rather
+than leaving colour on longer. Wear gloves for home colour and rinse
+thoroughly.
+
+Do the patch test even if you have used the same product for years. Pregnancy
+can change how your skin reacts.
+
+**Your hair may behave differently anyway**
+
+Pregnancy hormones change hair texture, thickness and how it takes colour. A
+shade you have used for years can lift differently or fade faster.
+
+Tell your colourist you are pregnant so they can adjust, and consider a
+strand test before committing to a big change.
+
+**Nails, lashes and brows**
+
+Manicures, gel and acrylic nails are generally considered fine, though salons
+should be well ventilated because the fumes can make nausea worse.
+
+Lash and brow tints use the same patch-test logic as hair dye. If a nail bed
+or lash line becomes sore, swollen or infected, see your GP or pharmacist
+rather than treating it yourself.
+
+**Fake tan and sunbeds**
+
+Fake tan lotions and mousses sit on the surface of the skin and are generally
+considered fine, although skin can be more sensitive in pregnancy, so patch
+test first. Spray tan salons should be well ventilated because of the mist.
+
+Sunbeds are not recommended in pregnancy, or at any other time, because of
+the skin cancer risk, and pregnancy skin can burn and pigment more easily.
+
+**Massage, facials and saunas**
+
+Many spas ask you to wait until after twelve weeks and to use a therapist
+trained in pregnancy massage, which is about positioning and comfort as much
+as anything else.
+
+Skip anything that raises your core temperature a lot, including saunas,
+steam rooms and very hot baths. Strong facial peels and certain acne
+treatments are best checked with your midwife or a pharmacist, because some
+skin ingredients are avoided in pregnancy.
+
+**When to ask someone**
+
+Ask your midwife, GP or a pharmacist before starting any prescribed or strong
+skin treatment in pregnancy.
+
+If you have a reaction to a product, a spreading rash, swelling, or
+difficulty breathing needs urgent medical help.
+
+**Key takeaways**
+
+- Most research indicates that dyeing or colouring your hair in pregnancy is
+  safe, because the scalp absorbs very little dye.
+- Waiting until after twelve weeks is a personal preference, not a rule.
+- Patch test even familiar products, because pregnancy can change how your
+  skin reacts.
+- Manicures, lash and brow tints and fake tan are generally considered fine,
+  with good ventilation and a patch test.
+- Sunbeds are not recommended, and anything that raises your core temperature
+  a lot is best skipped.
+- Check prescribed or strong skin treatments with your midwife, GP or a
+  pharmacist.
+
+### Supported claims
+
+Colouring hair in pregnancy is safe for most people; low scalp absorption;
+research concerns relate to very high doses; waiting twelve weeks is
+preference not rule; lower-scalp-contact colour options; ventilation, packet
+timings, gloves and rinsing; patch testing familiar products; hormonal
+changes to hair; manicures, gels, acrylics, lash and brow tints as generally
+fine with ventilation and patch testing; fake tan as surface-level and
+generally fine with a patch test; sunbeds not recommended; spa twelve-week
+and trained-therapist convention; avoiding a large rise in core temperature;
+checking prescribed or strong skin treatments; routing infections and
+reactions to a GP or pharmacist; urgent help for a severe reaction.
+
+### Excluded claims
+
+No claim that any treatment is risk-free; no named product or brand
+endorsement; no ingredient list presented as safe or unsafe; no trimester
+rule presented as clinical guidance; no instruction to self-treat an
+infection or reaction.
+
+### Reviewer checkpoints
+
+1. Hair-colouring claim — "most research indicates... is safe" is the correct
+   strength for the source.
+2. Absorption wording — "your scalp absorbs very little of them" is accurate
+   and not over-reassuring.
+3. Ventilation — the ventilation advice is correct for home colour, nail
+   treatments and spray tan.
+4. Patch testing — the instruction to patch test familiar products is
+   supported and clearly stated.
+5. Nails, lashes and brows — the "generally considered fine" framing and the
+   patch-test parallel are appropriate.
+6. Fake tan — the surface-absorption reasoning and sensitivity caveat.
+7. Sunbeds — the "not recommended" wording and stated reasons.
+8. Massage and positioning — the twelve-week and trained-therapist wording is
+   presented as spa convention, not clinical guidance.
+9. Sauna and heat exposure — the core-temperature caution is complete and
+   correctly scoped to saunas, steam rooms and very hot baths.
+10. Skin and acne treatments — the deferral to midwife or pharmacist is
+    correct, without naming ingredients.
+11. Reactions — the sore, swollen or infected nail bed and lash line routing
+    to GP or pharmacist.
+12. Urgent reaction and escalation wording — "a spreading rash, swelling, or
+    difficulty breathing needs urgent medical help": whether this is
+    sufficiently urgent and correctly routed, and whether the classification
+    should be escalated to `SAFETY_REVIEW_REQUIRED`.
+13. Hero and body imagery remain unbranded, non-instructional and imply no
+    medical endorsement.
 
 Reviewer:
 

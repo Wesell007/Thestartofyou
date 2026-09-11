@@ -8,7 +8,7 @@ import bodyComfort from "@/assets/guidance-card-comfort.jpg";
 import bodySafety from "@/assets/guidance-card-safety.jpg";
 import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
-import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes.jpg";
+import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes-safe.jpg";
 import bodyNightWaking from "@/assets/firstyear-body-night-waking.jpg";
 import bodyBedtimeWindDown from "@/assets/firstyear-body-bedtime-wind-down-approved.jpg";
 
@@ -80,7 +80,7 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   "when-sleep-suddenly-changes": {
     hero: {
       src: heroSleepChanges,
-      alt: "A calm bedroom at night with a baby sleeping on their back in a clear, flat cot",
+      alt: "Baby lying on their back in a fitted sleep bag, in a clear wooden cot with a fitted sheet",
     },
     body: [
       {

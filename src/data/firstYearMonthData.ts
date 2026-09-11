@@ -1087,6 +1087,7 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
       { label: "Helping your baby settle", kicker: "Sleep", href: "/first-year/sleep/helping-your-baby-settle" },
       { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
       { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
+      { label: "Teething", kicker: "Care and safety", href: "/first-year/care-and-safety/teething" },
     ],
     sources: [
       { label: "Your baby at 4 to 6 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/4-6-months/" },
@@ -1281,6 +1282,7 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
       { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
       { label: "Helping your baby settle", kicker: "Sleep", href: "/first-year/sleep/helping-your-baby-settle" },
       { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
+      { label: "Teething", kicker: "Care and safety", href: "/first-year/care-and-safety/teething" },
     ],
     sources: [
       { label: "Your baby at 4 to 6 months", publisher: "NHS Start for Life", url: "https://www.nhs.uk/start-for-life/baby/baby-development/4-6-months/" },

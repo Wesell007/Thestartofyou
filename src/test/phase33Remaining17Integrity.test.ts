@@ -184,13 +184,9 @@ describe("Phase 33 normal category discovery", () => {
 
 describe("Phase 32F approved migration intents", () => {
   it("satisfies all five approved intents and introduces no others", () => {
-    const satisfied = MIGRATION_INTENTS.filter(({ source, href }) => {
-      const crossLinks =
-        source.system === "legacy"
-          ? (getArticle(source.slug)?.crossLinks ?? [])
-          : (firstYearArticles.find((item) => item.slug === source.slug)?.crossLinks ?? []);
-      return crossLinks.some((link) => link.href === href);
-    });
+    const satisfied = MIGRATION_INTENTS.filter(({ sources, href }) =>
+      sources.every((source) => linksForSource(source).includes(href)),
+    );
 
     expect(MIGRATION_INTENTS).toHaveLength(5);
     expect(satisfied).toHaveLength(5);
@@ -201,7 +197,9 @@ describe("Phase 32F approved migration intents", () => {
       ...Object.entries(FIRST_YEAR_SLUGS).map(([slug, topic]) => `/first-year/${topic}/${slug}`),
     ]);
 
-    const sourceSlugs = new Set<string>(MIGRATION_INTENTS.map(({ source }) => source.slug));
+    const sourceSlugs = new Set<string>(
+      MIGRATION_INTENTS.flatMap(({ sources }) => sources.map((source) => source.slug)),
+    );
     const unapproved: string[] = [];
     for (const article of firstYearArticles) {
       if (sourceSlugs.has(article.slug) || FIRST_YEAR_SLUGS[article.slug]) continue;
@@ -212,6 +210,25 @@ describe("Phase 32F approved migration intents", () => {
       }
     }
     expect(unapproved).toEqual([]);
+  });
+
+  it("carries the teething intent on both approved month-guide surfaces", () => {
+    for (const slug of ["4-months", "5-months"]) {
+      const related = getMonthGuide(slug as never)?.related ?? [];
+      expect(
+        related.filter((link) => link.href === "/first-year/care-and-safety/teething"),
+        slug,
+      ).toHaveLength(1);
+    }
+  });
+
+  it("keeps the sleep guide link as an additional contextual occurrence only", () => {
+    const sleep = firstYearArticles.find((item) => item.slug === "when-sleep-suddenly-changes");
+    expect(
+      (sleep?.crossLinks ?? []).some(
+        (link) => link.href === "/first-year/care-and-safety/teething",
+      ),
+    ).toBe(true);
   });
 });
 

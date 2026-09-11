@@ -1,5 +1,13 @@
 # Phase 33 — Human Review Pack
 
+> **Phase 33.3 update.** All 19 articles now exist as runtime records in the
+> existing datasets (`src/data/articleData.ts` for the 9 Legacy articles,
+> `src/data/firstYearArticleData.ts` for the 10 First Year articles) and can be
+> read in the frontend preview at their live routes. Reviewers should review the
+> runtime copy at those routes, which is authoritative. Governance is unchanged:
+> 19 held for human review, 0 reviews completed, 0 deployment eligible.
+
+
 **19 articles.** Human reviews completed: **0**. Nothing in this pack is
 approved for production, and nothing may be deployed until a named human
 reviewer completes the record below it.

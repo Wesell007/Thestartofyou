@@ -666,7 +666,6 @@ export const topicMapEntries: TopicMapEntry[] = [
       { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
       { label: "Induction of labour", href: "/articles/induction-of-labour" },
       { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
-          { label: "Caesarean birth", href: "/articles/caesarean-birth" },
     ],
   },
 ];

@@ -233,6 +233,25 @@ export const ARTICLE_GROUNDING_REGISTRY: readonly ArticleGroundingRecord[] = [
   { slug: "when-to-call-the-gp", journey: ["toddler"], topics: ["health-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "simple-play-ideas-for-toddlers", journey: ["toddler"], topics: ["play-connection"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "building-connection-through-everyday-play", journey: ["toddler"], topics: ["play-connection"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+
+  // Phase 33 — runtime preview records held for human review (not approved).
+  { slug: "itching-in-pregnancy", journey: ["pregnancy"], topics: ["body"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "caesarean-birth", journey: ["pregnancy"], topics: ["preparing-for-baby"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "gestational-diabetes", journey: ["pregnancy"], topics: ["health-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "diarrhoea-and-tummy-bugs-in-pregnancy", journey: ["pregnancy"], topics: ["safety-and-support"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "leg-cramps-in-pregnancy", journey: ["pregnancy"], topics: ["common-symptoms"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "hcg-levels-explained", journey: ["pregnancy","trying-to-conceive"], topics: ["safety-and-support"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "sex-during-pregnancy", journey: ["pregnancy"], topics: ["relationships-and-feelings"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "dizziness-and-feeling-faint-in-pregnancy", journey: ["pregnancy"], topics: ["common-symptoms"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "teething", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "colic-and-evening-crying", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "introducing-solid-foods", journey: ["first-year"], topics: ["feeding"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "stitches-tears-and-perineal-healing", journey: ["first-year"], topics: ["postpartum-recovery"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "separated-tummy-muscles", journey: ["first-year"], topics: ["body-and-hormones"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "sex-and-intimacy-after-birth", journey: ["first-year"], topics: ["body-and-hormones"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "newborn-quirks-and-reflexes", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "newborn-skin-spots-and-marks", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "common-illnesses-in-the-first-year", journey: ["first-year"], topics: ["checkups-and-warning-signs"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
 ];
 
 const BY_SLUG: ReadonlyMap<string, ArticleGroundingRecord> = new Map(

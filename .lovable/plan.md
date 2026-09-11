@@ -1,87 +1,87 @@
-# Phase 33 article visual standard correction
+# Phase 33.2 final governance and sleep hero correction
 
 ## Goal
-Bring the two implemented Batch 1 guides up to the approved Start of You editorial image rhythm, then update the Phase 33 programme standard for all 19 guides. Keep the existing First Year and legacy article systems unchanged. Do not deploy or begin Batch 2.
+Preserve the completed Batch 1 article and visual work while correcting both review classifications, replacing only the ambiguous sleep hero, and placing production deployment on human review hold. Do not deploy or begin Batch 2.
 
 ## Confirmed current state
 
-- `when-sleep-suddenly-changes` currently has one hero and one body image. Its seven sections support a second body image later in the reading sequence through the existing First Year image map.
-- `hair-dye-and-beauty-treatments-in-pregnancy` currently has one hero. Its seven editorial sections use the existing flagship renderer, which already supports section-specific images and alternating image and text compositions.
-- The current Phase 33 publication register still records the superseded 29-asset plan.
-- The requested Batch 1 publication report does not currently exist and must be created as part of this correction.
+- The sleep article contains direct safe sleep, room sharing, SIDS risk reduction, car seat transfer and professional advice guidance. It therefore requires `SAFETY_REVIEW_REQUIRED`, not `LOW_RISK_GENERAL`.
+- The hair dye article contains pregnancy specific health claims and precautions covering exposure, ventilation, patch testing, heat, skin treatments, reactions and professional advice. It therefore requires `HEALTH_REVIEW_REQUIRED`. Its single urgent reaction statement will be a specific reviewer checkpoint, but the article does not contain the sustained emergency or high consequence instruction pattern used by existing safety classified records.
+- Human review is complete for neither article.
+- The current sleep hero is ambiguous because its lower covering can read as loose bedding. It must be replaced.
+- Both articles remain present in the repository and preview, the other 17 remain held, and production deployments remain zero.
+- The programme visual standard is already one hero plus at least two meaningful body images per article, totalling at least 57 assets across 19 articles. This remains unchanged.
 
 ## Implementation
 
-### 1. Produce exactly three approved additional Batch 1 images
+### 1. Correct governance and deployment state
 
-Use Nano Banana inside Lovable with the established premium, warm, calm, realistic, UK editorial direction.
+Update the Phase 33 publication register and Batch 1 report so:
 
-Rejected or regenerated attempts do not count towards the production inventory and will not be retained. The report will state approved new assets = 3 and rejected or regenerated attempts separately.
+- `when-sleep-suddenly-changes` is `SAFETY_REVIEW_REQUIRED`, human review `REQUIRED / NOT COMPLETED`, production status `HOLD_HUMAN_REVIEW`.
+- `hair-dye-and-beauty-treatments-in-pregnancy` is `HEALTH_REVIEW_REQUIRED`, human review `REQUIRED / NOT COMPLETED`, production status `HOLD_HUMAN_REVIEW`.
+- No Phase 33 article is described as low risk or ready for deployment.
+- Repository published or preview available remains distinct from production deployment eligibility.
+- Human review held count becomes 19, human reviews completed remains 0, and production deployed count remains 0.
+- The corrected closure is `PHASE 33.2 — BATCH 1 VISUAL IMPLEMENTATION CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT`.
 
-- **Sleep body image 2**
-  - Supports: `What tends to help`
-  - Subject: a quiet, non-sleeping evening wind-down routine between parent and baby
-  - Placement: resolve the current section index from the authoritative title `What tends to help`, leaving the existing night-waking image associated with `Things that commonly disturb a settled pattern`
-  - Format: landscape body image, designed for the existing responsive 4:3 to 16:10 crop
-  - Safety: no unsafe sleep position, loose bedding, cot accessories, or implied sleep instruction
+### 2. Expand the human review pack from 17 to 19 records
 
-- **Hair dye body image 1**
-  - Supports: `Ways to feel more comfortable about it`
-  - Subject: thoughtful home colour preparation in a bright, ventilated domestic setting, with unbranded materials and no application instruction
-  - Placement: explicit image on the authoritative section title `Ways to feel more comfortable about it` through the existing `EditorialSection.image` field
-  - Format: portrait editorial composition for the existing flagship section placement and mobile 4:3 crop
+Add complete records for both Batch 1 articles using the current repository copy as the authoritative text rather than stale draft pointers.
 
-- **Hair dye body image 2**
-  - Supports: `Nails, lashes and brows` or `Massage, facials and saunas`, selected after checking visual separation from the hero, first body image, section spacing and article pacing
-  - Subject: understated pregnancy self-care or calm treatment consultation, fully clothed and non-clinical
-  - Placement: later in the article through the same existing section image capability
-  - Format: portrait editorial composition with a mobile-safe central focal point
+Each new record will include:
 
-Inspect every generated image for malformed anatomy, unsafe details, brands, text, visual diagnosis, staged expressions, and crop quality. Regenerate only rejected assets.
+- full current article copy
+- authoritative evidence and source URLs already used
+- supported and excluded claims
+- health or safety wording requiring review
+- claim specific reviewer checkpoints
+- current hero and body image paths where useful for visual context
+- blank `Reviewer`, `Review date`, `Outcome`, and `Reviewer notes` fields
 
-### 2. Wire images through existing article capabilities
+The sleep checkpoints will cover room sharing, SIDS risk wording, safe sleep source alignment, car seat transfer, sling wording, solids and sleep, and routes for professional advice. The hair dye checkpoints will cover the strength and scope of safety claims for colouring, absorption, ventilation, patch tests, treatments, heat exposure, reactions and urgent escalation.
 
-- Add the new sleep image to the existing First Year article image map with purposeful alt text and a section-specific caption because the current map contract already supports captions.
-- Add both hair-dye images directly to the relevant existing editorial sections.
-- Preserve all article copy, routes, metadata, image components, templates, renderers, design tokens, and navigation architecture.
-- Do not add a new layout component or change shared article styling.
+### 3. Replace only the sleep hero with Nano Banana
 
-### 3. Update Phase 33 controls
+Generate a new premium Start of You editorial hero showing:
 
-Update `docs/content/phase33-publication-register.md` so every one of the 19 records states:
+- a baby unambiguously asleep on their back
+- a separate cot with a firm, flat mattress and fitted sheet
+- clearly fitted sleepwear or an unmistakably correctly fitted sleep bag
+- face and head fully uncovered
+- no blanket, duvet, pillow, bumper, toy, positioner or loose cot accessory
+- a calm, realistic bedroom with no text or branding
 
-- hero count 1
-- body-image minimum 2
-- planned and actual totals
-- Nano Banana status
-- image QA status
-- exception status and rationale where applicable
+Inspect the generated image at source size before accepting it. Reject and remove any variant with ambiguous fabric, unsafe details, malformed anatomy, text, brands or weak responsive crop behaviour. Replace the existing hero asset or its single image map reference without changing the template or placement.
 
-Replace the old estimate with:
+Preserve both sleep body images and all three hair dye images unless final visual inspection reveals a separate defect. Confirm the wind down baby is awake and held, its caption remains routine focused, and the beauty imagery remains unbranded, non instructional and non diagnostic.
 
-```text
-19 heroes + minimum 38 body images = minimum 57 planned assets
-```
+### 4. Strengthen focused safeguards
 
-Keep all 17 review-held articles unpublished and ungenerated. Record no exceptions unless repository compatibility proves one is necessary.
+Extend the existing Batch 1 integrity coverage to verify:
 
-Create `docs/content/phase33-batch1-publication-report.md` with the two Batch 1 articles, previous image count, three newly approved assets, six final approved article images, Nano Banana provenance, rejected or regenerated attempts, section support, placement, actual asset paths, actual alt text, supported captions, aspect ratio, focal point, mobile crop, generation and QA outcomes, template confirmation, responsive checks, route and indexability checks, sitemap result, sleep link migration confirmation, hair-dye no-migration confirmation, technical validation and deployment state.
+- sleep still has exactly one hero and two correctly placed body images
+- the accepted sleep hero is the corrected asset and has explicit safe sleep alt text
+- both hair dye section images remain attached to their intended sections
+- both review classifications and human review holds are represented consistently in the Phase 33 control documents where practical
 
-### 4. Validate the complete result
+No article copy will be weakened or removed to regain a lower review class.
 
-- Inspect both guides from hero to footer at recorded desktop, tablet, and mobile viewport sizes.
-- Compare their overall pacing with the Cervical mucus benchmark: distribution, whitespace, text density, alternating compositions, section transitions, hero relationship, stacking, crops, and overflow.
-- Confirm each Batch 1 guide has exactly one hero plus at least two meaningful body images and no clustered image dumping.
-- Confirm the sleep image remains safe and the beauty images imply neither diagnosis nor medical endorsement.
-- Confirm both routes remain clean and indexable, sitemap remains at the expected two-guide increase, the documented sleep migration remains intact, and no hair-dye migration was introduced.
-- Confirm links to the remaining 17 unpublished drafts remain zero and every one remains `NOT PUBLISHED` with no generated imagery.
-- Run focused image/publication integrity tests, the full test suite, typecheck twice, lint against its recorded baseline, and a production build.
+### 5. Validate the corrected state
+
+- Inspect the complete sleep article at desktop, tablet and mobile sizes after hero replacement.
+- Confirm safe sleep presentation is unambiguous, title and hero balance is preserved, cropping is sound, no content overlaps or overflows, and all six Batch 1 image placements remain correct.
+- Reconfirm the sleep wind down image and all hair dye imagery against the stated safety and editorial checks.
+- Confirm both article routes, titles, canonicals and indexability remain valid and the sitemap still contains 333 unique URLs if repository truth confirms it.
+- Confirm the sleep link migration remains intact, hair dye still has no migration, and the other 17 records have no article, image or publication changes.
+- Run focused image and publication tests, the full test suite, typecheck twice, lint against the recorded 1 error and 10 warning baseline, and a production build.
+- Record actual results, accepted and rejected hero generation attempts, final asset path, crop behaviour and all changed files in the Batch 1 report.
 
 ## Boundaries
 
-- Batch 1 only
-- No generation for the other 17 guides
-- No substantive copy changes
-- No new article, URL, route, renderer, template, lifecycle, navigation, canonical, sitemap architecture, AI, journal, memory, voice, database, schema, or RLS work
 - No deployment
-- Stop after the Phase 33.2 Batch 1 closure report. Close as `PHASE 33.2 — BATCH 1 PUBLICATION IMPLEMENTATION CLOSED PASS / VISUAL STANDARD CORRECTED / READY FOR DEPLOYMENT` only if every gate passes, stating repository-published articles = 2 and production-deployed articles = 0. Otherwise close on visual verification hold.
+- No Batch 2
+- No article copy removal or substantive rewrite
+- No body image regeneration unless a separate defect is proven during QA
+- No renderer, template, route, canonical, navigation, sitemap architecture, lifecycle, AI, grounding behaviour, journal, memory, voice, database, schema or RLS changes
+- The two repository records remain available for preview and review, but all 19 Phase 33 articles remain blocked from production deployment until their required human reviews are genuinely completed

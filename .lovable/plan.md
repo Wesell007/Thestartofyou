@@ -1,60 +1,57 @@
-# Phase 33.3 — final exception reconciliation
+# Phase 33.3 — final exception reconciliation (approved)
 
-Reconciliation only. No deployment, no new phase, no rebuild of the completed article work.
+Reconciliation only. No deployment, no new phase, no rebuild of completed article work.
 
-## 1. Grounding: what actually changed (verified)
+## 1. Grounding — approved boundary exception, preserved
 
-Exact files changed under grounding during Phase 33.3 (commit `6b29c804`, diff against `406304fd`):
+Files changed during Phase 33.3 (verified against commit `406304fd..6b29c804`):
 
-- `src/lib/grounding/articleGroundingRegistry.ts` — 17 metadata rows appended, one per new Phase 33.3 article slug, all `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, `archived: false`, `deprecated: false`. No sensitivity, owner, reviewer, contentVersion, approvedBy or approvedAt fields set.
-- `src/test/articleGrounding.test.ts` — pinned counts updated 208 to 225, draft 45 to 62.
-- `src/test/articleGroundingApproval.test.ts` — same two pinned counts.
+- `src/lib/grounding/articleGroundingRegistry.ts` — 17 metadata rows appended, all `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, `archived: false`, `deprecated: false`, no approval fields.
+- `src/test/articleGrounding.test.ts`, `src/test/articleGroundingApproval.test.ts` — pinned counts 208 to 225, draft 45 to 62.
 
-Nothing else grounding-related changed. `supabase/functions/_shared/aiVersions.ts` is untouched: `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`. No file under `docs/ai/grounding-approvals/` changed. No eligibility helper, prompt, mode, source-routing rule or edge function changed.
+Rows stay. Nothing reverted. Reporting will read:
 
-Why it was made: `src/test/articleGroundingDrift.test.ts` requires exactly one registry record for every article slug in the datasets and zero orphans. Adding 17 runtime article records without registry rows breaks that guard. The rows are default-deny governance metadata, not approvals.
+```text
+GROUNDING REGISTRY METADATA CHANGES   17 default-deny coverage rows added
+GROUNDING RUNTIME BEHAVIOUR CHANGES   0
+```
 
-Effect: eligible slugs stay `[]`, candidates 0, approved 0, runtime grounding behaviour unchanged, classifications unchanged, routing unchanged.
+Classified as APPROVED PHASE 33.3 BOUNDARY EXCEPTION — REGISTRY COVERAGE / DEFAULT-DENY METADATA ONLY. To verify and quote: registry 225, approved 0, candidates 0, `listGroundingEligibleSlugs()` empty, `AI_SOURCE_ROUTING_VERSION` = `30B-source-routing-v1`, drift guard PASS, 0 prompt/routing/eligibility/edge-function changes.
 
-Conclusion to record: **GROUNDING RUNTIME CHANGES = 0**, with a documented registry-coverage exception (metadata rows only, default deny). Nothing to revert. Verification to re-run and quote in the report: registry length 225, approved count 0, candidate count 0, `listGroundingEligibleSlugs()` empty, `AI_SOURCE_ROUTING_VERSION` string pinned.
+## 2. Teething correction on the approved surfaces
 
-## 2. Teething migration: month-page findings
+Add one `related` entry (existing `MonthRelated` mechanism, already rendered) to `src/data/firstYearMonthData.ts`:
 
-Verified in `src/data/firstYearMonthData.ts` and `src/components/firstyear/month/FirstYearMonthPage.tsx`:
+- `4-months` related list, and `5-months` related list
+- `{ label: "Teething", kicker: "Care and safety", href: "/first-year/care-and-safety/teething" }`
 
-- Teething context appears at 4 months and 5 months (mouthing described as "not usually about teething alone") and more substantively in the sleep copy at 7, 8, 9 and 11 months.
-- Month pages already have two rendered link mechanisms: `MonthQuestion.readMore` and the `related` list (`MonthRelated { label, kicker, href }`). Both are rendered today.
-- So the approved intent **can** be satisfied on the month pages with existing architecture. No new component, field, renderer or template is required.
-- Constraint: at 4 and 5 months every existing question already carries a `readMore`, and repointing one would delete an approved link. Adding a `related` entry is therefore the correct existing mechanism.
+No existing `readMore` destination is touched. No new field, component, renderer or template.
 
-## 3. Proposed teething correction
+## 3. Classification
 
-Add one existing-mechanism `related` entry linking to `/first-year/care-and-safety/teething` on the month guides carrying teething context: `4-months` and `5-months` (the originally approved surfaces).
+```text
+Approved migration intents        5
+Satisfied exactly as approved     5
+Implementation exceptions         0
+Unapproved migration intents      0
+```
 
-Then re-classify:
+The existing `when-sleep-suddenly-changes` to teething cross-link stays and is recorded separately as an ADDITIONAL EDITORIALLY RELEVANT CONTEXTUAL LINK, not as the intent's source surface. Actual contextual occurrences are counted and reported separately from the intent count.
 
-- TEETHING MIGRATION INTENT = SATISFIED_AS_APPROVED
-- Approved Phase 32F intents = 5, satisfied exactly as approved = 5, implementation exceptions = 0.
+## 4. Integrity test update
 
-The existing sleep-guide cross-link (`when-sleep-suddenly-changes` to teething) is editorially relevant and stays, reported as an additional contextual occurrence, not as the intent's source surface.
+`src/test/phase33Remaining17Integrity.test.ts`: the teething intent asserts the 4-month and 5-month `related` links. All existing assertions preserved — 19 records (9 Legacy, 10 First Year), routes, 19/19 normal category discovery with 0 duplicates, hero plus two body images per article, non-claim alt text, five satisfied intents, zero unapproved intents, zero unsupported review metadata.
 
-If you would rather not touch the month data at all, the fallback is to keep the sleep-guide link only and report:
+## 5. Validation
 
-- TEETHING MIGRATION INTENT = IMPLEMENTATION_EXCEPTION / ALTERNATIVE_CONTEXTUAL_LINK
-- intents 5, satisfied as approved 4, exceptions 1.
+Focused Phase 33 tests, grounding drift/approval tests, full suite, typecheck twice, lint (baseline 1 error / 10 warnings), production build, sitemap generation with duplicate check. Actual post-correction numbers reported; previous baseline 119 files / 1,307 tests.
 
-## 4. Boundary reconciliation
+## 6. Preserved results to reconfirm
 
-Full changed-file list for the phase will be reconciled against the boundary table (new hub, navigation, renderer, template, design token, database, schema, RLS, AI runtime, grounding runtime, journal, memory, voice, lifecycle, deployment — all expected 0). The only files touched were article/topic data, the First Year image map, assets, tests, the grounding registry metadata rows above, docs and the generated sitemap.
+19 records (Legacy 9, First Year 10), 19/19 routes, 19/19 normal discovery, 0 duplicate discovery, 19 heroes, 38 body images, 57 approved assets, sitemap 350 unique / 0 duplicates, 0 broken images, 0 horizontal overflow, 0 human reviews, 0 deployment eligible, 0 deployed.
 
-## 5. Validation after the correction
+## 7. Documentation
 
-- `src/test/phase33Remaining17Integrity.test.ts` updated so the teething intent asserts the month-page surface.
-- Full test suite, typecheck twice, lint (baseline 1 error / 10 warnings), build, sitemap count.
-- Preserved results re-confirmed: 19 records (Legacy 9, First Year 10), 19 routes, 19 discovery entries, 0 duplicates, 19 heroes, 38 body images, 57 approved assets, sitemap 350 unique / 0 duplicates.
+Update `docs/content/phase33-remaining17-frontend-report.md` with the grounding registry coverage exception (runtime behaviour changed NO, eligibility NO, AI routing NO, approvals NO), teething SATISFIED_AS_APPROVED on the 4 and 5 month guides, the sleep-guide link as an additional contextual occurrence, the full boundary table (all zeros except the 17 registry metadata rows), and closure.
 
-## 6. Documentation
-
-Update `docs/content/phase33-remaining17-frontend-report.md` with the grounding exception explanation and the corrected teething classification; leave the publication register and human-review pack governance unchanged (19 held, 0 reviews, 0 deployment eligible, deployment block active).
-
-Closure on pass: **PHASE 33.3 — CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**. No deployment.
+Closure on pass: **PHASE 33.3 — CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**. Global Phase 33 deployment block stays ACTIVE. No deployment.

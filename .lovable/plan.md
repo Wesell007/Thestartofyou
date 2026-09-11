@@ -9,10 +9,10 @@ entries are added.
 
 What is left is the closing work.
 
-## 1. Phase 32F approved migrations (5)
+## 1. Phase 32F approved migration intents (5)
 
-Apply only the five already-approved ownership links, in the existing
-`crossLinks` / editorial link fields, nothing new invented:
+Apply only the five already-approved ownership intents, through the existing
+`crossLinks` and editorial link fields, nothing new invented:
 
 - Caesarean birth — from the labour and recovery surfaces that carry caesarean
   asides.
@@ -21,7 +21,11 @@ Apply only the five already-approved ownership links, in the existing
 - Stitches, tears and perineal healing — from `healing-after-birth`.
 - Separated tummy muscles — from `your-body-after-birth`.
 
-Normal category discovery is not counted as a migration.
+These are five intents, not five hyperlinks: an intent may need more than one
+contextual occurrence where the Phase 32F record names several source surfaces.
+Report intents required, intents satisfied, unapproved intents, and the actual
+number of contextual link occurrences separately. Normal category discovery is
+not a migration.
 
 ## 2. Duplicate discovery clean-up
 

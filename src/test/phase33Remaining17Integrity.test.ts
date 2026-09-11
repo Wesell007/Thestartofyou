@@ -3,6 +3,7 @@ import { firstYearArticleImageMap } from "@/components/firstyear/article/firstYe
 import { getArticle } from "@/data/articleData";
 import type { FirstYearArticleTopic } from "@/data/firstYearArticleData";
 import { firstYearArticles, getFirstYearArticlesByTopic } from "@/data/firstYearArticleData";
+import { getMonthGuide } from "@/data/firstYearMonthData";
 import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
 
 /**

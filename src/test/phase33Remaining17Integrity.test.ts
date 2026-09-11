@@ -43,39 +43,53 @@ const REMAINING_FIRST_YEAR = Object.keys(FIRST_YEAR_SLUGS).filter(
   (slug) => slug !== "when-sleep-suddenly-changes",
 );
 
-/** The five approved Phase 32F ownership migration intents. */
+/**
+ * The five approved Phase 32F ownership migration intents. An intent is an
+ * ownership decision, not a hyperlink count: teething is one intent carried on
+ * both approved month-guide surfaces.
+ */
 const MIGRATION_INTENTS = [
   {
     intent: "caesarean-birth",
-    source: { system: "legacy", slug: "signs-of-labour" },
+    sources: [{ system: "legacy", slug: "signs-of-labour" }],
     href: "/articles/caesarean-birth",
   },
   {
     intent: "teething",
-    source: { system: "month-guide", slug: "4-months" },
-    href: "/first-year/care-and-safety/teething",
-  },
-  {
-    intent: "teething",
-    source: { system: "month-guide", slug: "5-months" },
+    sources: [
+      { system: "month-guide", slug: "4-months" },
+      { system: "month-guide", slug: "5-months" },
+    ],
     href: "/first-year/care-and-safety/teething",
   },
   {
     intent: "introducing-solid-foods",
-    source: { system: "legacy", slug: "feeding-your-baby-complete-guide" },
+    sources: [{ system: "legacy", slug: "feeding-your-baby-complete-guide" }],
     href: "/first-year/feeding/introducing-solid-foods",
   },
   {
     intent: "stitches-tears-and-perineal-healing",
-    source: { system: "first-year", slug: "healing-after-birth" },
+    sources: [{ system: "first-year", slug: "healing-after-birth" }],
     href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
   },
   {
     intent: "separated-tummy-muscles",
-    source: { system: "legacy", slug: "your-body-after-birth" },
+    sources: [{ system: "legacy", slug: "your-body-after-birth" }],
     href: "/first-year/body-and-hormones/separated-tummy-muscles",
   },
 ];
+
+const linksForSource = (source: { system: string; slug: string }): string[] => {
+  if (source.system === "legacy") {
+    return (getArticle(source.slug)?.crossLinks ?? []).map((link) => link.href);
+  }
+  if (source.system === "month-guide") {
+    return (getMonthGuide(source.slug as never)?.related ?? []).map((link) => link.href);
+  }
+  return (
+    firstYearArticles.find((item) => item.slug === source.slug)?.crossLinks ?? []
+  ).map((link) => link.href);
+};
 
 const CLAIM_LIKE_ALT =
   /\b(safe|unsafe|risky?|should|must|always|never|cures?|treats?|diagnos\w*)\b/i;

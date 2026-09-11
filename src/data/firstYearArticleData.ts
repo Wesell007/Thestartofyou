@@ -536,6 +536,13 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "newborn-sleep-expectations",
       "baby-development-in-the-first-year",
     ],
+    crossLinks: [
+      {
+        label: "Teething",
+        href: "/first-year/care-and-safety/teething",
+        context: "What teething tends to involve, and what it does not explain.",
+      },
+    ],
     sources: [
       {
         label: "Helping your baby to sleep",
@@ -1065,6 +1072,11 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Postpartum recovery timeline",
         href: "/articles/postpartum-recovery-timeline",
         context: "The wider recovery guide this sits inside.",
+      },
+      {
+        label: "Stitches, tears and perineal healing",
+        href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
+        context: "The detailed guide to stitches, tears and perineal healing.",
       },
     ],
     sources: [

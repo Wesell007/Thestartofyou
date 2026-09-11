@@ -2947,6 +2947,13 @@ const articleDatabase: ArticleData[] = [
     sources: ["NHS: Breastfeeding", "NHS: Bottle feeding", "UNICEF Baby Friendly Initiative", "La Leche League GB"],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",
+    crossLinks: [
+      {
+        label: "Introducing solid foods",
+        href: "/first-year/feeding/introducing-solid-foods",
+        context: "When and how first foods usually start, alongside milk feeds.",
+      },
+    ],
     faq: [
       { question: "How do I know if my baby is getting enough milk?", answer: "Key signs include regular wet and dirty nappies, steady weight gain, and your baby seeming content after feeds. Your health visitor will monitor weight at regular check-ups." },
       { question: "Is it okay to mix breastfeeding and formula?", answer: "Yes. Combination feeding is common and can work well. Introducing formula does not mean you have to stop breastfeeding." },
@@ -3245,6 +3252,13 @@ const articleDatabase: ArticleData[] = [
     topics: ["body-changes", "timelines"],
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
+    crossLinks: [
+      {
+        label: "Separated tummy muscles",
+        href: "/first-year/body-and-hormones/separated-tummy-muscles",
+        context: "What abdominal separation is, and what helps it recover.",
+      },
+    ],
     faq: [
       { question: "How long does postpartum bleeding last?", answer: "Lochia typically lasts 4-6 weeks, gradually reducing in flow and changing from red to pink to yellowish." },
       { question: "When will my body go back to normal?", answer: "Physical recovery takes months, not weeks. Many people notice significant improvement by 3-6 months, but some changes are permanent. 'Normal' may look different than before." },
@@ -5974,6 +5988,13 @@ const articleDatabase: ArticleData[] = [
     topics: ["body", "labour"],
     reviewedBy: "Jenny Joines",
     lastUpdated: "April 2026",
+    crossLinks: [
+      {
+        label: "Caesarean birth",
+        href: "/articles/caesarean-birth",
+        context: "What a planned or unplanned caesarean involves, if birth takes that route.",
+      },
+    ],
     keyTakeaways: [
       "Labour usually begins with contractions, waters breaking, or a show — sometimes all three, often not at once",
       "Early signs can come and go for hours or days before labour establishes",

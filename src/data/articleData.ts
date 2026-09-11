@@ -23049,6 +23049,1731 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+// ─── ITCHING IN PREGNANCY ──────────────────────────────────────────────
+  {
+    slug: "itching-in-pregnancy",
+    title: "Itching in pregnancy: why it happens, and when to call your maternity team",
+    metaDescription:
+      "Itching in pregnancy is common and usually nothing serious, but some patterns need checking the same day. What causes it, what helps, and when to call.",
+    quickAnswer:
+      "Itching in pregnancy is common, and it is usually caused by ordinary things: hormone changes and skin stretching as your baby grows. It normally settles after birth. Sometimes, though, itching is a sign of a liver condition called intrahepatic cholestasis of pregnancy, or ICP, which can be serious and needs treatment. If your itching is severe, if it is worse at night, or if the palms of your hands or the soles of your feet are itchy, contact your maternity unit now. Do not wait to see whether it passes.",
+    howThisFeels: [
+      "Dismissing an itch in daylight, then lying awake scratching your shins at three in the morning",
+      "Wondering whether this is just skin doing skin things, or something more",
+      "Not wanting to bother anyone with what might turn out to be nothing",
+      "Trying to describe an itch on the phone and feeling like it sounds too vague to matter",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Hormone changes and stretching skin",
+          body: "Changing hormone levels and skin stretching as your baby grows are the usual reasons for itching in pregnancy, and the itching usually stops once your baby is born.",
+        },
+        {
+          heading: "Drier, more reactive skin",
+          body: "Skin that was fine before pregnancy can become drier, more reactive and quicker to complain. If you already have eczema, pregnancy can make it worse.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Intrahepatic cholestasis of pregnancy (ICP)",
+          body: "Itching can also sometimes be caused by ICP, a liver condition that needs to be treated with medicine. That does not make ICP the likely explanation for your itching, but it is the reason certain patterns of itching are taken seriously.",
+        },
+      ],
+      whyItVaries:
+        "Being itchy does not mean you have ICP. This page will not tell you the odds either way, because ICP is diagnosed by your maternity team, not by a symptom checklist. What matters is that certain patterns get checked quickly rather than at your next scheduled appointment.",
+    },
+    timing: {
+      whenStarts:
+        "Itching can start at any point in pregnancy as skin stretches and hormone levels change.",
+      whenEases:
+        "Ordinary pregnancy itching usually stops once your baby is born.",
+    },
+    whatItFeelsLike: [
+      "An itch that is easy to dismiss in daylight and hard to ignore at night",
+      "Not knowing whether to call, and not needing to have decided what is wrong before you do",
+    ],
+    whatThisMeans:
+      "Most itching in pregnancy is ordinary and settles after birth, but severe itching, itching worse at night, or itching on the palms or soles needs same-day medical attention because these can be signs of ICP.",
+    normal: [
+      "Generally itchy skin as your bump grows, especially over the tummy",
+      "Skin that is drier or more reactive than before pregnancy",
+      "Eczema flaring up more than usual",
+      "Itching that responds to moisturiser, cool baths and loose clothing",
+    ],
+    seekSupport: [
+      "Skin that is very itchy, for example itchy enough to keep you awake at night",
+      "Itchy palms of your hands or soles of your feet",
+      "Itching that is worse at night",
+      "A new rash, lump or swelling, or itching not improving after pharmacist-suggested treatment",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Contact your maternity unit or call 111 for the urgent symptoms above, and see a GP for the others.",
+    whatYouCanDo: [
+      {
+        action: "Pat or tap itchy skin instead of scratching it",
+        reason: "It relieves the itch without damaging the skin.",
+      },
+      {
+        action: "Keep baths and showers cool or warm, and under 20 minutes",
+        reason: "Hot water tends to make itching worse.",
+      },
+      {
+        action: "Use an unperfumed moisturiser or emollient regularly, and skip perfumed products",
+        reason: "Perfumed soaps, deodorants and moisturisers can irritate itchy skin.",
+      },
+      {
+        action: "Keep nails short and wear loose clothing made from natural fibres such as cotton",
+        reason: "It reduces damage from scratching and keeps skin comfortable.",
+      },
+      {
+        action: "Go easy on very spicy food and caffeinated drinks",
+        reason: "These can make skin feel itchier for some people.",
+      },
+      {
+        action: "Ask a pharmacist first",
+        reason: "They can suggest creams, lotions and antihistamines that are safe in pregnancy, and tell you if you should see a GP or midwife instead.",
+      },
+    ],
+    whatHappensNext:
+      "For itching that has been assessed and is not causing concern, a pharmacist, GP or midwife can offer creams, antihistamines or steroid cream, and most ordinary pregnancy itching settles after birth. If ICP is suspected, blood tests and a care plan follow, with extra appointments and medicines, and most people with ICP make a full recovery and have a healthy birth.",
+    relatedStage: {
+      intro: "This sits alongside the rest of what your body is doing in pregnancy:",
+      links: [
+        {
+          label: "Your body in pregnancy",
+          href: "/pregnancy/body",
+          context: "The wider picture of physical changes to expect.",
+        },
+        {
+          label: "Third trimester complete guide",
+          href: "/articles/third-trimester-complete-guide",
+          context: "What else is typical in the final weeks.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Is itching normal in pregnancy?",
+      "What does itchy hands and feet in pregnancy mean?",
+      "When should I call about itching in pregnancy?",
+    ],
+    captureIntro:
+      "Itching can be easy to brush off until it disrupts your sleep. Worth noting where it was, how bad, and whether it eased.",
+    trimester: [1, 2, 3],
+    relatedSlugs: [
+      "pelvic-pain-in-pregnancy",
+      "tests-and-scans-in-pregnancy",
+      "third-trimester-complete-guide",
+    ],
+    journey: ["pregnancy"],
+    topics: ["body"],
+    keyTakeaways: [
+      "Itching in pregnancy is common and usually caused by hormone changes and stretching skin, easing after birth.",
+      "Severe itching, itching worse at night, or itching on the palms or soles needs same-day medical attention.",
+      "These patterns can be signs of ICP, a liver condition diagnosed by blood tests, not a symptom checklist.",
+      "Being itchy does not mean you have ICP, and being sent home reassured is a good outcome, not a wasted trip.",
+      "A pharmacist is a good first stop for ordinary itching that is not causing concern.",
+      "With ICP, a care plan, extra monitoring and medicines reduce risk, and most people have a healthy birth.",
+    ],
+    sources: [
+      {
+        label: "Itching in pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/complications/itching-and-intrahepatic-cholestasis/",
+      },
+      {
+        label: "Intrahepatic cholestasis of pregnancy, Green-top Guideline No. 43",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/intrahepatic-cholestasis-of-pregnancy-green-top-guideline-no-43/",
+      },
+      {
+        label: "Intrahepatic cholestasis of pregnancy — patient information",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/intrahepatic-cholestasis-of-pregnancy/",
+      },
+    ],
+    topic: "body",
+    standfirst:
+      "Itching in pregnancy is usually ordinary skin change, but a few patterns need checking the same day. What causes it, what helps, and when to call your maternity team.",
+    hero: {
+      src: new URL("../assets/article-hero-itching-in-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman sitting on the edge of her bed at night, gently resting a hand on her forearm.",
+    },
+    editorialSections: [
+      {
+        id: "the-itch-that-keeps-you-awake",
+        heading: "The itch that keeps you awake",
+        lead: "Pregnancy itching is easy to dismiss in daylight and hard to ignore at night.",
+        paragraphs: [
+          "Itching does not sound like much until it is three in the morning and you have been scratching your shins for an hour. Most of the time it is exactly what it seems: skin doing skin things while your body changes shape. Occasionally it is your body flagging something that needs looking at.",
+          "This page helps you tell the difference, and it does not ask you to make a diagnosis on your own.",
+        ],
+      },
+      {
+        id: "why-itching-happens-in-pregnancy",
+        heading: "Why itching happens in pregnancy",
+        paragraphs: [
+          "Itching in pregnancy is common. Changing hormone levels and skin stretching as your baby grows are the usual reasons, and the itching usually stops once your baby is born. Skin that was fine before pregnancy can become drier, more reactive and quicker to complain. If you already have eczema, pregnancy can make it worse.",
+          "Itching can also sometimes be caused by ICP, a liver condition that needs to be treated with medicine. That does not make ICP the likely explanation for your itching, and this page will not tell you the odds either way. It is simply the reason certain patterns of itching are taken seriously.",
+        ],
+      },
+      {
+        id: "when-to-speak-to-your-maternity-team",
+        heading: "When to speak to your maternity team",
+        image: {
+          src: new URL("../assets/article-body-itching-in-pregnancy-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman making a phone call while sitting comfortably at home in the evening.",
+        },
+        paragraphs: [
+          "Some itching needs same-day attention. Get urgent medical help now if you are pregnant and your skin is very itchy, for example itchy enough to keep you awake at night, if the palms of your hands or the soles of your feet are itchy, or if the itching is worse at night. Call your maternity unit if you have the number. If you cannot reach them, call 111. These can be signs of ICP, which needs urgent treatment.",
+          "See a GP if you are pregnant with itchy skin and the itching is affecting your daily life, it has not improved after treatment suggested by a pharmacist or it keeps coming back, you have eczema, which can get worse in pregnancy, or you have a new rash, lump or swelling. These are usually not harmful in pregnancy, but a GP can offer advice and treatment.",
+          "You do not need to justify the call, and you do not need to have decided what is wrong before you make it. Describing where you itch, when it is worst and whether it is disturbing your sleep is enough.",
+        ],
+      },
+      {
+        id: "what-icp-means-in-plain-english",
+        heading: "What ICP means, in plain English",
+        paragraphs: [
+          "Intrahepatic cholestasis of pregnancy, previously called obstetric cholestasis, is a condition affecting how the liver works during pregnancy. It is diagnosed by your maternity team, not by a symptom checklist, and blood tests are part of that assessment.",
+          "If you are diagnosed with ICP, a care plan is agreed with you to keep you and your baby as well as possible. You will be offered extra appointments to check on you both, and medicines to treat your liver and reduce the itching. With ICP there is a small risk your baby may be born early, before 37 weeks, and a small risk of stillbirth if the ICP is severe. Your care team will talk through what that means for your particular pregnancy, and your midwife and doctor may suggest starting labour early to reduce the risk. Most people with ICP make a full recovery and have a healthy birth.",
+        ],
+      },
+      {
+        id: "easing-ordinary-itching",
+        heading: "Easing ordinary itching",
+        image: {
+          src: new URL("../assets/article-body-itching-in-pregnancy-2.jpg", import.meta.url).href,
+          alt: "A pregnant woman applying unperfumed moisturiser to her arm after a shower.",
+        },
+        paragraphs: [
+          "For itching that has been assessed and is not causing concern, there are things that genuinely help: pat or tap your skin instead of scratching it, keep baths and showers cool or warm rather than hot and under 20 minutes, use an unperfumed moisturiser or emollient regularly, keep your nails short so scratching does less damage, wear loose clothing made from natural fibres such as cotton, skip perfumed soaps, deodorants and moisturisers, and go easy on very spicy food and on caffeinated drinks like tea and coffee, which can make skin feel itchier.",
+          "A pharmacist is a good first stop. They can suggest creams and lotions that are safe in pregnancy, antihistamines that are safe to buy in pregnancy, and other things that help, and they will tell you if you should see a GP or midwife instead. Tell them you are pregnant, where the itching is and whether you have any other symptoms.",
+          "A GP or midwife may offer antihistamine tablets, some of which also help with sleep if itching is keeping you awake, emollients, or steroid cream. If your symptoms are very bad you may be referred to a dermatologist, or to a maternity unit if you have symptoms of ICP.",
+        ],
+      },
+      {
+        id: "what-this-does-not-mean",
+        heading: "What this does not mean",
+        paragraphs: [
+          "Being itchy does not mean you have ICP. Contacting your maternity unit does not mean you are overreacting, and being sent home reassured is a good outcome, not a wasted trip. What matters is that the checking happens quickly rather than at your next scheduled appointment.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "You do not need to have decided what is wrong before you call. Describing where you itch, when it is worst and whether it is disturbing your sleep is enough.",
+        },
+      },
+    ],
+  },
+  // ─── CAESAREAN BIRTH ───────────────────────────────────────────────────
+  {
+    slug: "caesarean-birth",
+    title: "Caesarean birth: what happens, and what the first days are like",
+    metaDescription:
+      "What a caesarean birth involves, why one may be planned or unplanned, what the operation is like, and what to expect in the first days afterwards.",
+    quickAnswer:
+      "A caesarean is an operation to deliver your baby through a cut made in your tummy and womb, usually just below your bikini line. It is major surgery, so it is generally done when it is the safest option for you and your baby. Around 45% of babies born in England are born this way. It may be planned, usually from 39 weeks, or it may be decided during labour. Most caesareans are done under a spinal or epidural, so you are awake, and the operation normally takes about 40 to 50 minutes.",
+    howThisFeels: [
+      "Picturing one kind of birth and preparing for another",
+      "Feeling relief, feeling robbed of the birth you imagined, or both within the same hour",
+      "Wanting to know roughly what the day looks like before you are in it",
+      "Wondering how a caesarean will affect recovery, feeding and future births",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Planned for a known reason",
+          body: "A caesarean may be recommended as a planned procedure, usually from the 39th week of pregnancy. Reasons include your baby being in the breech position when turning has not worked or is not wanted, a low-lying placenta, pre-eclampsia, certain infections, concerns that your baby is not getting enough oxygen and nutrients, labour not progressing, or heavy bleeding.",
+        },
+        {
+          heading: "Decided during labour",
+          body: "A caesarean can also be carried out as an emergency if a vaginal birth is thought to become too risky once labour is under way.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Requested without a medical reason",
+          body: "You can also ask for a caesarean without a medical reason. You should be offered a conversation about the benefits and risks, and support if you are anxious about giving birth. If, after all of that, you still feel a vaginal birth is not an acceptable option for you, you should be offered a planned caesarean.",
+        },
+      ],
+      whyItVaries:
+        "Where there is time to plan, your midwife or doctor will talk through the benefits and risks compared with a vaginal birth. Whether a caesarean is planned well ahead or decided during labour, the aim is the same: the safest route for you and your baby.",
+    },
+    timing: {
+      whenStarts:
+        "Planned caesareans are usually done from the 39th week of pregnancy; unplanned ones can happen at any point once labour has started.",
+      whenEases:
+        "Most people go home one to two days later, and driving, exercising, lifting anything heavier than your baby and having sex often wait around six weeks.",
+    },
+    whatItFeelsLike: [
+      "Awake but numb from the chest or waist down, with a screen across your body so you cannot see what is being done",
+      "Tugging and pulling during the operation, described as pressure rather than pain",
+    ],
+    whatThisMeans:
+      "A caesarean is a birth, not a failure of one. It is generally very safe, recovery usually takes longer than from a vaginal birth, and most people who have had one can safely have a vaginal birth next time.",
+    normal: [
+      "Being offered a planned caesarean from 39 weeks for a known medical reason, or requesting one",
+      "Having a caesarean decided during labour if a vaginal birth becomes too risky",
+      "Feeling tugging and pulling, described as pressure rather than pain, during the operation",
+      "Going home one to two days afterwards, and taking around six weeks before driving, exercising, heavy lifting or sex",
+      "Feeling relief, loss, or both about how the birth went",
+    ],
+    seekSupport: [
+      "Severe pain, leaking urine, or pain when peeing",
+      "Heavy vaginal bleeding",
+      "A wound that becomes more red, painful or swollen, or pus or foul-smelling fluid from your wound",
+      "A cough or shortness of breath, or swelling or pain in your lower leg",
+      "Still feeling heavily affected by how your birth went weeks later",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Contact your midwife or a GP straight away for the urgent symptoms above, and speak to your midwife, health visitor or GP if your birth is still sitting heavily with you.",
+    whatYouCanDo: [
+      {
+        action: "Ask your midwife or doctor to talk through the benefits and risks compared with a vaginal birth",
+        reason: "This helps you understand why a caesarean is being recommended or offered.",
+      },
+      {
+        action: "Take regular pain relief at home, such as paracetamol or ibuprofen if breastfeeding",
+        reason: "Aspirin and the codeine in co-codamol are usually avoided while breastfeeding; your doctor can advise on what suits you.",
+      },
+      {
+        action: "Use pads rather than tampons for vaginal bleeding after birth",
+        reason: "It reduces infection risk while you heal, and heavy bleeding should be checked.",
+      },
+      {
+        action: "Keep moving gently, such as a daily walk, without overdoing it",
+        reason: "It reduces the risk of blood clots after surgery.",
+      },
+      {
+        action: "Wait around six weeks before driving, exercising, heavy lifting or sex",
+        reason: "Your midwife or the GP at your six-week check can advise on timing for you.",
+      },
+    ],
+    whatHappensNext:
+      "Non-dissolvable stitches or staples are usually taken out by your midwife after five to seven days. Most people who have had a caesarean can safely have a vaginal birth next time, known as VBAC, sometimes with extra monitoring during labour, while some are advised to have another caesarean depending on what is safest for them and their baby.",
+    relatedStage: {
+      intro: "This sits alongside the rest of preparing for baby's arrival:",
+      links: [
+        {
+          label: "Preparing for baby",
+          href: "/pregnancy/preparing-for-baby",
+          context: "The wider picture of getting ready for birth.",
+        },
+        {
+          label: "Writing a birth plan",
+          href: "/articles/writing-a-birth-plan",
+          context: "How to record your preferences, including for a caesarean.",
+        },
+        {
+          label: "Birth preferences",
+          href: "/articles/birth-preferences",
+          context: "Thinking through options ahead of the day.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "What happens during a caesarean birth?",
+      "How long is recovery after a caesarean?",
+      "Can I have a vaginal birth after a caesarean?",
+    ],
+    captureIntro:
+      "However your birth happens, it helps to have somewhere to note how you felt about it, then and later.",
+    trimester: [2, 3],
+    relatedSlugs: [
+      "birth-preferences",
+      "writing-a-birth-plan",
+      "induction-of-labour",
+      "hospital-bag-and-what-to-pack",
+      "your-body-after-birth",
+    ],
+    journey: ["pregnancy"],
+    topics: ["preparing-for-baby"],
+    keyTakeaways: [
+      "A caesarean is major surgery to deliver your baby through a cut in your tummy and womb, done when it is the safest option.",
+      "Around 45% of babies born in England are born by caesarean, either planned from 39 weeks or decided during labour.",
+      "Most caesareans use a spinal or epidural, so you are awake, and the operation normally takes 40 to 50 minutes.",
+      "Recovery usually takes longer than after a vaginal birth, with most people home one to two days later.",
+      "Contact your midwife or a GP straight away for signs of infection or a blood clot after a caesarean.",
+      "Most people who have had a caesarean can safely have a vaginal birth next time.",
+    ],
+    sources: [
+      {
+        label: "Caesarean section — Overview",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/tests-and-treatments/caesarean-section/",
+      },
+      {
+        label: "Caesarean section — Recovery",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/tests-and-treatments/caesarean-section/recovery/",
+      },
+    ],
+    topic: "preparing-for-baby",
+    standfirst:
+      "What a caesarean involves, why one may be planned or unplanned, what the operation is like, and what the first days afterwards tend to bring.",
+    hero: {
+      src: new URL("../assets/article-hero-caesarean-birth.jpg", import.meta.url).href,
+      alt: "A calm hospital room with a partner sitting beside a new mother holding her newborn baby.",
+    },
+    editorialSections: [
+      {
+        id: "a-birth-not-a-failure-of-one",
+        heading: "A birth, not a failure of one",
+        lead: "Plenty of people arrive at a caesarean without ever having pictured one.",
+        paragraphs: [
+          "Some plan it months ahead. Some are told during labour that this is now the safest route. Either way it is a birth, and it helps to know roughly what the day looks like before you are in it.",
+        ],
+      },
+      {
+        id: "why-a-caesarean-may-happen",
+        heading: "Why a caesarean may happen",
+        paragraphs: [
+          "A caesarean may be recommended as a planned procedure, or carried out in an emergency if a vaginal birth is thought to be too risky. Planned caesareans are usually done from the 39th week of pregnancy.",
+          "Reasons include your baby being in the breech position when turning has not worked or is not wanted, a low-lying placenta, pre-eclampsia, certain infections, concerns that your baby is not getting enough oxygen and nutrients, labour not progressing, or heavy bleeding. Where there is time to plan, your midwife or doctor will talk through the benefits and risks compared with a vaginal birth.",
+          "You can also ask for a caesarean without a medical reason. You should be offered a conversation about the benefits and risks, and if you are anxious about giving birth you should be offered the chance to discuss that with a healthcare professional who can support you through pregnancy and labour. If, after all of that, you still feel a vaginal birth is not an acceptable option for you, you should be offered a planned caesarean, and if your doctor is unwilling to carry it out they should refer you to one who will.",
+        ],
+      },
+      {
+        id: "what-happens-during-a-caesarean",
+        heading: "What happens during a caesarean",
+        image: {
+          src: new URL("../assets/article-body-caesarean-birth-1.jpg", import.meta.url).href,
+          alt: "A birth partner holding a pregnant woman's hand in a hospital corridor before surgery.",
+        },
+        paragraphs: [
+          "Most caesareans are carried out under spinal or epidural anaesthetic, which means you are awake but numb from the chest or waist down, and you should not feel pain. Occasionally a general anaesthetic is used, particularly when a baby needs to be born quickly.",
+          "During the operation, a screen is placed across your body so you cannot see what is being done, and the team tells you what is happening. A cut usually about 10 to 20cm long is made across your lower tummy and womb. You may feel tugging and pulling, pressure rather than pain. If your baby is well, you and your birth partner can see and hold them as soon as they are born; a baby born by emergency caesarean because of distress may be taken straight to a paediatrician first. The whole thing normally takes around 40 to 50 minutes.",
+        ],
+      },
+      {
+        id: "the-first-days-afterwards",
+        heading: "The first days afterwards",
+        paragraphs: [
+          "Recovery from a caesarean usually takes longer than from a vaginal birth. Most people go home one to two days later.",
+          "In hospital you will be offered painkillers, encouraged to get up and move about as soon as you can, and able to eat and drink when you feel hungry or thirsty. You can have close contact with your baby and start breastfeeding. A catheter stays in your bladder for at least 12 hours, and your wound is covered with a dressing for at least 24 hours. Non-dissolvable stitches or staples are usually taken out by your midwife after five to seven days.",
+          "At home, take it gently. Regular pain relief matters, for most people paracetamol or ibuprofen is preferred while breastfeeding, rather than aspirin or the codeine in co-codamol, and your doctor can advise on what suits you. You will have some vaginal bleeding; use pads rather than tampons, and get advice if it is heavy. Keep moving gently, a daily walk for instance, to reduce the risk of blood clots, without overdoing it. You should be able to hold and carry your baby, but driving, exercising, lifting anything heavier than your baby and having sex often wait around six weeks, and your midwife or the GP at your six-week check can advise.",
+        ],
+      },
+      {
+        id: "when-to-get-help-after-a-caesarean",
+        heading: "When to get help after a caesarean",
+        image: {
+          src: new URL("../assets/article-body-caesarean-birth-2.jpg", import.meta.url).href,
+          alt: "A new mother resting on a sofa at home while gently holding her sleeping baby.",
+        },
+        paragraphs: [
+          "Contact your midwife or a GP straight away if you have severe pain, leaking urine, pain when peeing, heavy vaginal bleeding, a wound that becomes more red, painful or swollen, pus or foul-smelling fluid from your wound, a cough or shortness of breath, or swelling or pain in your lower leg. These can be signs of an infection or a blood clot, and both need treating quickly.",
+        ],
+      },
+      {
+        id: "the-risks-plainly",
+        heading: "The risks, plainly",
+        paragraphs: [
+          "A caesarean is generally very safe, but like any surgery it carries risk. Possible complications include infection of the wound or the lining of the womb, blood clots, heavy bleeding, damage to nearby areas such as the bladder or the tubes connecting the kidneys and bladder, temporary breathing difficulties for your baby, and, occasionally, an accidental cut to your baby when the womb is opened.",
+        ],
+      },
+      {
+        id: "and-next-time",
+        heading: "And next time",
+        paragraphs: [
+          "Having a caesarean does not mean every future baby has to be born the same way. Most people who have had a caesarean can safely have a vaginal birth next time, known as VBAC, sometimes with extra monitoring during labour. Some are advised to have another caesarean, depending on what is safest for them and their baby.",
+        ],
+      },
+      {
+        id: "how-it-can-feel",
+        heading: "How it can feel",
+        paragraphs: [
+          "Some people feel relief, some feel robbed of the birth they imagined, some feel both within the same hour, and some feel nothing much until weeks later. None of those reactions is the wrong one. If how your birth went is still sitting heavily with you, your midwife, health visitor or GP can help, and many trusts offer a chance to talk through your birth with someone who can explain what happened and why.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "There is no single right way to feel about a caesarean, and support is available if it is still sitting heavily with you.",
+        },
+      },
+    ],
+  },
+  // ─── GESTATIONAL DIABETES ──────────────────────────────────────────────
+  {
+    slug: "gestational-diabetes",
+    title: "Gestational diabetes: what it means and what happens next",
+    metaDescription:
+      "What gestational diabetes is, why screening is offered, what care looks like after a diagnosis, and what happens at birth and afterwards.",
+    quickAnswer:
+      "Gestational diabetes is high blood glucose that develops during pregnancy and usually goes away after birth. It happens when your body cannot make enough insulin to meet the extra demands of pregnancy, and it is most common in the second or third trimester. It often causes no symptoms, which is why screening is offered to anyone with a risk factor. Most people with gestational diabetes have otherwise normal pregnancies and healthy babies, and the risks are reduced when it is found early and managed well.",
+    howThisFeels: [
+      "Getting a phone call about a label attached to a pregnancy where nothing feels different",
+      "Wondering what a diagnosis will mean for the rest of your pregnancy and for birth",
+      "Feeling like you did something wrong when medicine is added",
+      "Not being sure which everyday symptoms are pregnancy and which are worth mentioning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Insulin cannot meet extra demand",
+          body: "Insulin is the hormone that helps control the level of glucose in your blood. Pregnancy increases how much insulin your body needs. Gestational diabetes happens when your body cannot produce enough to meet that extra need, so blood glucose runs high.",
+        },
+        {
+          heading: "More common later in pregnancy",
+          body: "It can start at any stage of pregnancy but is more common in the second or third trimester, and it usually disappears after your baby is born.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Risk factors raise the chance of testing, not a certain diagnosis",
+          body: "Being over 40, a BMI above 30, a previous baby weighing 4.5kg or more, gestational diabetes in a previous pregnancy, a parent or sibling with diabetes, south Asian, Black, African-Caribbean or Middle Eastern origin, or a gastric bypass or other weight-loss surgery are all reasons to test. Plenty of people with several risk factors go on to have entirely normal results.",
+        },
+      ],
+      whyItVaries:
+        "A risk factor is a reason to test, not a prediction. Gestational diabetes often causes no symptoms at all, which is why it is mostly picked up through screening rather than how you feel day to day.",
+    },
+    timing: {
+      whenStarts:
+        "Screening is offered based on risk factors identified at your booking appointment, usually around 8 to 12 weeks, with the oral glucose tolerance test itself usually done between 24 and 28 weeks, or earlier if you have had gestational diabetes before.",
+      whenEases:
+        "Gestational diabetes normally goes away after birth, though you will need a follow-up blood test 6 to 13 weeks afterwards.",
+    },
+    whatItFeelsLike: [
+      "Usually nothing at all; most people find out from a phone call after a test, not because they felt unwell",
+      "If blood glucose rises high, some people notice increased thirst, needing to pee more often, a dry mouth, tiredness, blurred vision, or genital itching or thrush",
+    ],
+    whatThisMeans:
+      "A gestational diabetes diagnosis mostly means monitoring and adjustment, with a team who does this every week. Managing blood glucose well is what reduces the risks, and that is the whole point of the care you will be offered.",
+    normal: [
+      "Being offered screening because of one or more risk factors, without going on to be diagnosed",
+      "Finding out by phone call rather than feeling unwell",
+      "Being given a blood glucose testing kit and making changes to diet and activity as the first step",
+      "Needing medicine, tablets or insulin, if diet and activity changes are not enough",
+      "Extra monitoring, growth scans and appointments through the rest of pregnancy",
+    ],
+    seekSupport: [
+      "Symptoms of high blood glucose that are worrying you, such as increased thirst, needing to pee more often or a dry mouth",
+      "Any question about your readings, your medicine or your baby's movements once you have a diagnosis",
+      "Something worrying you before a diagnosis, when your midwife is the right first call",
+      "Symptoms of high blood glucose after birth, rather than waiting for your follow-up test",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Speak to your midwife or doctor about symptoms, readings or concerns, and use your maternity and diabetes team's contact route once you have a diagnosis.",
+    whatYouCanDo: [
+      {
+        action: "Attend your booking appointment and screening test as offered",
+        reason: "It is how gestational diabetes is found early, since it often causes no symptoms.",
+      },
+      {
+        action: "Use your blood glucose testing kit and make changes to diet and activity",
+        reason: "These are the first steps offered after a diagnosis, alongside gentle activity such as walking, swimming or antenatal yoga.",
+      },
+      {
+        action: "Take tablets or insulin if advised, without seeing it as a personal failing",
+        reason: "Pregnancy hormones keep shifting the goalposts, and needing medicine is not a sign you did something wrong.",
+      },
+      {
+        action: "Attend extra monitoring appointments and growth scans as offered",
+        reason: "Your team sets individual targets and a plan based on how your pregnancy is going.",
+      },
+      {
+        action: "Have your follow-up blood test 6 to 13 weeks after birth, and yearly after that if normal",
+        reason: "Many people with diabetes have no symptoms, so testing catches it even when you feel well.",
+      },
+    ],
+    whatHappensNext:
+      "With gestational diabetes it is best to give birth before 41 weeks; induction or a caesarean may be recommended if labour has not started by then, or earlier if there are concerns about your or your baby's health. Gestational diabetes normally goes away after birth, though it makes it more likely you will have it again in a future pregnancy and more likely you will develop type 2 diabetes later, and the NHS Diabetes Prevention Programme is available to support you.",
+    relatedStage: {
+      intro: "This sits alongside the rest of health and safety checks in pregnancy:",
+      links: [
+        {
+          label: "Health and safety in pregnancy",
+          href: "/pregnancy/health-and-safety",
+          context: "The wider picture of what is monitored and why.",
+        },
+        {
+          label: "Glucose tolerance test",
+          href: "/articles/glucose-tolerance-test",
+          context: "What the screening appointment itself involves.",
+        },
+        {
+          label: "Tests and scans in pregnancy",
+          href: "/articles/tests-and-scans-in-pregnancy",
+          context: "How this screening fits into the wider schedule.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "What is gestational diabetes?",
+      "What happens after a gestational diabetes diagnosis?",
+      "Does gestational diabetes go away after birth?",
+    ],
+    captureIntro:
+      "A diagnosis can feel like a lot to take in even when you feel completely well. Worth noting your questions before appointments.",
+    trimester: [2, 3],
+    relatedSlugs: [
+      "glucose-tolerance-test",
+      "tests-and-scans-in-pregnancy",
+      "growth-scans-in-pregnancy",
+      "induction-of-labour",
+    ],
+    journey: ["pregnancy"],
+    topics: ["health-and-safety"],
+    keyTakeaways: [
+      "Gestational diabetes is high blood glucose that develops in pregnancy because the body cannot make enough insulin to meet extra demand.",
+      "It often causes no symptoms, which is why screening is offered to anyone with a risk factor, usually with a test between 24 and 28 weeks.",
+      "A risk factor is a reason to test, not a prediction, and most people tested have normal results.",
+      "Care after diagnosis usually starts with diet and activity changes, adding tablets or insulin if needed.",
+      "It is best to give birth before 41 weeks, with induction or caesarean considered if labour has not started.",
+      "Gestational diabetes normally goes away after birth, but a follow-up test and long-term diabetes risk both need following up.",
+    ],
+    sources: [
+      {
+        label: "Gestational diabetes",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/gestational-diabetes/",
+      },
+      {
+        label: "NG3 Diabetes in pregnancy: management from preconception to the postnatal period",
+        publisher: "NICE",
+        url: "https://www.nice.org.uk/guidance/ng3",
+      },
+    ],
+    topic: "health-and-safety",
+    standfirst:
+      "What gestational diabetes is, why screening is offered, what care looks like after a diagnosis, and what to expect at birth and afterwards.",
+    hero: {
+      src: new URL("../assets/article-hero-gestational-diabetes-guide.jpg", import.meta.url).href,
+      alt: "A pregnant woman sitting at a kitchen table checking her blood glucose with a testing kit.",
+    },
+    editorialSections: [
+      {
+        id: "being-told-you-have-it",
+        heading: "Being told you have it",
+        lead: "Most people find out from a phone call, not because they felt unwell.",
+        paragraphs: [
+          "That can be disorienting: nothing has changed in how you feel, and yet your pregnancy now has a label attached. What follows is mostly monitoring and adjustment, with a team who does this every week.",
+        ],
+      },
+      {
+        id: "what-gestational-diabetes-actually-is",
+        heading: "What gestational diabetes actually is",
+        paragraphs: [
+          "Insulin is the hormone that helps control the level of glucose in your blood. Pregnancy increases how much insulin your body needs. Gestational diabetes happens when your body cannot produce enough to meet that extra need, so blood glucose runs high. It can start at any stage of pregnancy but is more common in the second or third trimester, and it usually disappears after your baby is born.",
+        ],
+      },
+      {
+        id: "why-you-may-be-offered-screening",
+        heading: "Why you may be offered screening",
+        paragraphs: [
+          "At your booking appointment, usually around 8 to 12 weeks, your midwife or doctor asks questions to work out whether you are at increased risk. Screening is offered if any of these apply: you are over 40; your BMI is above 30; you previously had a baby weighing 4.5kg or more; you had gestational diabetes in a previous pregnancy; a parent or sibling has diabetes; you are of south Asian, Black, African-Caribbean or Middle Eastern origin, even if you were born in the UK; or you have had a gastric bypass or other weight-loss surgery.",
+          "A risk factor is a reason to test, not a prediction. Plenty of people with several go on to have entirely normal results.",
+          "The test itself is the oral glucose tolerance test, usually between 24 and 28 weeks, or earlier if you have had gestational diabetes before. Our guide to the glucose tolerance test covers what the appointment involves.",
+        ],
+      },
+      {
+        id: "would-you-notice-symptoms",
+        heading: "Would you notice symptoms?",
+        paragraphs: [
+          "Usually not. Gestational diabetes does not normally cause symptoms, which is why it is mostly picked up through screening. If blood glucose rises high, some people notice increased thirst, needing to pee more often, a dry mouth, tiredness, blurred vision, or genital itching or thrush. Several of those are simply part of pregnancy for many people, so they are not a reliable sign on their own. If any of them are worrying you, speak to your midwife or doctor.",
+        ],
+      },
+      {
+        id: "what-it-can-mean-for-your-pregnancy",
+        heading: "What it can mean for your pregnancy",
+        image: {
+          src: new URL("../assets/article-body-gestational-diabetes-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman having a calm conversation with a midwife during an antenatal appointment.",
+        },
+        paragraphs: [
+          "Most people with gestational diabetes have otherwise normal pregnancies and healthy babies. It can, though, cause problems worth knowing about: your baby growing larger than usual, which can make birth harder and makes induction or a caesarean more likely; polyhydramnios, too much fluid around the baby, which can bring on early labour or cause problems at birth; premature birth; pre-eclampsia; and low blood sugar or jaundice in your baby after birth, which may need hospital treatment. Rarely, there is a risk of stillbirth. Managing blood glucose well is what reduces these risks, and that is the whole point of the care you will be offered.",
+        ],
+      },
+      {
+        id: "what-care-looks-like-after-a-diagnosis",
+        heading: "What care looks like after a diagnosis",
+        paragraphs: [
+          "You will be given a blood glucose testing kit so you can see how things are going day to day. Changes to what you eat and being more active where you can are the first steps, gentle activity like walking, swimming or antenatal yoga can help, though tell your midwife or doctor before starting something new. If those changes do not bring glucose down enough, medicine is added, either tablets or insulin injections. Needing medicine is not a sign that you did something wrong; pregnancy hormones keep shifting the goalposts.",
+          "You will also be monitored more closely through the rest of pregnancy and during birth. Your team will give you your own targets and a plan; those are set individually, so this page does not give numbers. The overall UK approach is set out in NICE guidance covering care from diagnosis through to after birth, and the detail of how it runs, clinic structure, how often you are seen, whether extra growth scans are offered, varies between trusts and areas.",
+        ],
+      },
+      {
+        id: "birth",
+        heading: "Birth",
+        paragraphs: [
+          "With gestational diabetes it is best to give birth before 41 weeks. If labour has not started by then, induction or a caesarean may be recommended. Birth may be recommended earlier if there are concerns about your health or your baby's, or if blood glucose has not been well controlled.",
+        ],
+      },
+      {
+        id: "after-your-baby-is-born",
+        heading: "After your baby is born",
+        image: {
+          src: new URL("../assets/article-body-gestational-diabetes-2.jpg", import.meta.url).href,
+          alt: "A mother sitting on a sofa at home with her newborn baby, a cup of tea nearby.",
+        },
+        paragraphs: [
+          "Gestational diabetes normally goes away after birth. You should have a blood test to check for diabetes 6 to 13 weeks afterwards, and once a year after that if the result is normal. Have these even if you feel completely well, because many people with diabetes have no symptoms. If you develop symptoms of high blood glucose, such as increased thirst, needing to pee more often or a dry mouth, see your GP rather than waiting for the next test.",
+          "Having had gestational diabetes makes it more likely you will have it again in a future pregnancy, and more likely you will develop type 2 diabetes later. The NHS Diabetes Prevention Programme supports people with a history of gestational diabetes, and you can refer yourself. If you are planning another pregnancy, ask your GP to check you for diabetes first.",
+        ],
+      },
+      {
+        id: "who-to-contact",
+        heading: "Who to contact",
+        paragraphs: [
+          "If you have been diagnosed, you will have a maternity and diabetes team and a way to reach them; use that route with any question about your readings, your medicine or your baby's movements. If you have not been diagnosed but something is worrying you, your midwife is the right first call.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "Most people with gestational diabetes have otherwise normal pregnancies and healthy babies, especially with early monitoring and a plan in place.",
+        },
+      },
+    ],
+  },
+// ─── DIARRHOEA AND TUMMY BUGS IN PREGNANCY ────────────────────────────────
+  {
+    slug: "diarrhoea-and-tummy-bugs-in-pregnancy",
+    title: "Diarrhoea and tummy bugs in pregnancy",
+    metaDescription:
+      "I have diarrhoea or a stomach bug while pregnant — is it harmful and what can I take? A calm guide to fluids, medicines, food safety and when to get help.",
+    quickAnswer:
+      "Digestion changes throughout pregnancy, and most people notice it in some form. Constipation is the more common complaint, but loose stools happen too, whether from a stomach bug, something you ate, iron or other supplements, or simply a gut that is behaving differently. A short bout on its own is not usually a sign that anything is wrong with your pregnancy. Diarrhoea usually stops within five to seven days, and vomiting within one or two days.",
+    howThisFeels: [
+      "Worrying whether a stomach bug can affect the baby",
+      "Not knowing what you are allowed to take for it",
+      "Feeling drained and wanting to just wait it out at home",
+      "Second-guessing whether this is 'just a bug' or something to flag",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "A stomach bug or something you ate",
+          body: "Loose stools in pregnancy often come from an ordinary stomach bug or something you have eaten, in exactly the same way they would outside pregnancy.",
+        },
+        {
+          heading: "Iron or other supplements",
+          body: "Iron and some other supplements can change how your digestion behaves, including causing looser stools for some people.",
+        },
+        {
+          heading: "A gut that is simply behaving differently",
+          body: "Digestion changes throughout pregnancy, and most people notice it in some form. Constipation is the more common complaint, but loose stools happen too.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Food poisoning that needs extra care in pregnancy",
+          body: "Some food poisoning infections carry particular risks in pregnancy, which is why food safety advice in pregnancy is stricter than usual. If you think a specific food made you ill, mention it to your midwife or GP.",
+        },
+      ],
+      whyItVaries:
+        "A short bout on its own is not usually a sign that anything is wrong with your pregnancy, but how it is treated and how closely it is watched depends on how long it lasts, whether you can keep fluids down, and what else comes with it.",
+    },
+    timing: {
+      whenStarts: "Symptoms usually begin as they would with any stomach bug, sometimes alongside nausea you already have.",
+      whenEases:
+        "Diarrhoea usually stops within five to seven days, and vomiting within one or two days.",
+    },
+    whatItFeelsLike: [
+      "Needing the toilet more often than usual, alongside tiredness and a lack of appetite",
+      "Feeling wrung out and wanting reassurance that this will pass",
+    ],
+    whatThisMeans:
+      "Fluids matter more than anything else, because dehydration is the main risk. A short bout of diarrhoea or vomiting is common in pregnancy and usually passes on its own with rest and fluids, but it is worth knowing what to take, what to avoid, and when to get checked.",
+    normal: [
+      "A short bout of loose stools that settles within about a week",
+      "Vomiting that stops within a day or two",
+      "Looser stools linked to iron or other supplements",
+      "Feeling tired and off your food while it passes",
+    ],
+    seekSupport: [
+      "You cannot keep any fluid down",
+      "You have signs of dehydration, such as dark, strong-smelling urine, passing urine much less often, dizziness or a dry mouth, that do not improve with rehydration sachets",
+      "The diarrhoea lasts more than seven days, or the vomiting more than two",
+      "There is blood in your stools, or you have severe or persistent tummy pain",
+      "You have a high temperature alongside it",
+      "You have been abroad recently",
+      "You are worried about your baby's movements, or you have any bleeding",
+      "Repeated vomiting stops you keeping food and fluid down, which needs medical assessment rather than waiting it out",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Contact your midwife, GP or 111 if you are unsure, and severe pregnancy sickness is treatable and should not be endured alone.",
+    whatYouCanDo: [
+      {
+        action: "Sip water regularly rather than drinking a lot at once",
+        reason: "Fluids matter more than anything else, because dehydration is the main risk.",
+      },
+      {
+        action: "Rest, and eat when you feel able",
+        reason: "Your appetite will return as the bug settles.",
+      },
+      {
+        action: "Avoid fatty or spicy foods for a few days, and avoid fruit juice and fizzy drinks",
+        reason: "These can make diarrhoea worse.",
+      },
+      {
+        action: "Ask a pharmacist before taking anti-diarrhoea medicine",
+        reason: "A pharmacist can tell you what is suitable for you and may suggest oral rehydration sachets, which are usually the more useful option.",
+      },
+      {
+        action: "Take paracetamol for discomfort rather than other painkillers",
+        reason: "Check with a pharmacist if you are unsure about anything you already have at home.",
+      },
+      {
+        action: "Wash your hands with soap and water often",
+        reason: "Especially after using the toilet and before preparing food, to stop it spreading.",
+      },
+    ],
+    whatHappensNext:
+      "Most tummy bugs in pregnancy settle within a week with rest and fluids, and everyday routines and appetite return to normal on their own.",
+    relatedStage: {
+      intro: "This sits alongside the rest of staying well in pregnancy:",
+      links: [
+        {
+          label: "Health and safety in pregnancy",
+          href: "/pregnancy/health-and-safety",
+          context: "The wider picture of what is worth checking.",
+        },
+        {
+          label: "Constipation in pregnancy",
+          href: "/articles/constipation-in-pregnancy",
+          context: "The more common side of digestion changes in pregnancy.",
+        },
+        {
+          label: "Medicines in pregnancy",
+          href: "/articles/medicines-in-pregnancy",
+          context: "What to check before taking anything.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Is diarrhoea dangerous in pregnancy?",
+      "Can I take anti-diarrhoea medicine while pregnant?",
+      "When should I worry about a stomach bug in pregnancy?",
+    ],
+    captureIntro:
+      "Stomach bugs are unpleasant at any time, and pregnancy adds an extra layer of watching yourself. Worth noting how this one went.",
+    trimester: [1, 2, 3],
+    relatedSlugs: [
+      "constipation-in-pregnancy",
+      "foods-to-avoid-in-pregnancy",
+      "medicines-in-pregnancy",
+    ],
+    journey: ["pregnancy"],
+    topics: ["safety-and-support"],
+    keyTakeaways: [
+      "A short bout of diarrhoea or vomiting is common in pregnancy and is not usually a sign that anything is wrong.",
+      "Fluids matter more than anything else, because dehydration is the main risk.",
+      "Diarrhoea usually stops within five to seven days, and vomiting within one or two days.",
+      "Ask a pharmacist before taking anti-diarrhoea medicine, and consider oral rehydration sachets instead.",
+      "Get help if you cannot keep fluids down, have blood in your stools, a high temperature, symptoms lasting longer than expected, or you are worried about your baby's movements or bleeding.",
+      "Food safety advice in pregnancy is stricter than usual, because some food poisoning infections carry particular risks.",
+    ],
+    sources: [
+      {
+        label: "Diarrhoea and vomiting",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/diarrhoea-and-vomiting/",
+      },
+      {
+        label: "Common health problems in pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/",
+      },
+    ],
+    topic: "health-and-safety",
+    standfirst:
+      "What is normal digestion, what helps a stomach bug settle, and when diarrhoea or vomiting in pregnancy needs a call to your midwife, GP or 111.",
+    hero: {
+      src: new URL("../assets/article-hero-diarrhoea-tummy-bugs-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman resting on a sofa under a blanket with a glass of water nearby.",
+    },
+    editorialSections: [
+      {
+        id: "is-diarrhoea-normal-in-pregnancy",
+        heading: "Is diarrhoea normal in pregnancy?",
+        paragraphs: [
+          "Digestion changes throughout pregnancy, and most people notice it in some form. Constipation is the more common complaint, but loose stools happen too, whether from a stomach bug, something you ate, iron or other supplements, or simply a gut that is behaving differently.",
+          "A short bout on its own is not usually a sign that anything is wrong with your pregnancy.",
+        ],
+      },
+      {
+        id: "looking-after-yourself",
+        heading: "Looking after yourself",
+        image: {
+          src: new URL("../assets/article-body-diarrhoea-tummy-bugs-pregnancy-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman sipping a glass of water while resting on the sofa at home.",
+        },
+        paragraphs: [
+          "Fluids matter more than anything else, because dehydration is the main risk. Sip water regularly rather than drinking a lot at once if you feel sick. Rest. Eat when you feel able, and avoid fatty or spicy foods for a few days. Avoid fruit juice and fizzy drinks, which can make diarrhoea worse.",
+          "Diarrhoea usually stops within five to seven days, and vomiting within one or two days.",
+        ],
+      },
+      {
+        id: "medicines",
+        heading: "Medicines",
+        paragraphs: [
+          "Do not reach for anti-diarrhoea medicines in pregnancy without asking first. A pharmacist can tell you what is suitable for you and may suggest oral rehydration sachets, which are usually the more useful option.",
+          "Take paracetamol for discomfort rather than other painkillers, and check with a pharmacist if you are unsure about anything you already have at home.",
+        ],
+      },
+      {
+        id: "stopping-it-spreading",
+        heading: "Stopping it spreading",
+        image: {
+          src: new URL("../assets/article-body-diarrhoea-tummy-bugs-pregnancy-2.jpg", import.meta.url).href,
+          alt: "A pregnant woman washing her hands at a bathroom sink.",
+        },
+        paragraphs: [
+          "Wash your hands with soap and water often, especially after using the toilet and before preparing food.",
+          "Wash soiled clothing and bedding separately on a hot wash, clean toilet seats, flush handles, taps and door handles daily, and avoid preparing food for others while you are ill.",
+        ],
+      },
+      {
+        id: "contact-your-midwife-gp-or-111",
+        heading: "Contact your midwife, GP or 111 if",
+        paragraphs: [
+          "Get in touch if you cannot keep any fluid down, if you have signs of dehydration such as dark, strong-smelling urine, passing urine much less often, dizziness or a dry mouth that does not improve with rehydration sachets, or if the diarrhoea lasts more than seven days, or the vomiting more than two.",
+          "Also get in touch if there is blood in your stools, severe or persistent tummy pain, a high temperature alongside it, you have been abroad recently, or you are worried about your baby's movements or any bleeding.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Repeated vomiting that stops you keeping food and fluid down needs medical assessment rather than waiting it out. Severe pregnancy sickness is treatable and should not be endured alone.",
+        },
+      },
+      {
+        id: "food-safety-while-pregnant",
+        heading: "Food safety while you are pregnant",
+        paragraphs: [
+          "Some food poisoning infections carry particular risks in pregnancy, which is why food safety advice in pregnancy is stricter than usual. If you think a specific food made you ill, mention it to your midwife or GP.",
+        ],
+      },
+    ],
+  },
+
+  // ─── LEG CRAMPS IN PREGNANCY ───────────────────────────────────────────────
+  {
+    slug: "leg-cramps-in-pregnancy",
+    title: "Leg cramps in pregnancy",
+    metaDescription:
+      "Why do I get sudden calf cramps in pregnancy, usually at night, and what helps? A calm guide to easing cramp and knowing the difference from a blood clot.",
+    quickAnswer:
+      "A pregnancy cramp is usually a sudden, sharp pain in the calf or foot. It most often happens at night, and it can wake you out of deep sleep and leave the muscle tender the next day. It is common, particularly later in pregnancy, and it is not a sign that anything is wrong. Moving the muscle is what breaks the cramp: pull your toes up hard towards your shin and straighten your leg.",
+    howThisFeels: [
+      "Being woken suddenly by a sharp pain in the calf, again",
+      "Worrying whether this is 'just cramp' or something more serious",
+      "Dreading bedtime because the cramps keep coming back",
+      "Wanting something that actually helps rather than another remedy that does not",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "A common and largely unexplained pregnancy symptom",
+          body: "Cramp is common, particularly later in pregnancy, and it is not a sign that anything is wrong. It most often happens at night.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Long periods of sitting or being still",
+          body: "Being sedentary for a stretch of the day can make cramps more likely to strike later, which is one reason getting up and moving helps.",
+        },
+      ],
+      whyItVaries:
+        "There is no strong evidence behind most of the remedies you will be told about, including magnesium, so how much cramp bothers each person, and what settles it, varies a great deal.",
+    },
+    timing: {
+      whenStarts: "Cramp typically becomes more noticeable later in pregnancy.",
+      whenEases:
+        "It tends to ease once the pregnancy ends, though the pattern varies from person to person and night to night.",
+    },
+    whatItFeelsLike: [
+      "A sudden, sharp pain in the calf or foot that can wake you from deep sleep",
+      "A muscle that stays tender the next day after a bad cramp",
+    ],
+    whatThisMeans:
+      "This is one of the more painful but ordinary discomforts of pregnancy, worth easing with simple, low-risk steps, and worth being able to tell apart from something that needs urgent attention.",
+    normal: [
+      "Sudden calf or foot cramp, usually at night",
+      "Cramp that comes and goes and eases with movement or stretching",
+      "A tender muscle the day after a bad cramp",
+      "Cramps becoming more frequent later in pregnancy",
+    ],
+    seekSupport: [
+      "Pain in one leg that does not come and go like a cramp but stays there",
+      "Pain that comes with swelling, warmth, redness or skin that looks discoloured in that area",
+      "Pain that is tender to touch along the calf",
+      "Pain that comes with breathlessness or chest pain, which needs 999",
+      "Cramps severe enough to disturb your sleep most nights",
+      "Any numbness or weakness in the leg",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Contact your midwife, GP or 111 if you are unsure, and call 999 for breathlessness or chest pain with leg pain.",
+    whatYouCanDo: [
+      {
+        action: "Pull your toes up hard towards your shin and straighten your leg",
+        reason: "Moving the muscle is what breaks the cramp.",
+      },
+      {
+        action: "Rub the muscle firmly afterwards, or stand and walk a few steps on a cold floor if you can do so safely",
+        reason: "This helps the muscle settle once the cramp has broken.",
+      },
+      {
+        action: "Try gentle ankle and leg movements, including a simple routine before bed",
+        reason: "Regular, gentle exercise in pregnancy, particularly ankle and leg movements, is thought to help. Bend and stretch your foot up and down thirty times, then circle each foot several times in both directions.",
+      },
+      {
+        action: "Stay well hydrated through the day, and get up and move after long stretches of sitting",
+        reason: "This is a low-cost, low-risk step worth trying first.",
+      },
+      {
+        action: "Speak to your midwife before starting a supplement such as magnesium",
+        reason: "There is no strong evidence behind most of the remedies you will be told about.",
+      },
+      {
+        action: "Use a pillow between your knees, a warm bath before bed, and settle on your side to sleep",
+        reason: "From around the second half of pregnancy it is recommended to avoid sleeping on your back.",
+      },
+    ],
+    whatHappensNext:
+      "Most people find a bedtime routine of gentle stretches and staying hydrated cuts down how often cramps strike, even though they may not disappear completely until after birth.",
+    relatedStage: {
+      intro: "This sits alongside other common symptoms and comfort measures:",
+      links: [
+        {
+          label: "Common symptoms in pregnancy",
+          href: "/pregnancy/body",
+          context: "The wider picture of ordinary pregnancy discomforts.",
+        },
+        {
+          label: "Sleep in pregnancy",
+          href: "/articles/sleep-in-pregnancy",
+          context: "For more on broken nights and comfortable positions.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Why do I keep getting leg cramps in pregnancy?",
+      "How do I stop night cramps in pregnancy?",
+      "How do I know if leg pain in pregnancy is a blood clot?",
+    ],
+    captureIntro:
+      "Broken sleep from cramp adds up. Worth noting how often it happens and what actually helps you.",
+    trimester: [2, 3],
+    relatedSlugs: [
+      "sleep-in-pregnancy",
+    ],
+    journey: ["pregnancy"],
+    topics: ["common-symptoms"],
+    keyTakeaways: [
+      "Sudden calf or foot cramp, usually at night, is common in pregnancy and is not a sign that anything is wrong.",
+      "Pulling your toes up towards your shin and straightening your leg is what breaks the cramp.",
+      "Gentle ankle and leg exercises, staying hydrated and moving after sitting for a long time may help reduce how often cramps happen.",
+      "There is no strong evidence behind supplements such as magnesium; speak to your midwife before starting one.",
+      "Cramp is not the same as a blood clot: pain that stays in one place, with swelling, warmth, redness or tenderness along the calf, needs prompt attention.",
+      "Breathlessness or chest pain alongside leg pain needs 999.",
+    ],
+    sources: [
+      {
+        label: "Common health problems in pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/",
+      },
+    ],
+    topic: "body",
+    standfirst:
+      "Why sudden calf cramps strike at night in pregnancy, what breaks them fast, and how to tell ordinary cramp apart from something that needs urgent attention.",
+    hero: {
+      src: new URL("../assets/article-hero-leg-cramps-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman sitting up in bed at night, stretching her foot.",
+    },
+    editorialSections: [
+      {
+        id: "what-it-feels-like",
+        heading: "What it feels like",
+        paragraphs: [
+          "A pregnancy cramp is usually a sudden, sharp pain in the calf or foot. It most often happens at night, and it can wake you out of deep sleep and leave the muscle tender the next day.",
+          "It is common, particularly later in pregnancy, and it is not a sign that anything is wrong.",
+        ],
+      },
+      {
+        id: "in-the-moment",
+        heading: "In the moment",
+        image: {
+          src: new URL("../assets/article-body-leg-cramps-pregnancy-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman sitting on the edge of the bed at night, flexing her foot upward.",
+        },
+        paragraphs: [
+          "Moving the muscle is what breaks the cramp. Pull your toes up hard towards your shin and straighten your leg.",
+          "Rubbing the muscle firmly afterwards helps, as does standing and walking a few steps on a cold floor if you can get up safely.",
+        ],
+      },
+      {
+        id: "reducing-how-often-they-happen",
+        heading: "Reducing how often they happen",
+        paragraphs: [
+          "Regular, gentle exercise in pregnancy, particularly ankle and leg movements, is thought to help. A simple routine before bed is worth trying: bend and stretch your foot up and down thirty times, then circle each foot several times in both directions.",
+          "Stay well hydrated through the day, and get up and move if you have been sitting for a long stretch.",
+          "There is no strong evidence behind most of the remedies you will be told about, including magnesium, so try the low-cost, low-risk things first and speak to your midwife before starting a supplement.",
+        ],
+      },
+      {
+        id: "cramp-is-not-the-same-as-a-clot",
+        heading: "Cramp is not the same as a clot",
+        paragraphs: [
+          "This is the one boundary worth knowing. Contact your midwife, GP or 111 straight away if you have pain in one leg that does not come and go like a cramp but stays there, comes with swelling, warmth, redness or skin that looks discoloured in that area, or is tender to touch along the calf. Pain that comes with breathlessness or chest pain needs 999.",
+          "Blood clots are uncommon, but pregnancy raises the risk, and they are treatable when found early. Never wait it out to avoid making a fuss.",
+          "Also mention it to your midwife if cramps are severe enough to disturb your sleep most nights, or if you have any numbness or weakness in the leg.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Blood clots are uncommon but treatable when found early. Pain that stays in one place, with swelling or redness, is worth checking straight away.",
+        },
+      },
+      {
+        id: "sleep-and-comfort",
+        heading: "Sleep and comfort",
+        image: {
+          src: new URL("../assets/article-body-leg-cramps-pregnancy-2.jpg", import.meta.url).href,
+          alt: "A pregnant woman settling to sleep on her side with a pillow between her knees.",
+        },
+        paragraphs: [
+          "Cramp often lands in the middle of an already broken night. A pillow between your knees, a warm bath before bed and a few minutes of ankle movements can all help.",
+          "From around the second half of pregnancy it is recommended to avoid sleeping on your back and to settle on your side instead.",
+        ],
+      },
+    ],
+  },
+
+  // ─── HCG LEVELS: WHAT THE PREGNANCY HORMONE TELLS YOU ─────────────────────
+  {
+    slug: "hcg-levels-explained",
+    title: "hCG levels: what the pregnancy hormone tells you",
+    metaDescription:
+      "What is hCG, what does my number mean, and why am I having repeat blood tests? A calm guide to the pregnancy hormone, without value tables or predictions.",
+    quickAnswer:
+      "Human chorionic gonadotrophin, hCG, is the hormone produced in pregnancy. It is what home pregnancy tests detect in urine, and it is what a blood test measures when a clinic wants an actual number. There is a very wide normal range at any point in early pregnancy, and a single number cannot tell you whether a pregnancy is progressing, how far along you are, whether there is more than one baby, or what will happen next. What clinicians look at is the pattern, not the point.",
+    howThisFeels: [
+      "Refreshing a results portal, hoping a number will tell you something it cannot",
+      "Comparing today's test line with yesterday's and feeling worse for it",
+      "Waiting between blood tests and feeling suspended by it",
+      "Wanting a clear answer when the honest answer is 'we need to see the pattern'",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "hCG rises and peaks in early pregnancy",
+          body: "Levels rise quickly in the first weeks of pregnancy and peak at around ten weeks before settling down again.",
+        },
+        {
+          heading: "A wide normal range",
+          body: "There is a very wide normal range at any point in early pregnancy, and two healthy pregnancies at the same stage can have very different levels.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Repeat tests when a scan cannot yet see clearly",
+          body: "If you are under the care of an early pregnancy unit, repeat hCG tests are usually done to help work out what is happening when it is too early to see anything clearly on a scan, or when there are symptoms such as bleeding or pain.",
+        },
+      ],
+      whyItVaries:
+        "A number on its own cannot tell you whether a pregnancy is progressing, how far along you are, whether there is more than one baby, or what will happen next. What clinicians look at is the pattern, not the point: in early pregnancy the level typically rises substantially over roughly two days, and a rise that is slower than expected is one of the reasons a team may want to look more closely.",
+    },
+    timing: {
+      whenStarts: "hCG is detectable from very early pregnancy and is what home tests pick up.",
+      whenPeaks: "Levels peak at around ten weeks.",
+      whenEases: "Levels settle down again after the peak as pregnancy continues.",
+    },
+    whatItFeelsLike: [
+      "Being handed a number without context and not knowing what to do with it",
+      "The particular strain of waiting between one blood test and the next",
+    ],
+    whatThisMeans:
+      "If you are having your levels monitored, the tests are not a verdict; they are one piece of information alongside your symptoms and, when the timing allows, a scan.",
+    normal: [
+      "A single hCG number that means little on its own",
+      "Being asked to have a repeat blood test to look at the pattern over time",
+      "A rise over roughly two days when a pregnancy is developing as expected",
+      "Feeling anxious while waiting for results",
+    ],
+    seekSupport: [
+      "Severe tummy pain, especially on one side",
+      "Shoulder-tip pain",
+      "Heavy bleeding, or bleeding with pain",
+      "Feeling faint, dizzy or collapsing",
+      "Pain when opening your bowels or passing urine alongside bleeding",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. These symptoms can be signs of a pregnancy outside the womb, which is a medical emergency. Contact your early pregnancy unit, GP or 111, or 999 if you are seriously unwell.",
+    whatYouCanDo: [
+      {
+        action: "Ask what your team is looking for, when the next test is, and who to call if something changes",
+        reason: "Having those three answers makes the wait more bearable.",
+      },
+      {
+        action: "Avoid comparing home test line darkness day to day",
+        reason: "Urine concentration, test brand and sensitivity all change the picture, so a lighter line is not a reliable measurement.",
+      },
+      {
+        action: "Treat a single number as one piece of information, not a verdict",
+        reason: "A number on its own cannot tell you how a pregnancy is progressing.",
+      },
+      {
+        action: "Contact your early pregnancy unit if you develop severe pain, bleeding or feel faint",
+        reason: "These need urgent assessment rather than waiting for the next scheduled test.",
+      },
+    ],
+    whatHappensNext:
+      "Once a scan can see the pregnancy clearly, repeat blood tests are usually no longer needed, and the picture becomes much clearer than any single hCG number could give.",
+    relatedStage: {
+      intro: "This sits alongside other early pregnancy testing and reassurance content:",
+      links: [
+        {
+          label: "Faint positive pregnancy test",
+          href: "/articles/faint-positive-pregnancy-test",
+          context: "For more on interpreting home test results.",
+        },
+        {
+          label: "Testing too early",
+          href: "/articles/testing-too-early",
+          context: "Why timing affects what a home test can show.",
+        },
+        {
+          label: "Bleeding in early pregnancy",
+          href: "/articles/bleeding-in-early-pregnancy",
+          context: "What to do if bleeding happens alongside monitoring.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "What does my hCG level mean?",
+      "Why is my hCG level being monitored?",
+      "Can hCG numbers predict twins or how far along I am?",
+    ],
+    captureIntro:
+      "Waiting on numbers is one of the hardest parts of early pregnancy. Worth noting how the wait felt for you.",
+    trimester: [1],
+    relatedSlugs: [
+      "faint-positive-pregnancy-test",
+      "testing-too-early",
+      "bleeding-in-early-pregnancy",
+    ],
+    journey: ["pregnancy", "trying-to-conceive"],
+    topics: ["safety-and-support"],
+    keyTakeaways: [
+      "hCG is the pregnancy hormone that home tests detect in urine and blood tests measure as a number.",
+      "There is a very wide normal range in early pregnancy, so a single number tells you very little.",
+      "Clinicians look at the pattern of repeat tests rather than one point, because levels typically rise substantially over roughly two days in a developing pregnancy.",
+      "Repeat blood tests are used when a scan cannot yet see clearly, or when there is bleeding or pain, to help decide what happens next.",
+      "Comparing home test line darkness day to day is not a reliable way to measure anything.",
+      "Severe one-sided pain, shoulder-tip pain, heavy bleeding or feeling faint need urgent assessment, as they can signal a pregnancy outside the womb.",
+    ],
+    sources: [
+      {
+        label: "Human chorionic gonadotropin (hCG)",
+        publisher: "Eastern Pathology Alliance (NHS)",
+        url: "https://www.easternpathologyalliance.nhs.uk/tests/human-chorionic-gonadotropin-hcg/",
+      },
+      {
+        label: "HCG monitoring patient information leaflet",
+        publisher: "Saint Mary's, Manchester University NHS Foundation Trust",
+        url: "https://mft.nhs.uk/app/uploads/sites/4/2025/07/HCG-Monitoring_PIL.pdf",
+      },
+      {
+        label: "Ectopic pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/ectopic-pregnancy/",
+      },
+      {
+        label: "Miscarriage",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/miscarriage/",
+      },
+    ],
+    topic: "health-and-safety",
+    standfirst:
+      "What hCG actually is, why a single number tells you very little, and what your team is really looking for when they ask for repeat blood tests.",
+    hero: {
+      src: new URL("../assets/article-hero-hcg-levels-explained.jpg", import.meta.url).href,
+      alt: "A woman sitting calmly in a quiet clinic waiting area.",
+    },
+    editorialSections: [
+      {
+        id: "what-hcg-is",
+        heading: "What hCG is",
+        paragraphs: [
+          "Human chorionic gonadotrophin, hCG, is the hormone produced in pregnancy. It is what home pregnancy tests detect in urine, and it is what a blood test measures when a clinic wants an actual number.",
+          "Levels rise quickly in the first weeks of pregnancy and peak at around ten weeks before settling down again.",
+        ],
+      },
+      {
+        id: "why-a-single-number-tells-you-very-little",
+        heading: "Why a single number tells you very little",
+        image: {
+          src: new URL("../assets/article-body-hcg-levels-explained-1.jpg", import.meta.url).href,
+          alt: "A woman looking at a phone screen while sitting at a kitchen table with a cup of tea.",
+        },
+        paragraphs: [
+          "This is the part most people are looking for and it is the part that disappoints. There is a very wide normal range at any point in early pregnancy, and two healthy pregnancies at the same stage can have very different levels. A number on its own cannot tell you whether a pregnancy is progressing, how far along you are, whether there is more than one baby, or what will happen next.",
+          "What clinicians look at is the pattern, not the point. In early pregnancy the level typically rises substantially over roughly two days, and a rise that is slower than expected is one of the reasons a team may want to look more closely.",
+        ],
+      },
+      {
+        id: "why-you-might-be-having-repeat-blood-tests",
+        heading: "Why you might be having repeat blood tests",
+        paragraphs: [
+          "If you are under the care of an early pregnancy unit, repeat hCG tests are usually done to help work out what is happening when it is too early to see anything clearly on a scan, or when there are symptoms such as bleeding or pain. Levels that rise slowly, plateau or fall can point towards a pregnancy that is not developing as expected, or towards a pregnancy outside the womb, and either of those needs proper assessment.",
+          "Waiting between blood tests is one of the hardest experiences in early pregnancy. It is normal to feel suspended by it. The tests are not a verdict; they are one piece of information alongside your symptoms and, when the timing allows, a scan.",
+        ],
+      },
+      {
+        id: "home-tests-and-hcg",
+        heading: "Home tests and hCG",
+        paragraphs: [
+          "Home tests are designed to answer yes or no, not to measure. A line that looks lighter than yesterday's is not a reliable measurement, because urine concentration, test brand and sensitivity all change the picture. Comparing lines day to day tends to cause distress without producing information.",
+        ],
+      },
+      {
+        id: "get-medical-help-straight-away",
+        heading: "Get medical help straight away if you have",
+        paragraphs: [
+          "Seek urgent help for severe tummy pain, especially on one side, shoulder-tip pain, heavy bleeding or bleeding with pain, feeling faint, dizzy or collapsing, or pain when opening your bowels or passing urine alongside bleeding.",
+          "These can be signs of a pregnancy outside the womb, which is a medical emergency. Contact your early pregnancy unit, GP or 111, or 999 if you are seriously unwell.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "These symptoms need urgent assessment. Contact your early pregnancy unit, GP or 111, or call 999 if you are seriously unwell.",
+        },
+      },
+      {
+        id: "what-to-ask",
+        heading: "What to ask",
+        image: {
+          src: new URL("../assets/article-body-hcg-levels-explained-2.jpg", import.meta.url).href,
+          alt: "A woman talking with a healthcare professional in a consultation room.",
+        },
+        paragraphs: [
+          "If you are having your levels monitored, it is fair to ask what your team is looking for, when the next test is, and who you call if something changes in between. Having those three answers makes the wait more bearable.",
+        ],
+      },
+    ],
+  },
+
+  // ─── SEX DURING PREGNANCY ──────────────────────────────────────────────────
+  {
+    slug: "sex-during-pregnancy",
+    title: "Sex during pregnancy",
+    metaDescription:
+      "Is sex safe while pregnant, will it hurt the baby, and why does desire keep changing? A calm guide to safety, comfort and staying close through pregnancy.",
+    quickAnswer:
+      "For most pregnancies, yes, sex is safe. Sex is normally safe throughout pregnancy unless your midwife or doctor has told you otherwise. Your baby is protected by the amniotic fluid and the muscle of your womb, and a mucus plug seals the cervix. Penetration does not reach or harm your baby.",
+    howThisFeels: [
+      "Worrying that sex might somehow hurt the baby",
+      "Desire swinging between wanting closeness and feeling touched out",
+      "A partner holding back out of fear rather than a lack of wanting you",
+      "Not knowing whether a cramp or spotting afterwards means something is wrong",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Your baby is well protected",
+          body: "Your baby is protected by the amniotic fluid and the muscle of your womb, and a mucus plug seals the cervix. Penetration does not reach or harm your baby.",
+        },
+        {
+          heading: "Hormones and a changing body affect desire",
+          body: "Nausea and exhaustion in the first months, a body that feels unfamiliar, worry about the pregnancy, or simply being touched out can all change how you feel. Later on, size and comfort come into it.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Specific medical advice to avoid sex",
+          body: "Your midwife or doctor may advise avoiding sex, or penetrative sex specifically, if you have had bleeding in this pregnancy, if you have a low-lying placenta, if your waters have broken, if you have a history of very early labour, or if you are expecting more than one baby.",
+        },
+      ],
+      whyItVaries:
+        "Some people want sex more in pregnancy, some much less, and most swing between the two. None of this needs fixing, and it does not predict anything about your relationship afterwards.",
+    },
+    timing: {
+      whenStarts: "Questions and changes in desire can come up from the earliest weeks of pregnancy.",
+      whenEases:
+        "Comfort and desire tend to shift again after birth, following their own pattern for each person.",
+    },
+    whatItFeelsLike: [
+      "Positions that worked before no longer feeling comfortable, particularly on your back later in pregnancy",
+      "Mild cramping or a tightening of the bump afterwards that usually settles quickly",
+    ],
+    whatThisMeans:
+      "Sex is generally safe throughout pregnancy unless you have been told otherwise, and changes in desire, comfort or the amount of discharge are part of the range of normal.",
+    normal: [
+      "Sex throughout pregnancy unless your midwife or doctor has advised otherwise",
+      "Desire that rises, falls or swings between the two",
+      "Needing to change positions for comfort, particularly later in pregnancy",
+      "Vaginal dryness or increased discharge",
+      "Mild cramping or tightening of the bump afterwards that settles quickly",
+      "Light spotting occasionally, because the cervix has more blood flow in pregnancy and can bleed more easily when touched",
+    ],
+    seekSupport: [
+      "Bleeding after sex, or bleeding at any time in pregnancy",
+      "Pain that does not settle, or regular tightenings",
+      "Thinking your waters may have broken",
+      "Unusual discharge, itching, soreness or a smell, which can indicate an infection worth treating",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Contact your midwife or maternity unit if you are unsure, and ask for a sexually transmitted infection test if there is any chance of one; sexual health services are confidential.",
+    whatYouCanDo: [
+      {
+        action: "Follow specific advice from your midwife or doctor if you have been given it, and ask what it applies to",
+        reason: "Guidance to avoid sex is often more specific than a blanket no.",
+      },
+      {
+        action: "Try side-lying positions or ones where you control depth and pace",
+        reason: "Positions that worked before may not now, particularly on your back later in pregnancy.",
+      },
+      {
+        action: "Use a water-based lubricant if you notice vaginal dryness",
+        reason: "Dryness or increased discharge are both common in pregnancy.",
+      },
+      {
+        action: "Say out loud if you or your partner are holding back out of worry",
+        reason: "Partners often hold back out of fear of causing harm rather than a lack of desire, and saying so usually helps more than either person expects.",
+      },
+      {
+        action: "Lean on touch, massage and time together when penetrative sex is off the table",
+        reason: "Closeness is not off the table even if sex is, by advice or by choice.",
+      },
+    ],
+    whatHappensNext:
+      "Most couples find their own rhythm through pregnancy, with desire and comfort shifting again after the baby arrives.",
+    relatedStage: {
+      intro: "This sits alongside other wellbeing and relationship content:",
+      links: [
+        {
+          label: "Wellbeing in pregnancy",
+          href: "/pregnancy/feelings",
+          context: "The wider picture of emotional changes in pregnancy.",
+        },
+        {
+          label: "Bleeding in early pregnancy",
+          href: "/articles/bleeding-in-early-pregnancy",
+          context: "What to do about bleeding, including after sex.",
+        },
+        {
+          label: "Discharge in pregnancy",
+          href: "/articles/discharge-in-pregnancy",
+          context: "What is ordinary and what is worth checking.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Is it safe to have sex while pregnant?",
+      "Why has my sex drive changed in pregnancy?",
+      "Can sex bring on labour?",
+    ],
+    captureIntro:
+      "Changes in desire and closeness are a normal part of pregnancy for most couples. Worth noting how things are feeling between you.",
+    trimester: [1, 2, 3],
+    relatedSlugs: [
+      "bleeding-in-early-pregnancy",
+      "discharge-in-pregnancy",
+    ],
+    journey: ["pregnancy"],
+    topics: ["relationships-and-feelings"],
+    keyTakeaways: [
+      "Sex is normally safe throughout pregnancy unless your midwife or doctor has told you otherwise, because your baby is protected by amniotic fluid, the womb and the mucus plug.",
+      "Specific advice to avoid sex is more common with bleeding, a low-lying placenta, broken waters, a history of very early labour, or expecting more than one baby.",
+      "Desire going up, down or swinging between the two is normal and does not predict anything about your relationship afterwards.",
+      "Comfort often means changing position, going slower, and using a water-based lubricant if needed.",
+      "Mild cramping or light spotting after sex can happen and usually settles quickly, because the cervix has more blood flow in pregnancy.",
+      "Bleeding, pain that does not settle, regular tightenings, waters breaking, or signs of infection need contact with your midwife or maternity unit.",
+    ],
+    sources: [
+      {
+        label: "Sex and sexual health in pregnancy",
+        publisher: "NHS Inform (Ready Steady Baby)",
+        url: "https://www.nhsinform.scot/ready-steady-baby/pregnancy/relationships-and-wellbeing-in-pregnancy/sex-and-sexual-health-in-pregnancy/",
+      },
+      {
+        label: "Common health problems in pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/",
+      },
+    ],
+    topic: "feelings",
+    standfirst:
+      "Is sex safe in pregnancy, why desire keeps changing, and how to stay comfortable and close as your body changes.",
+    hero: {
+      src: new URL("../assets/article-hero-sex-during-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman and her partner sitting close together on a sofa at home, smiling.",
+    },
+    editorialSections: [
+      {
+        id: "is-it-safe",
+        heading: "Is it safe?",
+        paragraphs: [
+          "For most pregnancies, yes. Sex is normally safe throughout pregnancy unless your midwife or doctor has told you otherwise. Your baby is protected by the amniotic fluid and the muscle of your womb, and a mucus plug seals the cervix. Penetration does not reach or harm your baby.",
+        ],
+      },
+      {
+        id: "when-to-check-first",
+        heading: "When to check first",
+        paragraphs: [
+          "Your midwife or doctor may advise avoiding sex, or penetrative sex specifically, if you have had bleeding in this pregnancy, if you have a low-lying placenta, if your waters have broken, if you have a history of very early labour, or if you are expecting more than one baby. If you have been given advice like this, follow it and ask what it applies to, because the guidance is often more specific than a blanket no.",
+        ],
+      },
+      {
+        id: "desire-goes-up-and-down",
+        heading: "Desire goes up and down, and both are normal",
+        image: {
+          src: new URL("../assets/article-body-sex-during-pregnancy-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman and her partner sitting together on the edge of a bed, talking.",
+        },
+        paragraphs: [
+          "Some people want sex more in pregnancy, some much less, and most swing between the two. Nausea and exhaustion in the first months, a body that feels unfamiliar, worry about the pregnancy, or simply being touched out can all change how you feel. Later on, size and comfort come into it. None of this needs fixing, and it does not predict anything about your relationship afterwards.",
+          "Partners often hold back out of fear of causing harm rather than a lack of desire, and saying so out loud usually helps more than either person expects.",
+        ],
+      },
+      {
+        id: "comfort",
+        heading: "Comfort",
+        paragraphs: [
+          "Positions that worked before may not now, particularly on your back later in pregnancy. Side-lying and positions where you control depth and pace tend to be more comfortable. Go slower than you would have before. Vaginal dryness or increased discharge are both common; a water-based lubricant is fine.",
+          "Mild cramping or a tightening of the bump afterwards can happen and usually settles quickly. Some people notice light spotting because the cervix has more blood flow in pregnancy and can bleed more easily when touched.",
+        ],
+      },
+      {
+        id: "other-ways-to-stay-close",
+        heading: "Other ways to stay close",
+        image: {
+          src: new URL("../assets/article-body-sex-during-pregnancy-2.jpg", import.meta.url).href,
+          alt: "A pregnant woman and her partner embracing warmly in a softly lit living room.",
+        },
+        paragraphs: [
+          "If penetrative sex is off the table, by advice or by choice, closeness is not. Touch, massage, time together without phones, and saying what you actually want all count, and they carry the relationship through the periods when sex is not happening.",
+        ],
+      },
+      {
+        id: "contact-your-midwife-or-maternity-unit",
+        heading: "Contact your midwife or maternity unit if",
+        paragraphs: [
+          "Get in touch if you have bleeding after sex, or bleeding at any time in pregnancy, pain that does not settle or regular tightenings, if you think your waters may have broken, or unusual discharge, itching, soreness or a smell, which can indicate an infection worth treating.",
+          "Sexually transmitted infections can affect pregnancy and are treatable. If there is any chance of one, ask for a test. Sexual health services are confidential.",
+        ],
+      },
+    ],
+  },
+
+  // ─── DIZZINESS AND FEELING FAINT IN PREGNANCY ─────────────────────────────
+  {
+    slug: "dizziness-and-feeling-faint-in-pregnancy",
+    title: "Dizziness and feeling faint in pregnancy",
+    metaDescription:
+      "Why do I feel light-headed or close to fainting in pregnancy, and when does it matter? A calm guide to what helps and when to get checked.",
+    quickAnswer:
+      "Feeling faint is common in pregnancy and is usually down to hormonal changes affecting your circulation. It tends to come on when you stand up quickly, after a hot bath or shower, when you have not eaten for a while, or in a warm, crowded place. Later in pregnancy, lying flat on your back can also make you feel light-headed because of the weight pressing on a major blood vessel.",
+    howThisFeels: [
+      "That swimmy, unsteady moment when you stand up too fast",
+      "Worrying you might actually faint in public",
+      "Feeling silly for needing to sit down again so soon",
+      "Not knowing whether this is ordinary or worth mentioning",
+    ],
+    whatHappening: {
+      commonCauses: [
+        {
+          heading: "Hormonal changes affecting circulation",
+          body: "Feeling faint is common in pregnancy and is usually down to hormonal changes affecting your circulation.",
+        },
+        {
+          heading: "Standing up quickly, heat, or not eating for a while",
+          body: "It tends to come on when you stand up quickly, after a hot bath or shower, when you have not eaten for a while, or in a warm, crowded place.",
+        },
+        {
+          heading: "Lying flat on your back later in pregnancy",
+          body: "Later in pregnancy, lying flat on your back can make you feel light-headed because of the weight pressing on a major blood vessel.",
+        },
+      ],
+      lessCauses: [
+        {
+          heading: "Anaemia",
+          body: "Feeling persistently exhausted, breathless on mild activity, or unusually pale can be a sign of anaemia and is worth a blood test.",
+        },
+        {
+          heading: "A pregnancy outside the womb, in early pregnancy",
+          body: "Feeling faint with one-sided tummy pain, shoulder-tip pain or bleeding in early pregnancy needs urgent assessment, because it can be a sign of a pregnancy outside the womb.",
+        },
+      ],
+      whyItVaries:
+        "How often dizziness strikes, and how much it disrupts your day, depends on things like heat, how regularly you are eating, how long you have been standing, and what position you sleep or rest in.",
+    },
+    timing: {
+      whenStarts: "Feeling faint can happen at any stage of pregnancy.",
+      whenEases:
+        "It often becomes less frequent once you adjust your routine around standing, eating and rest, though patterns vary by trimester.",
+    },
+    whatItFeelsLike: [
+      "A swimmy, light-headed feeling that passes once you sit or lie down",
+      "Feeling faint after standing for a while, in a hot room, or after a hot bath",
+    ],
+    whatThisMeans:
+      "Feeling faint in pregnancy is usually ordinary and manageable with simple steps, but there are specific patterns, especially alongside other symptoms, that are worth getting checked.",
+    normal: [
+      "Feeling light-headed on standing up quickly",
+      "Feeling faint after a hot bath or shower, or in a warm, crowded place",
+      "Feeling dizzy lying flat on your back later in pregnancy",
+      "Occasional faintness that settles quickly once you sit or lie down",
+    ],
+    seekSupport: [
+      "Actually fainting, or nearly fainting more than occasionally",
+      "Dizziness with a headache that will not shift, blurred vision, flashing lights, or swelling of your face, hands or feet",
+      "Palpitations, chest pain, or breathlessness at rest",
+      "Feeling faint alongside bleeding or tummy pain, particularly in early pregnancy",
+      "Persistent exhaustion, breathlessness on mild activity, or unusual paleness, which can be a sign of anaemia and is worth a blood test",
+      "Your baby's movements changing or slowing, at any hour",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Call 999 if you have chest pain, severe breathlessness, or you collapse.",
+    whatYouCanDo: [
+      {
+        action: "Get up slowly from sitting or lying, sitting on the edge of the bed for a moment before standing",
+        reason: "This gives your circulation time to adjust.",
+      },
+      {
+        action: "Sit down straight away if you feel faint while standing, or lie down with your legs raised if you can",
+        reason: "This helps blood flow return to normal quickly.",
+      },
+      {
+        action: "Roll onto your side if faintness comes on while lying on your back",
+        reason: "It relieves the pressure of the weight on a major blood vessel.",
+      },
+      {
+        action: "Eat regularly, even small amounts, and keep water with you",
+        reason: "Low blood sugar and dehydration can both bring on faintness.",
+      },
+      {
+        action: "Keep cool where you can, and take baths warm rather than hot",
+        reason: "Overheating is a common trigger.",
+      },
+      {
+        action: "Settle on your side to sleep from the second half of pregnancy",
+        reason: "This avoids the light-headedness that can come from lying flat on your back.",
+      },
+      {
+        action: "Tell your employer you are pregnant if your job involves long periods standing, heat, or few breaks",
+        reason: "Sitting when you need to, taking water with you and eating regularly are reasonable adjustments, not favours, once a risk assessment is done.",
+      },
+    ],
+    whatHappensNext:
+      "For most people, small changes to pace, position and eating cut down how often faintness strikes, and it settles further once the pregnancy ends.",
+    relatedStage: {
+      intro: "This sits alongside other common symptoms and safety guidance:",
+      links: [
+        {
+          label: "Common symptoms in pregnancy",
+          href: "/pregnancy/body",
+          context: "The wider picture of ordinary pregnancy discomforts.",
+        },
+        {
+          label: "Fatigue in early pregnancy",
+          href: "/articles/fatigue-in-early-pregnancy",
+          context: "For more on tiredness alongside dizziness.",
+        },
+        {
+          label: "Sleep in pregnancy",
+          href: "/articles/sleep-in-pregnancy",
+          context: "For more on sleep positions later in pregnancy.",
+        },
+        {
+          label: "Bleeding in early pregnancy",
+          href: "/articles/bleeding-in-early-pregnancy",
+          context: "What to do if faintness comes with bleeding or pain.",
+        },
+      ],
+    },
+    aiPrompts: [
+      "Why do I feel dizzy when I stand up in pregnancy?",
+      "Is it normal to feel faint in pregnancy?",
+      "When is dizziness in pregnancy an emergency?",
+    ],
+    captureIntro:
+      "Faintness can be unsettling even when it is ordinary. Worth noting when it happens and what seems to trigger it.",
+    trimester: [1, 2, 3],
+    relatedSlugs: [
+      "fatigue-in-early-pregnancy",
+      "sleep-in-pregnancy",
+      "bleeding-in-early-pregnancy",
+    ],
+    journey: ["pregnancy"],
+    topics: ["common-symptoms"],
+    keyTakeaways: [
+      "Feeling faint is common in pregnancy and is usually down to hormonal changes affecting circulation.",
+      "It is often triggered by standing up quickly, heat, not eating for a while, or lying flat on your back later in pregnancy.",
+      "Getting up slowly, sitting or lying down when faint, eating regularly and staying cool all help.",
+      "From the second half of pregnancy, settle on your side to sleep rather than on your back.",
+      "Persistent exhaustion, breathlessness or unusual paleness can point to anaemia and is worth a blood test.",
+      "Actual fainting, dizziness with headache or visual changes, chest pain, breathlessness at rest, or faintness with bleeding or tummy pain needs prompt medical attention; call 999 for chest pain, severe breathlessness or collapse.",
+    ],
+    sources: [
+      {
+        label: "Common health problems in pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/",
+      },
+      {
+        label: "Ectopic pregnancy",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/ectopic-pregnancy/",
+      },
+    ],
+    topic: "body",
+    standfirst:
+      "Why light-headedness and faintness are so common in pregnancy, what helps in the moment, and which patterns are worth getting checked.",
+    hero: {
+      src: new URL("../assets/article-hero-dizziness-feeling-faint-pregnancy.jpg", import.meta.url).href,
+      alt: "A pregnant woman sitting calmly in a chair by a window, resting with a glass of water.",
+    },
+    editorialSections: [
+      {
+        id: "why-it-happens",
+        heading: "Why it happens",
+        paragraphs: [
+          "Feeling faint is common in pregnancy and is usually down to hormonal changes affecting your circulation. It tends to come on when you stand up quickly, after a hot bath or shower, when you have not eaten for a while, or in a warm, crowded place.",
+          "Later in pregnancy, lying flat on your back can also make you feel light-headed because of the weight pressing on a major blood vessel.",
+        ],
+      },
+      {
+        id: "what-helps",
+        heading: "What helps",
+        image: {
+          src: new URL("../assets/article-body-dizziness-feeling-faint-pregnancy-1.jpg", import.meta.url).href,
+          alt: "A pregnant woman sitting on the edge of a bed with her feet on the floor, pausing before standing.",
+        },
+        paragraphs: [
+          "Get up slowly from sitting or lying, and sit on the edge of the bed for a moment before standing. If you feel faint while standing, sit down straight away, or lie down with your legs raised if you can. If it comes on while you are lying on your back, roll onto your side.",
+          "Eat regularly, even small amounts, and keep water with you. Keep cool where you can, and take baths warm rather than hot.",
+          "From the second half of pregnancy, settle on your side to sleep rather than on your back.",
+        ],
+      },
+      {
+        id: "contact-your-midwife-gp-or-111",
+        heading: "Contact your midwife, GP or 111 if",
+        paragraphs: [
+          "Get in touch if you actually faint, or nearly faint more than occasionally, if dizziness comes with a headache that will not shift, blurred vision, flashing lights, or swelling of your face, hands or feet, or if you have palpitations, chest pain, or breathlessness at rest.",
+          "Also get in touch if you feel faint alongside bleeding or tummy pain, particularly in early pregnancy, if you feel persistently exhausted, breathless on mild activity, or unusually pale, which can be a sign of anaemia and is worth a blood test, or if your baby's movements have changed or slowed, at any hour.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Call 999 if you have chest pain, severe breathlessness, or you collapse.",
+        },
+      },
+      {
+        id: "early-pregnancy-and-feeling-faint",
+        heading: "Early pregnancy and feeling faint",
+        paragraphs: [
+          "Feeling faint with one-sided tummy pain, shoulder-tip pain or bleeding in early pregnancy needs urgent assessment, because it can be a sign of a pregnancy outside the womb.",
+        ],
+      },
+      {
+        id: "at-work-and-out-of-the-house",
+        heading: "At work and out of the house",
+        image: {
+          src: new URL("../assets/article-body-dizziness-feeling-faint-pregnancy-2.jpg", import.meta.url).href,
+          alt: "A pregnant woman sitting down at her desk at work, taking a moment with a bottle of water.",
+        },
+        paragraphs: [
+          "If your job involves long periods standing, heat, or few breaks, tell your employer you are pregnant so a risk assessment can be done. Sitting when you need to, taking water with you and eating regularly are reasonable adjustments, not favours.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

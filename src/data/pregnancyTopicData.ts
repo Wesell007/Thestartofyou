@@ -129,6 +129,9 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Round ligament pain", href: "/articles/round-ligament-pain" },
           { label: "Braxton Hicks contractions", href: "/articles/braxton-hicks-contractions" },
           { label: "Swelling in pregnancy", href: "/articles/swelling-in-pregnancy" },
+          { label: "Itching in pregnancy", href: "/articles/itching-in-pregnancy" },
+          { label: "Leg cramps in pregnancy", href: "/articles/leg-cramps-in-pregnancy" },
+          { label: "Dizziness and feeling faint in pregnancy", href: "/articles/dizziness-and-feeling-faint-in-pregnancy" },
         ],
       },
       {
@@ -352,6 +355,8 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "NIPT in pregnancy", href: "/articles/nipt-in-pregnancy" },
           { label: "20-week anomaly scan", href: "/articles/20-week-anomaly-scan" },
           { label: "Glucose tolerance test", href: "/articles/glucose-tolerance-test" },
+          { label: "Gestational diabetes", href: "/articles/gestational-diabetes" },
+          { label: "hCG levels explained", href: "/articles/hcg-levels-explained" },
           { label: "Anti-D injection in pregnancy", href: "/articles/anti-d-injection-in-pregnancy" },
           { label: "What if a scan shows something unexpected", href: "/articles/what-if-a-scan-shows-something-unexpected" },
         ],
@@ -370,6 +375,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Cold and flu in pregnancy", href: "/articles/cold-and-flu-in-pregnancy" },
           { label: "UTI in pregnancy", href: "/articles/uti-in-pregnancy" },
           { label: "Thrush in pregnancy", href: "/articles/thrush-in-pregnancy" },
+          { label: "Diarrhoea and tummy bugs in pregnancy", href: "/articles/diarrhoea-and-tummy-bugs-in-pregnancy" },
         ],
       },
       {
@@ -387,6 +393,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         links: [
           { label: "Weight changes in pregnancy", href: "/articles/weight-changes-in-pregnancy" },
           { label: "Hair dye and beauty treatments in pregnancy", href: "/articles/hair-dye-and-beauty-treatments-in-pregnancy" },
+          { label: "Sex during pregnancy", href: "/articles/sex-during-pregnancy" },
         ],
       },
     ],
@@ -522,6 +529,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         links: [
           { label: "Birth preferences: how to make a plan that helps rather than disappoints", href: "/articles/birth-preferences" },
           { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
+          { label: "Caesarean birth", href: "/articles/caesarean-birth" },
         ],
       },
       {
@@ -658,6 +666,7 @@ export const topicMapEntries: TopicMapEntry[] = [
       { label: "The 36-week appointment", href: "/articles/the-36-week-appointment" },
       { label: "Induction of labour", href: "/articles/induction-of-labour" },
       { label: "Hospital bag and what to pack", href: "/articles/hospital-bag-and-what-to-pack" },
+          { label: "Caesarean birth", href: "/articles/caesarean-birth" },
     ],
   },
 ];

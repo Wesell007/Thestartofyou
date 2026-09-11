@@ -1841,6 +1841,924 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       },
     ],
   },
+{
+    slug: "teething",
+    topic: "care-and-safety",
+    title: "Teething: what to expect and what helps",
+    description:
+      "When teeth may arrive, what teething can look like, what helps with sore gums, and what teething does not explain.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Teething: what to expect and what helps | The Start of You",
+    seoDescription:
+      "A calm guide to teething timing, common signs, what genuinely helps, and the symptoms teething does not explain.",
+    intro:
+      "There is often a stretch of days where your baby seems different and you cannot quite name why. More dribble than usual. More chewing. Shorter naps. Teething gets blamed for a lot, and sometimes it is the reason. This is a calm look at what teething tends to involve, what genuinely helps, and, just as importantly, what teething does not explain.",
+    sections: [
+      {
+        heading: "When teeth tend to arrive",
+        body: [
+          "Most babies start teething at around six months, but the range is genuinely wide. Some babies start before four months, some after twelve, and a few are born with a tooth already through. None of that is a sign of anything being ahead or behind.",
+          "Teeth usually arrive in a rough order: the bottom front teeth first, then the top front teeth, then the ones either side, then the back teeth later in the second year. Most children have all their milk teeth by two to three years old.",
+        ],
+      },
+      {
+        heading: "What teething can look like",
+        body: [
+          "Some teeth arrive with no fuss at all. When there are signs, they are usually mild and last a few days: a sore, red patch of gum where the tooth is coming through, a slightly raised temperature but under 38C, one flushed cheek or a rash on the face, rubbing an ear on the same side, more dribbling than usual, gnawing and chewing on hands, toys and anything else within reach, and being more fretful and sleeping less well.",
+        ],
+      },
+      {
+        heading: "What teething does not explain",
+        body: [
+          "This part matters more than the list above. Teething is not a reason to wait and see when your baby seems unwell.",
+          "A temperature of 38C or higher is not teething, and should be treated as a fever in its own right. There is no evidence that teething causes diarrhoea. Persistent distress, being off feeds, vomiting or a baby who simply is not themselves all deserve looking at separately.",
+          "You know your baby. If any symptom worries you, get advice from a GP or call NHS 111 rather than putting it down to teeth.",
+        ],
+      },
+      {
+        heading: "What helps",
+        body: [
+          "A teething ring: chilling one in the fridge can soothe sore gums. Never freeze it, as a frozen ring can damage the gums, and never tie one around your baby's neck.",
+          "Gentle gum rubbing with a clean finger, and comfort and distraction: being held, played with or carried often does more than any product.",
+          "Something safe to chew if your baby is six months or older and eating solids, such as raw fruit or vegetables. Stay with them while they eat, in case of choking. Rusks are best avoided because nearly all contain sugar.",
+          "Wiping dribble gently from the face can help prevent a rash.",
+        ],
+      },
+      {
+        heading: "About medicines and gels",
+        body: [
+          "If your baby is in pain, a sugar-free painkiller can help. Paracetamol can be given from two months old and ibuprofen from three months. Children under sixteen should never have aspirin. Always follow the instructions with the medicine, and ask a pharmacist or GP if you are unsure.",
+          "There is a lack of evidence that teething gels work, so rings and simple painkillers come first. If you do use a gel, it must be one made for young children and bought from a pharmacy; general oral pain gels are not suitable. Homeopathic teething products are not recommended.",
+        ],
+      },
+      {
+        heading: "Looking after new teeth",
+        body: [
+          "Register your baby with a dentist once teeth start coming through, and start brushing with fluoride toothpaste as soon as the first tooth appears. Sugary foods and drinks can cause decay even when there are only a few teeth.",
+        ],
+      },
+      {
+        heading: "How this can feel for you",
+        body: [
+          "Teething weeks are tiring in a low-level, unglamorous way. Broken nights and a grumbly baby wear you down, and it is hard not to second-guess whether it really is teeth. Doing the simple things, and checking anything that worries you rather than sitting with it, is enough.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Teething usually starts around six months, but the range is wide and normal.",
+      "Signs are often mild and short-lived.",
+      "A temperature of 38C or above, or diarrhoea, is not explained by teething.",
+      "Chilled (never frozen) teething rings, gum rubbing and comfort are the first things to try.",
+      "Paracetamol from two months and ibuprofen from three months can be used for pain; teething gels have little evidence behind them.",
+      "Brush with fluoride toothpaste from the very first tooth.",
+    ],
+    relatedSlugs: ["baby-care-basics", "when-to-ask-for-help-after-birth"],
+    crossLinks: [
+      {
+        label: "Baby care basics",
+        href: "/first-year/care-and-safety/baby-care-basics",
+      },
+      {
+        label: "When to ask for help after birth",
+        href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth",
+      },
+    ],
+    sources: [
+      {
+        label: "Baby teething symptoms",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/babys-development/teething/baby-teething-symptoms/",
+      },
+      {
+        label: "Tips for helping your teething baby",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/babys-development/teething/tips-for-helping-your-teething-baby/",
+      },
+    ],
+  },
+  {
+    slug: "colic-and-evening-crying",
+    topic: "care-and-safety",
+    title: "Colic and evening crying",
+    description:
+      "What colic means in UK guidance, why evenings can be hardest, what helps, what to avoid, and when to get advice.",
+    readTime: "7 min read",
+    status: "ready",
+    seoTitle: "Colic and evening crying | The Start of You",
+    seoDescription:
+      "A calm guide to colic and evening crying: what it means, what genuinely helps, what the evidence does not support, and when to get advice.",
+    intro:
+      "Some evenings a baby cries and cries, and nothing you try seems to reach them. It is one of the hardest experiences of early parenthood, partly because it tends to land at the end of the day when you have the least left to give. This is what colic means in UK guidance, what genuinely helps, and when to ask for help.",
+    sections: [
+      {
+        heading: "Why evenings are often the hardest part",
+        body: [
+          "Afternoon and evening are the most common times for babies to cry and be difficult to comfort. Crying overall tends to increase at around two weeks old and gradually reduce by around three months. That pattern is common, and it is not a sign that you are missing something obvious.",
+        ],
+      },
+      {
+        heading: "What colic means",
+        body: [
+          "Colic is the word used when a baby who is otherwise healthy cries a great deal: more than three hours a day, on more than three days a week, for at least a week. Alongside the crying, you might notice that your baby is very hard to settle, clenches their fists, goes red in the face, pulls their knees up or arches their back, or is windy with a rumbling tummy.",
+          "It often starts in the first few weeks and usually stops by three to four months.",
+          "Nobody knows exactly what causes it. It may be that young babies find digestion harder, and in some cases crying is linked to something else such as a cows' milk allergy.",
+        ],
+      },
+      {
+        heading: "It is not always colic",
+        body: [
+          "Crying has plenty of other explanations: hunger, a dirty nappy, wind, reflux or constipation. If you are not sure what is going on, that is a good reason to speak to your health visitor, call NHS 111 or see your GP rather than to assume.",
+        ],
+      },
+      {
+        heading: "What can help",
+        body: [
+          "Babies with colic do not usually need to see a doctor, and the things most likely to help are simple: hold and cuddle your baby while they are crying, sit or hold them upright during feeds so they swallow less air, wind them after feeds, rock them gently over your shoulder, in a Moses basket or crib, or in the pram, try a warm bath, and try gentle background sound such as the radio, which can distract some babies.",
+          "Keep feeding as usual; if you are breastfeeding, you do not need to change your diet.",
+        ],
+      },
+      {
+        heading: "What the evidence does not support",
+        body: [
+          "This is the part that is easy to miss when you are exhausted and reading reviews at 9pm.",
+          "Colic remedies sold in pharmacies and shops, including gripe water and anti-colic drops, herbal preparations and probiotic supplements, are not recommended, and there is no evidence that they help colic. Spinal manipulation and cranial osteopathy are also not advised: there is little evidence they work, and they may hurt your baby.",
+          "If you want to try something, your health visitor is the better first stop.",
+        ],
+      },
+      {
+        heading: "When to get advice",
+        body: [
+          "Call NHS 111 or see a GP if you are worried about your baby's crying, your baby has colic and nothing seems to be working, you are finding it hard to cope, your baby is not growing or gaining weight as expected, or symptoms of colic are still there after four months of age.",
+          "Go to A&E or call 999 if your baby has a weak or high-pitched cry, or their cry does not sound like their normal cry. Trust your instincts if you think something is seriously wrong, particularly alongside other worrying symptoms.",
+        ],
+      },
+      {
+        heading: "How this can feel for you",
+        body: [
+          "Prolonged crying is genuinely hard to sit with. Feeling frustrated, tearful or numb does not make you a bad parent; it makes you a tired one. If you need to, it is safe to put your baby down somewhere safe, such as their cot, and step away for a couple of minutes to breathe.",
+          "Cry-sis runs a free helpline on 0800 448 0737, 9am to 10pm, seven days a week. Your health visitor, family and other parents are also worth leaning on.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Crying often peaks in the afternoon and evening, rises around two weeks and eases by around three months.",
+      "Colic describes frequent, hard-to-soothe crying in an otherwise healthy baby, usually settling by three to four months.",
+      "The cause is not known.",
+      "Holding, upright feeding, winding, gentle motion and a warm bath are the things most worth trying.",
+      "Gripe water, anti-colic drops, herbal and probiotic remedies are not recommended, and cranial osteopathy and spinal manipulation should be avoided.",
+      "Contact NHS 111 or a GP if you are worried or struggling; a weak, high-pitched or unusual cry needs urgent help.",
+    ],
+    relatedSlugs: [
+      "newborn-sleep-expectations",
+      "newborn-feeding-rhythms",
+      "when-parenthood-feels-heavy",
+    ],
+    crossLinks: [
+      {
+        label: "Newborn sleep expectations",
+        href: "/first-year/sleep/newborn-sleep-expectations",
+      },
+      {
+        label: "Newborn feeding rhythms",
+        href: "/first-year/feeding/newborn-feeding-rhythms",
+      },
+      {
+        label: "When parenthood feels heavy",
+        href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
+      },
+    ],
+    sources: [
+      {
+        label: "Colic",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/colic/",
+      },
+      {
+        label: "Soothing a crying baby",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/caring-for-a-newborn/soothing-a-crying-baby/",
+      },
+    ],
+  },
+  {
+    slug: "introducing-solid-foods",
+    topic: "feeding",
+    title: "Introducing solid foods",
+    description:
+      "When to start solids in the UK, the three readiness signs, how textures progress, allergenic foods, and staying safe while your baby learns to eat.",
+    readTime: "8 min read",
+    status: "ready",
+    seoTitle: "Introducing solid foods | The Start of You",
+    seoDescription:
+      "A calm, practical guide to starting solids in the UK: readiness signs, textures, allergenic foods, and staying safe at mealtimes.",
+    intro:
+      "Starting solids is messier and slower than most people expect, and that is fine. The first few months of eating are really about getting used to tastes, textures and the whole business of moving food around a mouth. Milk is still doing the heavy lifting. This guide covers weaning in the UK sense of introducing complementary solid foods, not about stopping breastfeeding.",
+    sections: [
+      {
+        heading: "When to start",
+        body: [
+          "Introducing a variety of foods alongside breast milk or first infant formula from around six months helps set your child up for healthier eating.",
+          "There are good reasons to wait until around six months. Breast milk or first infant formula provides the energy and nutrients your baby needs until then, apart from vitamin D in some cases. Breastfeeding only, up to around six months, helps protect against illness and infection. Waiting also gives your baby time to develop enough to cope with solid foods and to feed themselves, and often means they move on to a range of textures more quickly.",
+          "If your baby was born prematurely, ask your health visitor or GP when to start.",
+        ],
+      },
+      {
+        heading: "The three readiness signs",
+        body: [
+          "Look for these three together, from around six months. Your baby can stay sitting and hold their head steady, coordinate eyes, hands and mouth well enough to look at food, pick it up and put it in their mouth themselves, and swallow food rather than spitting it back out.",
+        ],
+      },
+      {
+        heading: "Signs that are easily misread",
+        body: [
+          "Chewing fists, waking more at night, and wanting extra milk feeds are all normal baby behaviours and are not signs of readiness for solids. Starting solids will not make your baby sleep through the night. Sometimes a little extra milk is all that is needed until they are ready.",
+        ],
+      },
+      {
+        heading: "How to begin",
+        body: [
+          "Start with a small amount of food before a usual milk feed. Do not worry about how much goes in. Most of your baby's energy and nutrients still come from milk.",
+          "A few things that make it easier: allow plenty of time, especially at first; go at your baby's pace and let them show you when they are hungry or full; stop when they have had enough, a firmly closed mouth or a turned head says it clearly; if you are spoon feeding, wait for them to open their mouth; never force your baby to eat, try again another time; and keep offering variety, including foods they seem to reject, as it can take ten tries or more for a baby to get used to a new food.",
+          "Some days they will eat plenty, some days almost nothing. That is normal.",
+        ],
+      },
+      {
+        heading: "Textures",
+        body: [
+          "Foods can start as purées, soft cooked pieces, cereals or baby rice mixed with milk, and progress towards mashed, lumpy food and finger foods. Some babies move quickly and may barely need smooth blended food at all.",
+        ],
+      },
+      {
+        heading: "Salt, sugar and foods to avoid",
+        body: [
+          "Do not add salt or sugar to your baby's food or cooking water, including stock cubes and gravy. Salt is not good for a baby's kidneys and sugar causes tooth decay. Some other foods need to be avoided in the first year; check the NHS list of foods to avoid giving babies.",
+        ],
+      },
+      {
+        heading: "Foods that can trigger allergies",
+        body: [
+          "From around six months, allergenic foods can be introduced one at a time, so you can spot any reaction. These include eggs, nuts and peanuts, cows' milk, gluten-containing foods, beans, lentils and peas, seeds, soya, shellfish, fish, celery, mustard and sulphur dioxide.",
+          "Serve them safely: nuts and seeds finely ground or as butters, eggs without a red lion stamp never raw or lightly cooked, shellfish never raw or lightly cooked.",
+          "Once a food has been introduced and tolerated, keep it in your baby's usual diet. Evidence shows that delaying peanut and hen's eggs beyond six to twelve months may increase the risk of developing an allergy to them.",
+          "If your baby already has a diagnosed food allergy or eczema, or there is a family history of food allergies, eczema, asthma or hay fever, speak to your GP or health visitor before you start.",
+        ],
+      },
+      {
+        heading: "Spotting a reaction",
+        body: [
+          "Reactions usually happen within minutes, though symptoms can take up to two hours, and for some allergies such as cows' milk up to three days. Signs include swollen lips or face, red itchy watery eyes, wheezing and coughing, a red itchy rash, worsening eczema, being sick, tummy pain, diarrhoea or constipation.",
+          "Most reactions are mild. Anaphylaxis is rare but is a medical emergency: it starts quickly and can cause breathing problems, a swollen throat or tongue, or a raised itchy rash. Call 999.",
+          "Never cut out a major food such as milk on your own, as your child may miss out on nutrients they need. Talk to your health visitor or GP, who can refer you to a registered dietitian.",
+        ],
+      },
+      {
+        heading: "Staying safe while your baby learns to eat",
+        body: [
+          "Always stay with your baby while they are eating. Babies gag fairly often as they learn to manage food, and gagging is noisy and usually resolves itself; choking is quiet and needs immediate action. Make sure you know what to do: read the NHS guidance on what to do if your baby is choking, and consider a local baby first-aid course.",
+        ],
+      },
+      {
+        heading: "How this can feel for you",
+        body: [
+          "Mealtimes can feel like a lot: the mess, the waste, the worry about how little went in. It helps to remember what this stage is actually for. You are introducing tastes and skills, not hitting targets.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Start solids at around six months, alongside breast milk or infant formula.",
+      "Look for all three readiness signs together.",
+      "Night waking and fist chewing are not readiness signs, and solids will not make a baby sleep through.",
+      "Move from purées and soft pieces towards lumps and finger foods at your baby's pace.",
+      "Introduce allergenic foods one at a time from around six months, in safe forms, and keep them in the diet.",
+      "No added salt or sugar, and never leave your baby alone while eating.",
+      "Ask a GP or health visitor first if there is existing allergy, eczema or a family history.",
+    ],
+    relatedSlugs: [
+      "newborn-feeding-rhythms",
+      "bottle-and-breastfeeding-questions",
+      "safe-sleep-and-home-safety",
+    ],
+    crossLinks: [
+      {
+        label: "Newborn feeding rhythms",
+        href: "/first-year/feeding/newborn-feeding-rhythms",
+      },
+      {
+        label: "Bottle and breastfeeding questions",
+        href: "/first-year/feeding/bottle-and-breastfeeding-questions",
+      },
+      {
+        label: "Safe sleep and home safety",
+        href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
+      },
+    ],
+    sources: [
+      {
+        label: "Your baby's first solid foods",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/weaning-and-feeding/babys-first-solid-foods/",
+      },
+      {
+        label: "Food allergies in babies and young children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/weaning-and-feeding/food-allergies-in-babies-and-young-children/",
+      },
+    ],
+  },
+  {
+    slug: "newborn-quirks-and-reflexes",
+    topic: "care-and-safety",
+    title: "Normal newborn quirks and reflexes",
+    description:
+      "What to make of the noises, jerks, marks and movements of a brand new baby, and when something needs urgent attention.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Normal newborn quirks and reflexes | The Start of You",
+    seoDescription:
+      "A calm guide to newborn reflexes, breathing, soft spots and other ordinary quirks, plus the signs that need urgent help.",
+    intro:
+      "New babies do a lot of surprising things. Most of them are ordinary, and knowing what they are makes the first weeks calmer.",
+    sections: [
+      {
+        heading: "Startling and jerky movements",
+        body: [
+          "Babies are born with reflexes. A sudden noise or a feeling of falling can make your baby fling out their arms and then draw them back in. Newborns also turn towards a touch on the cheek and open their mouth looking for a feed, and they grip a finger placed in their palm surprisingly tightly. These reflexes fade over the first few months as your baby's movements become more deliberate.",
+        ],
+      },
+      {
+        heading: "Noisy breathing, snuffles and hiccups",
+        body: [
+          "Newborn breathing is irregular. It speeds up, slows down, and can pause briefly before settling back into a rhythm. Small snuffly noises are common because their nasal passages are narrow. Hiccups are frequent and do not usually bother the baby.",
+          "Breathing that is fast and stays fast, grunting with every breath, the skin pulling in under the ribs, or a baby who goes pale, blue, grey or blotchy needs urgent help.",
+        ],
+      },
+      {
+        heading: "The soft spots",
+        body: [
+          "There is a diamond-shaped patch near the front of your baby's head where the skull bones have not yet joined, and a smaller one towards the back. These are the fontanelles, and it is usually a year or more before the bones close over. They are covered by a tough membrane, so ordinary washing and handling will not hurt them. A soft spot that is sunken, or one that is bulging when your baby is calm and upright, should be checked.",
+        ],
+      },
+      {
+        heading: "Their eyes",
+        body: [
+          "Newborns can see, but their focus is limited and their eyesight develops gradually over the first months. It is normal for a newborn's eyes to drift apart from each other occasionally, and this should settle by around four months. Mention it to your health visitor or GP if it does not.",
+        ],
+      },
+      {
+        heading: "Bumps, bruises and an odd-shaped head",
+        body: [
+          "Swelling and bruising on the head, and sometimes bloodshot eyes, are common after birth, especially after a forceps or ventouse delivery. This is caused by the squeezing of birth and settles on its own. Ask your midwife if you are worried.",
+        ],
+      },
+      {
+        heading: "The cord",
+        body: [
+          "The umbilical stump takes about a week to dry out and drop off. Keep it clean and dry and let it do its thing. Tell your midwife, health visitor or GP if you notice bleeding or discharge.",
+        ],
+      },
+      {
+        heading: "Sneezing, sicking up and odd noises in sleep",
+        body: [
+          "Babies sneeze to clear their noses, bring up small amounts of milk, and make grunts and squeaks in their sleep. Forceful vomiting after most feeds, or a baby who is not putting on weight, is worth raising with your health visitor.",
+        ],
+      },
+      {
+        heading: "Get urgent help if your baby",
+        body: [
+          "Call 111 or 999 if your baby is under three months and has a temperature of 38C or higher, is working hard to breathe, grunting, or pausing for long periods, looks pale, blue, grey or blotchy, is floppy, unusually difficult to wake, or will not respond to you, or has a rash that does not fade when you press a glass against it.",
+          "If you are worried about your baby and cannot get through to anyone, call 111. If they are seriously unwell, call 999.",
+        ],
+      },
+      {
+        heading: "Trust the \"not like themselves\" feeling",
+        body: [
+          "You will learn your baby's normal faster than you expect. If something feels different and you cannot explain why, that is reason enough to ask. Nobody minds being asked about a newborn.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Newborn reflexes, irregular breathing, snuffles and hiccups are usually ordinary and fade over the first months.",
+      "The soft spots on your baby's head are protected by a tough membrane and can be washed and handled normally.",
+      "Bruising or swelling on the head after birth usually settles on its own.",
+      "Fast or laboured breathing, pale, blue, grey or blotchy skin, floppiness, or an unresponsive baby need urgent help.",
+      "A rash that does not fade under a pressed glass needs urgent medical attention.",
+      "Trust your own sense that something is different, and ask for advice without waiting.",
+    ],
+    relatedSlugs: [
+      "baby-care-basics",
+      "newborn-sleep-expectations",
+      "newborn-skin-spots-and-marks",
+      "common-illnesses-in-the-first-year",
+    ],
+    crossLinks: [
+      {
+        label: "Baby care basics",
+        href: "/first-year/care-and-safety/baby-care-basics",
+      },
+      {
+        label: "Newborn sleep expectations",
+        href: "/first-year/sleep/newborn-sleep-expectations",
+      },
+    ],
+    sources: [
+      {
+        label: "Getting to know your newborn",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/getting-to-know-your-newborn/",
+      },
+      {
+        label: "Rashes in babies and children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/rashes-babies-and-children/",
+      },
+      {
+        label: "High temperature (fever) in children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/fever-in-children/",
+      },
+    ],
+  },
+  {
+    slug: "newborn-skin-spots-and-marks",
+    topic: "care-and-safety",
+    title: "Newborn skin: spots, marks and dry patches",
+    description:
+      "What is behind common newborn spots, rashes, cradle cap and birthmarks, and how to tell routine skin changes from something that needs checking.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Newborn skin: spots, marks and dry patches | The Start of You",
+    seoDescription:
+      "A calm guide to common newborn skin changes, cradle cap, birthmarks and nappy rash, and the signs of a rash that needs urgent attention.",
+    intro:
+      "Newborn skin changes constantly in the first weeks. Most of what appears needs nothing at all.",
+    sections: [
+      {
+        heading: "Why newborn skin is so delicate",
+        body: [
+          "At birth the top layer of your baby's skin is very thin and easily damaged. Over the first month, or longer for premature babies, it matures and builds its own protective barrier. That is why plain water is best for bathing for at least the first month, without cleansers, lotions or medicated wipes. Vernix, the white sticky coating some babies are born with, is a natural moisturiser that also protects against infection, so leave it on the skin rather than wiping it off.",
+          "Babies born after their due date often have dry, cracked-looking skin because the vernix was absorbed before birth. Peeling in the first weeks is common and usually needs nothing.",
+        ],
+      },
+      {
+        heading: "Spots and blotches in the first weeks",
+        body: [
+          "Spots and rashes are very common in newborns. Tiny white pinhead spots across the nose and cheeks, and blotchy red patches with a small pale centre that come and go across the body in the first days, are both familiar newborn patterns. They typically clear on their own. Heat and overwrapping can bring spots out, so a slightly cooler room and one fewer layer often helps.",
+        ],
+      },
+      {
+        heading: "Cradle cap",
+        body: [
+          "Cradle cap looks like patches of greasy white or yellow scales on the scalp and face that form a crust and flake off, and it can also affect the nappy area and skin creases. The skin under the scales may look pink or red on white skin, or lighter or darker than the surrounding skin on brown or black skin. It is harmless, it is not itchy or painful, it does not bother your baby, and it cannot be caught from other babies. It usually clears by itself within a few months. Do not pick at the crusts.",
+        ],
+      },
+      {
+        heading: "Birthmarks",
+        body: [
+          "The most common newborn birthmarks are small pink or red V-shaped marks on the forehead, eyelids or neck, sometimes called stork marks. Marks on the face tend to fade gradually, and marks on the neck can take longer. Raised dark red marks can appear in the first days or weeks, grow for a while and then fade slowly over a longer period. Show any birthmark to your midwife or health visitor so it can be noted.",
+        ],
+      },
+      {
+        heading: "Nappy rash and sore creases",
+        body: [
+          "Sore, red skin in the nappy area is usually caused by wetness rubbing against the skin. Frequent nappy changes, time without a nappy, plain water or fragrance-free wipes, and a thin layer of barrier cream at each change usually settle it. Ask a pharmacist if the rash is spreading, weeping, has spots around the edge, or is not improving after a few days, as it may need a different treatment.",
+        ],
+      },
+      {
+        heading: "When a rash is not routine",
+        body: [
+          "Get urgent medical help if your baby has a rash and is unwell, is breathing quickly or with difficulty, looks pale, blue, grey or blotchy, is unusually sleepy or hard to rouse, has swelling of the lips, mouth, throat or tongue, or has a rash that looks like bruising and does not fade when you press a clear glass firmly against it. A baby under three months with a temperature of 38C or higher needs urgent advice.",
+          "Otherwise, if a rash is spreading, blistering, weeping, or your baby seems uncomfortable with it, speak to your health visitor or GP.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Newborn skin is thin and delicate; plain water is best for bathing in the first month.",
+      "Vernix protects the skin and is best left on rather than wiped off.",
+      "Small white spots, blotchy patches and peeling skin are common and usually clear on their own.",
+      "Cradle cap is harmless, does not bother the baby and usually clears within a few months.",
+      "Most birthmarks fade over time; show them to your midwife or health visitor.",
+      "A rash alongside being unwell, breathing difficulty, or one that does not fade under a pressed glass needs urgent medical help.",
+    ],
+    relatedSlugs: [
+      "baby-care-basics",
+      "newborn-quirks-and-reflexes",
+      "common-illnesses-in-the-first-year",
+    ],
+    crossLinks: [
+      {
+        label: "Baby care basics",
+        href: "/first-year/care-and-safety/baby-care-basics",
+      },
+    ],
+    sources: [
+      {
+        label: "Getting to know your newborn",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/getting-to-know-your-newborn/",
+      },
+      {
+        label: "Cradle cap",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/cradle-cap/",
+      },
+      {
+        label: "Rashes in babies and children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/rashes-babies-and-children/",
+      },
+      {
+        label: "High temperature (fever) in children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/fever-in-children/",
+      },
+    ],
+  },
+  {
+    slug: "common-illnesses-in-the-first-year",
+    topic: "checkups-and-warning-signs",
+    title: "Common illnesses in the first year",
+    description:
+      "What is normal when your baby is ill, what can help, and when to get medical advice or urgent help.",
+    readTime: "7 min read",
+    status: "ready",
+    seoTitle: "Common illnesses in the first year | The Start of You",
+    seoDescription:
+      "A calm, practical guide to colds, high temperatures and tummy bugs in the first year, and the signs that mean you should get help.",
+    intro:
+      "Babies pick up a lot of infections in their first year, especially once they are around other children. Most are mild and pass in a few days. This page is about telling the ordinary from the urgent.",
+    sections: [
+      {
+        heading: "Read this part first: get help straight away",
+        body: [
+          "Call 999 or go to A&E if your baby is having trouble breathing, is grunting with every breath, or the skin is sucking in under their ribs, looks pale, blue, grey or blotchy, is floppy, will not wake up properly, or does not respond to you, has a rash that does not fade when you press a clear glass firmly against it, has swelling of the lips, mouth, throat or tongue, or has a fit or seizure for the first time.",
+          "Call 111 for urgent advice if your baby is under three months old and has a temperature of 38C or higher, is three to six months old and has a temperature of 39C or higher, has a high temperature lasting five days or more, has stopped feeding, is not keeping fluids down, or has far fewer wet nappies than usual, has other signs of illness alongside a temperature such as a rash, or simply is not themselves in a way that worries you.",
+          "Trusting that last instinct is not overreacting. Health professionals would far rather check a baby who turns out to be fine.",
+        ],
+      },
+      {
+        heading: "Coughs and colds",
+        body: [
+          "Colds are the most common illness of the first year, and several in a winter is not unusual. Expect a snuffly nose, a cough, some disturbed sleep and a smaller appetite. Keep feeds going, offer them more often and in smaller amounts if your baby is struggling, and keep the room comfortably warm rather than hot. Cough and cold medicines are not suitable for babies; ask a pharmacist before giving anything.",
+          "Watch the breathing rather than the noise. Noise alone is not the measure. Effort is.",
+        ],
+      },
+      {
+        heading: "A high temperature",
+        body: [
+          "A high temperature is 38C or more, and it is a natural response to infection. It usually returns to normal within one to four days. Keep offering fluids, keep breastfeeding as normal if you are, check on your baby regularly including at night, and look for signs of dehydration.",
+          "Paracetamol or ibuprofen can be given if your baby is distressed or uncomfortable, but check the packaging or ask a pharmacist or GP if you are unsure. Paracetamol is not for babies under two months. Ibuprofen is not for babies under three months, under 5kg, dehydrated, or with chickenpox, and not for children with asthma unless a doctor has recommended it. Never give aspirin to a child under sixteen. Do not undress your baby or sponge them down to cool them, and do not alternate paracetamol and ibuprofen unless a health professional has told you to.",
+        ],
+      },
+      {
+        heading: "Tummy bugs: being sick and diarrhoea",
+        body: [
+          "Diarrhoea and vomiting are common and are usually a stomach bug. Vomiting usually stops within a day or two and diarrhoea within five to seven days. The most important thing is fluids. Carry on breast or bottle feeding, and if your baby is being sick, try smaller feeds more often. If your baby is on formula or solids, small sips of water between feeds can help. Do not make formula weaker than usual, do not give fruit juice or fizzy drinks, and do not give under-twelves medicine to stop diarrhoea.",
+          "Call 111 if you are worried about a baby under twelve months, if they stop feeding while ill, if they show signs of dehydration such as fewer wet nappies, or if they cannot keep any fluid down.",
+          "Stomach bugs spread easily. Wash hands often with soap and water, wash soiled clothing and bedding separately on a hot wash, and clean taps, handles and surfaces daily.",
+        ],
+      },
+      {
+        heading: "Looking after them at home",
+        body: [
+          "Most illnesses in the first year need rest, fluids and a calm adult. Keep them at home, keep the routine loose, and accept that sleep and feeding will be off for a few days and will come back.",
+        ],
+      },
+      {
+        heading: "Your baby's reviews",
+        body: [
+          "Your health visiting team offers reviews during the first year, and they are a good moment to raise anything that has been niggling at you, including repeated infections or a cough that keeps coming back. You do not have to wait for a review to make contact.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Trouble breathing, pale, blue, grey or blotchy skin, floppiness, an unresponsive baby, a non-fading rash, or a first seizure need 999 or A&E.",
+      "A temperature of 38C or higher under three months, or 39C or higher from three to six months, needs a call to 111.",
+      "Colds are common; watch breathing effort rather than the amount of noise.",
+      "Fluids matter most during a high temperature or tummy bug; do not dilute formula or give under-twelves anti-diarrhoea medicine.",
+      "Paracetamol and ibuprofen have age and weight limits; check before giving either.",
+      "Trust your instinct that something is not right, and use your health visiting reviews to raise ongoing concerns.",
+    ],
+    relatedSlugs: [
+      "when-to-ask-for-help-after-birth",
+      "newborn-quirks-and-reflexes",
+      "newborn-skin-spots-and-marks",
+    ],
+    crossLinks: [
+      {
+        label: "Checkups and warning signs",
+        href: "/first-year/checkups-and-warning-signs",
+      },
+      {
+        label: "When to ask for help after birth",
+        href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth",
+      },
+    ],
+    sources: [
+      {
+        label: "High temperature (fever) in children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/fever-in-children/",
+      },
+      {
+        label: "Diarrhoea and vomiting",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/diarrhoea-and-vomiting/",
+      },
+      {
+        label: "Rashes in babies and children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/rashes-babies-and-children/",
+      },
+    ],
+  },
+{
+    slug: "stitches-tears-and-perineal-healing",
+    topic: "postpartum-recovery",
+    title: "Stitches, tears and perineal healing",
+    description:
+      "What healing can look like after a tear or an episiotomy, how to stay comfortable, and when to ask for help.",
+    readTime: "7 min read",
+    status: "ready",
+    seoTitle: "Stitches, tears and perineal healing | The Start of You",
+    seoDescription:
+      "Calm UK guidance on healing after a perineal tear or episiotomy, comfort while peeing and pooing, and the signs that need a midwife or GP.",
+    intro:
+      "If you had stitches after your baby was born, the first days can feel strange and tender in a way nobody quite prepares you for. Sitting, standing, going to the loo, even shifting in bed can all feel like something to think about. This piece walks through what perineal healing usually looks like, what tends to help, and the signs that mean it is time to ask someone.",
+    sections: [
+      {
+        heading: "How common tears and episiotomies are",
+        body: [
+          "Up to nine in ten women having their first vaginal birth have a tear, a graze or an episiotomy. It is one of the most ordinary parts of birth, even though it is rarely talked about beforehand.",
+          "Tears vary. Some are small and heal quickly on their own. Others need stitching, and an episiotomy, a cut made to widen the opening during birth, is always repaired afterwards. Whatever happened for you, the healing follows a broadly similar shape.",
+        ],
+      },
+      {
+        heading: "What healing tends to look like",
+        body: [
+          "Stitches are made with dissolvable thread, so they do not usually need to be taken out. Most people find they heal within about a month, though the area can feel tight, itchy or oddly numb for a while before it feels like yours again.",
+          "Soreness in the first week or two is expected. It often eases week by week rather than day by day, so it is worth measuring progress in fortnights, not mornings.",
+        ],
+      },
+      {
+        heading: "Keeping the area clean and comfortable",
+        body: [
+          "Bathe or shower the area with plain warm water once a day, then pat it dry gently. There is no need for salts, additives or special products, and it is better to keep things simple while the skin is healing.",
+          "Change your pad regularly and wash your hands before and after. Letting the area have some time in fresh air, lying on a towel on your bed without underwear for a little while, can feel surprisingly good.",
+        ],
+      },
+      {
+        heading: "Peeing, pooing and the bits nobody mentions",
+        body: [
+          "Peeing can sting in the first days. Pouring warm water over the area while you go, or going while you are in the shower, often takes the edge off it.",
+          "For pooing, hold a clean pad gently against your stitches while you go. It sounds odd; it genuinely helps. Wipe from front to back to keep things clean.",
+          "Try to avoid getting constipated, since straining is uncomfortable and can make piles worse. Fibre in your food and plenty of fluids help, and your midwife, GP or pharmacist can suggest a gentle laxative if you need one. It is very unlikely that your stitches will break.",
+        ],
+      },
+      {
+        heading: "Managing pain",
+        body: [
+          "Paracetamol is usually the first thing to reach for and is safe while breastfeeding. Ibuprofen is generally considered safe too, but check with your midwife, GP or pharmacist first. Aspirin is not recommended while breastfeeding.",
+          "A cold pack wrapped in a towel, held against the area for a short while, can ease soreness. Never put ice straight onto your skin.",
+          "If you are still in pain after two or three weeks, that is worth mentioning to your midwife, health visitor or GP rather than waiting it out.",
+        ],
+      },
+      {
+        heading: "Pelvic floor exercises help here too",
+        body: [
+          "Gentle pelvic floor exercises support healing in this area by improving the blood flow around it, and they help with leaking later on. There is no rush and no need to push. Small, regular squeezes, when you remember, do more than an occasional determined effort.",
+        ],
+      },
+      {
+        heading: "Sex, later on",
+        body: [
+          "Pain during sex in the first months after a tear or an episiotomy is very common. There is no timetable you have to meet. If it hurts, stopping is the right response, and it is something to raise with your GP rather than something to endure.",
+        ],
+      },
+      {
+        heading: "When to ask for help",
+        body: [
+          "Contact your midwife, health visitor or GP if your stitches become more painful rather than less, there is discharge that smells unpleasant or any pus, the skin around the tear or cut looks red and swollen, you have real difficulty peeing, you are leaking poo or pooing without meaning to, you cannot hold in wind, constipation will not settle, or you notice raised or itchy scar tissue as things heal.",
+          "The first three can mean an infection, which is treatable and much easier dealt with early. The bowel and bladder symptoms deserve a proper conversation, not quiet acceptance, and can be raised at your postnatal check or sooner.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Tears, grazes and episiotomies are very common, and stitches usually dissolve and heal within about a month.",
+      "Plain warm water and gentle drying are all the area needs.",
+      "Warm water while you pee and a clean pad held against your stitches while you poo both take the edge off.",
+      "Paracetamol is the usual first choice; check before taking ibuprofen while breastfeeding.",
+      "Increasing pain, smelly discharge, redness or swelling can mean infection and need a professional the same day.",
+      "Any leaking of wind, pee or poo, or pain during sex, is worth raising rather than living with.",
+    ],
+    relatedSlugs: [
+      "healing-after-birth",
+      "body-changes-after-birth",
+      "when-to-ask-for-help-after-birth",
+    ],
+    crossLinks: [
+      {
+        label: "Postpartum recovery hub",
+        href: "/first-year/postpartum-recovery",
+        context: "Explore more on postpartum recovery",
+      },
+    ],
+    sources: [
+      {
+        label: "Episiotomy and perineal tears",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/episiotomy-and-perineal-tears/",
+      },
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+      {
+        label: "Your 6-week postnatal check",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-6-week-postnatal-check/",
+      },
+    ],
+  },
+  {
+    slug: "separated-tummy-muscles",
+    topic: "body-and-hormones",
+    title: "Separated tummy muscles after birth",
+    description:
+      "Why the muscles down the middle of your tummy separate in pregnancy, how they usually recover, and when to ask for a physio referral.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Separated tummy muscles after birth | The Start of You",
+    seoDescription:
+      "Gentle UK guidance on diastasis recti after birth: why it happens, how it usually settles, what helps, and when to speak to your GP.",
+    intro:
+      "Somewhere in the first weeks, a lot of people notice their tummy feels soft in the middle, or that a ridge appears when they sit up from lying down. It is a common part of recovery, it has a name, and for most people it settles. This piece explains what is happening and what genuinely helps.",
+    sections: [
+      {
+        heading: "What is actually happening",
+        body: [
+          "Two long muscles run down the middle of your tummy. During pregnancy the growing womb pushes them apart, and they become longer and weaker to make room. This is called diastasis recti, or divarication.",
+          "It is common, and it usually amounts to a separation of around two finger widths, though the amount varies a lot from person to person. It is not a sign that anything went wrong.",
+        ],
+      },
+      {
+        heading: "How it usually recovers",
+        body: [
+          "For most people, the separation returns to normal by around the time their baby is eight weeks old. That happens quietly, without a programme or a plan, as the tissues shorten again.",
+          "Because the recovery is gradual, the middle of your tummy can look and feel unfamiliar for a while. That is worth expecting rather than worrying about in the early weeks.",
+        ],
+      },
+      {
+        heading: "What helps",
+        body: [
+          "Regular pelvic floor and deep tummy muscle exercises support the recovery, and good posture through the day does more than people expect, particularly during long feeds when it is easy to sink and round forward.",
+          "It is sensible to hold off on sit-ups, planks and high-impact exercise in the early weeks, and to avoid heavy lifting and straining on the toilet while things are still knitting back together. Gentle, frequent and unhurried beats determined and occasional.",
+        ],
+      },
+      {
+        heading: "When to speak to someone",
+        body: [
+          "If the gap is still obvious eight weeks after the birth, contact your GP. A separation that stays open can put strain on your back, and it is worth having looked at rather than waiting to see.",
+          "Also speak to your GP if you have tummy pain or discomfort. In either case, your GP can refer you to a physiotherapist, who can give you exercises suited to your body rather than general advice. Physiotherapy is the proper route here, and asking for it is entirely reasonable.",
+          "Your postnatal check is a natural moment to raise it if you would rather not book separately, though you do not have to wait for it.",
+        ],
+      },
+      {
+        heading: "A note on how this gets talked about",
+        body: [
+          "Abdominal separation gets pulled into a lot of conversation about getting your body back. Try to set that aside. This is about how your middle works, not how it looks, and the goal is a body that feels supported when you lift your baby, not a particular shape by a particular week.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "The tummy muscles commonly separate during pregnancy, often by about two finger widths.",
+      "For most people the separation settles by around eight weeks after birth.",
+      "Pelvic floor and deep tummy exercises, plus good posture, support the recovery.",
+      "Sit-ups, planks, high-impact exercise, heavy lifting and straining are best left for later.",
+      "If the gap is still obvious at eight weeks, or you have tummy pain, contact your GP, who can refer you to a physiotherapist.",
+    ],
+    relatedSlugs: [
+      "body-changes-after-birth",
+      "healing-after-birth",
+      "postnatal-checks-and-appointments",
+    ],
+    crossLinks: [
+      {
+        label: "Body and hormones hub",
+        href: "/first-year/body-and-hormones",
+        context: "Explore more on body changes after birth",
+      },
+    ],
+    sources: [
+      {
+        label: "Your post-pregnancy body",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-post-pregnancy-body/",
+      },
+      {
+        label: "Your body after the birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/your-body/",
+      },
+    ],
+  },
+  {
+    slug: "sex-and-intimacy-after-birth",
+    topic: "body-and-hormones",
+    title: "Sex and intimacy after birth",
+    description:
+      "There is no set date for starting again, what comfort and closeness can look like, and why contraception matters earlier than most people expect.",
+    readTime: "6 min read",
+    status: "ready",
+    seoTitle: "Sex and intimacy after birth | The Start of You",
+    seoDescription:
+      "Calm UK guidance on sex after birth, including comfort after a tear or caesarean, painful sex, and contraception from three weeks.",
+    intro:
+      "Sex after birth is one of those subjects that gets reduced to a single number, usually six weeks, and then left there. In practice there are no rules about when to start again, and the more useful questions are about comfort, closeness and contraception. This piece covers all three.",
+    sections: [
+      {
+        heading: "There is no set date",
+        body: [
+          "There is no fixed point at which sex becomes allowed. Some people feel ready sooner than they expected; many take considerably longer. Tiredness and soreness both play their part, and so does simply having very little left at the end of the day.",
+          "If you had a caesarean, sex sits alongside the other activities you pick back up when they feel comfortable, which for many people is not for around six weeks. If you had stitches, the same applies: readiness is a feeling, not a date on a calendar.",
+        ],
+      },
+      {
+        heading: "Comfort, and what can help",
+        body: [
+          "Hormonal changes after birth, particularly while breastfeeding, can leave the vagina drier than usual. A water-based lubricant from a pharmacy often makes a real difference. Avoid oil-based lubricants, which can irritate and can damage latex condoms and diaphragms.",
+          "Going slowly, choosing a moment when you are not exhausted, and being able to stop without it being a problem all matter more than technique.",
+        ],
+      },
+      {
+        heading: "If it hurts",
+        body: [
+          "Pain during sex in the first few months is very common after a tear or an episiotomy. If it hurts, stop. That is not giving up on anything, it is the right response.",
+          "Closeness does not have to mean penetration. Holding, lying together, and other kinds of intimacy are a legitimate part of finding your way back to each other, and for many couples they come first by some distance.",
+          "If sex is still painful, tell your GP, or raise it at your postnatal check. It is a common thing to bring up and there is usually something that can help.",
+        ],
+      },
+      {
+        heading: "Contraception comes sooner than people expect",
+        body: [
+          "This is the part that catches people out. You can become pregnant again from three weeks after giving birth, including if you are breastfeeding and even if your periods have not come back. If you do not want to conceive again straight away, contraception needs to be in place within 21 days.",
+          "Some methods can be started immediately after birth, including the implant, the injection, the progestogen-only pill and condoms. A coil can be fitted within 48 hours of birth, or otherwise from about four weeks.",
+          "The combined pill, patch and vaginal ring are usually started from three weeks if you are not breastfeeding and do not have risk factors for blood clots, and usually from around six weeks if you are breastfeeding. A diaphragm or cap needs refitting after birth and is usually used from about six weeks.",
+          "Breastfeeding itself only offers reliable protection under narrow conditions: exclusive breastfeeding, a baby under six months, and no periods yet. It is not something to rely on casually.",
+          "Your midwife, health visitor, GP or a sexual health clinic can talk through which method suits you, and that conversation is part of routine postnatal care.",
+        ],
+      },
+      {
+        heading: "Your relationship, more broadly",
+        body: [
+          "The first months change the rhythm between partners as much as anything physical. Feeling touched out, feeling distant, or feeling like desire has simply gone quiet are all common. Talking about it, even briefly, tends to help more than waiting for it to resolve itself.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "There are no rules about when to have sex again after birth.",
+      "Dryness is common; a water-based lubricant helps, and oil-based ones can damage condoms and diaphragms.",
+      "Pain during sex is very common in the first months after a tear or episiotomy. Stop if it hurts, and tell your GP.",
+      "Closeness without penetration counts.",
+      "Pregnancy is possible from three weeks after birth, so contraception should be sorted within 21 days.",
+      "Which method suits you depends on breastfeeding and your health, so ask your midwife, GP or a sexual health clinic.",
+    ],
+    relatedSlugs: [
+      "healing-after-birth",
+      "postnatal-checks-and-appointments",
+      "feeling-like-yourself-again",
+    ],
+    crossLinks: [
+      {
+        label: "Body and hormones hub",
+        href: "/first-year/body-and-hormones",
+        context: "Explore more on body changes after birth",
+      },
+    ],
+    sources: [
+      {
+        label: "Sex and contraception after birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/sex-and-contraception-after-birth/",
+      },
+      {
+        label: "Episiotomy and perineal tears",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/pregnancy/labour-and-birth/episiotomy-and-perineal-tears/",
+      },
+      {
+        label: "Caesarean section: recovery",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/tests-and-treatments/caesarean-section/recovery/",
+      },
+      {
+        label: "Your 6-week postnatal check",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-6-week-postnatal-check/",
+      },
+    ],
+  },
 ];
 
 export function getFirstYearArticlesByTopic(topic: FirstYearArticleTopic) {

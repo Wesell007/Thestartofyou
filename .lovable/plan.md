@@ -1,70 +1,60 @@
-# Phase 33.3 — Finish the remaining work
+# Phase 33.3 — final exception reconciliation
 
-Verified current repository state: all 17 remaining records are already in the
-runtime datasets (Legacy 8 in `src/data/articleData.ts`, First Year 9 in
-`src/data/firstYearArticleData.ts`), the 51 new images exist in `src/assets`,
-the 27 First Year images are wired to named sections, the 8 Legacy hero and 16
-Legacy body images are attached in their records, and the 8 Pregnancy discovery
-entries are added.
+Reconciliation only. No deployment, no new phase, no rebuild of the completed article work.
 
-What is left is the closing work.
+## 1. Grounding: what actually changed (verified)
 
-## 1. Phase 32F approved migration intents (5)
+Exact files changed under grounding during Phase 33.3 (commit `6b29c804`, diff against `406304fd`):
 
-Apply only the five already-approved ownership intents, through the existing
-`crossLinks` and editorial link fields, nothing new invented:
+- `src/lib/grounding/articleGroundingRegistry.ts` — 17 metadata rows appended, one per new Phase 33.3 article slug, all `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, `archived: false`, `deprecated: false`. No sensitivity, owner, reviewer, contentVersion, approvedBy or approvedAt fields set.
+- `src/test/articleGrounding.test.ts` — pinned counts updated 208 to 225, draft 45 to 62.
+- `src/test/articleGroundingApproval.test.ts` — same two pinned counts.
 
-- Caesarean birth — from the labour and recovery surfaces that carry caesarean
-  asides.
-- Teething — from the month pages that carry teething context.
-- Introducing solid foods — from the weaning section of the feeding guide.
-- Stitches, tears and perineal healing — from `healing-after-birth`.
-- Separated tummy muscles — from `your-body-after-birth`.
+Nothing else grounding-related changed. `supabase/functions/_shared/aiVersions.ts` is untouched: `AI_SOURCE_ROUTING_VERSION` remains `30B-source-routing-v1`. No file under `docs/ai/grounding-approvals/` changed. No eligibility helper, prompt, mode, source-routing rule or edge function changed.
 
-These are five intents, not five hyperlinks: an intent may need more than one
-contextual occurrence where the Phase 32F record names several source surfaces.
-Report intents required, intents satisfied, unapproved intents, and the actual
-number of contextual link occurrences separately. Normal category discovery is
-not a migration.
+Why it was made: `src/test/articleGroundingDrift.test.ts` requires exactly one registry record for every article slug in the datasets and zero orphans. Adding 17 runtime article records without registry rows breaks that guard. The rows are default-deny governance metadata, not approvals.
 
-## 2. Duplicate discovery clean-up
+Effect: eligible slugs stay `[]`, candidates 0, approved 0, runtime grounding behaviour unchanged, classifications unchanged, routing unchanged.
 
-Caesarean birth currently appears in two Pregnancy discovery lists. Reduce it to
-exactly one entry, and audit all 19 for duplicates.
+Conclusion to record: **GROUNDING RUNTIME CHANGES = 0**, with a documented registry-coverage exception (metadata rows only, default deny). Nothing to revert. Verification to re-run and quote in the report: registry length 225, approved count 0, candidate count 0, `listGroundingEligibleSlugs()` empty, `AI_SOURCE_ROUTING_VERSION` string pinned.
 
-## 3. Integrity tests
+## 2. Teething migration: month-page findings
 
-Add a Phase 33.3 integrity test alongside the existing Batch 1 test asserting:
-19 records exist with exact slugs and correct system; First Year topic paths are
-right; one hero plus two body images per article with resolvable references and
-factual alt text; exactly one discovery entry each with the exact destination;
-the five migrations present and no others; zero `medicallyReviewed: true` and
-zero reviewer names on the new records, so zero visitor-facing review badges.
+Verified in `src/data/firstYearMonthData.ts` and `src/components/firstyear/month/FirstYearMonthPage.tsx`:
 
-## 4. Validation
+- Teething context appears at 4 months and 5 months (mouthing described as "not usually about teething alone") and more substantively in the sleep copy at 7, 8, 9 and 11 months.
+- Month pages already have two rendered link mechanisms: `MonthQuestion.readMore` and the `related` list (`MonthRelated { label, kicker, href }`). Both are rendered today.
+- So the approved intent **can** be satisfied on the month pages with existing architecture. No new component, field, renderer or template is required.
+- Constraint: at 4 and 5 months every existing question already carries a `readMore`, and repointing one would delete an approved link. Adding a `related` entry is therefore the correct existing mechanism.
 
-Focused tests, full suite, typecheck twice, lint against the 1 error / 10
-warnings baseline, production build, and the generated sitemap count with
-duplicate check (expected 350 if repository output agrees).
+## 3. Proposed teething correction
 
-## 5. Responsive QA
+Add one existing-mechanism `related` entry linking to `/first-year/care-and-safety/teething` on the month guides carrying teething context: `4-months` and `5-months` (the originally approved surfaces).
 
-Walk every new article at desktop, tablet and mobile: hero crop, image
-distribution and placement, spacing, stacking, overlap, overflow, broken images.
+Then re-classify:
+
+- TEETHING MIGRATION INTENT = SATISFIED_AS_APPROVED
+- Approved Phase 32F intents = 5, satisfied exactly as approved = 5, implementation exceptions = 0.
+
+The existing sleep-guide cross-link (`when-sleep-suddenly-changes` to teething) is editorially relevant and stays, reported as an additional contextual occurrence, not as the intent's source surface.
+
+If you would rather not touch the month data at all, the fallback is to keep the sleep-guide link only and report:
+
+- TEETHING MIGRATION INTENT = IMPLEMENTATION_EXCEPTION / ALTERNATIVE_CONTEXTUAL_LINK
+- intents 5, satisfied as approved 4, exceptions 1.
+
+## 4. Boundary reconciliation
+
+Full changed-file list for the phase will be reconciled against the boundary table (new hub, navigation, renderer, template, design token, database, schema, RLS, AI runtime, grounding runtime, journal, memory, voice, lifecycle, deployment — all expected 0). The only files touched were article/topic data, the First Year image map, assets, tests, the grounding registry metadata rows above, docs and the generated sitemap.
+
+## 5. Validation after the correction
+
+- `src/test/phase33Remaining17Integrity.test.ts` updated so the teething intent asserts the month-page surface.
+- Full test suite, typecheck twice, lint (baseline 1 error / 10 warnings), build, sitemap count.
+- Preserved results re-confirmed: 19 records (Legacy 9, First Year 10), 19 routes, 19 discovery entries, 0 duplicates, 19 heroes, 38 body images, 57 approved assets, sitemap 350 unique / 0 duplicates.
 
 ## 6. Documentation
 
-Create `docs/content/phase33-remaining17-frontend-report.md` with the full
-per-article record (title, slug, system, runtime file, route, topic, discovery
-location and count, migration state, review classification and state, hero and
-both body images with alt text and section titles, generation and rejected
-attempts, approved count, QA result, deployment eligibility). Update the
-publication register and Batch 1 report only for cross-phase truth, and point
-the human review pack at the new runtime copy locations.
+Update `docs/content/phase33-remaining17-frontend-report.md` with the grounding exception explanation and the corrected teething classification; leave the publication register and human-review pack governance unchanged (19 held, 0 reviews, 0 deployment eligible, deployment block active).
 
-## Governance
-
-All 19 stay `HOLD_HUMAN_REVIEW`, human reviews completed 0, deployment eligible
-0, global Phase 33 deployment block ACTIVE. No deployment. No new hub,
-navigation, renderer, template, tokens, database, schema, RLS, AI, grounding,
-journal, memory or voice change. Saved lifecycles unchanged.
+Closure on pass: **PHASE 33.3 — CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**. No deployment.

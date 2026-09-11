@@ -23636,7 +23636,7 @@ const articleDatabase: ArticleData[] = [
     standfirst:
       "What gestational diabetes is, why screening is offered, what care looks like after a diagnosis, and what to expect at birth and afterwards.",
     hero: {
-      src: new URL("../assets/article-hero-gestational-diabetes.jpg", import.meta.url).href,
+      src: new URL("../assets/article-hero-gestational-diabetes-guide.jpg", import.meta.url).href,
       alt: "A pregnant woman sitting at a kitchen table checking her blood glucose with a testing kit.",
     },
     editorialSections: [

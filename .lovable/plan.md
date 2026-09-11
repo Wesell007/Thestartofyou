@@ -85,3 +85,21 @@ desktop/tablet/mobile, full test suite, typecheck twice, lint against baseline
 No deployment, no new hub, navigation, renderer, template, design tokens,
 database/schema/RLS/AI/grounding/journal/memory/voice changes. Saved lifecycles
 remain `ttc`, `pregnancy`, `first_year`.
+
+## Binding safeguard — review metadata (approved addition)
+
+Repository truth confirmed: in `src/data/firstYearArticleData.ts` both
+`medicallyReviewed` and `reviewedBy` are optional, and `HubArticleView` renders
+the "Medically reviewed by ..." badge only when both are present. So omitting
+them is truthful and still renders — no architecture blocker.
+
+- New Phase 33 First Year records omit `medicallyReviewed` and `reviewedBy`
+  (or set `medicallyReviewed: false`). No fabricated affirmative value.
+- Legacy records add no `reviewedBy` and no medical-review claim.
+- `status: "ready"` stays purely a renderability value.
+- No renderer change to bypass governance. If any record could only render by
+  asserting a false review claim, that record stops as a genuine blocker and is
+  reported; unaffected records continue.
+- Integrity tests assert, across all 19: zero visitor-facing review badges
+  without genuine review, zero fabricated `medicallyReviewed: true`, and both
+  Batch 1 pages remain consistent with the same rule.

@@ -23,6 +23,8 @@ Update the Phase 33 publication register and Batch 1 report so:
 - Human review held count becomes 19, human reviews completed remains 0, and production deployed count remains 0.
 - The corrected closure is `PHASE 33.2 — BATCH 1 VISUAL IMPLEMENTATION CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT`.
 
+`HOLD_HUMAN_REVIEW` is a Phase 33 governance and deployment status only. It will not be written into runtime article dataset fields. The existing runtime schema and truthful runtime values needed for repository preview and rendering stay exactly as they are, including the First Year `status: "ready"` value for the sleep record, and no runtime status field will be invented for the legacy hair dye dataset. Each Batch 1 article is documented as: runtime record state, the actual existing dataset value; human review, required and not completed; deployment eligibility, no; Phase 33 production status, `HOLD_HUMAN_REVIEW`.
+
 ### 2. Record the exact repository state for all 19
 
 Batch 1, two articles: runtime record present YES, repository and build preview YES, production deployed NO, human review complete NO, production deployment eligible NO, final production status `HOLD_HUMAN_REVIEW`.

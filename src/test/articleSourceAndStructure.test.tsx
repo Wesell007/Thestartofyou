@@ -138,8 +138,9 @@ describe("source presentation — plain citations", () => {
 });
 
 describe("Family source provenance", () => {
-  it("has 19 records, and only records with real sources render a block", () => {
-    expect(familyArticles).toHaveLength(19);
+  it("has 18 records, and only records with real sources render a block", () => {
+    // Repository truth: 18 Family records, 4 carrying source provenance.
+    expect(familyArticles).toHaveLength(18);
     const withSources = familyArticles.filter((a) => (a.sources?.length ?? 0) > 0);
     expect(withSources.length).toBe(4);
 
@@ -180,7 +181,11 @@ describe("article navigation is never duplicated", () => {
 
     // TOC anchors still point at real sections.
     const ids = (flagship.editorialSections ?? []).map((s) => s.id);
-    const hrefs = Array.from(container.querySelectorAll('a[href^="#"]')).map(
+    const tocLabel = Array.from(container.querySelectorAll("p")).find((el) =>
+      /^in this article$/i.test((el.textContent ?? "").trim())
+    )!;
+    const toc = tocLabel.closest("article")!;
+    const hrefs = Array.from(toc.querySelectorAll('a[href^="#"]')).map(
       (a) => a.getAttribute("href")!.slice(1)
     );
     expect(hrefs.length).toBeGreaterThan(0);

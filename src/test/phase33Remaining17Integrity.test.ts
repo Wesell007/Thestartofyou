@@ -5,6 +5,7 @@ import type { FirstYearArticleTopic } from "@/data/firstYearArticleData";
 import { firstYearArticles, getFirstYearArticlesByTopic } from "@/data/firstYearArticleData";
 import { getMonthGuide } from "@/data/firstYearMonthData";
 import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
+import { ARTICLE_GROUNDING_REGISTRY } from "@/lib/grounding/articleGroundingRegistry";
 
 /**
  * Phase 33 authoritative runtime inventory.

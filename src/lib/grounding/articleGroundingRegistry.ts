@@ -251,7 +251,7 @@ export const ARTICLE_GROUNDING_REGISTRY: readonly ArticleGroundingRecord[] = [
   { slug: "sex-and-intimacy-after-birth", journey: ["first-year"], topics: ["body-and-hormones"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "newborn-quirks-and-reflexes", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "newborn-skin-spots-and-marks", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
-  { slug: "common-illnesses-in-the-first-year", journey: ["first-year"], topics: ["checkups-and-warning-signs"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "common-illnesses-in-the-first-year", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
 ];
 
 const BY_SLUG: ReadonlyMap<string, ArticleGroundingRecord> = new Map(

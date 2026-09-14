@@ -2388,7 +2388,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   },
   {
     slug: "common-illnesses-in-the-first-year",
-    topic: "checkups-and-warning-signs",
+    topic: "care-and-safety",
     title: "Common illnesses in the first year",
     description:
       "What is normal when your baby is ill, what can help, and when to get medical advice or urgent help.",

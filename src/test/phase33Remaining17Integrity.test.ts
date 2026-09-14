@@ -5,6 +5,7 @@ import type { FirstYearArticleTopic } from "@/data/firstYearArticleData";
 import { firstYearArticles, getFirstYearArticlesByTopic } from "@/data/firstYearArticleData";
 import { getMonthGuide } from "@/data/firstYearMonthData";
 import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
+import { ARTICLE_GROUNDING_REGISTRY } from "@/lib/grounding/articleGroundingRegistry";
 
 /**
  * Phase 33 authoritative runtime inventory.
@@ -31,7 +32,7 @@ const FIRST_YEAR_SLUGS: Record<string, FirstYearArticleTopic> = {
   "sex-and-intimacy-after-birth": "body-and-hormones",
   "newborn-quirks-and-reflexes": "care-and-safety",
   "newborn-skin-spots-and-marks": "care-and-safety",
-  "common-illnesses-in-the-first-year": "checkups-and-warning-signs",
+  "common-illnesses-in-the-first-year": "care-and-safety",
   "when-sleep-suddenly-changes": "sleep",
 };
 
@@ -245,5 +246,32 @@ describe("Phase 33 review metadata", () => {
       const article = getArticle(slug);
       expect(article?.reviewedBy ?? null, slug).toBeNull();
     }
+  });
+});
+
+describe("Common illnesses placement correction", () => {
+  const SLUG = "common-illnesses-in-the-first-year";
+
+  it("owns care-and-safety as its sole normal discovery surface", () => {
+    const article = firstYearArticles.find((item) => item.slug === SLUG);
+    expect(article?.topic).toBe("care-and-safety");
+    expect(`/first-year/${article?.topic}/${article?.slug}`).toBe(
+      "/first-year/care-and-safety/common-illnesses-in-the-first-year",
+    );
+    expect(
+      getFirstYearArticlesByTopic("care-and-safety").filter((item) => item.slug === SLUG),
+    ).toHaveLength(1);
+    expect(
+      getFirstYearArticlesByTopic("checkups-and-warning-signs").filter(
+        (item) => item.slug === SLUG,
+      ),
+    ).toHaveLength(0);
+  });
+
+  it("keeps the default-deny grounding row on the corrected topic", () => {
+    const row = ARTICLE_GROUNDING_REGISTRY.find((entry) => entry.slug === SLUG);
+    expect(row?.topics).toEqual(["care-and-safety"]);
+    expect(row?.editorialStatus).toBe("draft");
+    expect(row?.approvalStatus).toBe("blocked_draft");
   });
 });

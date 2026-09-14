@@ -17,7 +17,7 @@ Exact counts, statuses and discoverability will be established during the audit 
 2. **Journey map** — map the UK IVF journey across the 28 audit domains (understanding IVF through to deciding whether to try again), marking each as covered, partially covered or uncovered, and merging domains where one strong page can satisfy several intents.
 3. **Evidence hierarchy** — record HFEA, NHS and NICE as the primary reference hierarchy for any future IVF factual content, with reputable UK support organisations as secondary for emotional content. Competitor material is treated as demand evidence only.
 4. **Search-demand audit** — a separate IVF demand assessment (Phase 31's dataset produced zero IVF rows). Intent clusters split into informational, treatment-stage, symptom/safety, emotional-support, funding/eligibility and decision-support. Demand is never treated as a proxy for clinical importance.
-5. **Existing content actions** — classify every current IVF record as KEEP, EXPAND_EXISTING, MERGE, REPOSITION, INTERNAL_LINK_ONLY, REQUIRES_SOURCE_REMEDIATION, REQUIRES_HUMAN_HEALTH_REVIEW, REQUIRES_SAFETY_REVIEW or POTENTIAL_CANONICAL_OVERLAP. No rewriting.
+5. **Existing content actions** — each current IVF record gets exactly one primary action (KEEP, EXPAND_EXISTING, MERGE, REPOSITION or INTERNAL_LINK_ONLY) plus any secondary flags recorded in a separate column (REQUIRES_SOURCE_REMEDIATION, REQUIRES_HUMAN_HEALTH_REVIEW, REQUIRES_SAFETY_REVIEW, POTENTIAL_CANONICAL_OVERLAP). Secondary flags may overlap and are never counted as primary actions. No rewriting.
 6. **Gap register** — every opportunity classified as NEW_ARTICLE, EXPAND_EXISTING, MERGE_EXISTING, TOOL_OPPORTUNITY, JOURNEY_CONTENT, INTERNAL_LINK, NO_ACTION or DO_NOT_CREATE, each with a stated reason.
 7. **Safety classification** — LOW_RISK_GENERAL, HEALTH_REVIEW_REQUIRED or SAFETY_REVIEW_REQUIRED per proposed item. No review is claimed as done; the no-provenance-no-claim rule stays binding.
 8. **Product and companion opportunities** — separate the needs better served by a journey stage, companion answer, tool, checklist, tracker or timeline rather than another article.
@@ -27,8 +27,8 @@ Exact counts, statuses and discoverability will be established during the audit 
 ## Counting and reconciliation rules
 
 - Surfaces are counted separately, never collapsed into a single article count: hub surfaces, stage/journey pages, topic/subtopic data records, unique articles, TTC/Pregnancy crossover articles with IVF relevance, tools/results, and total distinct public surfaces. Where one record powers several surfaces, that relationship is documented rather than double-counted.
-- Each of the 28 journey domains is classified COVERED, PARTIALLY_COVERED, UNCOVERED, NOT_REQUIRED_AS_STANDALONE_CONTENT or BETTER_SERVED_BY_PRODUCT_OR_JOURNEY, with its current owner where one exists.
-- Existing records carry one primary action plus any secondary flags kept separate, so primary-action totals equal the number of records audited.
+- Each of the 28 journey domains gets exactly one status (COVERED, PARTIALLY_COVERED, UNCOVERED, NOT_REQUIRED_AS_STANDALONE_CONTENT, BETTER_SERVED_BY_PRODUCT_OR_JOURNEY) plus current owner, supporting content, actual gap and recommended treatment. Status counts must total 28.
+- Primary-action totals equal the number of existing records audited; secondary flags are reported separately and may overlap.
 - Gap-register rows carry exactly one primary classification, so classification totals equal the row count.
 - "Source provenance present" means traceable source references. Reviewer fields, review flags and reviewer names are never counted as provenance, and no review is recorded as completed.
 - Where reliable UK search-volume evidence is not available, demand is recorded as a qualitative signal with its supporting evidence. No numbers are invented, and demand stays separate from clinical importance.

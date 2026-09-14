@@ -9,6 +9,8 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+
 
 import ArticleSources from "@/components/article/ArticleSources";
 import WeekSources from "@/components/week/WeekSources";
@@ -23,7 +25,11 @@ import { firstYearArticles } from "@/data/firstYearArticleData";
 import { toddlerArticles } from "@/data/toddlerArticleData";
 
 const withRouter = (ui: React.ReactElement) =>
-  render(<MemoryRouter>{ui}</MemoryRouter>);
+  render(
+    <HelmetProvider>
+      <MemoryRouter>{ui}</MemoryRouter>
+    </HelmetProvider>
+  );
 
 const DISCLAIMER = /external links open in a new tab|not controlled by us/i;
 

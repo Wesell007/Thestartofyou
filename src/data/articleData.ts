@@ -1921,7 +1921,7 @@ const articleDatabase: ArticleData[] = [
       "The two-week wait is often the hardest part",
       "Every cycle is different",
     ],
-    inThisArticle: ["How IVF works", "Stimulation phase", "Egg collection", "Embryo transfer", "The two-week wait", "Common questions"],
+    inThisArticle: ["How IVF works", "Stimulation phase", "Monitoring scans and bloods", "Trigger and egg collection", "Sperm collection and preparation", "Fertilisation and embryo development", "Embryo transfer", "The two-week wait", "Common questions"],
     sources: [
       { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
       { label: "IVF: what happens", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/what-happens/" },
@@ -1983,12 +1983,23 @@ const articleDatabase: ArticleData[] = [
         ],
         subsections: [
           {
+            subheading: "What monitoring is actually checking",
+            paragraphs: [
+              "Monitoring appointments usually pair an ultrasound scan with a blood test. The scan counts and measures follicles, the fluid-filled sacs in which eggs develop, and checks the lining of the womb. The bloods usually track oestradiol, and sometimes other hormones, to see how your ovaries are responding to the dose you are on.",
+              "Appointments tend to be short, early, and frequent, often every two or three days towards the end of stimulation. Numbers can change between visits, and a dose adjustment is a routine response to what the monitoring shows rather than a setback.",
+            ],
+          },
+          {
             subheading: "What the rhythm often feels like",
             paragraphs: [
               "Early mornings at clinic. Coordinating injections around work, travel, and meals. A growing sense of being on a schedule that is not yours. Many people describe the second week as the point where the cycle starts to feel heavy.",
             ],
           },
         ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Stimulation carries a risk of ovarian hyperstimulation syndrome (OHSS). Severe or rapidly worsening bloating, abdominal pain, sickness, breathlessness, or passing much less urine than usual needs same-day contact with your clinic or urgent medical care.",
+        },
       },
       {
         id: "trigger-and-collection",
@@ -1997,6 +2008,22 @@ const articleDatabase: ArticleData[] = [
         paragraphs: [
           "The trigger shot is one of the most time-sensitive moments of the cycle. Most clinics give a specific minute, not just an hour. Setting two alarms is not over-cautious — it is standard.",
           "Egg collection usually takes 20 to 30 minutes. You will be drowsy afterwards, with cramping and light spotting common over the next day or two. The number of eggs collected is rarely the final story — what matters more is how many are mature and fertilise.",
+        ],
+        subsections: [
+          {
+            subheading: "What egg collection day usually involves",
+            paragraphs: [
+              "You will normally be asked not to eat or drink for a set period beforehand, and to bring someone with you, because sedation means you cannot drive afterwards. In theatre, eggs are collected through the vaginal wall using a fine needle guided by ultrasound.",
+              "Afterwards you rest in recovery until the sedation wears off, and the team tells you how many eggs were collected before you go home. Cramping, tiredness and light spotting for a day or two are common; most people take the rest of the day quietly.",
+            ],
+          },
+          {
+            subheading: "Sperm collection and preparation",
+            paragraphs: [
+              "A fresh sperm sample is usually produced at the clinic on the same day as egg collection, or a previously frozen sample is thawed. The laboratory then prepares the sample, separating the most active sperm from the surrounding fluid before the eggs and sperm are brought together.",
+              "Where sperm numbers or movement make conventional insemination less likely to work, clinics may use ICSI, where a single sperm is injected directly into each mature egg. If surgical sperm retrieval is needed, that is arranged separately and discussed with you in advance.",
+            ],
+          },
         ],
         callout: {
           tone: "reassurance",
@@ -2028,6 +2055,15 @@ const articleDatabase: ArticleData[] = [
         paragraphs: [
           "Symptoms during this window are unreliable. Progesterone — whether produced naturally or given as support — causes bloating, breast tenderness, fatigue, and mood changes that look identical to early pregnancy. Testing early can produce false reassurance or false worry, neither of which helps.",
           "The blood test (beta hCG) at the end of the wait gives a number, not just a yes or no. A second beta 48 hours later checks the rise. Clinics use both readings to gauge what is happening, which is why a single number rarely tells the full story.",
+        ],
+        subsections: [
+          {
+            subheading: "Why home testing early can mislead",
+            paragraphs: [
+              "Trigger injections contain hCG, the same hormone home pregnancy tests look for. It can take several days to clear, so a home test taken too soon after the trigger can pick up the medication rather than a pregnancy.",
+              "Your clinic will give you a test date. Waiting for the blood test they have booked, rather than testing early at home, gives you a result that actually means something.",
+            ],
+          },
         ],
         callout: {
           tone: "gentle-warning",

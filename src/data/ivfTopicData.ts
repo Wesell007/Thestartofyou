@@ -256,6 +256,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "Egg collection, what actually happens on the day", href: askIVF("Egg collection — what actually happens on the day") },
           { label: "Embryo transfer, what to expect on transfer day", href: askIVF("Embryo transfer — what to expect on transfer day") },
           { label: "How should I prepare for transfer day, practically?", href: askIVF("How should I prepare for transfer day, practically?") },
+          { label: "Embryo freezing and storage, the rules are set by the HFEA", href: askIVF("What happens to embryos that are frozen and stored, and what are the HFEA storage rules?") },
           { label: "Track your transfer day", href: LINKS.timeline },
         ],
       },
@@ -534,6 +535,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "What happens between bloods and scans after IVF?", href: askIVF("What happens between bloods and scans after IVF?") },
           { label: "How do I read early checkpoints without over-reading them?", href: askIVF("How do I read early IVF checkpoints without over-reading them?") },
           { label: "Tests and scans in pregnancy", href: LINKS.testsScans },
+          { label: "Twins and multiples in pregnancy", href: LINKS.twins },
         ],
       },
       {

@@ -1,40 +1,69 @@
-# Phase 33.4 — Article trust and structure consistency
+# Phase 33.5 — Reviewer claim governance correction
 
-Standardise how sources appear and remove duplicated article navigation, without touching article copy, imagery, routes, governance or deployment.
+Remove every visitor-facing medical-review claim that has no provenance behind it, while leaving article content, sources, imagery, routes and governance untouched. No deployment. No IVF work.
 
-## What the audit found
+## 1. What the audit found (verified in the repository)
 
-Three source renderers and several navigation blocks are involved:
+The Phase 33.4 figure of 177 counted article-record claims only. The real surface is wider, and it splits into two different mechanisms.
 
-| Area | Component | Current behaviour |
-| --- | --- | --- |
-| Legacy (TTC / Pregnancy / IVF articles) | `src/components/article/ArticleSources.tsx` | Sources rendered as clickable external links |
-| First Year / Toddler / Family | `src/components/shared/HubArticleView.tsx` | Clickable links, external-link icon, "External links open in a new tab…" note |
-| Pregnancy week pages | `src/components/week/WeekSources.tsx` | Clickable external links |
-| Flagship articles | `FlagshipSummaryRow` (At a glance + In this article) **plus** `ArticleContents` (In this article again) | Duplicate navigation, e.g. Preconception GP appointment |
-| Legacy template | `ArticleQuickAnswer` (At a glance) + `ArticleJumpNav` / `ArticleInThisGuide` | One navigation block only; no duplicate found so far |
+**A. Data-driven claims** — article records carry `reviewedBy` / `medicallyReviewed`, and renderers print them.
 
-Family content: 19 article records, 4 currently carry source data. The remaining 15 will be listed as `SOURCE PROVENANCE MISSING` — no citations will be invented.
+| Dataset | Records naming a reviewer |
+| --- | --- |
+| `src/data/articleData.ts` | 156 |
+| `src/data/firstYearArticleData.ts` | 17 |
+| `src/data/ttcFlagshipOverrides.ts` | 14 |
+| `src/data/toddlerArticleData.ts` | 4 |
+| `src/data/familyArticleData.ts` | 1 |
+| Total reviewer mentions in data | 179 |
 
-## What will change
+Renderers reading those fields: `ArticleHeader`, `ArticleHero`, `FlagshipHero`, `ArticleQuickAnswer` (twice), `ArticleDeepIntro`, `ArticleTrustBar`, `ArticleSources`, `HubArticleView` (twice), plus "Medically reviewed" chips on `FirstYearArticleCard`, `ToddlerArticleCard`, `FamilyArticleCard`, `FamilyArticleImageCard`, `FYTwoTrackEntry`, and topic-level badges in `FirstYearTopicPage` and `ToddlerTopicPage`.
 
-1. **Sources become plain citations everywhere.** In all three source renderers, drop the anchor, `target="_blank"`, the external-link icon and link styling. Each entry reads `Title — Organisation (year)` as ordered-list text, keeping each hub's existing colours and spacing. Remove the "External links open in a new tab / not controlled by us" sentence.
-2. **Source URLs stay in the data.** No article record is edited; only rendering changes.
-3. **Family sources render through the same block.** The Family page already uses the shared hub view, so the four articles with provenance display sources automatically once the renderer is corrected; the rest are reported, not filled in.
-4. **One "In this article" per article.** Remove the second navigation block from the flagship template (the summary row already carries it). Deep and hub templates keep their single block untouched.
-5. **At a glance audit.** Confirm the opening summary and the "Key takeaways — the essentials, at a glance" section stay distinct; remove only genuine duplicates. Key takeaways are preserved.
-6. **Reviewer claims audited read-only.** Every visitor-facing "Medically reviewed by …" line is listed with whether reviewer metadata and provenance exist in the repository; anything unbacked is flagged `REVIEW CLAIM REQUIRES GOVERNANCE CHECK`. Nothing is added or removed.
+**B. Hardcoded claims** — the name "Jenny Joines" is typed directly into 55 places across 55 code files, none of which consults any data or provenance: 43 individual week pages, plus `WeekNormal`, `StagePage`, `ArticleNormal`, `PostpartumNormal`, `FirstYearNormal`, `FYMedicallyReviewed`, `FirstYearTopicPage`, `ToddlerTopicPage`, `IVFNormal`, `IVFTopicPage`, `IVFTimelineResult`, `SupportFinalCTA`, `DueDateCalculatorResult`.
 
-## Tests and checks
+**C. Structured data** — `src/pages/ArticlePage.tsx` also emits `reviewedBy: { "@type": "Person", name: ... }` into article JSON-LD, asserting the same unsupported review to search engines.
 
-New focused tests: zero anchors and zero external-link icons inside source blocks, source titles and organisations still visible, URLs still present in data, one navigation block per template, navigation anchors match real section ids, key takeaways intact.
+Root cause: the claim was treated as a brand trust signal (a hardcoded default, and a reviewer name copied onto records) rather than as the output of a review record. `docs/ai/article-grounding-health-review.md` already states the reviewer metadata is context only and is not review evidence. Provenance-backed reviews in the repository: **0**.
 
-Validation: focused tests, full suite, typecheck twice, lint against the 1 error / 10 warnings baseline, production build, plus browser checks at desktop, tablet and mobile on a TTC, Pregnancy flagship, First Year, Toddler and Family article.
+## 2. The rule to implement
 
-## Documentation
+A medical-review claim renders only when a provenance-backed review record exists for that specific article: reviewer identity, the article reviewed, review completion state, and a review date or traceable record reference. Everything else renders nothing — no softer wording, no alternative reviewer, no "expert reviewed".
 
-`docs/content/article-source-and-structure-consistency.md` records the audit, the new standard, Family coverage and missing provenance, duplicate findings, reviewer-claim audit, QA, tests, changed files and the full count table (items 1–16 of the brief).
+Since no such record exists today, every review claim on the site stops rendering.
 
-## Boundaries
+## 3. Work to do
 
-No article copy, imagery, routes, canonicals, topic placement, discovery, sitemap architecture, AI/grounding/journal/memory/voice, database or lifecycle changes. No deployment; the global Phase 33 deployment block stays active. No IVF work.
+1. **Add one gate** — a small module holding the review-provenance type, an empty provenance registry (there is nothing genuine to put in it), and a lookup that returns a claim or `null`. Plus a single shared claim component that renders the badge when the lookup returns a record and renders nothing otherwise. No database, no new review system.
+2. **Route every surface through the gate** — replace the 55 hardcoded strings and every data-driven review block and chip with the shared component. With the registry empty, all of them render nothing, and the site is future-proofed: adding a genuine record later restores the badge in one place.
+3. **Stop emitting the unsupported JSON-LD `reviewedBy`** — same governance rule, machine-facing.
+4. **Keep the stored metadata** — `reviewedBy`, `medicallyReviewed` and `lastUpdated` stay in the datasets as historical metadata, flagged in documentation as unsupported and pending governance remediation. Nothing is deleted, nothing is invented.
+5. **Tidy the gap the badge leaves** — where the claim sat inside a metadata row (updated date, read time), the row must still read cleanly with the claim gone; where it was a standalone strip, the strip disappears entirely rather than leaving empty padding.
+
+## 4. Not touched
+
+Article titles, descriptions, body copy, guidance, FAQs, source citations, imagery, alt text, routes, canonicals, topics, discovery, related links, AI, grounding, journal, memory features, voice, database, schema, RLS. Human reviews completed: 0. Deployment: 0. The global Phase 33 deployment block stays active.
+
+## 5. Tests
+
+New focused test file asserting: zero rendered review claims across legacy, flagship, deep, week, First Year, Toddler and Family surfaces; zero rendered reviewer names; zero hardcoded reviewer strings left in components and pages; article copy, sources and routes unchanged; the gate does render a claim when given a provenance record (exercised in isolation, without touching production data); JSON-LD carries no `reviewedBy`.
+
+## 6. QA and validation
+
+Browser QA at 1280×1800, 768×1200 and 390×844 on representative TTC, Pregnancy legacy, Pregnancy flagship, Pregnancy week, First Year, Toddler and Family pages: claim absent, no empty metadata gap, updated-date and read-time still aligned, hero spacing intact, no overflow, no console errors.
+
+Then: focused tests, full suite, typecheck twice, lint against the 1-error/10-warning baseline, production build. Actual numbers reported against the 120 files / 1,320 tests baseline.
+
+## 7. Documentation
+
+Create `docs/content/reviewer-claim-governance-correction.md` (previous counts, rendering sources, root cause, provenance result, correction, retained metadata, future display rule, tests, QA, changed files) and update `docs/content/article-source-and-structure-consistency.md` section 7 with the remediation outcome.
+
+## 8. One conflict to confirm
+
+Stored project memory currently carries the rule: *"All medically relevant pages MUST include ✔ Medically reviewed by Jenny Joines."* This phase directly reverses it. On approval that memory rule will be replaced with the provenance-gated rule, so the badge is not reintroduced in future work.
+
+## Technical notes
+
+- New: `src/lib/reviewClaims.ts` (type, empty registry, lookup) and `src/components/shared/MedicalReviewClaim.tsx` (gated renderer).
+- Edited: 43 `src/pages/Week*.tsx`, `StagePage.tsx`, `ArticlePage.tsx` (JSON-LD), and the article/week/hub/IVF/postpartum/first-year/toddler/family/support components listed in section 1.
+- Datasets are not edited. Type definitions keep `reviewedBy?` / `medicallyReviewed?`.
+- New test file `src/test/reviewerClaimGovernance.test.tsx`; existing tests that assert badge presence, if any, are updated to assert the governed behaviour.

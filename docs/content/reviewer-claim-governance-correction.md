@@ -103,10 +103,39 @@ UK health sources rather than claiming review of our own content.
 
 ## 7. Retained historical metadata
 
-`reviewedBy`, `medicallyReviewed` and `lastUpdated` remain in
-`src/data/*` as **HISTORICAL / UNSUPPORTED REVIEW METADATA PENDING GOVERNANCE
-REMEDIATION** (179 reviewer mentions). They are not deleted, are never used as a
-display fallback, and do not satisfy the gate.
+`reviewedBy`, `medicallyReviewed` and `lastUpdated` remain in `src/data/*` as
+**HISTORICAL / UNSUPPORTED REVIEW METADATA PENDING GOVERNANCE REMEDIATION**
+(191 unique records carrying reviewer metadata; 179 raw "Jenny Joines" string
+occurrences). They are not deleted, are never used as a display fallback, and
+do not satisfy the gate.
+
+## 7A. Exact before-count clarification
+
+A single rendered-page before count is not meaningful: shared renderers multiply
+across dynamic routes, so the same component can produce a claim on many pages.
+The documentation therefore uses two defined, auditable metrics.
+
+**Metric A — content records capable of displaying an unsupported claim: 191.**
+
+**Metric B — distinct unsupported claim-producing source locations: 72.**
+- 42 week-page locations (one hardcoded claim each)
+- 29 other visitor-facing locations (13 hardcoded plus 16 data-driven sites)
+- 1 machine-facing JSON-LD generator (`ArticlePage.tsx`)
+
+After correction: Metric A = 0 rendered unsupported claims; Metric B = 0
+unsupported claim-producing locations. The only places review wording still
+appears are the gated `MedicalReviewClaim` component and four badge chips, all
+behind `hasReviewClaim()`.
+
+## 7B. Reconciliation closure note
+
+The earlier report's total of 179 was a raw string count of "Jenny Joines",
+not a record count. The row values mixed raw string counts with field counts and
+summed to 192, while the stated total was 179; neither figure is the unique
+record count. The authoritative figure is **191 unique records carrying reviewer
+metadata** (177 article records plus 14 TTC flagship overrides). All
+unsupported visitor-facing claims, hardcoded reviewer strings, and unsupported
+machine-facing claims are now 0. Production provenance-backed reviews remain 0.
 
 ## 8. Adding a genuine review in future
 

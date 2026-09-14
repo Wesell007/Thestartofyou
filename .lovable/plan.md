@@ -1,38 +1,40 @@
-# Phase 33 — Move "Common illnesses in the first year" to Baby care and safety
+# Phase 33.4 — Article trust and structure consistency
 
-Placement correction only. No content, imagery, review metadata, governance or deployment changes.
+Standardise how sources appear and remove duplicated article navigation, without touching article copy, imagery, routes, governance or deployment.
 
-## What changes for a reader
+## What the audit found
 
-The guide will be found under First Year → Baby care and safety → Related guidance, instead of Check-ups and warning signs. Its address becomes `/first-year/care-and-safety/common-illnesses-in-the-first-year`. Title, wording, pictures and review status stay exactly as they are.
+Three source renderers and several navigation blocks are involved:
 
-## Changes
+| Area | Component | Current behaviour |
+| --- | --- | --- |
+| Legacy (TTC / Pregnancy / IVF articles) | `src/components/article/ArticleSources.tsx` | Sources rendered as clickable external links |
+| First Year / Toddler / Family | `src/components/shared/HubArticleView.tsx` | Clickable links, external-link icon, "External links open in a new tab…" note |
+| Pregnancy week pages | `src/components/week/WeekSources.tsx` | Clickable external links |
+| Flagship articles | `FlagshipSummaryRow` (At a glance + In this article) **plus** `ArticleContents` (In this article again) | Duplicate navigation, e.g. Preconception GP appointment |
+| Legacy template | `ArticleQuickAnswer` (At a glance) + `ArticleJumpNav` / `ArticleInThisGuide` | One navigation block only; no duplicate found so far |
 
-1. `src/data/firstYearArticleData.ts` — change the record's `topic` from `checkups-and-warning-signs` to `care-and-safety`. Nothing else in the record is touched (title, description, intro, sections, sources, status, review fields unchanged).
-   - Discovery follows the topic automatically via `getFirstYearArticlesByTopic`, so the article leaves the Check-ups listing and joins the Baby care and safety listing with exactly one occurrence. No manual discovery rows exist for First Year, so no additions or removals elsewhere.
-   - Existing `relatedSlugs` references to this slug from `newborn-quirks-and-reflexes` and `newborn-skin-spots-and-marks` stay as-is (contextual related reading, not normal discovery); they resolve by slug, so no href edits are needed.
+Family content: 19 article records, 4 currently carry source data. The remaining 15 will be listed as `SOURCE PROVENANCE MISSING` — no citations will be invented.
 
-2. `src/lib/grounding/articleGroundingRegistry.ts` — update only the `topics` array of the existing default-deny row to `["care-and-safety"]`. Row stays `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, no approval metadata. Registry length stays 225; approvals 0; candidates 0; eligible slugs `[]`; `AI_SOURCE_ROUTING_VERSION` unchanged.
+## What will change
 
-3. `src/test/phase33Remaining17Integrity.test.ts` — map the slug to `care-and-safety` in `FIRST_YEAR_SLUGS`, and add assertions that the route is `/first-year/care-and-safety/common-illnesses-in-the-first-year`, that it appears exactly once in the Baby care and safety topic listing, and zero times in the Check-ups and warning signs listing.
+1. **Sources become plain citations everywhere.** In all three source renderers, drop the anchor, `target="_blank"`, the external-link icon and link styling. Each entry reads `Title — Organisation (year)` as ordered-list text, keeping each hub's existing colours and spacing. Remove the "External links open in a new tab / not controlled by us" sentence.
+2. **Source URLs stay in the data.** No article record is edited; only rendering changes.
+3. **Family sources render through the same block.** The Family page already uses the shared hub view, so the four articles with provenance display sources automatically once the renderer is corrected; the rest are reported, not filled in.
+4. **One "In this article" per article.** Remove the second navigation block from the flagship template (the summary row already carries it). Deep and hub templates keep their single block untouched.
+5. **At a glance audit.** Confirm the opening summary and the "Key takeaways — the essentials, at a glance" section stay distinct; remove only genuine duplicates. Key takeaways are preserved.
+6. **Reviewer claims audited read-only.** Every visitor-facing "Medically reviewed by …" line is listed with whether reviewer metadata and provenance exist in the repository; anything unbacked is flagged `REVIEW CLAIM REQUIRES GOVERNANCE CHECK`. Nothing is added or removed.
 
-4. Documentation — update the topic/route cells for this article in:
-   - `docs/content/phase33-remaining17-frontend-report.md` (First Year table row)
-   - `docs/content/phase33-publication-register.md` (row 14 topic, route and discovery-surface cells)
-   - `docs/content/phase33-human-review-pack.md` only if it names the old route (current text names the slug only; add the corrected route reference if present)
+## Tests and checks
 
-5. Sitemap — regenerate. The URL is derived from the record's topic, so the old URL disappears and the new one appears. Total stays 350 unique, 0 duplicates.
+New focused tests: zero anchors and zero external-link icons inside source blocks, source titles and organisations still visible, URLs still present in data, one navigation block per template, navigation anchors match real section ids, key takeaways intact.
 
-## Not changed
+Validation: focused tests, full suite, typecheck twice, lint against the 1 error / 10 warnings baseline, production build, plus browser checks at desktop, tablet and mobile on a TTC, Pregnancy flagship, First Year, Toddler and Family article.
 
-Images and alt text, section placements, review classification and human-review status, other articles, routes, navigation architecture, renderers, templates, database, RLS, AI runtime, grounding runtime behaviour, journal, memory, voice, saved lifecycles. No redirect architecture is added, since Phase 33 is preview-only.
+## Documentation
 
-## Validation
+`docs/content/article-source-and-structure-consistency.md` records the audit, the new standard, Family coverage and missing provenance, duplicate findings, reviewer-claim audit, QA, tests, changed files and the full count table (items 1–16 of the brief).
 
-- Focused Phase 33 integrity tests plus grounding drift/approval tests
-- Full test suite, typecheck, lint (baseline 1 error / 10 warnings), production build
-- Sitemap regeneration with duplicate check (expect 350 unique, 0 duplicates; new route present, old route absent)
-- Browser check of the journey: First Year → Baby care and safety → Related guidance → Common illnesses in the first year, confirming it opens at the new address
-- Direct check of both addresses: the new one renders with the new canonical; the old one is inspected as-is. The First Year page matches on topic and slug together, so the old address is expected to fall through to the not-found page, but I will confirm actual behaviour and report it rather than assume. No redirect, renderer or route-guard changes either way; discovery, sitemap, canonical and internal references will use the new address only.
+## Boundaries
 
-Governance unchanged: human review required and not completed, deployment eligible NO, production deployed NO, global Phase 33 deployment block ACTIVE. No deployment.
+No article copy, imagery, routes, canonicals, topic placement, discovery, sitemap architecture, AI/grounding/journal/memory/voice, database or lifecycle changes. No deployment; the global Phase 33 deployment block stays active. No IVF work.

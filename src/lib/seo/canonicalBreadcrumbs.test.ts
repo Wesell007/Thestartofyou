@@ -111,12 +111,15 @@ describe("WC-3c canonical breadcrumb hierarchies", () => {
   });
 
   it("leaves the deferred legacy article headers byte-identical", () => {
+    // Hashes re-pinned in Phase 33.5: the unsupported medical-review claim was
+    // removed from both headers and routed through the provenance gate.
+    // Breadcrumb behaviour in these files is unchanged.
     const hash = (p: string) => createHash("md5").update(readFileSync(join(root, p))).digest("hex");
     expect(hash("src/components/article/ArticleHeader.tsx")).toBe(
-      "b5c8afcfbe2b55d1904f814b3a33ca13",
+      "45f87fe7bf0299e2a579e9f75c6e82d9",
     );
     expect(hash("src/components/article/flagship/FlagshipHero.tsx")).toBe(
-      "70b785b2bd292243587c431229afa7c5",
+      "ca5138a6d4f6d26fb4c7947dfd496060",
     );
   });
 });

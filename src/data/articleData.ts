@@ -3128,10 +3128,12 @@ const articleDatabase: ArticleData[] = [
       "When to ask for more support",
     ],
     sources: [
-      "HFEA — Patient support and counselling",
-      "British Infertility Counselling Association (BICA)",
-      "Fertility Network UK — Emotional support",
-      "Royal College of Obstetricians and Gynaecologists — Information for women",
+      { label: "Getting emotional support", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-emotional-support/" },
+      { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+      { label: "Get support", publisher: "Fertility Network UK", url: "https://www.fertilitynetworkuk.org/get-support/" },
+      { label: "Find a fertility counsellor", publisher: "British Infertility Counselling Association", url: "https://www.bica.net/find-a-counsellor" },
     ],
     faq: [
       { question: "Is it normal to feel depressed during IVF?", answer: "Yes. The combination of hormones, uncertainty, and emotional intensity can trigger depression. Seek support if you're struggling — most clinics offer counselling, and BICA-registered fertility counsellors specialise in this." },

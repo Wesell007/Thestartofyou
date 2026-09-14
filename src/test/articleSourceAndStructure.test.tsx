@@ -15,7 +15,9 @@ import WeekSources from "@/components/week/WeekSources";
 import HubArticleView from "@/components/shared/HubArticleView";
 import ArticleFlagshipTemplate from "@/components/article/flagship/ArticleFlagshipTemplate";
 import ArticleDeepTemplate from "@/components/article/ArticleDeepTemplate";
-import { articles, type ArticleData } from "@/data/articleData";
+import { getAllArticles, type ArticleData } from "@/data/articleData";
+
+const articles = getAllArticles();
 import { familyArticles } from "@/data/familyArticleData";
 import { firstYearArticles } from "@/data/firstYearArticleData";
 import { toddlerArticles } from "@/data/toddlerArticleData";

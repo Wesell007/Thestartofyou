@@ -7,7 +7,6 @@ import PublicReflectionEditor from "@/components/shared/PublicReflectionEditor";
 import SeoHead from "@/components/seo/SeoHead";
 import { ttcStages, type StageData } from "@/data/stageData";
 import { postpartumStages } from "@/data/postpartumStageData";
-import { ivfStages } from "@/data/ivfStageData";
 import { firstYearStages } from "@/data/firstYearStageData";
 import NotFound from "@/pages/NotFound";
 import AskAboutThis from "@/components/companion/AskAboutThis";
@@ -21,7 +20,6 @@ import { HOME_CRUMB, TTC_CRUMB } from "@/lib/seo/journeyCrumbs";
 const stageRegistry: Record<string, Record<string, StageData>> = {
   "trying-to-conceive": ttcStages,
   postpartum: postpartumStages,
-  ivf: ivfStages,
   "first-year": firstYearStages,
 };
 

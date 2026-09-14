@@ -9,7 +9,7 @@ import FlagshipKeyTakeawaysStrip from "./FlagshipKeyTakeawaysStrip";
 import FlagshipEditorialSections from "./FlagshipEditorialSections";
 import FlagshipNormalCheckPanel from "./FlagshipNormalCheckPanel";
 import FlagshipFAQ from "./FlagshipFAQ";
-import ArticleContents from "@/components/article/ArticleContents";
+
 import ArticleSources from "@/components/article/ArticleSources";
 import ArticleRelatedReads from "@/components/article/ArticleRelatedReads";
 import ArticleTopicReturn from "@/components/article/ArticleTopicReturn";

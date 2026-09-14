@@ -30,19 +30,14 @@ const ArticleSources = ({ data }: Props) => {
                 <span className="font-sans text-xs font-light text-muted-foreground/70 leading-relaxed">
                   {isStructured(source) ? (
                     <>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="underline decoration-border/40 underline-offset-4 hover:text-foreground/80"
-                      >
-                        {source.label}
-                      </a>
-                      <span className="text-muted-foreground/50">
-                        {" — "}
-                        {source.publisher}
-                        {source.year ? ` (${source.year})` : ""}
-                      </span>
+                      <span className="text-foreground/80">{source.label}</span>
+                      {source.publisher ? (
+                        <span className="text-muted-foreground/50">
+                          {" — "}
+                          {source.publisher}
+                          {source.year ? ` (${source.year})` : ""}
+                        </span>
+                      ) : null}
                     </>
                   ) : (
                     source

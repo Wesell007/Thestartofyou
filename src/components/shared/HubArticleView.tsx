@@ -5,7 +5,7 @@ import {
   ShieldCheck,
   Sparkles,
   BookOpen,
-  ExternalLink,
+  
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -493,39 +493,25 @@ const HubArticleView = ({
                 <ol className="space-y-3 list-decimal pl-5 marker:font-sans marker:text-[12px]" style={{ color: deepMuted }}>
                   {article.sources.map((s) => (
                     <li key={s.url} className="pl-1">
-                      <a
-                        href={s.url}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center gap-1.5 font-sans text-[14px] font-medium underline decoration-1 underline-offset-4 hover:opacity-80 transition-opacity"
-                        style={{ color: deep, textDecorationColor: accentMid }}
+                      <span
+                        className="font-sans text-[14px] font-medium"
+                        style={{ color: deep }}
                       >
                         {s.label}
-                        <ExternalLink
-                          size={12}
-                          strokeWidth={1.8}
-                          style={{ color: accent }}
-                          aria-hidden
-                        />
-                      </a>
-                      <span
-                        className="font-sans text-[13px] font-light"
-                        style={{ color: deepSoft }}
-                      >
-                        {" — "}
-                        {s.publisher}
-                        {s.year ? ` (${s.year})` : ""}
                       </span>
+                      {s.publisher ? (
+                        <span
+                          className="font-sans text-[13px] font-light"
+                          style={{ color: deepSoft }}
+                        >
+                          {" — "}
+                          {s.publisher}
+                          {s.year ? ` (${s.year})` : ""}
+                        </span>
+                      ) : null}
                     </li>
                   ))}
                 </ol>
-                <p
-                  className="mt-6 font-sans text-[12px] font-light leading-[1.6]"
-                  style={{ color: deepMuted }}
-                >
-                  External links open in a new tab. Content on external sites is
-                  not controlled by us.
-                </p>
               </div>
             </div>
           </section>

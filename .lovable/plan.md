@@ -1,48 +1,62 @@
-# Phase 34A — IVF content coverage and journey audit
+# Phase 34B — IVF source remediation and existing-content expansion
 
-Audit only. No new articles, no edits to content, routes, discovery, grounding, AI or deployment. The only files written are the four Phase 34A documents.
+Implementation of the Phase 34A approved smallest next batch, minus the new articles. No new IVF articles, no new routes, no deployment.
 
-## What exists today (confirmed by reading the project)
+## Scope reconciled against the 34A registers
 
-- IVF hub at `/ivf`, three stage pages (`/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`), one tool result route `/ivf-timeline`, and a TTC crossover page `/trying-to-conceive/ivf-and-treatment`.
-- IVF stage and topic content in `src/data/ivfStageData.ts` and `src/data/ivfTopicData.ts`.
-- IVF-tagged legacy articles in `src/data/articleData.ts` including `ivf-timeline-what-to-expect`, `emotional-impact-of-ivf` and `moving-from-ttc-to-ivf`, plus fertility articles that link into IVF.
-- Contextual entry points: IVF strip above articles, IVF pathway blocks on the pregnancy and TTC hubs.
+From `phase34a-ivf-existing-content-actions.csv`:
 
-Exact counts, statuses and discoverability will be established during the audit rather than assumed.
+| 34A record | Primary action | 34B treatment |
+| --- | --- | --- |
+| `/articles/ivf-timeline-what-to-expect` (row 6) | EXPAND_EXISTING + REQUIRES_SOURCE_REMEDIATION | Expand and remediate sources |
+| `/ivf/after-transfer` (row 3) | EXPAND_EXISTING | Expand |
+| `/ivf/before-transfer` (row 2) | EXPAND_EXISTING | **DEFERRED FROM 34B SMALL BATCH** — the 34A smallest batch names only the timeline article and after-transfer |
+| `/articles/emotional-impact-of-ivf` (row 7) | KEEP + REQUIRES_SOURCE_REMEDIATION | Sources only, no copy expansion |
+| Rows 18, 19, 20 (`ivfStageData.ts`) | MERGE | Resolve the shadowed duplicates |
+| Rows 14, 15, 16, 17 | INTERNAL_LINK_ONLY | Contextual links only |
+| Row 9 `moving-from-ttc-to-ivf` | KEEP | Hub discovery correction only |
 
-## How the audit will run
+Held for a later phase: all 7 NEW_ARTICLE rows (what IVF is, NHS funding, OHSS, unsuccessful cycle, ICSI, embryo development, fresh vs frozen), the clinic-questions checklist (DEFERRED PRODUCT OPPORTUNITY), and every DO_NOT_CREATE decision.
 
-1. **Inventory** — enumerate every IVF surface: hub, stage pages, topic/subtopic data, legacy IVF articles, the timeline tool, and IVF content living under TTC or Pregnancy. For each record capture title, slug, route, topic, template system, editorial status, whether real source provenance exists, normal discovery surface, contextual discovery surfaces, overlaps and journey role. Discovery is confirmed against the route table, the sitemap generator and the actual link graph, not filenames.
-2. **Journey map** — map the UK IVF journey across the 28 audit domains (understanding IVF through to deciding whether to try again), marking each as covered, partially covered or uncovered, and merging domains where one strong page can satisfy several intents.
-3. **Evidence hierarchy** — record HFEA, NHS and NICE as the primary reference hierarchy for any future IVF factual content, with reputable UK support organisations as secondary for emotional content. Competitor material is treated as demand evidence only.
-4. **Search-demand audit** — a separate IVF demand assessment (Phase 31's dataset produced zero IVF rows). Intent clusters split into informational, treatment-stage, symptom/safety, emotional-support, funding/eligibility and decision-support. Demand is never treated as a proxy for clinical importance.
-5. **Existing content actions** — each current IVF record gets exactly one primary action (KEEP, EXPAND_EXISTING, MERGE, REPOSITION or INTERNAL_LINK_ONLY) plus any secondary flags recorded in a separate column (REQUIRES_SOURCE_REMEDIATION, REQUIRES_HUMAN_HEALTH_REVIEW, REQUIRES_SAFETY_REVIEW, POTENTIAL_CANONICAL_OVERLAP). Secondary flags may overlap and are never counted as primary actions. No rewriting.
-6. **Gap register** — every opportunity classified as NEW_ARTICLE, EXPAND_EXISTING, MERGE_EXISTING, TOOL_OPPORTUNITY, JOURNEY_CONTENT, INTERNAL_LINK, NO_ACTION or DO_NOT_CREATE, each with a stated reason.
-7. **Safety classification** — LOW_RISK_GENERAL, HEALTH_REVIEW_REQUIRED or SAFETY_REVIEW_REQUIRED per proposed item. No review is claimed as done; the no-provenance-no-claim rule stays binding.
-8. **Product and companion opportunities** — separate the needs better served by a journey stage, companion answer, tool, checklist, tracker or timeline rather than another article.
-9. **Cannibalisation audit** — for each overlapping intent nominate a primary owner, supporting page or merge candidate, with specific attention to IVF process, timeline, stimulation, transfer, implantation, two-week wait, symptoms, testing, failed cycles and emotional support.
-10. **Discovery audit** — identify normal discovery gaps, orphan pages, duplicate discovery and misplaced content. Nothing is changed.
+## 1. Source provenance
 
-## Counting and reconciliation rules
+Both IVF articles currently store sources as plain label strings. Convert them to the structured source shape already supported by the article data and renderer (label, publisher, URL, year where genuinely published), using HFEA first, then NHS, then NICE, with Fertility Network UK and BICA only for the emotional article's support context. Each source is verified against the live page before it is recorded; no year is invented. URLs stay in the data only — the visitor still sees plain text citations with no anchor, no icon and no new-tab wording, exactly as Phase 33.4 requires.
 
-- Surfaces are counted separately, never collapsed into a single article count: hub surfaces, stage/journey pages, topic/subtopic data records, unique articles, TTC/Pregnancy crossover articles with IVF relevance, tools/results, and total distinct public surfaces. Where one record powers several surfaces, that relationship is documented rather than double-counted.
-- Each of the 28 journey domains gets exactly one status (COVERED, PARTIALLY_COVERED, UNCOVERED, NOT_REQUIRED_AS_STANDALONE_CONTENT, BETTER_SERVED_BY_PRODUCT_OR_JOURNEY) plus current owner, supporting content, actual gap and recommended treatment. Status counts must total 28.
-- Primary-action totals equal the number of existing records audited; secondary flags are reported separately and may overlap.
-- Gap-register rows carry exactly one primary classification, so classification totals equal the row count.
-- "Source provenance present" means traceable source references. Reviewer fields, review flags and reviewer names are never counted as provenance, and no review is recorded as completed.
-- Where reliable UK search-volume evidence is not available, demand is recorded as a qualitative signal with its supporting evidence. No numbers are invented, and demand stays separate from clinical importance.
-- IVF stays an editorial domain. Saved lifecycles remain ttc, pregnancy and first_year, and no lifecycle, persistence, setup or routing change is proposed.
+## 2. Timeline article expansion
 
-## Deliverables
+`ivf-timeline-what-to-expect` stays the single owner of the generic IVF sequence. Expand its editorial sections so stimulation, monitoring, the trigger injection, egg collection, sperm collection and preparation each read as a proper section rather than a single line, and keep the existing fertilisation, embryo development, transfer, two-week wait and testing material as sequence-level orientation. Depth on high-risk subjects (OHSS in particular) stays a short signpost, because 34A assigns it to a future dedicated article. Route, canonical, slug, topics, hero and identity unchanged.
 
-- `docs/content/phase34a-ivf-content-audit.md` — full inventory, quality review, cannibalisation and discovery findings, plus the headline counts (IVF article count, topic/subtopic count, discoverable articles, orphans, new/expand/merge recommendations, tool and journey opportunities, no-action intents, health and safety review items, cannibalisation risks).
-- `docs/content/phase34a-ivf-journey-map.md` — the UK journey map with coverage status per domain.
-- `docs/content/phase34a-ivf-gap-register.csv` — one row per opportunity with classification and rationale.
-- `docs/content/phase34a-ivf-existing-content-actions.csv` — one row per existing IVF record with its action classification.
+## 3. After-transfer stage expansion
 
-The audit closes with one verdict (sufficient / minor gaps / material gaps / major gaps) and a deliberately small recommended next publication batch, not one article per gap.
+Expand the `after-transfer` config in `src/data/ivfTopicData.ts` so the page covers: what typically happens after transfer, normal uncertainty, continuing medication as the clinic directs, symptoms versus no symptoms, rest and activity myths, when a test is meaningful (including why the trigger injection can distort an early result), when to contact the clinic, and the emotional weight of the wait. No individualised advice, no overstated implantation symptoms, no separate symptom article.
 
-## Boundaries
+## 4. Shadowed stage data
 
-No new or edited articles, no source, route, topic, discovery, grounding, AI, journal, memory or voice changes, no imagery, no reviewer claims, no deployment. The Phase 33 deployment block stays active.
+`src/data/ivfStageData.ts` defines three stage records consumed only by `src/pages/StagePage.tsx` through the generic `/:journey/:stage` route. The three explicit `/ivf/*` routes are registered above that generic route in `src/App.tsx`, and the sitemap lists only the explicit routes, so all three records are unreachable. Authoritative owner = `ivfTopicData.ts`. Resolution: remove the `ivf` entry from the stage registry and delete the unreachable file, after confirming no other importer. No route, no new stage page, no visitor-facing change. The before/after mapping is documented in the report.
+
+## 5. Internal links and hub discovery
+
+- Contextual loss support from `/ivf/after-transfer` and `/ivf/early-pregnancy` to the existing chemical pregnancy and pregnancy-after-loss articles.
+- Contextual multiple-pregnancy link from `/ivf/early-pregnancy` to existing pregnancy content.
+- Embryo freezing and storage: a short plain-text HFEA signpost inside the before-transfer support copy, no external anchor, no new article.
+- `Moving from TTC to IVF` surfaced exactly once on the IVF hub as a normal discovery destination. Its route, canonical, dataset and TTC ownership stay unchanged; occurrence on the hub = 1, with no duplicate discovery elsewhere on the hub.
+
+## 6. Review governance and safety
+
+Every medically substantive addition keeps its 34A classification (HEALTH_REVIEW_REQUIRED, or SAFETY_REVIEW_REQUIRED where it touches bleeding, pain, OHSS, ectopic concerns, medication, loss or test interpretation). Human reviews completed stays 0. No reviewer badge, no named reviewer, no generic expert claim, no machine-facing `reviewedBy` emitted. Existing stored historical metadata is left untouched. Nothing implies the content replaces a clinic or urgent care.
+
+## 7. Tests
+
+New or updated focused tests covering: structured provenance present on both IVF articles; source citations render without anchors; the timeline article remains the sole owner of the generic sequence; the after-transfer route is unchanged; the shadowed stage records are gone and no IVF stage resolves through the generic route; no new routes; hub occurrence of `moving-from-ttc-to-ivf` is exactly 1; reviewer claims = 0; JSON-LD `reviewedBy` = 0; saved lifecycles remain exactly `ttc`, `pregnancy`, `first_year`.
+
+## 8. QA and validation
+
+Browser QA at mobile, tablet and desktop on `/ivf`, the three stage routes, both IVF articles and `moving-from-ttc-to-ivf`: content, images, overflow, visible non-clickable citations, no reviewer claims, links resolve, hub discovery coherent. Then the focused tests, the full suite, typecheck twice, lint against the existing baseline, production build and route/link validation. No deployment; the global Phase 33 block stays active.
+
+## 9. Documentation
+
+Create `docs/content/phase34b-ivf-remediation-report.md` recording sources remediated, articles expanded, the deferred third expansion, the shadowed-data mapping, links implemented, review classifications, tests, QA, changed files, the held new-article backlog and the deferred product opportunity. Add implementation-status notes to the Phase 34A documents without altering their historical counts.
+
+## Expected completion counts
+
+IVF articles source-remediated 2, existing articles expanded 1, stage surfaces expanded 1, shadowed records 3 to 0, new article records 0, new routes 0, human reviews completed 0, reviewer claims rendered 0, deployed 0. Link and discovery counts reported exactly as implemented.

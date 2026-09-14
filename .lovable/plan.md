@@ -24,6 +24,16 @@ Exact counts, statuses and discoverability will be established during the audit 
 9. **Cannibalisation audit** — for each overlapping intent nominate a primary owner, supporting page or merge candidate, with specific attention to IVF process, timeline, stimulation, transfer, implantation, two-week wait, symptoms, testing, failed cycles and emotional support.
 10. **Discovery audit** — identify normal discovery gaps, orphan pages, duplicate discovery and misplaced content. Nothing is changed.
 
+## Counting and reconciliation rules
+
+- Surfaces are counted separately, never collapsed into a single article count: hub surfaces, stage/journey pages, topic/subtopic data records, unique articles, TTC/Pregnancy crossover articles with IVF relevance, tools/results, and total distinct public surfaces. Where one record powers several surfaces, that relationship is documented rather than double-counted.
+- Each of the 28 journey domains is classified COVERED, PARTIALLY_COVERED, UNCOVERED, NOT_REQUIRED_AS_STANDALONE_CONTENT or BETTER_SERVED_BY_PRODUCT_OR_JOURNEY, with its current owner where one exists.
+- Existing records carry one primary action plus any secondary flags kept separate, so primary-action totals equal the number of records audited.
+- Gap-register rows carry exactly one primary classification, so classification totals equal the row count.
+- "Source provenance present" means traceable source references. Reviewer fields, review flags and reviewer names are never counted as provenance, and no review is recorded as completed.
+- Where reliable UK search-volume evidence is not available, demand is recorded as a qualitative signal with its supporting evidence. No numbers are invented, and demand stays separate from clinical importance.
+- IVF stays an editorial domain. Saved lifecycles remain ttc, pregnancy and first_year, and no lifecycle, persistence, setup or routing change is proposed.
+
 ## Deliverables
 
 - `docs/content/phase34a-ivf-content-audit.md` — full inventory, quality review, cannibalisation and discovery findings, plus the headline counts (IVF article count, topic/subtopic count, discoverable articles, orphans, new/expand/merge recommendations, tool and journey opportunities, no-action intents, health and safety review items, cannibalisation risks).

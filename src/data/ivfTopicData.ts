@@ -145,7 +145,7 @@ const LINKS = {
   fertilityAppt: "/articles/what-happens-at-a-fertility-appointment",
   testsScans: "/articles/tests-and-scans-in-pregnancy",
   twins: "/articles/twins-and-multiples-in-pregnancy",
-  movingToIVF: "/articles/moving-from-ttc-to-ivf",
+  
 };
 
 // IVF-framed AI destination. The question is decoded into router state by the

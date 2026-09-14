@@ -387,7 +387,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "Why does medication continue after transfer?", href: askIVF("Why does medication continue after embryo transfer?") },
           { label: "Do I need to rest after embryo transfer?", href: askIVF("Do I need to rest after embryo transfer?") },
           { label: "What can I safely do in the two weeks after transfer?", href: askIVF("What can I safely do in the two weeks after transfer?") },
-          { label: "Chemical pregnancy", href: LINKS.chemical },
+          { label: "When should I contact the clinic after transfer?", href: askIVF("When should I contact the clinic after transfer?") },
         ],
       },
       {

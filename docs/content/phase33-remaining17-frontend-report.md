@@ -45,7 +45,7 @@ Articles deployment eligible          0
 | `sex-and-intimacy-after-birth` | `/first-year/body-and-hormones/sex-and-intimacy-after-birth` | body-and-hormones | topic listing ×1 |
 | `newborn-quirks-and-reflexes` | `/first-year/care-and-safety/newborn-quirks-and-reflexes` | care-and-safety | topic listing ×1 |
 | `newborn-skin-spots-and-marks` | `/first-year/care-and-safety/newborn-skin-spots-and-marks` | care-and-safety | topic listing ×1 |
-| `common-illnesses-in-the-first-year` | `/first-year/checkups-and-warning-signs/common-illnesses-in-the-first-year` | checkups-and-warning-signs | topic listing ×1 |
+| `common-illnesses-in-the-first-year` | `/first-year/care-and-safety/common-illnesses-in-the-first-year` | care-and-safety | topic listing ×1 |
 
 No new route type, renderer, dataset, hub or lifecycle was created. Legacy
 records render through `ArticleFlagshipTemplate`; First Year records render

@@ -33,5 +33,6 @@ Images and alt text, section placements, review classification and human-review 
 - Full test suite, typecheck, lint (baseline 1 error / 10 warnings), production build
 - Sitemap regeneration with duplicate check (expect 350 unique, 0 duplicates; new route present, old route absent)
 - Browser check of the journey: First Year → Baby care and safety → Related guidance → Common illnesses in the first year, confirming it opens at the new address
+- Direct check of both addresses: the new one renders with the new canonical; the old one is inspected as-is. The First Year page matches on topic and slug together, so the old address is expected to fall through to the not-found page, but I will confirm actual behaviour and report it rather than assume. No redirect, renderer or route-guard changes either way; discovery, sitemap, canonical and internal references will use the new address only.
 
 Governance unchanged: human review required and not completed, deployment eligible NO, production deployed NO, global Phase 33 deployment block ACTIVE. No deployment.

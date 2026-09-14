@@ -204,3 +204,18 @@ PRODUCT/JOURNEY: clinic-questions checklist; editorial stage sequencing.
 DO NOT CREATE: donor eggs and sperm (HFEA-regulated, outside current editorial scope); standalone pages for blastocysts, stimulation, trigger, egg collection or sperm preparation.
 
 Source remediation for the two IVF articles and the four new pieces must precede publication, and all six sit behind health or safety review. Nothing in this batch is implemented in Phase 34A.
+
+---
+
+## Implementation status (recorded after Phase 34B)
+
+Phase 34A audit counts above are historical and unchanged. Implementation outcome only:
+
+- Source remediation for both IVF articles: COMPLETE (Phase 34B).
+- EXPAND: timeline article and `/ivf/after-transfer`: COMPLETE. `/ivf/before-transfer` DEFERRED FROM 34B SMALL BATCH.
+- MERGE: 3 shadowed `ivfStageData.ts` records: RESOLVED (file deleted, registry entry removed); shadowed records now 0; public IVF stage routes 3 -> 3.
+- LINK: freezing/storage signpost, loss (chemical pregnancy, pregnancy after loss) and multiple pregnancy implemented as contextual links; `moving-from-ttc-to-ivf` surfaced on the IVF hub exactly once.
+- CREATE (4 articles) and the clinic-questions checklist: NOT STARTED, held for a later phase.
+- Human reviews completed: still 0. Deployment: still 0.
+
+See `docs/content/phase34b-ivf-remediation-report.md`.

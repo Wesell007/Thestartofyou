@@ -1,57 +1,37 @@
-# Phase 33.3 — final exception reconciliation (approved)
+# Phase 33 — Move "Common illnesses in the first year" to Baby care and safety
 
-Reconciliation only. No deployment, no new phase, no rebuild of completed article work.
+Placement correction only. No content, imagery, review metadata, governance or deployment changes.
 
-## 1. Grounding — approved boundary exception, preserved
+## What changes for a reader
 
-Files changed during Phase 33.3 (verified against commit `406304fd..6b29c804`):
+The guide will be found under First Year → Baby care and safety → Related guidance, instead of Check-ups and warning signs. Its address becomes `/first-year/care-and-safety/common-illnesses-in-the-first-year`. Title, wording, pictures and review status stay exactly as they are.
 
-- `src/lib/grounding/articleGroundingRegistry.ts` — 17 metadata rows appended, all `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, `archived: false`, `deprecated: false`, no approval fields.
-- `src/test/articleGrounding.test.ts`, `src/test/articleGroundingApproval.test.ts` — pinned counts 208 to 225, draft 45 to 62.
+## Changes
 
-Rows stay. Nothing reverted. Reporting will read:
+1. `src/data/firstYearArticleData.ts` — change the record's `topic` from `checkups-and-warning-signs` to `care-and-safety`. Nothing else in the record is touched (title, description, intro, sections, sources, status, review fields unchanged).
+   - Discovery follows the topic automatically via `getFirstYearArticlesByTopic`, so the article leaves the Check-ups listing and joins the Baby care and safety listing with exactly one occurrence. No manual discovery rows exist for First Year, so no additions or removals elsewhere.
+   - Existing `relatedSlugs` references to this slug from `newborn-quirks-and-reflexes` and `newborn-skin-spots-and-marks` stay as-is (contextual related reading, not normal discovery); they resolve by slug, so no href edits are needed.
 
-```text
-GROUNDING REGISTRY METADATA CHANGES   17 default-deny coverage rows added
-GROUNDING RUNTIME BEHAVIOUR CHANGES   0
-```
+2. `src/lib/grounding/articleGroundingRegistry.ts` — update only the `topics` array of the existing default-deny row to `["care-and-safety"]`. Row stays `editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, no approval metadata. Registry length stays 225; approvals 0; candidates 0; eligible slugs `[]`; `AI_SOURCE_ROUTING_VERSION` unchanged.
 
-Classified as APPROVED PHASE 33.3 BOUNDARY EXCEPTION — REGISTRY COVERAGE / DEFAULT-DENY METADATA ONLY. To verify and quote: registry 225, approved 0, candidates 0, `listGroundingEligibleSlugs()` empty, `AI_SOURCE_ROUTING_VERSION` = `30B-source-routing-v1`, drift guard PASS, 0 prompt/routing/eligibility/edge-function changes.
+3. `src/test/phase33Remaining17Integrity.test.ts` — map the slug to `care-and-safety` in `FIRST_YEAR_SLUGS`, and add assertions that the route is `/first-year/care-and-safety/common-illnesses-in-the-first-year`, that it appears exactly once in the Baby care and safety topic listing, and zero times in the Check-ups and warning signs listing.
 
-## 2. Teething correction on the approved surfaces
+4. Documentation — update the topic/route cells for this article in:
+   - `docs/content/phase33-remaining17-frontend-report.md` (First Year table row)
+   - `docs/content/phase33-publication-register.md` (row 14 topic, route and discovery-surface cells)
+   - `docs/content/phase33-human-review-pack.md` only if it names the old route (current text names the slug only; add the corrected route reference if present)
 
-Add one `related` entry (existing `MonthRelated` mechanism, already rendered) to `src/data/firstYearMonthData.ts`:
+5. Sitemap — regenerate. The URL is derived from the record's topic, so the old URL disappears and the new one appears. Total stays 350 unique, 0 duplicates.
 
-- `4-months` related list, and `5-months` related list
-- `{ label: "Teething", kicker: "Care and safety", href: "/first-year/care-and-safety/teething" }`
+## Not changed
 
-No existing `readMore` destination is touched. No new field, component, renderer or template.
+Images and alt text, section placements, review classification and human-review status, other articles, routes, navigation architecture, renderers, templates, database, RLS, AI runtime, grounding runtime behaviour, journal, memory, voice, saved lifecycles. No redirect architecture is added, since Phase 33 is preview-only.
 
-## 3. Classification
+## Validation
 
-```text
-Approved migration intents        5
-Satisfied exactly as approved     5
-Implementation exceptions         0
-Unapproved migration intents      0
-```
+- Focused Phase 33 integrity tests plus grounding drift/approval tests
+- Full test suite, typecheck, lint (baseline 1 error / 10 warnings), production build
+- Sitemap regeneration with duplicate check (expect 350 unique, 0 duplicates; new route present, old route absent)
+- Browser check of the journey: First Year → Baby care and safety → Related guidance → Common illnesses in the first year, confirming it opens at the new address
 
-The existing `when-sleep-suddenly-changes` to teething cross-link stays and is recorded separately as an ADDITIONAL EDITORIALLY RELEVANT CONTEXTUAL LINK, not as the intent's source surface. Actual contextual occurrences are counted and reported separately from the intent count.
-
-## 4. Integrity test update
-
-`src/test/phase33Remaining17Integrity.test.ts`: the teething intent asserts the 4-month and 5-month `related` links. All existing assertions preserved — 19 records (9 Legacy, 10 First Year), routes, 19/19 normal category discovery with 0 duplicates, hero plus two body images per article, non-claim alt text, five satisfied intents, zero unapproved intents, zero unsupported review metadata.
-
-## 5. Validation
-
-Focused Phase 33 tests, grounding drift/approval tests, full suite, typecheck twice, lint (baseline 1 error / 10 warnings), production build, sitemap generation with duplicate check. Actual post-correction numbers reported; previous baseline 119 files / 1,307 tests.
-
-## 6. Preserved results to reconfirm
-
-19 records (Legacy 9, First Year 10), 19/19 routes, 19/19 normal discovery, 0 duplicate discovery, 19 heroes, 38 body images, 57 approved assets, sitemap 350 unique / 0 duplicates, 0 broken images, 0 horizontal overflow, 0 human reviews, 0 deployment eligible, 0 deployed.
-
-## 7. Documentation
-
-Update `docs/content/phase33-remaining17-frontend-report.md` with the grounding registry coverage exception (runtime behaviour changed NO, eligibility NO, AI routing NO, approvals NO), teething SATISFIED_AS_APPROVED on the 4 and 5 month guides, the sleep-guide link as an additional contextual occurrence, the full boundary table (all zeros except the 17 registry metadata rows), and closure.
-
-Closure on pass: **PHASE 33.3 — CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT**. Global Phase 33 deployment block stays ACTIVE. No deployment.
+Governance unchanged: human review required and not completed, deployment eligible NO, production deployed NO, global Phase 33 deployment block ACTIVE. No deployment.

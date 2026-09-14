@@ -144,6 +144,8 @@ const LINKS = {
   fertilityTestsMen: "/articles/fertility-tests-for-men",
   fertilityAppt: "/articles/what-happens-at-a-fertility-appointment",
   testsScans: "/articles/tests-and-scans-in-pregnancy",
+  twins: "/articles/twins-and-multiples-in-pregnancy",
+  movingToIVF: "/articles/moving-from-ttc-to-ivf",
 };
 
 // IVF-framed AI destination. The question is decoded into router state by the
@@ -308,15 +310,44 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
       lead:
         "Guidance for the two-week wait, symptom-checking, testing, and the emotional weight of not yet knowing.",
       bullets: [
-        "What the two-week wait actually feels like after IVF",
+        "What usually happens in the days straight after transfer",
         "What early symptoms might mean — and not mean",
+        "Continuing the medication your clinic has prescribed",
+        "Rest, activity, and the myths about lying still",
         "When and how to test, and how to read the result",
         "Implantation, faint lines, and bleeding interpretation",
+        "When to contact your clinic rather than wait",
         "Waiting emotionally without losing yourself in it",
-        "Holding both outcomes gently before you know",
       ],
     },
-    startHere: [],
+    startHere: [
+      {
+        title: "IVF timeline, what to expect",
+        why: "Where the wait sits in the cycle, and what the test at the end of it actually measures.",
+        href: LINKS.ivfTimeline,
+      },
+      {
+        title: "The emotional impact of IVF",
+        why: "Why this fortnight so often feels heavier than the treatment itself.",
+        href: LINKS.emotionalIVF,
+      },
+      {
+        title: "Track your IVF timeline",
+        why: "Add your transfer date and follow the days without counting them in your head.",
+        href: LINKS.timeline,
+      },
+    ],
+    protocolWeek: {
+      title: "What the wait after transfer often looks like",
+      intro: "A general shape only. Your clinic sets your medication, your test date, and what to do if anything changes.",
+      items: [
+        { day: "Transfer day", body: "A short procedure, then home. Mild cramping or a little spotting afterwards is common. Progesterone or other support usually continues exactly as prescribed." },
+        { day: "Days 1 to 4", body: "Ordinary life resumes. There is no evidence that strict bed rest improves the outcome; most clinics suggest gentle normal activity rather than lying still." },
+        { day: "Days 5 to 9", body: "Symptoms, or the absence of them, tell you very little at this point. Progesterone can cause bloating, tenderness and tiredness whether or not a pregnancy is developing." },
+        { day: "Days 10 to 14", body: "The hardest stretch for many people. Home tests taken before your clinic's date can still be reading the trigger injection rather than a pregnancy." },
+        { day: "Test day", body: "A blood test measures hCG as a number. Clinics often repeat it around 48 hours later to see how it is changing." },
+      ],
+    },
     featured: {
       eyebrow: "Anchor read · after transfer",
       title: "The emotional impact of IVF",

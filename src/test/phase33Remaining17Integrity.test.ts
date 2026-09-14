@@ -31,7 +31,7 @@ const FIRST_YEAR_SLUGS: Record<string, FirstYearArticleTopic> = {
   "sex-and-intimacy-after-birth": "body-and-hormones",
   "newborn-quirks-and-reflexes": "care-and-safety",
   "newborn-skin-spots-and-marks": "care-and-safety",
-  "common-illnesses-in-the-first-year": "checkups-and-warning-signs",
+  "common-illnesses-in-the-first-year": "care-and-safety",
   "when-sleep-suddenly-changes": "sleep",
 };
 

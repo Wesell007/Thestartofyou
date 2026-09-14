@@ -63,7 +63,7 @@ const ArticlePage = () => {
   }
 
   // Phase 33.5: machine-facing review claims follow the same provenance gate as
-  // visitor-facing ones. `data.reviewedBy` is historical metadata, not evidence
+  // visitor-facing ones. the stored reviewer field is historical metadata, not evidence
   // of a completed review, so no `reviewedBy` is emitted without provenance.
   const reviewClaim = getReviewClaim(reviewSurfaceKey("article", data.slug));
   if (reviewClaim) {

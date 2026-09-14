@@ -10,8 +10,10 @@ phase showed the surface was wider and split into two mechanisms.
 
 | Mechanism | Count before | Detail |
 | --- | --- | --- |
-| Stored reviewer mentions in datasets | 179 | `articleData.ts` 156, `firstYearArticleData.ts` 17, `ttcFlagshipOverrides.ts` 14, `toddlerArticleData.ts` 4, `familyArticleData.ts` 1 |
-| Hardcoded reviewer strings in rendering code/pages | 55 | 42 week pages plus `WeekNormal`, `StagePage`, `ArticleNormal`, `PostpartumNormal`, `FirstYearNormal`, `FYMedicallyReviewed`, `FirstYearTopicPage`, `ToddlerTopicPage`, `IVFTopicPage`, `IVFTimelineResult`, `IVFNormal`, `SupportFinalCTA`, `DueDateCalculatorResult` |
+| Unique records carrying reviewer metadata | 191 | `articleData.ts` 156, `firstYearArticleData.ts` 16, `ttcFlagshipOverrides.ts` 14, `toddlerArticleData.ts` 3, `familyArticleData.ts` 2 |
+| Raw "Jenny Joines" string occurrences in datasets | 179 | 156 + 17 + 1 + 4 + 1 (includes mapper fallbacks and the shared TTC `REVIEWER` constant; this is not a record count) |
+| Hardcoded reviewer strings in rendering code/pages | 55 | 42 routed `WeekNPage.tsx` files plus 13 non-week locations: `WeekNormal`, `StagePage`, `ArticleNormal`, `PostpartumNormal`, `FirstYearNormal`, `FYMedicallyReviewed`, `FirstYearTopicPage`, `ToddlerTopicPage`, `IVFTopicPage`, `IVFTimelineResult`, `IVFNormal`, `SupportFinalCTA`, `DueDateCalculatorResult` |
+| Distinct unsupported claim-producing source locations | 72 | 42 week-page locations + 29 other visitor-facing locations + 1 machine-facing JSON-LD generator (`ArticlePage.tsx`) |
 | Machine-facing claims | 1 generator | `ArticlePage.tsx` emitted `reviewedBy: { "@type": "Person" }` into Article JSON-LD |
 | Provenance-backed reviews in the repository | 0 | Human reviews completed: 0 |
 
@@ -71,8 +73,8 @@ its own review rule.
   provenance-backed record; with an empty registry it is absent.
 - Unused icon imports left behind by the removals cleaned up. Layout gaps
   checked: no empty strips, doubled separators or misaligned metadata rows.
-- `canonicalBreadcrumbs.test.ts` pinned hashes for `ArticleHeader.tsx` and
-  `FlagshipHero.tsx` re-pinned; breadcrumb behaviour in both files unchanged.
+- `canonicalBreadcrumbs.test.ts` — one pinned-hash test containing two file hashes
+  (`ArticleHeader.tsx` and `FlagshipHero.tsx`) — re-pinned; breadcrumb behaviour in both files unchanged.
 
 ## 5. Structured-data sweep
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { articles } from "@/data/articleData";
+import { getAllArticles } from "@/data/articleData";
 import { ivfTopicConfigs } from "@/data/ivfTopicData";
 import stagePageSource from "../pages/StagePage.tsx?raw";
 import ivfStagesSource from "../components/ivf/IVFStages.tsx?raw";
@@ -9,7 +9,7 @@ import articleSourcesSource from "../components/article/ArticleSources.tsx?raw";
 const IVF_ARTICLE_SLUGS = ["ivf-timeline-what-to-expect", "emotional-impact-of-ivf"] as const;
 
 const findArticle = (slug: string) => {
-  const record = articles.find((a) => a.slug === slug);
+  const record = getAllArticles().find((a) => a.slug === slug);
   expect(record, `article ${slug} must exist`).toBeTruthy();
   return record!;
 };
@@ -59,7 +59,7 @@ describe("phase 34B — timeline ownership and expansion", () => {
   };
 
   it("keeps a single generic IVF sequence owner", () => {
-    const owners = articles.filter(
+    const owners = getAllArticles().filter(
       (a) => /ivf/i.test(a.slug) && /timeline|process|what to expect/i.test(a.title ?? ""),
     );
     expect(owners.map((a) => a.slug)).toEqual(["ivf-timeline-what-to-expect"]);
@@ -137,9 +137,9 @@ describe("phase 34B — stage data and discovery", () => {
 
 describe("phase 34B — review governance", () => {
   it("renders no reviewer claim for the IVF articles", async () => {
-    const { resolveReviewClaim } = await import("@/lib/reviewClaims");
+    const { getReviewClaim, reviewSurfaceKey } = await import("@/lib/reviewClaims");
     for (const slug of IVF_ARTICLE_SLUGS) {
-      expect(resolveReviewClaim(slug)).toBeNull();
+      expect(getReviewClaim(reviewSurfaceKey("article", slug))).toBeNull();
     }
   });
 });

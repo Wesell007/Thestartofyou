@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import { ChevronRight, ShieldCheck, Clock } from "lucide-react";
 import type { ToddlerArticle, ToddlerArticleTopic } from "@/data/toddlerArticleData";
 import { getToddlerArticleImages } from "@/components/toddler/article/toddlerArticleImages";
@@ -78,7 +79,7 @@ const ToddlerArticleCard = ({ article }: Props) => {
               Coming soon
             </span>
           )}
-          {article.medicallyReviewed && (
+          {hasReviewClaim(reviewSurfaceKey("article", article.slug)) && (
             <span
               className="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 font-sans text-[10.5px] font-medium"
               style={{

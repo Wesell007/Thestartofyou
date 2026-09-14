@@ -2,10 +2,8 @@ import { Link } from "react-router-dom";
 import {
   ArrowLeft,
   Clock,
-  ShieldCheck,
   Sparkles,
   BookOpen,
-  
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -14,6 +12,8 @@ import type { ReactNode } from "react";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 
 export interface HubArticleViewArticle {
   slug: string;
@@ -185,20 +185,12 @@ const HubArticleView = ({
                   <span>Last updated {article.lastUpdated}</span>
                 </>
               )}
-              {article.medicallyReviewed && article.reviewedBy && (
+              {hasReviewClaim(reviewSurfaceKey("article", article.slug)) && (
                 <>
                   <span aria-hidden>·</span>
-                  <span
-                    className="inline-flex items-center gap-1.5"
-                    style={{ color: deep }}
-                  >
-                    <ShieldCheck
-                      size={12}
-                      strokeWidth={1.9}
-                      style={{ color: accent }}
-                    />
-                    Medically reviewed by {article.reviewedBy}
-                  </span>
+                  <MedicalReviewClaim
+                    contentKey={reviewSurfaceKey("article", article.slug)}
+                  />
                 </>
               )}
               {isDraft && (
@@ -435,7 +427,7 @@ const HubArticleView = ({
               </p>
             )}
 
-            {article.medicallyReviewed && article.reviewedBy && (
+            {hasReviewClaim(reviewSurfaceKey("article", article.slug)) && (
               <div
                 className="mt-14 rounded-2xl border px-6 py-5 flex items-start gap-3"
                 style={{
@@ -443,21 +435,10 @@ const HubArticleView = ({
                   backgroundColor: accentSofter,
                 }}
               >
-                <ShieldCheck
-                  size={16}
-                  strokeWidth={1.9}
-                  style={{ color: accent }}
-                  className="mt-0.5 shrink-0"
-                  aria-hidden
+                <MedicalReviewClaim
+                  contentKey={reviewSurfaceKey("article", article.slug)}
+                  className="text-[13.5px]"
                 />
-                <p
-                  className="font-sans text-[13.5px] font-light leading-[1.6]"
-                  style={{ color: deepSoft }}
-                >
-                  ✔ Medically reviewed by {article.reviewedBy}. Guidance is
-                  informational and not a substitute for advice from your GP,
-                  midwife or health visitor.
-                </p>
               </div>
             )}
           </div>

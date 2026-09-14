@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Shield, Clock, BookOpen } from "lucide-react";
+import { Clock, BookOpen } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import heroNausea from "@/assets/article-hero-nausea.jpg";
 import heroFatigue from "@/assets/article-hero-fatigue.jpg";
 import heroImplantation from "@/assets/article-hero-implantation.jpg";
@@ -96,12 +98,10 @@ const ArticleHero = ({ data }: Props) => {
 
           {/* Trust bar */}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-sans text-[11px] font-light text-white/35">
-            {data.reviewedBy && (
-              <span className="flex items-center gap-1.5">
-                <Shield className="w-3.5 h-3.5 text-white/30" />
-                Reviewed by {data.reviewedBy}
-              </span>
-            )}
+            <MedicalReviewClaim
+              contentKey={reviewSurfaceKey("article", data.slug)}
+              className="text-white/35"
+            />
             {data.lastUpdated && (
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5 text-white/25" />

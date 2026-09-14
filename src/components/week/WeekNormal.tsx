@@ -50,11 +50,6 @@ const WeekNormal = ({ data }: Props) => {
             </ul>
           </div>
         </div>
-
-        {/* Medical review signal, subtle, elegant */}
-        <p className="font-sans text-xs font-light text-sage-muted flex items-center gap-1.5">
-          <span className="text-sage">✔</span> Medically reviewed by Jenny Joines
-        </p>
       </div>
     </section>
   );

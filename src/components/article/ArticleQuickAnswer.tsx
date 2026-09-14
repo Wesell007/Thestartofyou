@@ -1,5 +1,6 @@
-import { Shield } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 
 interface Props {
   data: ArticleData;
@@ -21,12 +22,9 @@ const ArticleQuickAnswer = ({ data, variant = "legacy" }: Props) => {
               {data.quickAnswer}
             </p>
 
-            {data.reviewedBy && (
+            {hasReviewClaim(reviewSurfaceKey("article", data.slug)) && (
               <div className="mt-4 pt-3 border-t border-border/20">
-                <span className="flex items-center gap-1.5 font-sans text-[11px] font-light text-sage">
-                  <Shield className="w-3 h-3 text-sage/60" />
-                  Medically reviewed by {data.reviewedBy}
-                </span>
+                <MedicalReviewClaim contentKey={reviewSurfaceKey("article", data.slug)} />
               </div>
             )}
           </div>
@@ -48,12 +46,9 @@ const ArticleQuickAnswer = ({ data, variant = "legacy" }: Props) => {
             {data.quickAnswer}
           </p>
 
-          {data.reviewedBy && (
+          {hasReviewClaim(reviewSurfaceKey("article", data.slug)) && (
             <div className="mt-4 pt-3 border-t border-border/20">
-              <span className="flex items-center gap-1.5 font-sans text-[11px] font-light text-sage">
-                <Shield className="w-3 h-3 text-sage/60" />
-                Medically reviewed by {data.reviewedBy}
-              </span>
+              <MedicalReviewClaim contentKey={reviewSurfaceKey("article", data.slug)} />
             </div>
           )}
         </div>

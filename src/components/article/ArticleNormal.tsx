@@ -1,4 +1,4 @@
-import { CheckCircle, AlertCircle, Shield } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
 
 interface Props {
@@ -59,12 +59,6 @@ const ArticleNormal = ({ data }: Props) => {
               ))}
             </ul>
           </div>
-        </div>
-
-        {/* Trust signal */}
-        <div className="mt-4 flex items-center gap-1.5 font-sans text-[11px] font-light text-sage-muted">
-          <Shield className="w-3 h-3 text-sage/50" />
-          Medically reviewed by Jenny Joines
         </div>
       </div>
     </section>

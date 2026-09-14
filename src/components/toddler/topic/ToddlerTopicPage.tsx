@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, ShieldCheck, Check } from "lucide-react";
+import { ArrowRight, ChevronRight, Check } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HubAISupport from "@/components/shared/HubAISupport";
@@ -21,6 +21,8 @@ import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard"
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 
 interface Props {
   config: ToddlerTopicConfig;
@@ -36,6 +38,9 @@ const ToddlerTopicPage = ({ config }: Props) => {
   const deep = "hsl(var(--stage-toddler-deep))";
   const deepSoft = "hsl(var(--stage-toddler-deep) / 0.72)";
   const deepMuted = "hsl(var(--stage-toddler-deep) / 0.55)";
+
+  // Phase 33.5: review claims require genuine provenance for this exact surface.
+  const reviewClaimKey = reviewSurfaceKey("topic", `toddler/${config.slug}`);
 
   const related = config.related
     .filter((s) => s !== config.slug)
@@ -184,19 +189,9 @@ const ToddlerTopicPage = ({ config }: Props) => {
                     {config.standfirst}
                   </p>
 
-                  {config.medicallyReviewed && (
+                  {hasReviewClaim(reviewClaimKey) && (
                     <div className="mt-7 md:mt-8">
-                      <span
-                        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11.5px] font-light"
-                        style={{
-                          borderColor: accentBorderStrong,
-                          backgroundColor: accentSoft,
-                          color: deep,
-                        }}
-                      >
-                        <ShieldCheck size={13} strokeWidth={1.8} />
-                        Medically reviewed by Jenny Joines
-                      </span>
+                      <MedicalReviewClaim contentKey={reviewClaimKey} variant="badge" />
                     </div>
                   )}
                 </div>

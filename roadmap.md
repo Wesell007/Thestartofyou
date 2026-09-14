@@ -1,12 +1,13 @@
-# Phase 33.4 — Article trust & structure consistency
+# Phase 33.5 — reviewer claim governance correction
 
-- [ ] Sources plain text: ArticleSources, HubArticleView, WeekSources (no anchors/icons/disclaimer)
-- [ ] No empty Family source blocks
-- [ ] Flagship duplicate "In this article" removed (TOC = 1)
-- [ ] At-a-glance duplication audit (Key Takeaways preserved)
-- [ ] Reviewer-claim audit (read only)
-- [ ] Focused tests: source presentation, Family provenance, TOC counts
-- [ ] Responsive QA: TTC, Pregnancy legacy/flagship, week, First Year, Toddler, Family
-- [ ] docs/content/article-source-and-structure-consistency.md
-- [ ] Validation: focused + full tests, typecheck x2, lint, build
-- [ ] No deployment; no IVF work
+- [ ] `src/lib/reviewClaims.ts` — provenance type, empty registry, lookup
+- [ ] `src/components/shared/MedicalReviewClaim.tsx` — sole display authority
+- [ ] Remove 55 hardcoded reviewer strings (43 week pages, stage, IVF x3, postpartum, first year x3, toddler topic, support CTA, due-date result, article normal, week normal)
+- [ ] Route data-driven surfaces through the gate (header/hero/flagship hero/trust bar/quick answer/deep intro/sources/hub view/cards/topic badges)
+- [ ] Remove unsupported JSON-LD `reviewedBy`; sweep all structured-data generators
+- [ ] Layout cleanup: no empty separators, strips or gaps
+- [ ] Focused tests incl. positive test-only provenance
+- [ ] Responsive QA incl. a non-article surface
+- [ ] Docs: governance doc + section 7 update
+- [ ] Validation: full tests, typecheck x2, lint baseline, build
+- [ ] Update project memory (badge rule superseded)

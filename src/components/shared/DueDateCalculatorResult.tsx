@@ -650,12 +650,6 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
                     {result.insight.reassurance}
                   </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Shield size={12} className="text-sage" />
-                  <p className="font-sans text-[11px] font-light text-muted-foreground/50">
-                    Medically reviewed by Jenny Joines
-                  </p>
-                </div>
               </div>
 
               {/* Right — trimester context card */}
@@ -1259,7 +1253,6 @@ const DueDateCalculatorResult = ({ lmp }: Props) => {
               <div className="md:col-span-5">
                 <div className="space-y-4">
                   {[
-                    { icon: Shield, text: "Medically reviewed guidance" },
                     { icon: Calendar, text: "Personalised by your stage" },
                     { icon: Heart, text: "Save your place and return anytime" },
                   ].map((cue, i) => (

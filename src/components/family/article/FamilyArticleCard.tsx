@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import { ChevronRight, ShieldCheck, Clock } from "lucide-react";
 import type { FamilyArticle } from "@/data/familyArticleData";
 
@@ -54,7 +55,7 @@ const FamilyArticleCard = ({ article }: Props) => {
               Coming soon
             </span>
           )}
-          {article.medicallyReviewed && (
+          {hasReviewClaim(reviewSurfaceKey("article", article.slug)) && (
             <span
               className="inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-sans text-[10.5px] font-medium"
               style={{

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { Shield, Clock, BookOpen } from "lucide-react";
+import { Clock, BookOpen } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import { estimateReadTime } from "@/lib/readingTime";
 import { flagshipHeroMap } from "./flagshipImageMap";
 
@@ -101,12 +103,7 @@ const FlagshipHero = ({ data }: Props) => {
                   <BookOpen className="w-3 h-3 text-foreground/40" />
                   {readTime}
                 </span>
-                {data.reviewedBy && (
-                  <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/65">
-                    <Shield className="w-3 h-3 text-sage/70" />
-                    Medically reviewed by {data.reviewedBy}
-                  </span>
-                )}
+                <MedicalReviewClaim contentKey={reviewSurfaceKey("article", data.slug)} />
                 {data.lastUpdated && (
                   <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-light text-foreground/55">
                     <Clock className="w-3 h-3 text-foreground/40" />

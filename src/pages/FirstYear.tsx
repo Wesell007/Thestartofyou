@@ -8,7 +8,6 @@ import FYAISupport from "@/components/firstyear/new/FYAISupport";
 import FYPhaseNav from "@/components/firstyear/new/FYPhaseNav";
 import FYTopicsParallel from "@/components/firstyear/new/FYTopicClusters";
 import FYCommonQuestions from "@/components/firstyear/new/FYCommonQuestions";
-import FYMedicallyReviewed from "@/components/firstyear/new/FYMedicallyReviewed";
 import FYReflection from "@/components/firstyear/new/FYReflection";
 import FYPathways from "@/components/firstyear/new/FYPathways";
 import FYFinalCTA from "@/components/firstyear/new/FYFinalCTA";
@@ -25,7 +24,6 @@ import FYFinalCTA from "@/components/firstyear/new/FYFinalCTA";
  *   6.  FYPhaseNav           — dual-tint phase cards
  *   7.  FYTopicsParallel     — Baby + Recovery topics, side-by-side at md+
  *   8.  FYCommonQuestions    — per-row track tint
- *   9.  FYMedicallyReviewed  — quiet trust strip
  *   10. FYReflection         — slim italic beat
  *   11. FYPathways           — dual-tone gradient
  *   12. FYFinalCTA           — dual mini CTAs on dual-tone gradient
@@ -50,7 +48,6 @@ const FirstYear = () => {
         <FYPhaseNav />
         <FYTopicsParallel />
         <FYCommonQuestions />
-        <FYMedicallyReviewed />
         <FYReflection />
         <FYPathways />
         <FYFinalCTA />

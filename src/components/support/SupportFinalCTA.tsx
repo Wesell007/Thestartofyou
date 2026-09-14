@@ -67,10 +67,6 @@ const SupportFinalCTA = () => {
             <div key={i} className={`w-6 h-1 rounded-full ${bg} ${i === 5 ? 'opacity-100' : 'opacity-40'}`} />
           ))}
         </div>
-
-        <p className="font-sans text-xs font-light text-muted-foreground/60">
-          ✔ Medically reviewed by Jenny Joines
-        </p>
       </div>
     </section>
   );

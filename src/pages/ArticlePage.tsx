@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { getReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import { getArticle } from "@/data/articleData";
 import ArticleDeepTemplate from "@/components/article/ArticleDeepTemplate";
 import ArticleLegacyPage from "@/pages/ArticleLegacyPage";
@@ -61,8 +62,12 @@ const ArticlePage = () => {
     jsonLd.citation = citation;
   }
 
-  if (data.reviewedBy) {
-    jsonLd.reviewedBy = { "@type": "Person", name: data.reviewedBy };
+  // Phase 33.5: machine-facing review claims follow the same provenance gate as
+  // visitor-facing ones. `data.reviewedBy` is historical metadata, not evidence
+  // of a completed review, so no `reviewedBy` is emitted without provenance.
+  const reviewClaim = getReviewClaim(reviewSurfaceKey("article", data.slug));
+  if (reviewClaim) {
+    jsonLd.reviewedBy = { "@type": "Person", name: reviewClaim.reviewer };
   }
 
   if (data.lastUpdated && ISO_DATE.test(data.lastUpdated)) {

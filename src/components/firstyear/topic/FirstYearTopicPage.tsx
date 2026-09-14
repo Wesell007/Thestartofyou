@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft, Check, ShieldCheck, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowLeft, Check, ChevronRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AskAboutThis from "@/components/companion/AskAboutThis";
@@ -20,6 +20,8 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 
 // First Year topic pages are photo-led and calm. No botanical sprigs or
 // pregnancy-style decorative motifs — quietness comes from soft tints,
@@ -126,19 +128,10 @@ const FirstYearTopicPage = ({ config }: Props) => {
     />
   );
 
-  const MedicallyReviewed = () => (
-    <div
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[11.5px] font-light"
-      style={{
-        borderColor: accentBorder,
-        backgroundColor: accentSoft,
-        color: deep,
-      }}
-    >
-      <ShieldCheck size={13} strokeWidth={1.8} />
-      Medically reviewed by Jenny Joines
-    </div>
-  );
+  // Phase 33.5: a review claim renders only when this exact topic surface has
+  // genuine provenance. Dataset flags are historical metadata, not evidence.
+  const reviewClaimKey = reviewSurfaceKey("topic", `first-year/${config.slug}`);
+  const showReviewClaim = hasReviewClaim(reviewClaimKey);
 
   // Hero crop tuned per topic so faces / babies stay comfortably inside the
   // frame at every breakpoint. Falls back to a safe upper-centre default.
@@ -187,9 +180,9 @@ const FirstYearTopicPage = ({ config }: Props) => {
                 <p className="mt-6 font-sans text-[15px] md:text-[15.5px] font-light text-muted-foreground leading-relaxed max-w-md">
                   {config.intro}
                 </p>
-                {config.medicallyReviewed && (
+                {showReviewClaim && (
                   <div className="mt-6">
-                    <MedicallyReviewed />
+                    <MedicalReviewClaim contentKey={reviewClaimKey} variant="badge" />
                   </div>
                 )}
               </div>
@@ -551,9 +544,9 @@ const FirstYearTopicPage = ({ config }: Props) => {
                 ? "You don't have to read it all today. Take what's useful, leave the rest for when you need it."
                 : "Your recovery has its own pace. Come back to anything here when it feels right."}
             </p>
-            {config.medicallyReviewed && (
+            {showReviewClaim && (
               <div className="mb-7">
-                <MedicallyReviewed />
+                <MedicalReviewClaim contentKey={reviewClaimKey} variant="badge" />
               </div>
             )}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">

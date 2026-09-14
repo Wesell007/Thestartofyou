@@ -74,15 +74,6 @@ const FYTwoTrackEntry = () => {
                 >
                   {t.eyebrow}
                 </p>
-                <span
-                  className="font-sans text-[10px] font-light tracking-wider uppercase px-2 py-0.5 rounded-full border"
-                  style={{
-                    color: `hsl(var(${t.deep}) / 0.75)`,
-                    borderColor: `hsl(var(${t.accent}) / 0.18)`,
-                  }}
-                >
-                  Medically reviewed
-                </span>
               </div>
 
               <h3 className="font-serif text-2xl sm:text-[1.75rem] text-foreground leading-tight mb-3">

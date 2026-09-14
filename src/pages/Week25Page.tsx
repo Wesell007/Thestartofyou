@@ -143,8 +143,7 @@ const MetaBar = () => (
             <Leaf size={16} className="text-sage" />
           </div>
           <div className="min-w-0">
-            <p className="font-sans text-[13px] font-medium text-foreground leading-snug">✔ Medically reviewed by Jenny Joines</p>
-            <p className="font-sans text-[11.5px] font-normal text-foreground/60 mt-0.5">Updated for 2026 · 14 min read · The first week past the threshold</p>
+            <p className="font-sans text-[11.5px] font-normal text-foreground/60">Updated for 2026 · 14 min read · The first week past the threshold</p>
           </div>
         </div>
         <nav aria-label="On this page" className="flex-1 pt-4 lg:pt-0">

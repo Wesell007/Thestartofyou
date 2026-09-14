@@ -1,69 +1,113 @@
-# Phase 33.5 — Reviewer claim governance correction
+# Phase 33.5 — Final count reconciliation (documentation only)
 
-Remove every visitor-facing medical-review claim that has no provenance behind it, while leaving article content, sources, imagery, routes and governance untouched. No deployment. No IVF work.
+Reconciliation is complete. The implementation is sound: the after-state is zero on every
+measure, so no implementation change is proposed. Only the documented counts need correcting.
 
-## 1. What the audit found (verified in the repository)
+## 1. Stored reviewer metadata — authoritative counts
 
-The Phase 33.4 figure of 177 counted article-record claims only. The real surface is wider, and it splits into two different mechanisms.
+Counted per record (a record with both `reviewedBy` and `medicallyReviewed` counts once).
 
-**A. Data-driven claims** — article records carry `reviewedBy` / `medicallyReviewed`, and renderers print them.
+| Dataset | Records in file | with `reviewedBy` | with `medicallyReviewed: true` | with both | unique records with reviewer metadata |
+| --- | --- | --- | --- | --- | --- |
+| `articleData.ts` | 165 | 156 | 0 (field not in this dataset) | 0 | 156 |
+| `firstYearArticleData.ts` | 24 | 16 | 16 | 16 | 16 |
+| `toddlerArticleData.ts` | 16 | 3 | 3 | 3 | 3 |
+| `familyArticleData.ts` | 18 | 0 | 2 | 0 | 2 |
+| `ttcFlagshipOverrides.ts` | 14 overrides | 14 | 0 | 0 | 14 |
 
-| Dataset | Records naming a reviewer |
-| --- | --- |
-| `src/data/articleData.ts` | 156 |
-| `src/data/firstYearArticleData.ts` | 17 |
-| `src/data/ttcFlagshipOverrides.ts` | 14 |
-| `src/data/toddlerArticleData.ts` | 4 |
-| `src/data/familyArticleData.ts` | 1 |
-| Total reviewer mentions in data | 179 |
+**TOTAL UNIQUE RECORDS WITH REVIEWER METADATA = 191**
+(177 article records, matching the Phase 33.4 figure, plus 14 TTC flagship overrides.)
 
-Renderers reading those fields: `ArticleHeader`, `ArticleHero`, `FlagshipHero`, `ArticleQuickAnswer` (twice), `ArticleDeepIntro`, `ArticleTrustBar`, `ArticleSources`, `HubArticleView` (twice), plus "Medically reviewed" chips on `FirstYearArticleCard`, `ToddlerArticleCard`, `FamilyArticleCard`, `FamilyArticleImageCard`, `FYTwoTrackEntry`, and topic-level badges in `FirstYearTopicPage` and `ToddlerTopicPage`.
+### Why the previous report said 179
 
-**B. Hardcoded claims** — the name "Jenny Joines" is typed directly into 55 places across 55 code files, none of which consults any data or provenance: 43 individual week pages, plus `WeekNormal`, `StagePage`, `ArticleNormal`, `PostpartumNormal`, `FirstYearNormal`, `FYMedicallyReviewed`, `FirstYearTopicPage`, `ToddlerTopicPage`, `IVFNormal`, `IVFTopicPage`, `IVFTimelineResult`, `SupportFinalCTA`, `DueDateCalculatorResult`.
+179 was a raw string count of `Jenny Joines` across the five datasets: 156 + 17 + 4 + 1 + 1.
+Two of those are not records:
 
-**C. Structured data** — `src/pages/ArticlePage.tsx` also emits `reviewedBy: { "@type": "Person", name: ... }` into article JSON-LD, asserting the same unsupported review to search engines.
+- `firstYearArticleData.ts` has 17 raw matches but 16 records — the 17th is a mapper fallback
+  expression (`article.medicallyReviewed ? "Jenny Joines" : undefined`).
+- `ttcFlagshipOverrides.ts` has 1 raw match because all 14 overrides share one `REVIEWER`
+  constant.
+- `familyArticleData.ts` has 1 raw match, which is the same mapper fallback, while 2 records
+  carry `medicallyReviewed: true`.
 
-Root cause: the claim was treated as a brand trust signal (a hardcoded default, and a reviewer name copied onto records) rather than as the output of a review record. `docs/ai/article-grounding-health-review.md` already states the reviewer metadata is context only and is not review evidence. Provenance-backed reviews in the repository: **0**.
+The table then mixed metrics: raw string counts for four datasets and the field count (14) for
+the TTC overrides, so the row values summed to 192 while the stated total stayed at 179.
+Neither figure is the record count. The correct record count is 191.
 
-## 2. The rule to implement
+No dataset is edited.
 
-A medical-review claim renders only when a provenance-backed review record exists for that specific article: reviewer identity, the article reviewed, review completion state, and a review date or traceable record reference. Everything else renders nothing — no softer wording, no alternative reviewer, no "expert reviewed".
+## 2. Hardcoded reviewer locations — 42 / 13 is correct
 
-Since no such record exists today, every review claim on the site stops rendering.
+Evidence: `git grep -c "Jenny Joines"` at the pre-change commit, restricted to
+`src/components` and `src/pages`.
 
-## 3. Work to do
+- Week-page hardcoded locations before = **42** (`Week1Page.tsx` … `Week42Page.tsx`, one each)
+- Non-week hardcoded locations before = **13** (`WeekNormal`, `StagePage`, `ArticleNormal`,
+  `PostpartumNormal`, `FirstYearNormal`, `FYMedicallyReviewed`, `FirstYearTopicPage`,
+  `ToddlerTopicPage`, `IVFTopicPage`, `IVFTimelineResult`, `IVFNormal`, `SupportFinalCTA`,
+  `DueDateCalculatorResult`)
+- Total hardcoded locations before = **55**
+- Hardcoded locations after = **0**
 
-1. **Add one gate** — a small module holding the review-provenance type, an empty provenance registry (there is nothing genuine to put in it), and a lookup that returns a claim or `null`. Plus a single shared claim component that renders the badge when the lookup returns a record and renders nothing otherwise. No database, no new review system.
-2. **Route every surface through the gate** — replace the 55 hardcoded strings and every data-driven review block and chip with the shared component. With the registry empty, all of them render nothing, and the site is future-proofed: adding a genuine record later restores the badge in one place.
-3. **Stop emitting the unsupported JSON-LD `reviewedBy`** — same governance rule, machine-facing.
-4. **Keep the stored metadata** — `reviewedBy`, `medicallyReviewed` and `lastUpdated` stay in the datasets as historical metadata, flagged in documentation as unsupported and pending governance remediation. Nothing is deleted, nothing is invented.
-5. **Tidy the gap the badge leaves** — where the claim sat inside a metadata row (updated date, read time), the row must still read cleanly with the claim gone; where it was a standalone strip, the strip disappears entirely rather than leaving empty padding.
+The earlier 43 / 12 split counted `src/components/week/WeekNormal.tsx` as a week page. It is a
+shared week renderer, not a routed `WeekNPage`. Total is 55 either way.
 
-## 4. Not touched
+## 3. Exact visitor-facing before count
 
-Article titles, descriptions, body copy, guidance, FAQs, source citations, imagery, alt text, routes, canonicals, topics, discovery, related links, AI, grounding, journal, memory features, voice, database, schema, RLS. Human reviews completed: 0. Deployment: 0. The global Phase 33 deployment block stays active.
+A single rendered-page count cannot be calculated meaningfully: shared renderers multiply across
+dynamic routes, so the same component produces a different claim count per journey and per
+dataset record. The documentation will state this explicitly and use two defined, auditable
+metrics instead.
 
-## 5. Tests
+**Metric A — content records capable of displaying an unsupported claim: 191.**
 
-New focused test file asserting: zero rendered review claims across legacy, flagship, deep, week, First Year, Toddler and Family surfaces; zero rendered reviewer names; zero hardcoded reviewer strings left in components and pages; article copy, sources and routes unchanged; the gate does render a claim when given a provenance record (exercised in isolation, without touching production data); JSON-LD carries no `reviewedBy`.
+**Metric B — distinct claim-producing rendering locations in source: 72.**
+- 42 week pages (one hardcoded claim each)
+- 29 non-week visitor-facing claim sites (13 hardcoded plus 16 data-driven sites across
+  `ArticleHeader`, `ArticleHero`, `ArticleDeepIntro`, `ArticleTrustBar`, `ArticleQuickAnswer`
+  ×2, `ArticleSources`, `FlagshipHero`, `HubArticleView` ×2, `FirstYearArticleCard`,
+  `ToddlerArticleCard`, `FamilyArticleCard`, `FamilyArticleImageCard`, `FYTwoTrackEntry`,
+  `DueDateCalculatorResult` trust cue)
+- 1 machine-facing generator (`ArticlePage.tsx` Article JSON-LD `reviewedBy`)
 
-## 6. QA and validation
+After: unsupported claim-producing locations = 0. Wording no longer appears anywhere except the
+single gated component and the four badge chips, all of which are behind `hasReviewClaim()`.
 
-Browser QA at 1280×1800, 768×1200 and 390×844 on representative TTC, Pregnancy legacy, Pregnancy flagship, Pregnancy week, First Year, Toddler and Family pages: claim absent, no empty metadata gap, updated-date and read-time still aligned, hero spacing intact, no overflow, no console errors.
+## 4. Final zero state — reconfirmed
 
-Then: focused tests, full suite, typecheck twice, lint against the 1-error/10-warning baseline, production build. Actual numbers reported against the 120 files / 1,320 tests baseline.
+- Hardcoded reviewer identity strings in active rendering code/pages = 0
+- Unsupported rendered review wording = 0
+- Unsupported JSON-LD `reviewedBy` = 0
+- Other machine-facing reviewer claims = 0
+- Production provenance registry records = 0
+- Rendered production provenance-backed claims = 0
+- No fallback from historical dataset metadata = YES
 
-## 7. Documentation
+## 5. Pinned-hash clarification
 
-Create `docs/content/reviewer-claim-governance-correction.md` (previous counts, rendering sources, root cause, provenance result, correction, retained metadata, future display rule, tests, QA, changed files) and update `docs/content/article-source-and-structure-consistency.md` section 7 with the remediation outcome.
+One test file was re-pinned: `src/lib/seo/canonicalBreadcrumbs.test.ts`, containing two hashes —
+`ArticleHeader.tsx` and `FlagshipHero.tsx`. The hashes changed because each file's inline
+`reviewedBy` block was replaced by the gated `MedicalReviewClaim` component and the now-unused
+`Shield` icon import was dropped. The diff touches nothing else: breadcrumb source behaviour
+unchanged, routes changed = 0, canonicals changed = 0, discovery changed = 0. The report wording
+"one pinned-hash guard" will be corrected to "one pinned-hash test, two file hashes".
 
-## 8. One conflict to confirm
+## 6. Documentation edits
 
-Stored project memory currently carries the rule: *"All medically relevant pages MUST include ✔ Medically reviewed by Jenny Joines."* This phase directly reverses it. On approval that memory rule will be replaced with the provenance-gated rule, so the badge is not reintroduced in future work.
+`docs/content/reviewer-claim-governance-correction.md`
+- Section 1 table: replace the 179 row with the 191 record count and add a raw-string-count row
+  explaining the 179 / 192 artefact.
+- Section 7: change "179 reviewer mentions" to "191 records carrying reviewer metadata
+  (179 raw `Jenny Joines` string occurrences)".
+- Add a short before-count section using Metric A and Metric B with the note that a universal
+  rendered-page count is not calculable.
+- Correct the pinned-hash sentence.
+- Add a closing reconciliation note.
 
-## Technical notes
+`docs/content/article-source-and-structure-consistency.md`
+- Keep the 177 Phase 33.4 figures as the historical audit result, annotated as article records
+  only.
+- Update the remediation paragraph: 191 records with reviewer metadata, 42 + 13 = 55 hardcoded
+  locations, 72 claim-producing locations, all now 0.
 
-- New: `src/lib/reviewClaims.ts` (type, empty registry, lookup) and `src/components/shared/MedicalReviewClaim.tsx` (gated renderer).
-- Edited: 43 `src/pages/Week*.tsx`, `StagePage.tsx`, `ArticlePage.tsx` (JSON-LD), and the article/week/hub/IVF/postpartum/first-year/toddler/family/support components listed in section 1.
-- Datasets are not edited. Type definitions keep `reviewedBy?` / `medicallyReviewed?`.
-- New test file `src/test/reviewerClaimGovernance.test.tsx`; existing tests that assert badge presence, if any, are updated to assert the governed behaviour.
+No source, dataset, test or schema change. No deployment. No IVF work.

@@ -69,7 +69,7 @@ Classification: **REVIEW CLAIM REQUIRES GOVERNANCE CHECK** for all 177 visitor-f
 
 ### Remediation outcome (Phase 33.5)
 
-Remediated in Phase 33.5. A deeper trace found 179 stored reviewer mentions in the datasets, 55 hardcoded reviewer strings in rendering code and pages, and one machine-facing assertion (Article JSON-LD `reviewedBy`). All unsupported claims now render only through a single provenance gate (`src/lib/reviewClaims.ts` + `src/components/shared/MedicalReviewClaim.tsx`) whose production registry is empty, so unsupported visitor-facing claims = 0, hardcoded reviewer strings = 0 and unsupported JSON-LD claims = 0. Historical dataset metadata is preserved untouched. Full record: `docs/content/reviewer-claim-governance-correction.md`.
+Remediated in Phase 33.5. The historical Phase 33.4 audit found 177 visitor-facing reviewer claims on article records. A deeper trace found 191 unique records carrying reviewer metadata (177 article records plus 14 TTC flagship overrides), 179 raw "Jenny Joines" string occurrences in the datasets, 42 + 13 = 55 hardcoded reviewer strings in rendering code and pages, and 72 distinct unsupported claim-producing source locations (42 week-page locations, 29 other visitor-facing locations, and 1 machine-facing JSON-LD `reviewedBy` generator). All unsupported claims now render only through a single provenance gate (`src/lib/reviewClaims.ts` + `src/components/shared/MedicalReviewClaim.tsx`) whose production registry is empty, so unsupported visitor-facing claims = 0, hardcoded reviewer strings = 0, distinct unsupported claim-producing source locations = 0 and unsupported JSON-LD claims = 0. Historical dataset metadata is preserved untouched. Full record: `docs/content/reviewer-claim-governance-correction.md`.
 
 ## 8. Audit counts
 
@@ -116,7 +116,7 @@ Every route, every viewport: source block visible = YES, source anchors = 0, sou
 
 1. Family inventory is 18 records, not the 19 stated in the brief; provenance-missing count is therefore 14, not 15.
 2. IVF articles use the shared legacy renderer, so their citations also became plain text — shared source presentation consistency, not IVF content work.
-3. 177 reviewer claims carry no repository provenance and are flagged for governance, unchanged.
+3. 177 article records carried reviewer metadata with no repository provenance and were flagged for governance; Phase 33.5 traced the full scope as 191 unique records with reviewer metadata and 72 distinct unsupported claim-producing source locations, all now corrected to 0.
 
 ## 13. Boundaries held
 

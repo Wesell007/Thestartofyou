@@ -1922,7 +1922,14 @@ const articleDatabase: ArticleData[] = [
       "Every cycle is different",
     ],
     inThisArticle: ["How IVF works", "Stimulation phase", "Egg collection", "Embryo transfer", "The two-week wait", "Common questions"],
-    sources: ["HFEA", "NICE guidelines on fertility treatment (CG156)", "NHS: IVF"],
+    sources: [
+      { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
+      { label: "IVF: what happens", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/what-happens/" },
+      { label: "IVF: risks", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/risks/" },
+      { label: "Risks of fertility treatment", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/risks-of-fertility-treatment/" },
+      { label: "Embryo freezing", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/fertility-preservation/embryo-freezing/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
     lastUpdated: "March 2026",
     reviewedBy: "Jenny Joines",
     faq: [

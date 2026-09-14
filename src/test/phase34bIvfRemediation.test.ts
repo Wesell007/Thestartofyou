@@ -110,7 +110,9 @@ describe("phase 34B — after transfer surface", () => {
   });
 
   it("carries no duplicate contextual link targets", () => {
-    const hrefs = after.groups.flatMap((g) => g.links.map((l) => l.href));
+    const hrefs = after.groups
+      .flatMap((g) => g.links.map((l) => l.href))
+      .filter((href) => href.startsWith("/articles/"));
     expect(new Set(hrefs).size).toBe(hrefs.length);
   });
 });

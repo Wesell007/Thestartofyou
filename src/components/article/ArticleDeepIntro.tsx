@@ -1,5 +1,7 @@
-import { BookOpen, Clock, Shield } from "lucide-react";
+import { BookOpen, Clock } from "lucide-react";
 import type { ArticleData } from "@/data/articleData";
+import MedicalReviewClaim from "@/components/shared/MedicalReviewClaim";
+import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 
 interface Props {
   data: ArticleData;
@@ -35,12 +37,7 @@ const ArticleDeepIntro = ({ data }: Props) => {
             {sectionCount > 0 && (
               <span>{sectionCount} sections</span>
             )}
-            {data.reviewedBy && (
-              <span className="flex items-center gap-1.5">
-                <Shield className="w-3 h-3" />
-                Reviewed by {data.reviewedBy}
-              </span>
-            )}
+            <MedicalReviewClaim contentKey={reviewSurfaceKey("article", data.slug)} />
           </div>
         </div>
       </div>

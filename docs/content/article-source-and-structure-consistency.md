@@ -67,6 +67,10 @@ Displayed wording:
 
 Classification: **REVIEW CLAIM REQUIRES GOVERNANCE CHECK** for all 177 visitor-facing claims. Nothing was added, removed, certified or reworded in this phase.
 
+### Remediation outcome (Phase 33.5)
+
+Remediated in Phase 33.5. A deeper trace found 179 stored reviewer mentions in the datasets, 55 hardcoded reviewer strings in rendering code and pages, and one machine-facing assertion (Article JSON-LD `reviewedBy`). All unsupported claims now render only through a single provenance gate (`src/lib/reviewClaims.ts` + `src/components/shared/MedicalReviewClaim.tsx`) whose production registry is empty, so unsupported visitor-facing claims = 0, hardcoded reviewer strings = 0 and unsupported JSON-LD claims = 0. Historical dataset metadata is preserved untouched. Full record: `docs/content/reviewer-claim-governance-correction.md`.
+
 ## 8. Audit counts
 
 | # | Metric | Value |

@@ -1267,12 +1267,6 @@ const IVFTimelineResult = ({ transferDate, transferType = "5day" }: IVFTimelineR
                 </p>
               ))}
             </div>
-
-            {/* Medical trust */}
-            <p className="mt-14 font-sans text-[11px] font-light text-muted-foreground/30 flex items-center justify-center gap-2">
-              <Shield size={10} style={{ color: "hsl(var(--stage-ivf-accent) / 0.35)" }} />
-              Medically reviewed by Jenny Joines
-            </p>
           </Fade>
         </div>
       </section>

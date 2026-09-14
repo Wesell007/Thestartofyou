@@ -494,9 +494,6 @@ const IVFTopicPage = ({ config }: Props) => {
                 </ul>
               </div>
             </div>
-            <p className="mt-5 text-center font-sans text-[12.5px] font-light text-muted-foreground/80">
-              ✔ Medically reviewed by Jenny Joines
-            </p>
           </div>
         </section>
 

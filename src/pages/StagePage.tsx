@@ -394,9 +394,6 @@ const StagePage = () => {
                     </div>
                   ))}
                 </div>
-                <p className="font-sans text-xs font-light text-sage-muted italic">
-                  ✔ Medically reviewed by Jenny Joines
-                </p>
               </div>
             </div>
           </div>

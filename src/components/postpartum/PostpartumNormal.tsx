@@ -77,10 +77,6 @@ const PostpartumNormal = () => {
             </ul>
           </div>
         </div>
-
-        <p className="mt-6 font-sans text-xs font-light text-muted-foreground flex items-center gap-2">
-          <span style={{ color: 'hsl(var(--stage-postpartum-accent))' }}>✔</span> Medically reviewed by Jenny Joines
-        </p>
       </div>
     </section>
   );

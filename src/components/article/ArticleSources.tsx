@@ -47,11 +47,11 @@ const ArticleSources = ({ data }: Props) => {
             ))}
           </ul>
 
-          {/* Editorial trust note */}
-          {data.reviewedBy && (
+          {/* Editorial note. Phase 33.5: no review claim without provenance. */}
+          {data.lastUpdated && (
             <div className="mt-8 pt-6 border-t border-border/20">
               <p className="font-sans text-[11px] font-light text-muted-foreground/50 leading-relaxed max-w-lg">
-                This article has been reviewed for accuracy by {data.reviewedBy}. Content is updated regularly to reflect the latest evidence and guidance. Last updated {data.lastUpdated || 'recently'}.
+                Content is updated regularly to reflect the latest evidence and guidance. Last updated {data.lastUpdated}.
               </p>
             </div>
           )}

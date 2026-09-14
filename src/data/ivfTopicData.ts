@@ -380,6 +380,17 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         ],
       },
       {
+        label: "Medication, rest & daily life",
+        description: "What to keep doing, and what you can let go of.",
+        intro: "Medication support usually continues after transfer exactly as your clinic prescribed it. Beyond that, ordinary gentle activity is fine — strict bed rest is not shown to change the outcome.",
+        links: [
+          { label: "Why does medication continue after transfer?", href: askIVF("Why does medication continue after embryo transfer?") },
+          { label: "Do I need to rest after embryo transfer?", href: askIVF("Do I need to rest after embryo transfer?") },
+          { label: "What can I safely do in the two weeks after transfer?", href: askIVF("What can I safely do in the two weeks after transfer?") },
+          { label: "Chemical pregnancy", href: LINKS.chemical },
+        ],
+      },
+      {
         label: "Symptoms, signals & testing",
         description: "Interpreting your body without spiralling.",
         intro: "Honest framing on what symptoms after embryo transfer can and cannot tell you, when to test, and how to read a faint line without letting it run your day.",
@@ -408,6 +419,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         links: [
           { label: "If my IVF cycle didn't work, what now?", href: askIVF("If my IVF cycle didn't work — what now?") },
           { label: "Chemical pregnancy after IVF, what now?", href: askIVF("Chemical pregnancy after IVF — what now?") },
+          { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },
           { label: "Find support for hard moments", href: LINKS.support },
         ],

@@ -47,6 +47,27 @@ Articles deployment eligible          0
 | `newborn-skin-spots-and-marks` | `/first-year/care-and-safety/newborn-skin-spots-and-marks` | care-and-safety | topic listing ×1 |
 | `common-illnesses-in-the-first-year` | `/first-year/care-and-safety/common-illnesses-in-the-first-year` | care-and-safety | topic listing ×1 |
 
+#### Placement correction — common illnesses in the first year
+
+`common-illnesses-in-the-first-year` was moved from `checkups-and-warning-signs`
+to `care-and-safety` because the article is about the baby. Placement only: the
+title, copy, description, sources, imagery, alt text, review classification and
+review state are unchanged.
+
+```text
+Authoritative route   /first-year/care-and-safety/common-illnesses-in-the-first-year
+Normal discovery      First Year > Baby care and safety > Related guidance (x1)
+Check-ups discovery   0
+Old route behaviour   does not resolve as the article (404) — no redirect,
+                      renderer or route-guard architecture was added
+Sitemap               new route present, old route absent, 350 unique, 0 duplicates
+Grounding registry    existing default-deny row retopiced to ["care-and-safety"];
+                      still draft / blocked_draft, 225 records, 0 approvals,
+                      0 candidates, eligible slugs [],
+                      AI_SOURCE_ROUTING_VERSION 30B-source-routing-v1
+```
+
+
 No new route type, renderer, dataset, hub or lifecycle was created. Legacy
 records render through `ArticleFlagshipTemplate`; First Year records render
 through the existing First Year article page.

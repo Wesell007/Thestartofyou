@@ -145,6 +145,11 @@ const LINKS = {
   fertilityAppt: "/articles/what-happens-at-a-fertility-appointment",
   testsScans: "/articles/tests-and-scans-in-pregnancy",
   twins: "/articles/twins-and-multiples-in-pregnancy",
+  // Phase 34C — new IVF guides
+  whatIvfIs: "/articles/what-ivf-is-uk-guide",
+  nhsFunding: "/articles/nhs-ivf-funding-and-eligibility",
+  ohss: "/articles/ohss-and-ivf-side-effects",
+  cycleNotWork: "/articles/when-an-ivf-cycle-does-not-work",
   
 };
 
@@ -418,7 +423,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         description: "Held honestly. Stays within IVF and support.",
         intro: "If the result is not what you hoped for, these are the reads we'd hand you first. They stay inside IVF and our support library — never bouncing you back to start again.",
         links: [
-          { label: "If my IVF cycle didn't work, what now?", href: askIVF("If my IVF cycle didn't work — what now?") },
+          { label: "When an IVF cycle doesn't work", href: LINKS.cycleNotWork },
           { label: "Chemical pregnancy after IVF, what now?", href: askIVF("Chemical pregnancy after IVF — what now?") },
           { label: "Chemical pregnancy", href: LINKS.chemical },
           { label: "Pregnancy after loss", href: LINKS.afterLoss },

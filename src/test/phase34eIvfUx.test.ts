@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { IVF_HUB_GUIDES } from "@/components/ivf/IVFGuides";
 import { ivfTopicConfigs, type IVFDestination, type IVFDestinationKind } from "@/data/ivfTopicData";
 
 const hubSource = readFileSync("src/pages/IVF.tsx", "utf8");
+const guidesSource = readFileSync("src/components/ivf/IVFGuides.tsx", "utf8");
 const stageSource = readFileSync("src/components/ivf/IVFTopicPage.tsx", "utf8");
+const hubGuideHrefs = [...guidesSource.matchAll(/href: "(\/articles\/[^"]+)"/g)].map((match) => match[1]);
 
 const allDestinations = Object.values(ivfTopicConfigs).flatMap((config) => [
   ...config.guides,
@@ -41,7 +42,7 @@ describe("phase 34E IVF destination behaviour", () => {
 
 describe("phase 34E hub discovery and AI separation", () => {
   it("accounts for eight unique IVF guides including all six phase 34C and 34D guides", () => {
-    const hrefs = IVF_HUB_GUIDES.map((guide) => guide.href);
+    const hrefs = hubGuideHrefs;
     expect(hrefs).toHaveLength(8);
     expect(new Set(hrefs).size).toBe(8);
     expect(hrefs).toEqual(expect.arrayContaining([
@@ -62,6 +63,6 @@ describe("phase 34E hub discovery and AI separation", () => {
 
   it("keeps one timeline tool and a separate timeline article", () => {
     expect(hubSource).toContain("<IVFHero />");
-    expect(IVF_HUB_GUIDES.filter((guide) => guide.href === "/articles/ivf-timeline-what-to-expect")).toHaveLength(1);
+    expect(hubGuideHrefs.filter((href) => href === "/articles/ivf-timeline-what-to-expect")).toHaveLength(1);
   });
 });

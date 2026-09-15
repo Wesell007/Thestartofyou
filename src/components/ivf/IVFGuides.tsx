@@ -9,7 +9,7 @@ import imgCycle from "@/assets/article-hero-ivf-cycle-not-work.jpg";
 import imgIcsi from "@/assets/article-hero-ivf-vs-icsi.jpg";
 import imgFresh from "@/assets/article-hero-fresh-vs-frozen.jpg";
 
-export const IVF_HUB_GUIDES = [
+const IVF_HUB_GUIDES = [
   { group: "Start with IVF", title: "What IVF is: a UK guide", href: "/articles/what-ivf-is-uk-guide", image: imgWhat },
   { group: "Start with IVF", title: "IVF timeline, what to expect", href: "/articles/ivf-timeline-what-to-expect", image: imgTimeline },
   { group: "Start with IVF", title: "NHS IVF funding and eligibility", href: "/articles/nhs-ivf-funding-and-eligibility", image: imgFunding },

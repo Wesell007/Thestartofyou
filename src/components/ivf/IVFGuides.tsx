@@ -4,6 +4,8 @@ import guideWhatIvfIs from "@/assets/article-hero-what-ivf-is.jpg";
 import guideFunding from "@/assets/article-hero-nhs-ivf-funding.jpg";
 import guideOhss from "@/assets/article-hero-ohss-ivf.jpg";
 import guideNotWork from "@/assets/article-hero-ivf-cycle-not-work.jpg";
+import guideIcsi from "@/assets/article-hero-ivf-vs-icsi.jpg";
+import guideFreshFrozen from "@/assets/article-hero-fresh-vs-frozen.jpg";
 
 // Phase 34C — single hub discovery surface for the four new IVF guides.
 // Each guide is surfaced here exactly once. No new stage routes.
@@ -40,6 +42,23 @@ const guides = [
     image: guideNotWork,
     alt: "A quiet window seat with a wool blanket, a cup of tea on the sill and dried flowers in soft light.",
   },
+  // Phase 34D — two further guides in the same section. One placement each.
+  {
+    href: "/articles/ivf-vs-icsi",
+    eyebrow: "Fertilisation",
+    title: "IVF versus ICSI",
+    sub: "What the two methods are, the single step where they differ, and why a clinic may discuss ICSI.",
+    image: guideIcsi,
+    alt: "A quiet laboratory bench corner in soft daylight with a closed notebook and a small potted plant.",
+  },
+  {
+    href: "/articles/fresh-vs-frozen-embryo-transfer",
+    eyebrow: "Transfer routes",
+    title: "Fresh versus frozen transfer",
+    sub: "What each route means, how the timing differs, and how embryo freezing and storage work.",
+    image: guideFreshFrozen,
+    alt: "A sunlit sash window sill with a small stoneware vase of dried grasses and a folded linen cloth.",
+  },
 ];
 
 const IVFGuides = () => {
@@ -60,9 +79,10 @@ const IVFGuides = () => {
             Understanding <span className="italic font-normal">the treatment</span>
           </h2>
           <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
-            Four guides for the questions that sit alongside the stages: what IVF is,
-            how funded treatment is decided, what to watch for during treatment, and
-            what happens if a cycle doesn't work.
+            Guides for the questions that sit alongside the stages: what IVF is,
+            how funded treatment is decided, how fertilisation and transfer routes
+            differ, what to watch for during treatment, and what happens if a cycle
+            doesn't work.
           </p>
         </div>
 

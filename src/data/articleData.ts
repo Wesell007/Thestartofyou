@@ -1916,6 +1916,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "minimal",
     crossLinks: [
       { label: "OHSS and IVF treatment side effects", href: "/articles/ohss-and-ivf-side-effects", context: "what to watch for during stimulation, and when to ring your clinic" },
+      { label: "IVF versus ICSI", href: "/articles/ivf-vs-icsi", context: "the fertilisation step, and where the two methods differ" },
     ],
     keyTakeaways: [
       "A typical IVF cycle takes 4-6 weeks",
@@ -24916,6 +24917,7 @@ const articleDatabase: ArticleData[] = [
     crossLinks: [
       { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "the full sequence of a cycle, stage by stage" },
       { label: "NHS IVF funding and eligibility", href: "/articles/nhs-ivf-funding-and-eligibility", context: "how access to funded treatment is decided" },
+      { label: "IVF versus ICSI", href: "/articles/ivf-vs-icsi", context: "the one step where the two fertilisation methods differ" },
     ],
     keyTakeaways: [
       "IVF fertilises eggs outside the body and transfers an embryo into the womb",
@@ -25528,6 +25530,357 @@ const articleDatabase: ArticleData[] = [
         paragraphs: [
           "Licensed UK clinics are expected to offer counselling alongside treatment. Fertility Network UK provides support for people affected by fertility problems, and BICA can help you find an accredited fertility counsellor.",
           "If your mood has been low for a sustained period, or you feel unable to cope, speak to your GP. If you ever feel unsafe, contact NHS 111 or the Samaritans on 116 123.",
+        ],
+      },
+    ],
+  },
+  // ── Phase 34D — IVF final coverage refinement (preview only, human review outstanding) ──
+  {
+    slug: "ivf-vs-icsi",
+    title: "IVF versus ICSI: what the difference actually is",
+    metaDescription:
+      "A calm UK explainer on standard IVF fertilisation and ICSI, where the two differ, why a clinic may discuss ICSI, and what to ask at your appointment.",
+    quickAnswer:
+      "In standard IVF, eggs and sperm are placed together in the laboratory and fertilisation is left to happen on its own. In ICSI, a single sperm is injected directly into an egg. Everything else in the treatment cycle is broadly the same. ICSI is a different fertilisation method, not a better or upgraded form of IVF.",
+    howThisFeels: [
+      "Being offered a term you have never heard before",
+      "Wondering whether you are being sold something extra",
+      "Not knowing what question to ask in the room",
+      "Wanting to understand before agreeing to anything",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Standard IVF fertilisation", body: "Prepared sperm and collected eggs are placed together in the laboratory, and fertilisation is allowed to happen without further intervention." },
+        { heading: "ICSI fertilisation", body: "An embryologist injects one sperm directly into an egg. This is the single step where ICSI differs from standard IVF." },
+        { heading: "Everything around it", body: "Medication, monitoring, egg collection and embryo transfer follow the same broad shape either way." },
+      ],
+      lessCauses: [
+        { heading: "Why it may be discussed", body: "ICSI is generally considered where sperm-related factors may make fertilisation less likely, or where fertilisation has not happened in a previous cycle." },
+      ],
+      whyItVaries:
+        "Whether ICSI is appropriate depends on individual test results and treatment history. It is a clinical decision made with you, not a tier of service you choose from a list.",
+    },
+    timing: {
+      whenStarts: "The fertilisation method is usually discussed before treatment begins, and may be revisited after egg collection.",
+      whenEases: "Once your clinic has explained why a method is being suggested for you specifically.",
+    },
+    whatItFeelsLike: [
+      "Hearing two acronyms used almost interchangeably",
+      "Not being sure whether one costs more and why",
+      "Wanting a straight comparison rather than a brochure",
+    ],
+    whatThisMeans:
+      "Understanding where the two methods diverge makes the conversation with your clinic much easier. It does not tell you which is right for you, and nothing here should replace that conversation.",
+    normal: [
+      "Needing the difference explained more than once",
+      "Feeling unsure whether to ask why a method is suggested",
+      "Wanting to know the reasoning rather than just the plan",
+    ],
+    seekSupport: [
+      "You do not understand why ICSI is being recommended for you",
+      "You feel pressed towards an add-on you have not had explained",
+      "You want a second explanation before consenting",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Your fertility clinic is the only place that can advise on which fertilisation method is appropriate for you.",
+    whatYouCanDo: [
+      { action: "Ask why this method is being suggested for you", reason: "The reasoning matters more than the label." },
+      { action: "Ask what the evidence is in your situation", reason: "Clinics should be able to explain the basis for a recommendation." },
+      { action: "Ask what it costs and what is included", reason: "Costs differ between clinics and between treatment plans." },
+      { action: "Ask what happens if fertilisation does not occur", reason: "Knowing the plan in advance removes one unknown." },
+    ],
+    whatHappensNext:
+      "Whichever method is used, the next stage is the same: the laboratory watches how fertilised eggs develop before any transfer is planned.",
+    relatedStage: {
+      intro: "Related IVF guidance:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "What IVF is: a UK guide", href: "/articles/what-ivf-is-uk-guide" },
+        { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect" },
+      ],
+    },
+    aiPrompts: ["What is the difference between IVF and ICSI?", "Why might a clinic suggest ICSI?", "What should I ask about the fertilisation method?"],
+    captureIntro: "The fertilisation step is one of the few places the two treatments genuinely differ.",
+    journey: ["ivf"],
+    topics: ["treatment"],
+    productPromotion: "minimal",
+    relatedSlugs: ["what-ivf-is-uk-guide", "ivf-timeline-what-to-expect", "fresh-vs-frozen-embryo-transfer"],
+    crossLinks: [
+      { label: "What IVF is: a UK guide", href: "/articles/what-ivf-is-uk-guide", context: "the definition and orientation, if the treatment itself is still new" },
+      { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "where fertilisation sits in the full sequence of a cycle" },
+    ],
+    keyTakeaways: [
+      "ICSI differs from standard IVF at the fertilisation step only",
+      "In IVF, eggs and sperm are placed together; in ICSI, one sperm is injected into an egg",
+      "ICSI is generally considered where sperm-related factors are involved",
+      "ICSI is not automatically better and is not an upgrade",
+      "Which method suits you is a clinical decision made with your clinic",
+    ],
+    inThisArticle: ["What standard IVF fertilisation means", "What ICSI means", "Where the two actually differ", "Why a clinic may discuss ICSI", "What ICSI does not mean", "Questions for your clinic"],
+    sources: [
+      { label: "Intracytoplasmic sperm injection (ICSI)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/intracytoplasmic-sperm-injection-icsi/" },
+      { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
+      { label: "IVF: what happens", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/what-happens/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "Two acronyms, used almost interchangeably, describing treatments that are identical apart from one step. Here is where that step sits, and what it changes.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-vs-icsi.jpg", import.meta.url).href,
+      alt: "A quiet laboratory bench corner in soft daylight with a closed notebook and a small potted plant.",
+    },
+    faq: [
+      { question: "Is ICSI better than IVF?", answer: "No. ICSI is a different way of achieving fertilisation, not a better version of IVF. It is generally considered where there is a reason to think fertilisation may be less likely without it." },
+      { question: "Does ICSI cost more?", answer: "It is often charged as an additional cost in self-funded treatment, and what is included varies. Ask your clinic for a written breakdown." },
+      { question: "Can we ask for ICSI?", answer: "You can ask, but it is a clinical decision. Your clinic should explain the reasoning for or against it in your particular situation." },
+    ],
+    editorialSections: [
+      {
+        id: "standard-ivf-fertilisation",
+        heading: "What standard IVF fertilisation means",
+        lead: "In a standard IVF cycle, the eggs collected from the ovaries and the prepared sperm sample are placed together in the laboratory, and fertilisation is left to happen without further intervention.",
+        paragraphs: [
+          "The embryologist checks the following day to see how many eggs have fertilised. Not every egg collected will fertilise, and that is expected rather than a sign that something has gone wrong.",
+          "This is the method most people picture when they hear the word IVF, and it remains the standard approach where there is no particular reason to do something different.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-icsi-comparison.jpg", import.meta.url).href,
+          alt: "Two identical plain ceramic mugs side by side on a light oak table in morning light.",
+        },
+      },
+      {
+        id: "what-icsi-means",
+        heading: "What ICSI means",
+        lead: "ICSI stands for intracytoplasmic sperm injection. Instead of leaving fertilisation to happen on its own, an embryologist injects a single sperm directly into an egg.",
+        paragraphs: [
+          "It is a laboratory technique, carried out by the embryology team after egg collection. You do not experience it differently: the appointments, the medication and the procedures around it are the same.",
+          "As with standard IVF, not every egg treated this way will fertilise, and the eggs that do fertilise still need to develop before a transfer can be considered.",
+        ],
+      },
+      {
+        id: "where-they-differ",
+        heading: "Where the two actually differ",
+        lead: "It is a narrower difference than the two names suggest.",
+        subsections: [
+          { subheading: "Before fertilisation", paragraphs: ["Medication, monitoring scans, blood tests, the trigger and egg collection follow the same broad shape either way."] },
+          { subheading: "At fertilisation", paragraphs: ["This is the only step that genuinely differs. Eggs and sperm placed together, or one sperm injected into one egg."] },
+          { subheading: "After fertilisation", paragraphs: ["Embryo development, the decision about transfer and the wait that follows are the same in both."] },
+        ],
+        callout: {
+          tone: "info",
+          text: "If you are trying to picture where this sits in the whole cycle, the timeline guide owns the full sequence.",
+        },
+      },
+      {
+        id: "why-a-clinic-may-discuss-it",
+        heading: "Why a clinic may discuss ICSI",
+        lead: "ICSI is generally considered where there is a reason to think fertilisation may be less likely to happen on its own.",
+        paragraphs: [
+          "That usually relates to sperm: low numbers, movement, or shape, or where sperm has been collected surgically. It may also be discussed where fertilisation did not happen, or happened poorly, in a previous cycle.",
+          "The HFEA and NHS both describe ICSI in these terms: as a technique for particular circumstances, rather than as a routine improvement on standard IVF.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-icsi-clinic-talk.jpg", import.meta.url).href,
+          alt: "A round wooden consultation table with two chairs, an open blank notebook and a pen in daylight.",
+        },
+      },
+      {
+        id: "what-icsi-is-not",
+        heading: "What ICSI does not mean",
+        lead: "Because it is often quoted as an additional cost, ICSI can read like a premium option. That framing is misleading.",
+        paragraphs: [
+          "Choosing ICSI where there is no clinical reason for it does not make treatment more likely to work. It addresses one specific hurdle, and where that hurdle is not present, there is nothing for it to address.",
+          "This guide does not compare success rates between the two methods, because outcome depends far more on individual circumstances than on the fertilisation technique alone. Any figures you are given should come from your own clinic, in the context of your own situation.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "If a treatment add-on is being suggested, it is reasonable to ask what the evidence is for it in your situation, and what would happen without it.",
+        },
+      },
+      {
+        id: "questions-for-your-clinic",
+        heading: "Questions worth asking your clinic",
+        lead: "A few plain questions will usually make the recommendation clear.",
+        paragraphs: [
+          "Why are you suggesting this method for us. What in our test results points to it. What would you expect to happen if we used standard IVF instead. Is there an additional cost, and what does it include. What happens if fertilisation does not occur.",
+          "Asking for the reasoning is not challenging your clinic. It is the conversation the consent process is designed to support.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "fresh-vs-frozen-embryo-transfer",
+    title: "Fresh versus frozen embryo transfer: understanding the two routes",
+    metaDescription:
+      "A calm UK guide to fresh and frozen embryo transfer: what each route means, how the timing differs, how freezing and storage work, and what to ask your clinic.",
+    quickAnswer:
+      "A fresh transfer places an embryo into the womb within the same cycle as egg collection. A frozen embryo transfer uses an embryo that has been frozen and stored, and thawed for a later cycle. Both are routine parts of UK treatment, and which is used is a clinical decision made with your clinic.",
+    howThisFeels: [
+      "Expecting one route and being offered the other",
+      "Reading that a delay is a setback when your clinic says it is not",
+      "Wanting to know what changes and what stays the same",
+      "Trying to plan around a timeline that has just moved",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Fresh transfer", body: "An embryo is transferred a few days after egg collection, in the same treatment cycle." },
+        { heading: "Frozen embryo transfer", body: "Embryos are frozen after collection and stored. One is thawed and transferred in a later, separately prepared cycle." },
+        { heading: "Freezing and storage", body: "Embryo freezing and storage in the UK are regulated by the HFEA, including the consent you give and the storage period." },
+      ],
+      lessCauses: [
+        { heading: "Both in one journey", body: "Many people have both over time: a fresh transfer first, then a frozen transfer later using embryos from the same collection." },
+      ],
+      whyItVaries:
+        "The route depends on how your body has responded to treatment, how the embryos develop, whether any testing is planned and what your clinic judges safest and most appropriate for you.",
+    },
+    timing: {
+      whenStarts: "The route is often discussed before treatment and may be revisited after egg collection.",
+      whenEases: "Once a plan is set and you know when your transfer is expected to happen.",
+    },
+    whatItFeelsLike: [
+      "Adjusting to a date that has moved",
+      "Feeling relief and frustration at the same time",
+      "Wanting reassurance that a wait is not a loss",
+    ],
+    whatThisMeans:
+      "Neither route is automatically the right one. They suit different situations, and a change of plan usually reflects a clinical judgement about safety or timing rather than a problem with your treatment.",
+    normal: [
+      "Being told the plan may change after egg collection",
+      "Feeling deflated when a fresh transfer is postponed",
+      "Needing the reasoning explained before it settles",
+    ],
+    seekSupport: [
+      "You do not understand why your route has changed",
+      "You have unanswered questions about your consent or storage",
+      "The change in timing is affecting your wellbeing",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Your fertility clinic is the only place that can advise on which transfer route is right for you.",
+    whatYouCanDo: [
+      { action: "Ask why this route is being suggested for you", reason: "The reasoning is usually specific to your cycle." },
+      { action: "Ask what the timings would be for each route", reason: "It makes planning around work and life possible." },
+      { action: "Ask what your storage consent covers", reason: "Consent and storage are formal, and worth understanding early." },
+      { action: "Ask what happens if a thawed embryo does not survive", reason: "Knowing the plan in advance removes one unknown." },
+    ],
+    whatHappensNext:
+      "Once a route is agreed, your clinic will set out how your womb lining is prepared and when your transfer is expected.",
+    relatedStage: {
+      intro: "Related IVF guidance:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "Before transfer", href: "/ivf/before-transfer" },
+        { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect" },
+      ],
+    },
+    aiPrompts: ["What is a frozen embryo transfer?", "Why has my transfer been changed to a frozen cycle?", "What should I ask about embryo storage?"],
+    captureIntro: "A change of transfer route moves the dates, not the point of the treatment.",
+    journey: ["ivf"],
+    topics: ["treatment"],
+    productPromotion: "minimal",
+    relatedSlugs: ["ivf-timeline-what-to-expect", "what-ivf-is-uk-guide", "ivf-vs-icsi"],
+    crossLinks: [
+      { label: "Before transfer", href: "/ivf/before-transfer", context: "the stage itself: preparation, monitoring and the days leading up to transfer" },
+      { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "where transfer sits in the full sequence of a cycle" },
+    ],
+    keyTakeaways: [
+      "A fresh transfer happens in the same cycle as egg collection",
+      "A frozen transfer uses a stored embryo thawed for a later cycle",
+      "Both are routine parts of UK treatment",
+      "Embryo freezing, storage and consent are regulated by the HFEA",
+      "Neither route is automatically right for everyone",
+    ],
+    inThisArticle: ["What a fresh transfer means", "What a frozen embryo transfer means", "How the timing differs", "Freezing and storage", "Why a clinic may choose one route", "Questions for your clinic"],
+    sources: [
+      { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
+      { label: "Embryo freezing", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/fertility-preservation/embryo-freezing/" },
+      { label: "IVF: what happens", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/what-happens/" },
+      { label: "IVF: risks", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/risks/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "Two routes to the same step, separated mostly by timing. Here is what each one means, why a clinic may choose between them, and what freezing and storage actually involve.",
+    hero: {
+      src: new URL("../assets/article-hero-fresh-vs-frozen.jpg", import.meta.url).href,
+      alt: "A sunlit sash window sill with a small stoneware vase of dried grasses and a folded linen cloth.",
+    },
+    faq: [
+      { question: "Is a frozen transfer worse than a fresh one?", answer: "No. Both are routine parts of UK treatment. Which is used depends on your response to treatment, how the embryos develop and what your clinic judges appropriate." },
+      { question: "Why might a fresh transfer be postponed?", answer: "Reasons vary. They can include how your body has responded to stimulation, a risk of ovarian hyperstimulation, the state of the womb lining, or planned embryo testing. Your clinic will explain the reason in your case." },
+      { question: "How long can embryos be stored?", answer: "Storage in the UK is regulated by the HFEA, and the period depends on the consent you give. Your clinic will explain the consent forms and the renewal arrangements that apply to you." },
+    ],
+    editorialSections: [
+      {
+        id: "fresh-transfer",
+        heading: "What a fresh transfer means",
+        lead: "In a fresh transfer, an embryo is placed into the womb within the same treatment cycle as the egg collection, usually a few days afterwards.",
+        paragraphs: [
+          "Between collection and transfer, the fertilised eggs are watched in the laboratory as they develop. Your clinic decides with you when a transfer is appropriate and which embryo to use.",
+          "Any suitable embryos not transferred may be frozen for later use, which is why fresh and frozen routes are not really alternatives so much as two points on the same journey.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-fresh-frozen-routes.jpg", import.meta.url).href,
+          alt: "Morning light falling in two broad bands across a pale wooden floor beside a plain armchair.",
+        },
+      },
+      {
+        id: "frozen-transfer",
+        heading: "What a frozen embryo transfer means",
+        lead: "In a frozen embryo transfer, an embryo that has been frozen and stored is thawed and transferred in a later cycle prepared for that purpose.",
+        paragraphs: [
+          "The preparation is different from a stimulation cycle. The focus is on the womb lining rather than on producing eggs, so the medication and monitoring look different, and there is no egg collection.",
+          "Not every embryo survives thawing. Clinics discuss this in advance, and it is a reasonable thing to ask about before the day itself.",
+        ],
+      },
+      {
+        id: "how-timing-differs",
+        heading: "How the timing differs",
+        lead: "Timing is the clearest practical difference between the two routes.",
+        subsections: [
+          { subheading: "Fresh", paragraphs: ["Transfer follows egg collection within the same cycle, so the whole sequence is continuous and comparatively quick."] },
+          { subheading: "Frozen", paragraphs: ["There is a gap, sometimes of weeks or longer, while the body recovers and a separate cycle is prepared. That gap is planned, not lost time."] },
+          { subheading: "Both", paragraphs: ["Whichever route is used, the wait between transfer and a pregnancy test is the same, and it feels just as long."] },
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "A postponed fresh transfer is not a failed cycle. It is a change of plan within the same treatment.",
+        },
+      },
+      {
+        id: "freezing-and-storage",
+        heading: "Freezing and storage, briefly",
+        lead: "Embryo freezing and storage in the UK are regulated by the HFEA, which sets the framework clinics work within.",
+        paragraphs: [
+          "Freezing allows suitable embryos to be kept for use in a later cycle. Consent is formal: you are asked to record what you agree to, including how long embryos may be stored and what should happen in various circumstances.",
+          "Because the rules around storage periods and consent can change, this guide does not state figures. The HFEA publishes current information for patients on embryo freezing and storage, and your clinic will explain the consent forms that apply to you.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Storage detail is set nationally and changes over time. Treat the HFEA's own patient information and your clinic's consent forms as the current position.",
+        },
+      },
+      {
+        id: "why-a-clinic-chooses",
+        heading: "Why a clinic may choose one route",
+        lead: "This is a clinical decision, made with you, based on how your cycle has actually gone.",
+        paragraphs: [
+          "Factors a clinic may weigh include how your body responded to stimulation, whether there is a risk of ovarian hyperstimulation, the state of the womb lining, how the embryos have developed, and whether any embryo testing is planned.",
+          "Neither route is automatically the right one, and a recommendation is not a judgement on your treatment so far. If the plan changes, ask what prompted the change.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-fresh-frozen-questions.jpg", import.meta.url).href,
+          alt: "An open blank notebook, a pen, a mug of tea and a glass jar of foliage on a wooden desk by a window.",
+        },
+      },
+      {
+        id: "questions-for-your-clinic",
+        heading: "Questions worth asking your clinic",
+        lead: "A few direct questions will usually make the plan clear.",
+        paragraphs: [
+          "Which route are you recommending for us, and why. What would the timings look like either way. How many embryos might be suitable for freezing. What does my storage consent cover, and when would it need renewing. What happens if a thawed embryo does not survive. Is there an additional cost for a frozen transfer, and what does it include.",
+          "It is reasonable to ask for the answers in writing, particularly anything involving consent.",
         ],
       },
     ],

@@ -147,6 +147,9 @@ const LINKS = {
   twins: "/articles/twins-and-multiples-in-pregnancy",
   // Phase 34C — new IVF guides
   cycleNotWork: "/articles/when-an-ivf-cycle-does-not-work",
+  // Phase 34D — new IVF guides
+  freshFrozen: "/articles/fresh-vs-frozen-embryo-transfer",
+  ivfVsIcsi: "/articles/ivf-vs-icsi",
   
 };
 
@@ -175,7 +178,9 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         "What IVF actually involves, step by step",
         "Medication, injections, and how to follow your protocol",
         "Scans, blood tests, and how to read your monitoring",
-        "Egg collection, fertilisation, and embryo grading basics",
+        "Egg collection, fertilisation, and how embryos develop before transfer",
+        "Why embryos vary, and what grading language does and does not mean",
+        "Fresh and frozen transfer routes, and how the timing differs",
         "Practical and physical preparation for transfer day",
         "Holding emotional steadiness through the prep weeks",
       ],
@@ -260,6 +265,23 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
           { label: "How should I prepare for transfer day, practically?", href: askIVF("How should I prepare for transfer day, practically?") },
           { label: "Embryo freezing and storage, the rules are set by the HFEA", href: askIVF("What happens to embryos that are frozen and stored, and what are the HFEA storage rules?") },
           { label: "Track your transfer day", href: LINKS.timeline },
+        ],
+      },
+      {
+        // Phase 34D — embryo-development context at orientation depth only.
+        // Not an embryology reference, not a grading guide. The fresh/frozen
+        // comparison is owned by the article; this group owns the stage context.
+        label: "Fertilisation & embryo development",
+        description: "The laboratory days between collection and transfer.",
+        intro:
+          "After egg collection there are a few quiet days when nothing is asked of you and a great deal is happening out of sight. Not every egg collected will be mature, not every mature egg will fertilise, and not every fertilised egg will keep developing. That narrowing is expected, and the numbers dropping at each step is not a sign that something has gone wrong. Embryos are watched over several days, and some reach the blastocyst stage while others stop earlier, for reasons that often cannot be identified. Clinics describe embryos using grading language, which is a way of recording how an embryo looks at a particular moment, not a prediction and not a verdict. Your embryology team and your clinic are the people who can explain what your own updates mean.",
+        links: [
+          { label: "Why do embryos develop differently from one another?", href: askIVF("Why do embryos develop differently from one another during IVF?") },
+          { label: "What does embryo grading actually describe?", href: askIVF("What does embryo grading actually describe, and what does it not tell me?") },
+          { label: "What is a blastocyst, and why does it matter?", href: askIVF("What is a blastocyst, and why does the clinic mention it?") },
+          { label: "Fresh versus frozen embryo transfer", href: LINKS.freshFrozen },
+          { label: "IVF versus ICSI", href: LINKS.ivfVsIcsi },
+          { label: "What should I ask the embryologist before transfer?", href: askIVF("What should I ask the embryology team before embryo transfer?") },
         ],
       },
       {

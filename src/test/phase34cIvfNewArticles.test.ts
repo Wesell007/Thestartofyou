@@ -39,6 +39,9 @@ describe("phase 34C — exactly four new IVF guides exist", () => {
       [
         "emotional-impact-of-ivf",
         "ivf-timeline-what-to-expect",
+        // Phase 34D additions; 34C itself added no further IVF articles.
+        "ivf-vs-icsi",
+        "fresh-vs-frozen-embryo-transfer",
         ...NEW_SLUGS,
       ].sort(),
     );

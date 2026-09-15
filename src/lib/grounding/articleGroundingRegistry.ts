@@ -256,6 +256,9 @@ export const ARTICLE_GROUNDING_REGISTRY: readonly ArticleGroundingRecord[] = [
   { slug: "nhs-ivf-funding-and-eligibility", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "ohss-and-ivf-side-effects", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "when-an-ivf-cycle-does-not-work", journey: ["ivf","support"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  // Phase 34D — default-deny metadata rows. No approval metadata.
+  { slug: "ivf-vs-icsi", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "fresh-vs-frozen-embryo-transfer", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
 ];
 
 const BY_SLUG: ReadonlyMap<string, ArticleGroundingRecord> = new Map(

@@ -7,7 +7,16 @@
 - [x] Documentation: batch, evidence pack, frontend report
 - [x] Final closure reconciliation: docs correction + dead-code cleanup + validation
 
+## Phase 34D — IVF final coverage refinement — CLOSED PASS (preview only)
+- [x] `/articles/ivf-vs-icsi` created, imaged, sourced and registered
+- [x] `/articles/fresh-vs-frozen-embryo-transfer` created, imaged, sourced and registered
+- [x] `/ivf/before-transfer` expanded with embryo-development orientation context
+- [x] Hub discovery 2, contextual links 8, grounding 231, sitemap 356
+- [x] Tests, typecheck x2, lint at baseline, build, responsive QA
+- [x] Documentation: refinement report, evidence pack, frontend report
+- [x] Deferred: standalone embryo-development article; clinic-questions checklist
+
 ## Open (blocked on the user)
-- [ ] Human review of all four Phase 34C guides — required before deployment
+- [ ] Human review of the four Phase 34C guides — required before deployment
+- [ ] Human review of the two Phase 34D guides and the before-transfer expansion
 - [ ] Global Phase 33 deployment block remains ACTIVE; nothing deployed
-- [ ] Phase 34D follow-up (recommendation B) — not started

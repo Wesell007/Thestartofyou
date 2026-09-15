@@ -1,6 +1,6 @@
-# Phase 34E — IVF stage UX, article discovery and AI separation
+# Phase 34E — IVF UX, article discovery and AI separation
 
-Cleanup only. No new articles, no new routes, no content topics, no deployment.
+Cleanup of `/ivf` and its three stage pages only. No new articles, routes, content topics, images or deployment.
 
 ## What is wrong today (verified in the code)
 
@@ -23,13 +23,45 @@ Problems confirmed by reading the data:
 - Every card falls back to the same stage hero image, so rows of different destinations share one picture.
 - Of the six new 34C/34D guides, only two (ICSI, fresh vs frozen) are surfaced from a stage page at all.
 
+The main IVF hub audit also confirms:
+
+- Its hero uses `min-h-screen`, delaying the page orientation and navigation.
+- `The active treatment pathway` and `What makes IVF different` are separate large orientation sections with overlapping roles.
+- The embedded AI section appears before stage navigation and the guide library.
+- The guide library contains only the six Phase 34C/34D guides. The timeline and emotional-impact guides are surfaced elsewhere, so the eight IVF-specific guides do not have one coherent editorial home.
+- `Common questions across IVF` consists entirely of AI destinations styled like editorial rows, creating a second page-level AI area.
+- The final `Ask a question` action links to `/ask` without naming the Companion.
+
 ## What I will build
 
 ### 1. Destination truth in the data
 
 Give every stage link an explicit `kind`: `article`, `tool`, `ai`, `stage`, `hub` or `support`, derived from and checked against the real href (`ask:` → AI, `/articles/…` → article, the timeline tracker → tool). The page then renders by kind, so a mislabelled item cannot render as an article.
 
-### 2. New page hierarchy (shared template, per-stage modules)
+### 2. Main IVF hub: one coherent journey
+
+Recompose the existing hub components into:
+
+```text
+Compact premium hero + clearly labelled timeline tool
+One consolidated IVF orientation section
+Your IVF stages
+IVF guidance (all 8 real IVF articles, grouped by intent)
+Companion (the only AI module, maximum 4 prompts)
+Quiet emotional / journal support
+Final journey action
+```
+
+- Reduce the hero from a full viewport while keeping its current visual identity and transfer-date timeline tool.
+- Merge `IVFPathwayPosition`, `IVFWhatThisCovers` and the useful parts of `IVFWhatMakesDifferent` into one concise orientation section; orientation sections after = 1.
+- Move the three stage cards ahead of all AI and label their action `Explore stage`.
+- Rebuild `IVFGuides` as a single eight-guide library with three deliberate groups: **Start with IVF**, **Treatment and decisions**, **The emotional and outcome side**. Add the existing timeline and emotional-impact guides, each once, with their actual imagery and `Read guide`.
+- Remove `IVFCommonQuestions` as a separate module; move no more than four useful prompts into `IVFAISupport`.
+- Move `IVFAISupport` below the stage and guide sections, retitle it `YOUR COMPANION`, explicitly describe the AI-generated answer and use `Ask the Companion`.
+- Keep the final journey action primary; rename the secondary AI action `Ask the Companion` and style it as AI rather than editorial or journey navigation.
+- Preserve the quiet support section without adding another large emotional-content block.
+
+### 3. New stage-page hierarchy (shared template, per-stage modules)
 
 ```text
 Hero
@@ -47,15 +79,18 @@ Start here, Anchor read and the bottom Common questions sections are removed as 
 
 Stages will not all carry the same modules: Before transfer keeps the protocol week, After transfer keeps the wait shape and the difficult-news group, Early pregnancy keeps the handover card and drops the protocol block.
 
-### 3. Three visibly different item types
+### 4. One content-type language system across all four pages
 
 - **Article**: its own imagery where a real image exists, title, description, `Read guide`.
 - **Tool**: utility card, tool icon, `Use the timeline`.
+- **Stage**: stage imagery and `Explore stage`.
 - **AI**: only inside the Companion module — eyebrow `ASK THE COMPANION`, helper line "Get an AI-generated answer using the context of this IVF stage.", button `Ask the Companion`. No AI item anywhere else on the page, and none styled as an article.
+- **Journey action**: `Start your journey`.
+- **Support / hub**: explicit destination wording rather than article, tool or AI language.
 
 Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a question about [stage]?", placeholder "Ask about [stage]…", button "Ask the Companion".
 
-### 4. Stage article line-ups (real routes only)
+### 5. Stage article line-ups (real routes only)
 
 - **Before transfer** — featured: *What IVF is (UK guide)*, *IVF timeline, what to expect*. More guidance: *IVF vs ICSI*, *Fresh vs frozen embryo transfer*, *OHSS and IVF side effects*, *NHS IVF funding and eligibility*, *The emotional impact of IVF*.
 - **After transfer** — featured: *The emotional impact of IVF*, *When an IVF cycle doesn't work*. More guidance: *Chemical pregnancy*, *Pregnancy after loss*, *Perinatal anxiety*, plus the Support crossover.
@@ -63,19 +98,20 @@ Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a qu
 
 Every article appears once per stage as primary discovery; duplicate destinations after this phase = 0.
 
-### 5. Imagery
+### 6. Imagery
 
-Use each article's existing hero where one exists (the six new guides all have one) by extending the existing href→image map. No new images generated. Cards without a real image use a plain text row rather than repeating the stage hero.
+Use each article's existing hero where one exists by extending the existing href→image map. No new images generated. Cards without a real image use a premium text row rather than repeating the stage hero.
 
 ## Technical notes
 
-- Files changed: `src/data/ivfTopicData.ts` (add `kind`, restructure per-stage module data, collapse AI questions into `aiPrompts` capped at 4), `src/components/ivf/IVFTopicPage.tsx` (new section order, article/tool/AI card components, remove Start here / Anchor read / Common questions modules), plus the thumbnail map.
+- Stage files: `src/data/ivfTopicData.ts` (add `kind`, restructure per-stage module data, collapse AI questions into `aiPrompts` capped at 4), `src/components/ivf/IVFTopicPage.tsx` (new section order, article/tool/AI card components, remove Start here / Anchor read / Common questions modules), plus the thumbnail map.
+- Hub files: `src/pages/IVF.tsx`, `IVFHero.tsx`, one consolidated orientation component, `IVFStages.tsx`, `IVFGuides.tsx`, `IVFAISupport.tsx`, `IVFFinalCTA.tsx`; the redundant orientation and common-question components will no longer be mounted. No unnecessary new shared system.
 - No changes to routes, `articleData.ts`, the grounding registry, sitemap, AI backend, saved lifecycles or reviewer governance. Safety blocks keep their current approved wording verbatim.
-- New test file `src/test/phase34eIvfStageUx.test.tsx`: all six 34C/34D routes resolve; each stage's article items point only at `/articles/…`; zero `ask:` destinations outside the Companion; exactly one Companion per stage; no duplicate article destinations per stage; no `commonQuestions` module; stage routes and grounding untouched.
-- Validation: focused 34E tests, full suite, typecheck ×2, lint against baseline, production build, plus QA of the three stage pages at 1280 / 834 / 390 px.
+- New focused tests cover: all eight hub article routes and 8/8 unique hub discovery; all six 34C/34D guides accounted for; stage links only use stage routes; article items only use `/articles/…`; tool and journey actions use their real destinations; zero AI destinations outside Companion modules; one embedded Companion on each of four pages; no separate Common Questions AI modules; no duplicate article destination within any page; unchanged routes, grounding, lifecycles and reviewer governance.
+- Validation: focused 34E tests, full suite, typecheck ×2, lint against baseline, production build, route and destination validation, plus QA of all four pages at 1280 / 834 / 390 px.
 
 ## Documentation
 
-`docs/content/phase34e-ivf-stage-ux-cleanup.md`, `phase34e-ivf-link-destination-audit.md` (full before/after destination table with the ARTICLE / TOOL / AI_PROMPT / STAGE / HUB / SUPPORT classification), `phase34e-ivf-frontend-report.md`.
+`docs/content/phase34e-ivf-ux-and-discovery-cleanup.md`, `phase34e-ivf-link-destination-audit.md` (full before/after destination table for all four pages with ARTICLE / TOOL / AI_PROMPT / STAGE / HUB / SUPPORT / JOURNEY_ACTION), and `phase34e-ivf-frontend-report.md`.
 
-Closing report will return the required counts, the 6/6 new-article discovery accounting, and the deployment hold remains active.
+Closing report will return the four-page destination counts, 8/8 hub guide accounting, 6/6 new-guide accounting, Companion/common-question/duplicate counts and unchanged deployment hold.

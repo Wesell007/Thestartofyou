@@ -1,25 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { format, subDays } from "date-fns";
-import { CalendarIcon, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import IVFTimelineForm from "@/components/ivf/IVFTimelineForm";
 import heroMoment from "@/assets/ivf-hero-moment.jpg";
 
 const IVFHero = () => {
-  const navigate = useNavigate();
-  const [transferDate, setTransferDate] = useState<Date>();
-  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
-  const [open, setOpen] = useState(false);
-
-  const handleTrack = () => {
-    if (transferDate) {
-      navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
-    }
-  };
-
   return (
     <section className="relative bg-parchment overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
 

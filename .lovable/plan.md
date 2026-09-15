@@ -22,11 +22,16 @@ No backfill, no existing data rewritten, no access rules changed: the new values
 
 Added to the existing trying-to-conceive persistence file, not a new service:
 
-- `loadIVFTimelineContext(userId)` — returns the two values or null.
-- `saveIVFTimelineContext(userId, { transferDate, transferType })` — validates first, then writes only those two columns.
-- `clearIVFTimelineContext(userId)` — sets both back to null, touching nothing else.
+- `loadIVFTimelineContext()` — returns the two stored values or null.
+- `saveIVFTimelineContext(context)` — validates first, then writes only those two columns.
+- `clearIVFTimelineContext()` — sets both back to null, touching nothing else.
+
+Each helper resolves the signed-in person itself and acts only on their own record; a caller cannot point them at anyone else's data, and the database's own ownership rules still apply underneath.
 
 Only these three functions write IVF values. Picking a date, choosing 3-day or 5-day, calculating, opening the page, navigating away, signing in and loading a journey all write nothing. The existing trying-to-conceive save routine is left untouched, so a normal profile save that omits IVF values can never clear them.
+
+Saving a new or updated timeline uses the calculator's own rules (real calendar date, not in the future, within its entry range, type 3-day or 5-day). Reading back an already-saved timeline uses shape and type checks only: an older treatment date stays readable forever, is never rejected and is never silently cleared, because IVF context is meant to survive as history.
+
 
 ## 4. Feature flag
 
@@ -43,10 +48,12 @@ Companion context, AI runtime, prompts, memory, grounding, journal, voice, artic
 ## 7. Technical notes
 
 - Migration: `ALTER TABLE public.ttc_journeys ADD COLUMN ivf_transfer_date date, ADD COLUMN ivf_transfer_type text` plus a `CHECK (ivf_transfer_type IN ('3day','5day'))` constraint tolerant of null. No grants or policies altered (both inherit the table's existing ones). Generated database types regenerate after it runs.
-- `src/lib/savedTTCJourney.ts`: new `IVFTimelineContext` type (`transfer_date: string | null`, `transfer_type: IVFTransferType | null`) and the three helpers, each re-checking the session user, writing through `supabase.from("ttc_journeys").update(...).eq("user_id", userId)` so row ownership rules apply, and returning the existing `CommitResult`-style outcome. Date validated with `parseDateOnly` plus the calculator's not-future / not-older-than-300-days rules; type validated against `IVFTransferType` from `IVFTimelineForm`.
-- `src/lib/featureFlags.ts` (new, or extended if a shared module already exists): `IVF_TIMELINE_SAVE_ENABLED` resolved from `import.meta.env`, defaulting false.
-- `src/lib/authIntent.ts`: `/ivf-timeline` added to a public tool return list used by `isSafeReturnTo`; protected-route behaviour unchanged.
-- Tests, new `src/test/phase34gIvfPersistence.test.ts(x)`: null IVF values remain valid; existing trying-to-conceive save without IVF payload still works and preserves IVF values; 3-day and 5-day both persist; date round-trips with no timezone drift; invalid type rejected; explicit update replaces values; explicit clear nulls both and leaves the journey and unrelated answers intact; no second journey; no IVF journey type; calculator triggers zero persistence writes (no journey save call, no storage write); flag defaults off; no save, update or clear control renders. Cross-user denial asserted at the query level (every helper filters by the signed-in user) and recorded as NOT FULLY TESTABLE if the harness cannot run two real sessions.
+- New neutral domain module `src/lib/ivfTimeline.ts`: owns `IVFTransferType = "3day" | "5day"`, the type guard, the save-time date rule and the lenient historical-load parse. `IVFTimelineForm.tsx` re-exports its type from there; `savedTTCJourney.ts` imports from there. Persistence never imports a React component.
+- `src/lib/savedTTCJourney.ts`: new `IVFTimelineContext` type (`transfer_date: string | null`, `transfer_type: IVFTransferType | null`) plus the three helpers. Each calls `supabase.auth.getSession()`, derives the user id from the session (no caller-supplied id), and reads/updates `ttc_journeys` filtered on that id, with existing row-ownership rules as the second layer. Save path validates date and type before any query; load path validates shape and type only and never rewrites or clears.
+- `src/lib/featureFlags.ts` (new, or extended if a shared module already exists): `IVF_TIMELINE_SAVE_ENABLED` resolved from `VITE_IVF_TIMELINE_SAVE_ENABLED`, defaulting false. Nothing is wired to it this phase.
+- `src/lib/authIntent.ts`: `/ivf-timeline` added to a public tool return list used by `isSafeReturnTo`; protected-route behaviour unchanged. Documented capability: return route supported, values not yet preserved across sign-in.
+- Tests, new `src/test/phase34gIvfPersistence.test.ts(x)`: null IVF values remain valid; an ordinary trying-to-conceive save without IVF payload works and preserves existing IVF values; 3-day and 5-day both persist; date round-trips with no timezone drift; invalid type rejected; a new save obeys the calculator date rules; a stored date older than 300 days still loads and is not cleared; explicit update replaces values; explicit clear is the only clear path and leaves the journey and unrelated answers intact; no second journey; no IVF journey type; calculator triggers zero persistence writes; flag defaults off; no save, update or clear control renders; the domain and persistence modules have no dependency on `IVFTimelineForm.tsx`; one shared transfer-type definition; helpers derive ownership internally so a caller cannot target another person's row. Cross-user access reported as NOT FULLY TESTABLE if the harness cannot run two real sessions — query filtering alone is not claimed as an access-rule integration test.
+- Deployment ordering documented: reviewed migration → verify generated types → ship persistence-capable code with the feature off → privacy and legal approval → ship approved save experience → enable the flag. Code expecting the new columns is never activated against a schema without them.
 - Boundary tests reconfirm: journey types exactly ttc / pregnancy / first_year, no `/my-ivf-journey`, grounding / AI context / memory / journal / voice / article changes all zero.
 - Docs: `docs/content/phase34g-ivf-timeline-persistence-foundation.md`, `...-privacy-review-pack.md`, `...-persistence-evidence.md`, plus a roadmap entry. Privacy pack records data, purpose, owner, access, no automatic collection, explicit future saving, calculator works unsaved, no AI access, no derived storage, clearing behaviour, no fourth journey, pregnancy-transition intent, and the open items (notice wording, lawful basis, retention, impact assessment, activation copy). No legal approval is claimed.
 - Validation: focused Phase 34G tests, existing trying-to-conceive tests, full suite, typecheck twice, lint against baseline, production build, migration validation in the non-production project only, and browser QA of `/ivf`, `/ivf-timeline` and the three stage pages at 1280/834/390 checking calculation still works signed out, no save/update/clear controls, no sensitive address parameters, no overflow, no new console errors.

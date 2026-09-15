@@ -140,8 +140,8 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 | New internal contextual link occurrences | 2 |
 | Pre-existing pregnancy-after-loss occurrences | 2 |
 | Plain-text HFEA authoritative signposts added | 1 |
-
 | Normal-discovery additions | 1 |
+
 | IVF hub occurrences of `moving-from-ttc-to-ivf` | 1 |
 | HEALTH_REVIEW_REQUIRED changed items | 3 |
 | SAFETY_REVIEW_REQUIRED changed items | 2 |

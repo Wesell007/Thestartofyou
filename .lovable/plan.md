@@ -22,9 +22,10 @@ Extract the existing hub calculator into `src/components/ivf/IVFTimelineForm.tsx
 
 Transfer date and type are treatment information. The hub currently passes them in the visible web address, where they can end up in browser history, server logs and referrers.
 
-- The hub to timeline handoff moves to ephemeral in-app navigation state, so nothing sensitive appears in the address bar.
-- Reading the existing address parameters stays supported for people who bookmarked or shared a link, but nothing new is added to them.
-- Verified: analytics record only the page path, never the parameters. This is documented as a privacy item to resolve before saving is ever switched on.
+- Every new calculation moves to ephemeral in-app navigation state, so nothing sensitive is ever put into the address bar again.
+- Old bookmarked or shared links still open correctly. Resolution order: navigation state, then the old address parameters, then the plain calculator. After a valid old link is read, the values are held in memory and the treatment details are removed from the visible address, leaving a clean `/ivf-timeline`.
+- Exposure that already happened through an old link cannot be undone retroactively; this is recorded in the report.
+- Verified: analytics record only the page path, never these values. This is documented as a privacy item to resolve before saving is ever switched on.
 
 ## 5. No Save UI
 
@@ -44,8 +45,8 @@ No "Save my timeline", no disabled or coming-soon control. The tool calculates a
 ## 7. Technical notes
 
 - `src/data/ivfTopicData.ts`: `LINKS.timeline` `/ivf` → `/ivf-timeline`; kind stays `tool`.
-- New `src/components/ivf/IVFTimelineForm.tsx` (date popover with `pointer-events-auto`, 5-day/3-day select, submit) navigating via `navigate("/ivf-timeline", { state: { transferMs, transferType } })`. `IVFHero.tsx` renders it in place of its inline card; `src/pages/IVFTimeline.tsx` renders it instead of the dead-end message, resolving values from router state first and existing query parameters second, keeping the current date validation.
+- New `src/components/ivf/IVFTimelineForm.tsx` (date popover with `pointer-events-auto`, 5-day/3-day select, submit) navigating via `navigate("/ivf-timeline", { state: { transferMs, transferType } })`. `IVFHero.tsx` renders it in place of its inline card; `src/pages/IVFTimeline.tsx` renders it instead of the dead-end message, resolving `location.state` first, then legacy `?date`/`?type`, keeping the current date validation, and calling `navigate("/ivf-timeline", { replace: true, state: {...} })` once valid legacy values are read so the parameters leave the address bar.
 - Untouched: `savedTTCJourney.ts`, `save_ttc_journey`, `journeys`, `authIntent.ts`, context builders, grounding, articles, imagery.
-- Tests, new `src/test/phase34fIvfTimeline.test.tsx`: every `kind: "tool"` destination is `/ivf-timeline` (incorrect = 0); `/ivf-timeline` renders a usable calculator with no pre-filled state; 3-day and 5-day both resolve; invalid or missing values fall back to the form safely; no save control rendered; no database call during calculation; lifecycle list remains exactly ttc, pregnancy, first_year; grounding and AI runtime unchanged; analytics do not record the sensitive parameters.
+- Tests, new `src/test/phase34fIvfTimeline.test.tsx`: every `kind: "tool"` destination is `/ivf-timeline` (incorrect = 0); `/ivf-timeline` renders a usable calculator with no pre-filled state; 3-day and 5-day both resolve; hub calculation works; navigation state wins over legacy parameters; a valid legacy link still resolves and its parameters are then stripped from the visible address; invalid or missing values fall back to the form safely; no save control rendered; no database call during calculation; lifecycle list remains exactly ttc, pregnancy, first_year; grounding and AI runtime unchanged; analytics do not record the sensitive values.
 - Docs: `docs/content/phase34f-ivf-timeline-routing-and-save-state.md` with the audit answers, the address-exposure note and the future design; roadmap entry.
 - Validation: focused tests, full suite, typecheck twice, lint against baseline, production build, and browser QA at 1280/834/390 checking stage actions land on `/ivf-timeline`, standalone and hub calculation both work, no dead end, no sideways scrolling, no new console errors.

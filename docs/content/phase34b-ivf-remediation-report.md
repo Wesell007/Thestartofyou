@@ -60,13 +60,42 @@ After: shadowed stage records = 0. Public IVF stage routes 3 -> 3. New stage rou
 
 ## 6. Links and discovery
 
-Contextual only (no new hub or topic discovery placements):
-- Chemical pregnancy — added to "If results bring difficult news" on `/ivf/after-transfer`.
-- Pregnancy after loss — already present; unchanged.
-- Twins and multiples in pregnancy — added to "Monitoring & early scans" on `/ivf/early-pregnancy`.
-- Embryo freezing and storage, with the HFEA named as the authority — added to "Procedures & preparation" on `/ivf/before-transfer` as a companion route.
+### Internal contextual links
 
-Normal discovery (1 addition): `moving-from-ttc-to-ivf` is surfaced on the IVF hub once, as a "Before stage one" pill above the stage cards in `IVFStages.tsx`. IVF hub occurrences = 1. The article keeps its TTC journey ownership, route and canonical; no replacement article was created; no duplicate discovery exists.
+New internal contextual link occurrences implemented = 2.
+
+| Source surface | Destination | Occurrences added |
+| --- | --- | --- |
+| `/ivf/after-transfer` | `/articles/chemical-pregnancy` | 1 |
+| `/ivf/early-pregnancy` | `/articles/twins-and-multiples-in-pregnancy` | 1 |
+
+### Pregnancy after loss
+
+`/articles/pregnancy-after-loss` was already present on two IVF source surfaces and is unchanged:
+- `/ivf/after-transfer` — pre-existing occurrence = 1
+- `/ivf/early-pregnancy` — pre-existing occurrence = 1
+
+Pre-existing pregnancy-after-loss occurrences = 2. New Phase 34B occurrences = 0. These are not counted as newly implemented Phase 34B links.
+
+### Plain-text authoritative signpost
+
+`/ivf/before-transfer` contains one plain-text authoritative HFEA signpost for embryo freezing and storage in the "Procedures & preparation" group. This is not an internal link, not a new article, not a normal-discovery destination, and not a clickable external citation. Plain-text external-authority signposts added = 1.
+
+### Phase 34A rows 14–17 mapping
+
+| Row | Intent | Implemented | Status | 34B occurrences |
+| --- | --- | --- | --- | --- |
+| 14 | Fertility tests for women | NO | DEFERRED | 0 |
+| 15 | Fertility tests for men | NO | DEFERRED | 0 |
+| 16 | Male fertility when trying to conceive | NO | DEFERRED | 0 |
+| 17 | Chemical pregnancy | YES | COMPLETED | 1 |
+
+Rows 14–16 are pre-treatment assessment subjects owned by the TTC journey and were outside the approved Phase 34B smallest implementation batch. Their historical Phase 34A classification is unchanged.
+
+### Normal discovery
+
+Normal-discovery additions = 1. `moving-from-ttc-to-ivf` is surfaced on the IVF hub once, as a "Before stage one" pill above the stage cards in `IVFStages.tsx`. IVF hub occurrences = 1. The article keeps its TTC journey ownership, route and canonical; no replacement article was created; no duplicate discovery exists.
+
 
 ## 7. Review governance
 

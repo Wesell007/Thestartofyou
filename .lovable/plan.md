@@ -36,6 +36,8 @@ The two values are always stored as a pair: either both empty or both filled wit
 
 Saving only ever updates an existing trying-to-conceive journey. If the person has no such journey yet, saving returns a clear "no journey" result and writes nothing — it never invents a journey, a placeholder or a lifecycle. Clearing behaves the same way: it empties both values on an existing journey, and is a safe no-op with a "no journey" result otherwise. Reading returns an empty context when the journey exists without IVF values, and a distinguishable "no journey" result when there is no journey at all.
 
+Success is proved, not assumed: an update that quietly matches nothing is not an error, so both saving and clearing ask the database to hand back the touched row and only report success when exactly one row came back. Nothing is ever inserted just to find out whether a journey exists, and the journey row count stays identical through save, update and clear.
+
 
 ## 4. Feature flag
 

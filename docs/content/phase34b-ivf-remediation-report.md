@@ -60,13 +60,42 @@ After: shadowed stage records = 0. Public IVF stage routes 3 -> 3. New stage rou
 
 ## 6. Links and discovery
 
-Contextual only (no new hub or topic discovery placements):
-- Chemical pregnancy — added to "If results bring difficult news" on `/ivf/after-transfer`.
-- Pregnancy after loss — already present; unchanged.
-- Twins and multiples in pregnancy — added to "Monitoring & early scans" on `/ivf/early-pregnancy`.
-- Embryo freezing and storage, with the HFEA named as the authority — added to "Procedures & preparation" on `/ivf/before-transfer` as a companion route.
+### Internal contextual links
 
-Normal discovery (1 addition): `moving-from-ttc-to-ivf` is surfaced on the IVF hub once, as a "Before stage one" pill above the stage cards in `IVFStages.tsx`. IVF hub occurrences = 1. The article keeps its TTC journey ownership, route and canonical; no replacement article was created; no duplicate discovery exists.
+New internal contextual link occurrences implemented = 2.
+
+| Source surface | Destination | Occurrences added |
+| --- | --- | --- |
+| `/ivf/after-transfer` | `/articles/chemical-pregnancy` | 1 |
+| `/ivf/early-pregnancy` | `/articles/twins-and-multiples-in-pregnancy` | 1 |
+
+### Pregnancy after loss
+
+`/articles/pregnancy-after-loss` was already present on two IVF source surfaces and is unchanged:
+- `/ivf/after-transfer` — pre-existing occurrence = 1
+- `/ivf/early-pregnancy` — pre-existing occurrence = 1
+
+Pre-existing pregnancy-after-loss occurrences = 2. New Phase 34B occurrences = 0. These are not counted as newly implemented Phase 34B links.
+
+### Plain-text authoritative signpost
+
+`/ivf/before-transfer` contains one plain-text authoritative HFEA signpost for embryo freezing and storage in the "Procedures & preparation" group. This is not an internal link, not a new article, not a normal-discovery destination, and not a clickable external citation. Plain-text external-authority signposts added = 1.
+
+### Phase 34A rows 14–17 mapping
+
+| Row | Intent | Implemented | Status | 34B occurrences |
+| --- | --- | --- | --- | --- |
+| 14 | Fertility tests for women | NO | DEFERRED | 0 |
+| 15 | Fertility tests for men | NO | DEFERRED | 0 |
+| 16 | Male fertility when trying to conceive | NO | DEFERRED | 0 |
+| 17 | Chemical pregnancy | YES | COMPLETED | 1 |
+
+Rows 14–16 are pre-treatment assessment subjects owned by the TTC journey and were outside the approved Phase 34B smallest implementation batch. Their historical Phase 34A classification is unchanged.
+
+### Normal discovery
+
+Normal-discovery additions = 1. `moving-from-ttc-to-ivf` is surfaced on the IVF hub once, as a "Before stage one" pill above the stage cards in `IVFStages.tsx`. IVF hub occurrences = 1. The article keeps its TTC journey ownership, route and canonical; no replacement article was created; no duplicate discovery exists.
+
 
 ## 7. Review governance
 
@@ -92,7 +121,9 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 - Lint: unchanged against baseline — 1 pre-existing error in the generated `previewAuthStorage.ts` and 10 pre-existing fast-refresh warnings.
 - Production build: passed.
 - Frontend QA at 1280px and 390px across `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, both IVF articles and `moving-from-ttc-to-ivf`: no horizontal overflow, no broken images, no external anchors in source citations, no reviewer claims, no "Jenny Joines". The only console warning is the pre-existing React `fetchPriority` casing warning.
+- Tablet QA at 834px across `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, the IVF timeline article, the emotional-impact-of-ivf article and `moving-from-ttc-to-ivf`: horizontal overflow = 0, broken images = 0, images loaded = 107, broken layout = 0, source citations visible = YES where applicable, clickable anchors inside source sections = 0, reviewer claims = 0, contextual link targets checked = 9, broken contextual link targets = 0, IVF hub occurrence of `moving-from-ttc-to-ivf` = 1. Console: one pre-existing React `fetchPriority` warning only; no new runtime error.
 - Route and internal-link validation: all IVF link targets resolve; broken references = 0.
+
 
 ## 10. Completion counts
 
@@ -106,14 +137,20 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 | Public IVF stage routes | 3 -> 3 |
 | New IVF article records | 0 |
 | New routes | 0 |
-| Contextual link occurrences implemented | 3 (chemical pregnancy, twins and multiples, freezing/storage signpost) |
+| New internal contextual link occurrences | 2 |
+| Pre-existing pregnancy-after-loss occurrences | 2 |
+| Plain-text HFEA authoritative signposts added | 1 |
 | Normal-discovery additions | 1 |
+
 | IVF hub occurrences of `moving-from-ttc-to-ivf` | 1 |
 | HEALTH_REVIEW_REQUIRED changed items | 3 |
 | SAFETY_REVIEW_REQUIRED changed items | 2 |
 | Human reviews completed | 0 |
 | Reviewer claims rendered | 0 |
+| Unsupported JSON-LD `reviewedBy` | 0 |
 | Production deployed | 0 |
+| GLOBAL PHASE 33 DEPLOYMENT BLOCK | ACTIVE |
+
 
 Boundaries held at 0: new lifecycles, saved-lifecycle changes (still exactly `ttc`, `pregnancy`, `first_year`), AI runtime changes, grounding eligibility changes, journal changes, memory changes, voice changes, database/schema/RLS changes, imagery changes, sitemap changes, deployment.
 
@@ -133,3 +170,8 @@ DO NOT CREATE (Phase 34A, preserved): donor-gamete content as a standalone expan
 - `src/test/phase34bIvfRemediation.test.ts` — new.
 - `docs/content/phase34b-ivf-remediation-report.md` — this report.
 - `docs/content/phase34a-ivf-content-audit.md` — implementation-status note only.
+
+---
+
+PHASE 34B — IVF SOURCE REMEDIATION & EXISTING-CONTENT EXPANSION CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT — CLOSURE RECONCILED
+

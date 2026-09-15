@@ -1,62 +1,81 @@
-# Phase 34D — IVF final coverage refinement
+# Phase 34E — IVF stage UX, article discovery and AI separation
 
-Two new IVF guides, one existing stage page strengthened. Preview only, no deployment.
+Cleanup only. No new articles, no new routes, no content topics, no deployment.
 
-## Verified starting position
+## What is wrong today (verified in the code)
 
-- Phase 34A gap register rows located and unchanged:
-  - Row 8 "Fertilisation and IVF versus ICSI" — NEW_ARTICLE, decision support, before transfer, HEALTH_REVIEW_REQUIRED, destination "new article on the IVF hub", merged so fertilisation and ICSI cannot cannibalise each other.
-  - Row 9 "Embryo development grading and blastocysts" — NEW_ARTICLE, informational, before transfer, HEALTH_REVIEW_REQUIRED. Deferred in 34D; historical classification untouched.
-  - Row 10 "Fresh versus frozen embryo transfer" — NEW_ARTICLE, decision support, before transfer, HEALTH_REVIEW_REQUIRED, the guide owns explanation while the before-transfer stage owns sequence.
-  - Row 11 "Embryo freezing and storage" — INTERNAL_LINK, LOW_RISK_GENERAL, to be covered briefly inside row 10 with an HFEA signpost.
-- Grounding registry today: 229 records. Sitemap today: 354 URLs. No existing ICSI or fresh/frozen content anywhere in the article data.
+All three stage pages render from one shared template (`IVFTopicPage`) in a fixed order:
 
-## What gets built
+```text
+Hero → What this topic covers → COMPANION (AI) → Start here → Anchor read
+→ What's normal / When to seek support → stage block → Emotional + journal
+→ Guidance groups (large mixed directory) → Common questions (AI) → Prev/next
+→ Other IVF stages → Back
+```
 
-### 1. IVF vs ICSI (`/articles/ivf-vs-icsi`)
+Problems confirmed by reading the data:
 
-Standalone guide owning the comparison: what IVF and ICSI each mean, exactly where ICSI changes the fertilisation step, why a clinic may discuss it, that it is not automatically better or an upgrade, limitations where evidence supports them, and questions to ask the clinic. No success-rate promises, no recommendation of a route.
+- The Companion sits third, before any editorial guidance.
+- The big "guidance groups" directory mixes real guides and AI questions in identical rows with the same chevron. Before transfer: 6 of 18 rows are real articles, the rest open AI. Early pregnancy: 25 rows, only 6 are real articles.
+- Early pregnancy's three "Start here" cards and its "Anchor read" all open AI while looking exactly like article cards, with the CTA "Open".
+- Start-here cards duplicate the same destinations shown elsewhere (the timeline article appears in Start here, Anchor read and a group row on Before transfer; the emotional-impact article likewise on After transfer).
+- "Common questions" at the bottom is a second AI area on every page, duplicating prompts already in the Companion.
+- Every card falls back to the same stage hero image, so rows of different destinations share one picture.
+- Of the six new 34C/34D guides, only two (ICSI, fresh vs frozen) are surfaced from a stage page at all.
 
-Ownership boundary: definition stays with "What IVF is", chronological sequence stays with the timeline article.
+## What I will build
 
-### 2. Fresh vs frozen embryo transfer (`/articles/fresh-vs-frozen-embryo-transfer`)
+### 1. Destination truth in the data
 
-Standalone guide owning the transfer-route comparison: what each route means, why either may be used, how timing differs, a short freezing and storage section signposting HFEA (row 11), high-level cycle differences, clinic decision factors where authoritative evidence supports them, and questions to discuss. Neither route framed as universally right; no invented or unsourced success-rate comparisons.
+Give every stage link an explicit `kind`: `article`, `tool`, `ai`, `stage`, `hub` or `support`, derived from and checked against the real href (`ask:` → AI, `/articles/…` → article, the timeline tracker → tool). The page then renders by kind, so a mislabelled item cannot render as an article.
 
-### 3. `/ivf/before-transfer` expansion
+### 2. New page hierarchy (shared template, per-stage modules)
 
-Strengthened in place, no new route. Adds: what the clinic is monitoring, fertilisation and early embryo development at orientation depth, why embryos develop differently, embryo selection and grading at a high level, fresh versus frozen decision context linking to the new guide, storage signposting, practical questions before transfer, and the emotional uncertainty of the wait. Kept at orientation depth, not an embryology reference.
+```text
+Hero
+What this stage covers
+Guides for this stage       ← real articles only: 2 featured + lighter rows
+Stage-specific block        ← protocol week / the wait / handover
+What's normal / when to seek support   (unchanged wording)
+Tool: Track your IVF timeline          (only where relevant)
+Your Companion              ← the single AI area, max 4 prompt chips
+Emotional note + journal line
+Prev / next stage
+```
 
-### 4. Deferred, not built
+Start here, Anchor read and the bottom Common questions sections are removed as separate modules; their genuine article destinations fold into "Guides for this stage" once each, and their AI questions fold into the Companion chips.
 
-Standalone embryo-development article — recorded DEFERRED, REASSESS AFTER BEFORE-TRANSFER EXPANSION. Clinic-questions checklist — remains a deferred product opportunity. Neither is created.
+Stages will not all carry the same modules: Before transfer keeps the protocol week, After transfer keeps the wait shape and the difficult-news group, Early pregnancy keeps the handover card and drops the protocol block.
 
-## Sources and presentation
+### 3. Three visibly different item types
 
-HFEA first, then NHS, then NICE, with reputable UK professional bodies only where genuinely needed. Every URL verified live before use; year recorded only where genuinely supported. Citations render visible and plain text with zero clickable anchors, per Phase 33.4. No reviewer name, badge or structured reviewer data, per Phase 33.5.
+- **Article**: its own imagery where a real image exists, title, description, `Read guide`.
+- **Tool**: utility card, tool icon, `Use the timeline`.
+- **AI**: only inside the Companion module — eyebrow `ASK THE COMPANION`, helper line "Get an AI-generated answer using the context of this IVF stage.", button `Ask the Companion`. No AI item anywhere else on the page, and none styled as an article.
 
-## Discovery and links
+Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a question about [stage]?", placeholder "Ask about [stage]…", button "Ask the Companion".
 
-Each new guide appears exactly once in normal discovery, added to the existing IVF hub "Understanding the treatment" section (no new section, no new hub). Contextual links: What IVF is → IVF vs ICSI; timeline → IVF vs ICSI at the fertilisation step; before transfer → fresh vs frozen; fresh vs frozen → before transfer and timeline. Actual occurrences counted and reported separately from the two discovery placements.
+### 4. Stage article line-ups (real routes only)
 
-## Imagery
+- **Before transfer** — featured: *What IVF is (UK guide)*, *IVF timeline, what to expect*. More guidance: *IVF vs ICSI*, *Fresh vs frozen embryo transfer*, *OHSS and IVF side effects*, *NHS IVF funding and eligibility*, *The emotional impact of IVF*.
+- **After transfer** — featured: *The emotional impact of IVF*, *When an IVF cycle doesn't work*. More guidance: *Chemical pregnancy*, *Pregnancy after loss*, *Perinatal anxiety*, plus the Support crossover.
+- **Early pregnancy** — featured: *Tests and scans in pregnancy*, *The emotional impact of IVF*. More guidance: *Bleeding in early pregnancy*, *Twins and multiples*, *Pregnancy after loss*, *Perinatal anxiety*, plus the handover into the Pregnancy hub.
 
-Six new assets minimum: one hero and two body images per guide. Editorial, warm, calm, realistic, UK-appropriate, no text or branding, no graphic clinical imagery. IVF vs ICSI imagery avoids implying either route is superior; fresh vs frozen avoids literal ice metaphors.
+Every article appears once per stage as primary discovery; duplicate destinations after this phase = 0.
+
+### 5. Imagery
+
+Use each article's existing hero where one exists (the six new guides all have one) by extending the existing href→image map. No new images generated. Cards without a real image use a plain text row rather than repeating the stage hero.
 
 ## Technical notes
 
-- Two records added to `src/data/articleData.ts` using the existing flagship renderer; no new renderer, aliases or redirects. Slug and route collisions checked at 0.
-- Two rows added to `src/data/articleInventory.ts` and two default-deny rows to `src/lib/grounding/articleGroundingRegistry.ts` (`editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, `archived: false`, `deprecated: false`). Registry 229 → 231; approvals 0, candidates 0, eligible slugs [], `AI_SOURCE_ROUTING_VERSION` unchanged at `30B-source-routing-v1`; grounding runtime changes 0.
-- Before-transfer expansion edits the `before-transfer` config in `src/data/ivfTopicData.ts` plus its stage template only where new blocks are required.
-- Sitemap 354 → 356, delta +2, duplicates 0.
-- Review classification preserved as HEALTH_REVIEW_REQUIRED for both guides and the expansion, escalated only if safety-sensitive wording is introduced. Human reviews completed = 0.
-- New `src/test/phase34dIvfRefinement.test.ts` covering record count, routes, collisions, ownership boundaries, expansion present, embryo-development article absent, discovery = 1 each with 0 duplicates, contextual links resolve, structured sources with stored URLs and 0 clickable citations, ≥3 images per guide, reviewer claims 0, JSON-LD reviewedBy 0, grounding approvals/candidates/eligibility, routing version, and saved lifecycles still exactly ttc, pregnancy, first_year.
-- Documentation: `phase34d-ivf-final-coverage-refinement.md`, `phase34d-ivf-evidence-pack.md`, `phase34d-ivf-frontend-report.md`. Gap register annotated for implemented and deferred outcomes only; historical counts untouched.
+- Files changed: `src/data/ivfTopicData.ts` (add `kind`, restructure per-stage module data, collapse AI questions into `aiPrompts` capped at 4), `src/components/ivf/IVFTopicPage.tsx` (new section order, article/tool/AI card components, remove Start here / Anchor read / Common questions modules), plus the thumbnail map.
+- No changes to routes, `articleData.ts`, the grounding registry, sitemap, AI backend, saved lifecycles or reviewer governance. Safety blocks keep their current approved wording verbatim.
+- New test file `src/test/phase34eIvfStageUx.test.tsx`: all six 34C/34D routes resolve; each stage's article items point only at `/articles/…`; zero `ask:` destinations outside the Companion; exactly one Companion per stage; no duplicate article destinations per stage; no `commonQuestions` module; stage routes and grounding untouched.
+- Validation: focused 34E tests, full suite, typecheck ×2, lint against baseline, production build, plus QA of the three stage pages at 1280 / 834 / 390 px.
 
-## Validation
+## Documentation
 
-Focused 34D tests, grounding drift and approval tests, full suite, typecheck twice, lint against baseline, production build, sitemap, route and internal-link validation, then desktop, tablet and mobile QA of both guides, `/ivf/before-transfer`, `/ivf` and the contextual-link source pages.
+`docs/content/phase34e-ivf-stage-ux-cleanup.md`, `phase34e-ivf-link-destination-audit.md` (full before/after destination table with the ARTICLE / TOOL / AI_PROMPT / STAGE / HUB / SUPPORT classification), `phase34e-ivf-frontend-report.md`.
 
-## Boundaries
-
-Exactly two new articles, exactly one stage expansion. No new hub, stage page, lifecycle, schema, RLS, AI, grounding-runtime, journal, memory or voice change. The global Phase 33 deployment block stays active and nothing is deployed. Closes with the final IVF coverage verdict, A or B, and no further IVF phase started.
+Closing report will return the required counts, the 6/6 new-article discovery accounting, and the deployment hold remains active.

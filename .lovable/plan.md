@@ -36,7 +36,7 @@ The main IVF hub audit also confirms:
 
 ### 1. Destination truth in the data
 
-Give every stage link an explicit `kind`: `article`, `tool`, `ai`, `stage`, `hub` or `support`, derived from and checked against the real href (`ask:` → AI, `/articles/…` → article, the timeline tracker → tool). The page then renders by kind, so a mislabelled item cannot render as an article.
+Give every visitor-facing item one of exactly seven explicit kinds: `article`, `tool`, `ai`, `stage`, `hub`, `support`, `journey`. Derive and test each kind against actual behaviour (`/articles/…` → article, `ask:` or Companion submission → ai, IVF stage route → stage, timeline utility → tool, real hub route → hub, support destination → support, setup action → journey). The actual destination always overrides its title, image or previous styling; a mismatch fails focused tests.
 
 ### 2. Main IVF hub: one coherent journey
 
@@ -86,7 +86,7 @@ Stages will not all carry the same modules: Before transfer keeps the protocol w
 - **Tool**: utility card, tool icon, `Use the timeline`.
 - **Stage**: stage imagery and `Explore stage`.
 - **AI**: only inside the Companion module — eyebrow `ASK THE COMPANION`, helper line "Get an AI-generated answer using the context of this IVF stage.", button `Ask the Companion`. No AI item anywhere else on the page, and none styled as an article.
-- **Journey action**: `Start your journey`.
+- **Journey action** (`kind: journey`): `Start your journey`.
 - **Support / hub**: explicit destination wording rather than article, tool or AI language.
 
 `Guides for this stage` and the hub guide library contain `kind: article` items only, each resolving to `/articles/…`. Support crossovers and Pregnancy-hub handover actions render in separate lightweight sections with explicit support/hub wording.
@@ -96,8 +96,8 @@ Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a qu
 ### 5. Stage article line-ups (real routes only)
 
 - **Before transfer** — featured: *What IVF is (UK guide)*, *IVF timeline, what to expect*. More guidance: *IVF vs ICSI*, *Fresh vs frozen embryo transfer*, *OHSS and IVF side effects*, *NHS IVF funding and eligibility*, *The emotional impact of IVF*.
-- **After transfer** — featured: *The emotional impact of IVF*, *When an IVF cycle doesn't work*. More guidance: *Chemical pregnancy*, *Pregnancy after loss*, *Perinatal anxiety*, plus the Support crossover.
-- **Early pregnancy** — featured: *Tests and scans in pregnancy*, *The emotional impact of IVF*. More guidance: *Bleeding in early pregnancy*, *Twins and multiples*, *Pregnancy after loss*, *Perinatal anxiety*, plus the handover into the Pregnancy hub.
+- **After transfer** — featured: *The emotional impact of IVF*, *When an IVF cycle doesn't work*. More guidance candidates: *Chemical pregnancy*, *Pregnancy after loss*, *Perinatal anxiety*. Each is included only after its actual href is verified as `/articles/…`; Support remains a separate support action.
+- **Early pregnancy** — featured candidates: *Tests and scans in pregnancy*, *The emotional impact of IVF*. More guidance candidates: *Bleeding in early pregnancy*, *Twins and multiples*, *Pregnancy after loss*, *Perinatal anxiety*. Each is included only after its actual href is verified as `/articles/…`; Pregnancy handover remains a separate hub action.
 
 Every article appears once per stage as primary discovery; duplicate destinations after this phase = 0.
 

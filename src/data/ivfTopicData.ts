@@ -85,7 +85,7 @@ export const ivfTopicConfigs: Record<IVFTopicSlug, IVFTopicConfig> = {
         "What IVF actually involves, step by step",
         "Medication, injections, and how to follow your protocol",
         "Scans, blood tests, and how to read your monitoring",
-        "Egg collection, fertilisation, and how embryos may develop towards the blastocyst stage",
+        "Egg collection, fertilisation, and how embryos develop towards the blastocyst stage",
         "Why embryos vary, and what grading language does and does not mean",
         "Fresh and frozen transfer routes, and how the timing differs",
         "Practical and physical preparation for transfer day",

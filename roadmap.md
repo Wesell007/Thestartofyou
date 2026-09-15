@@ -20,3 +20,11 @@
 - [ ] Human review of the four Phase 34C guides — required before deployment
 - [ ] Human review of the two Phase 34D guides and the before-transfer expansion
 - [ ] Global Phase 33 deployment block remains ACTIVE; nothing deployed
+
+## Phase 34E — IVF UX, article discovery and AI separation — IN PROGRESS (preview only)
+- [ ] Audit `/ivf` and all three IVF stage pages by destination behaviour
+- [ ] Separate article, tool, AI, stage, hub, support and journey actions
+- [ ] Consolidate hub orientation and surface 8/8 IVF guides
+- [ ] Recompose stage pages with editorial guidance before one Companion area
+- [ ] Add focused tests, documentation and responsive QA
+- [ ] Validate full suite, typecheck x2, lint and build; no deployment

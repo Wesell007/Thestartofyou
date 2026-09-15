@@ -95,15 +95,14 @@ describe("phase 34D — before-transfer expansion", () => {
   });
 
   it("covers embryo development at orientation depth", () => {
-    const group = before.groups.find((g) => /embryo development/i.test(g.label));
-    expect(group, "fertilisation and embryo development group must exist").toBeTruthy();
-    expect(group!.intro ?? "").toMatch(/fertilis/i);
-    expect(group!.intro ?? "").toMatch(/blastocyst/i);
-    expect(group!.intro ?? "").toMatch(/grading/i);
+    const coverage = before.whatThisCovers.bullets.join(" ");
+    expect(coverage).toMatch(/fertilis/i);
+    expect(coverage).toMatch(/blastocyst/i);
+    expect(coverage).toMatch(/grading/i);
   });
 
   it("links out to the fresh versus frozen guide from the stage", () => {
-    const hrefs = before.groups.flatMap((g) => g.links.map((l) => l.href));
+    const hrefs = before.guides.map((guide) => guide.href);
     expect(hrefs).toContain("/articles/fresh-vs-frozen-embryo-transfer");
     expect(hrefs).toContain("/articles/ivf-vs-icsi");
   });

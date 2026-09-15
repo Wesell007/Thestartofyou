@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { format, subDays } from "date-fns";
 import { CalendarIcon, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import heroMoment from "@/assets/ivf-hero-moment.jpg";
@@ -20,18 +21,7 @@ const IVFHero = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-parchment overflow-hidden flex flex-col justify-center pt-20 md:pt-24 pb-12">
-      {/* Ambient glows, softened to let the photographic moment breathe */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-[15%] left-[20%] w-[700px] h-[700px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.28)' }}
-        />
-        <div
-          className="absolute bottom-[10%] right-[15%] w-[500px] h-[500px] rounded-full blur-3xl"
-          style={{ backgroundColor: 'hsl(var(--stage-ivf) / 0.14)' }}
-        />
-      </div>
+    <section className="relative bg-parchment overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
 
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -114,17 +104,17 @@ const IVFHero = () => {
                 </div>
               </div>
 
-              <button
+              <Button
                 onClick={handleTrack}
                 disabled={!transferDate}
                 className={cn(
-                  "w-full flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all bg-terracotta text-terracotta-foreground shadow-cta",
+                  "w-full h-auto flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all bg-terracotta text-terracotta-foreground shadow-cta",
                   transferDate ? "hover:bg-terracotta-hover" : "opacity-50 cursor-not-allowed"
                 )}
               >
                 <ArrowRight size={15} />
                 Track your timeline
-              </button>
+              </Button>
 
               <p className="font-sans text-[10px] font-light text-muted-foreground/40 text-center leading-relaxed pt-0.5">
                 An estimate based on your transfer date. Experiences can vary.
@@ -188,7 +178,6 @@ const IVFHero = () => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-parchment-dark to-transparent pointer-events-none" />
     </section>
   );
 };

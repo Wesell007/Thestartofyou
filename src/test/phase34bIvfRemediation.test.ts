@@ -96,7 +96,7 @@ describe("phase 34B — after transfer surface", () => {
   });
 
   it("offers orientation entry points and a shape for the wait", () => {
-    expect(after.startHere.length).toBeGreaterThan(0);
+    expect(after.guides.length).toBeGreaterThan(0);
     expect(after.protocolWeek?.items.length ?? 0).toBeGreaterThanOrEqual(4);
     const wait = JSON.stringify(after.protocolWeek).toLowerCase();
     expect(wait).toContain("trigger");
@@ -110,8 +110,8 @@ describe("phase 34B — after transfer surface", () => {
   });
 
   it("carries no duplicate contextual link targets", () => {
-    const hrefs = after.groups
-      .flatMap((g) => g.links.map((l) => l.href))
+    const hrefs = after.guides
+      .map((guide) => guide.href)
       .filter((href) => href.startsWith("/articles/"));
     expect(new Set(hrefs).size).toBe(hrefs.length);
   });

@@ -2,12 +2,9 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFHero from "@/components/ivf/IVFHero";
 import IVFPathwayPosition from "@/components/ivf/IVFPathwayPosition";
-import IVFWhatThisCovers from "@/components/ivf/IVFWhatThisCovers";
-import IVFWhatMakesDifferent from "@/components/ivf/IVFWhatMakesDifferent";
 import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFStages from "@/components/ivf/IVFStages";
 import IVFGuides from "@/components/ivf/IVFGuides";
-import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
 import IVFReflection from "@/components/ivf/IVFReflection";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
 import SeoHead from "@/components/seo/SeoHead";
@@ -27,12 +24,9 @@ const IVF = () => {
       <main>
         <IVFHero />
         <IVFPathwayPosition />
-        <IVFWhatThisCovers />
-        <IVFWhatMakesDifferent />
-        <IVFAISupport />
         <IVFStages />
         <IVFGuides />
-        <IVFCommonQuestions />
+        <IVFAISupport />
         <IVFReflection />
         <IVFFinalCTA />
       </main>

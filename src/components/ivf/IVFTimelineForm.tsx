@@ -20,7 +20,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
  * creates a saved record and writes to no storage layer.
  */
 
-export type IVFTransferType = "5day" | "3day";
+export type { IVFTransferType } from "@/lib/ivfTimeline";
+import type { IVFTransferType } from "@/lib/ivfTimeline";
 
 export const IVF_TIMELINE_ROUTE = "/ivf-timeline";
 

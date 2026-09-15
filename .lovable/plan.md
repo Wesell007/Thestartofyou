@@ -1,79 +1,53 @@
-# Phase 34C — Final Closure Reconciliation
+# Phase 34C — Apply Final Closure Reconciliation
 
-Report-only, plus two documentation corrections the reconciliation exposed. No implementation change, no deployment, no Phase 34D.
+Two corrections only. No new content, no deployment, no Phase 34D.
 
-## 1. Grounding registry
+## 1. Documentation correction
 
-- GROUNDING REGISTRY RECORDS BEFORE PHASE 34C = 225
-- GROUNDING REGISTRY RECORDS AFTER PHASE 34C = 229
-- PHASE 34C ROWS ADDED = 4
+Rewrite `docs/content/phase34c-ivf-new-article-batch.md` to carry the reconciled record:
 
-Reason for the "226" in the implementation plan: it was a counting artefact, not a real row. The registry file contains one non-record line that also begins `slug:` — the parameter signature `slug: string,` in the lookup helper near the end of the file. A loose `slug:` grep therefore returns records + 1 (today: 230 matches for 229 records). Counting only record literals (`{ slug: "`) gives 229 now and 225 before. The historical 225 baseline stands and is not revised; no extra row ever entered the registry.
+- Review classifications taken verbatim from `phase34a-ivf-gap-register.csv`:
+  `what-ivf-is-uk-guide` = HEALTH_REVIEW_REQUIRED,
+  `nhs-ivf-funding-and-eligibility` = HEALTH_REVIEW_REQUIRED,
+  `ohss-and-ivf-side-effects` = SAFETY_REVIEW_REQUIRED,
+  `when-an-ivf-cycle-does-not-work` = SAFETY_REVIEW_REQUIRED.
+  Totals HEALTH 2 / SAFETY 2 / LOW RISK 0. Human reviews completed = 0. Deployment eligible = 0.
+- Grounding reconciliation: 225 before, 229 after, 4 rows added. The earlier "226" was a counting artefact — a loose grep for `slug:` also matches the helper parameter `slug: string,` near the end of the registry file, so loose matches after 34C = 230 while real record literals = 229. The 225 baseline stands unrevised.
+- Reconfirmed grounding state: approved = 0, candidates = 0, eligible slugs = [], `AI_SOURCE_ROUTING_VERSION` = `30B-source-routing-v1`, metadata changes = 4, runtime behaviour changes = 0.
+- Authoritative contextual-link table (6 occurrences), kept separate from normal discovery = 4 and duplicate discovery = 0:
 
-Final grounding state (verified):
-- approvalStatus approved records = 0 (the only textual match is a comment on line 16)
-- candidate records = 0
-- eligible slugs = []
-- AI_SOURCE_ROUTING_VERSION = `30B-source-routing-v1`
-- GROUNDING REGISTRY METADATA CHANGES = 4
-- GROUNDING RUNTIME BEHAVIOUR CHANGES = 0
+| # | Source | Destination | Occurrences |
+| --- | --- | --- | --- |
+| 1 | `/articles/ivf-timeline-what-to-expect` | `/articles/ohss-and-ivf-side-effects` | 1 |
+| 2 | `/articles/what-ivf-is-uk-guide` | `/articles/nhs-ivf-funding-and-eligibility` | 2 |
+| 3 | `/articles/nhs-ivf-funding-and-eligibility` | `/articles/what-ivf-is-uk-guide` | 2 |
+| 4 | `/ivf/after-transfer` | `/articles/when-an-ivf-cycle-does-not-work` | 1 |
 
-## 2. Review classifications (defect found in documentation)
+- Final authoritative counts block: 4 articles, 4 routes, 4 discovery placements, 6 contextual links, 4 structured-source articles, 0 clickable citations, 4 hero and 8 body images (12 assets), 0 reviewer claims, 0 unsupported JSON-LD `reviewedBy`, registry 225 → 229, sitemap 350 → 354 with 0 duplicates, production deployed = 0, Phase 33 deployment block ACTIVE.
+- Closure line and recommendation B.
 
-Authoritative source is `docs/content/phase34a-ivf-gap-register.csv`:
+## 2. Dead-code cleanup
 
-- `what-ivf-is-uk-guide` (row 1) = HEALTH_REVIEW_REQUIRED
-- `nhs-ivf-funding-and-eligibility` (row 2) = HEALTH_REVIEW_REQUIRED
-- `ohss-and-ivf-side-effects` (row 12) = SAFETY_REVIEW_REQUIRED
-- `when-an-ivf-cycle-does-not-work` (row 15) = SAFETY_REVIEW_REQUIRED
+In `src/data/ivfTopicData.ts`, remove the three Phase 34C link constants confirmed unused (repository references = 0 each, verified):
 
-Totals: HEALTH_REVIEW_REQUIRED = 2, SAFETY_REVIEW_REQUIRED = 2, LOW_RISK_GENERAL = 0.
+- `whatIvfIs` — defined at line 149, referenced nowhere
+- `nhsFunding` — defined at line 150, referenced nowhere
+- `ohss` — defined at line 151, referenced nowhere (the other 12 `ohss` matches are the article slug, not this constant)
 
-Defect: `docs/content/phase34c-ivf-new-article-batch.md` records row 2 as "LOW RISK" and row 15 as "HEALTH". This is a documentation error only; no content, gating or governance behaviour depends on it. Correction is in the change list below.
+`cycleNotWork` is kept; it is referenced at line 426. No rendered content, route, link, article data or discovery changes.
 
-Human reviews completed = 0. Deployment eligible = 0. Reviewer claims rendered = 0. Unsupported JSON-LD reviewedBy = 0.
+## 3. Validation
 
-## 3. Contextual links added in Phase 34C
+Focused Phase 34C tests, full suite, typecheck twice, lint against baseline, and the production build. Confirm the constant removal changes no rendered behaviour.
 
-| Source | Destination | Occurrences |
-| --- | --- | --- |
-| `/articles/ivf-timeline-what-to-expect` | `/articles/ohss-and-ivf-side-effects` | 1 |
-| `/articles/what-ivf-is-uk-guide` | `/articles/nhs-ivf-funding-and-eligibility` | 2 (related-stage link + cross-link) |
-| `/articles/nhs-ivf-funding-and-eligibility` | `/articles/what-ivf-is-uk-guide` | 2 (related-stage link + cross-link) |
-| `/ivf/after-transfer` difficult-news group | `/articles/when-an-ivf-cycle-does-not-work` | 1 |
+## Held backlog (unchanged, not started)
 
-New contextual-link occurrences = 6. Kept separate from normal discovery placements = 4, duplicate normal discovery = 0.
-
-## 4. Images
-
-Hero images generated = 4; body images generated = 8; total new Phase 34C assets = 12. Each article: hero = 1, body = 2. All twelve files present in `src/assets`. Broken images = 0. No hub or page imagery counted.
-
-## 5. Sitemap and routes
-
-Sitemap before = 350, after = 354, delta = +4. Each new URL present exactly once (verified against the generated `public/sitemap.xml`). Duplicates = 0. New article routes = 4. Aliases = 0. Redirects = 0.
-
-## 6. Discovery
-
-Each guide appears exactly once in `IVFGuides`, rendered once from the IVF hub:
-`what-ivf-is-uk-guide` = 1, `nhs-ivf-funding-and-eligibility` = 1, `ohss-and-ivf-side-effects` = 1, `when-an-ivf-cycle-does-not-work` = 1. Total normal-discovery placements = 4. Duplicate normal discovery = 0.
-
-## 7. Final state
-
-New IVF articles = 4. New IVF routes = 4. Structured-source articles = 4. Articles with clickable source citations = 0. Human reviews completed = 0. Reviewer claims = 0. Unsupported machine-facing reviewer claims = 0. Production deployed = 0. GLOBAL PHASE 33 DEPLOYMENT BLOCK = ACTIVE.
-
-Held backlog unchanged: IVF versus ICSI; embryo development; fresh versus frozen embryo transfer; deeper `/ivf/before-transfer` expansion; clinic-questions checklist.
-
-## Changes to apply (documentation and dead code only)
-
-1. `docs/content/phase34c-ivf-new-article-batch.md` — correct the review classifications to HEALTH 2 / SAFETY 2 / LOW RISK 0, and add the registry reconciliation (225 → 229, with the `slug: string` counting-artefact explanation) plus the contextual-link table and the closure line.
-2. `src/data/ivfTopicData.ts` — three link constants added in 34C (`whatIvfIs`, `nhsFunding`, `ohss`) are defined but never referenced; only `cycleNotWork` is used. Remove the three unused constants, or leave them if you would rather keep them for a later phase. No rendered output changes either way.
-
-Validation after the change: run the test suite, typecheck and lint. No deployment.
+IVF versus ICSI; embryo development; fresh versus frozen embryo transfer; deeper `/ivf/before-transfer` expansion; clinic-questions checklist.
 
 ## Closure
 
 PHASE 34C — SMALL IVF NEW-ARTICLE BATCH
 CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT
-— CLOSURE RECONCILED (subject to the two corrections above being applied)
+— CLOSURE RECONCILED
 
-Recommendation: **B. SMALL 34D FOLLOW-UP STILL JUSTIFIED** — the IVF hub still has no owner for IVF versus ICSI, fresh versus frozen transfer or embryo development, each of which readers of the new "what IVF is" guide will ask next. Phase 34D is not started.
+Recommendation: B. SMALL 34D FOLLOW-UP STILL JUSTIFIED. Phase 34D is not started.

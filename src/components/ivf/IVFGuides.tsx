@@ -79,9 +79,10 @@ const IVFGuides = () => {
             Understanding <span className="italic font-normal">the treatment</span>
           </h2>
           <p className="font-sans text-[15px] font-light text-muted-foreground leading-relaxed">
-            Four guides for the questions that sit alongside the stages: what IVF is,
-            how funded treatment is decided, what to watch for during treatment, and
-            what happens if a cycle doesn't work.
+            Guides for the questions that sit alongside the stages: what IVF is,
+            how funded treatment is decided, how fertilisation and transfer routes
+            differ, what to watch for during treatment, and what happens if a cycle
+            doesn't work.
           </p>
         </div>
 

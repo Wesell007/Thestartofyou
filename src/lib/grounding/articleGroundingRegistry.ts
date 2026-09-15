@@ -252,6 +252,10 @@ export const ARTICLE_GROUNDING_REGISTRY: readonly ArticleGroundingRecord[] = [
   { slug: "newborn-quirks-and-reflexes", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "newborn-skin-spots-and-marks", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
   { slug: "common-illnesses-in-the-first-year", journey: ["first-year"], topics: ["care-and-safety"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "what-ivf-is-uk-guide", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "nhs-ivf-funding-and-eligibility", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "ohss-and-ivf-side-effects", journey: ["ivf"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
+  { slug: "when-an-ivf-cycle-does-not-work", journey: ["ivf","support"], topics: ["treatment"], editorialStatus: "draft", archived: false, deprecated: false, hasSourceList: true, approvalStatus: "blocked_draft" },
 ];
 
 const BY_SLUG: ReadonlyMap<string, ArticleGroundingRecord> = new Map(

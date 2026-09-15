@@ -39,7 +39,7 @@ describe("phase 34B — IVF source provenance", () => {
 
   it("records no invented publication years", () => {
     for (const slug of IVF_ARTICLE_SLUGS) {
-      const sources = (findArticle(slug) as { sources?: Array<Record<string, unknown>> }).sources!;
+      const sources = (findArticle(slug) as unknown as { sources?: Array<Record<string, unknown>> }).sources!;
       for (const source of sources) {
         expect(source.year).toBeUndefined();
       }

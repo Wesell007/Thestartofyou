@@ -24840,6 +24840,695 @@ const articleDatabase: ArticleData[] = [
       },
     ],
   },
+  // ── Phase 34C — IVF new-article batch (preview only, human review outstanding) ──
+  {
+    slug: "what-ivf-is-uk-guide",
+    title: "What IVF is: a UK guide to in vitro fertilisation",
+    metaDescription:
+      "A calm UK starting point on what IVF is, how it works in principle, when it may be considered, and how NHS and private pathways differ.",
+    quickAnswer:
+      "IVF, in vitro fertilisation, is a fertility treatment where eggs are collected and fertilised with sperm in a laboratory, and a resulting embryo is placed into the womb. In the UK it is regulated by the HFEA, and treatment plans are set individually by your clinic.",
+    howThisFeels: [
+      "Being handed a lot of new language at once",
+      "Wanting to understand the treatment before deciding anything",
+      "Feeling behind everyone else who seems to know the terms already",
+      "Holding hope and caution at the same time",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Assessment", body: "Tests and a consultation build a picture of what may be affecting conception before any treatment is planned." },
+        { heading: "Treatment", body: "Medication is used to encourage the ovaries to produce more than one egg, with monitoring along the way." },
+        { heading: "Fertilisation and transfer", body: "Eggs are collected and fertilised in the laboratory, and an embryo may then be transferred into the womb." },
+      ],
+      lessCauses: [
+        { heading: "Outcome", body: "A pregnancy test follows the transfer. IVF does not work for everyone, and one cycle is not the whole picture." },
+      ],
+      whyItVaries:
+        "Clinics plan treatment around your own history, test results and how your body responds. Two people described as having the same treatment can have very different plans.",
+    },
+    timing: {
+      whenStarts: "Most people reach IVF after assessment and a referral, not as a first step.",
+      whenEases: "A typical treatment cycle runs over several weeks from the start of medication to a pregnancy test.",
+    },
+    whatItFeelsLike: [
+      "Reading the same explanation three times before it sticks",
+      "Learning terms like stimulation, collection and transfer",
+      "Wanting a clear map before agreeing to anything",
+    ],
+    whatThisMeans:
+      "Understanding the principle of IVF makes the rest of the journey easier to follow. It does not commit you to treatment, and it does not predict whether treatment would work for you.",
+    normal: [
+      "Needing several conversations before it feels clear",
+      "Not knowing which questions to ask at first",
+      "Feeling differently about treatment from week to week",
+    ],
+    seekSupport: [
+      "You are unsure whether IVF is clinically appropriate for you",
+      "You feel pushed towards a decision you are not ready to make",
+      "The emotional weight of deciding is affecting daily life",
+    ],
+    disclaimer:
+      "This is general information, not medical advice. Your fertility clinic and GP are the people who can advise on your own situation.",
+    whatYouCanDo: [
+      { action: "Write down your questions before an appointment", reason: "Consultations move quickly and questions are easy to lose." },
+      { action: "Ask your clinic to explain your own plan in order", reason: "Your protocol may differ from a general description." },
+      { action: "Check what is offered locally on the NHS", reason: "Access to funded treatment is decided locally, not nationally." },
+    ],
+    whatHappensNext:
+      "If treatment goes ahead, your clinic will set out the sequence of your cycle and when each step happens.",
+    relatedStage: {
+      intro: "Explore the IVF journey:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect" },
+        { label: "NHS IVF funding and eligibility", href: "/articles/nhs-ivf-funding-and-eligibility" },
+      ],
+    },
+    aiPrompts: ["What does IVF actually involve?", "Is IVF the right next step for us?", "What should I ask at a first IVF consultation?"],
+    captureIntro: "Understanding the treatment is the first steady footing in a long process.",
+    journey: ["ivf"],
+    topics: ["treatment", "orientation"],
+    productPromotion: "minimal",
+    relatedSlugs: ["ivf-timeline-what-to-expect", "moving-from-ttc-to-ivf", "emotional-impact-of-ivf"],
+    crossLinks: [
+      { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "the full sequence of a cycle, stage by stage" },
+      { label: "NHS IVF funding and eligibility", href: "/articles/nhs-ivf-funding-and-eligibility", context: "how access to funded treatment is decided" },
+    ],
+    keyTakeaways: [
+      "IVF fertilises eggs outside the body and transfers an embryo into the womb",
+      "UK treatment is regulated by the HFEA",
+      "Assessment comes before treatment is planned",
+      "Every treatment plan is individual",
+      "NHS and private access are decided differently",
+    ],
+    inThisArticle: ["What IVF means", "When IVF may be considered", "How IVF fits into fertility treatment", "NHS and private pathways", "Questions for your clinic"],
+    sources: [
+      { label: "In vitro fertilisation (IVF)", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/in-vitro-fertilisation-ivf/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "IVF: what happens", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/what-happens/" },
+      { label: "Infertility: treatment", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "Before the timelines and the protocols, there is a simpler question: what is this treatment, and what is it actually for? Here is the orientation, without the step-by-step.",
+    hero: {
+      src: new URL("../assets/article-hero-what-ivf-is.jpg", import.meta.url).href,
+      alt: "A calm consultation room corner with two soft armchairs, a low wooden table, a notebook and a glass of water in daylight.",
+    },
+    faq: [
+      { question: "What does IVF stand for?", answer: "In vitro fertilisation. In vitro means the fertilisation happens in the laboratory rather than in the body." },
+      { question: "Is IVF the only fertility treatment?", answer: "No. IVF is one of several treatments. Your clinic will discuss which options are appropriate after assessment." },
+      { question: "Who regulates IVF in the UK?", answer: "The Human Fertilisation and Embryology Authority, the HFEA, regulates licensed fertility treatment in the UK." },
+    ],
+    editorialSections: [
+      {
+        id: "what-ivf-means",
+        heading: "What IVF means",
+        lead: "IVF stands for in vitro fertilisation. The principle is straightforward, even when the process around it is not: eggs are collected from the ovaries, brought together with sperm in a laboratory, and an embryo that develops from that can be placed into the womb.",
+        paragraphs: [
+          "Everything else in an IVF cycle exists to make those three things possible and to give them the best chance of working. The medication encourages more than one egg to mature. The scans check how the body is responding. The laboratory stage gives the embryo a few days to develop before transfer.",
+          "In the UK, licensed fertility treatment is regulated by the HFEA, which sets the standards clinics work to and publishes information for patients.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-what-ivf-is-clinic.jpg", import.meta.url).href,
+          alt: "A calm, uncluttered fertility clinic waiting area with pale wood bench seating and a plant in soft daylight.",
+        },
+      },
+      {
+        id: "when-considered",
+        heading: "When IVF may be considered",
+        lead: "IVF is usually discussed after assessment, not before it. That assessment looks for anything that may be affecting conception, and it shapes whether IVF is the appropriate treatment at all.",
+        paragraphs: [
+          "People reach this point by many routes: a known fertility condition, a diagnosis affecting the fallopian tubes, sperm-related factors, unexplained difficulty conceiving over time, or treatment using donor gametes or surrogacy.",
+          "Being offered IVF is not a judgement on anything you have done. It is a clinical decision about which route has the best chance of working for your particular situation.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "If you have not yet had an assessment, that is the step before this one. Your GP can start that conversation.",
+        },
+      },
+      {
+        id: "how-it-fits",
+        heading: "How IVF fits into fertility treatment",
+        lead: "It helps to see treatment as four broad phases rather than a single event: assessment, treatment, transfer and outcome.",
+        subsections: [
+          { subheading: "Assessment", paragraphs: ["Tests, history and a consultation build the clinical picture. Nothing about a treatment plan is fixed until this is done."] },
+          { subheading: "Treatment", paragraphs: ["Medication and monitoring prepare for egg collection. This is the most intensive phase day to day, and the one people usually describe as the busiest."] },
+          { subheading: "Transfer", paragraphs: ["An embryo is placed into the womb, either in the same cycle or in a later frozen cycle. Which of those applies is a clinical decision made with you."] },
+          { subheading: "Outcome", paragraphs: ["A pregnancy test follows. Whatever the result, your clinic will offer a follow-up conversation about what happens next."] },
+        ],
+        image: {
+          src: new URL("../assets/article-body-what-ivf-is-planning.jpg", import.meta.url).href,
+          alt: "Two people's hands resting near an open blank diary and pen on a light oak table in soft window light.",
+        },
+      },
+      {
+        id: "nhs-and-private",
+        heading: "NHS and private pathways",
+        lead: "There are two broad routes to treatment in the UK: NHS-funded treatment, where you meet the criteria that apply where you live, and self-funded treatment at a licensed clinic.",
+        paragraphs: [
+          "Whether you can have NHS-funded treatment depends on where you live and on local eligibility criteria, which vary. NICE makes recommendations about what should be offered, but funding decisions are made locally.",
+          "Clinical suitability and funding eligibility are separate questions. A clinic may consider treatment appropriate for you while local funding criteria still do not cover it, and the reverse can also be true.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Funding and eligibility have their own guide. Start there if access, not process, is your current question.",
+        },
+      },
+      {
+        id: "questions-for-your-clinic",
+        heading: "Questions worth asking your clinic",
+        lead: "You do not need to arrive knowing the language. A few plain questions will get you further than technical ones.",
+        paragraphs: [
+          "Why is this treatment being recommended for us. What would my own plan look like in order. What happens at each appointment and how often would I need to attend. What are the risks I should know about, and what would you want me to ring about.",
+          "Ask what support the clinic offers alongside treatment, including counselling. Licensed clinics are expected to offer counselling, and taking it up is not a sign that you are not coping.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "nhs-ivf-funding-and-eligibility",
+    title: "NHS IVF funding and eligibility in the UK",
+    metaDescription:
+      "How NHS funding for IVF is decided in the UK, why eligibility varies by area, and what to ask your GP or fertility service about local criteria.",
+    quickAnswer:
+      "There is no single UK-wide rule for NHS-funded IVF. Scotland, Wales and Northern Ireland make their own decisions, and in England access is decided locally by integrated care boards. NICE makes recommendations, but local criteria decide what is actually offered where you live.",
+    howThisFeels: [
+      "Reading two accounts that contradict each other",
+      "Not knowing who to ask for a straight answer",
+      "Feeling the unfairness of access depending on a postcode",
+      "Trying to plan when the rules are not clear",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Recommendations are national", body: "NICE recommends what fertility treatment it considers should be provided, and to whom." },
+        { heading: "Funding decisions are local", body: "In England, integrated care boards decide who can have treatment locally and how much. The other UK nations make their own decisions." },
+        { heading: "Criteria vary", body: "Because decisions are local, the criteria used and the number of cycles offered can differ from one area to another." },
+      ],
+      lessCauses: [
+        { heading: "Private treatment", body: "Self-funded treatment at a licensed clinic is a separate route, with its own costs and no funding criteria to meet." },
+      ],
+      whyItVaries:
+        "Recommendations are not the same thing as funding. Local commissioners are free to set their own criteria, so what is available depends on where you live.",
+    },
+    timing: {
+      whenStarts: "Funding questions usually come up at or just after a referral.",
+      whenEases: "Once your GP or fertility service confirms the criteria that apply locally, planning becomes clearer.",
+    },
+    whatItFeelsLike: [
+      "Searching for a rule that turns out not to exist nationally",
+      "Comparing your area with someone else's and finding them different",
+      "Wanting a yes or no long before anyone can give one",
+    ],
+    whatThisMeans:
+      "Nothing you read online, here included, can tell you whether you personally qualify. The people who can tell you are your GP and the fertility service for your area.",
+    normal: [
+      "Finding conflicting information online",
+      "Needing to ask more than once to get a clear answer",
+      "Feeling angry about variation between areas",
+    ],
+    seekSupport: [
+      "You cannot get a clear answer about local criteria",
+      "You want to understand how a funding decision was reached",
+      "The uncertainty is affecting your wellbeing",
+    ],
+    disclaimer:
+      "This is general information, not a statement of your entitlement. Only your GP, your fertility service and your local NHS commissioners can confirm what applies to you.",
+    whatYouCanDo: [
+      { action: "Ask your GP what the criteria are for your area", reason: "Local criteria are the ones that decide access." },
+      { action: "Ask the fertility service to confirm in writing what is funded", reason: "It avoids relying on remembered detail from a busy appointment." },
+      { action: "Ask what a funded cycle includes locally", reason: "The definition of a cycle can differ between areas." },
+      { action: "Ask about costs before agreeing to self-funded treatment", reason: "Private costs vary considerably between clinics." },
+    ],
+    whatHappensNext:
+      "If funded treatment is available to you, your fertility service will explain waiting times and next steps. If it is not, they can set out the other options.",
+    relatedStage: {
+      intro: "Related guidance:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "What IVF is: a UK guide", href: "/articles/what-ivf-is-uk-guide" },
+        { label: "Moving from TTC to IVF", href: "/articles/moving-from-ttc-to-ivf" },
+      ],
+    },
+    aiPrompts: ["How is NHS IVF funding decided?", "What should I ask my GP about IVF funding?", "Why does IVF access vary by area?"],
+    captureIntro: "Access questions are exhausting because the answer genuinely depends on where you live.",
+    journey: ["ivf"],
+    topics: ["treatment", "access"],
+    productPromotion: "minimal",
+    relatedSlugs: ["moving-from-ttc-to-ivf", "what-ivf-is-uk-guide", "what-happens-at-a-fertility-appointment"],
+    crossLinks: [
+      { label: "Moving from TTC to IVF", href: "/articles/moving-from-ttc-to-ivf", context: "the decision point before treatment begins" },
+      { label: "What IVF is: a UK guide", href: "/articles/what-ivf-is-uk-guide", context: "what the treatment involves in principle" },
+    ],
+    keyTakeaways: [
+      "There is no single UK-wide rule for NHS-funded IVF",
+      "NICE recommends; local commissioners decide",
+      "Criteria and the number of cycles vary by area",
+      "Clinical suitability and funding eligibility are separate questions",
+      "Your GP and fertility service can confirm what applies locally",
+    ],
+    inThisArticle: ["Why there is no single rule", "NICE recommendations and local decisions", "Where variation comes from", "Clinical suitability versus funding", "What to ask", "Private treatment as a separate route"],
+    sources: [
+      { label: "Costs and funding", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/costs-and-funding/" },
+      { label: "IVF: availability", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/availability/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "The hardest part of NHS fertility funding is that there is no single answer to find. What exists instead is a national recommendation and a local decision, and only one of them decides what you are offered.",
+    hero: {
+      src: new URL("../assets/article-hero-nhs-ivf-funding.jpg", import.meta.url).href,
+      alt: "A kitchen table in morning light with a closed laptop, a mug of tea, an open blank notebook and a folded envelope.",
+    },
+    faq: [
+      { question: "Is IVF free on the NHS?", answer: "Funded treatment exists, but whether you can have it depends on where you live and on local eligibility criteria. It is not automatic anywhere in the UK." },
+      { question: "Does NICE decide who gets IVF?", answer: "No. NICE makes recommendations about fertility treatment. Funding decisions are made locally, and local commissioners are free to set their own criteria." },
+      { question: "How many cycles are funded?", answer: "This varies by area, and the definition of a cycle can vary too. Ask your GP or fertility service what applies locally." },
+    ],
+    editorialSections: [
+      {
+        id: "no-single-rule",
+        heading: "Why there is no single rule",
+        lead: "People often go looking for the UK rule on NHS-funded IVF and cannot find it. That is not a failure of searching. It does not exist in that form.",
+        paragraphs: [
+          "Scotland, Wales and Northern Ireland each make their own decisions about funding fertility treatment. In England, decisions about who can have treatment, and how much, are made locally by integrated care boards.",
+          "The practical result is that two people with similar histories, living in different places, can be offered different things. That is a real and widely acknowledged variation, not a misunderstanding on your part.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Where access is concerned, local criteria are the ones that count. A rule quoted for another area may not apply to yours.",
+        },
+        image: {
+          src: new URL("../assets/article-body-nhs-funding-gp.jpg", import.meta.url).href,
+          alt: "A quiet GP surgery waiting room corner with upholstered chairs, a side table and a plant beside a frosted window.",
+        },
+      },
+      {
+        id: "nice-and-local",
+        heading: "NICE recommendations and local decisions",
+        lead: "NICE publishes guidance on assessment and treatment for fertility problems, including recommendations about what should be offered and to whom.",
+        paragraphs: [
+          "Those recommendations are influential, but they are recommendations. Local commissioners are not bound to follow them, and in practice what is funded locally may be narrower than what is recommended.",
+          "This is why reading the national guidance can leave you with an expectation that your own service does not meet. Both things can be accurate at once.",
+        ],
+      },
+      {
+        id: "where-variation-sits",
+        heading: "Where variation shows up",
+        lead: "Variation appears in several places at once, which is part of why it is so hard to compare areas.",
+        paragraphs: [
+          "The number of cycles offered can vary. The criteria used to decide eligibility can vary. Even what counts as one cycle can be defined differently in different places, which matters when a frozen transfer is involved.",
+          "Because of that, this guide does not list criteria as though they were universal. Any specific threshold you read about belongs to a particular place and a particular time, and needs checking locally before you rely on it.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Be careful with criteria quoted in forums or older articles. Local criteria change, and a rule that applied somewhere last year may not apply to you now.",
+        },
+      },
+      {
+        id: "suitability-versus-funding",
+        heading: "Clinical suitability and funding eligibility are different",
+        lead: "These two questions get tangled together, and separating them makes conversations clearer.",
+        paragraphs: [
+          "Clinical suitability is about whether treatment is appropriate for you medically, and that is a conversation with a clinician. Funding eligibility is about whether local criteria cover your treatment, and that is a commissioning decision.",
+          "Neither answer predicts the other. It is worth asking both questions explicitly rather than assuming one answer covers both.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-nhs-funding-questions.jpg", import.meta.url).href,
+          alt: "A tidy home desk with a phone face down, a closed notebook with a pen, reading glasses and a mug in warm afternoon light.",
+        },
+      },
+      {
+        id: "what-to-ask",
+        heading: "What to ask your GP or fertility service",
+        lead: "A small number of direct questions will usually get you further than trying to work the rules out yourself.",
+        paragraphs: [
+          "What are the eligibility criteria for funded fertility treatment in this area. How many cycles are funded here, and what does one cycle include. Am I likely to meet the criteria as things stand, and if not, is there anything that would change that. What are the waiting times. If funded treatment is not available to me, what are my options.",
+          "Asking for the answer in writing, or writing it down during the appointment, is reasonable and common.",
+        ],
+      },
+      {
+        id: "private-route",
+        heading: "Private treatment as a separate route",
+        lead: "Self-funded treatment at a licensed clinic is a different route to access, with no funding criteria to satisfy.",
+        paragraphs: [
+          "Costs differ substantially between clinics and between treatment plans, and additional costs can arise during a cycle. It is reasonable to ask for a full written breakdown before agreeing to anything, including what happens to costs if a cycle is stopped.",
+          "This guide does not recommend clinics or providers. The HFEA publishes information for patients about costs and about choosing a licensed clinic.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ohss-and-ivf-side-effects",
+    title: "OHSS and IVF treatment side effects: what to know",
+    metaDescription:
+      "Calm UK guidance on common IVF treatment effects and ovarian hyperstimulation syndrome, including the symptoms that mean you should contact your clinic.",
+    quickAnswer:
+      "Fertility medication can cause symptoms such as bloating and discomfort, and some discomfort after egg collection is common. Ovarian hyperstimulation syndrome, OHSS, is a potentially serious complication of fertility treatment that can range from mild to severe. If you develop symptoms of OHSS, contact your fertility clinic.",
+    howThisFeels: [
+      "Not knowing which sensations are expected and which are not",
+      "Worrying about being a nuisance if you ring the clinic",
+      "Feeling unsettled by symptoms in your own body",
+      "Wanting a clear line between normal and not normal",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Medication effects", body: "Fertility medication changes hormone levels, and bloating, tenderness and tiredness are commonly described during stimulation." },
+        { heading: "After egg collection", body: "Some mild discomfort after egg collection is usual. Your clinic will tell you what to expect and what to watch for." },
+        { heading: "What OHSS is", body: "OHSS is a potentially serious complication of fertility treatment, particularly IVF, where the ovaries over-respond to stimulation. It can range from mild to severe." },
+      ],
+      lessCauses: [
+        { heading: "Why risk differs", body: "Risk is not the same for everyone. Your clinic assesses your own risk and adjusts monitoring and treatment accordingly." },
+      ],
+      whyItVaries:
+        "How a body responds to stimulation varies. That is one of the reasons monitoring exists during a cycle, and why your clinic may change a plan partway through.",
+    },
+    timing: {
+      whenStarts: "Symptoms most often arise during or after stimulation, and OHSS is associated with the period after the trigger injection and egg collection.",
+      whenEases: "Mild cases commonly settle with time and supportive care. More severe cases need specialist assessment and care.",
+    },
+    whatItFeelsLike: [
+      "Bloating and a feeling of fullness in the tummy",
+      "Tenderness and tiredness during stimulation",
+      "Being unsure whether to ring or wait",
+    ],
+    whatThisMeans:
+      "Most people going through IVF do not develop severe OHSS, and mild symptoms are common. That does not make symptoms something to sit on. Contacting your clinic is the right step when something changes or worries you.",
+    normal: [
+      "Bloating and mild abdominal discomfort during stimulation",
+      "Mild discomfort in the days after egg collection",
+      "Feeling tired while taking fertility medication",
+    ],
+    seekSupport: [
+      "Worsening or severe abdominal pain or swelling",
+      "Persistent sickness, or being unable to keep fluids down",
+      "Passing much less urine than usual, or extreme thirst",
+      "Difficulty breathing, chest pain, or pain, redness or swelling in a leg",
+      "Anything that worries you, at any point in the cycle",
+    ],
+    disclaimer:
+      "This is general information and cannot tell you whether you have OHSS. Your fertility clinic is the first point of contact during treatment. If symptoms are severe or you are seriously unwell, seek urgent medical care.",
+    whatYouCanDo: [
+      { action: "Keep your clinic's contact numbers where you can find them", reason: "Including the out-of-hours number, before you need it." },
+      { action: "Ring your clinic if symptoms worsen or worry you", reason: "Clinics expect these calls and would rather hear early." },
+      { action: "Attend your monitoring appointments", reason: "Monitoring is how your clinic tracks how you are responding." },
+      { action: "Take medication exactly as prescribed", reason: "Never change or stop prescribed medication without your clinic's instruction." },
+    ],
+    whatHappensNext:
+      "If you contact your clinic with symptoms, they will advise you on whether you need to be seen and what to do next. Care for OHSS ranges from supportive advice and monitoring through to hospital assessment.",
+    relatedStage: {
+      intro: "Related guidance:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect" },
+        { label: "After transfer", href: "/ivf/after-transfer" },
+      ],
+    },
+    aiPrompts: ["What is OHSS?", "When should I ring my fertility clinic?", "What are common side effects of IVF medication?"],
+    captureIntro: "Knowing what to watch for takes some of the fear out of the treatment weeks.",
+    journey: ["ivf"],
+    topics: ["treatment", "health-and-safety"],
+    productPromotion: "none",
+    relatedSlugs: ["ivf-timeline-what-to-expect", "what-ivf-is-uk-guide", "emotional-impact-of-ivf"],
+    crossLinks: [
+      { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "where stimulation, trigger and collection sit in a cycle" },
+    ],
+    keyTakeaways: [
+      "Some bloating and discomfort during stimulation is commonly described",
+      "OHSS is a potentially serious complication of fertility treatment",
+      "It can range from mild to severe",
+      "Contact your clinic if you develop symptoms of OHSS",
+      "Never stop or change prescribed medication without clinical instruction",
+    ],
+    inThisArticle: ["Common treatment effects", "What OHSS is", "Symptoms and when to contact your clinic", "Urgent symptoms", "Why risk varies", "The role of monitoring"],
+    sources: [
+      { label: "Risks of fertility treatment", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/risks-of-fertility-treatment/" },
+      { label: "IVF: risks", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/risks/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Ovarian hyperstimulation syndrome (OHSS), patient information", publisher: "RCOG", url: "https://www.rcog.org.uk/for-the-public/browse-our-patient-information/ovarian-hyperstimulation-syndrome/", year: "2016" },
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "Most of what fertility medication does to a body is uncomfortable rather than alarming. Knowing where the line sits, and who to ring when you reach it, is the useful part.",
+    hero: {
+      src: new URL("../assets/article-hero-ohss-ivf.jpg", import.meta.url).href,
+      alt: "A calm bedside table with a glass jug of water, a filled glass, a folded cloth and a sprig of eucalyptus in morning light.",
+    },
+    faq: [
+      { question: "Is bloating during IVF normal?", answer: "Bloating and abdominal discomfort are commonly described during stimulation. If discomfort worsens, or is joined by sickness, breathlessness or passing much less urine, contact your clinic." },
+      { question: "Does no symptoms mean no risk?", answer: "No. The absence of symptoms is not a guarantee, which is why monitoring appointments matter and why you should ring your clinic if anything changes." },
+      { question: "Should I stop my medication if I feel unwell?", answer: "Do not stop or change prescribed medication on your own. Contact your clinic and follow their instructions." },
+    ],
+    editorialSections: [
+      {
+        id: "common-effects",
+        heading: "Common treatment effects",
+        lead: "Fertility medication works by changing hormone levels, and bodies respond to that. Bloating, abdominal tenderness, tiredness and mood changes are all commonly described during a stimulation phase.",
+        paragraphs: [
+          "Some mild discomfort after egg collection is also usual. Your clinic will tell you what to expect afterwards, how long it typically lasts, and what they want you to ring about.",
+          "Common does not mean you have to endure anything in silence. If something is more than you expected, that is a reasonable thing to raise with your clinic.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-ohss-medication-care.jpg", import.meta.url).href,
+          alt: "A tidy surface with a fabric pouch, a folded towel, a glass of water and a cloth-wrapped cool pack in soft light.",
+        },
+      },
+      {
+        id: "what-ohss-is",
+        heading: "What OHSS is",
+        lead: "Ovarian hyperstimulation syndrome is a potentially serious complication of fertility treatment, particularly IVF, in which the ovaries respond excessively to stimulation.",
+        paragraphs: [
+          "It can range from mild to severe. Mild OHSS is described as common and usually settles with time, while more severe cases need specialist care and can require hospital admission.",
+          "This guide cannot tell you whether you have OHSS, and nothing here is a substitute for your clinic's assessment. What it can do is help you recognise when to make the call.",
+        ],
+        callout: {
+          tone: "info",
+          text: "OHSS is associated with the period after the trigger injection and egg collection. Your clinic will explain what to watch for at that point in your cycle.",
+        },
+      },
+      {
+        id: "when-to-contact",
+        heading: "Symptoms and when to contact your clinic",
+        lead: "The guidance from UK sources is consistent and simple: if you develop symptoms of OHSS, make contact with your fertility unit.",
+        paragraphs: [
+          "Symptoms described in UK patient information include abdominal swelling and discomfort, sickness, and diarrhoea, with more severe illness involving worsening pain and swelling, marked thirst, passing much less urine, breathlessness and chest pain.",
+          "You do not need to work out the severity yourself before ringing. Describing what has changed is enough, and clinics expect these calls.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Severe abdominal pain or swelling, persistent sickness, passing very little urine, difficulty breathing, chest pain, or pain, redness or swelling in a leg all need medical attention without delay. Contact your clinic, and seek urgent care if you are seriously unwell or cannot reach them.",
+        },
+        image: {
+          src: new URL("../assets/article-body-ohss-monitoring.jpg", import.meta.url).href,
+          alt: "A calm clinic room with a neatly made examination couch, a chair and daylight through a window.",
+        },
+      },
+      {
+        id: "why-risk-varies",
+        heading: "Why individual risk varies",
+        lead: "Risk is not evenly distributed. Some people are more likely to over-respond to stimulation than others, and clinics assess that before and during treatment.",
+        paragraphs: [
+          "That assessment is part of why protocols differ between people, and why a plan may be adjusted partway through a cycle. A change to your plan is usually a sign that monitoring is doing its job.",
+          "Having no symptoms is not proof that nothing is developing, which is why attending monitoring appointments matters even in a cycle that feels straightforward.",
+        ],
+      },
+      {
+        id: "role-of-monitoring",
+        heading: "The role of clinic monitoring",
+        lead: "Scans and blood tests during stimulation exist to track how your body is responding, and to catch an excessive response early.",
+        paragraphs: [
+          "Keep your clinic's contact details, including the out-of-hours number, somewhere you can find them quickly. It is much easier to have that to hand than to look for it while feeling unwell.",
+          "Do not change, pause or stop prescribed medication on your own, and do not act on a dose or protocol described by someone else online. Those decisions belong with the clinic that knows your cycle.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "when-an-ivf-cycle-does-not-work",
+    title: "When an IVF cycle doesn't work: what happens next",
+    metaDescription:
+      "Compassionate UK guidance for after an unsuccessful IVF cycle: the follow-up appointment, what may be discussed, and how decisions about trying again are approached.",
+    quickAnswer:
+      "An unsuccessful cycle can happen for many reasons, and often there is no single clear explanation. Your clinic will offer a follow-up conversation to look at what happened in the cycle and to discuss whether, and how, treatment might continue. There is no requirement to decide anything quickly.",
+    howThisFeels: [
+      "Grief that surprises you with its size",
+      "Wanting answers that may not exist",
+      "Feeling out of step with a partner who is coping differently",
+      "Not knowing whether you have another attempt in you",
+    ],
+    whatHappening: {
+      commonCauses: [
+        { heading: "Often there is no single reason", body: "The most common reason given is that the embryo does not continue to develop in the womb, and frequently there is no obvious explanation for that." },
+        { heading: "A follow-up conversation", body: "Clinics offer a review appointment to talk through the cycle and what, if anything, it suggests for the future." },
+        { heading: "Whether to try again", body: "Whether another attempt is appropriate, and whether anything would be done differently, is an individual clinical conversation." },
+      ],
+      lessCauses: [
+        { heading: "Stopping or pausing", body: "Deciding to pause or to stop treatment is a legitimate outcome of that conversation, not a failure to see it through." },
+      ],
+      whyItVaries:
+        "People arrive at this point with different histories, different numbers of attempts behind them and different circumstances. That is why there is no standard answer about what should happen next.",
+    },
+    timing: {
+      whenStarts: "The result lands first, and clarity usually comes later.",
+      whenEases: "Many people find the follow-up appointment easier once the first days have passed. There is no set timetable for feeling steadier.",
+    },
+    whatItFeelsLike: [
+      "The strange quiet after weeks of appointments",
+      "Rereading messages and results looking for a reason",
+      "Being asked what you will do next before you know",
+    ],
+    whatThisMeans:
+      "An unsuccessful cycle is information about one cycle. It does not, on its own, explain why treatment did not work, and it is not evidence that you did something wrong.",
+    normal: [
+      "Grief, anger, numbness, or all three in a day",
+      "Needing time before making any decision",
+      "Wanting to talk about it, or not wanting to at all",
+    ],
+    seekSupport: [
+      "Your mood has been low for a sustained period",
+      "You feel unable to cope day to day",
+      "You and a partner are stuck in different places about what comes next",
+      "If you ever feel unsafe or that life is not worth living, contact your GP, NHS 111, or the Samaritans on 116 123",
+    ],
+    disclaimer:
+      "This is general information, not advice about your own treatment. Your clinic is the right place for questions about your cycle and your options.",
+    whatYouCanDo: [
+      { action: "Take the follow-up appointment, even if you are unsure about more treatment", reason: "It is the place to ask what the cycle showed." },
+      { action: "Write your questions down beforehand", reason: "It is hard to think clearly in an emotional appointment." },
+      { action: "Ask about counselling through your clinic", reason: "Licensed clinics are expected to offer counselling alongside treatment." },
+      { action: "Give yourself time before deciding", reason: "A decision made in the first days is rarely the one you need to make." },
+    ],
+    whatHappensNext:
+      "After the review, some people go on to another cycle, some make changes to the plan, some pause, and some decide to stop. All of those are real outcomes of an honest conversation.",
+    relatedStage: {
+      intro: "Related guidance:",
+      links: [
+        { label: "IVF Hub", href: "/ivf" },
+        { label: "The emotional impact of IVF", href: "/articles/emotional-impact-of-ivf" },
+        { label: "Support Hub", href: "/support" },
+      ],
+    },
+    aiPrompts: ["What happens at an IVF follow-up appointment?", "How do people decide whether to try IVF again?", "Where can I find support after an unsuccessful cycle?"],
+    captureIntro: "This is the hardest stretch of the journey, and the one people prepare for least.",
+    journey: ["ivf", "support"],
+    topics: ["treatment", "emotional-wellbeing"],
+    productPromotion: "none",
+    relatedSlugs: ["emotional-impact-of-ivf", "chemical-pregnancy", "ivf-timeline-what-to-expect"],
+    crossLinks: [
+      { label: "The emotional impact of IVF", href: "/articles/emotional-impact-of-ivf", context: "the emotional experience across the whole of treatment" },
+    ],
+    keyTakeaways: [
+      "An unsuccessful cycle often has no single clear explanation",
+      "One cycle does not by itself explain why treatment did not work",
+      "The follow-up appointment is where the cycle is reviewed",
+      "Whether to change anything, or try again, is individual",
+      "Pausing or stopping is a legitimate decision",
+    ],
+    inThisArticle: ["Why a cycle may not work", "The follow-up appointment", "Questions worth asking", "The emotional impact", "Deciding what comes next", "Pausing or stopping", "Where to find support"],
+    sources: [
+      { label: "Coping if treatment doesn't work", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/coping-if-treatment-doesnt-work/" },
+      { label: "Getting emotional support", publisher: "HFEA", url: "https://www.hfea.gov.uk/treatments/explore-all-treatments/getting-emotional-support/" },
+      { label: "IVF", publisher: "NHS", url: "https://www.nhs.uk/conditions/ivf/" },
+      { label: "Get support", publisher: "Fertility Network UK", url: "https://fertilitynetworkuk.org/get-support/" },
+      { label: "Find a counsellor", publisher: "BICA", url: "https://www.bica.net/find-a-counsellor" },
+    ],
+    lastUpdated: "September 2026",
+    standfirst:
+      "The days after an unsuccessful cycle are quiet in a way that is hard to describe. This is about what happens next, clinically and personally, without any pressure to decide today.",
+    hero: {
+      src: new URL("../assets/article-hero-ivf-cycle-not-work.jpg", import.meta.url).href,
+      alt: "A quiet window seat with a wool blanket, a cup of tea on the sill and dried flowers, with soft rain-light outside.",
+    },
+    faq: [
+      { question: "Will the clinic be able to tell me why it didn't work?", answer: "Sometimes a cycle points to something specific, and often it does not. The most commonly given reason is that the embryo did not continue to develop, frequently without an obvious explanation." },
+      { question: "How long should we wait before trying again?", answer: "There is no universal waiting period. Your clinic will advise based on your own treatment and recovery, and your own readiness matters too." },
+      { question: "Is counselling available?", answer: "Licensed UK clinics are expected to offer counselling, and organisations such as Fertility Network UK and BICA also provide support." },
+    ],
+    editorialSections: [
+      {
+        id: "why-a-cycle-may-not-work",
+        heading: "Why a cycle may not work",
+        lead: "The first thing worth saying plainly: an unsuccessful cycle is not something you caused. Nothing you ate, lifted, felt or worried about is the reason.",
+        paragraphs: [
+          "UK patient information describes the most common reason as the embryo not continuing to develop in the womb, and notes that there is often no obvious explanation for why that happens. That absence of an answer is genuinely hard to sit with.",
+          "It is also why a single unsuccessful cycle rarely explains itself. It is one data point about one cycle, not a verdict on whether treatment could ever work.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-ivf-not-work-conversation.jpg", import.meta.url).href,
+          alt: "Two mugs of tea on a kitchen table between two empty chairs, with greenery in a vase in soft daylight.",
+        },
+      },
+      {
+        id: "follow-up-appointment",
+        heading: "The follow-up appointment",
+        lead: "Clinics offer a review conversation after an unsuccessful cycle. It is worth taking, even if you do not know whether you want more treatment.",
+        paragraphs: [
+          "The purpose is to look at what happened during the cycle: how you responded to medication, what happened at collection and in the laboratory, and whether anything in that sequence suggests a change for the future.",
+          "It is also the place to ask what your chances would be if you tried again, which is a question your clinician can answer for your situation in a way that no general article can.",
+        ],
+      },
+      {
+        id: "questions-worth-asking",
+        heading: "Questions worth asking",
+        lead: "Appointments like this go quickly, and grief makes it harder to hold a list in your head. Writing the questions down in advance helps.",
+        paragraphs: [
+          "What did this cycle show about how I responded. Is there anything you would do differently next time, and why. Are any further tests appropriate for us, or not. What would you expect our chances to be with another attempt. How long would you advise waiting. What support is available here.",
+          "If a clinician suggests a change of approach or an additional test, it is fair to ask what evidence supports it and what difference it would be expected to make.",
+        ],
+        callout: {
+          tone: "info",
+          text: "Not every unsuccessful cycle leads to a change of plan. Sometimes the honest answer is that the same approach is still the appropriate one.",
+        },
+      },
+      {
+        id: "emotional-impact",
+        heading: "The emotional impact",
+        lead: "People often describe an unsuccessful cycle as a bereavement, and speak about the loss of a future they had already begun to picture.",
+        paragraphs: [
+          "Partners frequently grieve differently and on different timelines, which can feel like distance at the very moment you most need to be close. Naming that out loud tends to help more than trying to synchronise.",
+          "The emotional experience of treatment as a whole has its own guide, and this one does not try to replace it. If what you need right now is words for the feeling rather than the clinical next step, start there.",
+        ],
+        image: {
+          src: new URL("../assets/article-body-ivf-not-work-walk.jpg", import.meta.url).href,
+          alt: "Two people walking away along a quiet tree-lined park path in soft overcast autumn light.",
+        },
+      },
+      {
+        id: "deciding-what-comes-next",
+        heading: "Deciding what comes next",
+        lead: "Give yourself time. A decision taken in the first raw days is rarely the decision you need to make.",
+        paragraphs: [
+          "Whether another attempt is appropriate depends on clinical factors, on funding or cost, and on what you have the capacity for. Those three rarely line up neatly, and weighing them is not a sign of insufficient commitment.",
+          "It can help to agree with a partner on when you will revisit the question, rather than trying to answer it while you are both still in the middle of it.",
+        ],
+      },
+      {
+        id: "pausing-or-stopping",
+        heading: "Pausing or stopping treatment",
+        lead: "Choosing to pause, or to stop, is a real and valid outcome of this conversation.",
+        paragraphs: [
+          "People stop for many reasons: the clinical picture, cost, the toll on health or relationships, or simply knowing they have reached the end of what they can carry. None of those is giving up.",
+          "If you and a partner see this differently, an impartial counsellor can help you talk it through. That is one of the situations UK patient information specifically suggests counselling for.",
+        ],
+        callout: {
+          tone: "reassurance",
+          text: "There is no correct number of attempts, and no one else's threshold is the measure of yours.",
+        },
+      },
+      {
+        id: "where-to-find-support",
+        heading: "Where to find support",
+        lead: "Support exists outside the clinic as well as inside it.",
+        paragraphs: [
+          "Licensed UK clinics are expected to offer counselling alongside treatment. Fertility Network UK provides support for people affected by fertility problems, and BICA can help you find an accredited fertility counsellor.",
+          "If your mood has been low for a sustained period, or you feel unable to cope, speak to your GP. If you ever feel unsafe, contact NHS 111 or the Samaritans on 116 123.",
+        ],
+      },
+    ],
+  },
 ];
 
 // ─── Public API ────────────────────────────────────────────────────────────

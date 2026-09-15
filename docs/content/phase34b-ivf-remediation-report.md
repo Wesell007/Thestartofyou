@@ -121,7 +121,9 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 - Lint: unchanged against baseline — 1 pre-existing error in the generated `previewAuthStorage.ts` and 10 pre-existing fast-refresh warnings.
 - Production build: passed.
 - Frontend QA at 1280px and 390px across `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, both IVF articles and `moving-from-ttc-to-ivf`: no horizontal overflow, no broken images, no external anchors in source citations, no reviewer claims, no "Jenny Joines". The only console warning is the pre-existing React `fetchPriority` casing warning.
+- Tablet QA at 834px across `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, the IVF timeline article, the emotional-impact-of-ivf article and `moving-from-ttc-to-ivf`: horizontal overflow = 0, broken images = 0, images loaded = 107, broken layout = 0, source citations visible = YES where applicable, clickable anchors inside source sections = 0, reviewer claims = 0, contextual link targets checked = 9, broken contextual link targets = 0, IVF hub occurrence of `moving-from-ttc-to-ivf` = 1. Console: one pre-existing React `fetchPriority` warning only; no new runtime error.
 - Route and internal-link validation: all IVF link targets resolve; broken references = 0.
+
 
 ## 10. Completion counts
 

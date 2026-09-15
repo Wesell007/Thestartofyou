@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getAllArticles, type ArticleData } from "@/data/articleData";
 import { articleInventory } from "@/data/articleInventory";
 import { ARTICLE_GROUNDING_REGISTRY } from "@/lib/grounding/articleGroundingRegistry";
-import { evaluateGroundingEligibility } from "@/lib/grounding/articleGroundingEligibility";
+import { listGroundingEligibleSlugs } from "@/lib/grounding/articleGroundingEligibility";
 import { REVIEW_PROVENANCE_REGISTRY } from "@/lib/reviewClaims";
 import { ivfTopicConfigs } from "@/data/ivfTopicData";
 import ivfGuidesSource from "../components/ivf/IVFGuides.tsx?raw";
@@ -219,8 +219,7 @@ describe("phase 34D — governance and grounding", () => {
   });
 
   it("keeps grounding approvals, candidates and eligibility empty", () => {
-    const result = evaluateGroundingEligibility();
-    expect(result.eligibleSlugs).toEqual([]);
+    expect(listGroundingEligibleSlugs()).toEqual([]);
     expect(
       ARTICLE_GROUNDING_REGISTRY.filter((r) => r.approvalStatus === "approved"),
     ).toHaveLength(0);

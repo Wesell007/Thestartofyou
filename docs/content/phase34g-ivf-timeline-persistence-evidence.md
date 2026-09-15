@@ -73,5 +73,13 @@ Automated browser pass at 1280, 834 and 390 across `/ivf`, `/ivf-timeline`,
 
 ## Deployment state
 
-Production migration applied = NO (validated in the non-production workflow
-only). Production deployed = 0. Feature flag enabled = NO.
+The schema change was applied through the project's only migration workflow. On
+this hosting one database instance serves both the preview and the published
+app, so there is no separate non-production database to validate against: the
+two additive nullable columns and the paired constraint now exist on that shared
+instance. No application code was deployed, no existing row was changed, and no
+access rule was altered, so the live published app is unaffected.
+
+Application deployed = NO (nothing published). Feature flag enabled = NO. No
+Save, Update or Clear control exists.
+

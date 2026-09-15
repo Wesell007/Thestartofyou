@@ -13,7 +13,7 @@ Global Phase 33 deployment block: **ACTIVE**. Production deployed = 0.
 | 10 | Fresh versus frozen embryo transfer | NEW_ARTICLE, HEALTH_REVIEW_REQUIRED | IMPLEMENTED as `/articles/fresh-vs-frozen-embryo-transfer` |
 | 11 | Embryo freezing and storage | INTERNAL_LINK, LOW_RISK_GENERAL | Covered as supporting coverage inside row 10 with an HFEA signpost. No new route, no standalone article. |
 
-Historical Phase 34A counts are not rewritten. Only outcome annotations were added.
+Historical Phase 34A counts and rows are not rewritten. The gap register has no status column, so outcomes are recorded here rather than inside the CSV.
 
 ## 2. Articles created
 
@@ -121,7 +121,7 @@ Editorial, warm, calm, realistic, UK appropriate. No text, no branding, no graph
 - `src/assets/` — six new images.
 - `src/test/phase34dIvfRefinement.test.ts` — new focused suite.
 - `src/test/articleGrounding.test.ts`, `src/test/articleGroundingApproval.test.ts`, `src/test/phase34cIvfNewArticles.test.ts` — pinned counts updated.
-- `docs/content/phase34a-ivf-gap-register.csv` — outcome annotations only.
+- `docs/content/phase34a-ivf-gap-register.csv` — unchanged. The register carries no status column, so 34D outcomes are annotated in section 1 of this report rather than by editing historical rows.
 
 ## 12. Final counts
 

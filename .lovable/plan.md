@@ -22,9 +22,10 @@ Extract the existing hub calculator into `src/components/ivf/IVFTimelineForm.tsx
 
 Transfer date and type are treatment information. The hub currently passes them in the visible web address, where they can end up in browser history, server logs and referrers.
 
-- The hub to timeline handoff moves to ephemeral in-app navigation state, so nothing sensitive appears in the address bar.
-- Reading the existing address parameters stays supported for people who bookmarked or shared a link, but nothing new is added to them.
-- Verified: analytics record only the page path, never the parameters. This is documented as a privacy item to resolve before saving is ever switched on.
+- Every new calculation moves to ephemeral in-app navigation state, so nothing sensitive is ever put into the address bar again.
+- Old bookmarked or shared links still open correctly. Resolution order: navigation state, then the old address parameters, then the plain calculator. After a valid old link is read, the values are held in memory and the treatment details are removed from the visible address, leaving a clean `/ivf-timeline`.
+- Exposure that already happened through an old link cannot be undone retroactively; this is recorded in the report.
+- Verified: analytics record only the page path, never these values. This is documented as a privacy item to resolve before saving is ever switched on.
 
 ## 5. No Save UI
 

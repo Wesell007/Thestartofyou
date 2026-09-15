@@ -2,6 +2,12 @@ import { format } from "date-fns";
 import { supabase } from "@/integrations/supabase/client";
 import { deriveTTCDates, computeTTCStage } from "@/lib/ttcDerived";
 import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
+import {
+  isIVFTransferType,
+  isValidNewIVFTransferDate,
+  parseIVFTransferDate,
+  type IVFTransferType,
+} from "@/lib/ivfTimeline";
 
 /**
  * Local-first TTC journey save.
@@ -166,4 +172,119 @@ export const deleteTTCJourney = async (userId: string): Promise<void> => {
   const { error } = await supabase.rpc("delete_active_journey", { p_lifecycle: "ttc" });
   if (error) throw error;
   notifyJourneyStateChanged();
+};
+
+/* ------------------------------------------------------------------ *
+ * Phase 34G — optional IVF timeline context on the existing TTC row.
+ *
+ * IVF is a treatment context within the trying-to-conceive journey, not a
+ * fourth saved lifecycle. These helpers:
+ *   - resolve the authenticated user internally (no caller-supplied id)
+ *   - UPDATE the existing ttc_journeys row only — never insert, never upsert
+ *   - prove a row was actually matched instead of trusting "no error"
+ *   - store only the two source values; every milestone stays derived
+ * Nothing calls them while IVF_TIMELINE_SAVE_ENABLED is off.
+ * ------------------------------------------------------------------ */
+
+export type IVFTimelineContext = {
+  transfer_date: string | null;
+  transfer_type: IVFTransferType | null;
+};
+
+export type IVFTimelineLoadResult =
+  | { ok: true; context: IVFTimelineContext }
+  | { ok: false; reason: "no_ttc_journey" }
+  | { ok: false; reason: "not_authenticated" }
+  | { ok: false; reason: "error"; message: string };
+
+export type IVFTimelineWriteResult =
+  | { ok: true }
+  | { ok: false; reason: "no_ttc_journey" }
+  | { ok: false; reason: "not_authenticated" }
+  | { ok: false; reason: "invalid_context" }
+  | { ok: false; reason: "error"; message: string };
+
+const EMPTY_IVF_CONTEXT: IVFTimelineContext = { transfer_date: null, transfer_type: null };
+
+type AuthFailure =
+  | { ok: false; reason: "not_authenticated" }
+  | { ok: false; reason: "error"; message: string };
+
+type AuthResolution = { ok: true; userId: string } | AuthFailure;
+
+const resolveAuthenticatedUserId = async (): Promise<AuthResolution> => {
+  const { data, error } = await supabase.auth.getSession();
+  if (error) return { ok: false, reason: "error", message: error.message };
+  const userId = data.session?.user.id;
+  if (!userId) return { ok: false, reason: "not_authenticated" };
+  return { ok: true, userId };
+};
+
+/**
+ * Read the stored IVF context for the signed-in person.
+ *
+ * Historical context never expires: we validate shape and transfer type only,
+ * and deliberately do not apply the calculator's entry window here.
+ */
+export const loadIVFTimelineContext = async (): Promise<IVFTimelineLoadResult> => {
+  const auth = await resolveAuthenticatedUserId();
+  if (!auth.ok) return auth as AuthFailure;
+
+  const { data, error } = await supabase
+    .from("ttc_journeys")
+    .select("ivf_transfer_date, ivf_transfer_type")
+    .eq("user_id", auth.userId)
+    .maybeSingle();
+  if (error) return { ok: false, reason: "error", message: error.message };
+  if (!data) return { ok: false, reason: "no_ttc_journey" };
+
+  const type = isIVFTransferType(data.ivf_transfer_type) ? data.ivf_transfer_type : null;
+  const date = parseIVFTransferDate(data.ivf_transfer_date) ? (data.ivf_transfer_date as string) : null;
+  if (!type || !date) return { ok: true, context: EMPTY_IVF_CONTEXT };
+  return { ok: true, context: { transfer_date: date, transfer_type: type } };
+};
+
+/**
+ * Explicitly save or update the IVF context on the signed-in person's existing
+ * TTC journey. Never creates a journey: with no row we report no_ttc_journey.
+ */
+export const saveIVFTimelineContext = async (context: {
+  transfer_date: string;
+  transfer_type: IVFTransferType;
+}): Promise<IVFTimelineWriteResult> => {
+  if (!isIVFTransferType(context?.transfer_type)) return { ok: false, reason: "invalid_context" };
+  if (!isValidNewIVFTransferDate(context?.transfer_date)) return { ok: false, reason: "invalid_context" };
+
+  const auth = await resolveAuthenticatedUserId();
+  if (!auth.ok) return auth;
+
+  const { data, error } = await supabase
+    .from("ttc_journeys")
+    .update({
+      ivf_transfer_date: context.transfer_date,
+      ivf_transfer_type: context.transfer_type,
+    })
+    .eq("user_id", auth.userId)
+    .select("user_id");
+  if (error) return { ok: false, reason: "error", message: error.message };
+  if (!data || data.length === 0) return { ok: false, reason: "no_ttc_journey" };
+  return { ok: true };
+};
+
+/**
+ * Explicitly clear the IVF context. Sets both values to null together and
+ * leaves the TTC journey, its answers and every other journey untouched.
+ */
+export const clearIVFTimelineContext = async (): Promise<IVFTimelineWriteResult> => {
+  const auth = await resolveAuthenticatedUserId();
+  if (!auth.ok) return auth;
+
+  const { data, error } = await supabase
+    .from("ttc_journeys")
+    .update({ ivf_transfer_date: null, ivf_transfer_type: null })
+    .eq("user_id", auth.userId)
+    .select("user_id");
+  if (error) return { ok: false, reason: "error", message: error.message };
+  if (!data || data.length === 0) return { ok: false, reason: "no_ttc_journey" };
+  return { ok: true };
 };

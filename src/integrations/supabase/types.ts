@@ -1036,6 +1036,8 @@ export type Database = {
           fertile_window_start: string | null
           id: string
           ivf_consideration: string | null
+          ivf_transfer_date: string | null
+          ivf_transfer_type: string | null
           last_period_date: string | null
           likely_ovulation_date: string | null
           period_length_days: number | null
@@ -1059,6 +1061,8 @@ export type Database = {
           fertile_window_start?: string | null
           id?: string
           ivf_consideration?: string | null
+          ivf_transfer_date?: string | null
+          ivf_transfer_type?: string | null
           last_period_date?: string | null
           likely_ovulation_date?: string | null
           period_length_days?: number | null
@@ -1082,6 +1086,8 @@ export type Database = {
           fertile_window_start?: string | null
           id?: string
           ivf_consideration?: string | null
+          ivf_transfer_date?: string | null
+          ivf_transfer_type?: string | null
           last_period_date?: string | null
           likely_ovulation_date?: string | null
           period_length_days?: number | null

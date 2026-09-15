@@ -44,8 +44,15 @@ export const isProtectedPath = (pathname: string): boolean =>
  */
 export const SETUP_RETURN_PREFIXES = ["/setup/pregnancy"];
 
+/**
+ * Public tool routes that are safe to return to after signing in. They carry
+ * no answers in the URL, and no tool values are preserved across sign-in.
+ */
+export const PUBLIC_TOOL_RETURN_PATHS = ["/ivf-timeline"];
+
 const isSetupReturnPath = (pathname: string): boolean =>
-  SETUP_RETURN_PREFIXES.some((p) => pathname === p);
+  SETUP_RETURN_PREFIXES.some((p) => pathname === p) ||
+  PUBLIC_TOOL_RETURN_PATHS.some((p) => pathname === p);
 
 /**
  * Only allow internal, protected paths as return targets. This blocks

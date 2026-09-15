@@ -37,3 +37,15 @@
 - [x] No save control, no persistence write, no new lifecycle, no schema, AI or grounding change
 - [x] Documented storage audit, future save flow, sign-in handoff and privacy gates
 - [x] Focused tests (15), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390; no deployment
+
+## Phase 34G — IVF timeline persistence foundation — CLOSED PASS (feature OFF)
+- [x] Storage owner confirmed as existing `public.ttc_journeys`; no new table, no IVF lifecycle
+- [x] Added 2 nullable columns (`ivf_transfer_date` date, `ivf_transfer_type` text) with no backfill
+- [x] Paired-state CHECK constraint; partial IVF context impossible (null-safe form verified)
+- [x] Neutral domain module `src/lib/ivfTimeline.ts`; persistence imports no React component
+- [x] `loadIVFTimelineContext` / `saveIVFTimelineContext` / `clearIVFTimelineContext` with internal auth ownership
+- [x] Update-only writes with matched-row verification; zero-row result returns `no_ttc_journey`
+- [x] `IVF_TIMELINE_SAVE_ENABLED` defaults FALSE; no Save/Update/Clear UI; no visitor-facing change
+- [x] `/ivf-timeline` accepted as a return route; no values preserved across sign-in
+- [x] Focused tests (24), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390
+- [ ] Privacy and legal review required before any activation; production deployment = 0

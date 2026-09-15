@@ -147,7 +147,10 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 | SAFETY_REVIEW_REQUIRED changed items | 2 |
 | Human reviews completed | 0 |
 | Reviewer claims rendered | 0 |
+| Unsupported JSON-LD `reviewedBy` | 0 |
 | Production deployed | 0 |
+| GLOBAL PHASE 33 DEPLOYMENT BLOCK | ACTIVE |
+
 
 Boundaries held at 0: new lifecycles, saved-lifecycle changes (still exactly `ttc`, `pregnancy`, `first_year`), AI runtime changes, grounding eligibility changes, journal changes, memory changes, voice changes, database/schema/RLS changes, imagery changes, sitemap changes, deployment.
 

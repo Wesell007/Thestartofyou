@@ -1,25 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { format, subDays } from "date-fns";
-import { CalendarIcon, ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import IVFTimelineForm from "@/components/ivf/IVFTimelineForm";
 import heroMoment from "@/assets/ivf-hero-moment.jpg";
 
 const IVFHero = () => {
-  const navigate = useNavigate();
-  const [transferDate, setTransferDate] = useState<Date>();
-  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
-  const [open, setOpen] = useState(false);
-
-  const handleTrack = () => {
-    if (transferDate) {
-      navigate(`/ivf-timeline?date=${transferDate.getTime()}&type=${transferType}`);
-    }
-  };
-
   return (
     <section className="relative bg-parchment overflow-hidden pt-28 md:pt-32 pb-12 md:pb-16">
 
@@ -48,78 +30,8 @@ const IVFHero = () => {
               Track your timeline, find answers to the questions that come between appointments, and move through each stage with clarity.
             </p>
 
-            {/* Calculator card — the primary utility object */}
-            <div
-              className="w-full rounded-2xl p-5 sm:p-6 animate-fade-up [animation-delay:0.2s] space-y-3.5 border backdrop-blur-sm"
-              style={{
-                backgroundColor: 'hsl(var(--stage-ivf) / 0.18)',
-                borderColor: 'hsl(var(--stage-ivf-accent) / 0.18)',
-              }}
-            >
-              <p className="font-sans text-xs font-light tracking-[0.15em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>
-                Track your IVF timeline
-              </p>
-
-              <div>
-                <p className="font-sans text-[11px] font-light text-muted-foreground/70 mb-1.5 text-left">Embryo transfer date</p>
-                <Popover open={open} onOpenChange={setOpen}>
-                  <PopoverTrigger asChild>
-                    <button
-                      className={cn(
-                        "w-full flex items-center justify-between bg-card border border-border/60 rounded-xl px-4 py-3 font-sans text-sm font-light transition-all hover:border-sage/40 focus:outline-none",
-                        transferDate ? "text-foreground" : "text-muted-foreground"
-                      )}
-                    >
-                      <span>{transferDate ? format(transferDate, "d MMMM yyyy") : "Select your transfer date"}</span>
-                      <CalendarIcon size={14} className="text-sage-muted" />
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 border border-border/60 shadow-soft rounded-xl" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={transferDate}
-                      onSelect={(d) => { setTransferDate(d); setOpen(false); }}
-                      disabled={(date) => date > new Date() || date < subDays(new Date(), 300)}
-                      initialFocus
-                      className={cn("p-3 pointer-events-auto")}
-                    />
-                  </PopoverContent>
-                </Popover>
-              </div>
-
-              <div>
-                <p className="font-sans text-[11px] font-light text-muted-foreground/70 mb-1.5 text-left">Transfer type</p>
-                <div className="relative">
-                  <select
-                    value={transferType}
-                    onChange={(e) => setTransferType(e.target.value as "5day" | "3day")}
-                    className="w-full appearance-none bg-card border border-border/60 rounded-xl px-4 py-3 font-sans text-sm font-light text-foreground focus:outline-none hover:border-sage/40 transition-all pr-10"
-                  >
-                    <option value="5day">5-day transfer (blastocyst)</option>
-                    <option value="3day">3-day transfer (cleavage)</option>
-                  </select>
-                  <svg className="absolute right-4 top-1/2 -translate-y-1/2 text-sage-muted pointer-events-none w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-
-              <Button
-                onClick={handleTrack}
-                disabled={!transferDate}
-                className={cn(
-                  "w-full h-auto flex items-center justify-center gap-2 rounded-pill px-7 py-3.5 font-sans text-sm font-medium transition-all bg-terracotta text-terracotta-foreground shadow-cta",
-                  transferDate ? "hover:bg-terracotta-hover" : "opacity-50 cursor-not-allowed"
-                )}
-              >
-                <ArrowRight size={15} />
-                Track your timeline
-              </Button>
-
-              <p className="font-sans text-[10px] font-light text-muted-foreground/40 text-center leading-relaxed pt-0.5">
-                An estimate based on your transfer date. Experiences can vary.
-              </p>
-            </div>
+            {/* Calculator card — one shared implementation (Phase 34F) */}
+            <IVFTimelineForm className="animate-fade-up [animation-delay:0.2s]" />
           </div>
 
           {/* Right column — single photographic moment + quiet truth band */}

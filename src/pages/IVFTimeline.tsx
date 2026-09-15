@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
-import { useSearchParams, Navigate } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import IVFTimelineResult from "@/components/ivf/IVFTimelineResult";
+import IVFTimelineForm, {
+  IVF_TIMELINE_ROUTE,
+  type IVFTimelineNavState,
+  type IVFTransferType,
+} from "@/components/ivf/IVFTimelineForm";
 import SeoHead from "@/components/seo/SeoHead";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -18,59 +23,72 @@ const TIMELINE_SEO = (
   />
 );
 
+const isTransferType = (value: unknown): value is IVFTransferType =>
+  value === "5day" || value === "3day";
+
+/** Accept only a real, recent, non-future transfer date. */
+const resolveTransferDate = (ms: unknown): Date | null => {
+  const ts = Number(ms);
+  if (!Number.isFinite(ts)) return null;
+  const candidate = new Date(ts);
+  const today = startOfDay(new Date());
+  if (!isValid(candidate)) return null;
+  if (isAfter(candidate, today)) return null;
+  if (isBefore(candidate, addDays(today, -300))) return null;
+  return candidate;
+};
+
+const readNavState = (state: unknown): { date: Date; type: IVFTransferType } | null => {
+  if (!state || typeof state !== "object") return null;
+  const candidate = state as Partial<IVFTimelineNavState>;
+  const date = resolveTransferDate(candidate.transferMs);
+  if (!date) return null;
+  return { date, type: isTransferType(candidate.transferType) ? candidate.transferType : "5day" };
+};
+
+/**
+ * Phase 34F — `/ivf-timeline` is a standalone tool.
+ *
+ * Resolution priority: ephemeral navigation state, then legacy `?date`/`?type`
+ * links, then the calculator itself. Nothing is persisted, and no new URL ever
+ * carries treatment information. Valid legacy values are reconstructed into
+ * navigation state once and the parameters are then replaced out of the visible
+ * address, so the treatment details stop being displayed.
+ */
 const IVFTimeline = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [transferDate, setTransferDate] = useState<Date | null>(null);
-  const [transferType, setTransferType] = useState<"5day" | "3day">("5day");
-  const [ready, setReady] = useState(false);
+
+  const navResolved = useMemo(() => readNavState(location.state), [location.state]);
+
+  const legacyResolved = useMemo(() => {
+    if (navResolved) return null;
+    const date = resolveTransferDate(searchParams.get("date"));
+    if (!date) return null;
+    const typeParam = searchParams.get("type");
+    return { date, type: isTransferType(typeParam) ? typeParam : ("5day" as IVFTransferType) };
+  }, [navResolved, searchParams]);
+
+  // Hold the reconstructed legacy values so the timeline survives the address
+  // replacement below.
+  const [carried, setCarried] = useState<{ date: Date; type: IVFTransferType } | null>(null);
+  const strippedRef = useRef(false);
 
   useEffect(() => {
-    setReady(false);
-    setTransferDate(null);
-    setTransferType("5day");
-    const dateParam = searchParams.get("date");
-    const typeParam = searchParams.get("type");
-    if (dateParam) {
-      const ts = Number(dateParam);
-      const candidate = new Date(ts);
-      const today = startOfDay(new Date());
-      if (
-        Number.isFinite(ts) &&
-        isValid(candidate) &&
-        !isAfter(candidate, today) &&
-        !isBefore(candidate, addDays(today, -300))
-      ) {
-        setTransferDate(candidate);
-      }
-    }
-    if (typeParam === "3day" || typeParam === "5day") {
-      setTransferType(typeParam);
-    }
-    setReady(true);
-  }, [searchParams]);
+    if (!legacyResolved || strippedRef.current) return;
+    strippedRef.current = true;
+    setCarried(legacyResolved);
+    const state: IVFTimelineNavState = {
+      transferMs: legacyResolved.date.getTime(),
+      transferType: legacyResolved.type,
+    };
+    // replace: one history entry, no loop, no duplicate calculation.
+    navigate(IVF_TIMELINE_ROUTE, { replace: true, state });
+  }, [legacyResolved, navigate]);
 
-  if (!ready) return null;
+  const resolved = navResolved ?? legacyResolved ?? carried;
 
-  if (!transferDate) {
-    return (
-      <div className="min-h-screen bg-parchment">
-        {TIMELINE_SEO}
-        <Navbar />
-        <section className="pt-28 pb-32 md:pt-36">
-          <div className="container mx-auto px-6 md:px-10 max-w-xl text-center">
-            <p className="font-sans text-sm font-light text-muted-foreground/60 leading-relaxed">
-              No transfer date provided. Please use the calculator on the{" "}
-              <a href="/ivf" className="text-sage underline hover:text-sage-muted transition-colors">IVF hub</a>{" "}
-              to track your timeline.
-            </p>
-          </div>
-        </section>
-        <Footer />
-      </div>
-    );
-  }
-
-  // Single authoritative crumb array: feeds the visible trail and the schema.
   const breadcrumbItems: BreadcrumbItem[] = [
     HOME_CRUMB,
     IVF_CRUMB,
@@ -81,15 +99,26 @@ const IVFTimeline = () => {
     <div className="min-h-screen bg-parchment">
       {TIMELINE_SEO}
       <Navbar />
-      <div className="container mx-auto px-6 md:px-10 max-w-5xl pt-24 md:pt-28">
+      <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl pt-24 md:pt-28">
         <BreadcrumbJsonLd items={breadcrumbItems} />
-        <Breadcrumbs
-          tone="section"
-          className="font-sans tracking-wide"
-          items={breadcrumbItems}
-        />
+        <Breadcrumbs tone="section" className="font-sans tracking-wide" items={breadcrumbItems} />
       </div>
-      <IVFTimelineResult transferDate={transferDate} transferType={transferType} />
+
+      {resolved ? (
+        <IVFTimelineResult transferDate={resolved.date} transferType={resolved.type} />
+      ) : (
+        <section className="pt-8 pb-24 md:pb-32">
+          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl">
+            <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-3">Your IVF timeline</h1>
+            <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-7">
+              Add your embryo transfer date and transfer type to see where you are, day by day. No
+              account needed, and nothing you enter is saved.
+            </p>
+            <IVFTimelineForm />
+          </div>
+        </section>
+      )}
+
       <Footer />
     </div>
   );

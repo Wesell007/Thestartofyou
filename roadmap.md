@@ -28,3 +28,12 @@
 - [x] Recomposed stage pages with editorial guidance before one Companion area
 - [x] Added focused tests, documentation and responsive QA
 - [x] Validated full suite, typecheck x2, lint at baseline and production build; no deployment
+
+## Phase 34F — IVF timeline routing fix and save-state design — CLOSED PASS (preview only)
+- [x] Audited 5 timeline actions; fixed 3 incorrect destinations to `/ivf-timeline` (incorrect after = 0)
+- [x] Extracted one shared `IVFTimelineForm`, reused on `/ivf` and `/ivf-timeline`
+- [x] Made `/ivf-timeline` a standalone tool, usable signed in or signed out
+- [x] Moved handoff to ephemeral navigation state; legacy `?date`/`?type` still read then stripped
+- [x] No save control, no persistence write, no new lifecycle, no schema, AI or grounding change
+- [x] Documented storage audit, future save flow, sign-in handoff and privacy gates
+- [x] Focused tests (15), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390; no deployment

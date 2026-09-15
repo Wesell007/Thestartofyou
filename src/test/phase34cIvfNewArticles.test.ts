@@ -47,7 +47,7 @@ describe("phase 34C — exactly four new IVF guides exist", () => {
 
 describe("phase 34C — provenance and citation rendering", () => {
   it.each(NEW_SLUGS)("%s carries structured UK sources", (slug) => {
-    const sources = findArticle(slug).sources as Array<Record<string, string>> | undefined;
+    const sources = findArticle(slug).sources as unknown as Array<Record<string, string>> | undefined;
     expect(Array.isArray(sources)).toBe(true);
     expect(sources!.length).toBeGreaterThanOrEqual(4);
     for (const source of sources!) {

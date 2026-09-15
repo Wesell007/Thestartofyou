@@ -1,85 +1,47 @@
-# Phase 34G — Final shared-database closure reconciliation (documentation only)
+# Phase 34H.1 — IVF timeline save experience (feature OFF)
 
-Scope: documentation corrections only. No source-code changes, no schema changes, no new migration, no feature activation, no deployment. Phase 34H not started.
+Build the complete save / update / load / remove experience for the IVF timeline on `/ivf-timeline`, behind the existing `IVF_TIMELINE_SAVE_ENABLED` flag which stays FALSE. No activation, no deployment, no schema change, no new lifecycle.
 
-## 1. Correct the deployment record
+## Auth handoff audit (already verified)
 
-`docs/content/phase34g-ivf-timeline-persistence-foundation.md`
+The sign-in flow uses Google OAuth and magic-link email, both of which leave the site and return through a full page load at `/auth`. React Router navigation state does not survive that round trip, and the only surviving mechanisms are the address bar and browser storage — both forbidden for treatment values.
 
-- Update the header state line to:
-  `CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED / PRIVACY & LEGAL APPROVAL REQUIRED BEFORE ACTIVATION`
-- Add a "Deployment record" section stating that the application has no separate preview and production databases: the database used by the preview also serves the published application, therefore the Phase 34G schema migration has already been applied to the shared production-serving database.
-- State separately, in the same section:
-  - Application code published/deployed = NO
-  - Feature flag enabled = NO
-  - Save UI visible = NO
-  - IVF persistence available to visitors = NO
-  - IVF transfer values stored = 0
-  - Existing records changed by migration = 0
-  - Existing data backfilled = NO
-  - RLS/access policies changed = NO
+- AUTH FLOW TYPE = full-page redirect (OAuth + magic link) via `/auth`
+- SIGNED-OUT IVF VALUES CAN SURVIVE AUTH EPHEMERALLY = NO
+- Decision: ACCEPTED RE-ENTRY UX. After signing in the person returns to `/ivf-timeline` (already on the safe return list) and re-enters the two values. No new storage mechanism is invented.
 
-`docs/content/phase34g-ivf-timeline-persistence-evidence.md` — "Deployment state" section
+## What gets built
 
-- Add the explicit line `Shared production-serving database migration applied = YES` alongside the existing prose (which already explains the single shared instance), keeping `Application deployed = NO`, `Feature flag enabled = NO`.
+A new save area component rendered only beneath a calculated timeline on `/ivf-timeline`, plus a small hook that owns the state machine.
 
-`roadmap.md` — Phase 34G checklist and open blockers
+States and copy:
 
-- Mandatory correction: remove every unqualified `nothing deployed` statement. The global Phase 33 note becomes: `Global Phase 33 deployment block remains ACTIVE; no application code deployed or published (the shared production-serving database already includes the additive Phase 34G schema migration)`.
-- Replace the Phase 34G final item with: `Shared production-serving database migration applied = YES; application code deployed/published = NO; feature remains OFF; privacy and legal approval remain required before activation.`
-- Update the Phase 34G roadmap heading to `CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED`.
-- The audit record explicitly distinguishes three facts: DATABASE SCHEMA CHANGE (applied), APPLICATION DEPLOYMENT (no application code deployed or published), FEATURE ACTIVATION (feature OFF).
+- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey and return to it later." / `Sign in to save`. Nothing is written before authentication.
+- Signed in, active TTC, nothing saved: `Save my timeline` with the stored-versus-derived explanation and "Calculated milestones are not stored."
+- Saved context identical to what is on screen: `Timeline saved` only — no active Save button, no redundant write, no save timestamp.
+- Saved context differs: `Update saved timeline` with "This will replace the transfer details currently saved to your TTC journey." Never automatic.
+- Signed in, no TTC journey: "Saving is connected to a Trying to Conceive journey." plus a `Start your TTC journey` link only when no other lifecycle is active. No implicit row creation.
+- Active pregnancy or first year with saved context: historical `Saved IVF timeline` display with date and type, Remove available, no Save or Update.
+- Saved context older than the calculator's entry range: shown as historical, never auto-cleared, removable.
+- Remove: `Remove saved timeline` behind a confirmation dialog ("Remove your saved IVF timeline?" / explains only the two values go, TTC journey and answers stay). After a successful clear the on-screen calculation stays visible.
 
-## 2. Explain why live product behaviour is unchanged
+Interaction states IDLE / SAVING / SAVED / UPDATING / REMOVING / ERROR, with the action button disabled during a write so repeated clicks cannot produce a second write. Status changes announced via a polite live region; focus returns to the action area after save or remove; errors use calm generic copy with no database text, identifiers or treatment values.
 
-In the foundation document's new "Deployment record" section (and mirrored briefly in the evidence document), document that the migration is additive only:
+Priority rule: a current explicit calculation (hub handoff, form, navigation state) always remains the displayed timeline. Saved context is read only to decide Saved / Save / Update, or to reconstruct a timeline when the page has no current calculation.
 
-- 2 nullable columns added, no defaults, no backfill, no data rewrite
-- paired-state CHECK constraint added
-- no policy changes
-- feature remains OFF, save UI is not deployed, calculator does not write IVF values
+## Feature-off boundary
 
-Conclusion recorded: database schema changed = YES; visitor-facing application behaviour changed = NO; health-treatment values collected automatically = NO.
+The flag is checked before anything else. While OFF the save area is never mounted, the hook never runs, and no load, save or clear helper is called — `/ivf-timeline` behaves exactly as in Phase 34F.
 
-## 3. Record the constraint defect and fix
+## Technical details
 
-`docs/content/phase34g-ivf-timeline-persistence-evidence.md` — "Database" section
+- New: `src/components/ivf/IVFTimelineSaveArea.tsx`, `src/hooks/useIVFTimelineSave.ts`, tests in `src/test/phase34h1IvfSaveExperience.test.tsx`.
+- Changed: `src/pages/IVFTimeline.tsx` (flag-gated mount, saved-context fallback when no current calculation), reusing `ConfirmDialog`, `useLifecycle`, `buildAuthUrl("return_to_route", "/ivf-timeline")` and the Phase 34G helpers in `savedTTCJourney.ts`. No change to the helpers themselves, to analytics, to companion or AI code.
+- Tests mock auth, lifecycle and the three persistence helpers; the flag module is mocked ON for feature-on tests. No real transfer values are written to the shared database. The flag default stays FALSE and the shared environment flag is not enabled.
+- Validation: focused 34H.1 tests, Phase 34F and 34G suites, TTC tests, full suite, typecheck twice, lint against baseline, production build, responsive feature-off QA at 1280 / 834 / 390 across `/ivf-timeline`, `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, and mocked feature-on UI QA.
 
-- Align the defect wording with the agreed statement: the initial paired-state CHECK expression could evaluate to SQL UNKNOWN for a partial state, and CHECK constraints treat TRUE or UNKNOWN as passing, so a partial state would have been accepted. The final shipped constraint was corrected with the explicit `IS NOT NULL` guard.
-- Extend the truth table to cover the full agreed set explicitly:
+## Documentation
 
-| ivf_transfer_date | ivf_transfer_type | result |
-| --- | --- | --- |
-| NULL | NULL | PASS |
-| DATE | `3day` | PASS |
-| DATE | `5day` | PASS |
-| DATE | NULL | REJECT |
-| NULL | `3day` | REJECT |
-| NULL | `5day` | REJECT |
+`docs/content/phase34h1-ivf-timeline-save-experience.md`, `docs/content/phase34h1-ivf-timeline-save-ux-evidence.md`, `docs/content/phase34h1-ivf-timeline-activation-readiness.md`, plus a roadmap entry. These record the state machine, every state's copy, the auth-handoff result above, accessibility, tests, files changed, activation blockers and the deployment state (schema change in 34H.1 = NO; application deployed = NO; feature activated = NO).
 
-- Keep the existing extra row for the invalid value (`DATE` / `day5` = REJECT) and the closing line `Partial IVF context accepted = NO`.
-- Mirror the defect-and-fix summary in the foundation document's constraint section (it already describes the NULL-satisfaction issue; align wording with the SQL UNKNOWN statement above).
-
-## 4. Final authoritative Phase 34G counts
-
-Add a "Final authoritative counts" section to the foundation document, listing exactly the agreed values: TTC persistence owner `public.ttc_journeys`; IVF fields added = 2; transfer date type = DATE; transfer type values = `3day` / `5day`; fields nullable = YES; paired-field constraint = YES; partial IVF context accepted = NO; existing records backfilled = NO; existing records modified by migration = 0; explicit load/save/clear helpers = YES; matched-row verification = YES; zero-row save/clear reported as success = NO; save/clear without TTC journey = `no_ttc_journey`; journey row count changed by IVF persistence = NO; ordinary TTC save preserves IVF context = YES; historical IVF context expires = NO; derived milestones persisted = 0; feature flag enabled = NO; save UI visible = NO; calculator-triggered persistence writes = 0; new IVF lifecycle = 0; saved lifecycles = ttc / pregnancy / first_year; existing access policies changed = NO; cross-user access = DENIED BY DESIGN / NOT FULLY TESTABLE; sensitive URL parameters generated = 0; companion access = NO; AI runtime changes = 0; grounding changes = 0; privacy/legal approval completed = NO; privacy/legal approval required before activation = YES; shared production-serving database migration applied = YES; application code deployed = NO; feature activated = NO.
-
-## 5. Validation record
-
-Preserve unchanged in the evidence document: focused Phase 34G tests = PASS (24); full suite = 127 files / 1,463 tests PASS; typecheck x2 = PASS; lint = baseline only / 1 pre-existing generated-file error; production build = PASS; responsive QA = 1280 / 834 / 390 PASS; Save / Update / Clear controls visible = 0.
-
-## 6. Closure lock
-
-Update the closure wording in the foundation document (and the roadmap Phase 34G heading if needed) to:
-
-`PHASE 34G — IVF TIMELINE PERSISTENCE FOUNDATION CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED / PRIVACY & LEGAL APPROVAL REQUIRED BEFORE ACTIVATION`
-
-Phase 34H remains recommended but NOT started.
-
-## Files touched
-
-- `docs/content/phase34g-ivf-timeline-persistence-foundation.md`
-- `docs/content/phase34g-ivf-timeline-persistence-evidence.md`
-- `roadmap.md`
-
-No other files. No code, schema, migration, analytics, AI or deployment changes.
+Closure on pass: PHASE 34H.1 — CLOSED PASS / FEATURE OFF / ACTIVATION GATES REMAIN. Phase 34H.2 recommended but not started.

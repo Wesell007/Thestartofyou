@@ -24917,6 +24917,7 @@ const articleDatabase: ArticleData[] = [
     crossLinks: [
       { label: "IVF timeline: what to expect", href: "/articles/ivf-timeline-what-to-expect", context: "the full sequence of a cycle, stage by stage" },
       { label: "NHS IVF funding and eligibility", href: "/articles/nhs-ivf-funding-and-eligibility", context: "how access to funded treatment is decided" },
+      { label: "IVF versus ICSI", href: "/articles/ivf-vs-icsi", context: "the one step where the two fertilisation methods differ" },
     ],
     keyTakeaways: [
       "IVF fertilises eggs outside the body and transfers an embryo into the womb",

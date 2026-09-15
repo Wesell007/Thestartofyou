@@ -215,8 +215,8 @@ const PHASE_30F_RESOLVED_TO_LIVE = [
 ] as const;
 
 describe("Phase 30F editorial status resolution", () => {
-  it("keeps the total registry count at 225 (Phase 33.3 added seventeen)", () => {
-    expect(ARTICLE_GROUNDING_REGISTRY.length).toBe(225);
+  it("keeps the total registry count at 229 (Phase 34C added four)", () => {
+    expect(ARTICLE_GROUNDING_REGISTRY.length).toBe(229);
   });
 
   it("pins the post-30F editorial status counts", () => {
@@ -227,7 +227,7 @@ describe("Phase 30F editorial status resolution", () => {
       },
       {},
     );
-    expect(counts).toEqual({ live: 118, draft: 62, unknown: 45 });
+    expect(counts).toEqual({ live: 118, draft: 66, unknown: 45 });
   });
 
   it("resolved exactly the seven evidence-backed records from unknown to live", () => {

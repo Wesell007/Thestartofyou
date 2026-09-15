@@ -6,6 +6,7 @@ import IVFWhatThisCovers from "@/components/ivf/IVFWhatThisCovers";
 import IVFWhatMakesDifferent from "@/components/ivf/IVFWhatMakesDifferent";
 import IVFAISupport from "@/components/ivf/IVFAISupport";
 import IVFStages from "@/components/ivf/IVFStages";
+import IVFGuides from "@/components/ivf/IVFGuides";
 import IVFCommonQuestions from "@/components/ivf/IVFCommonQuestions";
 import IVFReflection from "@/components/ivf/IVFReflection";
 import IVFFinalCTA from "@/components/ivf/IVFFinalCTA";
@@ -30,6 +31,7 @@ const IVF = () => {
         <IVFWhatMakesDifferent />
         <IVFAISupport />
         <IVFStages />
+        <IVFGuides />
         <IVFCommonQuestions />
         <IVFReflection />
         <IVFFinalCTA />

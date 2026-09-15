@@ -47,9 +47,9 @@ Compact premium hero + clearly labelled timeline tool
 One consolidated IVF orientation section
 Your IVF stages
 IVF guidance (all 8 real IVF articles, grouped by intent)
-Companion (the only AI module, maximum 4 prompts)
+Companion (the only page-level AI area, maximum 4 prompts)
 Quiet emotional / journal support
-Final journey action
+Final journey action (Start your journey only)
 ```
 
 - Reduce the hero from a full viewport while keeping its current visual identity and transfer-date timeline tool.
@@ -58,8 +58,9 @@ Final journey action
 - Rebuild `IVFGuides` as a single eight-guide library with three deliberate groups: **Start with IVF**, **Treatment and decisions**, **The emotional and outcome side**. Add the existing timeline and emotional-impact guides, each once, with their actual imagery and `Read guide`.
 - Remove `IVFCommonQuestions` as a separate module; move no more than four useful prompts into `IVFAISupport`.
 - Move `IVFAISupport` below the stage and guide sections, retitle it `YOUR COMPANION`, explicitly describe the AI-generated answer and use `Ask the Companion`.
-- Keep the final journey action primary; rename the secondary AI action `Ask the Companion` and style it as AI rather than editorial or journey navigation.
+- Make the final CTA journey-only with `Start your journey`; remove its secondary `/ask` action so no page-level AI action exists outside the dedicated Companion.
 - Preserve the quiet support section without adding another large emotional-content block.
+- Keep exactly one primary IVF timeline tool instance: the transfer-date functionality in the compact hero. Do not add a second tool section. Keep the timeline article once in the guide library.
 
 ### 3. New stage-page hierarchy (shared template, per-stage modules)
 
@@ -88,6 +89,8 @@ Stages will not all carry the same modules: Before transfer keeps the protocol w
 - **Journey action**: `Start your journey`.
 - **Support / hub**: explicit destination wording rather than article, tool or AI language.
 
+`Guides for this stage` and the hub guide library contain `kind: article` items only, each resolving to `/articles/…`. Support crossovers and Pregnancy-hub handover actions render in separate lightweight sections with explicit support/hub wording.
+
 Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a question about [stage]?", placeholder "Ask about [stage]…", button "Ask the Companion".
 
 ### 5. Stage article line-ups (real routes only)
@@ -105,9 +108,9 @@ Use each article's existing hero where one exists by extending the existing href
 ## Technical notes
 
 - Stage files: `src/data/ivfTopicData.ts` (add `kind`, restructure per-stage module data, collapse AI questions into `aiPrompts` capped at 4), `src/components/ivf/IVFTopicPage.tsx` (new section order, article/tool/AI card components, remove Start here / Anchor read / Common questions modules), plus the thumbnail map.
-- Hub files: `src/pages/IVF.tsx`, `IVFHero.tsx`, one consolidated orientation component, `IVFStages.tsx`, `IVFGuides.tsx`, `IVFAISupport.tsx`, `IVFFinalCTA.tsx`; the redundant orientation and common-question components will no longer be mounted. No unnecessary new shared system.
+- Hub files: `src/pages/IVF.tsx`, `IVFHero.tsx`, one consolidated orientation component, `IVFStages.tsx`, `IVFGuides.tsx`, `IVFAISupport.tsx`, `IVFFinalCTA.tsx`; the redundant orientation and common-question components will no longer be mounted. No unnecessary new shared system. The global floating Companion launcher remains unchanged and is excluded from page-module counts.
 - No changes to routes, `articleData.ts`, the grounding registry, sitemap, AI backend, saved lifecycles or reviewer governance. Safety blocks keep their current approved wording verbatim.
-- New focused tests cover: all eight hub article routes and 8/8 unique hub discovery; all six 34C/34D guides accounted for; stage links only use stage routes; article items only use `/articles/…`; tool and journey actions use their real destinations; zero AI destinations outside Companion modules; one embedded Companion on each of four pages; no separate Common Questions AI modules; no duplicate article destination within any page; unchanged routes, grounding, lifecycles and reviewer governance.
+- New focused tests cover: all eight hub article routes and 8/8 unique hub discovery; all six 34C/34D guides accounted for; stage links only use stage routes; article sections contain only `kind: article` items resolving to `/articles/…`; tool, hub, support and journey kinds agree with their real destinations; AI kinds use Companion prompt behaviour; any kind/destination mismatch fails; zero AI destinations outside Companion modules; one embedded Companion on each of four pages; no separate Common Questions AI modules; exactly one hub timeline tool and one hub timeline-article discovery; Pregnancy hub and Support crossover are not article styled; no duplicate article destination within any page; unchanged routes, grounding, lifecycles and reviewer governance.
 - Validation: focused 34E tests, full suite, typecheck ×2, lint against baseline, production build, route and destination validation, plus QA of all four pages at 1280 / 834 / 390 px.
 
 ## Documentation

@@ -157,6 +157,7 @@ const IVFStages = () => {
                   <p className="font-sans text-[14px] font-light text-muted-foreground leading-relaxed max-w-lg">
                     {stage.sub}
                   </p>
+                  <span className="font-sans text-[13px] font-medium" style={{ color: `hsl(${stage.theme.accent})` }}>Explore stage</span>
                   <span
                     className="inline-flex items-center gap-2 font-sans text-[11px] font-light tracking-[0.14em] uppercase rounded-full px-3 py-1 self-start mt-1"
                     style={{

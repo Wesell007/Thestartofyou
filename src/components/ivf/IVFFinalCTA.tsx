@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, NotebookPen } from "lucide-react";
+import { ArrowUpRight, NotebookPen } from "lucide-react";
 
 const IVFFinalCTA = () => {
   return (
@@ -45,14 +45,6 @@ const IVFFinalCTA = () => {
               >
                 Start your journey
                 <ArrowUpRight size={15} />
-              </Link>
-              <Link
-                to="/ask"
-                className="inline-flex items-center justify-center gap-2 border rounded-pill px-7 py-3.5 font-sans text-sm font-light transition-all hover:bg-parchment-dark"
-                style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.25)' }}
-              >
-                Ask a question
-                <ArrowRight size={14} />
               </Link>
             </div>
 

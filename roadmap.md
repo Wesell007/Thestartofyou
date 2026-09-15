@@ -19,7 +19,7 @@
 ## Open (blocked on the user)
 - [ ] Human review of the four Phase 34C guides — required before deployment
 - [ ] Human review of the two Phase 34D guides and the before-transfer expansion
-- [ ] Global Phase 33 deployment block remains ACTIVE; nothing deployed
+- [ ] Global Phase 33 deployment block remains ACTIVE; no application code deployed or published (the shared production-serving database already includes the additive Phase 34G schema migration)
 
 ## Phase 34E — IVF UX, article discovery and AI separation — CLOSED PASS (preview only)
 - [x] Audited `/ivf` and all three IVF stage pages by destination behaviour
@@ -38,7 +38,7 @@
 - [x] Documented storage audit, future save flow, sign-in handoff and privacy gates
 - [x] Focused tests (15), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390; no deployment
 
-## Phase 34G — IVF timeline persistence foundation — CLOSED PASS (feature OFF)
+## Phase 34G — IVF timeline persistence foundation — CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED
 - [x] Storage owner confirmed as existing `public.ttc_journeys`; no new table, no IVF lifecycle
 - [x] Added 2 nullable columns (`ivf_transfer_date` date, `ivf_transfer_type` text) with no backfill
 - [x] Paired-state CHECK constraint; partial IVF context impossible (null-safe form verified)
@@ -48,4 +48,4 @@
 - [x] `IVF_TIMELINE_SAVE_ENABLED` defaults FALSE; no Save/Update/Clear UI; no visitor-facing change
 - [x] `/ivf-timeline` accepted as a return route; no values preserved across sign-in
 - [x] Focused tests (24), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390
-- [ ] Privacy and legal review required before any activation; production deployment = 0
+- [ ] Shared production-serving database migration applied = YES; application code deployed/published = NO; feature remains OFF; privacy and legal approval remain required before activation

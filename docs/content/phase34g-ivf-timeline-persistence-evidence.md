@@ -7,20 +7,23 @@
 - Constraint verified: `ttc_journeys_ivf_transfer_paired_chk`.
 - Paired-state truth table evaluated against the shipped predicate:
 
-| date | type | accepted |
+| ivf_transfer_date | ivf_transfer_type | result |
 | --- | --- | --- |
-| NULL | NULL | YES |
-| 2026-03-01 | `3day` | YES |
-| 2026-03-01 | `5day` | YES |
-| 2026-03-01 | NULL | NO |
-| NULL | `5day` | NO |
-| 2026-03-01 | `day5` | NO |
+| NULL | NULL | PASS |
+| DATE | `3day` | PASS |
+| DATE | `5day` | PASS |
+| DATE | NULL | REJECT |
+| NULL | `3day` | REJECT |
+| NULL | `5day` | REJECT |
+| DATE | `day5` | REJECT |
 
-- Defect found and fixed during validation: the first constraint form
-  (`... AND ivf_transfer_type IN (...)`) evaluated to NULL for a date with a
-  NULL type, and Postgres treats a NULL CHECK result as satisfied — a partial
-  state would have been accepted. The shipped constraint adds an explicit
-  `ivf_transfer_type IS NOT NULL` guard and rejects it.
+- Defect found and fixed during validation: the initial paired-state CHECK
+  could evaluate to SQL UNKNOWN for a partial state, and PostgreSQL CHECK
+  constraints reject FALSE but allow TRUE or UNKNOWN — so the original form
+  could have allowed an incomplete IVF context (a date with a NULL type). The
+  final shipped constraint adds the explicit `ivf_transfer_type IS NOT NULL`
+  guard and now enforces the intended pair state.
+- Partial IVF context accepted = NO
 - No backfill, no data mutation, no grant or policy change.
 
 ## Tests
@@ -80,6 +83,14 @@ two additive nullable columns and the paired constraint now exist on that shared
 instance. No application code was deployed, no existing row was changed, and no
 access rule was altered, so the live published app is unaffected.
 
-Application deployed = NO (nothing published). Feature flag enabled = NO. No
-Save, Update or Clear control exists.
+- Shared production-serving database migration applied = YES
+- Application deployed = NO
+- Feature flag enabled = NO
+- Feature activated = NO
+- Save / Update / Clear control exists = 0
+
+The schema change is additive only: 2 nullable columns with no defaults, no
+backfill, no data rewrite, plus the paired-state CHECK constraint. Database
+schema changed = YES; visitor-facing application behaviour changed = NO;
+health-treatment values automatically collected = NO.
 

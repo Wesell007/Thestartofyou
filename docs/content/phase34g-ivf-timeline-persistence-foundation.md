@@ -1,6 +1,6 @@
 # Phase 34G — IVF timeline persistence foundation
 
-**State: CLOSED PASS / FEATURE OFF / PRIVACY & LEGAL APPROVAL REQUIRED BEFORE ACTIVATION**
+**State: CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED / PRIVACY & LEGAL APPROVAL REQUIRED BEFORE ACTIVATION**
 
 ## Purpose
 
@@ -42,10 +42,23 @@ CHECK (
 )
 ```
 
-The explicit `IS NOT NULL` guard on the type matters: a `CHECK` predicate that
-evaluates to NULL is treated as satisfied, so the first form of the constraint
-would have silently accepted a date with no transfer type. The shipped form
-rejects it.
+Constraint defect found and fixed during validation: the initial paired-state
+CHECK could evaluate to SQL UNKNOWN for a partial state, and PostgreSQL CHECK
+constraints reject FALSE but allow TRUE or UNKNOWN — so the original form could
+have allowed an incomplete IVF context. The final shipped constraint adds the
+explicit non-null guard on the type and now enforces the intended pair state:
+
+| ivf_transfer_date | ivf_transfer_type | result |
+| ----------------- | ----------------- | ------ |
+| NULL              | NULL              | PASS   |
+| DATE              | `3day`            | PASS   |
+| DATE              | `5day`            | PASS   |
+| DATE              | NULL              | REJECT |
+| NULL              | `3day`            | REJECT |
+| NULL              | `5day`            | REJECT |
+| DATE              | `day5`            | REJECT |
+
+Partial IVF context accepted = NO.
 
 Rollback: `ALTER TABLE public.ttc_journeys DROP CONSTRAINT
 ttc_journeys_ivf_transfer_paired_chk, DROP COLUMN ivf_transfer_type, DROP COLUMN
@@ -115,6 +128,88 @@ localStorage, sessionStorage, cookies, auth metadata or the address bar.
 Saved lifecycles remain exactly `ttc`, `pregnancy`, `first_year`. No `ivf`
 lifecycle, no `/my-ivf-journey`. No Companion, AI runtime, prompt, grounding,
 memory, journal, voice, article, imagery or analytics changes.
+
+## Deployment record
+
+The application does not have separate preview and production databases. The
+database used by the preview also serves the published application, so the
+Phase 34G schema migration has already been applied to the shared
+production-serving database.
+
+- Shared production-serving database migration applied = YES
+- Application code published/deployed = NO
+- Feature flag enabled = NO
+- Feature activated = NO
+- Save UI visible = NO
+- IVF persistence available to visitors = NO
+- IVF transfer values stored = 0
+- Existing records changed by migration = 0
+- Existing data backfilled = NO
+- RLS/access policies changed = NO
+
+Why live product behaviour is unchanged: the migration is additive only — 2
+nullable columns added with no defaults, no backfill and no data rewrite; one
+paired-state CHECK constraint added; no policy changes; the feature remains
+OFF; the application save UI is not deployed; the calculator does not write
+IVF values.
+
+- Database schema changed = YES
+- Visitor-facing application behaviour changed = NO
+- Health-treatment values automatically collected = NO
+
+The audit record distinguishes three separate facts: DATABASE SCHEMA CHANGE
+(shared production-serving migration applied = YES), APPLICATION DEPLOYMENT
+(application code deployed/published = NO), and FEATURE ACTIVATION (OFF).
+
+## Final authoritative counts
+
+- TTC persistence owner = `public.ttc_journeys`
+- IVF fields added = 2
+- Transfer date type = DATE
+- Transfer type values = `3day` / `5day`
+- Fields nullable = YES
+- Paired-field constraint = YES
+- Partial IVF context accepted = NO
+- Existing records backfilled = NO
+- Existing records modified by migration = 0
+- Explicit load helper = YES
+- Explicit save/update helper = YES
+- Explicit clear helper = YES
+- Matched-row verification = YES
+- Zero-row save reported as success = NO
+- Zero-row clear reported as success = NO
+- Save without TTC journey = `no_ttc_journey`
+- Clear without TTC journey = `no_ttc_journey`
+- Journey row count changed by IVF persistence = NO
+- Ordinary TTC save preserves IVF context = YES
+- Historical IVF context expires = NO
+- Derived milestones persisted = 0
+- Feature flag enabled = NO
+- Save UI visible = NO
+- Calculator-triggered persistence writes = 0
+- New IVF lifecycle = 0
+- Saved lifecycles = ttc / pregnancy / first_year
+- Existing access policies changed = NO
+- Cross-user access = DENIED BY DESIGN / NOT FULLY TESTABLE
+- Sensitive URL parameters generated = 0
+- Companion access = NO
+- AI runtime changes = 0
+- Grounding changes = 0
+- Privacy/legal approval completed = NO
+- Privacy/legal approval required before activation = YES
+- Shared production-serving database migration applied = YES
+- Application code deployed = NO
+- Feature activated = NO
+
+## Closure
+
+PHASE 34G — IVF TIMELINE PERSISTENCE FOUNDATION
+
+CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED / PRIVACY & LEGAL
+APPROVAL REQUIRED BEFORE ACTIVATION
+
+Phase 34H (IVF timeline save experience and activation) remains recommended
+but NOT started.
 
 ## Changed files
 

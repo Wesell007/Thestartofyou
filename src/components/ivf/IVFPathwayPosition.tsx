@@ -14,18 +14,17 @@ import { ArrowRight } from "lucide-react";
  */
 const IVFPathwayPosition = () => {
   return (
-    <section className="bg-parchment pt-2 pb-8 md:pb-10">
+    <section className="bg-parchment-dark py-12 md:py-16">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
         <div
-          className="rounded-2xl border bg-card/60 px-5 py-4 sm:px-7 sm:py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5"
+          className="rounded-lg border bg-card px-5 py-6 sm:px-8 sm:py-8 flex flex-col gap-6"
           style={{ borderColor: 'hsl(var(--stage-ivf-accent) / 0.18)' }}
         >
-          <p
-            className="font-sans text-[10px] font-light tracking-[0.22em] uppercase shrink-0"
-            style={{ color: 'hsl(var(--stage-ivf-accent))' }}
-          >
-            Where IVF sits
-          </p>
+          <div className="max-w-2xl">
+            <p className="mb-3 font-sans text-[10px] font-light tracking-[0.22em] uppercase" style={{ color: 'hsl(var(--stage-ivf-accent))' }}>Where IVF sits</p>
+            <h2 className="mb-3 font-serif text-2xl text-foreground sm:text-3xl">One treatment pathway, held in context</h2>
+            <p className="font-sans text-sm font-light leading-relaxed text-muted-foreground">IVF has its own appointments, medication and decisions. This space keeps those details together while connecting you back to trying to conceive and forward into pregnancy care.</p>
+          </div>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-sans text-[12.5px] font-light">
             <Link

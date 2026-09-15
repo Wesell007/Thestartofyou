@@ -146,9 +146,6 @@ const LINKS = {
   testsScans: "/articles/tests-and-scans-in-pregnancy",
   twins: "/articles/twins-and-multiples-in-pregnancy",
   // Phase 34C — new IVF guides
-  whatIvfIs: "/articles/what-ivf-is-uk-guide",
-  nhsFunding: "/articles/nhs-ivf-funding-and-eligibility",
-  ohss: "/articles/ohss-and-ivf-side-effects",
   cycleNotWork: "/articles/when-an-ivf-cycle-does-not-work",
   
 };

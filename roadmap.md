@@ -5,7 +5,9 @@
 - [x] Hub discovery section, contextual links, sitemap 354
 - [x] Tests, typecheck, lint, build, responsive QA
 - [x] Documentation: batch, evidence pack, frontend report
+- [x] Final closure reconciliation: docs correction + dead-code cleanup + validation
 
 ## Open (blocked on the user)
 - [ ] Human review of all four Phase 34C guides — required before deployment
 - [ ] Global Phase 33 deployment block remains ACTIVE; nothing deployed
+- [ ] Phase 34D follow-up (recommendation B) — not started

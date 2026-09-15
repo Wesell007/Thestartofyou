@@ -137,7 +137,10 @@ New: `src/test/phase34bIvfRemediation.test.ts` (16 tests) covering structured pr
 | Public IVF stage routes | 3 -> 3 |
 | New IVF article records | 0 |
 | New routes | 0 |
-| Contextual link occurrences implemented | 3 (chemical pregnancy, twins and multiples, freezing/storage signpost) |
+| New internal contextual link occurrences | 2 |
+| Pre-existing pregnancy-after-loss occurrences | 2 |
+| Plain-text HFEA authoritative signposts added | 1 |
+
 | Normal-discovery additions | 1 |
 | IVF hub occurrences of `moving-from-ttc-to-ivf` | 1 |
 | HEALTH_REVIEW_REQUIRED changed items | 3 |

@@ -48,9 +48,9 @@ const ActionLink = ({ item, children }: { item: IVFDestination; children?: React
 const IVFTopicPage = ({ config }: { config: IVFTopicConfig }) => {
   const siblings = IVF_TOPIC_ORDER.filter((slug) => slug !== config.slug).map((slug) => ivfTopicConfigs[slug]);
   const breadcrumbs: BreadcrumbItem[] = [
-    { name: "Home", url: "/" },
-    { name: "IVF", url: "/ivf" },
-    { name: config.title, url: `/ivf/${config.slug}` },
+    { label: "Home", href: "/" },
+    { label: "IVF", href: "/ivf" },
+    { label: config.title, href: `/ivf/${config.slug}` },
   ];
 
   useEffect(() => {

@@ -23,9 +23,12 @@ Scope: documentation corrections only. No source-code changes, no schema changes
 
 - Add the explicit line `Shared production-serving database migration applied = YES` alongside the existing prose (which already explains the single shared instance), keeping `Application deployed = NO`, `Feature flag enabled = NO`.
 
-`roadmap.md` — Phase 34G checklist
+`roadmap.md` — Phase 34G checklist and open blockers
 
-- Amend the final item to record: shared production-serving database migration applied = YES; application code deployed = 0; privacy and legal review still required before activation. The global "nothing deployed" note stays correct (no application code published) and is left as is.
+- Mandatory correction: remove every unqualified `nothing deployed` statement. The global Phase 33 note becomes: `Global Phase 33 deployment block remains ACTIVE; no application code deployed or published (the shared production-serving database already includes the additive Phase 34G schema migration)`.
+- Replace the Phase 34G final item with: `Shared production-serving database migration applied = YES; application code deployed/published = NO; feature remains OFF; privacy and legal approval remain required before activation.`
+- Update the Phase 34G roadmap heading to `CLOSED PASS / FEATURE OFF / SHARED-DATABASE MIGRATION APPLIED`.
+- The audit record explicitly distinguishes three facts: DATABASE SCHEMA CHANGE (applied), APPLICATION DEPLOYMENT (no application code deployed or published), FEATURE ACTIVATION (feature OFF).
 
 ## 2. Explain why live product behaviour is unchanged
 

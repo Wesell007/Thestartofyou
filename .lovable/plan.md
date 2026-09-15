@@ -30,7 +30,11 @@ Each helper resolves the signed-in person itself and acts only on their own reco
 
 Only these three functions write IVF values. Picking a date, choosing 3-day or 5-day, calculating, opening the page, navigating away, signing in and loading a journey all write nothing. The existing trying-to-conceive save routine is left untouched, so a normal profile save that omits IVF values can never clear them.
 
-Saving a new or updated timeline uses the calculator's own rules (real calendar date, not in the future, within its entry range, type 3-day or 5-day). Reading back an already-saved timeline uses shape and type checks only: an older treatment date stays readable forever, is never rejected and is never silently cleared, because IVF context is meant to survive as history.
+Saving a new or updated timeline uses the calculator's own rules (real calendar date, not in the future, within its entry range, type 3-day or 5-day, both values supplied together). Reading back an already-saved timeline uses shape and type checks only: an older treatment date stays readable forever, is never rejected and is never silently cleared, because IVF context is meant to survive as history.
+
+The two values are always stored as a pair: either both empty or both filled with valid values. The database itself refuses a half-filled state.
+
+Saving only ever updates an existing trying-to-conceive journey. If the person has no such journey yet, saving returns a clear "no journey" result and writes nothing — it never invents a journey, a placeholder or a lifecycle. Clearing behaves the same way: it empties both values on an existing journey, and is a safe no-op with a "no journey" result otherwise. Reading returns an empty context when the journey exists without IVF values, and a distinguishable "no journey" result when there is no journey at all.
 
 
 ## 4. Feature flag

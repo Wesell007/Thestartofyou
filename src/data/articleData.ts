@@ -1914,6 +1914,9 @@ const articleDatabase: ArticleData[] = [
     journey: ["ivf"],
     topics: ["timelines", "body-changes", "emotional-wellbeing"],
     productPromotion: "minimal",
+    crossLinks: [
+      { label: "OHSS and IVF treatment side effects", href: "/articles/ohss-and-ivf-side-effects", context: "what to watch for during stimulation, and when to ring your clinic" },
+    ],
     keyTakeaways: [
       "A typical IVF cycle takes 4-6 weeks",
       "Stimulation involves daily injections for 10-14 days",

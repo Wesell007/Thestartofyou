@@ -1,52 +1,79 @@
-# Phase 34C — small IVF new-article batch (preview only)
+# Phase 34C — Final Closure Reconciliation
 
-Create exactly four new IVF guides, available in preview, with imagery, verified UK sources, one discovery place each, and no deployment.
+Report-only, plus two documentation corrections the reconciliation exposed. No implementation change, no deployment, no Phase 34D.
 
-## The four guides
+## 1. Grounding registry
 
-| Guide | Slug / route | Owns |
+- GROUNDING REGISTRY RECORDS BEFORE PHASE 34C = 225
+- GROUNDING REGISTRY RECORDS AFTER PHASE 34C = 229
+- PHASE 34C ROWS ADDED = 4
+
+Reason for the "226" in the implementation plan: it was a counting artefact, not a real row. The registry file contains one non-record line that also begins `slug:` — the parameter signature `slug: string,` in the lookup helper near the end of the file. A loose `slug:` grep therefore returns records + 1 (today: 230 matches for 229 records). Counting only record literals (`{ slug: "`) gives 229 now and 225 before. The historical 225 baseline stands and is not revised; no extra row ever entered the registry.
+
+Final grounding state (verified):
+- approvalStatus approved records = 0 (the only textual match is a comment on line 16)
+- candidate records = 0
+- eligible slugs = []
+- AI_SOURCE_ROUTING_VERSION = `30B-source-routing-v1`
+- GROUNDING REGISTRY METADATA CHANGES = 4
+- GROUNDING RUNTIME BEHAVIOUR CHANGES = 0
+
+## 2. Review classifications (defect found in documentation)
+
+Authoritative source is `docs/content/phase34a-ivf-gap-register.csv`:
+
+- `what-ivf-is-uk-guide` (row 1) = HEALTH_REVIEW_REQUIRED
+- `nhs-ivf-funding-and-eligibility` (row 2) = HEALTH_REVIEW_REQUIRED
+- `ohss-and-ivf-side-effects` (row 12) = SAFETY_REVIEW_REQUIRED
+- `when-an-ivf-cycle-does-not-work` (row 15) = SAFETY_REVIEW_REQUIRED
+
+Totals: HEALTH_REVIEW_REQUIRED = 2, SAFETY_REVIEW_REQUIRED = 2, LOW_RISK_GENERAL = 0.
+
+Defect: `docs/content/phase34c-ivf-new-article-batch.md` records row 2 as "LOW RISK" and row 15 as "HEALTH". This is a documentation error only; no content, gating or governance behaviour depends on it. Correction is in the change list below.
+
+Human reviews completed = 0. Deployment eligible = 0. Reviewer claims rendered = 0. Unsupported JSON-LD reviewedBy = 0.
+
+## 3. Contextual links added in Phase 34C
+
+| Source | Destination | Occurrences |
 | --- | --- | --- |
-| What IVF is: a UK guide | `/articles/what-ivf-is-uk-guide` | Definition, context, orientation |
-| NHS IVF funding and eligibility | `/articles/nhs-ivf-funding-and-eligibility` | Access and funding variation |
-| OHSS and IVF treatment side effects | `/articles/ohss-and-ivf-side-effects` | Treatment-effect safety |
-| When an IVF cycle doesn't work | `/articles/when-an-ivf-cycle-does-not-work` | After an unsuccessful result, next steps |
+| `/articles/ivf-timeline-what-to-expect` | `/articles/ohss-and-ivf-side-effects` | 1 |
+| `/articles/what-ivf-is-uk-guide` | `/articles/nhs-ivf-funding-and-eligibility` | 2 (related-stage link + cross-link) |
+| `/articles/nhs-ivf-funding-and-eligibility` | `/articles/what-ivf-is-uk-guide` | 2 (related-stage link + cross-link) |
+| `/ivf/after-transfer` difficult-news group | `/articles/when-an-ivf-cycle-does-not-work` | 1 |
 
-Phase 34A gap register rows 1, 2, 12 and 15 — all four recorded as "New article on the IVF hub". No slug in the register, so the slugs above are chosen and will be documented. Slug collisions checked before writing. No aliases, no redirects.
+New contextual-link occurrences = 6. Kept separate from normal discovery placements = 4, duplicate normal discovery = 0.
 
-Ownership guarded: the existing IVF timeline guide keeps the step-by-step sequence, the emotional-impact guide keeps the emotional experience across treatment, and `/ivf/after-transfer` keeps the wait after transfer. New guides link to them rather than repeating them.
+## 4. Images
 
-## Content boundaries
+Hero images generated = 4; body images generated = 8; total new Phase 34C assets = 12. Each article: hero = 1, body = 2. All twelve files present in `src/assets`. Broken images = 0. No hub or page imagery counted.
 
-- Funding guide: NICE recommendations and NHS access described as varying locally; no invented age limits, cycle numbers, BMI, residency, relationship or previous-child criteria; no promise that anyone qualifies.
-- OHSS guide: calm, non-diagnostic; escalation wording only from HFEA/NHS; no medication instruction, no numerical thresholds beyond what sources support.
-- Unsuccessful-cycle guide: compassionate, non-blaming; no success promises, no universal waiting periods, not a recurrent-implantation-failure guide.
+## 5. Sitemap and routes
 
-## Sources
+Sitemap before = 350, after = 354, delta = +4. Each new URL present exactly once (verified against the generated `public/sitemap.xml`). Duplicates = 0. New article routes = 4. Aliases = 0. Redirects = 0.
 
-HFEA first, then NHS, then NICE; Fertility Network UK and BICA only for emotional support context. Every URL checked live before it is recorded. Titles, publisher and URL stored; years only where genuinely published. Visitor-facing citations stay visible plain text with zero clickable anchors (Phase 33.4).
+## 6. Discovery
 
-## Imagery
+Each guide appears exactly once in `IVFGuides`, rendered once from the IVF hub:
+`what-ivf-is-uk-guide` = 1, `nhs-ivf-funding-and-eligibility` = 1, `ohss-and-ivf-side-effects` = 1, `when-an-ivf-cycle-does-not-work` = 1. Total normal-discovery placements = 4. Duplicate normal discovery = 0.
 
-Twelve new images generated in-house: one hero and two in-article images per guide, in the existing premium editorial style — calm, warm, realistic, UK-appropriate, no text in image, no branding. OHSS uses clinic, medication-preparation and calm-home contexts, never anything that reads as diagnostic. The unsuccessful-cycle guide uses restrained, sensitive imagery, no devastation clichés. Existing hero and section image fields are reused; no new image system.
+## 7. Final state
 
-## Discovery and links
+New IVF articles = 4. New IVF routes = 4. Structured-source articles = 4. Articles with clickable source citations = 0. Human reviews completed = 0. Reviewer claims = 0. Unsupported machine-facing reviewer claims = 0. Production deployed = 0. GLOBAL PHASE 33 DEPLOYMENT BLOCK = ACTIVE.
 
-- One new hub section on `/ivf` listing the four guides — exactly one normal-discovery placement each, zero duplicates. No new stage pages, no new topic architecture.
-- Contextual links only where they help: what-IVF-is → timeline; timeline → OHSS; funding → moving from TTC to IVF; after-transfer → unsuccessful cycle; unsuccessful cycle → emotional impact of IVF. Reported separately from discovery.
+Held backlog unchanged: IVF versus ICSI; embryo development; fresh versus frozen embryo transfer; deeper `/ivf/before-transfer` expansion; clinic-questions checklist.
 
-## Review and publication holds
+## Changes to apply (documentation and dead code only)
 
-Classifications inherited from the audit: health review required for what-IVF-is, funding and unsuccessful-cycle; safety review required for OHSS (and escalated if anything else warrants it). Human reviews completed = 0, so no reviewer name, no review badge, no machine-readable reviewer data on any of the four. Preview only; the production deployment block stays in place.
+1. `docs/content/phase34c-ivf-new-article-batch.md` — correct the review classifications to HEALTH 2 / SAFETY 2 / LOW RISK 0, and add the registry reconciliation (225 → 229, with the `slug: string` counting-artefact explanation) plus the contextual-link table and the closure line.
+2. `src/data/ivfTopicData.ts` — three link constants added in 34C (`whatIvfIs`, `nhsFunding`, `ohss`) are defined but never referenced; only `cycleNotWork` is used. Remove the three unused constants, or leave them if you would rather keep them for a later phase. No rendered output changes either way.
 
-## Technical notes
+Validation after the change: run the test suite, typecheck and lint. No deployment.
 
-- Records added to `src/data/articleData.ts` in the existing flagship shape (quick answer, editorial sections, key takeaways, structured sources, hero). No new renderer. Inventory rows added to `src/data/articleInventory.ts`.
-- Four default-deny rows added to `src/lib/grounding/articleGroundingRegistry.ts` (`editorialStatus: "draft"`, `approvalStatus: "blocked_draft"`, not archived, not deprecated, no approval metadata) so the drift guard passes. Registry currently 226 rows; actual before/after reported. Grounding runtime, eligibility, routing version and AI code untouched.
-- Sitemap regenerated through the existing script (currently 350 URLs; expect 354, actual reported, duplicates checked).
-- New test file `src/test/phase34cIvfNewArticles.test.ts` covering: four records and routes, no slug collisions, ownership boundaries, one discovery placement each, contextual links resolve, structured sources with URLs, zero clickable citations, three or more images per guide, zero reviewer claims and zero reviewer structured data, grounding eligibility still empty, routing version unchanged, saved lifecycles still ttc, pregnancy, first_year.
-- Validation: focused tests, grounding drift and approval tests, full suite, typecheck twice, lint against baseline, production build, sitemap and route/link checks. Desktop, tablet and mobile QA on all four guides plus the hub.
-- Documentation: `phase34c-ivf-new-article-batch.md`, `phase34c-ivf-evidence-pack.md`, `phase34c-ivf-frontend-report.md`, plus status annotations on the Phase 34A rows (historical counts untouched).
+## Closure
 
-## Not in this phase
+PHASE 34C — SMALL IVF NEW-ARTICLE BATCH
+CLOSED PASS / HUMAN REVIEW REQUIRED BEFORE DEPLOYMENT
+— CLOSURE RECONCILED (subject to the two corrections above being applied)
 
-IVF versus ICSI, embryo development, fresh versus frozen transfer, the clinic-questions checklist, and deeper `/ivf/before-transfer` expansion all stay on hold. No schema, auth, AI, journal, memory or voice changes. No deployment.
+Recommendation: **B. SMALL 34D FOLLOW-UP STILL JUSTIFIED** — the IVF hub still has no owner for IVF versus ICSI, fresh versus frozen transfer or embryo development, each of which readers of the new "what IVF is" guide will ask next. Phase 34D is not started.

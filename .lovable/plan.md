@@ -1,49 +1,51 @@
 # Phase 34F — IVF timeline routing fix and save-state design
 
-Scope: fix the broken timeline buttons and make the timeline tool usable on its own. Saving is designed and documented only; nothing is stored, no new journey type, nothing deployed.
+Scope: fix the broken timeline buttons and make the timeline tool usable on its own. No saving, no Save button, no new journey type, nothing deployed.
 
 ## 1. The defect
 
-The stage pages' timeline action ("Track your IVF timeline" / "Use timeline") points at `/ivf`, the hub, not at the timeline tool. Someone arriving there sees the hub again and has to find the small date form. The real tool page `/ivf-timeline` also has no way to enter anything: without a date in the address it only shows a message telling people to go back to the hub.
+The three stage pages' timeline action ("Track your IVF timeline" / "Use timeline") points at `/ivf`, the hub, not at the timeline tool. The tool page `/ivf-timeline` also has no way to enter anything: without a date passed in it only shows a message sending people back to the hub.
 
-Audited timeline actions: 3 stage-page actions (before transfer, after transfer, early pregnancy) plus the hub's own date form (correct) and the fallback text link on the tool page (points back to the hub). Incorrect destinations before: 3. After: 0.
+Timeline actions audited: 5 (three stage actions, the hub's own date form, the tool page's fallback link). Incorrect destinations before: 3. After: 0. No new buttons are added.
 
 ## 2. Routing fix
 
 - Point all three stage timeline actions at `/ivf-timeline`.
-- Give `/ivf-timeline` its own transfer-date and transfer-type form, reusing the same calculator the hub already has, so it is a real starting point instead of a dead end. Anyone can calculate, signed in or not.
-- Keep the hub form working exactly as today (it already lands on `/ivf-timeline` with the entered values).
-- Keep the separate written guide "IVF timeline, what to expect" clearly a guide, not the tool.
+- Add the calculator directly to `/ivf-timeline`, so it works standalone: pick transfer date, pick transfer type, calculate. Signed in or signed out, no account needed.
+- The hub form keeps working; the tool page's fallback message is replaced by the working form.
 
-## 3. What is deliberately not changed
+## 3. Shared form, one source of truth
 
-- No new saved journey type. Saved journeys stay exactly: trying to conceive, pregnancy, first year.
-- No `/my-ivf-journey`, no change to "Start your journey", no Save button yet, no data stored.
-- No changes to the Companion, to guidance content, imagery, articles, or grounding.
+Extract the existing hub calculator into `src/components/ivf/IVFTimelineForm.tsx` and use it from both the hub hero and `/ivf-timeline`. No second implementation.
 
-## 4. Storage audit result (documented, not built)
+## 4. Health-data address safeguard
 
-Can today's trying-to-conceive storage hold an IVF timeline? **No.** The record keeps cycle dates and an "IVF consideration" answer, but has nowhere for a transfer date or transfer type, and the save routine accepts a fixed list of answers that does not include them.
+Transfer date and type are treatment information. The hub currently passes them in the visible web address, where they can end up in browser history, server logs and referrers.
 
-Smallest future change, written up for approval and not created now: two optional values (transfer date, transfer type) plus the existing updated timestamp on the same trying-to-conceive record, saved only by an explicit action, readable only by the person themselves under the existing access rules. Nothing else is stored: every day and milestone shown is recalculated from those two values.
+- The hub to timeline handoff moves to ephemeral in-app navigation state, so nothing sensitive appears in the address bar.
+- Reading the existing address parameters stays supported for people who bookmarked or shared a link, but nothing new is added to them.
+- Verified: analytics record only the page path, never the parameters. This is documented as a privacy item to resolve before saving is ever switched on.
 
-Does the Companion see saved IVF information today? **No.** It reads only the two named answers from the record, so new values would not be picked up without a separate approved change.
+## 5. No Save UI
 
-## 5. Documented design for later approval
+No "Save my timeline", no disabled or coming-soon control. The tool calculates and shows the timeline. Saving stays a documented future capability.
 
-Written into the phase document, not built:
+## 6. Documented audit results (no code or database change)
 
-- Signed-out: calculate freely; an optional "Save my timeline" with "Sign in to keep your IVF timeline and return to it later."
-- Signed in with a trying-to-conceive journey: saving attaches the transfer date and type to that journey, shows "Timeline saved", and offers "Update timeline". No second active journey.
-- Sign-in handoff: carry the entered date and type through sign-in and return to `/ivf-timeline` with them restored, using the existing pending-journey and return-route mechanism (the return-route allow list would need `/ivf-timeline` added when saving is activated).
-- Moving to pregnancy later: pregnancy becomes the active journey, the IVF timeline stays as history, is never treated as a competing active journey, and is not deleted automatically.
-- Privacy: treatment information is health information. Saving must stay explicit, optional, signed in and clearly explained; using the calculator must never store anything. Privacy and legal review required before saving is switched on.
+- Current trying-to-conceive storage supports an IVF timeline: **NO**. The record and its save routine have no transfer date or transfer type.
+- Future minimum storage: optional transfer date, optional transfer type, plus the existing updated timestamp. Two values only; every milestone is recalculated, never stored.
+- Future model stays: trying to conceive journey, optional IVF treatment context, pregnancy when applicable. No `ivf` lifecycle, no `/my-ivf-journey`, no competing active journey.
+- Future save flow: signed out calculates freely then an optional save with a clear sign-in explanation; signed in with an active trying-to-conceive journey, saving attaches the two values to that journey and confirms with "Timeline saved" plus an update action.
+- Future sign-in handoff: preserve entered values, return to `/ivf-timeline`, restore them; the existing return-route allow list would need to permit `/ivf-timeline` at that point. Not changed now.
+- Moving to pregnancy later: pregnancy becomes active, prior IVF context stays historical, never a competing lifecycle, never auto-deleted. No migration work now.
+- Companion access to saved IVF timeline data today: **NO**. No Companion, prompt, runtime, grounding or memory changes.
+- Privacy: future saved transfer information is personal health information; saving must be explicit, optional, signed in, user-controlled and clearly explained. Using the calculator must never create a saved record. Privacy and legal review required before persistence is activated.
 
-## 6. Technical notes
+## 7. Technical notes
 
-- `src/data/ivfTopicData.ts`: `LINKS.timeline` changes from `/ivf` to `/ivf-timeline`; kind stays `tool`.
-- New `src/components/ivf/IVFTimelineForm.tsx`, extracted from the existing hub calculator card in `IVFHero.tsx` (date popover, 5-day/3-day select, submit navigating to `/ivf-timeline?date=…&type=…`). `IVFHero.tsx` and `src/pages/IVFTimeline.tsx` both render it; `IVFTimeline.tsx` shows it in place of the current "No transfer date provided" dead end, and above the result once a date is present.
-- No changes to `savedTTCJourney.ts`, `save_ttc_journey`, `journeys`, `authIntent.ts`, or any context builder.
-- Tests: extend `src/test/phase34eIvfUx.test.ts` (or a new `phase34fIvfTimelineRouting.test.ts`) to assert every `kind: "tool"` destination equals `/ivf-timeline`, and that the lifecycle list stays the three existing values.
-- Docs: `docs/content/phase34f-ivf-timeline-routing-and-save-state.md` carrying the audit answers and the design above; roadmap entry.
-- Validation: focused tests, full suite, typecheck, lint baseline, production build, and browser checks at 1280/834/390 that each stage action lands on `/ivf-timeline` and that a signed-out calculation works.
+- `src/data/ivfTopicData.ts`: `LINKS.timeline` `/ivf` → `/ivf-timeline`; kind stays `tool`.
+- New `src/components/ivf/IVFTimelineForm.tsx` (date popover with `pointer-events-auto`, 5-day/3-day select, submit) navigating via `navigate("/ivf-timeline", { state: { transferMs, transferType } })`. `IVFHero.tsx` renders it in place of its inline card; `src/pages/IVFTimeline.tsx` renders it instead of the dead-end message, resolving values from router state first and existing query parameters second, keeping the current date validation.
+- Untouched: `savedTTCJourney.ts`, `save_ttc_journey`, `journeys`, `authIntent.ts`, context builders, grounding, articles, imagery.
+- Tests, new `src/test/phase34fIvfTimeline.test.tsx`: every `kind: "tool"` destination is `/ivf-timeline` (incorrect = 0); `/ivf-timeline` renders a usable calculator with no pre-filled state; 3-day and 5-day both resolve; invalid or missing values fall back to the form safely; no save control rendered; no database call during calculation; lifecycle list remains exactly ttc, pregnancy, first_year; grounding and AI runtime unchanged; analytics do not record the sensitive parameters.
+- Docs: `docs/content/phase34f-ivf-timeline-routing-and-save-state.md` with the audit answers, the address-exposure note and the future design; roadmap entry.
+- Validation: focused tests, full suite, typecheck twice, lint against baseline, production build, and browser QA at 1280/834/390 checking stage actions land on `/ivf-timeline`, standalone and hub calculation both work, no dead end, no sideways scrolling, no new console errors.

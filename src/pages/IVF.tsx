@@ -31,6 +31,7 @@ const IVF = () => {
         <IVFWhatMakesDifferent />
         <IVFAISupport />
         <IVFStages />
+        <IVFGuides />
         <IVFCommonQuestions />
         <IVFReflection />
         <IVFFinalCTA />

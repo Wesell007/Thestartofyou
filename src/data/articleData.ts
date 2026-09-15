@@ -1916,6 +1916,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "minimal",
     crossLinks: [
       { label: "OHSS and IVF treatment side effects", href: "/articles/ohss-and-ivf-side-effects", context: "what to watch for during stimulation, and when to ring your clinic" },
+      { label: "IVF versus ICSI", href: "/articles/ivf-vs-icsi", context: "the fertilisation step, and where the two methods differ" },
     ],
     keyTakeaways: [
       "A typical IVF cycle takes 4-6 weeks",

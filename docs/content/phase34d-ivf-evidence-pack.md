@@ -28,14 +28,14 @@ Phase 33.4 rendering rules apply to every source below: visible YES, plain text 
 ### `/articles/ivf-vs-icsi`
 1. HFEA — Intracytoplasmic sperm injection (ICSI)
 2. HFEA — In vitro fertilisation (IVF)
-3. NHS — IVF
-4. NHS — IVF: what happens
+3. NHS — IVF: what happens
+4. NHS — IVF
 5. NICE — CG156
 
 ### `/articles/fresh-vs-frozen-embryo-transfer`
 1. HFEA — In vitro fertilisation (IVF)
 2. HFEA — Embryo freezing
-3. NHS — IVF
+3. NHS — IVF: what happens
 4. NHS — IVF: risks
 5. NICE — CG156
 

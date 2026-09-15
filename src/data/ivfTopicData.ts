@@ -54,7 +54,7 @@ const LINKS = {
   early: "/ivf/early-pregnancy",
   pregnancy: "/pregnancy",
   support: "/support",
-  timeline: "/ivf",
+  timeline: "/ivf-timeline",
   ivfTimeline: "/articles/ivf-timeline-what-to-expect",
   emotionalIVF: "/articles/emotional-impact-of-ivf",
   whatIvf: "/articles/what-ivf-is-uk-guide",

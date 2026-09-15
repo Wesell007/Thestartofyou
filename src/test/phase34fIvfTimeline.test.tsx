@@ -155,7 +155,8 @@ describe("phase 34F legacy address compatibility", () => {
     const stateDate = subDays(new Date(), 3);
     const legacyDate = subDays(new Date(), 30);
     await renderTimelineAt({
-      pathname: `/ivf-timeline?date=${legacyDate.getTime()}&type=5day`,
+      pathname: "/ivf-timeline",
+      search: `?date=${legacyDate.getTime()}&type=5day`,
       state: { transferMs: stateDate.getTime(), transferType: "3day" },
     } as never);
     expect(screen.getByTestId("timeline-result").textContent).toContain(

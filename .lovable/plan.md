@@ -1,120 +1,49 @@
-# Phase 34E — IVF UX, article discovery and AI separation
+# Phase 34F — IVF timeline routing fix and save-state design
 
-Cleanup of `/ivf` and its three stage pages only. No new articles, routes, content topics, images or deployment.
+Scope: fix the broken timeline buttons and make the timeline tool usable on its own. Saving is designed and documented only; nothing is stored, no new journey type, nothing deployed.
 
-## What is wrong today (verified in the code)
+## 1. The defect
 
-All three stage pages render from one shared template (`IVFTopicPage`) in a fixed order:
+The stage pages' timeline action ("Track your IVF timeline" / "Use timeline") points at `/ivf`, the hub, not at the timeline tool. Someone arriving there sees the hub again and has to find the small date form. The real tool page `/ivf-timeline` also has no way to enter anything: without a date in the address it only shows a message telling people to go back to the hub.
 
-```text
-Hero → What this topic covers → COMPANION (AI) → Start here → Anchor read
-→ What's normal / When to seek support → stage block → Emotional + journal
-→ Guidance groups (large mixed directory) → Common questions (AI) → Prev/next
-→ Other IVF stages → Back
-```
+Audited timeline actions: 3 stage-page actions (before transfer, after transfer, early pregnancy) plus the hub's own date form (correct) and the fallback text link on the tool page (points back to the hub). Incorrect destinations before: 3. After: 0.
 
-Problems confirmed by reading the data:
+## 2. Routing fix
 
-- The Companion sits third, before any editorial guidance.
-- The big "guidance groups" directory mixes real guides and AI questions in identical rows with the same chevron. Before transfer: 6 of 18 rows are real articles, the rest open AI. Early pregnancy: 25 rows, only 6 are real articles.
-- Early pregnancy's three "Start here" cards and its "Anchor read" all open AI while looking exactly like article cards, with the CTA "Open".
-- Start-here cards duplicate the same destinations shown elsewhere (the timeline article appears in Start here, Anchor read and a group row on Before transfer; the emotional-impact article likewise on After transfer).
-- "Common questions" at the bottom is a second AI area on every page, duplicating prompts already in the Companion.
-- Every card falls back to the same stage hero image, so rows of different destinations share one picture.
-- Of the six new 34C/34D guides, only two (ICSI, fresh vs frozen) are surfaced from a stage page at all.
+- Point all three stage timeline actions at `/ivf-timeline`.
+- Give `/ivf-timeline` its own transfer-date and transfer-type form, reusing the same calculator the hub already has, so it is a real starting point instead of a dead end. Anyone can calculate, signed in or not.
+- Keep the hub form working exactly as today (it already lands on `/ivf-timeline` with the entered values).
+- Keep the separate written guide "IVF timeline, what to expect" clearly a guide, not the tool.
 
-The main IVF hub audit also confirms:
+## 3. What is deliberately not changed
 
-- Its hero uses `min-h-screen`, delaying the page orientation and navigation.
-- `The active treatment pathway` and `What makes IVF different` are separate large orientation sections with overlapping roles.
-- The embedded AI section appears before stage navigation and the guide library.
-- The guide library contains only the six Phase 34C/34D guides. The timeline and emotional-impact guides are surfaced elsewhere, so the eight IVF-specific guides do not have one coherent editorial home.
-- `Common questions across IVF` consists entirely of AI destinations styled like editorial rows, creating a second page-level AI area.
-- The final `Ask a question` action links to `/ask` without naming the Companion.
+- No new saved journey type. Saved journeys stay exactly: trying to conceive, pregnancy, first year.
+- No `/my-ivf-journey`, no change to "Start your journey", no Save button yet, no data stored.
+- No changes to the Companion, to guidance content, imagery, articles, or grounding.
 
-## What I will build
+## 4. Storage audit result (documented, not built)
 
-### 1. Destination truth in the data
+Can today's trying-to-conceive storage hold an IVF timeline? **No.** The record keeps cycle dates and an "IVF consideration" answer, but has nowhere for a transfer date or transfer type, and the save routine accepts a fixed list of answers that does not include them.
 
-Give every visitor-facing item one of exactly seven explicit kinds: `article`, `tool`, `ai`, `stage`, `hub`, `support`, `journey`. Derive and test each kind against actual behaviour (`/articles/…` → article, `ask:` or Companion submission → ai, IVF stage route → stage, timeline utility → tool, real hub route → hub, support destination → support, setup action → journey). The actual destination always overrides its title, image or previous styling; a mismatch fails focused tests.
+Smallest future change, written up for approval and not created now: two optional values (transfer date, transfer type) plus the existing updated timestamp on the same trying-to-conceive record, saved only by an explicit action, readable only by the person themselves under the existing access rules. Nothing else is stored: every day and milestone shown is recalculated from those two values.
 
-### 2. Main IVF hub: one coherent journey
+Does the Companion see saved IVF information today? **No.** It reads only the two named answers from the record, so new values would not be picked up without a separate approved change.
 
-Recompose the existing hub components into:
+## 5. Documented design for later approval
 
-```text
-Compact premium hero + clearly labelled timeline tool
-One consolidated IVF orientation section
-Your IVF stages
-IVF guidance (all 8 real IVF articles, grouped by intent)
-Companion (the only page-level AI area, maximum 4 prompts)
-Quiet emotional / journal support
-Final journey action (Start your journey only)
-```
+Written into the phase document, not built:
 
-- Reduce the hero from a full viewport while keeping its current visual identity and transfer-date timeline tool.
-- Merge `IVFPathwayPosition`, `IVFWhatThisCovers` and the useful parts of `IVFWhatMakesDifferent` into one concise orientation section; orientation sections after = 1.
-- Move the three stage cards ahead of all AI and label their action `Explore stage`.
-- Rebuild `IVFGuides` as a single eight-guide library with three deliberate groups: **Start with IVF**, **Treatment and decisions**, **The emotional and outcome side**. Add the existing timeline and emotional-impact guides, each once, with their actual imagery and `Read guide`.
-- Remove `IVFCommonQuestions` as a separate module; move no more than four useful prompts into `IVFAISupport`.
-- Move `IVFAISupport` below the stage and guide sections, retitle it `YOUR COMPANION`, explicitly describe the AI-generated answer and use `Ask the Companion`.
-- Make the final CTA journey-only with `Start your journey`; remove its secondary `/ask` action so no page-level AI action exists outside the dedicated Companion.
-- Preserve the quiet support section without adding another large emotional-content block.
-- Keep exactly one primary IVF timeline tool instance: the transfer-date functionality in the compact hero. Do not add a second tool section. Keep the timeline article once in the guide library.
+- Signed-out: calculate freely; an optional "Save my timeline" with "Sign in to keep your IVF timeline and return to it later."
+- Signed in with a trying-to-conceive journey: saving attaches the transfer date and type to that journey, shows "Timeline saved", and offers "Update timeline". No second active journey.
+- Sign-in handoff: carry the entered date and type through sign-in and return to `/ivf-timeline` with them restored, using the existing pending-journey and return-route mechanism (the return-route allow list would need `/ivf-timeline` added when saving is activated).
+- Moving to pregnancy later: pregnancy becomes the active journey, the IVF timeline stays as history, is never treated as a competing active journey, and is not deleted automatically.
+- Privacy: treatment information is health information. Saving must stay explicit, optional, signed in and clearly explained; using the calculator must never store anything. Privacy and legal review required before saving is switched on.
 
-### 3. New stage-page hierarchy (shared template, per-stage modules)
+## 6. Technical notes
 
-```text
-Hero
-What this stage covers
-Guides for this stage       ← real articles only: 2 featured + lighter rows
-Stage-specific block        ← protocol week / the wait / handover
-What's normal / when to seek support   (unchanged wording)
-Tool: Track your IVF timeline          (only where relevant)
-Your Companion              ← the single AI area, max 4 prompt chips
-Emotional note + journal line
-Prev / next stage
-```
-
-Start here, Anchor read and the bottom Common questions sections are removed as separate modules; their genuine article destinations fold into "Guides for this stage" once each, and their AI questions fold into the Companion chips.
-
-Stages will not all carry the same modules: Before transfer keeps the protocol week, After transfer keeps the wait shape and the difficult-news group, Early pregnancy keeps the handover card and drops the protocol block.
-
-### 4. One content-type language system across all four pages
-
-- **Article**: its own imagery where a real image exists, title, description, `Read guide`.
-- **Tool**: utility card, tool icon, `Use the timeline`.
-- **Stage**: stage imagery and `Explore stage`.
-- **AI**: only inside the Companion module — eyebrow `ASK THE COMPANION`, helper line "Get an AI-generated answer using the context of this IVF stage.", button `Ask the Companion`. No AI item anywhere else on the page, and none styled as an article.
-- **Journey action** (`kind: journey`): `Start your journey`.
-- **Support / hub**: explicit destination wording rather than article, tool or AI language.
-
-`Guides for this stage` and the hub guide library contain `kind: article` items only, each resolving to `/articles/…`. Support crossovers and Pregnancy-hub handover actions render in separate lightweight sections with explicit support/hub wording.
-
-Companion copy per the brief: eyebrow `YOUR COMPANION`, heading "Still have a question about [stage]?", placeholder "Ask about [stage]…", button "Ask the Companion".
-
-### 5. Stage article line-ups (real routes only)
-
-- **Before transfer** — featured: *What IVF is (UK guide)*, *IVF timeline, what to expect*. More guidance: *IVF vs ICSI*, *Fresh vs frozen embryo transfer*, *OHSS and IVF side effects*, *NHS IVF funding and eligibility*, *The emotional impact of IVF*.
-- **After transfer** — featured: *The emotional impact of IVF*, *When an IVF cycle doesn't work*. More guidance candidates: *Chemical pregnancy*, *Pregnancy after loss*, *Perinatal anxiety*. Each is included only after its actual href is verified as `/articles/…`; Support remains a separate support action.
-- **Early pregnancy** — featured candidates: *Tests and scans in pregnancy*, *The emotional impact of IVF*. More guidance candidates: *Bleeding in early pregnancy*, *Twins and multiples*, *Pregnancy after loss*, *Perinatal anxiety*. Each is included only after its actual href is verified as `/articles/…`; Pregnancy handover remains a separate hub action.
-
-Every article appears once per stage as primary discovery; duplicate destinations after this phase = 0.
-
-### 6. Imagery
-
-Use each article's existing hero where one exists by extending the existing href→image map. No new images generated. Cards without a real image use a premium text row rather than repeating the stage hero.
-
-## Technical notes
-
-- Stage files: `src/data/ivfTopicData.ts` (add `kind`, restructure per-stage module data, collapse AI questions into `aiPrompts` capped at 4), `src/components/ivf/IVFTopicPage.tsx` (new section order, article/tool/AI card components, remove Start here / Anchor read / Common questions modules), plus the thumbnail map.
-- Hub files: `src/pages/IVF.tsx`, `IVFHero.tsx`, one consolidated orientation component, `IVFStages.tsx`, `IVFGuides.tsx`, `IVFAISupport.tsx`, `IVFFinalCTA.tsx`; the redundant orientation and common-question components will no longer be mounted. No unnecessary new shared system. The global floating Companion launcher remains unchanged and is excluded from page-module counts.
-- No changes to routes, `articleData.ts`, the grounding registry, sitemap, AI backend, saved lifecycles or reviewer governance. Safety blocks keep their current approved wording verbatim.
-- New focused tests cover: all eight hub article routes and 8/8 unique hub discovery; all six 34C/34D guides accounted for; stage links only use stage routes; article sections contain only `kind: article` items resolving to `/articles/…`; tool, hub, support and journey kinds agree with their real destinations; AI kinds use Companion prompt behaviour; any kind/destination mismatch fails; zero AI destinations outside Companion modules; one embedded Companion on each of four pages; no separate Common Questions AI modules; exactly one hub timeline tool and one hub timeline-article discovery; Pregnancy hub and Support crossover are not article styled; no duplicate article destination within any page; unchanged routes, grounding, lifecycles and reviewer governance.
-- Validation: focused 34E tests, full suite, typecheck ×2, lint against baseline, production build, route and destination validation, plus QA of all four pages at 1280 / 834 / 390 px.
-
-## Documentation
-
-`docs/content/phase34e-ivf-ux-and-discovery-cleanup.md`, `phase34e-ivf-link-destination-audit.md` (full before/after destination table for all four pages with ARTICLE / TOOL / AI_PROMPT / STAGE / HUB / SUPPORT / JOURNEY_ACTION), and `phase34e-ivf-frontend-report.md`.
-
-Closing report will return the four-page destination counts, 8/8 hub guide accounting, 6/6 new-guide accounting, Companion/common-question/duplicate counts and unchanged deployment hold.
+- `src/data/ivfTopicData.ts`: `LINKS.timeline` changes from `/ivf` to `/ivf-timeline`; kind stays `tool`.
+- New `src/components/ivf/IVFTimelineForm.tsx`, extracted from the existing hub calculator card in `IVFHero.tsx` (date popover, 5-day/3-day select, submit navigating to `/ivf-timeline?date=…&type=…`). `IVFHero.tsx` and `src/pages/IVFTimeline.tsx` both render it; `IVFTimeline.tsx` shows it in place of the current "No transfer date provided" dead end, and above the result once a date is present.
+- No changes to `savedTTCJourney.ts`, `save_ttc_journey`, `journeys`, `authIntent.ts`, or any context builder.
+- Tests: extend `src/test/phase34eIvfUx.test.ts` (or a new `phase34fIvfTimelineRouting.test.ts`) to assert every `kind: "tool"` destination equals `/ivf-timeline`, and that the lifecycle list stays the three existing values.
+- Docs: `docs/content/phase34f-ivf-timeline-routing-and-save-state.md` carrying the audit answers and the design above; roadmap entry.
+- Validation: focused tests, full suite, typecheck, lint baseline, production build, and browser checks at 1280/834/390 that each stage action lands on `/ivf-timeline` and that a signed-out calculation works.

@@ -52,11 +52,51 @@ no IVF values written to the shared production-serving database.
 
 FEATURE-ON ENGINEERING QA = PASS.
 
-Limitation recorded honestly: **feature-ON responsive browser QA was not performed.** Rendering the
-save area in a browser requires a TRUE build-time flag value, and the only available browser
-environment is the shared preview, which must not be switched on. Feature-ON behaviour and copy are
-covered by the mocked component tests above; feature-ON visual QA at 1280 / 834 / 390 remains an
-activation-readiness item for an isolated non-shared environment.
+## Feature-ON browser QA — isolated, hermetic (completed)
+
+Method: a temporary build of the real application with `VITE_IVF_TIMELINE_SAVE_ENABLED=true` written to a
+throwaway output directory and served on a private local port. The shared preview, `.env`, CI, Vite config,
+deployment configuration and the shared database were not changed. Synthetic transfer values only.
+
+Network isolation: the entire shared backend origin was deny-by-default. Every relevant request either
+matched an explicitly expected request and was fulfilled locally with synthetic data, or was aborted and
+failed the run.
+
+| Isolation metric | Result |
+| --- | --- |
+| Shared-backend TTC reads | 0 |
+| Shared-backend IVF reads | 0 |
+| Shared-backend TTC mutations | 0 |
+| Shared-database IVF QA writes | 0 |
+| Shared auth/account mutations | 0 |
+| Unexpected shared-backend requests | 0 |
+| Console errors | 0 |
+| Horizontal overflow | 0 |
+
+Signed-out, feature ON, at 1280 / 834 / 390 (3/3 widths PASS): calculator usable, save prompt rendered,
+re-entry limitation copy present, sign-in link `/auth?intent=return_to_route&return_to=%2Fivf-timeline`
+carrying no treatment values, no treatment values in storage or cookies.
+
+Regression, feature ON, signed out: `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`,
+`/ivf/early-pregnancy` at all three widths — 0 save UI, 0 overflow (12/12 route-width combinations).
+
+Signed in, hermetic synthetic session, at 1280 / 834 / 390 (each scenario PASS at all three widths):
+
+| Scenario | Observed |
+| --- | --- |
+| Active TTC, nothing saved | Save offered; one click → exactly 1 update; Saved state; Save button gone; Remove offered; 0 storage leakage |
+| Active TTC, saved context differs | Update offered with replacement copy; one click → exactly 1 update carrying only the two source values; Saved state |
+| Remove — cancelled | Confirmation dialog shown, focus inside the dialog, 0 additional writes |
+| Remove — confirmed | Exactly 1 clear writing both columns to null; Save offered again; the calculated timeline stays on screen |
+| No TTC journey | Explanatory copy and journey-start link only; 0 writes; no implicit row creation |
+| Pregnancy lifecycle with saved context | Read-only saved timeline with Remove; Save and Update absent |
+| First year lifecycle with saved context | Read-only saved timeline with Remove; Save and Update absent |
+| Old saved context (400 days), no current calculation | Readable and removable; 0 automatic writes; stored row untouched |
+
+FEATURE-ON BROWSER QA = PASS (isolated, hermetic, all three widths).
+REAL PRODUCTION BACKEND FEATURE-ON QA = NOT PERFORMED (and not required for readiness).
+
+All temporary build output, scripts and synthetic sessions were destroyed after the run.
 
 ## Privacy and security boundary (feature ON, mocked)
 

@@ -19,7 +19,7 @@ Two separate things, so the feature boundary stays clean and no React hook is ev
 
 States and copy:
 
-- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey and return to it later." / `Sign in to save`. Nothing is written before authentication.
+- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey. You'll return here after signing in and can re-enter your transfer details to save them." / `Sign in to save`. The copy is explicit that the current values do not survive sign-in, and nothing is written before authentication.
 - Signed in, active TTC, nothing saved: `Save my timeline` with "Save your embryo transfer date and transfer type to your Trying to Conceive journey so you can return to this timeline later." and "Calculated milestones are not stored."
 - Saved context identical to what is on screen: `Timeline saved` only — no active Save button, no redundant write, no save timestamp.
 - Saved context differs: `Update saved timeline` with "This will replace the transfer details currently saved to your TTC journey." Never automatic.
@@ -34,6 +34,7 @@ Priority and restoration rules:
 
 - A current explicit calculation (form, hub handoff, navigation state) always remains the displayed timeline; stored context then only decides Save / Saved / Update / Remove or historical state.
 - With no current calculation and an active TTC journey, a usable saved context may reconstruct the normal timeline from the two source values. No write occurs.
+- Race guard: the saved-context load is asynchronous, so the restoration decision is made against the current state at the moment the load resolves (via a ref/functional update), not the state captured when the request began. If the person calculates while the load is in flight, their calculation stays on screen and the late saved context is kept only for the Save / Saved / Update / Remove comparison.
 
 ## Feature-off boundary
 
@@ -44,7 +45,7 @@ With the flag FALSE the controller never mounts, so the hook never runs and the 
 
 - New: `src/components/ivf/IVFTimelineSaveArea.tsx`, a small flag-gated feature controller in the same IVF component area, `src/hooks/useIVFTimelineSave.ts`, tests in `src/test/phase34h1IvfSaveExperience.test.tsx`.
 - Changed: `src/pages/IVFTimeline.tsx` only (flag-gated mount of the controller, saved-context fallback when no current calculation), reusing `ConfirmDialog`, `useLifecycle`, `buildAuthUrl("return_to_route", "/ivf-timeline")` and the Phase 34G helpers in `savedTTCJourney.ts`. No change to the helpers themselves, to analytics, to companion or AI code, and no broader refactor.
-- Tests mock auth, lifecycle, the three persistence helpers and the flag ON, and assert the exact arguments and call counts of each helper so the UI-to-persistence contract is verified. No real transfer values are written to the shared database. The flag default stays FALSE and the shared environment flag is not enabled.
+- Tests mock auth, lifecycle, the three persistence helpers and the flag ON, and assert the exact arguments and call counts of each helper so the UI-to-persistence contract is verified. Two extra focused tests cover the signed-out copy (re-entry stated, no write) and the async restoration race (a calculation made while the load is pending stays displayed). No real transfer values are written to the shared database. The flag default stays FALSE and the shared environment flag is not enabled.
 
 - Validation: focused 34H.1 tests, Phase 34F and 34G suites, TTC tests, full suite, typecheck twice, lint against baseline, production build, responsive feature-off QA at 1280 / 834 / 390 across `/ivf-timeline`, `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, and mocked feature-on UI QA.
 

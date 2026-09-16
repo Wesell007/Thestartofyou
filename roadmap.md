@@ -49,3 +49,16 @@
 - [x] `/ivf-timeline` accepted as a return route; no values preserved across sign-in
 - [x] Focused tests (24), full suite, typecheck x2, lint at baseline, build, QA at 1280/834/390
 - [ ] Shared production-serving database migration applied = YES; application code deployed/published = NO; feature remains OFF; privacy and legal approval remain required before activation
+
+## Phase 34H.1 — IVF timeline save experience — CLOSED PASS / FEATURE OFF / ACTIVATION GATES REMAIN
+- [x] Feature controller (`IVFTimelineSaveController`) mounts only while `IVF_TIMELINE_SAVE_ENABLED`; hook never runs while OFF
+- [x] Visible save area (`IVFTimelineSaveArea`) is presentation only; state machine lives in `useIVFTimelineSave`
+- [x] Feature OFF contract tested: 0 save UI, 0 persistence reads/writes, behaviour identical to Phase 34F
+- [x] Signed out: calculator fully usable; sign-in CTA states values must be re-entered; no persistence before auth
+- [x] Active TTC only: explicit Save / Update / Remove; remove behind a confirmation dialog; calculation survives removal
+- [x] Current explicit calculation always wins; late saved-context load never overwrites a newer calculation
+- [x] Historical or non-TTC saved context shown read-only with Remove; never auto-expired, never silently cleared
+- [x] No TTC journey: explanatory copy only; no insert, upsert, placeholder or IVF lifecycle
+- [x] No treatment data in URLs, browser storage, cookies, auth metadata, analytics or error output
+- [x] Focused tests (21), 34F/34G/TTC suites, full suite (128 files / 1,484 tests), typecheck x2, lint at baseline, build, QA at 1280/834/390
+- [ ] Deployed = NO; activated = NO; schema changes = 0; privacy and legal approval still required before Phase 34H.2

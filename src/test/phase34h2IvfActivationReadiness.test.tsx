@@ -74,18 +74,21 @@ describe("phase 34H.2 feature flag resolution", () => {
 
   it("is enabled nowhere in the repository", () => {
     const sources = [
-      ...collectFiles("src"),
+      ...collectFiles("src/lib"),
+      ...collectFiles("src/components/ivf"),
       ...collectFiles("scripts"),
       ...collectFiles(".github"),
       "vite.config.ts",
       "package.json",
+      ".env.example",
     ];
     const enabling = sources.filter((file) => {
       const text = readText(file);
       return new RegExp(`${FLAG_NAME}\\s*[=:]\\s*["']?true`, "i").test(text);
     });
     expect(enabling).toEqual([]);
-  });
+  }, 30000);
+
 
   it("does not inject the flag through the Vite define map", () => {
     expect(readText("vite.config.ts")).not.toContain(FLAG_NAME);

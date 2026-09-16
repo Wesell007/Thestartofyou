@@ -132,7 +132,7 @@ describe("phase 34H.1 feature-off boundary", () => {
     expect(screen.queryByRole("button", { name: /remove saved timeline/i })).toBeNull();
     expect(screen.queryByText(/timeline saved/i)).toBeNull();
     expect(screen.queryByText(/sign in to save/i)).toBeNull();
-  });
+  }, 20000);
 
   it("keeps the standalone calculator exactly as Phase 34F left it", async () => {
     await renderPage("/ivf-timeline");

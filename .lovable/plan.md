@@ -39,19 +39,30 @@ Isolated feature-ON build at 1280 / 834 / 390:
 Against the same real isolated bundle, with no application source change:
 
 - seed a synthetic session in browser storage inside the test only (session data is not treatment data);
-- intercept every backend call with Playwright routing and answer with synthetic lifecycle, journey and
-  IVF-context responses using synthetic transfer values;
-- hard network guard, fail-closed: any request that could insert, update or delete `ttc_journeys`,
-  change auth or account state, or persist IVF context is aborted and fails the test. Any unexpected
-  backend mutation aborts and fails.
+- expected reads: intercept and return synthetic auth, lifecycle, journey and IVF-context responses using
+  synthetic transfer values;
+- expected save, update and clear mutations: intercept and fulfil locally with synthetic success
+  responses, so the real bundle can exercise Save success, Saved, Update success and Remove success
+  without any request reaching the shared backend;
+- fail-closed guard: any unexpected backend request, and any request attempting to reach the shared
+  backend for a TTC insert, update or delete, IVF persistence, or an account or auth mutation, is
+  blocked and fails the test. Required results: shared-database IVF QA writes = 0, shared-backend TTC
+  mutations = 0, unexpected backend mutations = 0.
 
-States to render and check at all three widths on `/ivf-timeline`: active TTC with no saved context
-(Save my timeline, supporting copy, "Calculated milestones are not stored."); saved context matching
-(Timeline saved, no Update, no timestamp); different current calculation (Update saved timeline,
-replacement copy, calculation still displayed); Remove (confirmation dialog fit, focus behaviour, Cancel,
-Remove state, calculation retained after a mocked clear); no TTC journey (correct state, no implicit
-creation); pregnancy and first year with saved context (historical, Remove only); old historical context
-(historical display, removable, not auto-cleared).
+States to render and check at all three widths on `/ivf-timeline`: active TTC with nothing saved (Save my
+timeline, supporting copy, "Calculated milestones are not stored."); Save action with the mutation
+fulfilled locally, saved state rendered; saved context matching (Timeline saved, no redundant Save, no
+timestamp); different current calculation (Update saved timeline, replacement copy, calculation still
+displayed); Update action fulfilled locally with the updated saved state rendered; Remove (confirmation
+dialog fit and focus, Cancel works, mocked clear fulfilled locally, saved state removed, current
+calculation retained); no TTC journey (correct state, no implicit insert); pregnancy and first year with
+saved context (historical, Remove only); old historical context (historical display, removable, never
+auto-cleared).
+
+After each test the browser context is destroyed, the synthetic session discarded and the temporary
+build artefacts deleted. No shared account state changes. Treatment values never enter localStorage,
+sessionStorage, cookies, the URL or auth metadata.
+
 
 If this cannot be done without source changes, real auth side effects, shared-database writes or
 treatment values entering forbidden storage, it stops immediately, the exact reason is recorded, and

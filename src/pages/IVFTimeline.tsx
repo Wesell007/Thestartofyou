@@ -107,7 +107,7 @@ const IVFTimeline = () => {
       {resolved ? (
         <IVFTimelineResult transferDate={resolved.date} transferType={resolved.type} />
       ) : (
-        <section className="pt-8 pb-24 md:pb-32">
+        <section className="pt-8 pb-10">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl">
             <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-3">Your IVF timeline</h1>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-7">
@@ -118,6 +118,16 @@ const IVFTimeline = () => {
           </div>
         </section>
       )}
+
+      {/* Phase 34H.1 — the save feature exists only while the flag is on. */}
+      {IVF_TIMELINE_SAVE_ENABLED && (
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl pb-10">
+          <IVFTimelineSaveController current={resolved} onRestore={setRestored} />
+        </div>
+      )}
+
+      <div className="pb-14 md:pb-24" />
+
 
       <Footer />
     </div>

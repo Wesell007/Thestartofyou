@@ -76,10 +76,24 @@ PRIVACY NOTICE WORDING APPROVED = NOT PROVIDED. No speculative legal wording wil
    - `docs/content/phase34h2-ivf-timeline-release-evidence.md` — test, boundary, accessibility and QA
      evidence.
 9. **Validation**: focused 34H.2 tests, 34H.1 tests, 34G persistence tests, TTC tests, full suite,
-   typecheck twice, lint against baseline, production build. No deployment.
+   typecheck twice, lint against baseline, and a production **validation** build. The documentation
+   will state VALIDATION PRODUCTION BUILD = YES and PRODUCTION RELEASE BUILD DEPLOYED = NO; the
+   validation build is never described as a release or deployment.
 10. **Rollback documented** for a future release: flag FALSE, rebuild, redeploy. Never drop the 34G
     columns, never remove the pairing constraint, never automatically delete stored IVF data, never
     rewrite TTC journeys. Turning the UI off does not delete anything already saved.
+
+## Two independent activation blockers
+
+The documentation records these separately, not as one gate:
+
+- **HUMAN REVIEW BLOCKER** — reviewer, review date, privacy-notice decision, save copy, retention
+  wording, deletion wording, lawful processing position, special-category requirements, explicit
+  consent decision and additional privacy-impact requirements are all NOT PROVIDED or PENDING REVIEW.
+- **PRODUCTION ACTIVATION CONFIGURATION BLOCKER** — the build-time flag has no verified production
+  injection point, so TECHNICAL ACTIVATION CONFIGURATION FULLY VERIFIED = NO. The injection point may
+  turn out to be the hosting environment, the CI/build environment, a repository environment file or
+  another verified deployment mechanism; none is assumed.
 
 ## Technical notes
 
@@ -91,15 +105,18 @@ FALSE, the compiled flag is the only activation switch, and the feature-off cont
 
 ```text
 PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
-ACTIVATION READY / BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL / FEATURE OFF
+READINESS PASS / BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL +
+PRODUCTION FLAG INJECTION VERIFICATION / FEATURE OFF
 ```
 
-with the full pre-activation report, `READY TO ACTIVATE = NO`, and privacy/legal reviewer
-NOT PROVIDED.
+with the full pre-activation report: ENGINEERING ACTIVATION READINESS = PASS (if validation passes),
+PUBLIC ACTIVATION READINESS = NO, READY TO ACTIVATE = NO, application deployed = NO, feature
+activated = NO, shared environment flag changed = NO.
 
 ## What is needed from you to unblock activation
 
-A named human privacy/legal reviewer with a review date, and explicit decisions on: privacy notice
-change and wording, save copy, retention wording, deletion wording, lawful processing position,
-special-category requirements, whether explicit consent is required, and whether further
-privacy-impact documentation is needed. Plus a verified production flag injection point.
+Gate A: a named human privacy/legal reviewer with a review date, and explicit decisions on the
+privacy notice, save copy, retention wording, deletion wording, lawful processing position,
+special-category requirements, explicit consent and any further privacy-impact documentation.
+
+Gate B: confirmation of where the production build-time flag value is injected.

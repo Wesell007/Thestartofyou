@@ -181,7 +181,9 @@ describe("phase 34H.1 active TTC save and update", () => {
     fireEvent.click(button);
     fireEvent.click(button);
 
-    await waitFor(() => expect(screen.getByText("Timeline saved")).toBeTruthy());
+    await waitFor(() =>
+      expect(screen.getByRole("heading", { name: "Timeline saved" })).toBeTruthy(),
+    );
     expect(saveIVFTimelineContext).toHaveBeenCalledTimes(1);
     expect(saveIVFTimelineContext).toHaveBeenCalledWith({
       transfer_date: format(date, "yyyy-MM-dd"),

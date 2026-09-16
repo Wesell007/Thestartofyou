@@ -12,26 +12,33 @@ The sign-in flow uses Google OAuth and magic-link email, both of which leave the
 
 ## What gets built
 
-A new save area component rendered only beneath a calculated timeline on `/ivf-timeline`, plus a small hook that owns the state machine.
+Two separate things, so the feature boundary stays clean and no React hook is ever called conditionally:
+
+- A save feature controller component, mounted on `/ivf-timeline` only when the flag is ON. It owns authentication state, lifecycle state, the saved-context load, the save/update/remove state machine, the saved-versus-current comparison and the historical determination. The hook is called unconditionally inside it.
+- The visible Save / Update / Remove area, which renders only when the situation calls for it.
 
 States and copy:
 
 - Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey and return to it later." / `Sign in to save`. Nothing is written before authentication.
-- Signed in, active TTC, nothing saved: `Save my timeline` with the stored-versus-derived explanation and "Calculated milestones are not stored."
+- Signed in, active TTC, nothing saved: `Save my timeline` with "Save your embryo transfer date and transfer type to your Trying to Conceive journey so you can return to this timeline later." and "Calculated milestones are not stored."
 - Saved context identical to what is on screen: `Timeline saved` only — no active Save button, no redundant write, no save timestamp.
 - Saved context differs: `Update saved timeline` with "This will replace the transfer details currently saved to your TTC journey." Never automatic.
-- Signed in, no TTC journey: "Saving is connected to a Trying to Conceive journey." plus a `Start your TTC journey` link only when no other lifecycle is active. No implicit row creation.
-- Active pregnancy or first year with saved context: historical `Saved IVF timeline` display with date and type, Remove available, no Save or Update.
-- Saved context older than the calculator's entry range: shown as historical, never auto-cleared, removable.
-- Remove: `Remove saved timeline` behind a confirmation dialog ("Remove your saved IVF timeline?" / explains only the two values go, TTC journey and answers stay). After a successful clear the on-screen calculation stays visible.
+- Signed in, no TTC journey: "Saving is connected to a Trying to Conceive journey." plus the existing `Start your TTC journey` action only when no other lifecycle is active. No insert, upsert or placeholder.
+- Active pregnancy or first year with saved context: historical `Saved IVF timeline` display with date and type, Remove available, no Save or Update, never reconstructed as an active treatment timeline.
+- Saved context older than the calculator's entry range: shown as historical, never forced through entry validation, never auto-cleared, removable.
+- Remove: `Remove saved timeline` behind a confirmation dialog ("Remove your saved IVF timeline?" / "This removes your saved embryo transfer date and transfer type from your Trying to Conceive journey. It won't delete your TTC journey or your other answers." / `Cancel` and `Remove saved timeline`). After a successful clear the on-screen calculation stays visible and the TTC journey and its answers are untouched.
 
-Interaction states IDLE / SAVING / SAVED / UPDATING / REMOVING / ERROR, with the action button disabled during a write so repeated clicks cannot produce a second write. Status changes announced via a polite live region; focus returns to the action area after save or remove; errors use calm generic copy with no database text, identifiers or treatment values.
+Interaction states IDLE / SAVING / SAVED / UPDATING / REMOVING / ERROR, with the action disabled during a write so repeated clicks cannot produce a second write. Status changes announced via a polite live region; focus returns to the action area after save or remove; errors use calm generic copy with no database text, identifiers or treatment values.
 
-Priority rule: a current explicit calculation (hub handoff, form, navigation state) always remains the displayed timeline. Saved context is read only to decide Saved / Save / Update, or to reconstruct a timeline when the page has no current calculation.
+Priority and restoration rules:
+
+- A current explicit calculation (form, hub handoff, navigation state) always remains the displayed timeline; stored context then only decides Save / Saved / Update / Remove or historical state.
+- With no current calculation and an active TTC journey, a usable saved context may reconstruct the normal timeline from the two source values. No write occurs.
 
 ## Feature-off boundary
 
-The flag is checked before anything else. While OFF the save area is never mounted, the hook never runs, and no load, save or clear helper is called — `/ivf-timeline` behaves exactly as in Phase 34F.
+With the flag FALSE the controller never mounts, so the hook never runs and the load, save and clear helpers are called zero times — `/ivf-timeline` behaves exactly as in Phase 34F. Tested explicitly.
+
 
 ## Technical details
 

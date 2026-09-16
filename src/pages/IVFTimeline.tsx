@@ -89,7 +89,12 @@ const IVFTimeline = () => {
     navigate(IVF_TIMELINE_ROUTE, { replace: true, state });
   }, [legacyResolved, navigate]);
 
-  const resolved = navResolved ?? legacyResolved ?? carried;
+  // Phase 34H.1 — a saved timeline the controller restored when the page had
+  // nothing on screen. It sits last in the priority order, so any explicit
+  // calculation always wins.
+  const [restored, setRestored] = useState<{ date: Date; type: IVFTransferType } | null>(null);
+
+  const resolved = navResolved ?? legacyResolved ?? carried ?? restored;
 
   const breadcrumbItems: BreadcrumbItem[] = [
     HOME_CRUMB,

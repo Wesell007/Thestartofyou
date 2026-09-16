@@ -34,20 +34,24 @@ Isolated feature-ON build at 1280 / 834 / 390:
 - regression `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`: no save UI,
   no overflow, no console errors.
 
-## 2b. Signed-in browser QA attempt — mocked backend, fail-closed network guard
+## 2b. Signed-in browser QA attempt — hermetic mocked backend
 
-Against the same real isolated bundle, with no application source change:
+Against the same real isolated bundle, with no application source change. The run is fully hermetic:
+every relevant backend request, read or write, either matches an explicitly expected request and is
+fulfilled locally with synthetic data, or is aborted and fails the test.
 
 - seed a synthetic session in browser storage inside the test only (session data is not treatment data);
-- expected reads: intercept and return synthetic auth, lifecycle, journey and IVF-context responses using
-  synthetic transfer values;
-- expected save, update and clear mutations: intercept and fulfil locally with synthetic success
-  responses, so the real bundle can exercise Save success, Saved, Update success and Remove success
-  without any request reaching the shared backend;
-- fail-closed guard: any unexpected backend request, and any request attempting to reach the shared
-  backend for a TTC insert, update or delete, IVF persistence, or an account or auth mutation, is
-  blocked and fails the test. Required results: shared-database IVF QA writes = 0, shared-backend TTC
-  mutations = 0, unexpected backend mutations = 0.
+  if session bootstrap would call the real auth service unmocked, the request is intercepted or the test
+  stops;
+- expected reads — session/auth state, lifecycle state, TTC journey existence, saved IVF context:
+  intercept and fulfil locally with synthetic responses using synthetic transfer values;
+- expected mutations — save, update and clear IVF context: intercept and fulfil locally with synthetic
+  success responses, so the real bundle exercises Save, Saved, Update and Remove success without any
+  request reaching the shared backend;
+- all other relevant backend traffic: aborted, test fails. Required results: shared-backend TTC reads = 0,
+  shared-backend IVF reads = 0, shared-backend TTC mutations = 0, shared-database IVF QA writes = 0,
+  shared auth/account mutations = 0, unexpected shared-backend requests = 0.
+
 
 States to render and check at all three widths on `/ivf-timeline`: active TTC with nothing saved (Save my
 timeline, supporting copy, "Calculated milestones are not stored."); Save action with the mutation

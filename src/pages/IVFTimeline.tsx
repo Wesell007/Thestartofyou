@@ -8,6 +8,8 @@ import IVFTimelineForm, {
   type IVFTimelineNavState,
   type IVFTransferType,
 } from "@/components/ivf/IVFTimelineForm";
+import IVFTimelineSaveController from "@/components/ivf/IVFTimelineSaveController";
+import { IVF_TIMELINE_SAVE_ENABLED } from "@/lib/ivfTimelineFlags";
 import SeoHead from "@/components/seo/SeoHead";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
@@ -87,7 +89,12 @@ const IVFTimeline = () => {
     navigate(IVF_TIMELINE_ROUTE, { replace: true, state });
   }, [legacyResolved, navigate]);
 
-  const resolved = navResolved ?? legacyResolved ?? carried;
+  // Phase 34H.1 — a saved timeline the controller restored when the page had
+  // nothing on screen. It sits last in the priority order, so any explicit
+  // calculation always wins.
+  const [restored, setRestored] = useState<{ date: Date; type: IVFTransferType } | null>(null);
+
+  const resolved = navResolved ?? legacyResolved ?? carried ?? restored;
 
   const breadcrumbItems: BreadcrumbItem[] = [
     HOME_CRUMB,
@@ -107,7 +114,7 @@ const IVFTimeline = () => {
       {resolved ? (
         <IVFTimelineResult transferDate={resolved.date} transferType={resolved.type} />
       ) : (
-        <section className="pt-8 pb-24 md:pb-32">
+        <section className="pt-8 pb-10">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl">
             <h1 className="font-serif text-3xl md:text-4xl text-foreground mb-3">Your IVF timeline</h1>
             <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-7">
@@ -118,6 +125,16 @@ const IVFTimeline = () => {
           </div>
         </section>
       )}
+
+      {/* Phase 34H.1 — the save feature exists only while the flag is on. */}
+      {IVF_TIMELINE_SAVE_ENABLED && (
+        <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-xl pb-10">
+          <IVFTimelineSaveController current={resolved} onRestore={setRestored} />
+        </div>
+      )}
+
+      <div className="pb-14 md:pb-24" />
+
 
       <Footer />
     </div>

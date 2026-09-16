@@ -268,9 +268,13 @@ describe("phase 34G boundaries", () => {
       expect(source).not.toContain("saveIVFTimelineContext");
       expect(source).not.toContain("clearIVFTimelineContext");
       expect(source).not.toContain("loadIVFTimelineContext");
-      expect(source).not.toContain("IVF_TIMELINE_SAVE_ENABLED");
     }
+    // Phase 34H.1: the page may reference the flag, but only as the mount gate
+    // for the save controller. The form itself stays entirely unaware of it.
+    expect(form).not.toContain("IVF_TIMELINE_SAVE_ENABLED");
+    expect(page).toMatch(/IVF_TIMELINE_SAVE_ENABLED &&/);
   });
+
 
   it("makes no persistence write when the calculator is used", () => {
     const form = readFileSync("src/components/ivf/IVFTimelineForm.tsx", "utf8");

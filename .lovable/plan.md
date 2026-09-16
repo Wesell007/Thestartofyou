@@ -1,56 +1,91 @@
-# Phase 34H.1 — IVF timeline save experience (feature OFF)
+# Phase 34H.2 — IVF timeline save activation
 
-Build the complete save / update / load / remove experience for the IVF timeline on `/ivf-timeline`, behind the existing `IVF_TIMELINE_SAVE_ENABLED` flag which stays FALSE. No activation, no deployment, no schema change, no new lifecycle.
+Outcome of the audit: **the feature cannot be activated in this phase.** There is no human
+privacy/legal approval anywhere in the repository, and none was supplied in the request. So this
+plan covers all activation-readiness work and then stops, leaving the feature OFF.
 
-## Auth handoff audit (already verified)
+## Audit findings (verified, not assumed)
 
-The sign-in flow uses Google OAuth and magic-link email, both of which leave the site and return through a full page load at `/auth`. React Router navigation state does not survive that round trip, and the only surviving mechanisms are the address bar and browser storage — both forbidden for treatment values.
+**Feature flag mechanism — build-time.**
+`src/lib/ivfTimelineFlags.ts` reads `import.meta.env.VITE_IVF_TIMELINE_SAVE_ENABLED`, defaulting to
+FALSE. `vite.config.ts` only `define`s the three public backend values; the IVF flag is not in that
+map, so it resolves through Vite's standard `.env` loading, which is compiled into the bundle at
+build time. The variable appears in no `.env.example`, no CI workflow, and no build script.
+Consequence: setting an environment variable on an already-deployed bundle changes nothing.
+Activation requires a repository configuration change, a rebuild and a deployment.
 
-- AUTH FLOW TYPE = full-page redirect (OAuth + magic link) via `/auth`
-- SIGNED-OUT IVF VALUES CAN SURVIVE AUTH EPHEMERALLY = NO
-- Decision: ACCEPTED RE-ENTRY UX. After signing in the person returns to `/ivf-timeline` (already on the safe return list) and re-enters the two values. No new storage mechanism is invented.
+**Retention and deletion behaviour.**
+- Remove saved timeline clears only `ivf_transfer_date` and `ivf_transfer_type`; the TTC journey row
+  and all other answers stay (Phase 34G helper, `update` only, never delete).
+- TTC journey deletion runs `delete_active_journey('ttc')`, which deletes the `ttc_journeys` row, so
+  both IVF values go with it.
+- Account deletion calls the delete-account function, which sweeps storage then deletes the auth
+  user. `ttc_journeys.user_id` is `REFERENCES auth.users(id) ON DELETE CASCADE`, so the journey row
+  and both IVF values are removed by cascade.
+- No automated expiry or retention job exists for these columns.
+- Platform-level database backups are outside repository truth and must be answered by the reviewer
+  before any backup-related retention wording is published.
 
-## What gets built
+**Privacy notice.**
+`/privacy` (`src/pages/Privacy.tsx`) covers saved journey information, AI, analytics, user choices
+and general retention. It does not mention fertility-treatment dates or embryo transfer type, and
+contains no lawful-basis or special-category statement. Under the project's own AI privacy notes,
+IVF context is treated as special category health data. Assessment: **privacy notice change required
+= YES (reviewer to confirm)**, wording not drafted for publication in this phase.
 
-Two separate things, so the feature boundary stays clean and no React hook is ever called conditionally:
+**Approval records.** No privacy or legal approval record for this feature exists in `docs/`.
 
-- A save feature controller component, mounted on `/ivf-timeline` only when the flag is ON. It owns authentication state, lifecycle state, the saved-context load, the save/update/remove state machine, the saved-versus-current comparison and the historical determination. The hook is called unconditionally inside it.
-- The visible Save / Update / Remove area, which renders only when the situation calls for it.
+## What this phase will do
 
-States and copy:
+1. **No code activation.** Flag default stays FALSE. No `.env` change, no rebuild, no deploy, no
+   schema change, no migration, no RLS change, no analytics, no AI or Companion access.
+2. **Feature-ON verification via mocked tests and local flag only**, re-running the Phase 34H.1
+   matrix plus the release checklist: signed-out, active TTC save/saved/update/remove, no-TTC,
+   pregnancy and first-year historical, out-of-window historical, async load race.
+3. **Privacy and security boundary re-check** with the feature on locally: no treatment values in
+   URL, query, hash, localStorage, sessionStorage, cookies, auth metadata, analytics or logs.
+4. **Accessibility release check**: keyboard operation, dialog focus trap and return, accessible
+   names, polite status announcements, write/loading states, error association, mobile targets, no
+   colour-only state.
+5. **Responsive QA at 1280 / 834 / 390** on `/ivf-timeline` plus regression on `/ivf`,
+   `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`.
+6. **Copy for review.** Record the Section 7 copy verbatim as the proposed final wording, adding the
+   optional line "You can remove these saved details from your timeline later." for the reviewer to
+   accept or reject. Nothing is published as approved.
+7. **Documentation** — three new files plus the roadmap:
+   - `docs/content/phase34h2-ivf-timeline-activation.md` — activation mechanism, exact release steps,
+     rollback plan, activation state.
+   - `docs/content/phase34h2-ivf-timeline-privacy-legal-gate.md` — the review pack, the open
+     questions (privacy-notice coverage, lawful basis, special-category requirement, explicit
+     consent, retention, deletion, account and journey deletion implications, DPIA need, final
+     copy), and an empty approval-evidence table with every field marked NOT PROVIDED.
+   - `docs/content/phase34h2-ivf-timeline-release-evidence.md` — test, accessibility, QA, boundary
+     and validation evidence.
+8. **Validation run**: focused 34H.2 and 34H.1 tests, 34G tests, TTC tests, full suite, typecheck
+   twice, lint against baseline, production build.
+9. **Rollback plan documented** (flag to FALSE, rebuild, redeploy; never drop the 34G columns, never
+   delete user data, never remove the paired-state constraint).
 
-- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey. You'll return here after signing in and can re-enter your transfer details to save them." / `Sign in to save`. The copy is explicit that the current values do not survive sign-in, and nothing is written before authentication.
-- Signed in, active TTC, nothing saved: `Save my timeline` with "Save your embryo transfer date and transfer type to your Trying to Conceive journey so you can return to this timeline later." and "Calculated milestones are not stored."
-- Saved context identical to what is on screen: `Timeline saved` only — no active Save button, no redundant write, no save timestamp.
-- Saved context differs: `Update saved timeline` with "This will replace the transfer details currently saved to your TTC journey." Never automatic.
-- Signed in, no TTC journey: "Saving is connected to a Trying to Conceive journey." plus the existing `Start your TTC journey` action only when no other lifecycle is active. No insert, upsert or placeholder.
-- Active pregnancy or first year with saved context: historical `Saved IVF timeline` display with date and type, Remove available, no Save or Update, never reconstructed as an active treatment timeline.
-- Saved context older than the calculator's entry range: shown as historical, never forced through entry validation, never auto-cleared, removable.
-- Remove: `Remove saved timeline` behind a confirmation dialog ("Remove your saved IVF timeline?" / "This removes your saved embryo transfer date and transfer type from your Trying to Conceive journey. It won't delete your TTC journey or your other answers." / `Cancel` and `Remove saved timeline`). After a successful clear the on-screen calculation stays visible and the TTC journey and its answers are untouched.
+## Technical notes
 
-Interaction states IDLE / SAVING / SAVED / UPDATING / REMOVING / ERROR, with the action disabled during a write so repeated clicks cannot produce a second write. Status changes announced via a polite live region; focus returns to the action area after save or remove; errors use calm generic copy with no database text, identifiers or treatment values.
+New focused tests go in `src/test/phase34h2IvfActivationReadiness.test.ts(x)`, asserting the flag
+default is FALSE, that the compiled flag is the only activation switch, and re-asserting the
+feature-off contract (controller not mounted, persistence helpers called zero times). No production
+or shared-database writes, and no synthetic IVF values written to the shared database.
 
-Priority and restoration rules:
+## Closure this phase will report
 
-- A current explicit calculation (form, hub handoff, navigation state) always remains the displayed timeline; stored context then only decides Save / Saved / Update / Remove or historical state.
-- With no current calculation and an active TTC journey, a usable saved context may reconstruct the normal timeline from the two source values. No write occurs.
-- Race guard: the saved-context load is asynchronous, so the restoration decision is made against the current state at the moment the load resolves (via a ref/functional update), not the state captured when the request began. If the person calculates while the load is in flight, their calculation stays on screen and the late saved context is kept only for the Save / Saved / Update / Remove comparison.
+```text
+PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
+ACTIVATION READY / BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL / FEATURE OFF
+```
 
-## Feature-off boundary
+with the Section 23 pre-activation report, including `READY TO ACTIVATE = NO` and privacy/legal
+reviewer `NOT PROVIDED`.
 
-With the flag FALSE the controller never mounts, so the hook never runs and the load, save and clear helpers are called zero times — `/ivf-timeline` behaves exactly as in Phase 34F. Tested explicitly.
+## What is needed from you to unblock activation
 
-
-## Technical details
-
-- New: `src/components/ivf/IVFTimelineSaveArea.tsx`, a small flag-gated feature controller in the same IVF component area, `src/hooks/useIVFTimelineSave.ts`, tests in `src/test/phase34h1IvfSaveExperience.test.tsx`.
-- Changed: `src/pages/IVFTimeline.tsx` only (flag-gated mount of the controller, saved-context fallback when no current calculation), reusing `ConfirmDialog`, `useLifecycle`, `buildAuthUrl("return_to_route", "/ivf-timeline")` and the Phase 34G helpers in `savedTTCJourney.ts`. No change to the helpers themselves, to analytics, to companion or AI code, and no broader refactor.
-- Tests mock auth, lifecycle, the three persistence helpers and the flag ON, and assert the exact arguments and call counts of each helper so the UI-to-persistence contract is verified. Two extra focused tests cover the signed-out copy (re-entry stated, no write) and the async restoration race (a calculation made while the load is pending stays displayed). No real transfer values are written to the shared database. The flag default stays FALSE and the shared environment flag is not enabled.
-
-- Validation: focused 34H.1 tests, Phase 34F and 34G suites, TTC tests, full suite, typecheck twice, lint against baseline, production build, responsive feature-off QA at 1280 / 834 / 390 across `/ivf-timeline`, `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`, and mocked feature-on UI QA.
-
-## Documentation
-
-`docs/content/phase34h1-ivf-timeline-save-experience.md`, `docs/content/phase34h1-ivf-timeline-save-ux-evidence.md`, `docs/content/phase34h1-ivf-timeline-activation-readiness.md`, plus a roadmap entry. These record the state machine, every state's copy, the auth-handoff result above, accessibility, tests, files changed, activation blockers and the deployment state (schema change in 34H.1 = NO; application deployed = NO; feature activated = NO).
-
-Closure on pass: PHASE 34H.1 — CLOSED PASS / FEATURE OFF / ACTIVATION GATES REMAIN. Phase 34H.2 recommended but not started.
+A named human privacy/legal reviewer, the review date, and explicit YES/NO decisions on: privacy
+notice change and its wording, save copy, retention wording, deletion wording, lawful basis,
+whether explicit consent is required, and whether further privacy-impact documentation is needed.
+If explicit consent is required, that is new implementation work in a later phase.

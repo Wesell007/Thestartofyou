@@ -77,3 +77,15 @@
 - [x] Network isolation during feature-ON QA: shared-backend TTC reads 0, IVF reads 0, TTC mutations 0, shared-database IVF QA writes 0, shared auth mutations 0, unexpected shared-backend requests 0
 - [ ] Real production backend feature-ON QA = NOT PERFORMED (not required for readiness)
 - [ ] Application deployed = NO; feature activated = NO; shared environment flag changed = NO; schema changes = 0; migrations = 0
+
+## Phase 34H.3 — IVF save release gate resolution — PRIVACY REVIEW PACK READY / BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL + PRODUCTION FLAG INJECTION VERIFICATION / FEATURE OFF
+- [x] Track A: `docs/content/phase34h3-ivf-save-privacy-legal-review-pack.md` created for a real human reviewer, sections 1–12 complete
+- [x] Verified facts recorded: two stored values, explicit-action-only writes, TTC-only eligibility, storage owner, user control, deletion/cascade behaviour, no expiry, no retention job, backup retention NOT ESTABLISHED
+- [x] Exposure boundaries recorded as NO for URL, query, hash, localStorage, sessionStorage, cookies, auth metadata, analytics, logs, Companion, AI and grounding
+- [x] Proposed visitor copy included and marked PROPOSED / NOT YET HUMAN-APPROVED; reviewer decision table A–J left blank
+- [x] Track B: `docs/content/phase34h3-ivf-save-production-flag-verification.md` created; audit only, no secret values recorded
+- [x] Verified: build-time flag resolution, `vite build` build command, CI does not set or deploy the flag, no `.env.production`, flag absent from the Vite define map, runtime secrets are server-side only, project published through Lovable hosting
+- [ ] BLOCKER A — human privacy/legal approval: reviewer NOT PROVIDED; all decisions outstanding
+- [ ] BLOCKER B — production environment-variable configuration location NOT VERIFIED; only a repository-side build-time mechanism is verified and has never been exercised
+- [x] Future controlled release and rollback sequences documented only; turning the feature OFF never deletes saved user IVF data
+- [ ] Flag changed = NO; application deployed = NO; feature activated = NO; schema changes = 0; migrations = 0; AI/Companion access = NO; READY TO ACTIVATE = NO

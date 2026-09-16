@@ -19,7 +19,7 @@ Two separate things, so the feature boundary stays clean and no React hook is ev
 
 States and copy:
 
-- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey and return to it later." / `Sign in to save`. Nothing is written before authentication.
+- Signed out: "Want to keep this timeline?" / "Sign in to save your IVF timeline to your Trying to Conceive journey. You'll return here after signing in and can re-enter your transfer details to save them." / `Sign in to save`. The copy is explicit that the current values do not survive sign-in, and nothing is written before authentication.
 - Signed in, active TTC, nothing saved: `Save my timeline` with "Save your embryo transfer date and transfer type to your Trying to Conceive journey so you can return to this timeline later." and "Calculated milestones are not stored."
 - Saved context identical to what is on screen: `Timeline saved` only — no active Save button, no redundant write, no save timestamp.
 - Saved context differs: `Update saved timeline` with "This will replace the transfer details currently saved to your TTC journey." Never automatic.
@@ -34,6 +34,7 @@ Priority and restoration rules:
 
 - A current explicit calculation (form, hub handoff, navigation state) always remains the displayed timeline; stored context then only decides Save / Saved / Update / Remove or historical state.
 - With no current calculation and an active TTC journey, a usable saved context may reconstruct the normal timeline from the two source values. No write occurs.
+- Race guard: the saved-context load is asynchronous, so the restoration decision is made against the current state at the moment the load resolves (via a ref/functional update), not the state captured when the request began. If the person calculates while the load is in flight, their calculation stays on screen and the late saved context is kept only for the Save / Saved / Update / Remove comparison.
 
 ## Feature-off boundary
 

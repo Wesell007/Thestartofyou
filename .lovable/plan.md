@@ -20,23 +20,46 @@ Constraints enforced during that run:
 - no IVF write to the shared database — signed-out only, plus feature-off regression;
 - the isolated build artefacts are deleted afterwards.
 
-Honest limit recorded up front: signed-in Save / Saved / Update / Remove / historical states need a real
-authenticated session and would write treatment values to the shared production-serving database, which
-is prohibited. Those states stay covered by the mocked component tests. So browser QA splits into two
-recorded results rather than one.
+Signed-in states will not be declared unavailable up front. They will first be attempted in the same
+isolated browser through network-level mocking only (see section 2b).
 
-## 2. Browser QA to run
+## 2. Signed-out browser QA to run
 
 Isolated feature-ON build at 1280 / 834 / 390:
 
 - primary `/ivf-timeline`: calculate a timeline, confirm the signed-out save area renders with the
   agreed heading, re-entry body copy and "Sign in to save"; check no overflow, no layout collision, no
   duplicated save area, no duplicated companion, working mobile controls, zero console errors;
-- confirm no persistence call and no treatment value in the URL, storage or cookies on that page;
+- confirm no persistence call and no treatment value in the URL, localStorage, sessionStorage or cookies;
 - regression `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`: no save UI,
   no overflow, no console errors.
 
-Results recorded exactly as observed. Nothing mocked is relabelled as browser evidence.
+## 2b. Signed-in browser QA attempt — mocked backend, fail-closed network guard
+
+Against the same real isolated bundle, with no application source change:
+
+- seed a synthetic session in browser storage inside the test only (session data is not treatment data);
+- intercept every backend call with Playwright routing and answer with synthetic lifecycle, journey and
+  IVF-context responses using synthetic transfer values;
+- hard network guard, fail-closed: any request that could insert, update or delete `ttc_journeys`,
+  change auth or account state, or persist IVF context is aborted and fails the test. Any unexpected
+  backend mutation aborts and fails.
+
+States to render and check at all three widths on `/ivf-timeline`: active TTC with no saved context
+(Save my timeline, supporting copy, "Calculated milestones are not stored."); saved context matching
+(Timeline saved, no Update, no timestamp); different current calculation (Update saved timeline,
+replacement copy, calculation still displayed); Remove (confirmation dialog fit, focus behaviour, Cancel,
+Remove state, calculation retained after a mocked clear); no TTC journey (correct state, no implicit
+creation); pregnancy and first year with saved context (historical, Remove only); old historical context
+(historical display, removable, not auto-cleared).
+
+If this cannot be done without source changes, real auth side effects, shared-database writes or
+treatment values entering forbidden storage, it stops immediately, the exact reason is recorded, and
+signed-in browser QA is marked BLOCKED BY TEST ENVIRONMENT.
+
+Results are labelled precisely: ISOLATED BROWSER QA WITH MOCKED BACKEND STATE, distinct from component
+tests and from real production backend integration QA, which is recorded as NOT PERFORMED.
+
 
 ## 3. Evidence reconciliation
 
@@ -54,7 +77,9 @@ Re-run, from the current tree, and report exact figures rather than remembered o
 - ENGINEERING LOGIC READINESS = PASS (subject to the reruns above).
 - FULL ENGINEERING RELEASE READINESS = NO while any part of feature-ON browser QA is outstanding.
 - FEATURE-ON BROWSER QA = recorded per state: signed-out and feature-off regression from the isolated
-  browser run; signed-in save states PENDING, blocked by the shared-database constraint.
+  browser run; signed-in states either PASS — ISOLATED / MOCKED BACKEND, or BLOCKED BY TEST ENVIRONMENT
+  with the exact reason. REAL PRODUCTION BACKEND FEATURE-ON QA = NOT PERFORMED either way.
+
 - All preserved audit values from the brief are carried through unchanged: build-time flag, injection
   point NOT VERIFIED, rebuild and redeploy required, reviewer and approvals NOT PROVIDED, privacy notice
   gap YES / change PENDING HUMAN REVIEW, retention and both deletion behaviours verified YES, backup
@@ -74,8 +99,18 @@ Edit only the existing 34H.2 documents plus the roadmap:
 
 ## 6. Closure
 
-Because signed-in feature-ON browser QA cannot be completed without writing treatment values to the
-shared database, the phase locks as:
+Outcome A — if signed-out browser QA passes, the signed-in states render safely through intercepted
+mocked backend state at all three widths, validation passes and shared-database IVF writes stay 0:
+
+```text
+PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
+READINESS PASS /
+BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL +
+PRODUCTION FLAG INJECTION VERIFICATION /
+FEATURE OFF
+```
+
+Outcome B — if only signed-out browser QA can run safely:
 
 ```text
 PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
@@ -86,7 +121,10 @@ PRODUCTION FLAG INJECTION VERIFICATION /
 FEATURE OFF
 ```
 
-with READY TO ACTIVATE = NO, feature activated = NO, application deployed = NO.
+Either way: READY TO ACTIVATE = NO, feature activated = NO, application deployed = NO, shared flag
+changed = NO, shared schema changed = NO, shared-database IVF QA writes = 0, privacy/legal approval = NO,
+production flag injection point = NOT VERIFIED.
+
 
 ## Technical notes
 

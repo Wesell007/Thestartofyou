@@ -1,148 +1,45 @@
-# Phase 34H.2 — readiness evidence reconciliation
+# Phase 34H.3 — IVF save release gate resolution
 
-Feature stays OFF. No activation, no deployment, no schema change, no shared-flag change, no consent UX.
-This phase reconciles evidence and, where a genuinely isolated browser path exists, runs feature-ON
-browser QA there.
+Feature stays OFF. No activation, no deployment, no schema change, no flag change, no consent UX.
+Two tracks only: a human privacy/legal review pack, and an audit of where the production build gets the feature switch.
 
-## 1. Isolated browser environment — audit result
+## Track A — privacy/legal review pack
 
-An isolated path **does** exist and will be used:
+Create `docs/content/phase34h3-ivf-save-privacy-legal-review-pack.md`, written for a real human reviewer, readable without the engineering roadmap:
 
-- `vite build` plus `vite preview` can run with `VITE_IVF_TIMELINE_SAVE_ENABLED=true` supplied only to
-  that one command, producing a throwaway bundle on a private port (e.g. 4180).
-- The shared preview on port 8080 is never touched, never rebuilt, and its flag value never changes.
-- Playwright is already a devDependency, so the isolated server can be driven in a browser.
+1. Executive summary — what the feature is, the two values saved, the purpose, and that it is currently off and never activated publicly.
+2. Exact data stored (`ivf_transfer_date`, `ivf_transfer_type`) and the explicit list of what is not stored; derived timeline recalculated from the two source values.
+3. How data is collected — no automatic collection; calculating, choosing a date or type, signing in and loading the timeline never write; writes happen only on Save / Update / Remove.
+4. Who can save — authenticated, active Trying to Conceive journey, existing TTC record; never creates a journey; lifecycles stay ttc / pregnancy / first_year.
+5. Storage and access model — values live on the existing TTC journey record, one row per user, existing user-scoped access controls, no new public access, no separate IVF table.
+6. User control — explicit save, update, remove; removal clears only the two values.
+7. Deletion behaviour — remove clears the two values; TTC journey deletion removes the row; account deletion cascades; no automated expiry; no retention job; backup retention recorded as NOT ESTABLISHED BY REPOSITORY TRUTH.
+8. Data not exposed elsewhere — URL, query, hash, localStorage, sessionStorage, cookies, auth metadata, analytics, logs, Companion, AI and grounding all recorded NO.
+9. Authentication handoff — full-page `/auth` flow, accepted signed-out re-entry decision, no hidden temporary storage.
+10. Privacy notice finding — coverage gap identified YES; change required recorded as FOR HUMAN REVIEWER TO DECIDE, not as a legal conclusion.
+11. Proposed user copy, every block marked PROPOSED / NOT YET HUMAN-APPROVED, matching the copy currently built.
+12. Reviewer decision table with blank fields: name, role, date, then sections A–J (privacy notice, copy, lawful processing, special-category, explicit consent, retention, deletion, backup retention, additional documentation, final approval).
 
-Constraints enforced during that run:
+All human fields stay blank / NOT PROVIDED. No invented reviewer, date, lawful basis, consent decision or self-approval. A YES on explicit consent keeps activation blocked and needs a new phase — stated in the pack.
 
-- flag TRUE only inside the isolated build output, never in `.env`, never committed;
-- no deployment, no shared preview change;
-- no IVF write to the shared database — signed-out only, plus feature-off regression;
-- the isolated build artefacts are deleted afterwards.
+## Track B — production flag verification (audit only)
 
-Signed-in states will not be declared unavailable up front. They will first be attempted in the same
-isolated browser through network-level mocking only (see section 2b).
+Create `docs/content/phase34h3-ivf-save-production-flag-verification.md`.
 
-## 2. Signed-out browser QA to run
+Audit, changing nothing: repository build scripts and Vite config, CI workflow, repository environment files, project secret/environment configuration available through project tooling, publish/deployment settings, and any hosting configuration that is genuinely inspectable. Anything that cannot be inspected is recorded NOT VERIFIED rather than assumed.
 
-Isolated feature-ON build at 1280 / 834 / 390:
+Record the required findings exactly: hosting/deployment provider, production build mechanism, environment-variable configuration location, whether `VITE_IVF_TIMELINE_SAVE_ENABLED` can be supplied at build time, the exact value-setting workflow, whether it needs a repository change, rebuild required YES, redeploy required YES, and whether rollback by FALSE + rebuild + redeploy is achievable.
 
-- primary `/ivf-timeline`: calculate a timeline, confirm the signed-out save area renders with the
-  agreed heading, re-entry body copy and "Sign in to save"; check no overflow, no layout collision, no
-  duplicated save area, no duplicated companion, working mobile controls, zero console errors;
-- confirm no persistence call and no treatment value in the URL, localStorage, sessionStorage or cookies;
-- regression `/ivf`, `/ivf/before-transfer`, `/ivf/after-transfer`, `/ivf/early-pregnancy`: no save UI,
-  no overflow, no console errors.
+The flag is not set. No `.env.production` created. Nothing deployed.
 
-## 2b. Signed-in browser QA attempt — hermetic mocked backend
+If the injection point verifies, document the controlled release sequence (approval, notice changes, any implementation changes, release QA, set flag true, build, deploy, synthetic smoke test, remove synthetic values, confirm zero test values) and the rollback sequence, noting that turning the feature off must not delete existing user data.
 
-Against the same real isolated bundle, with no application source change. The run is fully hermetic:
-every relevant backend request, read or write, either matches an explicitly expected request and is
-fulfilled locally with synthetic data, or is aborted and fails the test.
+## Documentation and closure
 
-- seed a synthetic session in browser storage inside the test only (session data is not treatment data);
-  if session bootstrap would call the real auth service unmocked, the request is intercepted or the test
-  stops;
-- expected reads — session/auth state, lifecycle state, TTC journey existence, saved IVF context:
-  intercept and fulfil locally with synthetic responses using synthetic transfer values;
-- expected mutations — save, update and clear IVF context: intercept and fulfil locally with synthetic
-  success responses, so the real bundle exercises Save, Saved, Update and Remove success without any
-  request reaching the shared backend;
-- all other relevant backend traffic: aborted, test fails. Required results: shared-backend TTC reads = 0,
-  shared-backend IVF reads = 0, shared-backend TTC mutations = 0, shared-database IVF QA writes = 0,
-  shared auth/account mutations = 0, unexpected shared-backend requests = 0.
+Update `roadmap.md` with the 34H.3 entry. Phase 34H.2 evidence is left intact apart from a cross-reference if needed.
 
+Completion report returns every field listed in the request. Closure is Outcome A (technical release configuration pass, blocked on human privacy/legal approval) if the injection point verifies, otherwise Outcome B (pack ready, blocked on both gates). Either way: flag off, not deployed, not activated, schema unchanged, no IVF lifecycle, no AI access, ready to activate = NO.
 
-States to render and check at all three widths on `/ivf-timeline`: active TTC with nothing saved (Save my
-timeline, supporting copy, "Calculated milestones are not stored."); Save action with the mutation
-fulfilled locally, saved state rendered; saved context matching (Timeline saved, no redundant Save, no
-timestamp); different current calculation (Update saved timeline, replacement copy, calculation still
-displayed); Update action fulfilled locally with the updated saved state rendered; Remove (confirmation
-dialog fit and focus, Cancel works, mocked clear fulfilled locally, saved state removed, current
-calculation retained); no TTC journey (correct state, no implicit insert); pregnancy and first year with
-saved context (historical, Remove only); old historical context (historical display, removable, never
-auto-cleared).
+## Validation
 
-After each test the browser context is destroyed, the synthetic session discarded and the temporary
-build artefacts deleted. No shared account state changes. Treatment values never enter localStorage,
-sessionStorage, cookies, the URL or auth metadata.
-
-
-If this cannot be done without source changes, real auth side effects, shared-database writes or
-treatment values entering forbidden storage, it stops immediately, the exact reason is recorded, and
-signed-in browser QA is marked BLOCKED BY TEST ENVIRONMENT.
-
-Results are labelled precisely: ISOLATED BROWSER QA WITH MOCKED BACKEND STATE, distinct from component
-tests and from real production backend integration QA, which is recorded as NOT PERFORMED.
-
-
-## 3. Evidence reconciliation
-
-Re-run, from the current tree, and report exact figures rather than remembered ones:
-
-- focused Phase 34H.2 tests;
-- Phase 34H.1, Phase 34G persistence and TTC journey tests;
-- full suite (file and test counts);
-- typecheck twice;
-- lint against the recorded baseline;
-- production validation build with the feature OFF.
-
-## 4. Readiness wording
-
-- ENGINEERING LOGIC READINESS = PASS (subject to the reruns above).
-- FULL ENGINEERING RELEASE READINESS = NO while any part of feature-ON browser QA is outstanding.
-- FEATURE-ON BROWSER QA = recorded per state: signed-out and feature-off regression from the isolated
-  browser run; signed-in states either PASS — ISOLATED / MOCKED BACKEND, or BLOCKED BY TEST ENVIRONMENT
-  with the exact reason. REAL PRODUCTION BACKEND FEATURE-ON QA = NOT PERFORMED either way.
-
-- All preserved audit values from the brief are carried through unchanged: build-time flag, injection
-  point NOT VERIFIED, rebuild and redeploy required, reviewer and approvals NOT PROVIDED, privacy notice
-  gap YES / change PENDING HUMAN REVIEW, retention and both deletion behaviours verified YES, backup
-  retention NO, accessibility PASS, exposure violations 0, AI/Companion NO, schema and migrations 0,
-  validation build PASS, deployed NO, activated NO, PUBLIC ACTIVATION READINESS NO, READY TO ACTIVATE NO.
-
-## 5. Documentation updates
-
-Edit only the existing 34H.2 documents plus the roadmap:
-
-- `docs/content/phase34h2-ivf-timeline-release-evidence.md` — replace the current browser-QA limitation
-  note with the isolated-environment method, the per-state browser results and the reconciled validation
-  table.
-- `docs/content/phase34h2-ivf-timeline-activation.md` — add the isolated build/preview method as the
-  verified non-shared feature-ON QA route, and restate the readiness split.
-- `roadmap.md` — update the 34H.2 line to the reconciled closure.
-
-## 6. Closure
-
-Outcome A — if signed-out browser QA passes, the signed-in states render safely through intercepted
-mocked backend state at all three widths, validation passes and shared-database IVF writes stay 0:
-
-```text
-PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
-READINESS PASS /
-BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL +
-PRODUCTION FLAG INJECTION VERIFICATION /
-FEATURE OFF
-```
-
-Outcome B — if only signed-out browser QA can run safely:
-
-```text
-PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
-READINESS PARTIAL PASS /
-FEATURE-ON BROWSER QA PENDING /
-BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL +
-PRODUCTION FLAG INJECTION VERIFICATION /
-FEATURE OFF
-```
-
-Either way: READY TO ACTIVATE = NO, feature activated = NO, application deployed = NO, shared flag
-changed = NO, shared schema changed = NO, shared-database IVF QA writes = 0, privacy/legal approval = NO,
-production flag injection point = NOT VERIFIED.
-
-
-## Technical notes
-
-The isolated run uses a separate output directory and port so it cannot collide with the running dev
-server; the Playwright script lives under `/tmp`, not in `e2e/`, so no committed test depends on a
-flag-true build. No source file, `.env`, CI workflow or Vite config gains the flag.
+Documentation-only phase: no source changes expected. Run the test suite, typecheck and lint to confirm the repository is unchanged in behaviour, and report exact counts.

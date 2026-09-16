@@ -66,8 +66,23 @@ confirmed before activation.
 | PRODUCTION RELEASE BUILD DEPLOYED | NO |
 
 The production build run in this phase is a validation build only, carrying the real release feature
-state (OFF). It is not a release and was not deployed. Feature-ON verification was confined to
-isolated local configuration and mocked tests.
+state (OFF). It is not a release and was not deployed.
+
+Feature-ON verification was confined to an isolated environment: a temporary build with
+`VITE_IVF_TIMELINE_SAVE_ENABLED=true` written to a throwaway directory and served on a private local
+port, with the entire shared backend origin intercepted deny-by-default. Expected reads and IVF
+save/update/clear mutations were fulfilled locally with synthetic data; anything else was aborted.
+Results: shared-backend TTC reads 0, shared-backend IVF reads 0, shared-backend TTC mutations 0,
+shared-database IVF QA writes 0, shared auth/account mutations 0, unexpected shared-backend requests 0.
+Signed-out and signed-in feature-ON browser QA passed at 1280 / 834 / 390 with 0 overflow and 0 console
+errors. All temporary artefacts were destroyed. The shared preview, `.env`, CI, Vite config, deployment
+configuration and shared database were unchanged.
+
+FEATURE-ON BROWSER QA (ISOLATED) = PASS.
+REAL PRODUCTION BACKEND FEATURE-ON QA = NOT PERFORMED.
+LOGIC AND EXPERIENCE READINESS = PASS.
+FULL ENGINEERING RELEASE READINESS = NO (production flag injection point still unverified).
+HUMAN PRIVACY/LEGAL READINESS = NO.
 
 ## Retention and deletion — verified technical behaviour
 

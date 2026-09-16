@@ -77,7 +77,9 @@ Re-run, from the current tree, and report exact figures rather than remembered o
 - ENGINEERING LOGIC READINESS = PASS (subject to the reruns above).
 - FULL ENGINEERING RELEASE READINESS = NO while any part of feature-ON browser QA is outstanding.
 - FEATURE-ON BROWSER QA = recorded per state: signed-out and feature-off regression from the isolated
-  browser run; signed-in save states PENDING, blocked by the shared-database constraint.
+  browser run; signed-in states either PASS — ISOLATED / MOCKED BACKEND, or BLOCKED BY TEST ENVIRONMENT
+  with the exact reason. REAL PRODUCTION BACKEND FEATURE-ON QA = NOT PERFORMED either way.
+
 - All preserved audit values from the brief are carried through unchanged: build-time flag, injection
   point NOT VERIFIED, rebuild and redeploy required, reviewer and approvals NOT PROVIDED, privacy notice
   gap YES / change PENDING HUMAN REVIEW, retention and both deletion behaviours verified YES, backup
@@ -97,8 +99,18 @@ Edit only the existing 34H.2 documents plus the roadmap:
 
 ## 6. Closure
 
-Because signed-in feature-ON browser QA cannot be completed without writing treatment values to the
-shared database, the phase locks as:
+Outcome A — if signed-out browser QA passes, the signed-in states render safely through intercepted
+mocked backend state at all three widths, validation passes and shared-database IVF writes stay 0:
+
+```text
+PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
+READINESS PASS /
+BLOCKED ON HUMAN PRIVACY-LEGAL APPROVAL +
+PRODUCTION FLAG INJECTION VERIFICATION /
+FEATURE OFF
+```
+
+Outcome B — if only signed-out browser QA can run safely:
 
 ```text
 PHASE 34H.2 — IVF TIMELINE SAVE ACTIVATION
@@ -109,7 +121,10 @@ PRODUCTION FLAG INJECTION VERIFICATION /
 FEATURE OFF
 ```
 
-with READY TO ACTIVATE = NO, feature activated = NO, application deployed = NO.
+Either way: READY TO ACTIVATE = NO, feature activated = NO, application deployed = NO, shared flag
+changed = NO, shared schema changed = NO, shared-database IVF QA writes = 0, privacy/legal approval = NO,
+production flag injection point = NOT VERIFIED.
+
 
 ## Technical notes
 

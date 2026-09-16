@@ -3,7 +3,6 @@ import {
   clearIVFTimelineContext,
   loadIVFTimelineContext,
   saveIVFTimelineContext,
-  type IVFTimelineWriteResult,
 } from "@/lib/savedTTCJourney";
 import {
   formatIVFTransferDate,
@@ -53,8 +52,8 @@ export type IVFTimelineSaveApi = {
 
 const GENERIC_ERROR = "Something went wrong. Please try again.";
 
-const messageForWriteFailure = (result: Extract<IVFTimelineWriteResult, { ok: false }>): string => {
-  switch (result.reason) {
+const messageForWriteFailure = (reason: string): string => {
+  switch (reason) {
     case "not_authenticated":
       return "You need to be signed in to change your saved timeline.";
     case "no_ttc_journey":
@@ -106,7 +105,7 @@ export const useIVFTimelineSave = (options: {
       if (cancelled) return;
       setLoadingContext(false);
 
-      if (!result.ok) {
+      if ("reason" in result) {
         if (result.reason === "no_ttc_journey") {
           setJourneyState("no_ttc");
           setSaved(null);
@@ -172,7 +171,7 @@ export const useIVFTimelineSave = (options: {
       transfer_type: value.type,
     })
       .then((result) => {
-        if (result.ok) {
+        if (!("reason" in result)) {
           setSaved({
             transfer_date: formatIVFTransferDate(value.date),
             transfer_type: value.type,
@@ -183,7 +182,7 @@ export const useIVFTimelineSave = (options: {
         }
         if (result.reason === "no_ttc_journey") setJourneyState("no_ttc");
         setStatus(null);
-        setError(messageForWriteFailure(result));
+        setError(messageForWriteFailure(result.reason));
       })
       .catch(() => {
         setStatus(null);
@@ -204,14 +203,14 @@ export const useIVFTimelineSave = (options: {
 
     void clearIVFTimelineContext()
       .then((result) => {
-        if (result.ok) {
+        if (!("reason" in result)) {
           setSaved(null);
           setStatus("Saved timeline removed");
           return;
         }
         if (result.reason === "no_ttc_journey") setJourneyState("no_ttc");
         setStatus(null);
-        setError(messageForWriteFailure(result));
+        setError(messageForWriteFailure(result.reason));
       })
       .catch(() => {
         setStatus(null);

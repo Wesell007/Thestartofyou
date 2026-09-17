@@ -6,6 +6,7 @@ import TTCHubJourneyAction from "@/components/ttc/TTCHubJourneyAction";
 import { resolvePublicAccountLink, type NavLifecycle } from "@/lib/navLifecycle";
 import { ttcPageConfigs, ttcTopics } from "@/data/ttcTopicData";
 import {
+  TTC_EXPLORE_ACTION_LABEL,
   TTC_EXPLORE_TOPIC_CLUSTERS,
   TTC_EXPLORE_TOPIC_IMAGES,
 } from "@/pages/TTCHub";
@@ -118,6 +119,6 @@ describe("Phase 35A TTC public experience", () => {
       expect(topicsBySlug.get(slug)?.label).toBeTruthy();
       expect(topicsBySlug.get(slug)?.description).toBeTruthy();
     });
-    expect("Explore topic").toBe("Explore topic");
+    expect(TTC_EXPLORE_ACTION_LABEL).toBe("Explore topic");
   });
 });

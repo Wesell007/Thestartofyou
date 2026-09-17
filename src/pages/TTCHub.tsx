@@ -646,13 +646,22 @@ const pillarChildren: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
-export const TTC_EXPLORE_TOPIC_CLUSTERS: { label: string; slugs: TTCTopicSlug[] }[] = [
+export type TTCExploreTopicSlug =
+  | "cycle-tracking"
+  | "two-week-wait"
+  | "pregnancy-tests"
+  | "conditions"
+  | "age-and-fertility"
+  | "male-fertility"
+  | "ivf-and-treatment";
+
+export const TTC_EXPLORE_TOPIC_CLUSTERS: { label: string; slugs: TTCExploreTopicSlug[] }[] = [
   { label: "Timing, testing and waiting", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
   { label: "Health and preparation", slugs: ["conditions"] },
   { label: "Fertility support", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment"] },
 ];
 
-export const TTC_EXPLORE_TOPIC_IMAGES: Record<TTCTopicSlug, string> = {
+export const TTC_EXPLORE_TOPIC_IMAGES: Record<TTCExploreTopicSlug, string> = {
   "cycle-tracking": cycleTrackingImg,
   "two-week-wait": twoWeekWaitImg,
   "pregnancy-tests": pregnancyTestsImg,
@@ -660,10 +669,9 @@ export const TTC_EXPLORE_TOPIC_IMAGES: Record<TTCTopicSlug, string> = {
   "age-and-fertility": ageAndFertilityImg,
   "male-fertility": maleFertilityImg,
   "ivf-and-treatment": ivfTreatmentImg,
-  ovulation: cycleTrackingImg,
-  "preconception-health": conditionsImg,
-  fertility: ageAndFertilityImg,
 };
+
+export const TTC_EXPLORE_ACTION_LABEL = "Explore topic";
 
 const TopicLibrary = () => {
   const pillars = ttcTopics.filter((t) => t.kind === "pillar");
@@ -939,7 +947,7 @@ const TopicLibrary = () => {
                               className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
                               style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                             >
-                              Explore topic
+                              {TTC_EXPLORE_ACTION_LABEL}
                             </span>
                             <ArrowRight
                               size={12}

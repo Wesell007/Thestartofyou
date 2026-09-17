@@ -52,6 +52,8 @@ Specific changes:
 
 Apply the same hierarchy to Ovulation, Preconception Health and Fertility without creating bespoke page variants:
 
+The shared template has **six route consumers**. In scope: Ovulation, Preconception Health and Fertility. Out of scope: IVF and Treatment, Male Fertility and Age and Fertility. Add one narrow presentation option to the shared template and enable it only in the three in-scope wrappers. The default rendering for the three out-of-scope consumers remains unchanged. Do not duplicate the template.
+
 1. Breadcrumb
 2. Existing split hero
 3. Compact topic coverage
@@ -63,12 +65,13 @@ Apply the same hierarchy to Ovulation, Preconception Health and Fertility withou
 Specific changes:
 
 - Keep all existing page titles, introductions, coverage bullets, article destinations and images.
-- Add a small destination classifier so Start Here actions say `Open calculator`, `Read guidance`, `Explore topic`, `Explore IVF` or `Ask Companion` only when that destination type is genuinely present.
+- Add narrow presentation metadata to existing destination records so Start Here actions say `Open calculator`, `Read guidance`, `Explore topic`, `Explore IVF` or `Ask Companion` only when that destination type is genuinely present. Existing hrefs remain authoritative. Do not create a URL registry or second routing source of truth.
 - Remove the `/ask` card from Preconception Health Start Here. Its existing Companion module remains the sole AI entry on that page.
 - Keep the Ovulation calculator as a clearly labelled tool and keep Fertility's intentional single editorial anchor.
 - Replace image-heavy library rows with compact editorial rows so the page is denser and repeated thumbnails do not dominate.
 - Remove the five-link display cap so every configured destination is represented, including the currently hidden AMH guidance.
 - Preserve exactly one `AskAboutThis` Companion entry after editorial discovery.
+- Apply the denser library and removed link cap only when the new in-scope presentation option is active. Out-of-scope consumers retain their current layout and behaviour.
 
 ### 3. Destination accounting and regression coverage
 
@@ -83,6 +86,9 @@ Create a focused destination/type registry for presentation logic rather than ch
 - tool and editorial Start Here actions receive correct labels
 - every configured group destination renders, with no silent five-link truncation
 - the shared topic pages retain exactly one contextual Companion entry and do not introduce an AI execution surface
+- all three out-of-scope shared-template consumers retain their current presentation
+
+The existing `TTCFinalCTA` has one consumer, the retained legacy TTC page. Do not modify it. Build the canonical hub's final action locally around `usePublicAccountLink` and its existing lifecycle resolver so unrelated surfaces remain unchanged.
 
 Document exact before and after destination counts, destination types, retained URLs and intentional duplicate removals.
 
@@ -114,3 +120,4 @@ Append Phase 35A to `roadmap.md` without rewriting the locked Phase 34H evidence
 - Browser-check all four canonical surfaces at 1280, 834 and 390 pixels.
 - Verify section order, destination labels, all intended links, no static progress claim, one Companion module per surface, lifecycle-aware final routing, keyboard behaviour, no overflow and no console errors.
 - Confirm no new route, sitemap entry, content item, schema, migration, analytics event, AI/runtime/grounding/memory change or deployment.
+- Record: shared template consumers 6; in-scope 3; out-of-scope 3; out-of-scope changes 0; duplicate route source of truth NO; hidden configured TTC library destinations 0; AMH rendered YES; final-action consumers audited YES; unintended final-action changes 0.

@@ -103,8 +103,11 @@
 - [x] Lint matches baseline: 1 pre-existing generated-file error and 10 warnings
 - [x] New articles 0; routes 0; sitemap entries 0; database and journey-schema changes 0; analytics/AI/grounding/memory/reviewer changes 0; deployment NO
 
-## Phase 35A.1 — TTC Explore topic card imagery — IN PROGRESS
-- [ ] Add seven unique approved images to the seven existing supporting cards on the canonical TTC hub
-- [ ] Preserve existing card data, hrefs, grouping, order, copy and `Explore topic` action language
-- [ ] Keep deeper TTC topic-page compact libraries and the shared topic template unchanged
-- [ ] Complete focused and full validation plus responsive QA at 1280, 834 and 390 pixels; deployment NO
+## Phase 35A.1 — TTC Explore topic card imagery — CLOSED PASS / VISUAL REFINEMENT COMPLETE
+- [x] Added seven unique, relevant approved images to the seven existing supporting cards on the canonical TTC hub
+- [x] Preserved existing card data, hrefs, grouping, order, copy and `Explore topic` action language
+- [x] Kept deeper TTC topic-page compact libraries and the shared topic template unchanged
+- [x] Focused coverage passed: 4 files / 35 tests; full suite passed: 130 files / 1,499 tests
+- [x] Typecheck passed twice; production validation build passed with 356 sitemap entries
+- [x] Responsive QA passed at 1280, 834 and 390 pixels: 3 / 2 / 1 columns, seven images loaded, zero horizontal overflow, zero console errors, visible keyboard focus
+- [x] New content 0; new routes 0; new destinations 0; new images generated 0; database 0; grounding 0; analytics 0; deployment NO

@@ -9,7 +9,7 @@ const Page = () => (
       description="Understand ovulation, fertile windows, ovulation signs and cycle timing with calm guidance for trying to conceive."
       canonical="https://thestartofyou.com/trying-to-conceive/ovulation"
     />
-    <TTCTopicPage config={ttcPageConfigs["ovulation"]} heroImage={hero} />
+    <TTCTopicPage config={ttcPageConfigs["ovulation"]} heroImage={hero} editorialClarity />
   </>
 );
 export default Page;

@@ -36,6 +36,8 @@ export interface TTCStartHere {
   href: string;
   why: string;
   image?: string;
+  /** Presentation only. The existing href remains the route source of truth. */
+  destinationKind?: "guidance" | "topic" | "tool" | "companion" | "ivf" | "journey" | "support";
 }
 
 export interface TTCPageConfig {
@@ -210,6 +212,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "A simple tool that uses your cycle dates to estimate your most fertile days.",
+        destinationKind: "tool",
       },
     ],
     groups: [
@@ -275,11 +278,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         title: "Calculate your fertile window",
         href: LIVE.calculator,
         why: "Useful even before you start trying, to understand your cycle's shape.",
-      },
-      {
-        title: "Ask a question",
-        href: LIVE.ask,
-        why: "Get a calm, evidence-aware answer to anything specific you're wondering about.",
+        destinationKind: "tool",
       },
     ],
     groups: [
@@ -343,6 +342,7 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
         title: "How long to try before getting help",
         href: LIVE.howLongToTry,
         why: "Honest UK guidance on when fertility help becomes a sensible next step.",
+        destinationKind: "guidance",
       },
     ],
     groups: [

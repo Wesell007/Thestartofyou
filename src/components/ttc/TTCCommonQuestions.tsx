@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
+import { ChevronDown, ArrowUpRight, BookOpen } from "lucide-react";
 
 interface QItem {
   q: string;
   answer: string;
   readMore?: { href: string; label: string };
-  askHref: string;
 }
 
 const questions: QItem[] = [
@@ -15,41 +14,35 @@ const questions: QItem[] = [
     answer:
       "Your most fertile days are usually the days leading up to ovulation and the day of ovulation itself. Cycle tracking can help you notice your own pattern over time.",
     readMore: { href: "/articles/fertile-window", label: "Read: the fertile window" },
-    askHref: "/ask?stage=ttc&topic=fertile-window",
   },
   {
     q: "How do I track my cycle without feeling obsessed?",
     answer:
       "Tracking can be helpful, but it does not need to take over your life. Choose one or two signs that feel manageable and give yourself space from constant checking.",
-    askHref: "/ask?stage=ttc&topic=cycle-tracking",
   },
   {
     q: "When should I take a pregnancy test?",
     answer:
       "Testing too early can make the wait feel harder. Many people get clearer results after a missed period, but timing depends on your cycle and the type of test.",
     readMore: { href: "/articles/when-to-take-a-pregnancy-test", label: "Read: when to take a pregnancy test" },
-    askHref: "/ask?stage=ttc&topic=pregnancy-tests",
   },
   {
     q: "How do I cope with the two-week wait?",
     answer:
       "The two-week wait can feel emotionally intense because there is so much uncertainty. Gentle routines, fewer repeated checks and support can help the days feel more manageable.",
     readMore: { href: "/articles/two-week-wait", label: "Read: the two-week wait" },
-    askHref: "/ask?stage=ttc&topic=two-week-wait",
   },
   {
     q: "When should I ask for fertility help?",
     answer:
       "It is okay to ask for advice if you are worried, have irregular cycles, known health concerns or have been trying for a while. Your GP or local service can guide you on next steps.",
     readMore: { href: "/articles/how-long-to-try-before-getting-help", label: "Read: when to ask for help" },
-    askHref: "/ask?stage=ttc&topic=when-to-ask-help",
   },
   {
     q: "When should we start thinking about IVF?",
     answer:
       "IVF may become part of the conversation after tests, treatment advice or a longer time trying. It is okay to learn about it gently before you know whether it is your next step.",
     readMore: { href: "/ivf", label: "Explore IVF guidance" },
-    askHref: "/ask?stage=ttc&topic=ivf-next-step",
   },
 ];
 
@@ -78,7 +71,7 @@ const TTCCommonQuestions = () => {
           Questions while trying to conceive
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
-          A short answer to start with. Then read more, or ask your own question for personalised guidance.
+          A short answer to start with, with related guidance when you want to read more.
         </p>
 
         <div className="flex flex-col gap-3">
@@ -147,18 +140,6 @@ const TTCCommonQuestions = () => {
                           <ArrowUpRight size={12} />
                         </Link>
                       )}
-                      <Link
-                        to={item.askHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
-                        style={{
-                          borderColor: s.border,
-                          backgroundColor: "hsl(var(--card))",
-                          color: s.color,
-                        }}
-                      >
-                        <Sparkles size={13} strokeWidth={1.9} />
-                        Ask more
-                      </Link>
                     </div>
                   </div>
                 )}

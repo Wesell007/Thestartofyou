@@ -90,9 +90,15 @@
 - [x] Future controlled release and rollback sequences documented only; turning the feature OFF never deletes saved user IVF data
 - [ ] Flag changed = NO; application deployed = NO; feature activated = NO; schema changes = 0; migrations = 0; AI/Companion access = NO; READY TO ACTIVATE = NO
 
-## Phase 35A — TTC hub and topic UX, discovery and AI separation — IN PROGRESS
-- [ ] Refine the canonical TTC hub in the locked nine-section order without new content or routes
-- [ ] Apply the narrow premium editorial presentation to three of six shared topic-template consumers; out-of-scope changes 0
-- [ ] Keep existing destinations authoritative while adding presentation-only destination kinds
-- [ ] Test five distinct final journey user states through the existing account resolver
-- [ ] Complete destination accounting, responsive QA, documentation and full validation; deployment NO
+## Phase 35A — TTC hub and topic UX, discovery and AI separation — CLOSED PASS / TTC PUBLIC EXPERIENCE REFINED / NO NEW CONTENT
+- [x] Canonical TTC hub refined in the locked nine-section order; unsupported statistics and static current-stage claim removed
+- [x] Repository-backed three-stage journey used; primary pathways 3; supporting destinations 7; duplicate library destinations 0
+- [x] Six shared topic-template consumers audited; narrow presentation enabled for 3 in-scope consumers; out-of-scope presentation changes 0
+- [x] Existing destinations remain authoritative; presentation-only kinds added; duplicate route source of truth NO; incorrect labels 0
+- [x] Preconception `/ask` Start Here removed; in-scope library cap removed; AMH rendered; hidden configured destinations 0
+- [x] Six editorial questions retained with 0 direct AI actions; one Companion follows editorial discovery on each scoped surface
+- [x] `TTCFinalCTA` consumer audited and unchanged; five distinct journey user states tested, four unique destinations, incorrect routes 0, writes 0
+- [x] Responsive QA at 1280/834/390 on four canonical surfaces: no overflow, no console errors, keyboard accordion PASS
+- [x] Focused tests 4 files / 33 tests; full suite 130 files / 1,497 tests; typecheck x2; production validation build PASS
+- [x] Lint matches baseline: 1 pre-existing generated-file error and 10 warnings
+- [x] New articles 0; routes 0; sitemap entries 0; database and journey-schema changes 0; analytics/AI/grounding/memory/reviewer changes 0; deployment NO

@@ -9,7 +9,7 @@ const Page = () => (
       description="Practical preconception guidance on health, folic acid, appointments, lifestyle basics and preparing your body before pregnancy."
       canonical="https://thestartofyou.com/trying-to-conceive/preconception-health"
     />
-    <TTCTopicPage config={ttcPageConfigs["preconception-health"]} heroImage={hero} />
+    <TTCTopicPage config={ttcPageConfigs["preconception-health"]} heroImage={hero} editorialClarity />
   </>
 );
 export default Page;

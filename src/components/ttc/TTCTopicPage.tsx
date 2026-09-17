@@ -98,7 +98,17 @@ import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 interface Props {
   config: TTCPageConfig;
   heroImage: string;
+  /** Enables the Phase 35A presentation without changing other template consumers. */
+  editorialClarity?: boolean;
 }
+
+const destinationLabel = (kind: TTCPageConfig["startHere"][number]["destinationKind"]) => {
+  if (kind === "tool") return "Open calculator";
+  if (kind === "topic") return "Explore topic";
+  if (kind === "ivf") return "Explore IVF";
+  if (kind === "companion") return "Ask Companion";
+  return "Read guidance";
+};
 
 // ─── TTC per-slug theme — cool/green family, overrides any warm tones in data
 type TTCTheme = {
@@ -213,7 +223,7 @@ const TOPIC_FALLBACK: Record<TTCTopicSlug, string> = {
   conditions: imgConditions,
 };
 
-const TTCTopicPage = ({ config, heroImage }: Props) => {
+const TTCTopicPage = ({ config, heroImage, editorialClarity = false }: Props) => {
   const theme = TTC_THEME[config.slug];
   const accent = `hsl(${theme.accentHsl})`;
   const accentSoft = `hsl(${theme.accentHsl} / 0.10)`;
@@ -328,7 +338,6 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    fetchPriority="high"
                     className="relative w-full h-auto rounded-[2rem] object-cover"
                     style={{ aspectRatio: "1 / 1" }}
                   />
@@ -353,10 +362,10 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
         </section>
 
         {/* 2. WHAT THIS TOPIC COVERS (overlapping card) */}
-        <section className="relative -mt-12 md:-mt-20 pb-16 md:pb-24">
+        <section className={editorialClarity ? "relative -mt-8 pb-12 md:pb-16" : "relative -mt-12 md:-mt-20 pb-16 md:pb-24"}>
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div
-              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-14 overflow-hidden"
+              className={editorialClarity ? "relative bg-card rounded-2xl border p-6 sm:p-8 md:p-10 overflow-hidden" : "relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-14 overflow-hidden"}
               style={{ borderColor: accentBorder }}
             >
               <img
@@ -445,7 +454,7 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
                         className="mt-4 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium"
                         style={{ color: accent }}
                       >
-                        Read the guide
+                        {editorialClarity ? destinationLabel(item.destinationKind) : "Read the guide"}
                         <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>
@@ -477,9 +486,8 @@ const TTCTopicPage = ({ config, heroImage }: Props) => {
               <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-10">
                 {config.groups.map((group, gi) => {
                   const sprig = gi % 2 === 0 ? theme.sprigA : theme.sprigB;
-                  const links = group.links
-                    .filter((l) => !startHereHrefs.has(l.href))
-                    .slice(0, 5);
+                  const configuredLinks = group.links.filter((l) => !startHereHrefs.has(l.href));
+                  const links = editorialClarity ? configuredLinks : configuredLinks.slice(0, 5);
                   if (links.length === 0) return null;
 
                   const askMatch = links.some((l) => l.href === "/ask");

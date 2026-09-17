@@ -9,7 +9,7 @@ const Page = () => (
       description="A calm fertility guide covering timing, cycle patterns, lifestyle basics, support and when to ask for help while trying to conceive."
       canonical="https://thestartofyou.com/trying-to-conceive/fertility"
     />
-    <TTCTopicPage config={ttcPageConfigs["fertility"]} heroImage={hero} />
+    <TTCTopicPage config={ttcPageConfigs["fertility"]} heroImage={hero} editorialClarity />
   </>
 );
 export default Page;

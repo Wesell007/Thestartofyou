@@ -111,3 +111,17 @@
 - [x] Typecheck passed twice; production validation build passed with 356 sitemap entries
 - [x] Responsive QA passed at 1280, 834 and 390 pixels: 3 / 2 / 1 columns, seven images loaded, zero horizontal overflow, zero console errors, visible keyboard focus
 - [x] New content 0; new routes 0; new destinations 0; new images generated 0; database 0; grounding 0; analytics 0; deployment NO
+
+## Phase 35B — TTC content coverage and journey audit — AUDIT COMPLETE / OUTCOME B — MOSTLY SUFFICIENT / SMALL GAPS / NO CURRENT TTC BLOCKERS
+- [x] Audit only: content 0, routes 0, UX 0, AI runtime 0, grounding 0, analytics 0, reviewer claims 0, database 0, source behaviour changes 0, deployment NO
+- [x] Surfaces inventoried: 1 hub, 3 pillars, 7 subtopics, 3 legacy stage routes, 1 TTC tool plus 1 treatment-context tool, 3 redirects, 5 adjacent IVF routes
+- [x] Records inventoried: 56 TTC-journey articles (49 TTC-specific, 7 crossover), 8 adjacent IVF records; live 55, draft 0, unknown 0, shadow 1
+- [x] Link integrity: 87 distinct internal links across 47 TTC surface files, broken links 0, wrong-destination links 0, broken routes 0
+- [x] Discoverability separated into in-site navigation, internal findability and sitemap indexability: orphaned articles 0, weak-discovery articles 2 (each with a documented reason), orphaned non-article surfaces 3
+- [x] Journey moments audited 62: covered 53, partially covered 1, uncovered 0, not required standalone 2, better served elsewhere 5
+- [x] Classifications: KEEP 51, EXPAND_EXISTING 0, MERGE 0, REPOSITION 0, INTERNAL_LINK_ONLY 4, ARCHIVE_CANDIDATE 1; new article candidates 0; tool/checklist opportunities 2 (P3)
+- [x] Male fertility coverage SUFFICIENT; age and fertility coverage SUFFICIENT; TTC to IVF handoff COMPLETE; TTC to Pregnancy content handoff PARTIAL
+- [x] Unsupported numerical or medical claims 8 across 7 label-only-source articles; legacy ~85% statistics confined to unmounted code; material needs covered only by AI 0
+- [x] Imagery: 48 of 56 articles carry an explicit hero, 8 resolve to a fallback; Phase 35A.1 hub card imagery unchanged
+- [x] Full suite 130 files / 1,499 tests PASS; typecheck x2 PASS; lint matches baseline at 11 problems (1 pre-existing error, 10 warnings)
+- [x] Current TTC release blockers 0; smallest justified follow-up recorded (G1 legacy stage-route disposition, G2 positive-test handoff link, G6 structured-source normalisation) and not started

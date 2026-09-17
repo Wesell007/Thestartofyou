@@ -338,7 +338,6 @@ const TTCTopicPage = ({ config, heroImage, editorialClarity = false }: Props) =>
                     alt=""
                     aria-hidden="true"
                     loading="eager"
-                    fetchPriority="high"
                     className="relative w-full h-auto rounded-[2rem] object-cover"
                     style={{ aspectRatio: "1 / 1" }}
                   />

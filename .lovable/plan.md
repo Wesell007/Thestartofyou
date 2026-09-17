@@ -1,45 +1,116 @@
-# Phase 34H.3 — IVF save release gate resolution
+# Phase 35A — TTC hub and topic UX, discovery and AI separation
 
-Feature stays OFF. No activation, no deployment, no schema change, no flag change, no consent UX.
-Two tracks only: a human privacy/legal review pack, and an audit of where the production build gets the feature switch.
+## Goal
 
-## Track A — privacy/legal review pack
+Refine `/trying-to-conceive`, `/trying-to-conceive/ovulation`, `/trying-to-conceive/preconception-health` and `/trying-to-conceive/fertility` using the selected **Premium editorial clarity** direction. Preserve the existing brand, photography, copy and live destinations while making the experience tighter, easier to scan and explicit about what is guidance, a topic, a tool, IVF, support, Companion or a saved journey.
 
-Create `docs/content/phase34h3-ivf-save-privacy-legal-review-pack.md`, written for a real human reviewer, readable without the engineering roadmap:
+No new guidance, routes, database work, AI runtime changes, grounding changes, memory changes, analytics changes or deployment.
 
-1. Executive summary — what the feature is, the two values saved, the purpose, and that it is currently off and never activated publicly.
-2. Exact data stored (`ivf_transfer_date`, `ivf_transfer_type`) and the explicit list of what is not stored; derived timeline recalculated from the two source values.
-3. How data is collected — no automatic collection; calculating, choosing a date or type, signing in and loading the timeline never write; writes happen only on Save / Update / Remove.
-4. Who can save — authenticated, active Trying to Conceive journey, existing TTC record; never creates a journey; lifecycles stay ttc / pregnancy / first_year.
-5. Storage and access model — values live on the existing TTC journey record, one row per user, existing user-scoped access controls, no new public access, no separate IVF table.
-6. User control — explicit save, update, remove; removal clears only the two values.
-7. Deletion behaviour — remove clears the two values; TTC journey deletion removes the row; account deletion cascades; no automated expiry; no retention job; backup retention recorded as NOT ESTABLISHED BY REPOSITORY TRUTH.
-8. Data not exposed elsewhere — URL, query, hash, localStorage, sessionStorage, cookies, auth metadata, analytics, logs, Companion, AI and grounding all recorded NO.
-9. Authentication handoff — full-page `/auth` flow, accepted signed-out re-entry decision, no hidden temporary storage.
-10. Privacy notice finding — coverage gap identified YES; change required recorded as FOR HUMAN REVIEWER TO DECIDE, not as a legal conclusion.
-11. Proposed user copy, every block marked PROPOSED / NOT YET HUMAN-APPROVED, matching the copy currently built.
-12. Reviewer decision table with blank fields: name, role, date, then sections A–J (privacy notice, copy, lawful processing, special-category, explicit consent, retention, deletion, backup retention, additional documentation, final approval).
+## Verified starting point
 
-All human fields stay blank / NOT PROVIDED. No invented reviewer, date, lawful basis, consent decision or self-approval. A YES on explicit consent keeps activation blocked and needs a new phase — stated in the pack.
+- The canonical hub currently places Companion before the journey and editorial discovery.
+- The hub presents the three pillar topics twice: as primary cards and again inside the wider topic grid.
+- The hub shows four cycle moments but statically marks Ovulation as `You are here`; it is not connected to saved journey state.
+- Repository journey truth contains three TTC stages: Understanding your cycle, Timing and tracking, Waiting and testing.
+- The hub hero and unused legacy final action repeat `3 stages`, `5–6 days` and `~85%`. The stage count is supported by the stage model, while the medical figures are not given visible provenance on the hub.
+- The shared topic template labels every Start Here destination `Read the guide`, including the ovulation calculator.
+- Preconception Health places `/ask` beside editorial/tool Start Here cards, although each pillar already has one Companion module later on the page.
+- Fertility silently truncates one configured library destination because each group is capped at five links.
+- The existing final action component routes to a fixed editorial stage rather than resolving the visitor's active lifecycle.
 
-## Track B — production flag verification (audit only)
+## Build
 
-Create `docs/content/phase34h3-ivf-save-production-flag-verification.md`.
+### 1. Recompose the TTC hub
 
-Audit, changing nothing: repository build scripts and Vite config, CI workflow, repository environment files, project secret/environment configuration available through project tooling, publish/deployment settings, and any hosting configuration that is genuinely inspectable. Anything that cannot be inspected is recorded NOT VERIFIED rather than assumed.
+Keep the current split hero and calculator as the first screen, but remove the unsupported medical-statistic strip. Keep the calculator estimate wording and preserve its existing result behaviour.
 
-Record the required findings exactly: hosting/deployment provider, production build mechanism, environment-variable configuration location, whether `VITE_IVF_TIMELINE_SAVE_ENABLED` can be supplied at build time, the exact value-setting workflow, whether it needs a repository change, rebuild required YES, redeploy required YES, and whether rollback by FALSE + rebuild + redeploy is achievable.
+Use this order:
 
-The flag is not set. No `.env.production` created. Nothing deployed.
+1. Hero and ovulation calculator
+2. Compact orientation
+3. Neutral three-stage TTC journey
+4. Three primary topic pathways
+5. Consolidated intent-led library
+6. IVF pathway
+7. Compact editorial common questions
+8. One Companion module
+9. Lifecycle-aware journey action
 
-If the injection point verifies, document the controlled release sequence (approval, notice changes, any implementation changes, release QA, set flag true, build, deploy, synthetic smoke test, remove synthetic values, confirm zero test values) and the rollback sequence, noting that turning the feature off must not delete existing user data.
+Specific changes:
 
-## Documentation and closure
+- Convert the broad coverage card into a compact editorial orientation band.
+- Render the three repository-backed TTC stages without `You are here`, pulse styling or implied personal progress.
+- Keep one primary card each for Ovulation, Preconception Health and Fertility.
+- Remove those three duplicate pillar entries from the supporting library while retaining all seven supporting TTC topic destinations.
+- Label destinations by real type rather than using `Read guide` universally.
+- Keep the dedicated IVF pathway and its `/ivf` destination visually distinct from the TTC guide library.
+- Keep the existing six-question editorial accordion, but remove its duplicate direct AI actions. Companion remains a separate later module.
+- Move the existing Companion experience below editorial discovery and common questions. Do not alter its runtime, prompts, grounding, memory or full Ask fallback.
+- Add one final action using the existing public account/lifecycle resolver: TTC goes to My TTC Journey, Pregnancy to My Week, First Year to My First Year, and no active lifecycle to Start your journey. The action performs no writes.
 
-Update `roadmap.md` with the 34H.3 entry. Phase 34H.2 evidence is left intact apart from a cross-reference if needed.
+### 2. Refine the shared pillar topic template
 
-Completion report returns every field listed in the request. Closure is Outcome A (technical release configuration pass, blocked on human privacy/legal approval) if the injection point verifies, otherwise Outcome B (pack ready, blocked on both gates). Either way: flag off, not deployed, not activated, schema unchanged, no IVF lifecycle, no AI access, ready to activate = NO.
+Apply the same hierarchy to Ovulation, Preconception Health and Fertility without creating bespoke page variants:
+
+1. Breadcrumb
+2. Existing split hero
+3. Compact topic coverage
+4. Start Here
+5. Dense grouped library
+6. One Companion module
+7. Quiet links to the other two pillar topics
+
+Specific changes:
+
+- Keep all existing page titles, introductions, coverage bullets, article destinations and images.
+- Add a small destination classifier so Start Here actions say `Open calculator`, `Read guidance`, `Explore topic`, `Explore IVF` or `Ask Companion` only when that destination type is genuinely present.
+- Remove the `/ask` card from Preconception Health Start Here. Its existing Companion module remains the sole AI entry on that page.
+- Keep the Ovulation calculator as a clearly labelled tool and keep Fertility's intentional single editorial anchor.
+- Replace image-heavy library rows with compact editorial rows so the page is denser and repeated thumbnails do not dominate.
+- Remove the five-link display cap so every configured destination is represented, including the currently hidden AMH guidance.
+- Preserve exactly one `AskAboutThis` Companion entry after editorial discovery.
+
+### 3. Destination accounting and regression coverage
+
+Create a focused destination/type registry for presentation logic rather than changing URLs. Add tests that verify:
+
+- all three pillars appear once in the primary hub pathway area and not again in the supporting library
+- all seven supporting TTC topic routes remain discoverable
+- the three-stage journey has no static `You are here`
+- IVF remains reachable at `/ivf`
+- the final journey action resolves all four existing states correctly
+- Preconception Start Here has no `/ask` destination
+- tool and editorial Start Here actions receive correct labels
+- every configured group destination renders, with no silent five-link truncation
+- the shared topic pages retain exactly one contextual Companion entry and do not introduce an AI execution surface
+
+Document exact before and after destination counts, destination types, retained URLs and intentional duplicate removals.
+
+## Visual direction
+
+Use the selected Premium editorial clarity direction inside the existing design system:
+
+- preserve the current serif display type, sans interface type, near-white paper, sage and terracotta tokens
+- use compact editorial bands, restrained borders, short underline/lift cues and clear destination labels
+- keep cards only for primary pathways, tools and genuinely framed actions
+- avoid repeated decorative imagery, nested cards, excessive rounded containers and oversized vertical gaps
+- maintain keyboard focus, semantic headings, labelled controls, reduced-motion behaviour and readable 15px body text
+
+## Documentation
+
+Create:
+
+- `docs/content/phase35a-ttc-hub-topic-ux.md`
+- `docs/content/phase35a-ttc-destination-audit.md`
+- `docs/content/phase35a-ttc-responsive-evidence.md`
+
+Append Phase 35A to `roadmap.md` without rewriting the locked Phase 34H evidence.
 
 ## Validation
 
-Documentation-only phase: no source changes expected. Run the test suite, typecheck and lint to confirm the repository is unchanged in behaviour, and report exact counts.
+- Run focused TTC, Companion-boundary, route, breadcrumb and link-integrity tests.
+- Run the full test suite and report exact file/test counts.
+- Run typecheck twice, lint and production validation build. A validation build is not a deployment.
+- Browser-check all four canonical surfaces at 1280, 834 and 390 pixels.
+- Verify section order, destination labels, all intended links, no static progress claim, one Companion module per surface, lifecycle-aware final routing, keyboard behaviour, no overflow and no console errors.
+- Confirm no new route, sitemap entry, content item, schema, migration, analytics event, AI/runtime/grounding/memory change or deployment.

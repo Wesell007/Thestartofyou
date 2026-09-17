@@ -9,7 +9,7 @@ import {
   TTC_EXPLORE_ACTION_LABEL,
   TTC_EXPLORE_TOPIC_CLUSTERS,
   TTC_EXPLORE_TOPIC_IMAGES,
-} from "@/pages/TTCHub";
+} from "@/data/ttcExploreTopics";
 
 const account = vi.hoisted(() => ({
   authed: false as boolean | null,

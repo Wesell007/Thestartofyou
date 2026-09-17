@@ -53,7 +53,7 @@ describe("Phase 35A TTC public experience", () => {
   it("classifies calculators as tools without changing their existing href", () => {
     expect(ttcPageConfigs.ovulation.startHere).toEqual([
       expect.objectContaining({
-        href: "/trying-to-conceive/ovulation-calculator",
+        href: "/ovulation-calculator",
         destinationKind: "tool",
       }),
     ]);

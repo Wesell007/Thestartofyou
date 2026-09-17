@@ -90,6 +90,8 @@ Create a focused destination/type registry for presentation logic rather than ch
 
 The existing `TTCFinalCTA` has one consumer, the retained legacy TTC page. Do not modify it. Build the canonical hub's final action locally around `usePublicAccountLink` and its existing lifecycle resolver so unrelated surfaces remain unchanged.
 
+Test five distinct user states without collapsing the two fallback cases: signed out → `/start-your-journey`; signed in with TTC → `/my-ttc-journey`; signed in with Pregnancy → `/my-week`; signed in with First Year → `/my-first-year`; signed in with no active lifecycle → `/start-your-journey`. Confirm five states, four unique destinations, zero incorrect routes and zero writes.
+
 Document exact before and after destination counts, destination types, retained URLs and intentional duplicate removals.
 
 ## Visual direction
@@ -120,4 +122,4 @@ Append Phase 35A to `roadmap.md` without rewriting the locked Phase 34H evidence
 - Browser-check all four canonical surfaces at 1280, 834 and 390 pixels.
 - Verify section order, destination labels, all intended links, no static progress claim, one Companion module per surface, lifecycle-aware final routing, keyboard behaviour, no overflow and no console errors.
 - Confirm no new route, sitemap entry, content item, schema, migration, analytics event, AI/runtime/grounding/memory change or deployment.
-- Record: shared template consumers 6; in-scope 3; out-of-scope 3; out-of-scope changes 0; duplicate route source of truth NO; hidden configured TTC library destinations 0; AMH rendered YES; final-action consumers audited YES; unintended final-action changes 0.
+- Record: shared template consumers 6; in-scope 3; out-of-scope 3; out-of-scope changes 0; duplicate route source of truth NO; hidden configured TTC library destinations 0; AMH rendered YES; final-action consumers audited YES; five journey user states tested; four unique journey destinations; incorrect lifecycle routing 0; unintended final-action changes 0.

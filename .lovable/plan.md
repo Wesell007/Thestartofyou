@@ -81,7 +81,7 @@ Create a focused destination/type registry for presentation logic rather than ch
 - all seven supporting TTC topic routes remain discoverable
 - the three-stage journey has no static `You are here`
 - IVF remains reachable at `/ivf`
-- the final journey action resolves all four existing states correctly
+- the final journey action resolves all five required user states correctly
 - Preconception Start Here has no `/ask` destination
 - tool and editorial Start Here actions receive correct labels
 - every configured group destination renders, with no silent five-link truncation

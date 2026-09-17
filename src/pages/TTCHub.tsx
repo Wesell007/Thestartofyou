@@ -17,9 +17,6 @@ import {
   CalendarHeart,
   Stethoscope,
   Calendar as CalendarIcon,
-  Target,
-  Clock,
-  Leaf,
   type LucideIcon,
 } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
@@ -34,8 +31,8 @@ import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
 import SeoHead from "@/components/seo/SeoHead";
-import AskLink from "@/components/shared/AskLink";
 import { navigateToAsk } from "@/lib/askNavigation";
+import TTCHubJourneyAction from "@/components/ttc/TTCHubJourneyAction";
 
 /* ----------------------------------------------------------- */
 /* SHARED                                                      */
@@ -56,12 +53,6 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
 /* ----------------------------------------------------------- */
 /* 1. HERO — tool-first (calculator + common questions)        */
 /* ----------------------------------------------------------- */
-
-const commonQuestions = [
-  { text: "When am I most fertile?", sub: "Understanding your fertile window", icon: Target },
-  { text: "When should I test?", sub: "Timing and accuracy", icon: Clock },
-  { text: "Am I ovulating yet?", sub: "Signs and tracking", icon: Heart },
-];
 
 const cycleLengths = Array.from({ length: 16 }, (_, i) => i + 21);
 
@@ -153,27 +144,6 @@ const Hero = () => {
                 A calm, practical guide through every stage of trying to
                 conceive — from cycle awareness to the two-week wait.
               </p>
-
-              <div className="flex items-stretch gap-4 sm:gap-8 mb-7">
-                {[
-                  { label: "3 stages", sub: "of the journey" },
-                  { label: "5–6 days", sub: "fertile window" },
-                  { label: "~85%", sub: "within a year" },
-                ].map((item, i) => (
-                  <div
-                    key={item.label}
-                    className={`flex flex-col ${i > 0 ? "pl-4 sm:pl-8 border-l" : ""}`}
-                    style={i > 0 ? { borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)` } : undefined}
-                  >
-                    <span className="font-serif text-base sm:text-xl text-foreground leading-tight">
-                      {item.label}
-                    </span>
-                    <span className="font-sans text-[10.5px] sm:text-[11px] font-light text-muted-foreground/70 mt-0.5">
-                      {item.sub}
-                    </span>
-                  </div>
-                ))}
-              </div>
 
               <div
                 className="rounded-xl p-5 max-w-md"
@@ -301,45 +271,7 @@ const Hero = () => {
                 </p>
               </div>
 
-              {/* Common questions panel — breathable, kept under the calculator */}
-              <div className="mt-8">
-                <p
-                  className="font-sans text-[11px] font-light tracking-[0.22em] uppercase mb-4"
-                  style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                >
-                  Common questions
-                </p>
-                <div className="space-y-2.5">
-                  {commonQuestions.map((prompt, i) => {
-                    const Icon = prompt.icon;
-                    return (
-                      <AskLink
-                        key={i}
-                        question={prompt.text}
-                        context="Trying to conceive"
-                        stage="ttc"
-                        className="group flex items-start gap-3 w-full text-left py-3 px-4 rounded-xl border bg-card/60 hover:bg-card transition-all"
-                        style={{ borderColor: `hsl(var(${STAGE_BG}) / 0.3)` }}
-                      >
-                        <div
-                          className="w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                          style={{ backgroundColor: `hsl(var(${STAGE_BG}) / 0.3)` }}
-                        >
-                          <Icon size={11} style={{ color: `hsl(var(${STAGE_ACCENT}))` }} />
-                        </div>
-                        <div className="flex flex-col gap-0.5">
-                          <span className="font-sans text-[13.5px] font-light text-foreground/85 group-hover:text-foreground transition-colors leading-snug">
-                            {prompt.text}
-                          </span>
-                          <span className="font-sans text-[11px] font-light text-muted-foreground/55">
-                            {prompt.sub}
-                          </span>
-                        </div>
-                      </AskLink>
-                    );
-                  })}
-                </div>
-
+              <div className="mt-6">
                 <a
                   href="#ttc-topics"
                   onClick={(e) => {
@@ -564,14 +496,9 @@ const AISupport = () => {
 /* ----------------------------------------------------------- */
 
 const stages = [
-  { label: "Cycle", desc: "Understand your dates, symptoms, and usual rhythm." },
-  {
-    label: "Ovulation",
-    desc: "Find your fertile window and learn the signs your body may show.",
-    here: true,
-  },
-  { label: "Waiting", desc: "Move through the two-week wait with calm support and less pressure." },
-  { label: "Test", desc: "Know when to test and what your next step could be." },
+  { label: "Understanding your cycle", desc: "Understand your dates, symptoms, and usual rhythm." },
+  { label: "Timing and tracking", desc: "Find your fertile window and learn the signs your body may show." },
+  { label: "Waiting and testing", desc: "Move through the wait, know when to test, and understand possible next steps." },
 ];
 
 const JourneyTimeline = () => (
@@ -619,59 +546,23 @@ const JourneyTimeline = () => (
           }}
         />
 
-        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-12 md:gap-y-0 md:gap-x-6">
+        <ol className="relative grid grid-cols-1 sm:grid-cols-3 gap-y-12 md:gap-y-0 md:gap-x-8">
           {stages.map((s, i) => (
             <li key={s.label} className="relative text-center md:px-3">
               <div className="relative inline-flex items-center justify-center mb-5">
-                {s.here && (
-                  <>
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 rounded-full animate-pulse"
-                      style={{
-                        background: `hsl(var(${STAGE_ACCENT}) / 0.12)`,
-                        transform: "scale(2)",
-                      }}
-                    />
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
-                        transform: "scale(1.55)",
-                      }}
-                    />
-                  </>
-                )}
                 <span
                   className="relative inline-flex w-14 h-14 rounded-full items-center justify-center font-serif text-[15px] tracking-wide"
                   style={{
-                    background: s.here
-                      ? `hsl(var(--terracotta))`
-                      : `radial-gradient(circle at 30% 28%, hsl(var(--card)), hsl(var(${STAGE_BG}) / 0.55))`,
-                    color: s.here
-                      ? `hsl(var(--terracotta-foreground))`
-                      : `hsl(var(${STAGE_ACCENT}))`,
-                    border: s.here
-                      ? "none"
-                      : `1px solid hsl(var(${STAGE_ACCENT}) / 0.32)`,
-                    boxShadow: s.here
-                      ? `0 12px 28px -12px hsl(var(--terracotta) / 0.55)`
-                      : `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 8px 22px -14px hsl(var(${STAGE_ACCENT}) / 0.35)`,
+                    background: `radial-gradient(circle at 30% 28%, hsl(var(--card)), hsl(var(${STAGE_BG}) / 0.55))`,
+                    color: `hsl(var(${STAGE_ACCENT}))`,
+                    border: `1px solid hsl(var(${STAGE_ACCENT}) / 0.32)`,
+                    boxShadow: `0 1px 0 hsl(0 0% 100% / 0.95) inset, 0 8px 22px -14px hsl(var(${STAGE_ACCENT}) / 0.35)`,
                   }}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
 
-              {s.here && (
-                <p
-                  className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase mb-1.5"
-                  style={{ color: `hsl(var(--terracotta))` }}
-                >
-                  You are here
-                </p>
-              )}
               <h3 className="font-serif text-[1.2rem] text-foreground leading-tight mb-2">
                 {s.label}
               </h3>
@@ -945,9 +836,9 @@ const TopicLibrary = () => {
 
           {(() => {
             const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
-              { label: "Timing, testing and waiting", slugs: ["ovulation", "cycle-tracking", "two-week-wait", "pregnancy-tests"] },
-              { label: "Health and preparation", slugs: ["preconception-health", "conditions"] },
-              { label: "Fertility support", slugs: ["fertility", "age-and-fertility", "male-fertility"] },
+              { label: "Timing, testing and waiting", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
+              { label: "Health and preparation", slugs: ["conditions"] },
+              { label: "Fertility support", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment"] },
             ];
             const topicsBySlug = new Map(ttcTopics.map((s) => [s.slug, s]));
 
@@ -1014,7 +905,7 @@ const TopicLibrary = () => {
                             className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
                             style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
                           >
-                            Read guide
+                            Explore topic
                           </span>
                           <ArrowRight
                             size={12}
@@ -1037,30 +928,8 @@ const TopicLibrary = () => {
 
 
 /* ----------------------------------------------------------- */
-/* 6. REASSURANCE                                              */
+/* 9. FINAL JOURNEY ACTION                                     */
 /* ----------------------------------------------------------- */
-
-const Reassurance = () => (
-  <section className="py-16 md:py-24 bg-parchment relative overflow-hidden">
-    <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl text-center relative">
-      <Leaf
-        size={22}
-        strokeWidth={1.4}
-        className="mx-auto mb-5"
-        style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-      />
-      <h2 className="font-serif text-2xl sm:text-3xl md:text-[2rem] text-foreground leading-tight mb-5">
-        A small <span className="italic font-normal">reminder</span>
-      </h2>
-      <p className="font-sans text-[15px] sm:text-base font-light text-muted-foreground leading-relaxed">
-        Trying to conceive can feel hopeful one day and overwhelming the next.
-        You do not need to have everything perfectly figured out. Start with
-        understanding your cycle, taking care of your body, and knowing what
-        support is available if you need it.
-      </p>
-    </div>
-  </section>
-);
 
 /* ----------------------------------------------------------- */
 /* PAGE                                                        */
@@ -1091,12 +960,12 @@ const TTCHub = () => {
       <main>
         <Hero />
         <WhatThisCovers />
-        <AISupport />
         <JourneyTimeline />
         <TopicLibrary />
         <TTCIVFPathway />
         <TTCCommonQuestions />
-        <Reassurance />
+        <AISupport />
+        <TTCHubJourneyAction />
       </main>
       <Footer />
     </div>

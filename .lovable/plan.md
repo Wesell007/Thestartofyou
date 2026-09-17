@@ -1,52 +1,40 @@
-# Phase 35A.1: TTC Explore topic card imagery
+# Phase 35B — TTC content coverage and journey audit
 
-## Goal
-Refine only the seven existing supporting cards in `Explore TTC topics` on `/trying-to-conceive` by adding compact, relevant editorial photography. Preserve Phase 35A structure, wording, destinations and behaviour.
+Audit only. No new articles, no route changes, no UX changes, no AI or grounding changes, no deployment. The only files written are three audit documents plus a roadmap entry.
 
-## Existing imagery selection
-Use the distinct approved image already associated with each destination in the TTC page system:
+## What this produces
 
-| Card | Existing image |
-| --- | --- |
-| Cycle tracking | `ttc-stage-cycle.jpg` |
-| The two-week wait | `ttc-stage-waiting.jpg` |
-| Pregnancy testing in TTC | `ttc-pregnancy-tests.jpg` |
-| Conditions that can affect TTC | `ttc-conditions.jpg` |
-| Age and fertility | `ttc-age-and-fertility.jpg` |
-| Male fertility | `ttc-male-fertility.jpg` |
-| IVF and fertility treatment | `ttc-ivf-treatment.jpg` |
+1. `docs/content/phase35b-ttc-content-inventory.md` — every TTC surface and article record with status, route, discoverability and per-record classification.
+2. `docs/content/phase35b-ttc-journey-gap-register.md` — the journey-moment matrix and the final gap register with P1/P2/P3 priorities.
+3. `docs/content/phase35b-ttc-content-coverage-audit.md` — the narrative audit, all required counts, the closure decision and the completion report.
+4. `roadmap.md` — a new Phase 35B entry. Phase 35A and 35A.1 history left untouched.
 
-These are seven unique, topic-specific local assets already mapped to the same TTC destinations. No images will be generated, downloaded or duplicated.
+## How the audit is done
 
-## Implementation
-- Add a hub-local presentation image map keyed by the existing topic slug. Keep the existing topic data and destination source of truth unchanged.
-- Reshape only the seven supporting cards into image, category label, title, description and unchanged `Explore topic` action.
-- Use a stable compact image area around 160px high, full card width, `object-cover`, and top corners matching the current card shape.
-- Keep the existing desktop three-column, tablet two-column and mobile one-column layouts, with full readable copy and balanced card bodies.
-- Keep each card as the existing single accessible link. Treat its image as decorative within that already-labelled link so assistive technology does not repeat the visible title. Preserve visible focus and reduced-motion behaviour.
-- Lazy-load and asynchronously decode these below-the-fold images, with stable dimensions to avoid layout shift.
-- Do not alter the three deeper TTC topic-page libraries or any shared topic template.
+Every number and status claim comes from reading the repository, not from assumption. Work proceeds in these passes, each one producing evidence before anything is written up:
+
+**Pass 1 — routes.** Read the route table and every TTC page file to establish the real hub, pillar, subtopic, tool, legacy and redirect routes, plus what the sitemap generator actually emits. Any route that resolves to nothing is recorded as broken.
+
+**Pass 2 — article records.** Enumerate TTC-specific and TTC-crossover records across the article datasets, capturing slug, title, topic, editorial status, route, image fields and source fields. Records whose status cannot be determined from the data are reported as unknown rather than guessed.
+
+**Pass 3 — discoverability.** For each record, trace the inbound links from the hub, pillar pages, supporting cards, related-guidance blocks and article bodies. Anything with no inbound path is orphaned; a single weak path is weak discovery. Every outbound internal link is resolved against the route table to find broken and wrong-destination links.
+
+**Pass 4 — journey coverage.** Map the covered journey moments across preparation, cycle understanding, timing, the two-week wait, testing, fertility basics, investigations, conditions, taking longer, loss crossover and treatment transition. Each moment gets exactly one classification and a recommended treatment, with `NEW_ARTICLE` used only where no existing article, topic page, tool or handoff can serve the need.
+
+**Pass 5 — transitions and boundaries.** Trace TTC to IVF and TTC to Pregnancy end to end, counting broken routes, ambiguous destinations and duplicated guidance. Separately check that no important TTC need is reachable only through the Companion.
+
+**Pass 6 — claims, images and sources.** Flag every numerical or medical claim in TTC surfaces that lacks visible or documented sourcing, and count articles missing hero or expected body imagery. Nothing is rewritten. Grounding data is read only; any drift found is reported, not repaired.
+
+**Pass 7 — shortlists and closure.** Produce the new-article shortlist, expansion shortlist and merge/reposition/archive shortlist, then separate current blockers from future enhancements and select Outcome A, B or C from what the evidence supports.
 
 ## Validation
-- Add focused coverage confirming all seven cards have the intended unique image and retain their exact existing href, grouping, order, copy and action language.
-- Run the focused TTC tests, full tests, typecheck twice, lint and production validation build. Record any unchanged baseline issue separately.
-- Review `/trying-to-conceive` at 1280px, 834px and 390px, checking crop quality, image uniqueness, card rhythm, readable titles and descriptions, visible actions, overflow and console errors.
-- Confirm the three deeper topic-page compact libraries are unchanged.
 
-## Completion report
-Report:
-- Explore TTC topic cards with imagery = 7 / 7
-- Unique/relevant image treatment = YES
-- Existing destinations preserved = YES
-- Topic grouping unchanged = YES
-- Topic-page compact libraries changed = NO
-- Responsive 1280 / 834 / 390 = PASS or FAIL
-- New content = 0
-- New routes = 0
-- Application deployed = NO
+Focused TTC content and link-integrity tests, the full test suite, typecheck twice, and lint against the existing baseline. Source behaviour changes are expected to be zero, so results should match the current baseline exactly. Nothing is deployed.
 
-Close only when verified as:
+## Constraints held
 
-`PHASE 35A.1 — TTC EXPLORE TOPIC CARD IMAGERY`
+Saved lifecycles stay ttc, pregnancy, first_year. No `ivf` lifecycle and no `/my-ivf-journey`. Reviewer claims added = 0. Grounding changes = 0. AI runtime changes = 0. Application deployed = NO.
 
-`CLOSED PASS / VISUAL REFINEMENT COMPLETE`
+## Closure
+
+If no current blockers are found, the phase closes as TTC content sufficient for current strategy and the TTC workstream is locked closed, with no further TTC phase recommended. Otherwise it closes as audit complete with the single smallest justified follow-up phase named but not started.

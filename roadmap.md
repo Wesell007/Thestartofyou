@@ -89,3 +89,10 @@
 - [ ] BLOCKER B — production environment-variable configuration location NOT VERIFIED; only a repository-side build-time mechanism is verified and has never been exercised
 - [x] Future controlled release and rollback sequences documented only; turning the feature OFF never deletes saved user IVF data
 - [ ] Flag changed = NO; application deployed = NO; feature activated = NO; schema changes = 0; migrations = 0; AI/Companion access = NO; READY TO ACTIVATE = NO
+
+## Phase 35A — TTC hub and topic UX, discovery and AI separation — IN PROGRESS
+- [ ] Refine the canonical TTC hub in the locked nine-section order without new content or routes
+- [ ] Apply the narrow premium editorial presentation to three of six shared topic-template consumers; out-of-scope changes 0
+- [ ] Keep existing destinations authoritative while adding presentation-only destination kinds
+- [ ] Test five distinct final journey user states through the existing account resolver
+- [ ] Complete destination accounting, responsive QA, documentation and full validation; deployment NO

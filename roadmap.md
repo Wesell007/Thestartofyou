@@ -102,3 +102,9 @@
 - [x] Focused tests 4 files / 33 tests; full suite 130 files / 1,497 tests; typecheck x2; production validation build PASS
 - [x] Lint matches baseline: 1 pre-existing generated-file error and 10 warnings
 - [x] New articles 0; routes 0; sitemap entries 0; database and journey-schema changes 0; analytics/AI/grounding/memory/reviewer changes 0; deployment NO
+
+## Phase 35A.1 — TTC Explore topic card imagery — IN PROGRESS
+- [ ] Add seven unique approved images to the seven existing supporting cards on the canonical TTC hub
+- [ ] Preserve existing card data, hrefs, grouping, order, copy and `Explore topic` action language
+- [ ] Keep deeper TTC topic-page compact libraries and the shared topic template unchanged
+- [ ] Complete focused and full validation plus responsive QA at 1280, 834 and 390 pixels; deployment NO

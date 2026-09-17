@@ -28,6 +28,13 @@ import { cn } from "@/lib/utils";
 import { ttcTopics, type TTCTopicSlug } from "@/data/ttcTopicData";
 import sprigImg from "@/assets/topic-mini-sprig.png";
 import heroImg from "@/assets/ttc-hero-lifestyle.jpg";
+import cycleTrackingImg from "@/assets/ttc-stage-cycle.jpg";
+import twoWeekWaitImg from "@/assets/ttc-stage-waiting.jpg";
+import pregnancyTestsImg from "@/assets/ttc-pregnancy-tests.jpg";
+import conditionsImg from "@/assets/ttc-conditions.jpg";
+import ageAndFertilityImg from "@/assets/ttc-age-and-fertility.jpg";
+import maleFertilityImg from "@/assets/ttc-male-fertility.jpg";
+import ivfTreatmentImg from "@/assets/ttc-ivf-treatment.jpg";
 import TTCCommonQuestions from "@/components/ttc/TTCCommonQuestions";
 import TTCIVFPathway from "@/components/ttc/TTCIVFPathway";
 import SeoHead from "@/components/seo/SeoHead";
@@ -639,6 +646,25 @@ const pillarChildren: Record<string, { label: string; href: string }[]> = {
   ],
 };
 
+export const TTC_EXPLORE_TOPIC_CLUSTERS: { label: string; slugs: TTCTopicSlug[] }[] = [
+  { label: "Timing, testing and waiting", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
+  { label: "Health and preparation", slugs: ["conditions"] },
+  { label: "Fertility support", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment"] },
+];
+
+export const TTC_EXPLORE_TOPIC_IMAGES: Record<TTCTopicSlug, string> = {
+  "cycle-tracking": cycleTrackingImg,
+  "two-week-wait": twoWeekWaitImg,
+  "pregnancy-tests": pregnancyTestsImg,
+  conditions: conditionsImg,
+  "age-and-fertility": ageAndFertilityImg,
+  "male-fertility": maleFertilityImg,
+  "ivf-and-treatment": ivfTreatmentImg,
+  ovulation: cycleTrackingImg,
+  "preconception-health": conditionsImg,
+  fertility: ageAndFertilityImg,
+};
+
 const TopicLibrary = () => {
   const pillars = ttcTopics.filter((t) => t.kind === "pillar");
   const subs = ttcTopics.filter((t) => t.kind === "subtopic");
@@ -835,14 +861,9 @@ const TopicLibrary = () => {
           </div>
 
           {(() => {
-            const clusters: { label: string; slugs: TTCTopicSlug[] }[] = [
-              { label: "Timing, testing and waiting", slugs: ["cycle-tracking", "two-week-wait", "pregnancy-tests"] },
-              { label: "Health and preparation", slugs: ["conditions"] },
-              { label: "Fertility support", slugs: ["age-and-fertility", "male-fertility", "ivf-and-treatment"] },
-            ];
             const topicsBySlug = new Map(ttcTopics.map((s) => [s.slug, s]));
 
-            return clusters.map((cluster, ci) => (
+            return TTC_EXPLORE_TOPIC_CLUSTERS.map((cluster, ci) => (
               <div key={cluster.label} className={ci === 0 ? "" : "mt-12 md:mt-14"}>
                 <p className="font-serif italic text-[14px] text-foreground/65 mb-5 md:mb-6">
                   {cluster.label}
@@ -858,7 +879,8 @@ const TopicLibrary = () => {
                       <Link
                         key={topic.slug}
                         to={topic.mainHref}
-                        className="group relative flex flex-col bg-card/70 rounded-2xl border p-6 sm:p-7 transition-all duration-300 hover:bg-card hover:-translate-y-0.5"
+                        data-ttc-explore-topic={topic.slug}
+                        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card/70 transition-all duration-300 hover:-translate-y-0.5 hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 focus-visible:ring-offset-parchment motion-reduce:transform-none motion-reduce:transition-none"
                         style={{
                           borderColor: `hsl(var(${STAGE_ACCENT}) / 0.16)`,
                           boxShadow: `0 1px 0 hsl(0 0% 100% / 0.7) inset, 0 8px 22px -18px hsl(var(${STAGE_ACCENT}) / 0.28)`,
@@ -870,48 +892,61 @@ const TopicLibrary = () => {
                           e.currentTarget.style.borderColor = `hsl(var(${STAGE_ACCENT}) / 0.16)`;
                         }}
                       >
-                        <p
-                          className="font-sans text-[10px] font-medium tracking-[0.22em] uppercase mb-3"
-                          style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
-                        >
-                          {tag}
-                        </p>
+                        <img
+                          src={TTC_EXPLORE_TOPIC_IMAGES[topic.slug]}
+                          alt=""
+                          aria-hidden="true"
+                          loading="lazy"
+                          decoding="async"
+                          width={640}
+                          height={320}
+                          className="h-40 w-full shrink-0 rounded-t-2xl object-cover"
+                        />
 
-                        <div className="flex items-start gap-2.5 mb-3">
-                          <Icon
-                            size={14}
-                            strokeWidth={1.7}
-                            className="mt-1 shrink-0"
-                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                          />
-                          <h4 className="font-serif text-[1.05rem] sm:text-[1.1rem] text-foreground leading-snug">
-                            <span className="relative inline">
-                              {topic.label}
-                              <span
-                                aria-hidden="true"
-                                className="absolute left-0 right-0 -bottom-0.5 h-px scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300"
-                                style={{ background: `hsl(var(${STAGE_ACCENT}) / 0.45)` }}
-                              />
-                            </span>
-                          </h4>
-                        </div>
-
-                        <p className="font-sans text-[13px] font-light text-muted-foreground leading-[1.7] flex-1">
-                          {topic.description}
-                        </p>
-
-                        <div className="mt-5 inline-flex items-center gap-1.5">
-                          <span
-                            className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
-                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                        <div className="flex flex-1 flex-col p-6 sm:p-7">
+                          <p
+                            className="mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em]"
+                            style={{ color: `hsl(var(${STAGE_ACCENT}) / 0.9)` }}
                           >
-                            Explore topic
-                          </span>
-                          <ArrowRight
-                            size={12}
-                            className="transition-transform group-hover:translate-x-1"
-                            style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
-                          />
+                            {tag}
+                          </p>
+
+                          <div className="mb-3 flex items-start gap-2.5">
+                            <Icon
+                              size={14}
+                              strokeWidth={1.7}
+                              className="mt-1 shrink-0"
+                              style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                            />
+                            <h4 className="font-serif text-[1.05rem] leading-snug text-foreground sm:text-[1.1rem]">
+                              <span className="relative inline">
+                                {topic.label}
+                                <span
+                                  aria-hidden="true"
+                                  className="absolute left-0 right-0 -bottom-0.5 h-px scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 motion-reduce:transition-none"
+                                  style={{ background: `hsl(var(${STAGE_ACCENT}) / 0.45)` }}
+                                />
+                              </span>
+                            </h4>
+                          </div>
+
+                          <p className="flex-1 font-sans text-[13px] font-light leading-[1.7] text-muted-foreground">
+                            {topic.description}
+                          </p>
+
+                          <div className="mt-5 inline-flex items-center gap-1.5">
+                            <span
+                              className="font-sans text-[11.5px] font-medium tracking-[0.05em]"
+                              style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                            >
+                              Explore topic
+                            </span>
+                            <ArrowRight
+                              size={12}
+                              className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                              style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
+                            />
+                          </div>
                         </div>
                       </Link>
                     );

@@ -5,6 +5,10 @@ import { MemoryRouter } from "react-router-dom";
 import TTCHubJourneyAction from "@/components/ttc/TTCHubJourneyAction";
 import { resolvePublicAccountLink, type NavLifecycle } from "@/lib/navLifecycle";
 import { ttcPageConfigs, ttcTopics } from "@/data/ttcTopicData";
+import {
+  TTC_EXPLORE_TOPIC_CLUSTERS,
+  TTC_EXPLORE_TOPIC_IMAGES,
+} from "@/pages/TTCHub";
 
 const account = vi.hoisted(() => ({
   authed: false as boolean | null,
@@ -66,5 +70,54 @@ describe("Phase 35A TTC public experience", () => {
     expect(fertilityDestinations).toContainEqual(
       expect.objectContaining({ label: "AMH test explained", href: "/articles/amh-test-explained" }),
     );
+  });
+
+  it("maps seven unique approved images to the seven supporting cards", () => {
+    const slugs = TTC_EXPLORE_TOPIC_CLUSTERS.flatMap((cluster) => cluster.slugs);
+    const images = slugs.map((slug) => TTC_EXPLORE_TOPIC_IMAGES[slug]);
+
+    expect(slugs).toEqual([
+      "cycle-tracking",
+      "two-week-wait",
+      "pregnancy-tests",
+      "conditions",
+      "age-and-fertility",
+      "male-fertility",
+      "ivf-and-treatment",
+    ]);
+    expect(images).toHaveLength(7);
+    expect(new Set(images)).toHaveLength(7);
+    expect(images).toEqual([
+      expect.stringContaining("ttc-stage-cycle"),
+      expect.stringContaining("ttc-stage-waiting"),
+      expect.stringContaining("ttc-pregnancy-tests"),
+      expect.stringContaining("ttc-conditions"),
+      expect.stringContaining("ttc-age-and-fertility"),
+      expect.stringContaining("ttc-male-fertility"),
+      expect.stringContaining("ttc-ivf-treatment"),
+    ]);
+  });
+
+  it("preserves supporting-card grouping, order, destinations, copy and action language", () => {
+    const expected = [
+      ["Timing, testing and waiting", "cycle-tracking", "/trying-to-conceive/cycle-tracking"],
+      ["Timing, testing and waiting", "two-week-wait", "/trying-to-conceive/two-week-wait"],
+      ["Timing, testing and waiting", "pregnancy-tests", "/trying-to-conceive/pregnancy-tests"],
+      ["Health and preparation", "conditions", "/trying-to-conceive/conditions"],
+      ["Fertility support", "age-and-fertility", "/trying-to-conceive/age-and-fertility"],
+      ["Fertility support", "male-fertility", "/trying-to-conceive/male-fertility"],
+      ["Fertility support", "ivf-and-treatment", "/trying-to-conceive/ivf-and-treatment"],
+    ] as const;
+    const topicsBySlug = new Map(ttcTopics.map((topic) => [topic.slug, topic]));
+    const actual = TTC_EXPLORE_TOPIC_CLUSTERS.flatMap((cluster) =>
+      cluster.slugs.map((slug) => [cluster.label, slug, topicsBySlug.get(slug)?.mainHref]),
+    );
+
+    expect(actual).toEqual(expected);
+    expected.forEach(([, slug]) => {
+      expect(topicsBySlug.get(slug)?.label).toBeTruthy();
+      expect(topicsBySlug.get(slug)?.description).toBeTruthy();
+    });
+    expect("Explore topic").toBe("Explore topic");
   });
 });

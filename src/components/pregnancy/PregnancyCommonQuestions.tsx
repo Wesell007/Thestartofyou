@@ -59,7 +59,7 @@ const PregnancyCommonQuestions = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-parchment py-14 md:py-20">
+    <section className="bg-parchment py-14 md:py-20" data-pregnancy-editorial-questions>
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
         <div className="flex items-center gap-2 mb-3">
           <span className="h-px w-10" style={{ backgroundColor: "hsl(var(--stage-pregnancy-accent) / 0.55)" }} />

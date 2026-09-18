@@ -10,7 +10,7 @@ const PregnancyHubJourneyAction = () => {
   const label = authed ? accountLink.label : "Start your journey";
 
   return (
-    <section className="border-t border-border/50 bg-parchment-dark">
+    <section className="border-t border-border/50 bg-parchment-dark" data-pregnancy-journey-action>
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-stretch md:grid-cols-2">
         <div className="relative min-h-64 overflow-hidden md:min-h-[390px]">
           <img

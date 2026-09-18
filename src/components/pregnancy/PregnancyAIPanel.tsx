@@ -4,7 +4,7 @@ import sprigImg from "@/assets/topic-mini-sprig.png";
 
 const PregnancyAIPanel = () => {
   return (
-    <section className="py-14 md:py-20 bg-parchment">
+    <section className="py-14 md:py-20 bg-parchment" data-pregnancy-hub-companion>
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
         <div
           className="relative rounded-[2rem] overflow-hidden border shadow-card-brand"

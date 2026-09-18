@@ -5,7 +5,7 @@ import { PREGNANCY_TOPIC_IMAGES } from "@/components/pregnancy/pregnancyTopicIma
 
 const PregnancyTopicMap = () => {
   return (
-    <section className="relative bg-parchment py-14 md:py-20">
+    <section className="relative bg-parchment py-14 md:py-20" data-pregnancy-pathways>
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl relative">
         {/* Header */}
         <div className="text-center mb-10 md:mb-12">

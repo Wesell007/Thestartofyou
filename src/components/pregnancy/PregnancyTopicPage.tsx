@@ -9,14 +9,10 @@ import {
   PregnancyTopicSlug,
 } from "@/data/pregnancyTopicData";
 import { resolveRowThumb } from "@/lib/pregnancyRowThumbnails";
+import AskAboutThis from "@/components/companion/AskAboutThis";
+import { PREGNANCY_TOPIC_IMAGES } from "@/components/pregnancy/pregnancyTopicImages";
 
 // Hero & decorative
-import topicBodyHero from "@/assets/topic-body-hero.jpg";
-import topicBabyHero from "@/assets/topic-baby-hero.jpg";
-import topicFeelingsHero from "@/assets/topic-feelings-hero.jpg";
-import topicHealthHero from "@/assets/topic-health-hero.jpg";
-import topicDietHero from "@/assets/topic-diet-hero.jpg";
-import topicPreparingHero from "@/assets/topic-preparing-hero.jpg";
 import floralAccent from "@/assets/topic-floral-accent.png";
 import miniSprig from "@/assets/topic-mini-sprig.png";
 import wildflowerSprig from "@/assets/topic-wildflower-sprig.png";
@@ -116,7 +112,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   body: {
     accentHsl: "16 38% 52%",       // warm terracotta / blush
     tintHsl:   "20 45% 88%",
-    hero: topicBodyHero,
+    hero: PREGNANCY_TOPIC_IMAGES.body,
     sprigA: floralAccent,
     sprigB: miniSprig,
     sprigC: wildflowerSprig,
@@ -125,7 +121,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   baby: {
     accentHsl: "140 22% 42%",      // sage / soft green
     tintHsl:   "130 28% 88%",
-    hero: topicBabyHero,
+    hero: PREGNANCY_TOPIC_IMAGES.baby,
     sprigA: miniSprig,
     sprigB: miniSprig,
     sprigC: wildflowerSprig,
@@ -134,7 +130,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   feelings: {
     accentHsl: "342 32% 56%",      // muted rose / mauve
     tintHsl:   "345 40% 90%",
-    hero: topicFeelingsHero,
+    hero: PREGNANCY_TOPIC_IMAGES.feelings,
     sprigA: floralAccent,
     sprigB: wildflowerSprig,
     sprigC: floralAccent,
@@ -143,7 +139,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   "health-and-safety": {
     accentHsl: "200 22% 44%",      // soft slate-sage
     tintHsl:   "195 28% 88%",
-    hero: topicHealthHero,
+    hero: PREGNANCY_TOPIC_IMAGES["health-and-safety"],
     sprigA: miniSprig,
     sprigB: miniSprig,
     sprigC: miniSprig,
@@ -152,7 +148,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   "diet-and-exercise": {
     accentHsl: "120 28% 38%",      // fresh green
     tintHsl:   "115 35% 88%",
-    hero: topicDietHero,
+    hero: PREGNANCY_TOPIC_IMAGES["diet-and-exercise"],
     sprigA: miniSprig,
     sprigB: wildflowerSprig,
     sprigC: miniSprig,
@@ -161,7 +157,7 @@ const TOPIC_THEMES: Record<PregnancyTopicSlug, TopicTheme> = {
   "preparing-for-baby": {
     accentHsl: "26 48% 48%",       // warm amber / terracotta
     tintHsl:   "30 50% 88%",
-    hero: topicPreparingHero,
+    hero: PREGNANCY_TOPIC_IMAGES["preparing-for-baby"],
     sprigA: wildflowerSprig,
     sprigB: floralAccent,
     sprigC: wildflowerSprig,
@@ -352,7 +348,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
       <main className="overflow-hidden">
 
         {/* ─── 1. HERO ──────────────────────────────────────────────── */}
-        <section className="relative pt-10 sm:pt-14 md:pt-20 pb-20 md:pb-32">
+         <section className="relative pb-16 pt-10 sm:pt-14 md:pb-24 md:pt-20">
           {/* Soft topic-tinted top wash */}
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-48 md:h-72 -z-0"
@@ -424,10 +420,10 @@ const PregnancyTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 2. WHAT THIS TOPIC COVERS (overlapping card) ──────────── */}
-        <section className="relative -mt-12 md:-mt-20 pb-16 md:pb-24">
+         <section className="relative -mt-8 pb-14 md:-mt-14 md:pb-18">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
             <div
-              className="relative bg-card rounded-[2rem] border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-14 overflow-hidden"
+               className="relative overflow-hidden rounded-2xl border bg-card p-6 shadow-card-brand sm:p-8 md:p-10"
               style={{ borderColor: accentBorder }}
             >
               <img
@@ -445,7 +441,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
                 className="hidden md:block absolute right-4 bottom-4 w-14 opacity-60 pointer-events-none"
               />
 
-              <div className="md:pl-32 lg:pl-36 text-center md:text-left">
+               <div className="md:pl-28 lg:pl-32 text-center md:text-left">
                 <h2 className="font-serif text-2xl md:text-3xl text-foreground leading-tight">
                   What this topic covers
                 </h2>
@@ -477,7 +473,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 3. START HERE — featured editorial cards ──────────────── */}
-        <section className="pb-16 md:pb-24">
+         <section className="pb-14 md:pb-18">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <SectionLabel>Start here</SectionLabel>
             <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
@@ -516,7 +512,11 @@ const PregnancyTopicPage = ({ config }: Props) => {
                         className="mt-4 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium"
                         style={{ color: accent }}
                       >
-                        Read the guide
+                         {item.destinationKind === "tool"
+                           ? "Use the tool"
+                           : item.destinationKind === "topic"
+                             ? "Explore the topic"
+                             : "Read the guidance"}
                         <ArrowRight size={13} className="transition-transform group-hover:translate-x-0.5" />
                       </span>
                     </div>
@@ -528,7 +528,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
         </section>
 
         {/* ─── 4. GROUPED ARTICLE EXPLORATION ────────────────────────── */}
-        <section className="pb-16 md:pb-24">
+         <section className="pb-14 md:pb-18">
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <div
               className="bg-card rounded-[2rem] border p-5 sm:p-8 md:p-12 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.15)]"
@@ -537,7 +537,9 @@ const PregnancyTopicPage = ({ config }: Props) => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                 {config.groups.map((group, gi) => {
                   const sprig = groupSprigs[gi % groupSprigs.length];
-                  const viewAllHref = group.links[0]?.href || "/pregnancy";
+                   const uniqueLinks = group.links.filter(
+                     (link, index, links) => links.findIndex((candidate) => candidate.href === link.href) === index,
+                   );
                   return (
                     <div key={group.label} className="flex flex-col">
                       <div className="flex items-start gap-3 mb-3">
@@ -554,7 +556,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
                       </div>
 
                       <ul className="flex flex-col mt-1">
-                        {group.links.map((link) => {
+                         {uniqueLinks.map((link) => {
                           const thumb = resolveRowThumb(resolveImage(link.href, link.image));
                           return (
                             <li
@@ -592,14 +594,6 @@ const PregnancyTopicPage = ({ config }: Props) => {
                         })}
                       </ul>
 
-                      <Link
-                        to={viewAllHref}
-                        className="group mt-4 inline-flex items-center gap-1.5 font-sans text-[12px] font-medium tracking-wide self-start"
-                        style={{ color: accent }}
-                      >
-                        View all
-                        <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
-                      </Link>
                     </div>
                   );
                 })}
@@ -645,9 +639,24 @@ const PregnancyTopicPage = ({ config }: Props) => {
           </section>
         )}
 
-        {/* ─── 6. OTHER PREGNANCY TOPICS ─────────────────────────────── */}
+        {/* ─── 6. CONTEXTUAL COMPANION HANDOFF ─────────────────────── */}
+        <section className="py-10 md:py-14" data-pregnancy-topic-companion>
+          <div className="container mx-auto max-w-3xl px-5 text-center sm:px-6 md:px-10">
+            <SectionLabel>Ask about this topic</SectionLabel>
+            <AskAboutThis
+              className="mt-6"
+              label={`Ask about ${config.eyebrow.toLowerCase()}`}
+              entry={{ stage: "pregnancy", topic: config.slug, title: config.title }}
+              suggestions={config.companionSuggestions}
+              description="Opens the shared Companion while keeping this page in view."
+              buttonClassName="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-pill bg-terracotta px-6 py-3 font-sans text-[13.5px] font-medium text-terracotta-foreground shadow-cta transition-colors hover:bg-terracotta-hover"
+            />
+          </div>
+        </section>
+
+        {/* ─── 7. OTHER PREGNANCY TOPICS ─────────────────────────────── */}
         {config.showSiblings !== false && (
-          <section className="py-14 md:py-20">
+           <section className="pb-12 pt-8 md:pb-16 md:pt-10">
             <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
               <div className="text-center mb-8">
                 <SectionLabel>Other pregnancy topics</SectionLabel>

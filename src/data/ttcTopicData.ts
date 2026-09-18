@@ -64,6 +64,18 @@ export interface TTCPageConfig {
   curationNote?: string;
 
   aiPrompts?: string[];
+
+  /**
+   * Phase 35C — editorial handoff out of TTC. Presentation only: it points at
+   * an existing public route and never touches journey or lifecycle routing.
+   */
+  handoff?: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    cta: string;
+    href: string;
+  };
 }
 
 // Order matters for sibling chips on pillar pages.
@@ -108,6 +120,7 @@ const LIVE = {
   earlySymptoms: "/articles/early-pregnancy-symptoms-explained",
   symptomsStopping: "/articles/symptoms-stopping-early-pregnancy",
   pregnancyAfterLoss: "/articles/pregnancy-after-loss",
+  pregnancyHub: "/pregnancy",
   ivfTimelineArticle: "/articles/ivf-timeline-what-to-expect",
   emotionalIVF: "/articles/emotional-impact-of-ivf",
   emotionalWellbeing: "/articles/emotional-wellbeing-pregnancy",
@@ -687,6 +700,13 @@ export const ttcPageConfigs: Record<TTCTopicSlug, TTCPageConfig> = {
       "What does a faint line mean?",
       "Is it implantation bleeding or my period?",
     ],
+    handoff: {
+      eyebrow: "If your test was positive",
+      title: "Got a positive test? Start with pregnancy guidance",
+      body: "Testing guidance stops here. When the result is positive, the pregnancy hub is the calm place to begin, with early weeks, first appointments and what to expect next.",
+      cta: "Start with pregnancy guidance",
+      href: LIVE.pregnancyHub,
+    },
   },
 
 

@@ -63,7 +63,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     ],
     sources: [
       "NHS — Trying for a baby",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "Tommy's — Ovulation, fertile days and getting pregnant",
       "HFEA — Understanding ovulation and fertility",
     ],
@@ -166,7 +166,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     ],
     sources: [
       "NHS — Trying for a baby",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "Tommy's — When am I most fertile?",
       "HFEA — Fertility and timing intercourse",
     ],
@@ -191,7 +191,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         heading: "What the fertile window actually is",
         lead: "The fertile window is not one magical day. It is a short run of days where sperm and egg timing can realistically overlap.",
         paragraphs: [
-          "Sperm can survive in the reproductive tract for up to five days when cervical mucus is supportive. The egg, by contrast, only remains fertilisable for about 12 to 24 hours after ovulation. That is why the window begins before ovulation, not after it.",
+          "Sperm can survive in the reproductive tract for up to five days when cervical mucus is supportive. The egg, by contrast, only remains fertilisable for a short time after ovulation. That is why the window begins before ovulation, not after it.",
           "This matters because TTC advice often overfocuses on one exact date. In real life, the window is a range, and conception is more forgiving than many people fear.",
         ],
         image: { src: cardTimelines, alt: "A timeline-style editorial image representing the sequence of fertile days in a cycle." },
@@ -211,7 +211,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         heading: "How to estimate your fertile window more accurately",
         lead: "If your cycle is regular, date counting gives a starting point. If it is not, ovulation signals matter much more.",
         paragraphs: [
-          "In a typical cycle, ovulation usually happens about 12 to 16 days before the next period, not always on day 14. That means the fertile window can shift earlier or later depending on the total cycle length and on month-to-month variation.",
+          "In a typical cycle, ovulation usually happens in the second half of the cycle rather than always on day 14. That means the fertile window can shift earlier or later depending on the total cycle length and on month-to-month variation.",
           "An ovulation calculator can give a helpful estimate, but it works best when it is combined with what your body is showing: wetter mucus, a positive LH test, or the temperature rise that confirms ovulation afterwards.",
         ],
         image: { src: ttcStageCycle, alt: "A TTC cycle-tracking scene showing notes and gentle cycle observation." },
@@ -244,13 +244,13 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     reviewedBy: REVIEWER,
     lastUpdated: MAY_2026,
     standfirst:
-      "Implantation usually happens 6–12 days after ovulation. What that means for testing, symptoms, and how long the real wait truly is.",
+      "Implantation usually happens in the days after ovulation. What that means for testing, symptoms, and how long the real wait truly is.",
     hero: {
       src: heroImplantation,
       alt: "A calm bedside scene in soft morning light, representing the quiet uncertainty of implantation timing.",
     },
     keyTakeaways: [
-      "Implantation usually happens around 6 to 12 days after ovulation, most often around days 8 to 10.",
+      "Implantation usually happens in the days after ovulation, before a period would be due.",
       "The process takes time, which is why testing too early often gives a false negative.",
       "Most people do not feel implantation happening.",
       "Light spotting can happen, but no spotting at all is more common than TTC forums often suggest.",
@@ -289,7 +289,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       {
         id: "when-implantation-most-often-happens",
         heading: "When implantation most often happens",
-        lead: "The usual range is 6 to 12 days after ovulation, with most implantations clustering in the middle of that window.",
+        lead: "It usually happens in the days after ovulation, before a period would be due.",
         paragraphs: [
           "Many TTC charts and forums talk as though implantation should happen on one exact day. Real biology is looser than that. Some embryos implant earlier, some later, and the window is broad enough that a single negative test at 9 or 10 DPO tells you very little.",
           "Late implantation can mean later hCG rise and later positive testing, but it is not automatically a sign of a problem. It is one reason patience is genuinely part of accurate testing.",
@@ -347,7 +347,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     ],
     sources: [
       "NHS — Pregnancy tests",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "Tommy's — Pregnancy tests and early testing",
       "MHRA guidance on in vitro diagnostic test accuracy",
     ],
@@ -452,7 +452,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       },
       {
         question: "How quickly should a faint line get darker?",
-        answer: "Usually over about 48 hours, because hCG rises quickly in early pregnancy. Same-day comparisons are much less useful.",
+        answer: "Usually after leaving a day or two between tests, because hCG rises in early pregnancy. Same-day comparisons are much less useful.",
       },
     ],
     editorialSections: [
@@ -526,7 +526,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       "Repeated chemical pregnancies are worth discussing with a GP or fertility clinician.",
     ],
     sources: [
-      "NHS — Miscarriage",
+      { label: "Miscarriage", publisher: "NHS", url: "https://www.nhs.uk/conditions/miscarriage/" },
       "Tommy's — Chemical pregnancy",
       "NICE — Ectopic pregnancy and miscarriage (NG126)",
       "Miscarriage Association — Early loss information and support",
@@ -616,7 +616,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       "If you have had recurrent losses, later losses, or complications, personal medical advice is important.",
     ],
     sources: [
-      "NHS — Miscarriage",
+      { label: "Miscarriage", publisher: "NHS", url: "https://www.nhs.uk/conditions/miscarriage/" },
       "NICE — Ectopic pregnancy and miscarriage (NG126)",
       "Tommy's — Trying again after miscarriage",
       "Miscarriage Association — Emotional recovery and trying again",
@@ -707,7 +707,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     ],
     sources: [
       "NHS — Trying for a baby",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "Tommy's — Ovulation and fertile timing",
       "FSRH guidance on fertility awareness and conception risk",
     ],
@@ -790,15 +790,15 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
       alt: "A quiet bedside scene in soft daylight — the calm context of very early pregnancy spotting.",
     },
     keyTakeaways: [
-      "Implantation bleeding is usually light, short-lived, and happens around 6–12 days after ovulation.",
+      "Implantation bleeding is usually light, short-lived, and happens in the days after ovulation, before a period would be due.",
       "It tends to be pink or brown rather than bright red, and rarely fills a pad or tampon.",
       "Many people who go on to have healthy pregnancies never experience implantation bleeding at all.",
       "Heavy, bright-red, or clot-filled bleeding is not implantation bleeding and should be reviewed.",
     ],
     sources: [
-      "NHS — Vaginal bleeding in pregnancy",
+      { label: "Vaginal bleeding in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/" },
       "NICE — Ectopic pregnancy and miscarriage (NG126)",
-      "Tommy's — Bleeding in early pregnancy",
+      { label: "Bleeding in early pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/bleeding-early-pregnancy" },
       "RCOG — Early pregnancy loss patient information",
     ],
     relatedSlugs: ["how-long-implantation-takes", "when-to-take-a-pregnancy-test", "faint-positive-pregnancy-test"],
@@ -830,7 +830,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         heading: "What implantation bleeding actually is",
         lead: "A small amount of spotting can happen as a fertilised egg embeds into the uterine lining. It is usually subtle, not dramatic.",
         paragraphs: [
-          "Implantation bleeding tends to happen 6 to 12 days after ovulation, roughly a few days before a period would be due. It is often only enough to notice on wiping, or as light spotting on underwear, rather than anything that fills a pad.",
+          "Implantation bleeding tends to happen in the days after ovulation, roughly a few days before a period would be due. It is often only enough to notice on wiping, or as light spotting on underwear, rather than anything that fills a pad.",
           "Colour is usually pink or brown rather than bright red, because the small amount of blood has had time to oxidise on its way out. It is also typically short — often just a few hours, sometimes up to a day or two.",
         ],
         image: { src: heroImplantation, alt: "A calm early-pregnancy bedside scene in soft daylight." },
@@ -1053,7 +1053,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     sources: [
       "NHS — Trying for a baby",
       "Tommy's — Ovulation signs",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "HFEA — Understanding ovulation",
     ],
     relatedSlugs: ["ovulation-signs", "fertile-window", "two-week-wait"],
@@ -1142,7 +1142,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     sources: [
       "NHS — Pregnancy tests",
       "Tommy's — Two-week wait and early pregnancy signs",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "HFEA — Emotional impact of fertility treatment and waiting",
     ],
     relatedSlugs: ["how-long-implantation-takes", "when-to-take-a-pregnancy-test", "implantation-bleeding"],
@@ -1239,7 +1239,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
     ],
     sources: [
       "NHS — Trying for a baby",
-      "NICE — Fertility problems: assessment and treatment (CG156)",
+      { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" },
       "Tommy's — Trying to conceive",
       "HFEA — Fertility, age and getting help",
     ],
@@ -1272,7 +1272,7 @@ export const ttcFlagshipOverrides: Record<string, TTCOverride> = {
         heading: "How conception actually works",
         lead: "At the centre of TTC is one ordinary biological fact: conception can only happen when sperm and egg overlap in a very short window each cycle.",
         paragraphs: [
-          "Ovulation usually happens once per cycle. The egg then survives for only about 12 to 24 hours, while sperm can survive for several days in fertile cervical mucus. That is why intercourse in the days before ovulation matters so much.",
+          "Ovulation usually happens once per cycle. The egg then survives for only a short time, while sperm can survive for several days in fertile cervical mucus. That is why intercourse in the days before ovulation matters so much.",
           "This can sound clinical, but it is often reassuring. TTC is not about getting everything perfect. It is about understanding a small window and giving yourself enough chances within it.",
         ],
         image: { src: week2Ovulation, alt: "An ovulation-focused image representing the central biological event of TTC." },

@@ -435,7 +435,7 @@ const articleDatabase: ArticleData[] = [
     title: "Implantation bleeding: what it is, what it looks like, and whether to worry",
     metaDescription: "What is implantation bleeding? When does it happen, what does it look like, and how does it differ from a period? Clear, reassuring guidance.",
     quickAnswer:
-      "Implantation bleeding is light spotting that can occur when a fertilised egg attaches to the uterine lining, typically around 6-12 days after ovulation. It is lighter than a period, usually short-lived, and is not harmful. Not everyone experiences it, and its absence does not mean implantation hasn't occurred.",
+      "Implantation bleeding is light spotting that can occur when a fertilised egg attaches to the uterine lining, usually in the days after ovulation and before a period would be due. It is lighter than a period, usually short-lived, and is not harmful. Not everyone experiences it, and its absence does not mean implantation hasn't occurred.",
     howThisFeels: [
       "Seeing unexpected spotting and not knowing whether it's your period or something else",
       "Searching at length trying to distinguish between implantation bleeding and a period",
@@ -451,7 +451,7 @@ const articleDatabase: ArticleData[] = [
         },
         {
           heading: "Timing in the cycle",
-          body: "Implantation typically occurs 6-12 days after ovulation, which can coincide closely with when a period might be expected. This timing is a common source of confusion.",
+          body: "Implantation typically occurs in the days after ovulation, which can coincide closely with when a period might be expected. This timing is a common source of confusion.",
         },
       ],
       lessCauses: [
@@ -468,7 +468,7 @@ const articleDatabase: ArticleData[] = [
         "Not everyone experiences implantation bleeding, estimates suggest it occurs in roughly 25-30% of pregnancies. Its absence is entirely normal and does not indicate a problem with implantation. The amount, colour, and duration can also vary significantly between people.",
     },
     timing: {
-      whenStarts: "Implantation typically occurs 6-12 days after ovulation, placing bleeding approximately in the week before an expected period.",
+      whenStarts: "Implantation typically occurs in the days after ovulation, placing bleeding approximately in the week before an expected period.",
       whenPeaks: "It usually lasts only 1-3 days and does not build in intensity.",
       whenEases: "Implantation bleeding is short-lived. If spotting continues for more than a few days or increases in flow, it is worth contacting your healthcare provider.",
     },
@@ -547,7 +547,7 @@ const articleDatabase: ArticleData[] = [
             "Lasts 1-3 days",
             "Does not increase in flow",
             "May include mild cramping",
-            "Occurs 6-12 days after ovulation",
+            "Occurs in the days after ovulation",
           ],
         },
         {
@@ -568,14 +568,14 @@ const articleDatabase: ArticleData[] = [
     reviewedBy: "Jenny Joines",
     lastUpdated: "March 2026",
     keyTakeaways: [
-      "Implantation bleeding is light spotting that can happen when an embryo embeds into the uterine lining, usually 6–12 days after ovulation",
+      "Implantation bleeding is light spotting that can happen when an embryo embeds into the uterine lining, usually in the days after ovulation",
       "It is lighter, shorter, and usually pinker or browner than a period, and does not build in flow",
       "Only around 25–30% of pregnancies involve any visible implantation bleeding — its absence is completely normal",
       "Heavier bleeding, bright red flow, or one-sided pain is a different picture and is worth a same-day call to your midwife or doctor",
     ],
     sources: [
-      "NHS — Vaginal bleeding in pregnancy",
-      "Tommy's — Bleeding in early pregnancy",
+      { label: "Vaginal bleeding in pregnancy", publisher: "NHS", url: "https://www.nhs.uk/pregnancy/common-symptoms/vaginal-bleeding/" },
+      { label: "Bleeding in early pregnancy", publisher: "Tommy's", url: "https://www.tommys.org/pregnancy-information/im-pregnant/early-pregnancy/bleeding-early-pregnancy" },
       "NICE — Ectopic pregnancy and miscarriage (NG126)",
       "RCOG — Information for women in early pregnancy",
     ],
@@ -605,7 +605,7 @@ const articleDatabase: ArticleData[] = [
       {
         id: "when-implantation-bleeding-happens",
         heading: "When implantation bleeding usually happens",
-        lead: "Implantation typically occurs 6 to 12 days after ovulation, which often falls in the week before an expected period. Any bleeding usually shows up in that same window.",
+        lead: "Implantation typically occurs in the days after ovulation, which often falls in the week before an expected period. Any bleeding usually shows up in that same window.",
         paragraphs: [
           "Because the timing overlaps with when a period is due, implantation bleeding is often mistaken for an early or unusually light period. The biggest clue is what happens next: a period builds, an implantation bleed doesn't.",
           "If you've been tracking ovulation, the spotting most commonly appears 9–12 days after ovulation. If you haven't been tracking, just before — or instead of — your expected period is the typical timing.",
@@ -1793,7 +1793,7 @@ const articleDatabase: ArticleData[] = [
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "The ovulation window", body: "You can only conceive around ovulation. This window is roughly 12-24 hours, though sperm can survive for up to 5 days." },
+        { heading: "The ovulation window", body: "You can only conceive around ovulation. The egg itself is fertilisable for a short time, though sperm can survive for several days." },
         { heading: "Cycle length variation", body: "Not all cycles are 28 days. Ovulation timing varies between people and between cycles." },
         { heading: "Age and fertility", body: "Fertility gradually decreases with age, particularly after 35, but many people conceive naturally into their late 30s and beyond." },
       ],
@@ -15123,13 +15123,13 @@ const articleDatabase: ArticleData[] = [
     slug: "fertile-window",
     title: "The fertile window: when conception is actually most likely",
     metaDescription: "What the fertile window is, why timing matters more than frequency, and how to find your most fertile days without making TTC feel clinical.",
-    quickAnswer: "The fertile window is the roughly six-day stretch ending on the day of ovulation. Conception is most likely in the 2–3 days before ovulation and the day of ovulation itself, because sperm can survive up to five days while the egg only lives for 12–24 hours after release.",
+    quickAnswer: "The fertile window is the roughly six-day stretch ending on the day of ovulation. Conception is most likely in the 2–3 days before ovulation and the day of ovulation itself, because sperm can survive up to five days while the egg only lives for a short time after release.",
     standfirst: "Most people think of the fertile window as the day of ovulation. The truth is gentler — and a little wider — than that.",
     howThisFeels: ["Worried you're missing the right day", "Trying to time everything precisely", "Wondering if a calmer approach is okay"],
     whatHappening: {
       commonCauses: [
         { heading: "Sperm survival", body: "Healthy sperm can live in the reproductive tract for up to 5 days. That's why intercourse before ovulation can still result in conception." },
-        { heading: "Egg lifespan", body: "Once released, the egg is fertilisable for only about 12–24 hours. After that, the window closes until the next cycle." },
+        { heading: "Egg lifespan", body: "Once released, the egg is fertilisable for only a short time. After that, the window closes until the next cycle." },
         { heading: "Pre-ovulation peak", body: "Pregnancy rates are highest from intercourse 1–2 days before ovulation, when sperm are already in place and ready." },
       ],
       lessCauses: [
@@ -15149,7 +15149,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Avoid 'saving up'", reason: "Daily or near-daily intercourse in the window is fine and usually optimal." },
       { action: "Try the ovulation calculator", reason: "It gives a reasonable starting estimate based on your cycle dates." },
     ],
-    whatHappensNext: "If conception has happened, implantation usually follows 6–12 days later. A pregnancy test is most reliable from the day of your expected period.",
+    whatHappensNext: "If conception has happened, implantation usually follows in the days afterwards. A pregnancy test is most reliable from the day of your expected period.",
     relatedStage: { intro: "Related:", links: [{ label: "Ovulation signs", href: "/articles/ovulation-signs" }, { label: "Ovulation calculator", href: "/ovulation-calculator" }, { label: "TTC Hub", href: "/trying-to-conceive" }] },
     aiPrompts: ["When is my fertile window?", "How often should we try in the fertile window?", "Can the fertile window shift?"],
     captureIntro: "The shape of your cycle is worth remembering, beyond just the dates.",
@@ -15170,7 +15170,7 @@ const articleDatabase: ArticleData[] = [
     slug: "how-long-implantation-takes",
     title: "How long implantation takes after ovulation",
     metaDescription: "When implantation happens, how long it takes, what it can and can't be felt as, and why the timeline matters for testing. Calm UK guidance.",
-    quickAnswer: "Implantation usually happens 6–12 days after ovulation, with most cases falling around days 8–10. The implantation process itself takes a couple of days, and hCG only starts rising once it's complete — which is why testing too early often gives a negative result.",
+    quickAnswer: "Implantation usually happens in the days after ovulation. The implantation process itself takes a couple of days, and hCG only starts rising once it's complete — which is why testing too early often gives a negative result.",
     standfirst: "Implantation is one of the most-searched parts of trying to conceive. The timeline matters — but not as a deadline.",
     howThisFeels: ["Counting days obsessively after ovulation", "Reading every twinge as a sign", "Wondering if it's too early to test"],
     whatHappening: {
@@ -15195,7 +15195,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Use first morning urine for the most accurate result", reason: "hCG is most concentrated then." },
       { action: "Resist symptom-spotting where you can", reason: "Progesterone causes the same sensations whether or not implantation has happened." },
     ],
-    whatHappensNext: "If implantation has happened, hCG typically doubles every 48 hours. A test taken from the day of your expected period is usually reliable.",
+    whatHappensNext: "If implantation has happened, hCG rises steadily over the following days. A test taken from the day of your expected period is usually reliable.",
     relatedStage: { intro: "Related:", links: [{ label: "When to take a pregnancy test", href: "/articles/when-to-take-a-pregnancy-test" }, { label: "Implantation bleeding", href: "/articles/implantation-bleeding" }, { label: "Two-week wait", href: "/articles/two-week-wait" }] },
     aiPrompts: ["When does implantation usually happen?", "Can you feel implantation?", "Why is my test still negative at 10 DPO?"],
     captureIntro: "The two-week wait is full of small noticings worth holding onto.",
@@ -15302,7 +15302,7 @@ const articleDatabase: ArticleData[] = [
     faq: [
       { question: "Is a faint line always a positive?", answer: "If it appeared within the reading window and has any pink colour, it's almost always a true positive at low hCG." },
       { question: "What's the difference between a faint line and an evaporation line?", answer: "Faint positives are pink and appear in the reading window. Evaporation lines are usually grey or colourless and appear after the window has passed." },
-      { question: "How long until a faint line gets darker?", answer: "In a healthy early pregnancy, hCG roughly doubles every 48 hours, so retesting after two days usually shows a clear difference." },
+      { question: "How long until a faint line gets darker?", answer: "In a healthy early pregnancy, hCG rises steadily, so retesting after a couple of days usually shows a clear difference." },
     ],
   },
 
@@ -15460,7 +15460,7 @@ const articleDatabase: ArticleData[] = [
     howThisFeels: ["Wondering if you're being impatient", "Quietly worried it's taking longer than it should", "Unsure whether your situation 'counts' yet"],
     whatHappening: {
       commonCauses: [
-        { heading: "Most pregnancies happen within a year", body: "Around 80–85% of couples conceive within 12 months of regular, well-timed intercourse. The remaining group includes plenty of people who go on to conceive in year two without intervention." },
+        { heading: "Most pregnancies happen within a year", body: "Most couples conceive within 12 months of regular, well-timed intercourse. The remaining group includes plenty of people who go on to conceive in year two without intervention." },
         { heading: "Age changes the timeline", body: "Fertility gradually declines from the mid-30s, which is why guidance suggests talking to a GP after 6 months once you're 36 or over." },
         { heading: "Some situations warrant earlier help", body: "Irregular or absent periods, known conditions like PCOS or endometriosis, previous fertility issues, or a history of cancer treatment all justify an earlier conversation." },
       ],
@@ -15491,7 +15491,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — Infertility", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — When to seek help", "Tommy's — Trying for a baby"],
+    sources: [{ label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" }, { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "HFEA — When to seek help", "Tommy's — Trying for a baby"],
     keyTakeaways: [
       "NICE recommends a GP conversation after 12 months of trying — or 6 months if you're 36 or over.",
       "Conditions like PCOS, endometriosis, or absent periods justify an earlier conversation.",
@@ -15509,7 +15509,7 @@ const articleDatabase: ArticleData[] = [
         heading: "The UK benchmarks, in plain English",
         lead: "The 12-month and 6-month figures are not arbitrary — they reflect when most pregnancies have already happened in well-timed cycles.",
         paragraphs: [
-          "About 80–85% of couples conceive within a year of trying. By 18 months that figure rises further. The 12-month benchmark exists because, statistically, that's the point at which it becomes more useful to look for a reason than to keep waiting.",
+          "Most couples conceive within a year of trying, and more go on to conceive during the following months. The 12-month benchmark exists because, statistically, that's the point at which it becomes more useful to look for a reason than to keep waiting.",
           "Once you're 36 or older, the timeline shortens to 6 months. This is partly because age-related fertility changes accumulate gradually, and partly because earlier investigation gives you more options.",
         ],
       },
@@ -15586,7 +15586,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — PCOS", "NICE — Fertility problems: assessment and treatment (CG156)", "RCOG — Long-term consequences of PCOS", "Tommy's — PCOS and pregnancy"],
+    sources: ["NHS — PCOS", { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "RCOG — Long-term consequences of PCOS", "Tommy's — PCOS and pregnancy"],
     keyTakeaways: [
       "PCOS most commonly affects fertility through irregular or absent ovulation.",
       "Many people with PCOS conceive naturally; cycles may just take longer to read.",
@@ -15781,7 +15781,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — Irregular periods", "NICE — Fertility problems: assessment and treatment (CG156)", "RCOG — Long-term consequences of PCOS", "Tommy's — Trying for a baby"],
+    sources: [{ label: "Irregular periods", publisher: "NHS", url: "https://www.nhs.uk/conditions/irregular-periods/" }, { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "RCOG — Long-term consequences of PCOS", "Tommy's — Trying for a baby"],
     keyTakeaways: [
       "Irregular cycles usually reflect irregular ovulation, not necessarily infertility.",
       "Direct ovulation tracking is more useful than calendar predictions when cycles vary.",
@@ -15800,7 +15800,7 @@ const articleDatabase: ArticleData[] = [
         lead: "Cycle length isn't fixed, and a normal cycle has more flexibility than people often realise.",
         paragraphs: [
           "A typical cycle sits anywhere between 21 and 35 days, and a few days of variation month to month is completely normal. 'Irregular' usually refers to cycles that fall outside that range, vary by more than a week, or skip months altogether.",
-          "Cycle length is determined by when ovulation happens. The phase after ovulation (the luteal phase) is fairly fixed at around 12–14 days; the phase before ovulation is what varies. So an irregular cycle is really an ovulation-timing issue.",
+          "Cycle length is determined by when ovulation happens. The phase after ovulation (the luteal phase) tends to be fairly consistent in length; the phase before ovulation is what varies. So an irregular cycle is really an ovulation-timing issue.",
         ],
       },
       {
@@ -15876,7 +15876,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — Infertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — Fertility tests", "Tommy's — Fertility investigations"],
+    sources: ["NHS — Infertility tests", { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "HFEA — Fertility tests", "Tommy's — Fertility investigations"],
     keyTakeaways: [
       "Initial tests confirm ovulation and check the wider hormonal picture.",
       "Pelvic ultrasound, AMH, and tubal patency tests come in if more information is needed.",
@@ -15957,7 +15957,7 @@ const articleDatabase: ArticleData[] = [
     disclaimer: "This is general guidance, not a personal assessment. A fertility clinician can interpret your specific results.",
     whatYouCanDo: [
       { action: "Follow the abstinence guidance precisely", reason: "Usually 2–7 days; outside this range can affect the result." },
-      { action: "Repeat the test if the first is abnormal", reason: "Sperm production cycles take ~10–12 weeks, so retesting after 6–12 weeks is standard." },
+      { action: "Repeat the test if the first is abnormal", reason: "Sperm production happens over a period of weeks, so retesting after a gap is standard." },
       { action: "Look at lifestyle factors honestly", reason: "Sleep, stress, weight, smoking, alcohol, heat, and certain medications can all affect sperm." },
       { action: "Don't carry the result alone", reason: "An abnormal sample is not a personal verdict — it's a test result, and there are usually clear next steps." },
     ],
@@ -15971,7 +15971,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — Infertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "WHO — Laboratory manual for the examination of human semen", "HFEA — Fertility tests"],
+    sources: ["NHS — Infertility tests", { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "WHO — Laboratory manual for the examination of human semen", "HFEA — Fertility tests"],
     keyTakeaways: [
       "Semen analysis is the first and most important male fertility test.",
       "Results are usually repeated 6–12 weeks apart before being interpreted as final.",
@@ -15999,7 +15999,7 @@ const articleDatabase: ArticleData[] = [
         lead: "The logistics are usually the most awkward part. The actual test is straightforward.",
         paragraphs: [
           "Most clinics ask for 2–7 days of abstinence beforehand, because both shorter and longer windows can skew results. Samples can usually be produced at home and delivered to the lab within about an hour, kept warm.",
-          "If a sample is abnormal, the standard practice is to repeat the test 6–12 weeks later. Sperm take roughly 10–12 weeks to develop, so a single result is a snapshot rather than a final answer.",
+          "If a sample is abnormal, the standard practice is to repeat the test 6–12 weeks later. Sperm develop over a period of weeks, so a single result is a snapshot rather than a final answer.",
         ],
         callout: { tone: "reassurance", text: "An abnormal first sample is not a verdict. It's a starting point — and many people see meaningful improvement on the second test, especially after lifestyle changes." },
       },
@@ -16066,7 +16066,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["NHS — Infertility", "NICE — Fertility problems: assessment and treatment (CG156)", "HFEA — Going to a fertility clinic", "Tommy's — Trying for a baby"],
+    sources: [{ label: "Infertility", publisher: "NHS", url: "https://www.nhs.uk/conditions/infertility/" }, { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "HFEA — Going to a fertility clinic", "Tommy's — Trying for a baby"],
     keyTakeaways: [
       "A first fertility appointment is mostly a conversation, not an exam.",
       "Both partners are usually expected to contribute history and tests.",
@@ -16161,7 +16161,7 @@ const articleDatabase: ArticleData[] = [
     productPromotion: "light",
     reviewedBy: "Jenny Joines",
     lastUpdated: "May 2026",
-    sources: ["HFEA — Fertility tests", "NICE — Fertility problems: assessment and treatment (CG156)", "ESHRE — Ovarian reserve testing", "Tommy's — Fertility investigations"],
+    sources: ["HFEA — Fertility tests", { label: "Fertility problems: assessment and treatment (CG156)", publisher: "NICE", url: "https://www.nice.org.uk/guidance/cg156" }, "ESHRE — Ovarian reserve testing", "Tommy's — Fertility investigations"],
     keyTakeaways: [
       "AMH estimates egg quantity, not egg quality or natural conception chance.",
       "It's most useful for IVF planning and PCOS assessment.",

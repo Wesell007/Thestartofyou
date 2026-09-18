@@ -77,11 +77,14 @@ describe("WC-3c canonical breadcrumb hierarchies", () => {
     }
   });
 
-  it("keeps StagePage breadcrumbs limited to the confirmed TTC allowlist", () => {
+  // Phase 35C: the three legacy TTC stage routes were retired and now redirect
+  // to their canonical topic pages, so the allowlist is intentionally empty.
+  it("keeps StagePage breadcrumbs behind an empty allowlist after the 35C retirement", () => {
     const src = read("src/pages/StagePage.tsx");
-    expect(src).toContain("trying-to-conceive/understanding-your-cycle");
-    expect(src).toContain("trying-to-conceive/timing-and-tracking");
-    expect(src).toContain("trying-to-conceive/waiting-and-testing");
+    expect(src).toContain("const breadcrumbStageAllowlist: string[] = [];");
+    expect(src).not.toContain("trying-to-conceive/understanding-your-cycle");
+    expect(src).not.toContain("trying-to-conceive/timing-and-tracking");
+    expect(src).not.toContain("trying-to-conceive/waiting-and-testing");
     expect(src).toContain("showBreadcrumbs &&");
   });
 

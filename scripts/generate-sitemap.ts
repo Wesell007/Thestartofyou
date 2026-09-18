@@ -45,10 +45,8 @@ const ttc = [
   "/trying-to-conceive/preconception-health",
   "/trying-to-conceive/pregnancy-tests",
   "/trying-to-conceive/two-week-wait",
-  // TTC StagePage routes (Phase 9.10 SEO allowlist).
-  "/trying-to-conceive/understanding-your-cycle",
-  "/trying-to-conceive/timing-and-tracking",
-  "/trying-to-conceive/waiting-and-testing",
+  // Phase 35C: the three legacy TTC StagePage routes now redirect to their
+  // canonical topic pages and are deliberately excluded from the sitemap.
 ];
 
 const ivf = [

@@ -259,6 +259,25 @@ const App = () => (
           <Route path="/trying-to-conceive/pregnancy-tests" element={<TTCPregnancyTests />} />
           <Route path="/trying-to-conceive/two-week-wait" element={<TTCTwoWeekWait />} />
           <Route path="/trying-to-conceive/conditions" element={<TTCConditions />} />
+          {/*
+            Phase 35C — retired legacy TTC stage routes. Client-side route
+            redirects (React Router `Navigate replace`, not HTTP 301s) to the
+            canonical topic pages that replaced them. Mounted above the generic
+            /:journey/:stage route and removed from the sitemap and the stage
+            SEO / breadcrumb allowlists, so no indexable duplicate remains.
+          */}
+          <Route
+            path="/trying-to-conceive/understanding-your-cycle"
+            element={<Navigate to="/trying-to-conceive/ovulation" replace />}
+          />
+          <Route
+            path="/trying-to-conceive/timing-and-tracking"
+            element={<Navigate to="/trying-to-conceive/cycle-tracking" replace />}
+          />
+          <Route
+            path="/trying-to-conceive/waiting-and-testing"
+            element={<Navigate to="/trying-to-conceive/two-week-wait" replace />}
+          />
           <Route path="/ivf" element={<IVF />} />
           <Route path="/ivf/before-transfer" element={<IVFBeforeTransfer />} />
           <Route path="/ivf/after-transfer" element={<IVFAfterTransfer />} />

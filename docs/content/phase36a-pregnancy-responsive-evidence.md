@@ -19,8 +19,10 @@ An initial browser pass exposed the existing React 18 `fetchPriority` developmen
 
 - Focused Pregnancy, lifecycle, calculator and Companion regressions: 6 files / 46 tests PASS
 - Five distinct journey account states and four unique destinations: PASS
-- Full suite: pending final closure run
-- Typecheck x2: pending final closure run
-- Lint baseline comparison: pending final closure run
-- Production validation build: pending final closure run
+- Full suite: 131 files / 1,521 tests PASS; 1 unrelated legacy TTC link-integrity assertion FAILS because `src/data/stageData.ts` still contains four references to three redirects retired in Phase 35C
+- Typecheck x2: PASS
+- Lint: unchanged baseline, 1 pre-existing generated-file `prefer-const` error and 10 warnings
+- Production validation build: PASS with 353 sitemap entries
 - Application deployment: NO
+
+Phase 36A is not marked CLOSED PASS because the required full-suite gate is not wholly green. The smallest follow-up is a separately approved reconciliation of the dormant Phase 35C TTC stage-data references; it was not started because TTC changes are outside this phase.

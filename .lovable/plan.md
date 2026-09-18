@@ -20,19 +20,19 @@ Target after: orphaned legacy stage routes = 0, redirect loops = 0, broken route
 
 ## 3. Positive-result handoff into Pregnancy
 
-A single calm handoff link is added on the contextually correct testing surfaces only (pregnancy testing topic page, and the closest testing-related placement if the evidence supports it), pointing to the existing Pregnancy entry destination. Wording follows the existing copy system, for example "Got a positive test? Start with pregnancy guidance". No new pregnancy article, no new route, no change to lifecycle or journey routing.
+One calm handoff is added at the strongest testing-context surface, the pregnancy testing topic page, pointing to the existing Pregnancy entry destination. Wording in the existing voice, e.g. "Got a positive test? Start with pregnancy guidance". A second placement only if the evidence shows it is contextually distinct; no scattered repeat CTAs. No new pregnancy article, no new route, no lifecycle change.
 
 ## 4. Source normalisation (data only)
 
-Two distinct counts are preserved: 20 label-only TTC articles, of which 7 contain the 8 flagged numerical or medical claims.
+Two distinct counts are preserved and never conflated: 20 label-only TTC articles, of which 7 contain the 8 flagged numerical or medical claims.
 
-Label-only entries are converted to the existing structured-source shape (label, publisher, year, url) only where the repository already holds the exact matching source record elsewhere. Nothing is invented: no URLs, organisations, titles, review dates or reviewers. Anything that cannot be resolved from repository evidence is left as-is and reported as unresolved.
+A label-only entry becomes a structured source only where repository evidence establishes the same underlying source — matching title, publisher, year where present and URL. No pairing with a different document from the same publisher, no publisher-homepage URLs, no substituted newer editions, no invented years, no provenance inferred from topic similarity. Anything short of exact provenance stays label-only and is reported honestly; remaining label-only records are a governance state, not a release blocker, unless they leave an unsupported live claim.
 
-Source rendering behaviour is not changed. No grounding registry, approval, candidate or routing change. No reviewer or medical-review claim is added anywhere.
+Source rendering behaviour is unchanged. No grounding registry, approval, candidate, eligible-slug or routing change. No reviewer or medical-review claim added.
 
 ## 5. The 8 flagged claims
 
-Each claim is checked for genuine repository source evidence. Where evidence exists the claim is tied to a structured source. Where it does not, the smallest safe edit is made: drop the unsupported numeric precision or soften the assertion, preserving meaning and introducing no new medical claim. TTC does not close while any unresolved unsupported claim remains.
+Each claim gets exactly one resolution: supported with verified source, safely removed, safely reworded, or unresolved. Rewording preserves meaning and introduces no new medical precision. The four outcomes must sum to 8, and TTC does not close while any unresolved claim remains.
 
 ## 6. Discoverability recheck and closure audit
 

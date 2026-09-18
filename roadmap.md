@@ -125,3 +125,14 @@
 - [x] Imagery: 48 of 56 articles carry an explicit hero, 8 resolve to a fallback; Phase 35A.1 hub card imagery unchanged
 - [x] Full suite 130 files / 1,499 tests PASS; typecheck x2 PASS; lint matches baseline at 11 problems (1 pre-existing error, 10 warnings)
 - [x] Current TTC release blockers 0; smallest justified follow-up recorded (G1 legacy stage-route disposition, G2 positive-test handoff link, G6 structured-source normalisation) and not started
+
+## Phase 35C — TTC final cleanup and workstream closure — CLOSED PASS / TTC COMPLETE FOR CURRENT STRATEGY / NO CURRENT TTC BLOCKERS
+- [x] Phase 35B journey count reconciled by re-counting the matrix rows: 83 moments (covered 75, partially covered 1, uncovered 0, not required standalone 2, better served elsewhere 5); sum equals total; no moment invented; 35B conclusion unchanged
+- [x] Three legacy TTC stage routes retired as client-side canonical route redirects: understanding-your-cycle to ovulation, timing-and-tracking to cycle-tracking, waiting-and-testing to two-week-wait; removed from the sitemap and from the stage SEO and breadcrumb allowlists; redirect loops 0; orphaned legacy stage routes 0; indexable duplicates 0
+- [x] TTC to Pregnancy positive-result editorial handoff added once, on the pregnancy testing topic page, pointing at the existing /pregnancy hub; new article 0, new route 0, lifecycle logic changes 0; handoff COMPLETE
+- [x] Source normalisation with exact repository provenance only: label-only articles before 20, normalised 17, still label-only 3, total 20; 23 individual source records converted; no URL, publisher, year or reviewer invented
+- [x] Flagged unsupported claims 8: supported with verified source 0, safely removed 1, safely reworded 7, unresolved 0
+- [x] Discoverability recheck: orphaned articles 0, broken routes 0, broken internal links 0, wrong-destination links 0, weak-discovery records unchanged at 2 with documented reasons and no artificial links added
+- [x] Boundaries: grounding changes 0, approvals 0, candidates 0, eligible-slug changes 0, routing-version changes 0, reviewer claims 0, source rendering behaviour unchanged, AI runtime 0, analytics 0, database 0
+- [x] Full suite 131 files / 1,511 tests PASS; typecheck x2 PASS; lint 11 problems matching baseline; production build PASS with 353 sitemap entries; browser sanity QA at 1280, 834 and 390 with zero overflow; deployment NO
+- [x] P3 tool and checklist opportunities recorded as future optional enhancements; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY; next workstream PREGNANCY

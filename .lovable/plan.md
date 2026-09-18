@@ -1,40 +1,57 @@
-# Phase 35B — TTC content coverage and journey audit
+# Phase 35C — TTC final cleanup and workstream closure
 
-Audit only. No new articles, no route changes, no UX changes, no AI or grounding changes, no deployment. The only files written are three audit documents plus a roadmap entry.
+Audit-backed cleanup only. No new articles, no new routes beyond redirects, no AI, grounding, database or lifecycle changes. Nothing is deployed.
 
-## What this produces
+## 1. Reconcile the Phase 35B journey count
 
-1. `docs/content/phase35b-ttc-content-inventory.md` — every TTC surface and article record with status, route, discoverability and per-record classification.
-2. `docs/content/phase35b-ttc-journey-gap-register.md` — the journey-moment matrix and the final gap register with P1/P2/P3 priorities.
-3. `docs/content/phase35b-ttc-content-coverage-audit.md` — the narrative audit, all required counts, the closure decision and the completion report.
-4. `roadmap.md` — a new Phase 35B entry. Phase 35A and 35A.1 history left untouched.
+Re-derive the journey-moment matrix from the Phase 35B register and find whether the missing item is a mis-tallied row or a documentation error (53 + 1 + 0 + 2 + 5 = 61 against a stated 62). No moment is invented to balance the sum. Only the affected count and its evidence wording in the 35B documents are corrected; the 35B conclusion (mostly sufficient, small gaps, zero new articles, zero blockers) stays exactly as it is.
 
-## How the audit is done
+## 2. Legacy stage routes
 
-Every number and status claim comes from reading the repository, not from assumption. Work proceeds in these passes, each one producing evidence before anything is written up:
+Three routes render through the generic stage page and are indexable and sitemap-listed, but their only links live in unmounted legacy code:
 
-**Pass 1 — routes.** Read the route table and every TTC page file to establish the real hub, pillar, subtopic, tool, legacy and redirect routes, plus what the sitemap generator actually emits. Any route that resolves to nothing is recorded as broken.
+- /trying-to-conceive/understanding-your-cycle
+- /trying-to-conceive/timing-and-tracking
+- /trying-to-conceive/waiting-and-testing
 
-**Pass 2 — article records.** Enumerate TTC-specific and TTC-crossover records across the article datasets, capturing slug, title, topic, editorial status, route, image fields and source fields. Records whose status cannot be determined from the data are reported as unknown rather than guessed.
+Each is matched against its canonical replacement in the current hub/topic system (cycle tracking, ovulation, two-week wait / pregnancy testing) and given a disposition. Where a clear canonical replacement exists the route becomes a permanent redirect using the same pattern already used for the postpartum stage URLs and /trying-to-conceive/legacy, and its metadata and sitemap entry are withdrawn. No replacement content is written and no historical stage data is deleted.
 
-**Pass 3 — discoverability.** For each record, trace the inbound links from the hub, pillar pages, supporting cards, related-guidance blocks and article bodies. Anything with no inbound path is orphaned; a single weak path is weak discovery. Every outbound internal link is resolved against the route table to find broken and wrong-destination links.
+Target after: orphaned legacy stage routes = 0, broken routes = 0.
 
-**Pass 4 — journey coverage.** Map the covered journey moments across preparation, cycle understanding, timing, the two-week wait, testing, fertility basics, investigations, conditions, taking longer, loss crossover and treatment transition. Each moment gets exactly one classification and a recommended treatment, with `NEW_ARTICLE` used only where no existing article, topic page, tool or handoff can serve the need.
+## 3. Positive-result handoff into Pregnancy
 
-**Pass 5 — transitions and boundaries.** Trace TTC to IVF and TTC to Pregnancy end to end, counting broken routes, ambiguous destinations and duplicated guidance. Separately check that no important TTC need is reachable only through the Companion.
+A single calm handoff link is added on the contextually correct testing surfaces only (pregnancy testing topic page, and the closest testing-related placement if the evidence supports it), pointing to the existing Pregnancy entry destination. Wording follows the existing copy system, for example "Got a positive test? Start with pregnancy guidance". No new pregnancy article, no new route, no change to lifecycle or journey routing.
 
-**Pass 6 — claims, images and sources.** Flag every numerical or medical claim in TTC surfaces that lacks visible or documented sourcing, and count articles missing hero or expected body imagery. Nothing is rewritten. Grounding data is read only; any drift found is reported, not repaired.
+## 4. Source normalisation (data only)
 
-**Pass 7 — shortlists and closure.** Produce the new-article shortlist, expansion shortlist and merge/reposition/archive shortlist, then separate current blockers from future enhancements and select Outcome A, B or C from what the evidence supports.
+Two distinct counts are preserved: 20 label-only TTC articles, of which 7 contain the 8 flagged numerical or medical claims.
 
-## Validation
+Label-only entries are converted to the existing structured-source shape (label, publisher, year, url) only where the repository already holds the exact matching source record elsewhere. Nothing is invented: no URLs, organisations, titles, review dates or reviewers. Anything that cannot be resolved from repository evidence is left as-is and reported as unresolved.
 
-Focused TTC content and link-integrity tests, the full test suite, typecheck twice, and lint against the existing baseline. Source behaviour changes are expected to be zero, so results should match the current baseline exactly. Nothing is deployed.
+Source rendering behaviour is not changed. No grounding registry, approval, candidate or routing change. No reviewer or medical-review claim is added anywhere.
 
-## Constraints held
+## 5. The 8 flagged claims
 
-Saved lifecycles stay ttc, pregnancy, first_year. No `ivf` lifecycle and no `/my-ivf-journey`. Reviewer claims added = 0. Grounding changes = 0. AI runtime changes = 0. Application deployed = NO.
+Each claim is checked for genuine repository source evidence. Where evidence exists the claim is tied to a structured source. Where it does not, the smallest safe edit is made: drop the unsupported numeric precision or soften the assertion, preserving meaning and introducing no new medical claim. TTC does not close while any unresolved unsupported claim remains.
 
-## Closure
+## 6. Discoverability recheck and closure audit
 
-If no current blockers are found, the phase closes as TTC content sufficient for current strategy and the TTC workstream is locked closed, with no further TTC phase recommended. Otherwise it closes as audit complete with the single smallest justified follow-up phase named but not started.
+Re-run the TTC link and route checks after the changes: orphaned articles, the two previously flagged weak-discovery records (documented, not padded with artificial links), broken links, wrong destinations, and the IVF and Pregnancy handoffs. Reconfirm male fertility, age and fertility, zero new article candidates and zero release blockers.
+
+P3 tool and checklist ideas are explicitly not built and are recorded as future enhancements.
+
+## 7. Documentation and validation
+
+New: docs/content/phase35c-ttc-final-cleanup.md, phase35c-ttc-source-normalisation-evidence.md, phase35c-ttc-final-closure.md. roadmap.md updated. Phase 35A and 35A.1 history untouched.
+
+Validation: focused TTC route, redirect, sitemap, handoff, structured-source, article and link-integrity tests; full suite; typecheck twice; lint against the established baseline; production validation build; browser sanity check on the surfaces whose visible links changed. Application deployed = NO.
+
+## Closure gate
+
+Close as CLOSED PASS / TTC COMPLETE FOR CURRENT STRATEGY and lock the TTC workstream only if the arithmetic reconciles, orphaned legacy routes are 0, the Pregnancy handoff is complete, unresolved unsupported claims are 0, and broken routes, broken links and blockers are all 0. Otherwise the phase closes as partial with the exact remaining item named.
+
+## Technical notes
+
+- Redirects added in src/App.tsx above the generic /:journey/:stage route; matching removals from the SEO and breadcrumb allowlists in src/pages/StagePage.tsx and from scripts/generate-sitemap.ts extraction.
+- Source records edited in src/data/articleData.ts using the existing ArticleSource interface; ArticleSources.tsx and JSON-LD citation behaviour unchanged.
+- Handoff link placed in the existing TTC topic data / testing surface components, reusing current link styling.

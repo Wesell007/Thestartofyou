@@ -2,21 +2,21 @@
 
 Audit-backed cleanup only. No new articles, no new routes beyond redirects, no AI, grounding, database or lifecycle changes. Nothing is deployed.
 
-## 1. Reconcile the Phase 35B journey count
+## 1. Reconcile the Phase 35B journey count (already re-counted)
 
-Re-derive the journey-moment matrix from the Phase 35B register and find whether the missing item is a mis-tallied row or a documentation error (53 + 1 + 0 + 2 + 5 = 61 against a stated 62). No moment is invented to balance the sum. Only the affected count and its evidence wording in the 35B documents are corrected; the 35B conclusion (mostly sufficient, small gaps, zero new articles, zero blockers) stays exactly as it is.
+I re-counted the actual rows in the Phase 35B matrix. The eleven journey sections contain 83 classified moments, not 62: COVERED 75, PARTIALLY_COVERED 1, UNCOVERED 0, NOT_REQUIRED_STANDALONE 2, BETTER_SERVED_* 5. That sums exactly to 83, so the stored totals line (and the same figures echoed in the coverage audit and roadmap) is a summary error, not a missing moment. No moment is invented or added. Only those count sentences in the 35B documents are corrected; the 35B strategic conclusion is unchanged.
 
 ## 2. Legacy stage routes
 
-Three routes render through the generic stage page and are indexable and sitemap-listed, but their only links live in unmounted legacy code:
+Three routes render through the generic stage page and are indexable and sitemap-listed, but their only links live in unmounted legacy code. Each gets a client-side canonical redirect (the same React Router `Navigate replace` pattern used for `/trying-to-conceive/legacy` and the postpartum stage URLs — described accurately as a client-side route redirect, not an HTTP 301):
 
-- /trying-to-conceive/understanding-your-cycle
-- /trying-to-conceive/timing-and-tracking
-- /trying-to-conceive/waiting-and-testing
+- /trying-to-conceive/understanding-your-cycle → /trying-to-conceive/ovulation
+- /trying-to-conceive/timing-and-tracking → /trying-to-conceive/cycle-tracking
+- /trying-to-conceive/waiting-and-testing → /trying-to-conceive/two-week-wait
 
-Each is matched against its canonical replacement in the current hub/topic system (cycle tracking, ovulation, two-week wait / pregnancy testing) and given a disposition. Where a clear canonical replacement exists the route becomes a permanent redirect using the same pattern already used for the postpartum stage URLs and /trying-to-conceive/legacy, and its metadata and sitemap entry are withdrawn. No replacement content is written and no historical stage data is deleted.
+Destinations are chosen on visitor intent against the stage content. The three entries are removed from the sitemap list and from the stage SEO and breadcrumb allowlists, so no indexable duplicate remains. Stage data and legacy components are left in place; nothing is deleted recklessly.
 
-Target after: orphaned legacy stage routes = 0, broken routes = 0.
+Target after: orphaned legacy stage routes = 0, redirect loops = 0, broken routes = 0.
 
 ## 3. Positive-result handoff into Pregnancy
 

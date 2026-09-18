@@ -18,11 +18,20 @@ An initial browser pass exposed the existing React 18 `fetchPriority` developmen
 ## Automated validation
 
 - Focused Pregnancy, lifecycle, calculator and Companion regressions: 6 files / 46 tests PASS
+- Final closure regressions covering global link integrity, Phase 35C TTC closure and Phase 36A Pregnancy behaviour: 3 files / 27 tests PASS
 - Five distinct journey account states and four unique destinations: PASS
-- Full suite: 131 files / 1,521 tests PASS; 1 unrelated legacy TTC link-integrity assertion FAILS because `src/data/stageData.ts` still contains four references to three redirects retired in Phase 35C
+- Full suite: 132 files / 1,522 tests PASS
 - Typecheck x2: PASS
 - Lint: unchanged baseline, 1 pre-existing generated-file `prefer-const` error and 10 warnings
 - Production validation build: PASS with 353 sitemap entries
 - Application deployment: NO
 
-Phase 36A is not marked CLOSED PASS because the required full-suite gate is not wholly green. The smallest follow-up is a separately approved reconciliation of the dormant Phase 35C TTC stage-data references; it was not started because TTC changes are outside this phase.
+Pre-existing stale TTC internal references discovered during Phase 36A validation and canonicalised to the already-approved Phase 35C destinations.
+
+Final integrity results: stale internal TTC references before 4 and after 0; canonical replacements 4; legacy redirects preserved 3; broken TTC routes 0; broken Pregnancy routes 0; broken internal links 0; wrong-destination links 0.
+
+PHASE 36A — PREGNANCY HUB & TOPIC UX, DISCOVERY AND AI SEPARATION
+
+CLOSED PASS / PREGNANCY PUBLIC EXPERIENCE REFINED / NO NEW CONTENT
+
+TTC WORKSTREAM — CLOSED FOR CURRENT STRATEGY

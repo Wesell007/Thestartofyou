@@ -137,12 +137,13 @@
 - [x] Full suite 131 files / 1,511 tests PASS; typecheck x2 PASS; lint 11 problems matching baseline; production build PASS with 353 sitemap entries; browser sanity QA at 1280, 834 and 390 with zero overflow; deployment NO
 - [x] P3 tool and checklist opportunities recorded as future optional enhancements; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY; next workstream PREGNANCY
 
-## Phase 36A — Pregnancy hub and topic UX, discovery and AI separation — IMPLEMENTATION COMPLETE / CLOSURE BLOCKED BY PRE-EXISTING TTC LINK-INTEGRITY FAILURE / PREVIEW ONLY
+## Phase 36A — Pregnancy hub and topic UX, discovery and AI separation — CLOSED PASS / PREGNANCY PUBLIC EXPERIENCE REFINED / NO NEW CONTENT
 - [x] Refined the Pregnancy hub in the locked nine-section order with no new content or routes
 - [x] Refined all six canonical Pregnancy topic pages and added one contextual Companion handoff to each
 - [x] Preserved three trimester and 42 week destinations, calculator behaviour and the `/ivf` crossover
 - [x] Added focused regression coverage, three evidence documents and responsive QA at 1280/834/390: 21 checks, 0 overflow, 0 console errors
-- [x] Focused validation: 6 files / 46 tests PASS; five journey states PASS; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 353 sitemap entries
-- [ ] Full-suite gate: 131 files / 1,521 tests PASS, but 1 unrelated legacy TTC link-integrity assertion FAILS on four `src/data/stageData.ts` references to the three Phase 35C redirects
-- [ ] Smallest follow-up, not started: separately approve reconciliation of those dormant TTC stage-data references; TTC is outside Phase 36A scope
+- [x] Focused validation: 6 files / 46 tests PASS; five journey states PASS; final closure regressions 3 files / 27 tests PASS; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 353 sitemap entries
+- [x] Pre-existing stale TTC internal references discovered during Phase 36A validation and canonicalised to the already-approved Phase 35C destinations: before 4, after 0, canonical replacements 4
+- [x] Full-suite gate: 132 files / 1,522 tests PASS; broken TTC routes 0; broken Pregnancy routes 0; broken internal links 0; wrong-destination links 0
+- [x] All three Phase 35C redirects preserved unchanged and in their existing order; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY
 - [x] New content 0; routes 0; sitemap additions 0; calculator/week model/lifecycle/database/analytics/AI/grounding/memory/reviewer changes 0; deployment NO

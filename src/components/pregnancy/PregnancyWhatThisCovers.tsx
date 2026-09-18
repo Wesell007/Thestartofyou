@@ -14,15 +14,10 @@ const hubBullets = [
 
 const PregnancyWhatThisCovers = () => {
   return (
-    <section className="pb-14 md:pb-20 bg-parchment">
+    <section className="border-y border-border/40 bg-card/40 py-9 md:py-11">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-        <div
-          className="relative rounded-[2rem] bg-card border p-8 sm:p-10 md:p-14 overflow-hidden"
-          style={{
-            borderColor: `hsl(var(${STAGE_ACCENT}) / 0.18)`,
-            boxShadow: `0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 22px 50px -30px hsl(var(${STAGE_ACCENT}) / 0.28)`,
-          }}
-        >
+        <div className="grid gap-7 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
+          <div>
           <p
             className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
             style={{ color: `hsl(var(${STAGE_ACCENT}))` }}
@@ -37,13 +32,14 @@ const PregnancyWhatThisCovers = () => {
             questions. This hub gathers trusted guidance across every stage so
             you can feel informed, reassured, and prepared.
           </p>
-          <p className="font-sans text-[13.5px] font-light text-muted-foreground/80 leading-relaxed max-w-2xl mb-8">
+          <p className="font-sans text-[13.5px] font-light text-muted-foreground/80 leading-relaxed max-w-2xl">
             If you arrived here after IVF, the cautious early weeks and clinic
             handover are held inside the IVF pathway — pregnancy picks up the
             forward journey from there.
           </p>
 
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-4">
+          </div>
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
             {hubBullets.map((b) => (
               <li key={b} className="flex items-start gap-3">
                 <span

@@ -7,7 +7,7 @@ import PregnancyAIPanel from "@/components/pregnancy/PregnancyAIPanel";
 import PregnancyTopicMap from "@/components/pregnancy/PregnancyTopicMap";
 import PregnancyTrimesterCards from "@/components/pregnancy/PregnancyTrimesterCards";
 import WeekByWeek from "@/components/pregnancy/WeekByWeek";
-import KeepYourJourney from "@/components/pregnancy/KeepYourJourney";
+import PregnancyHubJourneyAction from "@/components/pregnancy/PregnancyHubJourneyAction";
 import PregnancyIVFPathway from "@/components/pregnancy/PregnancyIVFPathway";
 import PregnancyCommonQuestions from "@/components/pregnancy/PregnancyCommonQuestions";
 
@@ -40,30 +40,30 @@ const Pregnancy = () => {
         {/* 2. What this hub covers */}
         <PregnancyWhatThisCovers />
 
-        {/* 3. AI support */}
-        <PregnancyAIPanel />
-
-        <SoftDivider />
-
-        {/* 4. Topic Map */}
+        {/* 3. Topic Map */}
         <PregnancyTopicMap />
 
-        {/* 5. Trimester cards */}
+        {/* 4. Trimester cards */}
         <div data-section="trimesters">
           <PregnancyTrimesterCards />
         </div>
 
-        {/* 6. Week-by-week map */}
+        {/* 5. Week-by-week map */}
         <WeekByWeek />
 
-        {/* 7. IVF connected pathway (optional for those pregnant after IVF) */}
+        {/* 6. IVF connected pathway (optional for those pregnant after IVF) */}
         <PregnancyIVFPathway />
 
-        {/* 8. Common questions */}
+        {/* 7. Common questions */}
         <PregnancyCommonQuestions />
 
-        {/* 9. Journal CTA */}
-        <KeepYourJourney />
+        <SoftDivider />
+
+        {/* 8. AI support, after editorial discovery */}
+        <PregnancyAIPanel />
+
+        {/* 9. Lifecycle-aware journey action */}
+        <PregnancyHubJourneyAction />
         </main>
         <Footer />
       </div>

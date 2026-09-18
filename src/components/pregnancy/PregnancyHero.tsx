@@ -98,27 +98,6 @@ const PregnancyHero = () => {
                 every step of the way.
               </p>
 
-              {/* Stat markers row */}
-              <div className="flex items-stretch gap-4 sm:gap-8">
-                {[
-                  { label: "40+ weeks", sub: "of guidance" },
-                  { label: "3 trimesters", sub: "of care" },
-                  { label: "Free", sub: "to access" },
-                ].map((item, i) => (
-                  <div
-                    key={item.label}
-                    className={`flex flex-col ${i > 0 ? 'pl-4 sm:pl-8 border-l' : ''}`}
-                    style={i > 0 ? { borderColor: 'hsl(var(--stage-pregnancy-accent) / 0.18)' } : undefined}
-                  >
-                    <span className="font-serif text-base sm:text-xl text-foreground leading-tight">
-                      {item.label}
-                    </span>
-                    <span className="font-sans text-[10.5px] sm:text-[11px] font-light text-muted-foreground/70 mt-0.5">
-                      {item.sub}
-                    </span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Right card */}

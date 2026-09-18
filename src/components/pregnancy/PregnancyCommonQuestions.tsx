@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
+import { ChevronDown, ArrowUpRight, BookOpen } from "lucide-react";
 
 interface QItem {
   q: string;
   answer: string;
   readMore?: { href: string; label: string };
-  askHref: string;
 }
 
 const questions: QItem[] = [
@@ -15,41 +14,35 @@ const questions: QItem[] = [
     answer:
       "Early pregnancy can bring nausea, tiredness, breast tenderness, cramps, bloating and changes that come and go. If pain, bleeding, sickness or anything else worries you, ask your midwife, GP or local service for advice.",
     readMore: { href: "/articles/early-pregnancy-symptoms-explained", label: "Read: early pregnancy symptoms" },
-    askHref: "/ask?stage=pregnancy&topic=early-symptoms",
   },
   {
     q: "When should I feel my baby move?",
     answer:
       "Many people start noticing movements in the second trimester, but the pattern can feel different for every pregnancy. If your baby's movements reduce, change or worry you, ask your maternity unit or midwife for advice.",
     readMore: { href: "/articles/baby-movement-in-pregnancy", label: "Read: baby movement in pregnancy" },
-    askHref: "/ask?stage=pregnancy&topic=baby-movement",
   },
   {
     q: "What if I feel anxious during pregnancy?",
     answer:
       "Pregnancy can bring a lot of uncertainty, even when everything looks okay. If anxiety feels heavy, constant or hard to manage, it is okay to ask your midwife, GP or local service for support.",
     readMore: { href: "/articles/anxiety-in-pregnancy", label: "Read: anxiety in pregnancy" },
-    askHref: "/ask?stage=pregnancy&topic=anxiety",
   },
   {
     q: "What happens at pregnancy scans and appointments?",
     answer:
       "Appointments and scans are there to check how you and your baby are doing, answer questions and plan care. It can help to write down anything you want to ask before you go.",
     readMore: { href: "/articles/tests-and-scans-in-pregnancy", label: "Read: tests and scans in pregnancy" },
-    askHref: "/ask?stage=pregnancy&topic=scans-appointments",
   },
   {
     q: "When should I start preparing for birth?",
     answer:
       "Birth preparation can begin gently at any point. You do not need every detail decided at once. Learning about your options, preferences and support can help you feel more steady.",
     readMore: { href: "/articles/birth-preferences", label: "Read: birth preferences" },
-    askHref: "/ask?stage=pregnancy&topic=birth-preparation",
   },
   {
     q: "When should I ask for help in pregnancy?",
     answer:
       "You do not need to know exactly what is wrong before asking. If bleeding, pain, movement, sickness, mood, swelling or anything else worries you, contact your midwife, GP, maternity unit or appropriate local service.",
-    askHref: "/ask?stage=pregnancy&topic=when-to-ask-help",
   },
 ];
 
@@ -78,7 +71,7 @@ const PregnancyCommonQuestions = () => {
           Questions during pregnancy
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
-          A short answer to start with. Then read more, or ask your own question for personalised guidance.
+           A short answer to start with, with related guidance where it may help.
         </p>
 
         <div className="flex flex-col gap-3">
@@ -135,7 +128,7 @@ const PregnancyCommonQuestions = () => {
                     >
                       {item.answer}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <div>
                       {item.readMore && (
                         <Link
                           to={item.readMore.href}
@@ -147,18 +140,6 @@ const PregnancyCommonQuestions = () => {
                           <ArrowUpRight size={12} />
                         </Link>
                       )}
-                      <Link
-                        to={item.askHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
-                        style={{
-                          borderColor: s.border,
-                          backgroundColor: "hsl(var(--card))",
-                          color: s.color,
-                        }}
-                      >
-                        <Sparkles size={13} strokeWidth={1.9} />
-                        Ask more
-                      </Link>
                     </div>
                   </div>
                 )}

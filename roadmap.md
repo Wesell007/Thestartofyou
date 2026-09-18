@@ -136,3 +136,10 @@
 - [x] Boundaries: grounding changes 0, approvals 0, candidates 0, eligible-slug changes 0, routing-version changes 0, reviewer claims 0, source rendering behaviour unchanged, AI runtime 0, analytics 0, database 0
 - [x] Full suite 131 files / 1,511 tests PASS; typecheck x2 PASS; lint 11 problems matching baseline; production build PASS with 353 sitemap entries; browser sanity QA at 1280, 834 and 390 with zero overflow; deployment NO
 - [x] P3 tool and checklist opportunities recorded as future optional enhancements; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY; next workstream PREGNANCY
+
+## Phase 36A — Pregnancy hub and topic UX, discovery and AI separation — IN PROGRESS / PREVIEW ONLY
+- [ ] Refine the Pregnancy hub in the locked nine-section order with no new content or routes
+- [ ] Refine all six canonical Pregnancy topic pages and add one contextual Companion handoff to each
+- [ ] Preserve three trimester and 42 week destinations, calculator behaviour and the IVF crossover
+- [ ] Add focused regression coverage, three evidence documents and responsive QA at 1280/834/390
+- [ ] Run the full suite, typecheck x2, lint against baseline and production validation build; deployment NO

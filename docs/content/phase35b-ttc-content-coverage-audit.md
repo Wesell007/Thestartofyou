@@ -40,8 +40,8 @@ The findings that remain are cleanup rather than coverage. Three legacy stage ro
 | Wrong destination links | 0 |
 | Articles missing an explicit hero image | 8 (all render a fallback) |
 | Articles without body imagery | 43 (flagship text template — expected) |
-| Journey moments audited | 62 |
-| — COVERED | 53 |
+| Journey moments audited | 83 |
+| — COVERED | 75 |
 | — PARTIALLY_COVERED | 1 |
 | — UNCOVERED | 0 |
 | — NOT_REQUIRED_STANDALONE | 2 |

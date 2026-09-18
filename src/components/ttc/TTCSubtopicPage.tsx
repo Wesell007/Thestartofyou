@@ -513,6 +513,38 @@ const TTCSubtopicPage = ({ config, heroImage }: Props) => {
           </div>
         </section>
 
+        {/* 4b. EDITORIAL HANDOFF (Phase 35C) */}
+        {config.handoff && (
+          <section className="pb-4 md:pb-8">
+            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
+              <div
+                className="relative rounded-[1.75rem] border p-6 sm:p-8 md:p-10"
+                style={{
+                  borderColor: accentBorder,
+                  background: `hsl(${theme.tintHsl} / 0.4)`,
+                }}
+              >
+                <Eyebrow>{config.handoff.eyebrow}</Eyebrow>
+                <h2 className="mt-3 font-serif text-[1.35rem] md:text-[1.6rem] text-foreground leading-snug">
+                  {config.handoff.title}
+                </h2>
+                <p className="mt-3 font-sans text-[13.5px] font-light text-muted-foreground leading-relaxed max-w-xl">
+                  {config.handoff.body}
+                </p>
+                <Link
+                  to={config.handoff.href}
+                  className="group mt-5 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium tracking-wide"
+                  style={{ color: accent }}
+                >
+                  {config.handoff.cta}
+                  <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
+
+
         {/* 5. AI BRIDGE */}
         {config.aiPrompts && config.aiPrompts.length > 0 && (
           <section

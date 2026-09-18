@@ -35,10 +35,10 @@ const trimesters = [
 
 const PregnancyTrimesterCards = () => {
   return (
-    <section className="bg-parchment py-14 md:py-20">
+    <section className="bg-parchment pb-10 pt-12 md:pb-14 md:pt-16">
       <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
         {/* Soft section header */}
-        <div className="text-center mb-10 md:mb-12">
+        <div className="text-center mb-8 md:mb-9">
           <p
             className="font-sans text-[11px] font-light tracking-[0.24em] uppercase mb-3"
             style={{ color: 'hsl(var(--stage-pregnancy-accent))' }}
@@ -55,14 +55,14 @@ const PregnancyTrimesterCards = () => {
             <Link
               key={t.label}
               to={t.href}
-              className="group relative bg-card rounded-[1.25rem] overflow-hidden border flex flex-col transition-all duration-500 hover:-translate-y-0.5"
+              className="group relative grid grid-cols-[7.5rem_1fr] overflow-hidden rounded-xl border bg-card transition-all duration-500 hover:-translate-y-0.5 md:flex md:flex-col"
               style={{
                 borderColor: `hsl(var(${t.accentVar}) / 0.18)`,
                 boxShadow:
                   '0 1px 0 hsl(var(--parchment) / 0.9) inset, 0 16px 44px -28px hsl(var(--stage-pregnancy-accent) / 0.32)',
               }}
             >
-              <div className="h-48 sm:h-52 md:h-56 overflow-hidden relative">
+              <div className="relative min-h-36 overflow-hidden md:h-36 md:min-h-0">
                 <img
                   src={t.image}
                   alt={t.label}
@@ -82,7 +82,7 @@ const PregnancyTrimesterCards = () => {
                 />
                 {/* Floating range chip */}
                 <span
-                  className="absolute left-4 top-4 inline-flex items-center rounded-full px-3 py-1 font-sans text-[10.5px] font-light tracking-[0.18em] uppercase backdrop-blur-sm"
+                  className="absolute left-3 top-3 inline-flex items-center rounded-full px-2.5 py-1 font-sans text-[10px] font-light uppercase backdrop-blur-sm"
                   style={{
                     backgroundColor: 'hsl(var(--parchment) / 0.85)',
                     color: `hsl(var(${t.accentVar}))`,
@@ -91,15 +91,15 @@ const PregnancyTrimesterCards = () => {
                   {t.range}
                 </span>
               </div>
-              <div className="p-6 sm:p-7 flex flex-col gap-2.5 flex-1">
+              <div className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
                 <h3 className="font-serif text-xl text-foreground leading-tight">
                   {t.label}
                 </h3>
-                <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed">
+                <p className="font-sans text-[12.5px] font-light text-muted-foreground leading-relaxed">
                   {t.desc}
                 </p>
                 <span
-                  className="mt-3 inline-flex items-center gap-1.5 font-sans text-[13px] font-medium group-hover:gap-2 transition-all"
+                  className="mt-auto inline-flex items-center gap-1.5 pt-1 font-sans text-[12.5px] font-medium group-hover:gap-2 transition-all"
                   style={{ color: 'hsl(var(--terracotta))' }}
                 >
                   {t.cta} <span aria-hidden="true">→</span>

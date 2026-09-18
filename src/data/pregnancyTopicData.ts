@@ -27,6 +27,7 @@ export interface TopicStartHere {
   href: string;
   why: string;
   image?: string;
+  destinationKind?: "guidance" | "topic" | "tool";
 }
 
 export interface PregnancyTopicPageConfig {
@@ -53,6 +54,7 @@ export interface PregnancyTopicPageConfig {
   showSiblings?: boolean;
   showAI?: boolean;
   aiPrompts?: string[];
+  companionSuggestions: string[];
 }
 
 // All sibling routes — used for the lateral siblings row.
@@ -176,6 +178,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["What body changes can I expect?", "When should I ask for advice?"],
   },
 
   // Other topics not yet built.
@@ -244,6 +247,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["How does baby develop through pregnancy?", "What should I know about movement?"],
   },
   feelings: {
     slug: "feelings",
@@ -306,6 +310,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["How can pregnancy affect how I feel?", "When can extra support help?"],
   },
   "health-and-safety": {
     slug: "health-and-safety",
@@ -401,6 +406,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["What happens at scans and appointments?", "Who can I ask about medicines?"],
   },
   "diet-and-exercise": {
     slug: "diet-and-exercise",
@@ -472,6 +478,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["What helps with eating well?", "How can I move safely?"],
   },
   "preparing-for-baby": {
     slug: "preparing-for-baby",
@@ -496,6 +503,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
         title: "Preparing for baby: complete guide",
         href: "/preparing-for-baby",
         why: "The wider orientation hub — what to think about, when, and what can wait.",
+        destinationKind: "topic",
       },
       {
         title: "Birth preferences: how to make a plan that helps rather than disappoints",
@@ -559,6 +567,7 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
 
     showSiblings: true,
     showAI: false,
+    companionSuggestions: ["What can I prepare before birth?", "What can wait until later?"],
   },
 };
 

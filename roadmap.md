@@ -145,4 +145,5 @@
 - [x] Focused validation: 6 files / 46 tests PASS; five journey states PASS; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 353 sitemap entries
 - [ ] Full-suite gate: 131 files / 1,521 tests PASS, but 1 unrelated legacy TTC link-integrity assertion FAILS on four `src/data/stageData.ts` references to the three Phase 35C redirects
 - [ ] Smallest follow-up, not started: separately approve reconciliation of those dormant TTC stage-data references; TTC is outside Phase 36A scope
+- [ ] Final closure patch approved: canonicalise only the four stale `stageData.ts` href values, rerun every closure gate, and close Phase 36A only on full PASS
 - [x] New content 0; routes 0; sitemap additions 0; calculator/week model/lifecycle/database/analytics/AI/grounding/memory/reviewer changes 0; deployment NO

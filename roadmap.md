@@ -147,3 +147,10 @@
 - [x] Full-suite gate: 132 files / 1,522 tests PASS; broken TTC routes 0; broken Pregnancy routes 0; broken internal links 0; wrong-destination links 0
 - [x] All three Phase 35C redirects preserved unchanged and in their existing order; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY
 - [x] New content 0; routes 0; sitemap additions 0; calculator/week model/lifecycle/database/analytics/AI/grounding/memory/reviewer changes 0; deployment NO
+
+## Phase 36A.1 — Pregnancy visual QA and premium polish — CLOSED PASS / PREGNANCY UX VISUALLY APPROVED
+- [x] Applied the single evidence-backed mobile breadcrumb spacing and contrast correction across the six shared Pregnancy topic pages; breadcrumb text, links, semantics, structured data, tablet and desktop breakpoint rules unchanged
+- [x] Rechecked all seven Pregnancy surfaces at 1280, 834 and 390 pixels: 21 combinations PASS; overflow 0; console errors 0; broken images 0; broken Pregnancy destinations 0; excessive unexplained vertical gaps 0
+- [x] Reconfirmed six pathways with six distinct approved images, three trimester destinations, 42 week destinations, six FAQ rows, zero FAQ AI actions, one hub Companion and six topic handoffs
+- [x] Focused regressions 11 files / 114 tests PASS; full suite 132 files / 1,523 tests PASS; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 353 sitemap entries
+- [x] New content, guidance, routes, images, calculator, week model, lifecycle, database, schema, analytics, AI runtime, prompts, context builder, grounding, memory, reviewer, TTC and deployment changes: 0

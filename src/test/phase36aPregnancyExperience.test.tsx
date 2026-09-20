@@ -1,9 +1,11 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import PregnancyCommonQuestions from "@/components/pregnancy/PregnancyCommonQuestions";
 import PregnancyHubJourneyAction from "@/components/pregnancy/PregnancyHubJourneyAction";
+import PregnancyTopicPage from "@/components/pregnancy/PregnancyTopicPage";
 import { PREGNANCY_TOPIC_IMAGES } from "@/components/pregnancy/pregnancyTopicImages";
 import { pregnancyTopicConfigs, topicMapEntries } from "@/data/pregnancyTopicData";
 import { resolvePublicAccountLink, type NavLifecycle } from "@/lib/navLifecycle";
@@ -105,5 +107,33 @@ describe("Phase 36A Pregnancy public experience", () => {
     const configs = Object.values(pregnancyTopicConfigs).filter((config) => config !== null);
     expect(configs).toHaveLength(6);
     configs.forEach((config) => expect(config.companionSuggestions).toHaveLength(2));
+  });
+
+  it("keeps the shared topic breadcrumb clear on mobile without changing larger breakpoints", () => {
+    const bodyConfig = pregnancyTopicConfigs.body;
+    if (!bodyConfig) {
+      throw new Error("Pregnancy body topic configuration is required");
+    }
+
+    render(
+      <HelmetProvider>
+        <MemoryRouter>
+          <PregnancyTopicPage config={bodyConfig} />
+        </MemoryRouter>
+      </HelmetProvider>,
+    );
+
+    const breadcrumb = screen.getByRole("navigation", { name: "Breadcrumb" });
+    const hero = breadcrumb.closest("section");
+
+    expect(hero).toHaveClass("pt-24", "sm:pt-14", "md:pt-20");
+    expect(breadcrumb).toHaveClass(
+      "[&_ol]:text-foreground/75",
+      "sm:[&_ol]:text-muted-foreground",
+    );
+    expect(breadcrumb).toHaveTextContent("Home");
+    expect(breadcrumb.querySelector('a[href="/"]')).toBeInTheDocument();
+    expect(breadcrumb.querySelector('a[href="/pregnancy"]')).toBeInTheDocument();
+    expect(breadcrumb.querySelector('[aria-current="page"]')).toHaveTextContent("Your body");
   });
 });

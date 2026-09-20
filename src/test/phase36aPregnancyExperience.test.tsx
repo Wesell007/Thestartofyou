@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import PregnancyCommonQuestions from "@/components/pregnancy/PregnancyCommonQuestions";
 import PregnancyHubJourneyAction from "@/components/pregnancy/PregnancyHubJourneyAction";
@@ -115,9 +116,11 @@ describe("Phase 36A Pregnancy public experience", () => {
     }
 
     render(
-      <MemoryRouter>
-        <PregnancyTopicPage config={bodyConfig} />
-      </MemoryRouter>,
+      <HelmetProvider>
+        <MemoryRouter>
+          <PregnancyTopicPage config={bodyConfig} />
+        </MemoryRouter>
+      </HelmetProvider>,
     );
 
     const breadcrumb = screen.getByRole("navigation", { name: "Breadcrumb" });

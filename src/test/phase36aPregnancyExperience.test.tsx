@@ -131,8 +131,9 @@ describe("Phase 36A Pregnancy public experience", () => {
       "[&_ol]:text-foreground/75",
       "sm:[&_ol]:text-muted-foreground",
     );
-    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
-    expect(screen.getByRole("link", { name: "Pregnancy" })).toHaveAttribute("href", "/pregnancy");
-    expect(screen.getByText("Your body")).toHaveAttribute("aria-current", "page");
+    expect(breadcrumb).toHaveTextContent("Home");
+    expect(breadcrumb.querySelector('a[href="/"]')).toBeInTheDocument();
+    expect(breadcrumb.querySelector('a[href="/pregnancy"]')).toBeInTheDocument();
+    expect(breadcrumb.querySelector('[aria-current="page"]')).toHaveTextContent("Your body");
   });
 });

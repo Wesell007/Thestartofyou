@@ -147,3 +147,8 @@
 - [x] Full-suite gate: 132 files / 1,522 tests PASS; broken TTC routes 0; broken Pregnancy routes 0; broken internal links 0; wrong-destination links 0
 - [x] All three Phase 35C redirects preserved unchanged and in their existing order; TTC WORKSTREAM CLOSED FOR CURRENT STRATEGY
 - [x] New content 0; routes 0; sitemap additions 0; calculator/week model/lifecycle/database/analytics/AI/grounding/memory/reviewer changes 0; deployment NO
+
+## Phase 36A.1 — Pregnancy visual QA and premium polish — IN PROGRESS
+- [ ] Apply the single evidence-backed mobile breadcrumb spacing and contrast correction across the six shared Pregnancy topic pages
+- [ ] Recheck all seven Pregnancy surfaces at 1280, 834 and 390 pixels and record the visual evidence
+- [ ] Run focused and full validation; preserve the Phase 36A closure and all locked boundaries; deployment NO

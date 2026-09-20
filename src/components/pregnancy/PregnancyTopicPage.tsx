@@ -348,7 +348,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
       <main className="overflow-hidden">
 
         {/* ─── 1. HERO ──────────────────────────────────────────────── */}
-         <section className="relative pb-16 pt-10 sm:pt-14 md:pb-24 md:pt-20">
+         <section className="relative pb-16 pt-14 sm:pt-14 md:pb-24 md:pt-20">
           {/* Soft topic-tinted top wash */}
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-48 md:h-72 -z-0"
@@ -361,7 +361,7 @@ const PregnancyTopicPage = ({ config }: Props) => {
             <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
-              className="mb-8 font-sans tracking-wide"
+              className="mb-8 font-sans tracking-wide [&_ol]:text-foreground/75 sm:[&_ol]:text-muted-foreground"
               items={breadcrumbItems}
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">

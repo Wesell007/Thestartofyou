@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 
 import PregnancyCommonQuestions from "@/components/pregnancy/PregnancyCommonQuestions";
 import PregnancyHubJourneyAction from "@/components/pregnancy/PregnancyHubJourneyAction";
+import PregnancyTopicPage from "@/components/pregnancy/PregnancyTopicPage";
 import { PREGNANCY_TOPIC_IMAGES } from "@/components/pregnancy/pregnancyTopicImages";
 import { pregnancyTopicConfigs, topicMapEntries } from "@/data/pregnancyTopicData";
 import { resolvePublicAccountLink, type NavLifecycle } from "@/lib/navLifecycle";
@@ -105,5 +106,25 @@ describe("Phase 36A Pregnancy public experience", () => {
     const configs = Object.values(pregnancyTopicConfigs).filter((config) => config !== null);
     expect(configs).toHaveLength(6);
     configs.forEach((config) => expect(config.companionSuggestions).toHaveLength(2));
+  });
+
+  it("keeps the shared topic breadcrumb clear on mobile without changing larger breakpoints", () => {
+    render(
+      <MemoryRouter>
+        <PregnancyTopicPage topic="body" />
+      </MemoryRouter>,
+    );
+
+    const breadcrumb = screen.getByRole("navigation", { name: "Breadcrumb" });
+    const hero = breadcrumb.closest("section");
+
+    expect(hero).toHaveClass("pt-14", "sm:pt-14", "md:pt-20");
+    expect(breadcrumb).toHaveClass(
+      "[&_ol]:text-foreground/75",
+      "sm:[&_ol]:text-muted-foreground",
+    );
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "Pregnancy" })).toHaveAttribute("href", "/pregnancy");
+    expect(screen.getByText("Your body")).toHaveAttribute("aria-current", "page");
   });
 });

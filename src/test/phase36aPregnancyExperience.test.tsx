@@ -126,7 +126,7 @@ describe("Phase 36A Pregnancy public experience", () => {
     const breadcrumb = screen.getByRole("navigation", { name: "Breadcrumb" });
     const hero = breadcrumb.closest("section");
 
-    expect(hero).toHaveClass("pt-14", "sm:pt-14", "md:pt-20");
+    expect(hero).toHaveClass("pt-24", "sm:pt-14", "md:pt-20");
     expect(breadcrumb).toHaveClass(
       "[&_ol]:text-foreground/75",
       "sm:[&_ol]:text-muted-foreground",

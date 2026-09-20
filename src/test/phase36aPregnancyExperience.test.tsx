@@ -109,9 +109,14 @@ describe("Phase 36A Pregnancy public experience", () => {
   });
 
   it("keeps the shared topic breadcrumb clear on mobile without changing larger breakpoints", () => {
+    const bodyConfig = pregnancyTopicConfigs.body;
+    if (!bodyConfig) {
+      throw new Error("Pregnancy body topic configuration is required");
+    }
+
     render(
       <MemoryRouter>
-        <PregnancyTopicPage topic="body" />
+        <PregnancyTopicPage config={bodyConfig} />
       </MemoryRouter>,
     );
 

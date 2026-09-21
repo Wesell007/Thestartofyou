@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowLeft, BookOpen, Sparkles, ExternalLink } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, BookOpen, ExternalLink } from "lucide-react";
 import AskAboutThis from "@/components/companion/AskAboutThis";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SeoHead from "@/components/seo/SeoHead";
 import { toMetaDescription } from "@/lib/seo/metaDescription";
 import type { PhaseConfig } from "@/data/firstYearPhaseData";
-import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
@@ -303,7 +302,6 @@ const CommonQuestions = ({
       </h2>
       <ul className="space-y-4">
         {items.map((qa) => {
-          const topic = qa.askTopic ?? slugify(qa.q);
           return (
             <li key={qa.q}>
               <div
@@ -327,22 +325,6 @@ const CommonQuestions = ({
                       <ArrowUpRight size={11} />
                     </Link>
                   )}
-                  <AskAboutThis
-                    label="Ask about this stage"
-                    entry={{
-                      stage: "first-year",
-                      journey: "first_year",
-                      topic,
-                      title: phaseSlug,
-                    }}
-                    suggestions={[qa.q]}
-                    buttonClassName="inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3.5 py-1.5 font-sans text-[12px] font-medium border bg-card transition-all hover:-translate-y-[1px]"
-                    buttonStyle={{
-                      borderColor: "hsl(var(--stage-firstyear-accent) / 0.32)",
-                      color: "hsl(var(--stage-firstyear-deep))",
-                    }}
-                    iconSize={12}
-                  />
                 </div>
               </div>
             </li>
@@ -600,20 +582,18 @@ const PhaseSources = ({ items }: { items: PhaseConfig["sources"] }) => {
   );
 };
 
-const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] }) => (
+const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] }) => items.length > 0 ? (
   <section className="bg-parchment py-12 md:py-16">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
-      <SectionLabel>Questions to explore</SectionLabel>
+      <SectionLabel>Guidance for this phase</SectionLabel>
       <h2 className="font-serif text-xl sm:text-2xl text-foreground leading-snug mb-8">
-        Ask for guidance shaped to this phase.
+        Useful reads shaped to this phase.
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
         {items.map((g) => (
-          <AskLink
+          <Link
             key={g.title}
-            question={g.title}
-            context="First year phase guidance"
-            stage="first-year"
+            to={g.href}
             className="group relative overflow-hidden rounded-[22px] border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
             style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)" }}
           >
@@ -642,11 +622,27 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
                 className="inline-flex items-center gap-1 font-sans text-[11px] font-light transition-colors"
                 style={{ color: "hsl(var(--stage-firstyear-deep))" }}
               >
-                Ask about this <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                Read guidance <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </div>
-          </AskLink>
+          </Link>
         ))}
+      </div>
+    </div>
+  </section>
+) : null;
+
+const PhaseCompanion = ({ config }: Props) => (
+  <section className="bg-parchment py-12 md:py-16" data-phase-companion>
+    <div className="container mx-auto max-w-4xl px-5 sm:px-8 md:px-10">
+      <div className="border-y border-border/60 py-8 md:py-10">
+        <SectionLabel>Your companion</SectionLabel>
+        <h2 className="mb-4 font-serif text-2xl text-foreground">Ask about this phase.</h2>
+        <AskAboutThis
+          label="Ask about this phase"
+          entry={{ stage: "first-year", journey: "first_year", topic: config.slug, title: config.title }}
+          suggestions={config.commonQuestions.slice(0, 3).map((item) => item.q)}
+        />
       </div>
     </div>
   </section>
@@ -745,6 +741,7 @@ const FirstYearPhasePage = ({ config }: Props) => {
         <CommonQuestions items={config.commonQuestions} phaseSlug={config.slug} />
         <FeaturedGuidance items={config.featuredGuidance} />
         <RelatedTopics items={config.relatedTopics} />
+        <PhaseCompanion config={config} />
         <PhaseSources items={config.sources} />
         <Endcap />
       </main>

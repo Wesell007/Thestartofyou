@@ -11,7 +11,7 @@ export type PhaseQuestion = {
   readMore?: PhaseArticleLink;
   askTopic?: string;
 };
-export type PhaseGuidance = { title: string; description: string };
+export type PhaseGuidance = { title: string; description: string; href: string };
 export type PhaseRelated = { label: string; href: string };
 export type PhaseFeelsHard = { label: string; body: string };
 export type PhaseWhatHelps = { label: string; body: string };
@@ -172,9 +172,9 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ],
     sources: [SRC.nhsBaby, SRC.nhsPostnatal, SRC.unicef, SRC.lullaby, SRC.tommysMH],
     featuredGuidance: [
-      { title: "What is normal in the first two weeks", description: "Bleeding, soreness, swings in mood and the rhythm of newborn feeds." },
-      { title: "When to call your midwife or GP", description: "Calm, clear signs that something needs a closer look." },
-      { title: "Feeding in the early weeks", description: "Support for breastfeeding, bottle feeding or a mix, without judgement." },
+      { title: "What is normal in the first two weeks", description: "Bleeding, soreness, swings in mood and the rhythm of newborn feeds.", href: "/first-year/postpartum-recovery/healing-after-birth" },
+      { title: "When to call your midwife or GP", description: "Calm, clear signs that something needs a closer look.", href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth" },
+      { title: "Feeding in the early weeks", description: "Support for breastfeeding, bottle feeding or a mix, without judgement.", href: "/first-year/feeding/newborn-feeding-rhythms" },
     ],
     relatedTopics: [
       { label: "Feeding", href: "/first-year/feeding" },
@@ -260,9 +260,9 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ],
     sources: [SRC.nhsBaby, SRC.nhsWeaning, SRC.nhsPostnatal, SRC.tommysMH, SRC.nct],
     featuredGuidance: [
-      { title: "The four month sleep shift", description: "What is changing for your baby and what gentle adjustments help." },
-      { title: "Getting ready for first foods", description: "Calm, practical signs of readiness without pressure." },
-      { title: "Pelvic floor recovery, months in", description: "Why it still matters and how to ask for the right support." },
+      { title: "The four month sleep shift", description: "What is changing for your baby and what gentle adjustments help.", href: "/first-year/sleep/when-sleep-suddenly-changes" },
+      { title: "Getting ready for first foods", description: "Calm, practical signs of readiness without pressure.", href: "/first-year/feeding/introducing-solid-foods" },
+      { title: "Pelvic floor recovery, months in", description: "Why it still matters and how to ask for the right support.", href: "/first-year/body-and-hormones/body-changes-after-birth" },
     ],
     relatedTopics: [
       { label: "Development", href: "/first-year/development" },
@@ -348,9 +348,8 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ],
     sources: [SRC.nhsBaby, SRC.nhsWeaning, SRC.nhsMentalHealth, SRC.tommysMH, SRC.nct],
     featuredGuidance: [
-      { title: "Separation anxiety, kindly explained", description: "Why it appears now and how to support your baby without panic." },
-      { title: "Sleep when everything is changing", description: "Calm ways to ride out shifts without overhauling everything." },
-      { title: "Looking after a tired body", description: "Recovery does not stop at six weeks. Practical, gentle steps." },
+      { title: "Sleep when everything is changing", description: "Calm ways to ride out shifts without overhauling everything.", href: "/first-year/sleep/when-sleep-suddenly-changes" },
+      { title: "Looking after a tired body", description: "Recovery does not stop at six weeks. Practical, gentle steps.", href: "/first-year/postpartum-recovery/what-recovery-can-feel-like" },
     ],
     relatedTopics: [
       { label: "Development", href: "/first-year/development" },
@@ -435,9 +434,9 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ],
     sources: [SRC.nhsBaby, SRC.nhsPostnatal, SRC.nhsMentalHealth, SRC.nctReturn, SRC.niceNG194],
     featuredGuidance: [
-      { title: "Recovery a year on", description: "What is still common, what is worth checking and how to ask for help." },
-      { title: "Cycles, contraception and intimacy", description: "Honest, calm guidance for this stage of recovery." },
-      { title: "Easing into toddlerhood", description: "Small shifts that help the move from baby to toddler feel softer." },
+      { title: "Recovery a year on", description: "What is still common, what is worth checking and how to ask for help.", href: "/first-year/postpartum-recovery/what-recovery-can-feel-like" },
+      { title: "Cycles, contraception and intimacy", description: "Honest, calm guidance for this stage of recovery.", href: "/first-year/body-and-hormones/sex-and-intimacy-after-birth" },
+      { title: "Easing into toddlerhood", description: "Small shifts that help the move from baby to toddler feel softer.", href: "/toddler" },
     ],
     relatedTopics: [
       { label: "Care and safety", href: "/first-year/care-and-safety" },

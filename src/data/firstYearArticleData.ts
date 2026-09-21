@@ -40,6 +40,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   // Feeding
   {
     slug: "newborn-feeding-rhythms",
+    suppressHeroImage: true,
     topic: "feeding",
     title: "Newborn feeding rhythms",
     description:
@@ -571,6 +572,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   // Development
   {
     slug: "baby-development-in-the-first-year",
+    suppressHeroImage: true,
     topic: "development",
     title: "Baby development in the first year",
     description:
@@ -681,6 +683,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   },
   {
     slug: "when-milestones-feel-uneven",
+    suppressHeroImage: true,
     topic: "development",
     title: "When milestones feel uneven",
     description:
@@ -786,6 +789,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   // Care and safety
   {
     slug: "baby-care-basics",
+    suppressHeroImage: true,
     topic: "care-and-safety",
     title: "Baby care basics",
     description:
@@ -888,6 +892,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   },
   {
     slug: "safe-sleep-and-home-safety",
+    suppressHeroImage: true,
     topic: "care-and-safety",
     title: "Safe sleep and home safety",
     description:

@@ -1,16 +1,7 @@
-import heroNewbornSleep from "@/assets/firstyear-stage-0-3.jpg";
-import heroSafeSleep from "@/assets/guidance-card-nursery.jpg";
-import heroBabyCare from "@/assets/firstyear-journey.jpg";
-
-import bodyBonding from "@/assets/guidance-card-bonding.jpg";
-
 import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes-safe.jpg";
 import bodyNightWaking from "@/assets/firstyear-body-night-waking.jpg";
 import bodyBedtimeWindDown from "@/assets/firstyear-body-bedtime-wind-down-approved.jpg";
 
-
-import heroDevelopment from "@/assets/firstyear-stage-6-9.jpg";
-import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
 
 import heroSupportiveMoment from "@/assets/article-hero-emotional-supportive-moment.jpg";
 import bodyEmotionalSupport from "@/assets/guidance-card-emotional.jpg";
@@ -80,7 +71,6 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   "newborn-quirks-and-reflexes": {
     hero: { src: heroNewbornQuirksAndReflexes, alt: 'A parent holding a swaddled newborn close to their chest in a softly lit bedroom.' },
     body: [
-      { afterSectionIndex: 0, src: bodyNewbornQuirksAndReflexes1, alt: "A close view of a newborn's hand gripping an adult's finger." },
       { afterSectionIndex: 4, src: bodyNewbornQuirksAndReflexes2, alt: "A parent gently resting a hand on a newborn's head while the baby lies calmly in a crib." },
     ],
   },
@@ -121,10 +111,6 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   },
   // bespoke future: newborn asleep in a soft, warm-lit family bedroom
   "newborn-sleep-expectations": {
-    hero: {
-      src: heroNewbornSleep,
-      alt: "A newborn resting calmly in a soft first-year home setting",
-    },
     body: [],
   },
   // bespoke future: parent settling baby in warm evening light
@@ -154,26 +140,11 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
 
   // bespoke future: safe cot detail with breathable bedding
   "safe-sleep-and-home-safety": {
-    hero: {
-      src: heroSafeSleep,
-      alt: "A calm, safe nursery prepared for a baby",
-    },
     body: [],
   },
   // bespoke future: parent bathing or changing baby in soft daylight
   "baby-care-basics": {
-    hero: {
-      src: heroBabyCare,
-      alt: "An everyday first-year moment of a parent caring for a baby",
-    },
-    body: [
-      {
-        afterSectionIndex: 1,
-        src: bodyBonding,
-        alt: "A parent tending to a baby in a soft, unhurried moment",
-        caption: "The basics become intuitive faster than most new parents expect.",
-      },
-    ],
+    body: [],
   },
   // bespoke future: parent resting after birth in soft natural light
   "healing-after-birth": {
@@ -193,37 +164,18 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   },
   // bespoke future: parent feeding newborn calmly in soft natural light
   "newborn-feeding-rhythms": {
-    hero: {
-      src: heroNewbornSleep,
-      alt: "A calm early-days moment between a parent and newborn",
-    },
     body: [],
   },
   // bespoke future: inclusive feeding scene showing calm, non-judgemental support
   "bottle-and-breastfeeding-questions": {
-    body: [
-      {
-        afterSectionIndex: 1,
-        src: bodyBonding,
-        alt: "A parent and baby in a warm, unhurried feeding moment",
-        caption: "Feeding can change over time, and support matters more than choosing a perfect path.",
-      },
-    ],
+    body: [],
   },
   // bespoke future: baby exploring through play with a parent nearby in soft natural light
   "baby-development-in-the-first-year": {
-    hero: {
-      src: heroDevelopment,
-      alt: "A baby exploring movement and play in a calm first-year home setting",
-    },
     body: [],
   },
   // bespoke future: reassuring parent and baby development moment without clinical or comparison framing
   "when-milestones-feel-uneven": {
-    hero: {
-      src: heroMilestones,
-      alt: "A baby in a gentle everyday development moment at home",
-    },
     body: [],
   },
   // bespoke future: calm parent and baby preparing for an early postnatal appointment at home

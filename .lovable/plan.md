@@ -111,6 +111,8 @@ Use the removal disposition when no honest existing destination exists, or when 
 
 Keep a few strong image-backed Start Here cards, then show the complete existing topic library as compact grouped rows. Deduplicate destinations inside each rendered group. Add no fake View All links or arbitrary caps.
 
+If a topic has zero valid unique Start Here destinations, suppress the complete Start Here heading, divider, container and reserved space. Flow directly from compact orientation to grouped related guidance. Do not add placeholders, AI substitutes or artificial destinations for symmetry.
+
 ## 5. Refine the four shared phase pages
 
 Use this order for all four existing consumers:
@@ -143,6 +145,8 @@ Reconcile every faux-guidance card:
 
 Use the removal disposition when no genuine editorial owner exists, or when a stronger item in the same phase discovery section already represents the destination. Add exactly one contextual Companion after editorial discovery on each phase page. Final embedded counts are 1 hub module, 8 of 8 topic handoffs and 4 of 4 phase handoffs. Duplicate AI execution runtimes and AI runtime changes remain zero.
 
+If a phase has zero valid converted guidance destinations, suppress the complete guidance section, including its heading and spacing. Flow naturally from editorial common questions into the next valid editorial section and the single contextual Companion. Placeholder cards, AI substitutes and artificial destinations remain zero.
+
 ## 6. Contain shared-template and month-page impact
 
 Before implementation, confirm the shared consumer counts remain 4 phase and 8 topic pages. Keep `FirstYearMonthPage`, month data, route behaviour, source behaviour and month-specific discovery untouched.
@@ -166,6 +170,7 @@ Add focused Phase 37A regression coverage for:
 - zero hub and phase question AI actions
 - one contextual Companion on every topic and phase page
 - no duplicate destination within a rendered group and no fake View All links
+- zero empty Start Here or phase-guidance sections, placeholder cards, AI-filled editorial slots or artificial symmetry destinations
 - hero reuse audit and zero accidental high-visibility duplication
 - five lifecycle states, four destinations and zero writes
 - preserved First Year to Toddler transition

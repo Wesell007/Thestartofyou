@@ -1,0 +1,15 @@
+export const FIRST_YEAR_MONTH_DESTINATIONS = [
+  { label: "Newborn", href: "/first-year/newborn" },
+  { label: "1 month", href: "/first-year/1-month" },
+  { label: "2 months", href: "/first-year/2-months" },
+  { label: "3 months", href: "/first-year/3-months" },
+  { label: "4 months", href: "/first-year/4-months" },
+  { label: "5 months", href: "/first-year/5-months" },
+  { label: "6 months", href: "/first-year/6-months" },
+  { label: "7 months", href: "/first-year/7-months" },
+  { label: "8 months", href: "/first-year/8-months" },
+  { label: "9 months", href: "/first-year/9-months" },
+  { label: "10 months", href: "/first-year/10-months" },
+  { label: "11 months", href: "/first-year/11-months" },
+  { label: "12 months", href: "/first-year/12-months" },
+] as const;

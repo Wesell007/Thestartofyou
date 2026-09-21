@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { MemoryRouter } from "react-router-dom";
 
 import FYCommonQuestions from "@/components/firstyear/new/FYCommonQuestions";
-import { FIRST_YEAR_MONTH_DESTINATIONS } from "@/components/firstyear/new/FYMonthMap";
+import { FIRST_YEAR_MONTH_DESTINATIONS } from "@/components/firstyear/new/firstYearMonthDestinations";
 import FYStartFirstYearCTA from "@/components/firstyear/new/FYStartFirstYearCTA";
 import { phaseData } from "@/data/firstYearPhaseData";
 import { firstYearTopicConfigs } from "@/data/firstYearTopicData";

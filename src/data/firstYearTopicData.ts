@@ -368,7 +368,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
         title: "Pelvic floor in the months after birth",
         why: "Why it matters, what's normal, and when to ask for specialist support.",
         image: cardWellness,
-        href: "/first-year/postpartum-recovery/separated-tummy-muscles",
+        href: "/first-year/body-and-hormones/separated-tummy-muscles",
         tag: "common",
       },
     ],

@@ -83,13 +83,16 @@ For `Bottle and breastfeeding questions`:
 Contain the capability to the First Year article image mapping and article card presentation.
 
 • make First Year article heroes optional
+• model three explicit First Year states: image present, image intentionally suppressed, and no First Year specific image decision
+• use the smallest typed local mechanism, such as a First Year only suppression flag or explicit null, so deliberate removal cannot be confused with missing data or a mapping error
 • preserve the existing shared article view behaviour for present and absent heroes
 • prevent topic, category or article fallback photography from overriding an intentional image removal on any affected First Year card surface
 • support deliberate image absence across article cards, Start Here cards, related guidance cards, pathway cards and other affected First Year discovery cards
 • give every image free item a balanced text led treatment with no blank ratio box, broken slot or reserved whitespace
+• preserve normal fallback behaviour when no explicit First Year suppression decision exists
 • keep Family, Toddler and the global article systems unchanged
 
-Update old image quantity tests that force every audited article to retain photography. Replace them with checks for valid optional heroes, valid remaining body placements, no missing assets and no accidental fallback on explicitly image free First Year articles.
+Update old image quantity tests that force every audited article to retain photography. Add focused coverage proving that a First Year article with an image renders it, an explicitly image free article renders text only without fallback, an explicitly image free discovery card has no image or reserved ratio box, non First Year behaviour remains unchanged, and removed image references cause no broken request. Also check valid remaining body placements and missing assets.
 
 ### 4. Visual verification
 
@@ -108,6 +111,8 @@ Verify:
 • no strange crop, broken image, blank image box or empty placeholder
 • image free heroes and cards look intentional
 • deliberately image free First Year items receiving fallback photography: 0
+• image suppression leaking outside First Year: 0
+• missing or broken asset requests caused by suppression: 0
 • blank image ratio boxes and empty reserved image areas: 0
 • typography and article rhythm remain balanced
 • no horizontal overflow or console errors

@@ -69,6 +69,8 @@ Use this priority:
 
 Bulk generated images remain 0. No image will be retained to preserve visual symmetry or fill a slot.
 
+A `REMOVE` disposition removes photography from that First Year placement only. Before deleting any physical asset, perform a repository wide reference check and record remaining First Year, non First Year, component or configuration, test fixture, and documented intentional future references. Keep the physical asset whenever any valid reference remains. Do not alter another hub because First Year stops using a shared file. In particular, remove `firstyear-scene.jpg` from the named feeding article mapping but retain the file while another legitimate surface still references it.
+
 Reject malformed anatomy, implausible feeding or holding positions, synthetic skin, merged objects, surreal rooms, unsafe sleep cues and decorative detail photography without a clear editorial relationship. Do not hide those defects with cropping.
 
 For `Bottle and breastfeeding questions`:
@@ -146,6 +148,10 @@ The report will state:
 • semantic and uncanny defects after
 • broken placements and empty placeholders
 • deliberately image free items receiving fallback photography
+• image placements removed
+• underlying asset files made unreferenced and deleted
+• shared assets retained because references remain
+• broken asset references after and non First Year asset reference changes
 • hub, phase and topic regressions
 • article copy, AI, grounding, TTC and Pregnancy changes
 • deployment status

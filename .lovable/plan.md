@@ -55,9 +55,9 @@ The hub video remains a separate media decision rather than being mixed into the
 
 Accounting must reconcile exactly:
 
-`KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REMOVE = 96`
+`KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REPLACE_WITH_NEW_JUSTIFIED_ASSET + REMOVE = 96`
 
-If generation becomes genuinely necessary, record `REPLACE_WITH_NEW_JUSTIFIED_ASSET` separately while retaining the original placement in the replacement accounting. The preferred result is 0 generated assets.
+Each original placement receives exactly one of those five dispositions. If generation becomes genuinely necessary, record `REPLACE_WITH_NEW_JUSTIFIED_ASSET` once for that placement, with no double counting under another disposition. `New generated images` remains a separate production metric and may be lower if one justified asset is defensibly reused. The preferred result is 0 newly generated replacements and 0 generated assets.
 
 ### 2. Apply only evidence backed image decisions
 
@@ -128,7 +128,8 @@ Create:
 The report will state:
 
 • current placements audited
-• KEEP, RECROP, existing replacement and REMOVE totals
+• KEEP, RECROP, existing replacement, new justified replacement and REMOVE totals
+• disposition arithmetic in the form `X + X + X + X + X = 96`, with reconciliation status
 • canonical still placements audited: 96 of 96, with arithmetic reconciled
 • current pathway presentation placements and audited total, reported separately
 • hub video audited separately

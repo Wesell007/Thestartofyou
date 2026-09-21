@@ -45,8 +45,9 @@ Audit **99 / 99** existing image placements at placement level and audit the hub
 - REPLACE_WITH_EXISTING_APPROVED_ASSET
 - REPLACE_WITH_NANO_BANANA_ASSET
 - REMOVE_AS_UNNECESSARY, for body images only
+- REMOVED_WITH_DISCOVERY_CARD, for topic feature imagery whose unmatched Start Here card is removed
 
-Record route, surface, current asset, issue, replacement intent, final asset and reason. The disposition arithmetic for the original 99 must reconcile exactly. Keep strong existing imagery and generate only the minimum coherent replacement set.
+Record route, surface, current asset, issue, replacement intent, final asset and reason. The disposition arithmetic must reconcile exactly: KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REPLACE_WITH_NANO_BANANA_ASSET + REMOVE_AS_UNNECESSARY + REMOVED_WITH_DISCOVERY_CARD = 99. Keep strong existing imagery and generate only the minimum coherent replacement set.
 
 Track any new Baby and Postpartum pathway images separately as `NEW PRESENTATION PLACEMENTS`, never inside the original 99 denominator.
 
@@ -101,6 +102,7 @@ Reconcile every existing Start Here card:
 - starting cards: **24**
 - mapped to a genuine existing article, topic, month or phase destination: **X**
 - removed because no honest destination exists: **Y**
+- each removed card carrying imagery receives `REMOVED_WITH_DISCOVERY_CARD` in the 99-placement audit
 - required: **X + Y = 24**
 - AI fallback, `/ask` and hidden model-call destinations after: **0**
 
@@ -189,7 +191,7 @@ The completion report will reconcile every requested denominator, including:
 - existing image placements audited out of 99
 - hub video audit
 - new pathway placements
-- keep, recrop, existing replacement, Nano Banana replacement and body-image removal totals
+- keep, recrop, existing replacement, Nano Banana replacement, body-image removal and removed-with-card totals
 - intentional hero reuse
 - 24 topic Start Here dispositions
 - 12 phase faux-guidance dispositions

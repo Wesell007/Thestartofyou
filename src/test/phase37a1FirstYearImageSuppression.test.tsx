@@ -92,4 +92,13 @@ describe("Phase 37A.1 intentional First Year image absence", () => {
 
     expect(screen.getByRole("img", { name: /baby care and safety moment/i })).toBeInTheDocument();
   });
+
+  it("keeps every explicitly suppressed article free of a mapped hero", () => {
+    const suppressed = firstYearArticles.filter((item) => item.suppressHeroImage);
+
+    expect(suppressed).toHaveLength(15);
+    for (const item of suppressed) {
+      expect(getFirstYearArticleImages(item.slug)?.hero, item.slug).toBeUndefined();
+    }
+  });
 });

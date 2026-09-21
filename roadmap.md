@@ -180,11 +180,13 @@
 - [x] Validation: new Phase 36C regression suite 8 tests PASS; full suite 133 files / 1,531 tests PASS first run; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 352 sitemap entries; browser QA of 10 changed public surfaces PASS; deployment NO
 - [x] PREGNANCY WORKSTREAM — CLOSED FOR CURRENT STRATEGY; next major lifecycle workstream FIRST YEAR
 
-## Phase 37A — First Year hub, phase and topic UX, visual system and AI separation — IN PROGRESS
-- [ ] Create and approve the Nano Banana direction board before production image replacement
-- [ ] Audit and reconcile all 99 existing image placements plus the hub video
-- [ ] Recompose the hub in the locked ten-section order with one final lifecycle-aware action
-- [ ] Convert or remove all 24 Topic Start Here AI fallbacks and all 12 phase faux-guidance cards
-- [ ] Remove 6 hub and 20 phase question AI actions while preserving editorial questions and valid reads
-- [ ] Preserve 4 phase routes, 13 month destinations, 8 topic routes and all article boundaries
-- [ ] Validate 13 canonical surfaces at 1280, 834 and 390 pixels, then run all required checks
+## Phase 37A — First Year hub, phase and topic UX, visual system and AI separation — CLOSED PASS / FIRST YEAR PUBLIC EXPERIENCE REFINED / VISUAL SYSTEM ALIGNED / NO NEW CONTENT
+- [x] Nano Banana direction board created and approved before production replacement; not rendered in production; infant-care, safer-sleep, feeding-positioning, anatomy, postpartum-sensitivity and crop-space gates PASS
+- [x] Audited 99 of 99 original placements plus the hub video: KEEP 92, RECROP 0, existing replacement 0, Nano Banana replacement 4, body removal 0, removed with discovery card 3; new image-backed presentation placements 0
+- [x] Replaced four duplicated Baby topic heroes with distinct safe Feeding, Sleep, Development and Care imagery; accidental phase-to-topic hero duplication after 0; article imagery and copy unchanged
+- [x] Rebuilt the hub in the locked ten-section order with one final read-only lifecycle-aware action; five states, four destinations, incorrect routes 0, writes 0
+- [x] Topic Start Here reconciled 24 = 21 mapped + 3 removed; phase guidance reconciled 12 = 11 converted + 1 removed; duplicate destinations within a section 0; empty sections, placeholders, AI-filled slots and artificial symmetry destinations 0
+- [x] Hub question AI actions 6 to 0 and phase question AI actions 20 to 0; six hub questions, 20 phase questions and 15 valid phase reads preserved; Companion remains after editorial discovery
+- [x] Preserved 4 phase, 13 month and 8 topic destinations; month data, route behaviour and page presentation unchanged; First Year to Toddler transition preserved
+- [x] Browser QA 13 surfaces × 3 widths = 39 checks PASS with overflow 0, console errors 0 and broken images 0; focused checks 5 files / 50 tests PASS; full suite 134 files / 1,543 tests PASS; typecheck x2 PASS; lint at established baseline; production validation build PASS
+- [x] New articles, routes, lifecycle, database, schema, AI runtime, grounding, memory, history, reviewer, TTC and Pregnancy changes 0; deployment NO; visual review and content-coverage audit not started

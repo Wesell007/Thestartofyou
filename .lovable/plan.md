@@ -19,7 +19,7 @@ Repository truth currently contains:
 
 This gives a current configured still image baseline of 96 placements before counting repeated render appearances of article cards. The rendered audit will record both the canonical configured placement and every route surface where that asset appears, avoiding double counting while still exposing problematic repetition.
 
-Before auditing, confirm whether the two primary Baby's First Year and Postpartum Recovery pathway presentations currently render still images. Record any such imagery separately as `CURRENT_PATHWAY_PRESENTATION_PLACEMENTS`, audit all of it using the same four dispositions, and do not add it to the authoritative 96 denominator.
+Before auditing, confirm whether the two primary Baby's First Year and Postpartum Recovery pathway presentations currently render still images. Record any such imagery separately as `CURRENT_PATHWAY_PRESENTATION_PLACEMENTS`, audit all of it using the same five dispositions, and do not add it to the authoritative 96 denominator.
 
 The specific `Bottle and breastfeeding questions` hero is confirmed as `firstyear-scene.jpg`, the baby feet in a knitted blanket. It will be removed. The same article also currently uses a generic bonding image in its body, which will be judged independently against the surrounding feeding section.
 
@@ -46,7 +46,7 @@ For every canonical placement record:
 • surface
 • current asset
 • surrounding subject
-• `KEEP`, `RECROP`, `REPLACE_WITH_EXISTING_APPROVED_ASSET` or `REMOVE`
+• `KEEP`, `RECROP`, `REPLACE_WITH_EXISTING_APPROVED_ASSET`, `REPLACE_WITH_NEW_JUSTIFIED_ASSET` or `REMOVE`
 • reason
 • final treatment
 • any repetition, infant safety, anatomy or plausibility concern
@@ -55,9 +55,9 @@ The hub video remains a separate media decision rather than being mixed into the
 
 Accounting must reconcile exactly:
 
-`KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REMOVE = 96`
+`KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REPLACE_WITH_NEW_JUSTIFIED_ASSET + REMOVE = 96`
 
-If generation becomes genuinely necessary, record `REPLACE_WITH_NEW_JUSTIFIED_ASSET` separately while retaining the original placement in the replacement accounting. The preferred result is 0 generated assets.
+Each original placement receives exactly one of those five dispositions. If generation becomes genuinely necessary, record `REPLACE_WITH_NEW_JUSTIFIED_ASSET` once for that placement, with no double counting under another disposition. `New generated images` remains a separate production metric and may be lower if one justified asset is defensibly reused. The preferred result is 0 newly generated replacements and 0 generated assets.
 
 ### 2. Apply only evidence backed image decisions
 
@@ -128,7 +128,8 @@ Create:
 The report will state:
 
 • current placements audited
-• KEEP, RECROP, existing replacement and REMOVE totals
+• KEEP, RECROP, existing replacement, new justified replacement and REMOVE totals
+• disposition arithmetic in the form `X + X + X + X + X = 96`, with reconciliation status
 • canonical still placements audited: 96 of 96, with arithmetic reconciled
 • current pathway presentation placements and audited total, reported separately
 • hub video audited separately

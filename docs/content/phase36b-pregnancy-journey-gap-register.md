@@ -53,7 +53,7 @@ Each moment carries exactly one primary classification. Arithmetic is reconciled
 | 43 | Itching and cholestasis | COVERED | itching-in-pregnancy | — | NO_ACTION | High | — |
 | 44 | Iron and anaemia | BETTER_SERVED_BY_TOPIC_PAGE | `/pregnancy/diet-and-exercise` + key-nutrients-in-pregnancy | — | NO_ACTION | Medium | — |
 | 45 | Infections, colds, food risks | COVERED | cold-and-flu-in-pregnancy, eating-well-in-pregnancy | — | NO_ACTION | Medium | — |
-| 46 | Travel and flying | PARTIALLY_COVERED | 40 article and 33 week mentions; no owning section, no dedicated destination | EXPAND_EXISTING | Medium | P3 |
+| 46 | Travel and flying | UNCOVERED | No Pregnancy surface carries travel or flying guidance. The earlier "40 article and 33 week mentions" figure was a false positive: almost every match is the verb "travel" in unrelated sentences, and "flying", "air travel" and "airline" appear zero times in the audited article, week and topic datasets. The only real references are travel-vaccine asides in `vaccinations-in-pregnancy` | FUTURE EDITORIAL DECISION / NO CURRENT VALID OWNER (not a release blocker; no new article required before closure) | Medium | P3 |
 | 47 | Eating well | COVERED | eating-well-in-pregnancy | — | NO_ACTION | Medium | — |
 | 48 | Foods to avoid | COVERED | eating-well-in-pregnancy | — | NO_ACTION | High | — |
 | 49 | Key nutrients and supplements | COVERED | key-nutrients-in-pregnancy | — | NO_ACTION | Medium | — |
@@ -78,8 +78,8 @@ Each moment carries exactly one primary classification. Arithmetic is reconciled
 | Classification | Count |
 | --- | --- |
 | COVERED | 45 |
-| PARTIALLY_COVERED | 9 |
-| UNCOVERED | 0 |
+| PARTIALLY_COVERED | 8 |
+| UNCOVERED | 1 |
 | NOT_REQUIRED_STANDALONE | 2 |
 | BETTER_SERVED_BY_WEEK_PAGE | 2 |
 | BETTER_SERVED_BY_TOPIC_PAGE | 2 |
@@ -92,11 +92,11 @@ Each moment carries exactly one primary classification. Arithmetic is reconciled
 | **Better served elsewhere subtotal** | **8** |
 | **Total moments audited** | **64** |
 
-45 + 9 + 0 + 2 + 8 = 64. Reconciled.
+45 + 8 + 1 + 2 + 8 = 64. Reconciled (corrected in the Phase 36C final evidence reconciliation: moment 46 moved from PARTIALLY_COVERED to UNCOVERED).
 
 ## 3. Gap-treatment classification
 
-Each PARTIALLY_COVERED moment receives exactly one treatment. No moment defaults to NEW_ARTICLE.
+Each PARTIALLY_COVERED moment, plus the single UNCOVERED moment, receives exactly one treatment. No moment defaults to NEW_ARTICLE.
 
 | Moment | Treatment |
 | --- | --- |
@@ -107,7 +107,7 @@ Each PARTIALLY_COVERED moment receives exactly one treatment. No moment defaults
 | 29 Birth preferences duplication | MERGE |
 | 36 Antenatal classes | INTERNAL_LINK |
 | 42 Pre-eclampsia | EXPAND_EXISTING |
-| 46 Travel and flying | EXPAND_EXISTING |
+| 46 Travel and flying | FUTURE EDITORIAL DECISION / NO CURRENT VALID OWNER (UNCOVERED, P3, non-blocking) |
 | 56 Partner in pregnancy | TOPIC_PAGE_COPY |
 | 60 Miscarriage support | LOSS_HANDOFF |
 | 63 First Year handoff | FIRST_YEAR_HANDOFF |

@@ -67,14 +67,14 @@ The 19 unknown-status records are: hair-dye-and-beauty-treatments-in-pregnancy, 
 
 | Action | Count | Notes |
 | --- | --- | --- |
-| KEEP | 96 | Adequate coverage, adequate discovery |
-| EXPAND_EXISTING | 5 | complete-guide-morning-sickness (hyperemesis), stages-of-labour (pain relief options), swelling-in-pregnancy (pre-eclampsia), eating-well-in-pregnancy (travel/flying), preparing-for-baby-complete-guide (antenatal classes) |
+| KEEP | 97 | Adequate coverage, adequate discovery (includes `eating-well-in-pregnancy`, restored to KEEP in the Phase 36C final evidence reconciliation) |
+| EXPAND_EXISTING | 4 | complete-guide-morning-sickness (hyperemesis), stages-of-labour (pain relief options), swelling-in-pregnancy (pre-eclampsia), preparing-for-baby-complete-guide (antenatal classes) |
 | MERGE | 2 | writing-a-birth-plan and birth-preferences share one visitor intent |
 | REPOSITION | 0 | — |
 | INTERNAL_LINK_ONLY | 1 | low-lying-placenta-in-pregnancy (orphan with good content) |
 | ARCHIVE_CANDIDATE | 0 | — |
 
-Total: 96 + 5 + 2 + 1 = **104**.
+Total: 97 + 4 + 2 + 1 = **104**.
 
 ## 3. Week-module inventory
 

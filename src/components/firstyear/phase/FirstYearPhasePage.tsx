@@ -735,8 +735,8 @@ const FirstYearPhasePage = ({ config }: Props) => {
         <WhenToAskForSupport items={config.support} />
         <CommonQuestions items={config.commonQuestions} />
         <FeaturedGuidance items={config.featuredGuidance} />
-        <RelatedTopics items={config.relatedTopics} />
         <PhaseCompanion config={config} />
+        <RelatedTopics items={config.relatedTopics} />
         <PhaseSources items={config.sources} />
         <Endcap />
       </main>

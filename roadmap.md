@@ -166,3 +166,15 @@
 - [x] Handoffs: TTC to Pregnancy unchanged; IVF to Pregnancy COMPLETE; Pregnancy to IVF COMPLETE; Pregnancy to Loss support PARTIAL; Pregnancy to First Year content PARTIAL; Pregnancy to First Year lifecycle routing COMPLETE
 - [x] Reviewer claims added 0; grounding changes 0 with no registry drift found; source behaviour changes 0; current Pregnancy release blockers 0
 - [x] Three audit documents created; one smallest justified follow-up recorded (Phase 36C Pregnancy closure cleanup) and not started
+
+## Phase 36C — Pregnancy final cleanup and workstream closure — CLOSED PASS / PREGNANCY COMPLETE FOR CURRENT STRATEGY / NO CURRENT PREGNANCY BLOCKERS
+- [x] Stale related references 4 to 0: three first-trimester-symptoms occurrences canonicalised to early-pregnancy-symptoms-explained, the paracetamol headaches-in-pregnancy reference repointed to medicines-in-pregnancy; rendered broken links 0, wrong-destination links 0
+- [x] Orphans 2 to 0: symptoms-stopping-early-pregnancy linked once from early-pregnancy-symptoms-explained, low-lying-placenta-in-pregnancy linked once from anterior-placenta; new routes 0, artificial links 0
+- [x] Pregnancy to Loss support handoff COMPLETE with one editorial link from bleeding-in-early-pregnancy to the existing pregnancy-after-loss article; new loss content 0, loss lifecycle 0
+- [x] Pregnancy to First Year content handoff COMPLETE with one late-pregnancy transition group on the preparing-for-baby topic page into existing after-birth and first-year guidance; lifecycle routing COMPLETE and unchanged
+- [x] Birth-plan overlap resolved: birth-preferences is the single canonical owner, writing-a-birth-plan retired by the established client-side redirect and sitemap de-indexing; internal references to the retired route 0, broken links 0, redirect loops 0, third birth-plan article 0
+- [x] Expansions: hyperemesis, labour pain relief, pre-eclampsia and antenatal classes implemented in their verified existing owners; travel and flying reported as EXPANSION OWNER MISMATCH and left unresolved rather than guessed; new articles 0
+- [x] Claims 14 resolved: supported 0, safely removed 2, safely reworded 12, unresolved 0; sources added 0, source records edited 0, reviewer claims 0, grounding changes 0
+- [x] Governance debt carried forward unchanged: 126 label-only source records, 5 articles with no source records, 311 week statements at UNRESOLVED_PROVENANCE, 19 unknown-status records, one accepted weak-discovery record; week modules modified 0, week-model changes 0
+- [x] Validation: new Phase 36C regression suite 8 tests PASS; full suite 133 files / 1,531 tests PASS first run; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 352 sitemap entries; browser QA of 10 changed public surfaces PASS; deployment NO
+- [x] PREGNANCY WORKSTREAM — CLOSED FOR CURRENT STRATEGY; next major lifecycle workstream FIRST YEAR

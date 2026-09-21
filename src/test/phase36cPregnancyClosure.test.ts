@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getAllArticles } from "@/data/articleData";
-import { PREGNANCY_TOPICS } from "@/data/pregnancyTopicData";
+import { pregnancyTopicConfigs } from "@/data/pregnancyTopicData";
 import { getWeeklySuggestions } from "@/data/weeklyArticleSuggestions";
 
 const articles = getAllArticles();
@@ -47,7 +47,7 @@ describe("Phase 36C — Pregnancy final cleanup", () => {
   });
 
   it("offers a First Year editorial handoff from the preparing-for-baby topic page", () => {
-    const preparing = JSON.stringify(PREGNANCY_TOPICS["preparing-for-baby"]);
+    const preparing = JSON.stringify(pregnancyTopicConfigs["preparing-for-baby"]);
     expect(preparing).toContain("/articles/your-body-after-birth");
     expect(preparing).toContain("/first-year");
   });
@@ -55,7 +55,7 @@ describe("Phase 36C — Pregnancy final cleanup", () => {
   it("routes all birth-plan intent to the canonical birth-preferences article", () => {
     const surfaces = [
       JSON.stringify(articles),
-      JSON.stringify(PREGNANCY_TOPICS),
+      JSON.stringify(pregnancyTopicConfigs),
       weeklyJson,
     ];
     for (const surface of surfaces) {

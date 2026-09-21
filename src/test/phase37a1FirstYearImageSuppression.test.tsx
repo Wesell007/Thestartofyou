@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
 import FirstYearArticlePage from "@/components/firstyear/article/FirstYearArticlePage";
@@ -18,35 +19,35 @@ const article = (slug: string) => {
   return found;
 };
 
+const renderPage = (ui: React.ReactNode) =>
+  render(
+    <HelmetProvider>
+      <MemoryRouter>{ui}</MemoryRouter>
+    </HelmetProvider>,
+  );
+
 describe("Phase 37A.1 intentional First Year image absence", () => {
   it("renders an article hero when an approved image is present", () => {
-    render(
-      <MemoryRouter>
-        <FirstYearArticlePage article={article("teething")} tone="baby" />
-      </MemoryRouter>,
-    );
+    renderPage(<FirstYearArticlePage article={article("teething")} tone="baby" />);
 
     expect(screen.getByRole("img", { name: /parent smiling and holding a baby/i })).toBeInTheDocument();
   });
 
   it("renders an explicitly image-free article as text-led with no fallback", () => {
-    render(
-      <MemoryRouter>
-        <FirstYearArticlePage article={article("bottle-and-breastfeeding-questions")} tone="baby" />
-      </MemoryRouter>,
+    const { container } = renderPage(
+      <FirstYearArticlePage article={article("bottle-and-breastfeeding-questions")} tone="baby" />,
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Bottle and breastfeeding questions" })).toBeInTheDocument();
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(container.querySelector("main > section img")).toBeNull();
     expect(getFirstYearArticleImages("bottle-and-breastfeeding-questions")?.hero).toBeUndefined();
+    const mappedSources = Object.values(getFirstYearArticleImages("bottle-and-breastfeeding-questions") ?? {})
+      .flatMap((value) => Array.isArray(value) ? value.map((image) => image.src) : value?.src ?? []);
+    expect(mappedSources.some((src) => src.includes("firstyear-scene"))).toBe(false);
   });
 
   it("renders an explicitly image-free discovery card without a fallback or ratio box", () => {
-    render(
-      <MemoryRouter>
-        <FirstYearArticleCard article={article("bottle-and-breastfeeding-questions")} />
-      </MemoryRouter>,
-    );
+    renderPage(<FirstYearArticleCard article={article("bottle-and-breastfeeding-questions")} />);
 
     const card = screen.getByRole("link", { name: /Bottle and breastfeeding questions/i });
     expect(card.querySelector("img")).toBeNull();
@@ -55,9 +56,8 @@ describe("Phase 37A.1 intentional First Year image absence", () => {
   });
 
   it("keeps normal no-image behaviour unchanged outside First Year", () => {
-    render(
-      <MemoryRouter>
-        <HubArticleView
+    const { container } = renderPage(
+      <HubArticleView
           article={{
             slug: "family-example",
             topic: "family",
@@ -71,24 +71,26 @@ describe("Phase 37A.1 intentional First Year image absence", () => {
           hubHref="/family"
           topicLabel="Family"
           topicHref="/family"
-        />
-      </MemoryRouter>,
+      />,
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Family example" })).toBeInTheDocument();
-    expect(screen.queryByRole("img")).not.toBeInTheDocument();
+    expect(container.querySelector("main > section img")).toBeNull();
   });
 
   it("renders an explicitly image-free Start Here card without a blank image slot", () => {
-    render(
-      <MemoryRouter>
-        <FirstYearTopicPage config={firstYearTopicConfigs.feeding} />
-      </MemoryRouter>,
-    );
+    renderPage(<FirstYearTopicPage config={firstYearTopicConfigs.feeding} />);
 
     const card = screen.getByRole("link", { name: /How often should my baby feed in the early weeks/i });
     expect(card.querySelector("img")).toBeNull();
     expect(card.querySelector("[class*='aspect-']")).toBeNull();
     expect(card.querySelector('[data-image-treatment="text-led"]')).toBeInTheDocument();
+  });
+
+  it("retains the normal topic fallback when no First Year suppression decision exists", () => {
+    const unmapped = { ...article("teething"), slug: "unmapped-test-article" };
+    renderPage(<FirstYearArticleCard article={unmapped} />);
+
+    expect(screen.getByRole("img", { name: /baby care and safety moment/i })).toBeInTheDocument();
   });
 });

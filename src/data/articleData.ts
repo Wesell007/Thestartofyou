@@ -2712,6 +2712,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Accept help and delegate", reason: "You do not need to do everything yourself." },
       { action: "Prepare some meals in advance", reason: "Batch cooking for the freezer saves energy in the early weeks." },
       { action: "Talk about expectations with your partner", reason: "Shared understanding reduces conflict after baby arrives." },
+      { action: "Look into antenatal classes early", reason: "NHS classes are free and usually booked through your midwife; paid options such as NCT courses fill up, so places are often arranged well before the third trimester." },
     ],
     whatHappensNext: "Your baby arrives, and the real learning begins. Trust yourself. You will adapt.",
     relatedStage: {
@@ -2741,6 +2742,7 @@ const articleDatabase: ArticleData[] = [
     faq: [
       { question: "What do I actually need for a newborn?", answer: "A safe sleep space (moses basket or cot), nappies, basic clothing (bodysuits, sleepsuits), feeding supplies, and a car seat if driving from hospital." },
       { question: "When should I start buying baby things?", answer: "Many people start in the second trimester. There is no rush. Focus on essentials first and add as you go." },
+      { question: "Are antenatal classes worth it?", answer: "Many people find them useful for understanding labour, pain relief options, feeding and the first weeks, and for meeting others due around the same time. NHS classes are free and arranged through your midwife; paid courses such as NCT cover similar ground with smaller groups. Neither is compulsory, and online or recorded sessions are an option if getting to a class is difficult." },
       { question: "How do I prepare emotionally for a baby?", answer: "Talk to other parents, discuss expectations with your partner, and give yourself permission to not have all the answers. Emotional readiness is a process, not a destination." },
     ],
   },

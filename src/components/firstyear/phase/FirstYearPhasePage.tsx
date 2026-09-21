@@ -284,15 +284,10 @@ const PairedSection = ({ config }: Props) => (
   </section>
 );
 
-const slugify = (s: string) =>
-  s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-
 const CommonQuestions = ({
   items,
-  phaseSlug,
 }: {
   items: PhaseConfig["commonQuestions"];
-  phaseSlug: PhaseConfig["slug"];
 }) => (
   <section className="bg-parchment py-16 md:py-22">
     <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-4xl">
@@ -738,7 +733,7 @@ const FirstYearPhasePage = ({ config }: Props) => {
         {config.editorial && <PhaseEditorial text={config.editorial} />}
         <FeelsAndHelps feels={config.feelsHard} helps={config.whatHelps} />
         <WhenToAskForSupport items={config.support} />
-        <CommonQuestions items={config.commonQuestions} phaseSlug={config.slug} />
+        <CommonQuestions items={config.commonQuestions} />
         <FeaturedGuidance items={config.featuredGuidance} />
         <RelatedTopics items={config.relatedTopics} />
         <PhaseCompanion config={config} />

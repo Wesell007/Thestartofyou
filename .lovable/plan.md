@@ -1,44 +1,51 @@
-# Phase 36B — Pregnancy Content Coverage & Journey Audit
+# Phase 36C — Pregnancy final cleanup and workstream closure
 
-Audit only. No new content, no content rewrites, no route/week/AI/grounding/reviewer changes, no deployment. The only files written are the three new audit documents plus a roadmap entry.
+Evidence-backed remediation only. No new articles, no new topic pages, no week-model changes, no UX redesign, no AI, grounding, database, lifecycle or analytics changes, no deployment.
 
-## Locked starting state
+Phase 36B counts are locked as the starting evidence: 104 Pregnancy records, 64 journey moments, 0 new article candidates, 0 release blockers.
 
-- Phase 36A and 36A.1 stay closed and unedited; Pregnancy UX is treated as approved.
-- TTC workstream stays closed; saved lifecycles remain ttc, pregnancy, first_year.
-- Grounding, reviewer governance, Companion runtime and source records are read-only.
+## Scope of work
 
-## What the audit will cover
+### 1. Four stale related-article references
+The four references live in article `relatedSlugs` and are dropped silently before render. Repair each only where repository evidence establishes the intended canonical destination:
+- `first-trimester-symptoms` → the live owners (`early-pregnancy-symptoms-explained`, `nausea-in-early-pregnancy`, `fatigue-in-early-pregnancy`, `symptoms-stopping-early-pregnancy`) as the evidence supports, three references.
+- `headaches-in-pregnancy` referenced from `paracetamol-in-pregnancy` → its live canonical owner.
+If no defensible replacement exists for a given reference, remove it rather than guess. Target after: stale references 0, broken rendered links 0, wrong-destination links 0.
 
-**Surface inventory** — every visitor-facing Pregnancy surface traced from real route registration, not filenames: the hub, the six canonical topic routes (/pregnancy/body, /baby, /feelings, /health-and-safety, /diet-and-exercise, /preparing-for-baby), three trimester routes, the parameterised week route with all 42 week modules, the due-date calculator and results pages, the Pregnancy toolkit surfaces, preparing-for-baby and journey-support surfaces, IVF early-pregnancy crossover, loss and postpartum crossovers, saved-journey and Companion surfaces, plus legacy routes, redirects, drafts, duplicates and sitemap-emitted URLs. Each surface gets exactly one type classification (HUB, TOPIC_PAGE, TRIMESTER_PAGE, WEEK_PAGE, ARTICLE, TOOL, SUPPORT_SURFACE, IVF_CROSSOVER, FIRST_YEAR_CROSSOVER, LOSS_CROSSOVER, JOURNEY_SURFACE, REDIRECT, LEGACY).
+### 2. Two orphaned articles
+- `symptoms-stopping-early-pregnancy` — one honest inbound path from the early-pregnancy context that already discusses symptom change.
+- `low-lying-placenta-in-pregnancy` — one honest inbound path from the placenta/body context that already owns that intent.
+One placement each. No artificial padding, no navigation redesign. Target after: orphans 0, new routes 0.
 
-**Article inventory** — every Pregnancy-specific and Pregnancy-crossover article record with slug, title, topic, status, route, live/draft/unknown, discoverability, placements, inbound and outbound links, image state, source state, sensitivity, grounding metadata state, duplicate/shadow state, and exactly one action (KEEP, EXPAND_EXISTING, MERGE, REPOSITION, INTERNAL_LINK_ONLY, ARCHIVE_CANDIDATE).
+### 3. Pregnancy → Loss support handoff
+Add the smallest editorial handoff from the strongest existing Pregnancy surface (bleeding/uncertainty guidance in early pregnancy) to the existing loss support records. Existing content only; no loss article, no loss lifecycle, no repeated CTAs. Target: COMPLETE, new loss content 0.
 
-**Week inventory** — all 42 modules audited separately: trimester, indexability, baby development, maternal guidance, health/safety, sources, destinations, media, duplication, missing expected sections, broken destinations, recommendation.
+### 4. Pregnancy → First Year editorial handoff
+Add one clear editorial transition at the appropriate late-Pregnancy point (end of the week journey / late third trimester) into existing First Year and after-birth guidance. No postpartum lifecycle, no new First Year content, no routes, no change to lifecycle resolution. Target: content handoff COMPLETE, lifecycle routing unchanged and COMPLETE.
 
-**Trimester inventory** — unique value versus duplicated week navigation for each of the three surfaces; no trimester page removed simply because week pages exist.
+### 5. Birth-plan consolidation
+`writing-a-birth-plan` and `birth-preferences` share one visitor intent. Choose the canonical owner on content completeness, inbound links, discovery, source quality and route history; fold the useful guidance from the secondary record into it and apply the repository's established safe disposition to the secondary route, using the existing canonical-redirect pattern if its public route retires. No third record. Target: 1 canonical owner, 0 technical duplicates introduced, 0 broken inbound links.
 
-**Discoverability** — three separate dimensions kept apart: in-site navigation, internal findability, and sitemap/index state. Orphan means no meaningful in-site path. Every WEAK_DISCOVERY call carries a written reason based on link prominence, parent relevance, wording and journey context, not raw inbound-link count.
+### 6. Five EXPAND_EXISTING records (from 36B, no guessing)
+- `complete-guide-morning-sickness` — hyperemesis
+- `stages-of-labour` — pain relief options
+- `swelling-in-pregnancy` — pre-eclampsia
+- `eating-well-in-pregnancy` — travel and flying
+- `preparing-for-baby-complete-guide` — antenatal classes
 
-**Journey coverage** — an end-to-end Pregnancy moment matrix built from repository truth, covering positive test and entry, early pregnancy, first/second/third trimester care, your body, your baby, feelings, health and safety, diet and exercise, antenatal care and tests, common conditions, medication boundaries, loss crossover, IVF boundary, preparing for baby, labour and birth preparation, due date and overdue, First Year handoff, and partner support. Each moment receives exactly one classification and the arithmetic reconciles exactly against the totals.
+Each keeps its canonical route, adds only the audited missing guidance, keeps the established voice and safe escalation wording, uses existing verified sources, and introduces no new medical precision.
 
-**Safety and provenance** — unsupported medical/numerical claims counted and broken down by hub/topic, articles, trimester, week pages; medication-safety wording concerns counted; source records classified STRUCTURED_VERIFIED / LABEL_ONLY / MISSING / UNRESOLVED_PROVENANCE. Nothing is repaired in this phase. Any grounding registry drift is reported, not fixed.
+### 7. Fourteen unsupported claims
+Re-identify the exact 14 article claims (12 in the six label-only-source articles named in 36B, 2 in no-source articles). For each choose exactly one: supported with verified existing source, safely removed, safely reworded, or unresolved. No invented URLs, thresholds or timings; no source substitution. Also address the two "completely normal" certainty phrasings about implantation bleeding where they fall inside these claims. Arithmetic must total 14 with unresolved = 0.
 
-**Duplication, tools, Companion, imagery** — cannibalisation register with per-item treatment; tool inventory plus assessment of checklist/tool opportunities (assessed, not built); count of material needs reachable only through Companion; image completeness counts for heroes, fallbacks, body imagery and week media.
+### 8. Boundaries held
+No mass source normalisation; label-only (126), no-source (5) and the 311 week statements with unresolved statement-level provenance are recorded as governance debt, not remediated. The 42-week system stays locked unless a 36C link fix touches it. Unknown editorial status (19) untouched. Tool and checklist opportunities not built. Weak discovery reassessed and documented honestly, not padded. Companion, grounding and reviewer registries unchanged.
 
-**Shortlists and gap register** — new-article shortlist with justification tests applied (no quota, NEW_ARTICLE never the default), expansion shortlist, merge/reposition/archive shortlist, week-remediation shortlist, and one final gap register with P1/P2/P3 priorities. Blockers are separated from future enhancements.
-
-## Deliverables
-
-- `docs/content/phase36b-pregnancy-content-inventory.md`
-- `docs/content/phase36b-pregnancy-journey-gap-register.md`
-- `docs/content/phase36b-pregnancy-content-coverage-audit.md`
-- `roadmap.md` — appended Phase 36B entry only; 36A, 36A.1 and Phase 35 TTC history left untouched.
+## Documentation
+Create `docs/content/phase36c-pregnancy-final-cleanup.md`, `docs/content/phase36c-pregnancy-claim-resolution-evidence.md`, `docs/content/phase36c-pregnancy-final-closure.md`. Update `roadmap.md` with the Phase 36C entry only; Phase 36A, 36A.1, 36B and Phase 35 records are preserved except for exact cross-references to the new evidence.
 
 ## Validation
-
-Pregnancy content/data tests, Pregnancy route tests, week and trimester route integrity, article route tests, link integrity, sitemap/indexability checks, full suite, typecheck twice, lint against the existing baseline. Source behaviour changes = 0. Deployment = NO.
+Pregnancy content, route, article-route, related-guidance, loss-handoff, First Year handoff, birth-plan canonicalisation/redirect, source/claim, week-route, trimester-route, link-integrity and sitemap tests; new focused regressions for each change; full suite; typecheck twice; lint against the established baseline (1 pre-existing generated-file error, 10 warnings); production validation build; browser sanity QA at the changed public surfaces. Flaky failures reported with first-failure and rerun evidence. No deployment.
 
 ## Closure
-
-The completion report returns all required counts and handoff verdicts, then exactly one outcome: A (Pregnancy complete, workstream locked closed), B (mostly sufficient, one smallest justified follow-up phase recommended but not started), or C (material gaps, evidence-backed remediation sequence returned, not started).
+If every gate passes (stale references 0, orphans 0, both handoffs COMPLETE, birth-plan overlap resolved, five expansions done, unsupported claims 0, broken routes/links 0, AI-only needs 0, blockers 0), close Phase 36C PASS and lock the Pregnancy workstream as closed for the current strategy, with First Year named as the next workstream. No further Pregnancy phase recommended.

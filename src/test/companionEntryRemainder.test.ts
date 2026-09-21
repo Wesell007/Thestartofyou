@@ -82,9 +82,9 @@ describe("contextual labels describe the content, not the person", () => {
     );
   });
 
-  it("uses stage wording on the first year phase surface", () => {
+  it("uses phase wording on the first year phase surface", () => {
     expect(read("components/firstyear/phase/FirstYearPhasePage.tsx")).toContain(
-      'label="Ask about this stage"',
+      'label="Ask about this phase"',
     );
   });
 

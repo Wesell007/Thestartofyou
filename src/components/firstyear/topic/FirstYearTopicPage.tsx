@@ -15,7 +15,6 @@ import {
   type FirstYearArticleTopic,
 } from "@/data/firstYearArticleData";
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
-import AskLink from "@/components/shared/AskLink";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
@@ -269,7 +268,7 @@ const FirstYearTopicPage = ({ config }: Props) => {
         {/* ─── 3. GUIDANCE ───────────────────────────────────────────── */}
         {/* Designed as a real editorial article cluster; unpublished cards
             open contextual AI guidance without placing the question in the URL. */}
-        <section className="pb-16 md:pb-24">
+        {config.featured.length > 0 && <section className="pb-16 md:pb-24" data-start-here>
           <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-6xl">
             <div className="mb-9 md:mb-12 flex flex-col items-start gap-4">
               <SectionLabel>Guidance</SectionLabel>
@@ -333,28 +332,17 @@ const FirstYearTopicPage = ({ config }: Props) => {
                   </div>
                   </>
                 );
-                const className = "group block bg-card rounded-2xl overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]";
+                const className = "group block bg-card rounded-lg overflow-hidden border transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_-32px_rgba(0,0,0,0.28)]";
                 const style = { borderColor: accentBorder };
-                return item.href ? (
+                return (
                   <Link key={item.title} to={item.href} className={className} style={style}>
                     {card}
                   </Link>
-                ) : (
-                  <AskLink
-                    key={item.title}
-                    question={item.title}
-                    context={config.title}
-                    stage={config.side === "recovery" ? "recovery" : "first-year"}
-                    className={className}
-                    style={style}
-                  >
-                    {card}
-                  </AskLink>
                 );
               })}
             </div>
           </div>
-        </section>
+        </section>}
 
         {/* ─── 3b. RELATED GUIDANCE (ARTICLES) ───────────────────────── */}
         {(() => {

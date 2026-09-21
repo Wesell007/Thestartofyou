@@ -32,23 +32,6 @@ const phases = [
   },
 ];
 
-// Secondary quick-navigation strip — supports the four phase cards, never replaces them.
-const ageItems: { label: string; href: string }[] = [
-  { label: "Newborn", href: "/first-year/newborn" },
-  { label: "1 month", href: "/first-year/1-month" },
-  { label: "2 months", href: "/first-year/2-months" },
-  { label: "3 months", href: "/first-year/3-months" },
-  { label: "4 months", href: "/first-year/4-months" },
-  { label: "5 months", href: "/first-year/5-months" },
-  { label: "6 months", href: "/first-year/6-months" },
-  { label: "7 months", href: "/first-year/7-months" },
-  { label: "8 months", href: "/first-year/8-months" },
-  { label: "9 months", href: "/first-year/9-months" },
-  { label: "10 months", href: "/first-year/10-months" },
-  { label: "11 months", href: "/first-year/11-months" },
-  { label: "12 months", href: "/first-year/12-months" },
-];
-
 const FYPhaseNav = () => {
   return (
     <section id="phases" className="bg-parchment py-14 md:py-20">
@@ -152,46 +135,6 @@ const FYPhaseNav = () => {
           </div>
         </div>
 
-        {/* Secondary quick navigation */}
-        <div className="mt-16 md:mt-20">
-          <div
-            className="h-px w-full mb-10"
-            style={{ backgroundColor: "hsl(var(--border) / 0.55)" }}
-          />
-          <p className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3 text-foreground/45">
-            Month by month
-          </p>
-          <h3 className="font-serif text-xl sm:text-[1.4rem] text-foreground leading-snug mb-2">
-            Your baby's first year, month by month.
-          </h3>
-          <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed max-w-xl mb-6">
-            Choose your baby's age for a deeper guide to development, feeding, sleep, care and how this stage may feel for you.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {ageItems.map((a) => (
-              <Link
-                key={a.label}
-                to={a.href}
-                className="inline-flex items-center justify-center rounded-full px-4 min-h-[36px] font-sans text-[12px] font-light border transition-all hover:-translate-y-[1px]"
-                style={{
-                  backgroundColor: "hsl(var(--stage-firstyear-soft) / 0.38)",
-                  color: "hsl(var(--stage-firstyear-deep))",
-                  borderColor: "hsl(var(--stage-firstyear-accent) / 0.24)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.65)";
-                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "hsl(var(--stage-firstyear-soft) / 0.38)";
-                  e.currentTarget.style.borderColor = "hsl(var(--stage-firstyear-accent) / 0.24)";
-                }}
-              >
-                {a.label}
-              </Link>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

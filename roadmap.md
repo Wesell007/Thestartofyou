@@ -179,3 +179,12 @@
 - [x] Governance debt carried forward unchanged: 126 label-only source records, 5 articles with no source records, 311 week statements at UNRESOLVED_PROVENANCE, 19 unknown-status records, one accepted weak-discovery record; week modules modified 0, week-model changes 0
 - [x] Validation: new Phase 36C regression suite 8 tests PASS; full suite 133 files / 1,531 tests PASS first run; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 352 sitemap entries; browser QA of 10 changed public surfaces PASS; deployment NO
 - [x] PREGNANCY WORKSTREAM — CLOSED FOR CURRENT STRATEGY; next major lifecycle workstream FIRST YEAR
+
+## Phase 37A — First Year hub, phase and topic UX, visual system and AI separation — IN PROGRESS
+- [ ] Create and approve the Nano Banana direction board before production image replacement
+- [ ] Audit and reconcile all 99 existing image placements plus the hub video
+- [ ] Recompose the hub in the locked ten-section order with one final lifecycle-aware action
+- [ ] Convert or remove all 24 Topic Start Here AI fallbacks and all 12 phase faux-guidance cards
+- [ ] Remove 6 hub and 20 phase question AI actions while preserving editorial questions and valid reads
+- [ ] Preserve 4 phase routes, 13 month destinations, 8 topic routes and all article boundaries
+- [ ] Validate 13 canonical surfaces at 1280, 834 and 390 pixels, then run all required checks

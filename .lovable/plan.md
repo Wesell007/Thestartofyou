@@ -32,7 +32,7 @@ So the mapping fails on both halves: the owner is wrong, and the "partially cove
 
 ## Documentation edits (targeted only)
 
-1. `docs/content/phase36b-pregnancy-journey-gap-register.md` — row 46 treatment and evidence corrected; treatment-summary row 46 updated; P3 line kept with the corrected wording. No other rows touched.
+1. `docs/content/phase36b-pregnancy-journey-gap-register.md` — row 46 recorded as UNCOVERED / P3 / FUTURE EDITORIAL DECISION — NO CURRENT VALID OWNER, with the false-positive keyword evidence corrected; treatment-summary row 46 updated; journey totals corrected to 45 / 8 / 1 / 2 / 8 = 64. No other rows touched.
 2. `docs/content/phase36b-pregnancy-content-inventory.md` — EXPAND_EXISTING row 5 → 4 with `eating-well-in-pregnancy` removed; KEEP count adjusted.
 3. `docs/content/phase36b-pregnancy-content-coverage-audit.md` — only the dependent counts in the action line and the partial-moment arithmetic.
 4. `docs/content/phase36c-pregnancy-final-cleanup.md` and `phase36c-pregnancy-final-closure.md` — replace the "EXPANSION OWNER MISMATCH = 1, unresolved" record with the reconciled account: the original mapping, why it failed repository verification, the corrected classification, that no implementation was required, and the final 4/4 counts. Keeps the explicit statement that content was not forced into an unrelated article to satisfy a count.

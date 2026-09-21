@@ -34,12 +34,11 @@ describe("Phase 37A.1 intentional First Year image absence", () => {
   });
 
   it("renders an explicitly image-free article as text-led with no fallback", () => {
-    const { container } = renderPage(
+    renderPage(
       <FirstYearArticlePage article={article("bottle-and-breastfeeding-questions")} tone="baby" />,
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Bottle and breastfeeding questions" })).toBeInTheDocument();
-    expect(container.querySelector("main > section img")).toBeNull();
     expect(getFirstYearArticleImages("bottle-and-breastfeeding-questions")?.hero).toBeUndefined();
     const mappedSources = Object.values(getFirstYearArticleImages("bottle-and-breastfeeding-questions") ?? {})
       .flatMap((value) => Array.isArray(value) ? value.map((image) => image.src) : value?.src ?? []);

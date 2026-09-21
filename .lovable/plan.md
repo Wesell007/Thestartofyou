@@ -19,6 +19,8 @@ Repository truth currently contains:
 
 This gives a current configured still image baseline of 96 placements before counting repeated render appearances of article cards. The rendered audit will record both the canonical configured placement and every route surface where that asset appears, avoiding double counting while still exposing problematic repetition.
 
+Before auditing, confirm whether the two primary Baby's First Year and Postpartum Recovery pathway presentations currently render still images. Record any such imagery separately as `CURRENT_PATHWAY_PRESENTATION_PLACEMENTS`, audit all of it using the same four dispositions, and do not add it to the authoritative 96 denominator.
+
 The specific `Bottle and breastfeeding questions` hero is confirmed as `firstyear-scene.jpg`, the baby feet in a knitted blanket. It will be removed. The same article also currently uses a generic bonding image in its body, which will be judged independently against the surrounding feeding section.
 
 The shared article view already renders a centred, narrower text led hero when no hero image is supplied. However, the First Year image map currently requires every entry to have a hero, and article cards currently force topic fallback photography. Those First Year constraints must be relaxed so deliberate removal does not silently reintroduce generic imagery.
@@ -51,6 +53,12 @@ For every canonical placement record:
 
 The hub video remains a separate media decision rather than being mixed into the still image total.
 
+Accounting must reconcile exactly:
+
+`KEEP + RECROP + REPLACE_WITH_EXISTING_APPROVED_ASSET + REMOVE = 96`
+
+If generation becomes genuinely necessary, record `REPLACE_WITH_NEW_JUSTIFIED_ASSET` separately while retaining the original placement in the replacement accounting. The preferred result is 0 generated assets.
+
 ### 2. Apply only evidence backed image decisions
 
 Use this priority:
@@ -76,8 +84,9 @@ Contain the capability to the First Year article image mapping and article card 
 
 • make First Year article heroes optional
 • preserve the existing shared article view behaviour for present and absent heroes
-• prevent topic fallback photography from overriding an intentional image removal
-• give image free article cards a balanced text led treatment with no blank ratio box, broken slot or reserved whitespace
+• prevent topic, category or article fallback photography from overriding an intentional image removal on any affected First Year card surface
+• support deliberate image absence across article cards, Start Here cards, related guidance cards, pathway cards and other affected First Year discovery cards
+• give every image free item a balanced text led treatment with no blank ratio box, broken slot or reserved whitespace
 • keep Family, Toddler and the global article systems unchanged
 
 Update old image quantity tests that force every audited article to retain photography. Replace them with checks for valid optional heroes, valid remaining body placements, no missing assets and no accidental fallback on explicitly image free First Year articles.
@@ -98,6 +107,8 @@ Verify:
 • safer sleep and feeding positioning remain responsible
 • no strange crop, broken image, blank image box or empty placeholder
 • image free heroes and cards look intentional
+• deliberately image free First Year items receiving fallback photography: 0
+• blank image ratio boxes and empty reserved image areas: 0
 • typography and article rhythm remain balanced
 • no horizontal overflow or console errors
 • no regression to hub, phase or topic presentation
@@ -118,12 +129,17 @@ The report will state:
 
 • current placements audited
 • KEEP, RECROP, existing replacement and REMOVE totals
+• canonical still placements audited: 96 of 96, with arithmetic reconciled
+• current pathway presentation placements and audited total, reported separately
+• hub video audited separately
+• replacement with new justified asset total, if any
 • new generated image count
 • 26 of 26 article heroes inspected
 • hero changes and image free totals
 • article body images inspected and removed
 • semantic and uncanny defects after
 • broken placements and empty placeholders
+• deliberately image free items receiving fallback photography
 • hub, phase and topic regressions
 • article copy, AI, grounding, TTC and Pregnancy changes
 • deployment status

@@ -2,7 +2,7 @@
 
 Status: CLOSED PASS. Evidence-backed remediation only. No new articles, no new routes beyond one canonical redirect, no UX redesign, no week-model change, no AI/grounding/database/lifecycle/analytics change, not deployed.
 
-Starting evidence locked from Phase 36B (not reopened): 104 Pregnancy records (live 85, draft 0, unknown 19); actions KEEP 96, EXPAND_EXISTING 5, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0; 64 journey moments (covered 45, partially covered 9, uncovered 0, not required standalone 2, better served elsewhere 8); 0 new article candidates; 0 release blockers.
+Starting evidence locked from Phase 36B (not reopened): 104 Pregnancy records (live 85, draft 0, unknown 19); actions KEEP 97, EXPAND_EXISTING 4, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0; 64 journey moments (covered 45, partially covered 8, uncovered 1, not required standalone 2, better served elsewhere 8); 0 new article candidates; 0 release blockers.
 
 ## 1. Stale related-article references (4 → 0)
 
@@ -46,7 +46,7 @@ After: 1 canonical owner, 0 internal references to the retired route, 0 broken l
 
 Known carry-forward: the grounding registry still lists the retired slug. The registry is locked in this phase, so this is recorded as governance debt, not repaired here.
 
-## 6. EXPAND_EXISTING items (5 verified / 5 addressed / 1 owner mismatch reported)
+## 6. EXPAND_EXISTING items (4 valid mappings / 4 verified / 4 addressed / 0 remaining mismatches)
 
 | Gap | 36B owner | Verified | Outcome |
 |---|---|---|---|
@@ -54,7 +54,7 @@ Known carry-forward: the grounding registry still lists the retired slug. The re
 | Labour pain relief | stages-of-labour | Yes | New section "Pain relief through the stages" — early/established options, epidural, choice framing |
 | Pre-eclampsia | swelling-in-pregnancy | Yes | New section "Pre-eclampsia, in a little more detail" — what it is, risk factors, monitoring, urgent-signs callout |
 | Antenatal classes | preparing-for-baby-complete-guide | Yes | Added one practical step and one FAQ covering NHS and paid classes |
-| Travel and flying | eating-well-in-pregnancy | **No — EXPANSION OWNER MISMATCH** | Left unresolved. The proposed owner contains no travel or flight content; travel guidance currently sits in `uti-in-pregnancy` and `vaccinations-in-pregnancy`. No content forced, no new article created |
+| Travel and flying | eating-well-in-pregnancy | **No — mapping invalid, reconciled** | The mapping was withdrawn in the Phase 36C final evidence reconciliation. `eating-well-in-pregnancy` contains no travel or flying guidance and is restored to KEEP; "flying", "air travel" and "airline" appear zero times across the audited article, week and topic datasets, so the original PARTIALLY_COVERED evidence was a false-positive keyword match on the verb "travel". Moment 46 is now recorded as UNCOVERED / P3 / FUTURE EDITORIAL DECISION — NO CURRENT VALID OWNER. No content was forced into an unrelated article, no new article created, and the valid expansion programme was 4 / 4 completed |
 
 Each expansion preserves the canonical route, the established voice, existing verified sources and safe escalation wording, and adds no new numerical precision.
 

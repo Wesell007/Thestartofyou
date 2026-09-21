@@ -22,8 +22,8 @@ Verdict: **PHASE 36C — PREGNANCY FINAL CLEANUP & WORKSTREAM CLOSURE CLOSED PAS
 | Internal references to the retired route | 13 | 0 |
 | Redirect mechanism | n/a | Client-side `Navigate ... replace` above `/articles/:slug` + sitemap de-index (established pattern) |
 | Redirect loops | 0 | 0 |
-| Expansions verified | — | 4/5 verified, 1 EXPANSION OWNER MISMATCH reported (travel/flying → eating-well-in-pregnancy) |
-| Expansions addressed | — | 4 implemented, 1 left unresolved rather than guessed |
+| Expansions verified | — | 4/4 valid mappings verified; the fifth mapping (travel/flying → eating-well-in-pregnancy) was invalid and withdrawn in the final evidence reconciliation |
+| Expansions addressed | — | 4/4 implemented; remaining expansion-owner mismatches 0 |
 | Unsupported claims | 14 | 0 |
 | Claim outcomes | — | SUPPORTED 0 / SAFELY_REMOVED 2 / SAFELY_REWORDED 12 / UNRESOLVED 0 |
 | Label-only source records | 126 | 126 (governance debt) |
@@ -68,4 +68,15 @@ Your Body, Your Baby, Your Feelings, Diet & Exercise — sufficient, verdict unc
 
 Stale references 0 ✓ · orphans 0 ✓ · loss handoff COMPLETE ✓ · First Year content handoff COMPLETE ✓ · lifecycle routing COMPLETE ✓ · birth-plan overlap resolved ✓ · unsupported claims after 0 ✓ · broken and wrong-destination links 0 ✓ · AI-only needs 0 ✓ · blockers 0 ✓.
 
-Expansions: 4/5 verified and implemented; 1 reported as EXPANSION OWNER MISMATCH (travel/flying) and deliberately left unresolved rather than forced into an unrelated owner or turned into a new article. This is a reported, non-blocking documentation outcome rather than an unaddressed defect: the 36B evidence does not support the proposed owner, and creating content to satisfy the count would breach the phase's own no-new-content and no-guessing rules. The Pregnancy workstream is therefore closed with that single item carried forward as a future editorial decision.
+Expansions: 4/4 valid mappings verified and implemented; remaining expansion-owner mismatches 0.
+
+## Final evidence reconciliation — travel and flying
+
+- **Original mapping:** Phase 36B assigned the travel/flying gap to `eating-well-in-pregnancy` as an EXPAND_EXISTING item.
+- **Why it failed repository verification:** that article carries no travel or flying guidance, and "flying", "air travel" and "airline" appear zero times across the audited article, week and topic datasets. The "40 article and 33 week mentions" evidence was a false-positive keyword match on the verb "travel" (an embryo travelling, pain travelling, infection travelling to the kidneys). The only genuine references are travel-vaccine asides in `vaccinations-in-pregnancy`.
+- **Corrected classification:** `eating-well-in-pregnancy` action = KEEP. Moment 46 coverage = UNCOVERED, priority = P3, treatment = FUTURE EDITORIAL DECISION / NO CURRENT VALID OWNER.
+- **Implementation required:** no. No current surface can honestly absorb the intent without new content, and content was not forced into an unrelated article to satisfy a phase count.
+- **Reconciled counts:** article records 104 — KEEP 97, EXPAND_EXISTING 4, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0. Journey moments 64 — covered 45, partially covered 8, uncovered 1, not required standalone 2, better served elsewhere 8. Valid expansion mappings 4/4, addressed 4/4, remaining mismatches 0.
+- **Carried forward:** travel / flying in Pregnancy = UNCOVERED / P3 / non-blocking future editorial decision. It does not reopen the Pregnancy workstream.
+
+Phase 36B's strategic conclusion is unchanged: MOSTLY SUFFICIENT / SMALL GAPS, new Pregnancy article candidates 0, current Pregnancy release blockers 0. This reconciliation changed documentation and classification only: article dataset changes 0, route changes 0, UX changes 0, week-data changes 0, AI / grounding / reviewer / database / lifecycle changes 0, deployment NO.

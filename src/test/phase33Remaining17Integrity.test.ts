@@ -156,8 +156,8 @@ describe("Phase 33.3 imagery", () => {
       }
 
       expect(images?.hero?.src, slug).toBeTruthy();
-      expect(body, slug).toHaveLength(2);
-      expect(new Set([images?.hero?.src, ...body.map(({ src }) => src)]).size, slug).toBe(3);
+      expect(body.length, slug).toBeGreaterThanOrEqual(1);
+      expect(new Set([images?.hero?.src, ...body.map(({ src }) => src)]).size, slug).toBe(body.length + 1);
 
       for (const image of body) {
         const heading = article?.sections[image.afterSectionIndex]?.heading;

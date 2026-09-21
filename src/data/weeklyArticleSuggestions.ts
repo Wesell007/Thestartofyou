@@ -122,14 +122,14 @@ const RANGES: WeekRange[] = [
   ]},
   { from: 30, to: 31, items: [
     { slug: "hospital-bag-and-what-to-pack", reason: REASONS.bag },
-    { slug: "writing-a-birth-plan", reason: REASONS.birthPlan },
+    { slug: "birth-preferences", reason: REASONS.birthPlan },
   ]},
   { from: 32, to: 33, items: [
     { slug: "preparing-emotionally-for-birth", reason: REASONS.emotionally },
     { slug: "swelling-in-pregnancy", reason: REASONS.swelling },
   ]},
   { from: 34, to: 34, items: [
-    { slug: "writing-a-birth-plan", reason: REASONS.birthPlan },
+    { slug: "birth-preferences", reason: REASONS.birthPlan },
     { slug: "sleep-in-pregnancy", reason: REASONS.sleep },
   ]},
   { from: 35, to: 36, items: [

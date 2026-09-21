@@ -143,7 +143,7 @@ function extractHubArticles(file: string): Array<{ slug: string; topic: string }
 }
 
 // Redirected legacy slugs — excluded so only the canonical article is indexed.
-const legacyArticleRedirects = new Set(["signs-of-ovulation"]);
+const legacyArticleRedirects = new Set(["signs-of-ovulation", "writing-a-birth-plan"]);
 const legacyArticleUrls = extractLegacyArticleSlugs()
   .filter((s) => !legacyArticleRedirects.has(s))
   .map((s) => `/articles/${s}`);

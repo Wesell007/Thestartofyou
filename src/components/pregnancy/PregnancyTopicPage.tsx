@@ -256,7 +256,6 @@ const HREF_IMAGE_MAP: Record<string, string> = {
   "/articles/when-you-cant-face-food-in-pregnancy": imgFoodAversions,
   // Preparing
   "/preparing-for-baby": imgPreparingJourney,
-  "/articles/writing-a-birth-plan": imgBirthPreferences,
   "/articles/birth-preferences": imgBirthPreferences,
   "/articles/hospital-bag-and-what-to-pack": imgHospitalBag,
   "/articles/the-space-your-baby-will-come-home-to": imgNursery,

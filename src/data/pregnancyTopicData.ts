@@ -562,6 +562,15 @@ export const pregnancyTopicConfigs: Record<PregnancyTopicSlug, PregnancyTopicPag
           { label: "Maternity leave planning", href: "/articles/maternity-leave-planning" },
         ],
       },
+      {
+        label: "Looking ahead to the first weeks",
+        description: "Pregnancy guidance stops at birth, but the days straight after it are the part most people feel least prepared for. These are the first-year pages worth knowing about before your baby arrives.",
+        links: [
+          { label: "Your body after birth", href: "/articles/your-body-after-birth" },
+          { label: "Feeding your baby: a complete guide", href: "/articles/feeding-your-baby-complete-guide" },
+          { label: "The first year", href: "/first-year" },
+        ],
+      },
     ],
 
 

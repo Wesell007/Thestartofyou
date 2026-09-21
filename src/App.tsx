@@ -241,6 +241,8 @@ const App = () => (
           <Route path="/pregnancy/third-trimester" element={<ThirdTrimester />} />
           <Route path="/pregnancy/week/:week" element={<PregnancyWeekRoute />} />
           <Route path="/articles/signs-of-ovulation" element={<Navigate to="/articles/ovulation-signs" replace />} />
+          {/* Phase 36C — writing-a-birth-plan consolidated into the canonical birth-preferences article. */}
+          <Route path="/articles/writing-a-birth-plan" element={<Navigate to="/articles/birth-preferences" replace />} />
           <Route path="/articles/:slug" element={<ArticlePage />} />
           <Route path="/due-date-calculator" element={<DueDateCalculator />} />
           <Route path="/due-date-results" element={<DueDateResults />} />

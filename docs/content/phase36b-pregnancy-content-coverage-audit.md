@@ -6,11 +6,11 @@ Audit only. No article, route, week, source, reviewer, grounding, AI or analytic
 
 **AUDIT COMPLETE / MOSTLY SUFFICIENT / SMALL GAPS** (Outcome B).
 
-The combined ecosystem — 1 hub, 6 topic pages, 3 trimester surfaces, 42 week modules, 104 article records, 2 tools, 1 public support hub and the IVF crossover — covers the Pregnancy journey adequately and safely. 64 journey moments were audited: 45 covered, 9 partially covered, 0 uncovered. There are no current release blockers. What remains is a small, evidence-backed cleanup rather than a content programme.
+The combined ecosystem — 1 hub, 6 topic pages, 3 trimester surfaces, 42 week modules, 104 article records, 2 tools, 1 public support hub and the IVF crossover — covers the Pregnancy journey adequately and safely. 64 journey moments were audited: 45 covered, 8 partially covered, 1 uncovered (travel and flying, P3, non-blocking — corrected in the Phase 36C final evidence reconciliation). There are no current release blockers. What remains is a small, evidence-backed cleanup rather than a content programme.
 
 ## 2. Coverage assessment
 
-Coverage is not thin. Every stage from a positive test to going past due dates has an owning surface, and every week module carries a seek-support block and a disclaimer. The nine partial moments are all cases where real material exists in prose but no surface owns it (hyperemesis, labour pain relief, pre-eclampsia, travel, antenatal classes, telling people, the partner role) or where an existing owner sits in another hub (miscarriage support, the First Year handoff).
+Coverage is not thin. Every stage from a positive test to going past due dates has an owning surface, and every week module carries a seek-support block and a disclaimer. The eight partial moments are all cases where real material exists in prose but no surface owns it (hyperemesis, labour pain relief, pre-eclampsia, antenatal classes, telling people, the partner role) or where an existing owner sits in another hub (miscarriage support, the First Year handoff). Travel and flying is the single UNCOVERED moment: no current surface carries that guidance and none can honestly absorb it without new content, so it is carried as a P3 future editorial decision rather than a blocker.
 
 New article candidates: **0**. Every thin area already has an owner that would be cannibalised by a new record, so the recommended treatments are expansion, internal linking and two handoffs.
 
@@ -39,9 +39,9 @@ Articles: Pregnancy-specific and crossover records 104; live 85; draft 0; unknow
 
 Imagery: missing explicit hero 92; using fallback hero 92; missing expected body imagery 89; week modules missing expected media 0.
 
-Journey: moments audited 64; covered 45; partially covered 9; uncovered 0; not required standalone 2; better served elsewhere 8; arithmetic reconciled.
+Journey: moments audited 64; covered 45; partially covered 8; uncovered 1; not required standalone 2; better served elsewhere 8; arithmetic reconciled (45 + 8 + 1 + 2 + 8 = 64).
 
-Article actions: KEEP 96; EXPAND_EXISTING 5; MERGE 2; REPOSITION 0; INTERNAL_LINK_ONLY 1; ARCHIVE_CANDIDATE 0 (total 104).
+Article actions: KEEP 97; EXPAND_EXISTING 4; MERGE 2; REPOSITION 0; INTERNAL_LINK_ONLY 1; ARCHIVE_CANDIDATE 0 (total 104).
 
 Remediation: new article candidates 0; week modules requiring remediation 0; tool opportunities 1; checklist opportunities 2.
 

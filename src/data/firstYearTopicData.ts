@@ -11,12 +11,6 @@ import topicFeeding from "@/assets/firstyear-topic-feeding.jpg";
 import topicSleep from "@/assets/firstyear-topic-sleep.jpg";
 import topicDevelopment from "@/assets/firstyear-topic-development.jpg";
 import topicCareSafety from "@/assets/firstyear-topic-care-safety.jpg";
-import firstyearJourney from "@/assets/firstyear-journey.jpg";
-import guidanceFirstyear from "@/assets/guidance-firstyear.jpg";
-import babyEarly from "@/assets/myweek-baby-early.png";
-import babyMid from "@/assets/myweek-baby-mid.png";
-import secondSleep from "@/assets/article-hero-second-sleep.jpg";
-import cardBonding from "@/assets/guidance-card-bonding.jpg";
 import cardFresh from "@/assets/guidance-card-fresh.jpg";
 import cardQuiet from "@/assets/guidance-card-quiet.jpg";
 
@@ -24,11 +18,9 @@ import postpartumScene from "@/assets/postpartum-scene.jpg";
 import postpartumJourney from "@/assets/postpartum-journey.jpg";
 import postpartumAdjustment from "@/assets/postpartum-stage-adjustment.jpg";
 import postpartumEarlyWeeks from "@/assets/postpartum-stage-early-weeks.jpg";
-import guidancePostpartum from "@/assets/guidance-postpartum.jpg";
 import cardEmotional from "@/assets/guidance-card-emotional.jpg";
 import cardReflection from "@/assets/guidance-card-reflection.jpg";
 import cardPractical from "@/assets/guidance-card-practical.jpg";
-import perinatalAnxiety from "@/assets/article-hero-perinatal-anxiety.jpg";
 
 export type FirstYearTopicSlug =
   | "feeding"
@@ -521,13 +513,3 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
   },
 };
 
-// Silence intentionally-unused decorative imports kept for future swap-in.
-// (Some assets are imported but only used by alternate variants of the page.)
-void firstyearJourney;
-void guidanceFirstyear;
-void babyEarly;
-void babyMid;
-void secondSleep;
-void cardBonding;
-void perinatalAnxiety;
-void guidancePostpartum;

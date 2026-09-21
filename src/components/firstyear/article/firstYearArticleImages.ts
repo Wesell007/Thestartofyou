@@ -16,7 +16,6 @@ import heroIntroducingSolidFoods from "@/assets/firstyear-hero-introducing-solid
 import bodyIntroducingSolidFoods1 from "@/assets/firstyear-body-introducing-solid-foods-1.jpg";
 import bodyIntroducingSolidFoods2 from "@/assets/firstyear-body-introducing-solid-foods-2.jpg";
 import heroNewbornQuirksAndReflexes from "@/assets/firstyear-hero-newborn-quirks-and-reflexes.jpg";
-import bodyNewbornQuirksAndReflexes1 from "@/assets/firstyear-body-newborn-quirks-and-reflexes-1.jpg";
 import bodyNewbornQuirksAndReflexes2 from "@/assets/firstyear-body-newborn-quirks-and-reflexes-2.jpg";
 import heroNewbornSkinSpotsAndMarks from "@/assets/firstyear-hero-newborn-skin-spots-and-marks.jpg";
 import bodyNewbornSkinSpotsAndMarks1 from "@/assets/firstyear-body-newborn-skin-spots-and-marks-1.jpg";

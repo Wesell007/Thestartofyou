@@ -256,6 +256,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   // Sleep
   {
     slug: "newborn-sleep-expectations",
+    suppressHeroImage: true,
     topic: "sleep",
     title: "Newborn sleep expectations",
     description:

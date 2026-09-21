@@ -30,7 +30,7 @@ const FirstYearArticlePage = ({ article, tone }: Props) => {
   return (
     <HubArticleView
       article={article}
-      heroImage={images?.hero}
+      heroImage={article.suppressHeroImage ? undefined : images?.hero}
       bodyImages={images?.body}
       tokens={{
         base,

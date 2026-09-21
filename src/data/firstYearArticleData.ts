@@ -11,6 +11,8 @@ export type FirstYearArticleTopic =
 export interface FirstYearArticle {
   slug: string;
   topic: FirstYearArticleTopic;
+  /** Explicitly opts this First Year article into the intentional text-led hero treatment. */
+  suppressHeroImage?: true;
   title: string;
   description: string;
   readTime: string;
@@ -142,6 +144,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "bottle-and-breastfeeding-questions",
     topic: "feeding",
+    suppressHeroImage: true,
     title: "Bottle and breastfeeding questions",
     description:
       "Gentle answers to the everyday questions that come up whether you're breastfeeding, bottle-feeding or doing both.",
@@ -357,6 +360,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "helping-your-baby-settle",
     topic: "sleep",
+    suppressHeroImage: true,
     title: "Helping your baby settle",
     description:
       "Calm, low-pressure ways to help your baby drift off, without rigid routines or sleep-training pressure.",
@@ -989,6 +993,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "healing-after-birth",
     topic: "postpartum-recovery",
+    suppressHeroImage: true,
     title: "Healing after birth",
     description:
       "What physical recovery can look like in the first weeks, whether you had a vaginal birth or a caesarean.",
@@ -1105,6 +1110,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "what-recovery-can-feel-like",
     topic: "postpartum-recovery",
+    suppressHeroImage: true,
     title: "What recovery can feel like",
     description:
       "The tender, tiring, quietly emotional side of the early weeks, and why it takes longer than the world lets on.",
@@ -1211,6 +1217,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "feeling-like-yourself-again",
     topic: "emotional-wellbeing",
+    suppressHeroImage: true,
     title: "Feeling like yourself again",
     description:
       "Why identity shifts so much after birth, and the small returns to yourself that quietly gather over time.",
@@ -1425,6 +1432,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "body-changes-after-birth",
     topic: "body-and-hormones",
+    suppressHeroImage: true,
     title: "Body changes after birth",
     description:
       "What's normal in the weeks and months after birth, from your bump softening to how your body carries itself.",
@@ -1540,6 +1548,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "hormones-sweat-and-hair-loss",
     topic: "body-and-hormones",
+    suppressHeroImage: true,
     title: "Hormones, sweat and hair loss",
     description:
       "The hormonal shifts that quietly steer the early months, and why hair loss and night sweats aren't a worry.",
@@ -1645,6 +1654,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "postnatal-checks-and-appointments",
     topic: "checkups-and-warning-signs",
+    suppressHeroImage: true,
     title: "Postnatal checks and appointments",
     description:
       "What to expect from your six-week check, your baby's reviews and the appointments that quietly matter.",
@@ -1748,6 +1758,7 @@ const rawFirstYearArticles: FirstYearArticle[] = [
   {
     slug: "when-to-ask-for-help-after-birth",
     topic: "checkups-and-warning-signs",
+    suppressHeroImage: true,
     title: "When to ask for help after birth",
     description:
       "Signs it's worth calling your GP, midwife or 111, and how to trust your instinct without second-guessing it.",

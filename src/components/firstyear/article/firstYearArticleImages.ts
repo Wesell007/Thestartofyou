@@ -1,37 +1,23 @@
 import heroNewbornSleep from "@/assets/firstyear-stage-0-3.jpg";
-import heroSettle from "@/assets/firstyear-scene.jpg";
 import heroSafeSleep from "@/assets/guidance-card-nursery.jpg";
 import heroBabyCare from "@/assets/firstyear-journey.jpg";
 
-import bodySleepCot from "@/assets/article-hero-third-sleep.jpg";
-import bodyComfort from "@/assets/guidance-card-comfort.jpg";
-import bodySafety from "@/assets/guidance-card-safety.jpg";
 import bodyBonding from "@/assets/guidance-card-bonding.jpg";
 
 import heroSleepChanges from "@/assets/firstyear-hero-sleep-changes-safe.jpg";
 import bodyNightWaking from "@/assets/firstyear-body-night-waking.jpg";
 import bodyBedtimeWindDown from "@/assets/firstyear-body-bedtime-wind-down-approved.jpg";
 
-import heroHealing from "@/assets/postpartum-stage-early-days.jpg";
 import bodyHealing from "@/assets/postpartum-scene.jpg";
-import heroRecoveryFeel from "@/assets/postpartum-stage-early-weeks.jpg";
 import bodyRecoveryFeel from "@/assets/postpartum-journey.jpg";
-import heroBodyChanges from "@/assets/postpartum-stage-adjustment.jpg";
 import bodyBodyChanges from "@/assets/guidance-postpartum.jpg";
-import heroHormones from "@/assets/guidance-postpartum.jpg";
-import bodyHormones from "@/assets/home-emotional.jpg";
 
 import heroDevelopment from "@/assets/firstyear-stage-6-9.jpg";
-import bodyDevelopment from "@/assets/guidance-card-development.jpg";
 import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
-import bodyMilestones from "@/assets/guidance-card-milestones.jpg";
 
 import heroFeelingLikeYourself from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
 import heroSupportiveMoment from "@/assets/article-hero-emotional-supportive-moment.jpg";
 import bodyEmotionalSupport from "@/assets/guidance-card-emotional.jpg";
-// bodyEmotionalAdjustment reuses the already-imported `heroBodyChanges`
-// asset (`postpartum-stage-adjustment.jpg`), used here as the body image
-// for `feeling-like-yourself-again`.
 
 import heroTeething from "@/assets/firstyear-hero-teething.jpg";
 import bodyTeething1 from "@/assets/firstyear-body-teething-1.jpg";
@@ -69,7 +55,7 @@ export interface HubBodyImage {
 }
 
 export interface FirstYearArticleImages {
-  hero: { src: string; alt: string };
+  hero?: { src: string; alt: string };
   body: HubBodyImage[];
 }
 

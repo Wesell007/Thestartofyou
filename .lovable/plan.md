@@ -1,51 +1,53 @@
-# Phase 36C — Pregnancy final cleanup and workstream closure
+# Phase 36C — Final evidence reconciliation (travel and flying)
 
-Evidence-backed remediation only. No new articles, no new topic pages, no week-model changes, no UX redesign, no AI, grounding, database, lifecycle or analytics changes, no deployment.
+Documentation and classification reconciliation only. No new articles, no new routes, no UX, week-model, AI, grounding, database, lifecycle or analytics changes. No deployment. No Phase 36D.
 
-Phase 36B counts are locked as the starting evidence: 104 Pregnancy records, 64 journey moments, 0 new article candidates, 0 release blockers.
+## What the repository actually shows
 
-## Scope of work
+Checks run before writing this plan:
 
-### 1. Four stale related-article references
-The four references live in article `relatedSlugs` and are dropped silently before render. Repair each only where repository evidence establishes the intended canonical destination:
-- `first-trimester-symptoms` → the live owners (`early-pregnancy-symptoms-explained`, `nausea-in-early-pregnancy`, `fatigue-in-early-pregnancy`, `symptoms-stopping-early-pregnancy`) as the evidence supports, three references.
-- `headaches-in-pregnancy` referenced from `paracetamol-in-pregnancy` → its live canonical owner.
-If no defensible replacement exists for a given reference, remove it rather than guess. Target after: stale references 0, broken rendered links 0, wrong-destination links 0.
+- `eating-well-in-pregnancy` contains no travel or flying guidance of any kind. Its inventory record is `recommendedAction: keep`, `canonicalRole: primary`, `contentState: final`.
+- The words "flying", "air travel" and "airline" appear **zero** times across `articleData.ts`, `weekData.ts` and `pregnancyTopicData.ts`.
+- The Phase 36B evidence for moment 46 ("40 article and 33 week mentions") is keyword-count noise: nearly every match is the verb "travel" in unrelated sentences (an embryo travelling down the tube, pain that travels, infection travelling to the kidneys, nerve signals travelling). The only genuine travel references are travel-vaccine asides in `vaccinations-in-pregnancy`.
 
-### 2. Two orphaned articles
-- `symptoms-stopping-early-pregnancy` — one honest inbound path from the early-pregnancy context that already discusses symptom change.
-- `low-lying-placenta-in-pregnancy` — one honest inbound path from the placenta/body context that already owns that intent.
-One placement each. No artificial padding, no navigation redesign. Target after: orphans 0, new routes 0.
+So the mapping fails on both halves: the owner is wrong, and the "partially covered" evidence that produced the treatment does not exist.
 
-### 3. Pregnancy → Loss support handoff
-Add the smallest editorial handoff from the strongest existing Pregnancy surface (bleeding/uncertainty guidance in early pregnancy) to the existing loss support records. Existing content only; no loss article, no loss lifecycle, no repeated CTAs. Target: COMPLETE, new loss content 0.
+## Disposition
 
-### 4. Pregnancy → First Year editorial handoff
-Add one clear editorial transition at the appropriate late-Pregnancy point (end of the week journey / late third trimester) into existing First Year and after-birth guidance. No postpartum lifecycle, no new First Year content, no routes, no change to lifecycle resolution. Target: content handoff COMPLETE, lifecycle routing unchanged and COMPLETE.
+**Outcome A on the owner, with an honest residual note.**
 
-### 5. Birth-plan consolidation
-`writing-a-birth-plan` and `birth-preferences` share one visitor intent. Choose the canonical owner on content completeness, inbound links, discovery, source quality and route history; fold the useful guidance from the secondary record into it and apply the repository's established safe disposition to the secondary route, using the existing canonical-redirect pattern if its public route retires. No third record. Target: 1 canonical owner, 0 technical duplicates introduced, 0 broken inbound links.
+- Travel/flying → `eating-well-in-pregnancy` mapping valid = **NO**.
+- `eating-well-in-pregnancy` is reclassified to its true evidence-backed action, **KEEP** (matching its own inventory record), and removed from EXPAND_EXISTING.
+- Moment 46 is reclassified from PARTIALLY_COVERED / EXPAND_EXISTING to an explicitly recorded **P3 future editorial decision with no current valid owner**. No existing Pregnancy surface can absorb travel/flying guidance without inventing content, so nothing is implemented and no article is created.
+- Phase 36B's Outcome B conclusion, the 64-moment total, blockers = 0 and new article candidates = 0 all stand.
 
-### 6. Five EXPAND_EXISTING records (from 36B, no guessing)
-- `complete-guide-morning-sickness` — hyperemesis
-- `stages-of-labour` — pain relief options
-- `swelling-in-pregnancy` — pre-eclampsia
-- `eating-well-in-pregnancy` — travel and flying
-- `preparing-for-baby-complete-guide` — antenatal classes
+## Corrected counts
 
-Each keeps its canonical route, adds only the audited missing guidance, keeps the established voice and safe escalation wording, uses existing verified sources, and introduces no new medical precision.
+- EXPAND_EXISTING: 5 → **4**
+- Valid expansion mappings: **4 / 4**
+- Valid EXPAND_EXISTING records addressed: **4 / 4**
+- Remaining expansion-owner mismatches: **0**
+- Article action totals: KEEP 96 → 97, EXPAND_EXISTING 5 → 4 (total stays 104)
+- Journey matrix: partially covered 9 → 8, plus 1 recorded as a P3 open editorial decision; the 64-row arithmetic is re-reconciled in the register itself
+- Remaining genuine P1/P2 gap: **NO** (one P3 item, non-blocking)
+- Current Pregnancy release blockers: **0**
 
-### 7. Fourteen unsupported claims
-Re-identify the exact 14 article claims (12 in the six label-only-source articles named in 36B, 2 in no-source articles). For each choose exactly one: supported with verified existing source, safely removed, safely reworded, or unresolved. No invented URLs, thresholds or timings; no source substitution. Also address the two "completely normal" certainty phrasings about implantation bleeding where they fall inside these claims. Arithmetic must total 14 with unresolved = 0.
+## Documentation edits (targeted only)
 
-### 8. Boundaries held
-No mass source normalisation; label-only (126), no-source (5) and the 311 week statements with unresolved statement-level provenance are recorded as governance debt, not remediated. The 42-week system stays locked unless a 36C link fix touches it. Unknown editorial status (19) untouched. Tool and checklist opportunities not built. Weak discovery reassessed and documented honestly, not padded. Companion, grounding and reviewer registries unchanged.
+1. `docs/content/phase36b-pregnancy-journey-gap-register.md` — row 46 treatment and evidence corrected; treatment-summary row 46 updated; P3 line kept with the corrected wording. No other rows touched.
+2. `docs/content/phase36b-pregnancy-content-inventory.md` — EXPAND_EXISTING row 5 → 4 with `eating-well-in-pregnancy` removed; KEEP count adjusted.
+3. `docs/content/phase36b-pregnancy-content-coverage-audit.md` — only the dependent counts in the action line and the partial-moment arithmetic.
+4. `docs/content/phase36c-pregnancy-final-cleanup.md` and `phase36c-pregnancy-final-closure.md` — replace the "EXPANSION OWNER MISMATCH = 1, unresolved" record with the reconciled account: the original mapping, why it failed repository verification, the corrected classification, that no implementation was required, and the final 4/4 counts. Keeps the explicit statement that content was not forced into an unrelated article to satisfy a count.
+5. `roadmap.md` — append the reconciliation to the existing 36C entry. Phase 36A, 36A.1, 36B and Phase 35 records preserved.
 
-## Documentation
-Create `docs/content/phase36c-pregnancy-final-cleanup.md`, `docs/content/phase36c-pregnancy-claim-resolution-evidence.md`, `docs/content/phase36c-pregnancy-final-closure.md`. Update `roadmap.md` with the Phase 36C entry only; Phase 36A, 36A.1, 36B and Phase 35 records are preserved except for exact cross-references to the new evidence.
+## Preserved and untouched
+
+Stale references 0, orphans 0, loss handoff COMPLETE, First Year handoff COMPLETE, birth-plan canonical owner `birth-preferences`, unsupported claims after 0, broken/wrong-destination links 0, AI-only needs 0, grounding 0, AI runtime 0, reviewer claims 0, database 0, lifecycle 0. No article dataset edits at all in this reconciliation.
 
 ## Validation
-Pregnancy content, route, article-route, related-guidance, loss-handoff, First Year handoff, birth-plan canonicalisation/redirect, source/claim, week-route, trimester-route, link-integrity and sitemap tests; new focused regressions for each change; full suite; typecheck twice; lint against the established baseline (1 pre-existing generated-file error, 10 warnings); production validation build; browser sanity QA at the changed public surfaces. Flaky failures reported with first-failure and rerun evidence. No deployment.
+
+Documentation/classification only, so: the Phase 36C closure regression suite, the Phase 36A Pregnancy suite, the link-integrity sweep, full suite, typecheck ×2, lint against the 1 error + 10 warnings baseline, and a production build. Flaky failures reported with first-run and rerun evidence. Deployed = NO.
 
 ## Closure
-If every gate passes (stale references 0, orphans 0, both handoffs COMPLETE, birth-plan overlap resolved, five expansions done, unsupported claims 0, broken routes/links 0, AI-only needs 0, blockers 0), close Phase 36C PASS and lock the Pregnancy workstream as closed for the current strategy, with First Year named as the next workstream. No further Pregnancy phase recommended.
+
+If the above holds, record: **PHASE 36C — PREGNANCY FINAL CLEANUP & WORKSTREAM CLOSURE — CLOSED PASS / PREGNANCY COMPLETE FOR CURRENT STRATEGY / NO CURRENT PREGNANCY BLOCKERS**, then lock **PREGNANCY WORKSTREAM — CLOSED FOR CURRENT STRATEGY**. Next workstream: FIRST YEAR.

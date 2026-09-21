@@ -6,11 +6,11 @@
 // honest, unique owner were removed rather than routed to AI or duplicated.
 
 // ─── Imagery (curated from existing src/assets pool) ────────────────────
-import firstyearStage03 from "@/assets/firstyear-stage-0-3.jpg";
-import firstyearStage36 from "@/assets/firstyear-stage-3-6.jpg";
-import firstyearStage69 from "@/assets/firstyear-stage-6-9.jpg";
 import firstyearStage912 from "@/assets/firstyear-stage-9-12.jpg";
-import firstyearScene from "@/assets/firstyear-scene.jpg";
+import topicFeeding from "@/assets/firstyear-topic-feeding.jpg";
+import topicSleep from "@/assets/firstyear-topic-sleep.jpg";
+import topicDevelopment from "@/assets/firstyear-topic-development.jpg";
+import topicCareSafety from "@/assets/firstyear-topic-care-safety.jpg";
 import firstyearJourney from "@/assets/firstyear-journey.jpg";
 import guidanceFirstyear from "@/assets/guidance-firstyear.jpg";
 import babyEarly from "@/assets/myweek-baby-early.png";
@@ -128,7 +128,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Feeding in the first year",
     intro:
       "Feeding shifts more than almost anything else this year. From the first latch to first foods, this is calm, practical guidance for the questions parents actually ask.",
-    heroImage: firstyearStage03,
+    heroImage: topicFeeding,
     heroObjectPosition: "center 38%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -181,7 +181,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Baby sleep in the first year",
     intro:
       "Sleep in the first year rarely runs in a straight line. A calm place to understand naps, night waking, safer sleep and the patterns that quietly shift month by month.",
-    heroImage: firstyearStage36,
+    heroImage: topicSleep,
     heroObjectPosition: "center 40%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -234,7 +234,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Development and milestones",
     intro:
       "Your baby will change quickly this year. This topic helps you understand what's unfolding, without turning every milestone into a checklist or a worry.",
-    heroImage: firstyearStage69,
+    heroImage: topicDevelopment,
     heroObjectPosition: "center 42%",
     whatThisCovers: {
       lead: "What you'll find inside this topic:",
@@ -281,7 +281,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
     title: "Baby care and safety",
     intro:
       "Everyday care covers more than you'd expect in the first year. A practical, calm place for the questions about bathing, illness, routines and keeping your baby safe as they grow.",
-    heroImage: firstyearScene,
+    heroImage: topicCareSafety,
     heroObjectPosition: "center 45%",
     medicallyReviewed: true,
     whatThisCovers: {

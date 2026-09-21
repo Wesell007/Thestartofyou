@@ -11,37 +11,16 @@ import topicFeeding from "@/assets/firstyear-topic-feeding.jpg";
 import topicSleep from "@/assets/firstyear-topic-sleep.jpg";
 import topicDevelopment from "@/assets/firstyear-topic-development.jpg";
 import topicCareSafety from "@/assets/firstyear-topic-care-safety.jpg";
-import firstyearJourney from "@/assets/firstyear-journey.jpg";
-import guidanceFirstyear from "@/assets/guidance-firstyear.jpg";
-import babyEarly from "@/assets/myweek-baby-early.png";
-import babyMid from "@/assets/myweek-baby-mid.png";
-import babyLate from "@/assets/myweek-baby-late.png";
-import secondSleep from "@/assets/article-hero-second-sleep.jpg";
-import thirdSleep from "@/assets/article-hero-third-sleep.jpg";
-import cardDevelopment from "@/assets/guidance-card-development.jpg";
-import cardMilestones from "@/assets/guidance-card-milestones.jpg";
-import cardBonding from "@/assets/guidance-card-bonding.jpg";
-import cardSafety from "@/assets/guidance-card-safety.jpg";
-import cardNourish from "@/assets/guidance-card-nourish.jpg";
 import cardFresh from "@/assets/guidance-card-fresh.jpg";
-import cardComfort from "@/assets/guidance-card-comfort.jpg";
-import cardRest from "@/assets/guidance-card-rest.jpg";
 import cardQuiet from "@/assets/guidance-card-quiet.jpg";
 
 import postpartumScene from "@/assets/postpartum-scene.jpg";
 import postpartumJourney from "@/assets/postpartum-journey.jpg";
 import postpartumAdjustment from "@/assets/postpartum-stage-adjustment.jpg";
-import postpartumEarlyDays from "@/assets/postpartum-stage-early-days.jpg";
 import postpartumEarlyWeeks from "@/assets/postpartum-stage-early-weeks.jpg";
-import guidancePostpartum from "@/assets/guidance-postpartum.jpg";
-import cardBody from "@/assets/guidance-card-body.jpg";
 import cardEmotional from "@/assets/guidance-card-emotional.jpg";
-import cardWellness from "@/assets/guidance-card-wellness.jpg";
 import cardReflection from "@/assets/guidance-card-reflection.jpg";
-import cardSymptoms from "@/assets/guidance-card-symptoms.jpg";
-import cardTimelines from "@/assets/guidance-card-timelines.jpg";
 import cardPractical from "@/assets/guidance-card-practical.jpg";
-import perinatalAnxiety from "@/assets/article-hero-perinatal-anxiety.jpg";
 
 export type FirstYearTopicSlug =
   | "feeding"
@@ -59,7 +38,8 @@ export interface FirstYearFeaturedItem {
   /** One-line summary, read like a standfirst — not marketing copy. */
   why: string;
   /** Thumbnail. Choose distinct imagery per card where the asset pool allows. */
-  image: string;
+  /** null means this placement is intentionally text-led; undefined retains normal behaviour. */
+  image?: string | null;
   /**
    * Canonical editorial destination.
    */
@@ -145,7 +125,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "How often should my baby feed in the early weeks?",
         why: "A grounded look at feeding rhythm in the newborn period, with realistic ranges.",
-        image: cardNourish,
+        image: null,
         href: "/first-year/feeding/newborn-feeding-rhythms",
         tag: "start-here",
       },
@@ -158,7 +138,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When feeding feels harder than expected",
         why: "Honest support for the days that don't go smoothly, and when to seek help.",
-        image: cardComfort,
+        image: null,
         href: "/first-year/feeding/bottle-and-breastfeeding-questions",
         tag: "common",
       },
@@ -198,21 +178,21 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Safer sleep in the first year: the essentials",
         why: "A clear summary of current safer-sleep guidance, written for tired parents.",
-        image: cardSafety,
+        image: null,
         href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
         tag: "start-here",
       },
       {
         title: "Why is my baby suddenly waking again at night?",
         why: "What's usually behind a regression, and what tends to help it pass.",
-        image: thirdSleep,
+        image: null,
         href: "/first-year/sleep/when-sleep-suddenly-changes",
         tag: "common",
       },
       {
         title: "Wake windows and naps through the first year",
         why: "How daytime sleep changes month by month, without rigid schedules.",
-        image: cardRest,
+        image: null,
         href: "/first-year/sleep/helping-your-baby-settle",
       },
     ],
@@ -251,14 +231,14 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Milestones in the first year: a gentle overview",
         why: "What tends to emerge when, and why the timing range matters more than the dates.",
-        image: cardMilestones,
+        image: null,
         href: "/first-year/development/baby-development-in-the-first-year",
         tag: "start-here",
       },
       {
         title: "When should I raise a development question?",
         why: "Calm guidance on what's worth a conversation, without slipping into panic.",
-        image: cardDevelopment,
+        image: null,
         href: "/first-year/development/when-milestones-feel-uneven",
         tag: "when-to-get-help",
       },
@@ -299,7 +279,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When should I call the GP about my baby?",
         why: "Clear guidance on signs that need a conversation and signs that need urgent care.",
-        image: cardSafety,
+        image: null,
         href: "/first-year/care-and-safety/common-illnesses-in-the-first-year",
         tag: "when-to-get-help",
       },
@@ -313,7 +293,7 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Caring for baby skin in the first year",
         why: "What's usually normal, what helps, and when a skin change is worth checking.",
-        image: babyLate,
+        image: null,
         href: "/first-year/care-and-safety/baby-care-basics",
       },
     ],
@@ -354,20 +334,20 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "The first six weeks after birth: what to expect",
         why: "A grounded overview of early recovery, written without rushing you.",
-        image: postpartumEarlyDays,
+        image: null,
         href: "/first-year/postpartum-recovery/healing-after-birth",
         tag: "start-here",
       },
       {
         title: "Caesarean recovery: a gentle week-by-week guide",
         why: "What healing tends to look like, and what helps it along.",
-        image: cardBody,
+        image: null,
         href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
       },
       {
         title: "Pelvic floor in the months after birth",
         why: "Why it matters, what's normal, and when to ask for specialist support.",
-        image: cardWellness,
+        image: null,
         href: "/first-year/body-and-hormones/separated-tummy-muscles",
         tag: "common",
       },
@@ -455,21 +435,21 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Postnatal hair loss: what's happening and what helps",
         why: "Why it peaks around three to four months, and when it usually settles.",
-        image: cardSymptoms,
+        image: null,
         href: "/first-year/body-and-hormones/hormones-sweat-and-hair-loss",
         tag: "common",
       },
       {
         title: "When do periods return after birth?",
         why: "How feeding, hormones and individual variation shape the timeline.",
-        image: cardTimelines,
+        image: null,
         href: "/first-year/body-and-hormones/body-changes-after-birth",
         tag: "start-here",
       },
       {
         title: "Your body, six to twelve months on",
         why: "A calmer perspective on the longer arc of postnatal change.",
-        image: postpartumEarlyWeeks,
+        image: null,
         href: "/first-year/body-and-hormones/sex-and-intimacy-after-birth",
       },
     ],
@@ -533,13 +513,3 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
   },
 };
 
-// Silence intentionally-unused decorative imports kept for future swap-in.
-// (Some assets are imported but only used by alternate variants of the page.)
-void firstyearJourney;
-void guidanceFirstyear;
-void babyEarly;
-void babyMid;
-void secondSleep;
-void cardBonding;
-void perinatalAnxiety;
-void guidancePostpartum;

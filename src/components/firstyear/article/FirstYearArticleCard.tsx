@@ -44,9 +44,10 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
   const deepMuted = `hsl(var(${deepTok}) / 0.55)`;
 
   const isReady = article.status === "ready";
-  const hero =
-    getFirstYearArticleImages(article.slug)?.hero
-    ?? TOPIC_FALLBACK[article.topic];
+  const mappedHero = getFirstYearArticleImages(article.slug)?.hero;
+  const hero = article.suppressHeroImage
+    ? undefined
+    : mappedHero ?? TOPIC_FALLBACK[article.topic];
 
   const cardClass =
     "group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-parchment transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-32px_rgba(50,50,70,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[var(--card-ring)]";
@@ -77,7 +78,10 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
           />
         </div>
       )}
-      <div className="flex flex-1 flex-col gap-3 p-6">
+      <div
+        className={`flex flex-1 flex-col gap-3 p-6 ${article.suppressHeroImage ? "min-h-[18rem] justify-center sm:min-h-[20rem]" : ""}`}
+        data-image-treatment={article.suppressHeroImage ? "text-led" : undefined}
+      >
         <div className="flex flex-wrap items-center gap-2">
           {!isReady && (
             <span

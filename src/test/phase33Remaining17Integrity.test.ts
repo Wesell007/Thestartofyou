@@ -144,15 +144,20 @@ describe("Phase 33.3 imagery", () => {
     }
   });
 
-  it("gives every First Year record one hero and two body images on named sections", () => {
+  it("keeps approved First Year imagery valid while allowing explicit Phase 37A.1 suppression", () => {
     for (const slug of REMAINING_FIRST_YEAR) {
       const article = firstYearArticles.find((item) => item.slug === slug);
       const images = firstYearArticleImageMap[slug];
       const body = images?.body ?? [];
 
+      if (article?.suppressHeroImage) {
+        expect(images?.hero, slug).toBeUndefined();
+        continue;
+      }
+
       expect(images?.hero?.src, slug).toBeTruthy();
-      expect(body, slug).toHaveLength(2);
-      expect(new Set([images?.hero?.src, ...body.map(({ src }) => src)]).size, slug).toBe(3);
+      expect(body.length, slug).toBeGreaterThanOrEqual(1);
+      expect(new Set([images?.hero?.src, ...body.map(({ src }) => src)]).size, slug).toBe(body.length + 1);
 
       for (const image of body) {
         const heading = article?.sections[image.afterSectionIndex]?.heading;

@@ -283,7 +283,7 @@ const FirstYearTopicPage = ({ config }: Props) => {
               {config.featured.map((item) => {
                 const card = (
                   <>
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  {item.image ? <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={item.image}
                       alt=""
@@ -309,8 +309,11 @@ const FirstYearTopicPage = ({ config }: Props) => {
                         {TAG_LABEL[item.tag]}
                       </span>
                     )}
-                  </div>
-                  <div className="p-5 sm:p-6">
+                  </div> : null}
+                  <div
+                    className={`p-5 sm:p-6 ${item.image === null ? "flex min-h-[15rem] flex-col justify-center" : ""}`}
+                    data-image-treatment={item.image === null ? "text-led" : undefined}
+                  >
                     <h3 className="font-serif text-[1.1rem] sm:text-[1.18rem] text-foreground leading-snug mb-2.5">
                       {item.title}
                     </h3>

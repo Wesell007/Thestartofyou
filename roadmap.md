@@ -154,3 +154,15 @@
 - [x] Reconfirmed six pathways with six distinct approved images, three trimester destinations, 42 week destinations, six FAQ rows, zero FAQ AI actions, one hub Companion and six topic handoffs
 - [x] Focused regressions 11 files / 114 tests PASS; full suite 132 files / 1,523 tests PASS; typecheck x2 PASS; lint unchanged at 1 pre-existing error and 10 warnings; production build PASS with 353 sitemap entries
 - [x] New content, guidance, routes, images, calculator, week model, lifecycle, database, schema, analytics, AI runtime, prompts, context builder, grounding, memory, reviewer, TTC and deployment changes: 0
+
+## Phase 36B — Pregnancy content coverage and journey audit — AUDIT COMPLETE / MOSTLY SUFFICIENT / SMALL GAPS
+- [x] Audit only: content, route, week-data, image, source-record, reviewer, grounding, AI, analytics, database and lifecycle changes 0; deployment NO
+- [x] Surfaces inventoried from route registration: hub 1, topic routes 6, trimester routes 3, week modules 42/42, tool routes 2, public support surface 1, crossover surfaces 2, legacy or duplicate indexable Pregnancy surfaces 0, broken routes 0
+- [x] Article inventory: 104 Pregnancy-specific and crossover records (live 85, unknown status 19, draft 0, duplicates 0); actions KEEP 96, EXPAND_EXISTING 5, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0
+- [x] Week audit: 42 modules audited, material content gaps 0, broken links 0, missing illustrations 0; week numerical statements classified UNRESOLVED_PROVENANCE because week sources are hub-level
+- [x] Journey matrix reconciled by row count: 64 moments — covered 45, partially covered 9, uncovered 0, not required standalone 2, better served elsewhere 8; new article candidates 0
+- [x] Discovery: orphaned articles 2, weak-discovery 1 with a written reason, orphaned non-article surfaces 0, rendered broken links 0, wrong-destination links 0, stale related references silently dropped 4
+- [x] Claims and sources: unsupported medical or numerical claims 14 (all in articles), medication-safety wording concerns 0, material needs covered only by AI 0, source records 351 (structured 225, label-only 126, 5 articles with none)
+- [x] Handoffs: TTC to Pregnancy unchanged; IVF to Pregnancy COMPLETE; Pregnancy to IVF COMPLETE; Pregnancy to Loss support PARTIAL; Pregnancy to First Year content PARTIAL; Pregnancy to First Year lifecycle routing COMPLETE
+- [x] Reviewer claims added 0; grounding changes 0 with no registry drift found; source behaviour changes 0; current Pregnancy release blockers 0
+- [x] Three audit documents created; one smallest justified follow-up recorded (Phase 36C Pregnancy closure cleanup) and not started

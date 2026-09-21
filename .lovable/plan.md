@@ -101,12 +101,13 @@ Reconcile every existing Start Here card:
 
 - starting cards: **24**
 - mapped to a genuine existing article, topic, month or phase destination: **X**
-- removed because no honest destination exists: **Y**
+- removed because no valid unique editorial destination exists: **Y**
 - each removed card carrying imagery receives `REMOVED_WITH_DISCOVERY_CARD` in the 99-placement audit
 - required: **X + Y = 24**
+- duplicate Start Here destinations within each topic after: **0**
 - AI fallback, `/ask` and hidden model-call destinations after: **0**
 
-Use existing route and content records as the only URL authority. Presentation metadata may describe a destination kind but must not become another URL registry. Topic card counts may vary. Never create content merely to preserve a three-card layout.
+Use the removal disposition when no honest existing destination exists, or when the only defensible destination is already represented by a stronger Start Here card on the same topic page. Use existing route and content records as the only URL authority. Presentation metadata may describe a destination kind but must not become another URL registry. Topic card counts may vary. Never create content merely to preserve a three-card layout.
 
 Keep a few strong image-backed Start Here cards, then show the complete existing topic library as compact grouped rows. Deduplicate destinations inside each rendered group. Add no fake View All links or arbitrary caps.
 
@@ -135,11 +136,12 @@ Reconcile every faux-guidance card:
 
 - starting cards: **12**
 - converted to a genuine existing editorial destination: **X**
-- removed because no honest destination exists: **Y**
+- removed because no valid unique editorial destination exists: **Y**
 - required: **X + Y = 12**
+- duplicate faux-guidance destinations within each phase after: **0**
 - faux-editorial AI cards after: **0**
 
-Add exactly one contextual Companion after editorial discovery on each phase page. Final embedded counts are 1 hub module, 8 of 8 topic handoffs and 4 of 4 phase handoffs. Duplicate AI execution runtimes and AI runtime changes remain zero.
+Use the removal disposition when no genuine editorial owner exists, or when a stronger item in the same phase discovery section already represents the destination. Add exactly one contextual Companion after editorial discovery on each phase page. Final embedded counts are 1 hub module, 8 of 8 topic handoffs and 4 of 4 phase handoffs. Duplicate AI execution runtimes and AI runtime changes remain zero.
 
 ## 6. Contain shared-template and month-page impact
 

@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { getAllArticles } from "@/data/articleData";
-import { pregnancyTopics } from "@/data/pregnancyTopicData";
-import { weeklyArticleSuggestions } from "@/data/weeklyArticleSuggestions";
+import { PREGNANCY_TOPICS } from "@/data/pregnancyTopicData";
+import { getWeeklySuggestions } from "@/data/weeklyArticleSuggestions";
 
 const articles = getAllArticles();
+const weeklyJson = JSON.stringify(
+  Array.from({ length: 42 }, (_, i) => getWeeklySuggestions(i + 1)),
+);
 const slugs = new Set(articles.map((a) => a.slug));
 const RETIRED = "writing-a-birth-plan";
 
@@ -44,7 +47,7 @@ describe("Phase 36C — Pregnancy final cleanup", () => {
   });
 
   it("offers a First Year editorial handoff from the preparing-for-baby topic page", () => {
-    const preparing = JSON.stringify(pregnancyTopics["preparing-for-baby"]);
+    const preparing = JSON.stringify(PREGNANCY_TOPICS["preparing-for-baby"]);
     expect(preparing).toContain("/articles/your-body-after-birth");
     expect(preparing).toContain("/first-year");
   });
@@ -52,8 +55,8 @@ describe("Phase 36C — Pregnancy final cleanup", () => {
   it("routes all birth-plan intent to the canonical birth-preferences article", () => {
     const surfaces = [
       JSON.stringify(articles),
-      JSON.stringify(pregnancyTopics),
-      JSON.stringify(weeklyArticleSuggestions),
+      JSON.stringify(PREGNANCY_TOPICS),
+      weeklyJson,
     ];
     for (const surface of surfaces) {
       expect(surface).not.toContain(`/articles/${RETIRED}`);
@@ -61,7 +64,7 @@ describe("Phase 36C — Pregnancy final cleanup", () => {
     for (const article of articles) {
       expect(article.relatedSlugs ?? []).not.toContain(RETIRED);
     }
-    expect(JSON.stringify(weeklyArticleSuggestions)).toContain("birth-preferences");
+    expect(weeklyJson).toContain("birth-preferences");
   });
 
   it("covers the five audited expansion gaps in their existing owners", () => {

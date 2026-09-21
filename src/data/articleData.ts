@@ -241,7 +241,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Try ginger or cold foods if helpful", reason: "Some people find ginger-based foods or cold, bland foods easier to manage. This is personal, find what works for you." },
     ],
     whatHappensNext:
-      "For most people, nausea begins to ease between weeks 12-14 as hormone levels stabilise. Some people notice a gradual improvement; others experience a more sudden shift. If you're past 14 weeks and nausea continues, this is less common but still occurs, and is worth discussing with your midwife or doctor.",
+      "For most people, nausea begins to ease towards the end of the first trimester as hormone levels stabilise. Some people notice a gradual improvement; others experience a more sudden shift. If you're past 14 weeks and nausea continues, this is less common but still occurs, and is worth discussing with your midwife or doctor.",
     relatedStage: {
       intro: "Nausea is most common in the first trimester. If you're trying to understand where you are in your pregnancy:",
       links: [
@@ -259,7 +259,7 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "The early weeks can feel relentless and uncertain. Many parents choose to write down what this stage was really like, not just the milestones, but the difficult days too.",
     trimester: [1],
     relatedWeeks: [5, 6, 7, 8, 9],
-    relatedSlugs: ["fatigue-in-early-pregnancy", "implantation-bleeding", "first-trimester-symptoms"],
+    relatedSlugs: ["fatigue-in-early-pregnancy", "implantation-bleeding", "early-pregnancy-symptoms-explained"],
     cornerstoneSlug: "complete-guide-morning-sickness",
     journey: ["pregnancy"],
     topics: ["symptoms", "body-changes"],
@@ -407,7 +407,7 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "The exhaustion of early pregnancy is real and often invisible to others. Writing down what this stage felt like creates a record of something worth remembering.",
     trimester: [1],
     relatedWeeks: [4, 5, 6, 7, 8],
-    relatedSlugs: ["nausea-in-early-pregnancy", "first-trimester-symptoms"],
+    relatedSlugs: ["nausea-in-early-pregnancy", "early-pregnancy-symptoms-explained"],
     cornerstoneSlug: "first-trimester-complete-guide",
     journey: ["pregnancy"],
     topics: ["symptoms", "body-changes", "emotional-wellbeing"],
@@ -465,7 +465,7 @@ const articleDatabase: ArticleData[] = [
         },
       ],
       whyItVaries:
-        "Not everyone experiences implantation bleeding, estimates suggest it occurs in roughly 25-30% of pregnancies. Its absence is entirely normal and does not indicate a problem with implantation. The amount, colour, and duration can also vary significantly between people.",
+        "Not everyone experiences implantation bleeding, and many people never notice any. Its absence is common and does not indicate a problem with implantation. The amount, colour, and duration can also vary significantly between people.",
     },
     timing: {
       whenStarts: "Implantation typically occurs in the days after ovulation, placing bleeding approximately in the week before an expected period.",
@@ -529,7 +529,7 @@ const articleDatabase: ArticleData[] = [
       },
       {
         question: "Does everyone get implantation bleeding?",
-        answer: "No. Estimates suggest roughly 25-30% of people experience it. Its absence is completely normal and does not mean implantation hasn't occurred.",
+        answer: "No. Many people never notice any spotting at all. Its absence is common and does not mean implantation hasn't occurred.",
       },
       {
         question: "Can implantation bleeding be heavy?",
@@ -570,7 +570,7 @@ const articleDatabase: ArticleData[] = [
     keyTakeaways: [
       "Implantation bleeding is light spotting that can happen when an embryo embeds into the uterine lining, usually in the days after ovulation",
       "It is lighter, shorter, and usually pinker or browner than a period, and does not build in flow",
-      "Only around 25–30% of pregnancies involve any visible implantation bleeding — its absence is completely normal",
+      "Many pregnancies involve no visible implantation bleeding at all, and its absence is not a concern",
       "Heavier bleeding, bright red flow, or one-sided pain is a different picture and is worth a same-day call to your midwife or doctor",
     ],
     sources: [
@@ -595,11 +595,11 @@ const articleDatabase: ArticleData[] = [
         lead: "Implantation bleeding is a small amount of light spotting that can happen when a fertilised egg embeds into the lining of the uterus. It is not a period and it is not a sign that something is wrong.",
         paragraphs: [
           "When the embryo attaches to the uterine wall, it can disrupt some of the tiny blood vessels in the lining. That disruption can release a small amount of blood, which may show up days later as a brief, light bleed or a tinted discharge.",
-          "It does not happen for everyone. Most estimates put it at roughly one in four to one in three pregnancies, and many people who do experience it only notice it in hindsight.",
+          "It does not happen for everyone. Many people never notice any, and those who do often only recognise it in hindsight.",
         ],
         callout: {
           tone: "reassurance",
-          text: "Not seeing any spotting around implantation is completely normal and does not mean implantation hasn't happened.",
+          text: "Not seeing any spotting around implantation is common and does not mean implantation hasn't happened.",
         },
       },
       {
@@ -746,7 +746,7 @@ const articleDatabase: ArticleData[] = [
     captureIntro: "The uncertainty of early pregnancy is real, and worth acknowledging. Writing down how this stage felt creates a record of something that was genuinely significant, even when the outcome is happy.",
     trimester: [1],
     relatedWeeks: [5, 6, 7, 8, 9, 10, 12],
-    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "first-trimester-symptoms"],
+    relatedSlugs: ["nausea-in-early-pregnancy", "fatigue-in-early-pregnancy", "early-pregnancy-symptoms-explained"],
     cornerstoneSlug: "first-trimester-complete-guide",
     journey: ["pregnancy"],
     topics: ["symptoms", "emotional-wellbeing"],
@@ -775,7 +775,7 @@ const articleDatabase: ArticleData[] = [
     metaDescription: "Everything you need to know about morning sickness. Why it happens, when it starts and ends, what helps, when to seek support, and what is considered normal.",
     isCornerstone: true,
     quickAnswer:
-      "Morning sickness affects up to 80% of pregnant people and is caused primarily by rising hCG and progesterone levels. Despite its name, it can occur at any time of day. For most people it begins around weeks 5-6, peaks between weeks 8-10, and eases by weeks 12-14. While uncomfortable, it is almost always a normal part of pregnancy.",
+      "Morning sickness is very common in early pregnancy and is thought to be driven mainly by rising hCG and progesterone levels. Despite its name, it can occur at any time of day. For most people it begins around weeks 5-6, peaks between weeks 8-10, and eases by weeks 12-14. While uncomfortable, it is almost always a normal part of pregnancy.",
     howThisFeels: [
       "Feeling profoundly unwell while trying to function normally",
       "Wondering whether this level of sickness is normal",
@@ -938,7 +938,7 @@ const articleDatabase: ArticleData[] = [
     },
     productPromotion: "strong",
     keyTakeaways: [
-      "Morning sickness affects up to 80% of pregnant people",
+      "Morning sickness is very common in early pregnancy",
       "It can occur at any time of day, not just mornings",
       "Nausea typically peaks between weeks 8-10 and eases by 12-16",
       "Both strong nausea and very mild nausea are normal",
@@ -951,7 +951,7 @@ const articleDatabase: ArticleData[] = [
         heading: "Why morning sickness happens",
         lead: "Morning sickness is driven by a combination of hormonal shifts that begin almost immediately after implantation. Understanding these changes can help explain why nausea can feel so intense, and why it is almost always a normal part of early pregnancy.",
         paragraphs: [
-          "The primary driver is human chorionic gonadotropin (hCG), the hormone your body begins producing shortly after a fertilised egg implants in the uterine lining. hCG levels rise rapidly in the first trimester, roughly doubling every 48 to 72 hours during the early weeks. This hormone directly stimulates the chemoreceptor trigger zone in the brain, which is the area responsible for triggering the nausea response.",
+          "The primary driver is human chorionic gonadotropin (hCG), the hormone your body begins producing shortly after a fertilised egg implants in the uterine lining. hCG levels rise rapidly in the first weeks of pregnancy. This hormone directly stimulates the chemoreceptor trigger zone in the brain, which is the area responsible for triggering the nausea response.",
           "At the same time, progesterone levels increase significantly. Progesterone is essential for maintaining the pregnancy, but it also relaxes smooth muscle throughout the body, including the muscles of the digestive tract. This slowing of digestion can lead to bloating, a feeling of fullness, and nausea, particularly when the stomach is empty.",
           "Rising oestrogen plays a role too, especially by heightening the sense of smell. Many pregnant people report that previously neutral or pleasant smells suddenly become overwhelming or nauseating. This heightened sensitivity appears to be one of the earliest and most noticeable changes.",
         ],
@@ -1080,11 +1080,25 @@ const articleDatabase: ArticleData[] = [
         lead: "Understanding the boundary between uncomfortable-but-normal nausea and symptoms that need medical attention is one of the most important aspects of managing morning sickness.",
         paragraphs: [
           "Normal morning sickness, even when it feels severe, is characterised by nausea and occasional vomiting where you are still able to keep some food and fluids down, you are not losing significant weight, and while you feel unwell, you can broadly manage day-to-day activities even if they feel much harder than usual.",
-          "Morning sickness becomes a medical concern when it crosses into territory where your body is not getting the hydration and nutrition it needs. This is a condition called hyperemesis gravidarum, and it affects approximately 1-3% of pregnancies. It is a recognised medical condition with effective treatments, and getting help early makes a significant difference.",
+          "Morning sickness becomes a medical concern when it crosses into territory where your body is not getting the hydration and nutrition it needs. This is a condition called hyperemesis gravidarum, and it affects a small proportion of pregnancies. It is a recognised medical condition with effective treatments, and getting help early makes a significant difference.",
         ],
         callout: {
           tone: "gentle-warning",
           text: "Contact your midwife or doctor if you are unable to keep any fluids down for more than 24 hours, you are producing very little or very dark urine, you have lost weight since becoming pregnant, you feel faint, dizzy, or confused, or you are vomiting blood. These symptoms should always be assessed, and treatment is available.",
+        },
+      },
+      {
+        id: "hyperemesis-gravidarum",
+        heading: "Hyperemesis gravidarum",
+        lead: "A small number of people experience sickness severe enough that it stops being manageable at home. It has a name, it is recognised, and it is treated.",
+        paragraphs: [
+          "Hyperemesis gravidarum is persistent, severe vomiting in pregnancy that makes it very hard to keep food or fluids down. It is not the same as difficult morning sickness, and it is not something to push through quietly. People describe weight loss, dehydration, exhaustion and feeling unable to work or care for themselves or other children.",
+          "Treatment usually starts with anti-sickness medication and rehydration. If you cannot keep fluids down, you may be offered fluids through a drip, sometimes in a day unit rather than an overnight stay. Being seen early tends to make treatment simpler, so there is no advantage in waiting to see whether it settles.",
+          "The emotional weight of it is real too. Severe sickness can be isolating, and it is common to feel guilty for struggling with something often described as ordinary. If it is affecting your mood or your ability to cope, tell your midwife that as well — it is part of the picture, not a separate complaint.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Ring your midwife, GP or maternity assessment unit if you cannot keep fluids down, you are weeing very little or your urine is very dark, you are losing weight, or you feel faint or confused. Support is available and you do not need to wait until your next appointment.",
         },
       },
     ],
@@ -1448,6 +1462,7 @@ const articleDatabase: ArticleData[] = [
         { label: "First Trimester Hub", href: "/pregnancy/first-trimester" },
         { label: "Nausea guide", href: "/articles/nausea-in-early-pregnancy" },
         { label: "Fatigue guide", href: "/articles/fatigue-in-early-pregnancy" },
+        { label: "When symptoms stop or ease", href: "/articles/symptoms-stopping-early-pregnancy", context: "For the days symptoms quieten and the worry starts." },
         { label: "Week 6", href: "/pregnancy/week/6", context: "Peak symptom week for many." },
       ],
     },
@@ -1566,7 +1581,7 @@ const articleDatabase: ArticleData[] = [
       {
         id: "implantation-bleeding",
         heading: "Implantation bleeding, spotting, and what's normal",
-        lead: "Around 15–25% of people notice some light bleeding or spotting in early pregnancy. When it happens around the time you'd expect implantation, it is usually pink or light brown, light, and short.",
+        lead: "Some people notice light bleeding or spotting in early pregnancy. When it happens around the time you'd expect implantation, it is usually pink or light brown, light, and short.",
         paragraphs: [
           "Implantation bleeding is typically much lighter than a period, doesn't fill a pad, and lasts a few hours to a couple of days. It often appears six to twelve days after ovulation, which can be close to or just before an expected period.",
           "Light spotting later in the first trimester can also happen — sometimes after sex, a vaginal exam, or for no clear reason — and is usually not a sign of a problem. Heavier bleeding, particularly with cramping, is worth a same-day call to your midwife or doctor.",
@@ -3370,7 +3385,7 @@ const articleDatabase: ArticleData[] = [
       lessCauses: [{ heading: "What can wait", body: "High chairs, weaning supplies, toys, and most gadgets aren't needed until months later." }],
       whyItVaries: "What you need depends on your living situation, budget, feeding plans, and personal preferences.",
     },
-    timing: { whenStarts: "Most people start preparing from the second trimester.", whenEases: "Having the basics ready by 36 weeks gives you a comfortable buffer." },
+    timing: { whenStarts: "Most people start preparing from the second trimester.", whenEases: "Having the basics ready a few weeks before your due date gives you a comfortable buffer." },
     whatItFeelsLike: ["Nesting energy mixed with decision fatigue", "Excitement about preparing", "Anxiety about getting it wrong"],
     whatThisMeans: "Your baby needs you, not a perfectly equipped nursery. Start with essentials and add as you go.",
     normal: ["Feeling overwhelmed by choices", "Buying second-hand", "Not having a nursery ready", "Changing your mind about what you want"],
@@ -5389,7 +5404,7 @@ const articleDatabase: ArticleData[] = [
         heading: "What changes in the second trimester",
         lead: "The middle months are often the easiest physically and the most noticeable in terms of your baby.",
         paragraphs: [
-          "Your baby grows rapidly through the second trimester, from around the size of a lemon at 14 weeks to a substantial baby of around 35cm by 28 weeks. The senses come online: hearing develops, the eyes open and close, taste buds form, and reflexes like sucking and grasping appear.",
+          "Your baby grows rapidly through the second trimester, from around the size of a lemon early in the second trimester to a much longer, more substantial baby by the end of it. The senses come online: hearing develops, the eyes open and close, taste buds form, and reflexes like sucking and grasping appear.",
           "Movement, which has been happening for weeks, becomes something you can actually feel — first as flutters, then as clearer kicks. The 20-week scan offers the most detailed look at how your baby is growing and how the major systems are forming.",
         ],
       },
@@ -5399,7 +5414,7 @@ const articleDatabase: ArticleData[] = [
         lead: "The last 12 weeks are about maturing rather than building. Your baby is largely formed — the work now is finishing.",
         paragraphs: [
           "Weight gain accelerates. Fat is laid down, which helps with temperature regulation after birth. The lungs go through their final stages of maturation, producing the surfactant needed to breathe air. The brain develops rapidly, with significant growth in the final weeks of pregnancy.",
-          "Your baby's pattern of movement, sleep, and wakefulness becomes more established. Most babies settle into a head-down position by around 36 weeks, ready for birth.",
+          "Your baby's pattern of movement, sleep, and wakefulness becomes more established. Most babies settle into a head-down position in the final weeks, ready for birth.",
         ],
       },
       {
@@ -6323,6 +6338,20 @@ const articleDatabase: ArticleData[] = [
           "If your labour slows, your midwife may suggest changes of position, water, rest, or — if needed — gentle ways to support labour along. None of this means your body has failed. Sometimes it means your baby's position needs to shift; sometimes it means your body needs a quieter moment.",
           "If support or intervention is discussed, your midwife will explain what's being suggested and why. Decisions are made with you, not just told to you. Asking questions is part of the process, not an interruption to it.",
         ],
+      },
+      {
+        id: "pain-relief-through-the-stages",
+        heading: "Pain relief through the stages",
+        lead: "Different stages tend to suit different kinds of support, and you can change your mind at any point.",
+        paragraphs: [
+          "In early labour, most comfort comes from ordinary things: moving, changing position, a warm bath or shower, heat on your back, breathing you can settle into, and rest between contractions. Many people stay at home through this part, and paracetamol is generally considered suitable in labour if you need something.",
+          "As labour becomes established, options widen. A birth pool suits many people for the way water eases the weight and intensity. Gas and air (Entonox) is breathed during contractions, works quickly and wears off quickly, and can make some people feel light-headed or sick. Injected pain relief such as pethidine or diamorphine can help you rest, though it can make you drowsy and is usually avoided very close to birth. An epidural gives the most complete pain relief, is sited by an anaesthetist, and means more monitoring and less mobility. A TENS machine suits some people in earlier labour.",
+          "Your midwife will talk you through what is available where you are giving birth, and what timing makes sense. Wanting pain relief is not a plan failing, and neither is deciding you would rather manage without it. Both are reasonable choices, and either can change as labour unfolds.",
+        ],
+        callout: {
+          tone: "info",
+          text: "If you are unsure what to ask for, you can simply tell your midwife how you are coping and let them talk you through the options available to you at that point.",
+        },
       },
     ],
   },
@@ -8610,6 +8639,20 @@ const articleDatabase: ArticleData[] = [
         ],
         callout: { tone: "gentle-warning", text: "If swelling is sudden, one-sided, or paired with headache, vision changes, or upper-tummy pain — ring your maternity assessment unit, don't wait until your next appointment." },
       },
+      {
+        id: "pre-eclampsia-in-more-detail",
+        heading: "Pre-eclampsia, in a little more detail",
+        lead: "Swelling is only one part of the picture, which is why antenatal checks look at blood pressure and urine as well.",
+        paragraphs: [
+          "Pre-eclampsia is a condition of pregnancy involving raised blood pressure, usually alongside protein found in your urine. It is one of the reasons your midwife checks your blood pressure and tests a urine sample at every antenatal appointment, even when you feel completely well. Most people it is picked up in feel fine at the point it is found.",
+          "It is more likely if you have had it before, have existing high blood pressure, kidney disease or diabetes, or an autoimmune condition, and it is more common in first pregnancies and multiple pregnancies. If you have risk factors, your team may discuss taking low-dose aspirin from early pregnancy and may see you more often. That conversation belongs with your midwife or doctor, who can weigh it against your own history.",
+          "Management depends on how things look. Some people are monitored more closely with extra appointments, blood pressure checks and blood tests; others need medication to lower blood pressure, or a stay in hospital. Birth is the point at which pre-eclampsia resolves, so if it becomes more severe your team may discuss timing birth earlier than planned.",
+        ],
+        callout: {
+          tone: "gentle-warning",
+          text: "Ring your maternity assessment unit straight away if you have a severe headache, vision changes such as flashing lights or blurring, pain just below the ribs, sudden swelling of the face or hands, or vomiting with any of these.",
+        },
+      },
     ],
   },
 
@@ -9071,6 +9114,7 @@ const articleDatabase: ArticleData[] = [
         { label: "Baby movement in pregnancy", href: "/articles/baby-movement-in-pregnancy", context: "The cornerstone read on what to feel for and when." },
         { label: "Reduced movements in pregnancy", href: "/articles/reduced-movements-in-pregnancy", context: "Why anterior placenta doesn't change the rule for calling in." },
         { label: "Tests and scans in pregnancy", href: "/articles/tests-and-scans-in-pregnancy", context: "Where placental position is identified." },
+        { label: "Low-lying placenta in pregnancy", href: "/articles/low-lying-placenta-in-pregnancy", context: "The other placental position question scans often raise." },
       ],
     },
     aiPrompts: [
@@ -9698,7 +9742,7 @@ const articleDatabase: ArticleData[] = [
       whyItVaries: "Fundal height is a screening measure, not a precise one. It's there to flag when more checks might be useful — not to tell you exactly how big your baby is.",
     },
     timing: {
-      whenStarts: "Fundal height measurement usually starts from around 24-28 weeks at antenatal appointments.",
+      whenStarts: "Fundal height measurement usually starts in the second half of pregnancy, at antenatal appointments.",
       whenEases: "It continues at most appointments through the third trimester.",
     },
     whatItFeelsLike: [
@@ -9708,7 +9752,7 @@ const articleDatabase: ArticleData[] = [
     whatThisMeans:
       "Measuring ahead or behind by a centimetre or two is normal and rarely meaningful. Bigger differences — or repeated differences — are what trigger a closer look.",
     normal: [
-      "Measuring within 2-3 cm of your weeks",
+      "Measuring a little either side of your weeks",
       "A measurement that varies a bit between appointments",
       "Being told 'all on track' even if your bump looks different from others",
     ],
@@ -9746,7 +9790,7 @@ const articleDatabase: ArticleData[] = [
     lastUpdated: "April 2026",
     keyTakeaways: [
       "Fundal height (bump measurement) is a screening tool, not a precise measure",
-      "Measuring 2-3 cm off your weeks is common and usually fine",
+      "Measuring slightly off your weeks is common and usually fine",
       "Bigger or repeated differences trigger a growth scan for a clearer picture",
       "Most growth scans give reassuring news",
       "Reduced movements still always need a same-day call regardless of bump size",
@@ -9772,7 +9816,7 @@ const articleDatabase: ArticleData[] = [
         heading: "What fundal height actually is",
         lead: "A quick check, not a precise one.",
         paragraphs: [
-          "From around 24-28 weeks, your midwife will start measuring your bump at antenatal appointments. They use a tape measure from the top of your pubic bone to the top of your uterus, in centimetres.",
+          "In the second half of pregnancy, your midwife will start measuring your bump at antenatal appointments. They use a tape measure from the top of your pubic bone to the top of your uterus, in centimetres.",
           "Roughly speaking, the number matches your weeks of pregnancy. So at 28 weeks you'd expect around 28 cm. Within a couple of centimetres either way is normal.",
         ],
       },
@@ -10741,7 +10785,7 @@ const articleDatabase: ArticleData[] = [
     ],
     disclaimer: "Hand expressing in late pregnancy is generally only recommended from around 36 to 37 weeks, and only when specifically advised. Don't start earlier without guidance, and stop if you experience contractions or any of the warning signs above.",
     whatYouCanDo: [
-      { action: "Wait for the right time", reason: "Starting too early can theoretically encourage early contractions. From around 36 to 37 weeks, with your team's go-ahead, is the standard window." },
+      { action: "Wait for the right time", reason: "Starting too early can theoretically encourage early contractions. Teams usually suggest waiting until around 36 to 37 weeks, and only with their go-ahead." },
       { action: "Ask for a demonstration", reason: "A midwife or breastfeeding supporter can show you the technique in person. It's much easier learnt with someone watching than from a leaflet." },
       { action: "Use a small syringe", reason: "Drops are easy to lose. A 1ml syringe makes collection and storage straightforward." },
       { action: "Lower the bar", reason: "A few drops is a useful amount. There is no target. Comparing to anyone else's collection misses the point." },
@@ -10805,7 +10849,7 @@ const articleDatabase: ArticleData[] = [
         heading: "When to start (and when not to)",
         lead: "Usually from 36 to 37 weeks, only when your team has agreed it's appropriate.",
         paragraphs: [
-          "The standard window is from around 36 to 37 weeks, after a conversation with your midwife or doctor. Starting earlier than this isn't routinely recommended because of theoretical concerns about encouraging early contractions.",
+          "It isn't routinely suggested until the last few weeks of pregnancy, usually around 36 to 37 weeks, and only after a conversation with your midwife or doctor. Starting earlier than this isn't routinely recommended because of theoretical concerns about encouraging early contractions.",
           "It isn't recommended at all if you're at risk of early labour, have certain placenta findings, or have been specifically advised against it. If you're unsure whether it's right for you, ask your midwife directly. There's no badge for hand expressing — and there's no penalty for not doing it.",
         ],
         callout: { tone: "gentle-warning", text: "Don't start before 36 weeks unless your team has specifically advised it. If hand expressing brings on tightenings that don't settle, stop and call your maternity unit." },
@@ -11401,7 +11445,7 @@ const articleDatabase: ArticleData[] = [
     ],
     captureIntro: "Worth noting what kind of pain you're dosing for, and how often. Patterns are easier to read on paper than in your head.",
     trimester: [1, 2, 3],
-    relatedSlugs: ["cold-and-flu-in-pregnancy", "antibiotics-in-pregnancy", "uti-in-pregnancy", "headaches-in-pregnancy"],
+    relatedSlugs: ["cold-and-flu-in-pregnancy", "antibiotics-in-pregnancy", "uti-in-pregnancy", "medicines-in-pregnancy"],
     journey: ["pregnancy"],
     topics: ["health-and-safety", "body"],
     reviewedBy: "Jenny Joines",
@@ -12682,6 +12726,7 @@ const articleDatabase: ArticleData[] = [
         { label: "Spotting in pregnancy", href: "/articles/spotting-in-pregnancy", context: "When it's lighter than bleeding and you're not sure which it is." },
         { label: "When to worry about cramps in pregnancy", href: "/articles/when-to-worry-about-cramps-in-pregnancy", context: "How to think about pain alongside bleeding." },
         { label: "Anxiety in pregnancy", href: "/articles/anxiety-in-pregnancy", context: "For the spiralling that often comes with bleeding scares." },
+        { label: "Pregnancy after loss", href: "/articles/pregnancy-after-loss", context: "If you have been through loss before, or need somewhere gentler to go after one." },
       ],
     },
     aiPrompts: [
@@ -19924,9 +19969,9 @@ const articleDatabase: ArticleData[] = [
   {
     slug: "hydration-in-pregnancy",
     title: "Hydration in pregnancy: why fluids matter and how much to aim for",
-    metaDescription: "How much water in pregnancy? Around 8-10 cups (2-2.5 litres) a day. A calm guide to hydration cues, managing nausea, and drinks that count.",
+    metaDescription: "How much water in pregnancy? A calm guide to hydration cues, managing nausea, and the drinks that count towards your daily fluids.",
     quickAnswer:
-      "In pregnancy, aim for roughly 2 to 2.5 litres of fluid a day, around 8 to 10 cups. Water is the most efficient, but milk, decaf drinks, herbal teas, and water-rich foods all count. Steady sipping through the day works better than trying to catch up in the evening. Thirst, headaches, and dark urine are usually the first cues you need more.",
+      "In pregnancy, aim to drink steadily through the day rather than to a fixed total. Water is the most efficient, but milk, decaf drinks, herbal teas, and water-rich foods all count. Steady sipping through the day works better than trying to catch up in the evening. Thirst, headaches, and dark urine are usually the first cues you need more.",
     howThisFeels: [
       "Realising you've barely had a glass of water all morning",
       "Feeling thirsty in a way you haven't before",
@@ -19935,12 +19980,12 @@ const articleDatabase: ArticleData[] = [
     ],
     whatHappening: {
       commonCauses: [
-        { heading: "Higher blood volume", body: "Your blood volume increases by around 40-50% in pregnancy. That extra fluid has to come from somewhere, so your baseline need is genuinely higher." },
+        { heading: "Higher blood volume", body: "Your blood volume increases substantially in pregnancy. That extra fluid has to come from somewhere, so your baseline need is genuinely higher." },
         { heading: "The amniotic fluid around your baby", body: "Amniotic fluid is renewed constantly and depends on your hydration. Staying well-hydrated supports healthy amniotic fluid volume." },
       ],
       lessCauses: [
         { heading: "Nausea can make drinking feel harder", body: "First-trimester nausea sometimes makes plain water taste wrong. Cold, fizzy, or flavoured drinks often feel easier." },
-        { heading: "Warm weather and exercise raise the need further", body: "You may need an extra 500ml on hot days or after any real activity." },
+        { heading: "Warm weather and exercise raise the need further", body: "You may need noticeably more on hot days or after any real activity." },
       ],
       whyItVaries: "How much fluid you need varies by body size, climate, activity, and what you're eating. Fruit, veg, and soups all contribute.",
     },
@@ -19993,7 +20038,7 @@ const articleDatabase: ArticleData[] = [
     reviewedBy: "Jenny Joines",
     lastUpdated: "July 2026",
     keyTakeaways: [
-      "Aim for 2-2.5 litres of fluid a day, roughly 8-10 cups",
+      "Drink steadily through the day rather than aiming at a fixed total",
       "Water is best, but milk, decaf drinks, and water-rich foods all count",
       "Steady sipping through the day works better than catching up in the evening",
       "Pale-straw urine is the simplest sign you're hydrated enough",
@@ -20019,17 +20064,17 @@ const articleDatabase: ArticleData[] = [
         heading: "Why hydration matters more in pregnancy",
         lead: "Pregnancy raises your fluid needs across the board, for blood volume, the amniotic fluid around your baby, and everyday regulation.",
         paragraphs: [
-          "Your blood volume increases by 40-50% during pregnancy, which is one of the reasons hydration needs rise. Amniotic fluid is renewed constantly and depends on your daily intake. Digestion, kidney function, and temperature regulation all lean on water too.",
+          "Your blood volume increases substantially during pregnancy, which is one of the reasons hydration needs rise. Amniotic fluid is renewed constantly and depends on your daily intake. Digestion, kidney function, and temperature regulation all lean on water too.",
           "Being well-hydrated helps with several ordinary pregnancy discomforts: constipation, headaches, tiredness, and Braxton Hicks contractions all improve when fluids are steady. It's not a cure for anything, but it consistently helps.",
         ],
       },
       {
         id: "how-much-to-aim-for",
         heading: "How much to actually aim for",
-        lead: "Around 2 to 2.5 litres a day is the useful target, with room to move for climate, activity, and body size.",
+        lead: "Steady sipping through the day is the useful habit, with room to move for climate, activity, and body size.",
         paragraphs: [
           "That's roughly 8 to 10 mugs or glasses. It doesn't all need to be water. Milk, decaf coffee and tea, herbal infusions, fruit juice (in moderation), soups, and water-rich foods like cucumber, melon, tomatoes and yoghurt all contribute.",
-          "On hot days, after exercise, or when you've been vomiting, add an extra 500ml or so. If you're carrying twins or higher-order multiples, aim slightly higher across the day.",
+          "On hot days, after exercise, or when you've been vomiting, drink more than usual. If you're carrying twins or higher-order multiples, aim slightly higher across the day.",
         ],
         callout: {
           tone: "info",

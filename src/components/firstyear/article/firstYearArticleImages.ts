@@ -12,7 +12,6 @@ import bodyBedtimeWindDown from "@/assets/firstyear-body-bedtime-wind-down-appro
 import heroDevelopment from "@/assets/firstyear-stage-6-9.jpg";
 import heroMilestones from "@/assets/firstyear-stage-9-12.jpg";
 
-import heroFeelingLikeYourself from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
 import heroSupportiveMoment from "@/assets/article-hero-emotional-supportive-moment.jpg";
 import bodyEmotionalSupport from "@/assets/guidance-card-emotional.jpg";
 
@@ -237,10 +236,6 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   },
   // bespoke future: quiet parent and baby moment at home, calm emotional recovery after birth
   "feeling-like-yourself-again": {
-    hero: {
-      src: heroFeelingLikeYourself,
-      alt: "A parent holding their baby in a quiet first-year moment at home",
-    },
     body: [],
   },
   // bespoke future: calm supportive parent and baby moment after birth, emotionally honest but not crisis-led

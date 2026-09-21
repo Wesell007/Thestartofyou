@@ -1,51 +1,155 @@
-# Phase 36C — Final evidence reconciliation (travel and flying)
+# Phase 37A — First Year hub, phase and topic UX, visual system and AI separation
 
-Documentation and classification reconciliation only. No new articles, no new routes, no UX, week-model, AI, grounding, database, lifecycle or analytics changes. No deployment. No Phase 36D.
+Refine the public First Year experience only. Preserve all existing content, routes, month data, lifecycle rules, source governance and AI infrastructure. Create no new articles, guidance records, routes or saved journey types. Do not deploy.
 
-## What the repository actually shows
+## Verified repository baseline
 
-Checks run before writing this plan:
+- Public hub: `/first-year`.
+- Canonical phase pages: **4**, all sharing `FirstYearPhasePage`.
+- Month destinations: **13** from Newborn through 12 months, all sharing `FirstYearMonthPage`.
+- Canonical topic pages: **8**, all sharing `FirstYearTopicPage`: **4 baby** and **4 postpartum**.
+- Public First Year article records: **26**, all currently ready and all represented in the article image map.
+- Hub Companion: **1** embedded module, currently placed before phases, months, topics and common questions.
+- Topic Start Here: **24 cards**, all currently lack editorial destinations and therefore fall back to AI.
+- Hub question AI actions: **6**.
+- Phase question AI actions: **20** across four pages.
+- Phase faux guidance AI cards: **12** across four pages.
+- Current phase pages have no single dedicated Companion handoff. Topic pages already have one each after the article library.
+- Current hub journey CTA uses a separate First Year entry resolver and appears in both the hero and final section. The shared public account resolver already provides the required five-state, four-destination behaviour.
+- Current image surfaces include one hub video, four phase heroes, eight topic heroes, 24 topic feature-card placements, 26 article heroes and 37 article body-image placements. High-visibility reuse is present, including `firstyear-stage-0-3.jpg` on a phase, the Feeding topic and article imagery.
+- The current hub composition omits the existing two-pathway component, places Companion too early, combines phase and month navigation in one component, and ends with both a four-card continuation section and another multi-action CTA.
 
-- `eating-well-in-pregnancy` contains no travel or flying guidance of any kind. Its inventory record is `recommendedAction: keep`, `canonicalRole: primary`, `contentState: final`.
-- The words "flying", "air travel" and "airline" appear **zero** times across `articleData.ts`, `weekData.ts` and `pregnancyTopicData.ts`.
-- The Phase 36B evidence for moment 46 ("40 article and 33 week mentions") is keyword-count noise: nearly every match is the verb "travel" in unrelated sentences (an embryo travelling down the tube, pain that travels, infection travelling to the kidneys, nerve signals travelling). The only genuine travel references are travel-vaccine asides in `vaccinations-in-pregnancy`.
+## 1. Visual direction gate
 
-So the mapping fails on both halves: the owner is wrong, and the "partially covered" evidence that produced the treatment does not exist.
+Before replacing any production image, generate `src/assets/first-year-direction-board.png` with Nano Banana using the current hub, baby-topic and postpartum-topic screenshots as context.
 
-## Disposition
+The board will establish one editorial collection across:
 
-**Outcome A on the owner, with an honest residual note.**
+- hub hero
+- baby and postpartum pathway treatments
+- early and later phase imagery
+- baby and postpartum topic imagery
+- article hero and occasional body-image treatments
+- desktop, tablet and mobile crop guidance
 
-- Travel/flying → `eating-well-in-pregnancy` mapping valid = **NO**.
-- `eating-well-in-pregnancy` is reclassified to its true evidence-backed action, **KEEP** (matching its own inventory record), and removed from EXPAND_EXISTING.
-- Moment 46 coverage classification becomes **UNCOVERED**, priority **P3**, treatment **FUTURE EDITORIAL DECISION / NO CURRENT VALID OWNER**. Release blocker = NO; new article required before closure = NO. No existing Pregnancy surface can absorb travel/flying guidance without inventing content, so nothing is implemented.
-- Phase 36B's Outcome B conclusion, the 64-moment total, blockers = 0 and new article candidates = 0 all stand. `UNCOVERED = 0` is not preserved; the record reflects repository truth.
+Direction: intimate, warm, lived-in UK home photography; soft blue, sage and warm neutral for baby; muted plum, blush and warm neutral for postpartum; cream paper foundation; natural interaction and sensitive recovery representation. Reject staged perfection, unsafe anatomy or positioning, generic still life, excessive blur, oversaturated warmth and clinical stock.
 
-## Corrected counts
+The board is a direction artefact only. It will not render in the product.
 
-- Article records 104 — KEEP **97**, EXPAND_EXISTING **4**, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0 (97+4+2+0+1+0 = 104)
-- Valid expansion mappings: **4 / 4**; addressed **4 / 4**; remaining owner mismatches **0**
-- Journey moments 64 — covered 45, partially covered **8**, uncovered **1**, not required standalone 2, better served elsewhere 8 (45+8+1+2+8 = 64); arithmetic reconciled YES
-- Remaining genuine P1/P2 gap: **NO** (one uncovered P3 item, non-blocking)
-- Current Pregnancy release blockers: **0**
+## 2. Evidence-led image audit and replacement
 
+Create a complete placement-level audit covering the hub, four phases, eight topics, all 26 article heroes and all 37 configured body images. Classify every reviewed placement as:
 
-## Documentation edits (targeted only)
+- KEEP
+- RECROP
+- REPLACE_WITH_EXISTING_APPROVED_ASSET
+- REPLACE_WITH_NANO_BANANA_ASSET
 
-1. `docs/content/phase36b-pregnancy-journey-gap-register.md` — row 46 recorded as UNCOVERED / P3 / FUTURE EDITORIAL DECISION — NO CURRENT VALID OWNER, with the false-positive keyword evidence corrected; treatment-summary row 46 updated; journey totals corrected to 45 / 8 / 1 / 2 / 8 = 64. No other rows touched.
-2. `docs/content/phase36b-pregnancy-content-inventory.md` — EXPAND_EXISTING row 5 → 4 with `eating-well-in-pregnancy` removed; KEEP count adjusted.
-3. `docs/content/phase36b-pregnancy-content-coverage-audit.md` — only the dependent counts in the action line and the partial-moment arithmetic.
-4. `docs/content/phase36c-pregnancy-final-cleanup.md` and `phase36c-pregnancy-final-closure.md` — replace the "EXPANSION OWNER MISMATCH = 1, unresolved" record with the reconciled account: the original mapping, why it failed repository verification, the corrected classification, that no implementation was required, and the final 4/4 counts. Keeps the explicit statement that content was not forced into an unrelated article to satisfy a count.
-5. `roadmap.md` — append the reconciliation to the existing 36C entry. Phase 36A, 36A.1, 36B and Phase 35 records preserved.
+Record route, surface, current asset, issue, replacement intent, final asset and reason. Keep strong imagery. Generate only the minimum coherent replacement set after the direction board is approved by the implementation gate.
 
-## Preserved and untouched
+Apply distinct, relevant hero imagery to every phase and topic. Reconcile article hero and body imagery so no high-visibility phase, topic or article hero repeats accidentally. Remove body images that add no contextual or emotional value rather than forcing replacements. Document any intentional reuse separately.
 
-Stale references 0, orphans 0, loss handoff COMPLETE, First Year handoff COMPLETE, birth-plan canonical owner `birth-preferences`, unsupported claims after 0, broken/wrong-destination links 0, AI-only needs 0, grounding 0, AI runtime 0, reviewer claims 0, database 0, lifecycle 0. No article dataset edits at all in this reconciliation.
+## 3. Recompose the First Year hub
 
-## Validation
+Implement the locked order:
 
-Documentation/classification only, so: the Phase 36C closure regression suite, the Phase 36A Pregnancy suite, the link-integrity sweep, full suite, typecheck ×2, lint against the 1 error + 10 warnings baseline, and a production build. Flaky failures reported with first-run and rerun evidence. Deployed = NO.
+1. Hero
+2. Compact orientation
+3. Two image-backed primary pathways
+4. Four lightweight phase chapters
+5. Separate 13-destination month map
+6. Four baby and four postpartum topic pathways
+7. Six editorial common questions with no direct AI actions
+8. One embedded Companion
+9. Quiet cross-stage continuation, including Toddler as next-stage discovery
+10. One lifecycle-aware final journey action
 
-## Closure
+Preserve “Their first year, and your postpartum recovery.” Remove the journey CTA from the hero so its two editorial pathways are the only competing actions there. Reuse the shared public account resolver for the final action and verify signed out, TTC, Pregnancy, First Year and signed-in-without-lifecycle states. No journey writes.
 
-If the above holds, record: **PHASE 36C — PREGNANCY FINAL CLEANUP & WORKSTREAM CLOSURE — CLOSED PASS / PREGNANCY COMPLETE FOR CURRENT STRATEGY / NO CURRENT PREGNANCY BLOCKERS**, then lock **PREGNANCY WORKSTREAM — CLOSED FOR CURRENT STRATEGY**. Next workstream: FIRST YEAR.
+Reduce chips, nested cards, oversized containers and unexplained vertical gaps. Keep baby and postpartum equal in visual weight. Separate four-phase orientation from the detailed month map so their roles are unambiguous.
+
+## 4. Make all topic discovery editorial
+
+Refine the shared topic template for all eight canonical topics:
+
+```text
+Breadcrumb
+Split editorial hero
+Compact topic orientation
+Where parents tend to start
+Grouped related guidance
+One contextual Companion
+Quiet sibling navigation
+Return to First Year
+```
+
+For each of the 24 current Start Here intents, map only to a genuinely matching existing article, topic, month or phase destination. Where no honest destination exists, remove that card and allow topic counts to vary. Eliminate the optional-href AI fallback entirely.
+
+Keep a few strong image-backed Start Here cards, then render the complete existing topic library as compact grouped rows. Deduplicate destinations within rendered groups and add no fake View All links or arbitrary caps. Preserve all valid article destinations.
+
+## 5. Tighten all four phase pages
+
+Keep the existing dual baby and recovery content, safety support and source treatment, but establish this order:
+
+```text
+Breadcrumb and hero
+Phase orientation and month links
+Baby changes and recovery or adjustment
+What this stage can feel like
+What feels hard and what can help
+Who to turn to and safety support
+Editorial common questions
+Relevant real guidance
+One contextual Companion
+Related First Year topics
+Sources
+Quiet continuation
+```
+
+Remove all 20 per-question Companion actions. Keep the 15 existing article links and retain answers without links where no article exists.
+
+Audit the 12 “Ask for guidance shaped to this phase” cards against the 26 existing articles. Convert only genuine matches to editorial links; remove unmatched faux-editorial cards. Add exactly one contextual Companion handoff per phase after editorial discovery and before continuation.
+
+## 6. Preserve article and trust behaviour
+
+Do not redesign the article template or alter source rendering, source records, reviewer claims, grounding eligibility or article copy. Limit article changes to the audited image map: unique and relevant heroes, useful body imagery only, accurate alt text and appropriate crops.
+
+If source presentation conflicts with locked governance during QA, record it without changing global source behaviour.
+
+## 7. Tests and validation
+
+Add focused Phase 37A regression coverage for:
+
+- locked hub hierarchy and one late embedded Companion
+- four phase and all 13 month destinations
+- two primary pathways, four baby topics and four postpartum topics
+- editorial-only Start Here destinations, with zero `/ask` or hidden AI fallbacks
+- zero article-looking AI cards and zero phase per-question AI actions
+- exactly one contextual Companion on each of eight topic and four phase pages
+- no duplicate destination within a rendered group and no fake View All links
+- high-visibility hero-image uniqueness
+- five lifecycle states, four final destinations, zero incorrect routes and zero writes
+- preserved First Year to Toddler transition
+- unchanged route and month architecture
+- no TTC or Pregnancy regression
+
+Perform browser QA at 1280, 834 and 390 pixels across the hub, four phases and eight topics. Check crop quality, hierarchy, month navigation, grouped libraries, Companion placement, source panels, sibling navigation, focus visibility, touch targets, reduced motion, image loading, console errors and horizontal overflow.
+
+Run focused tests, the full suite, typecheck twice, lint against the established baseline and a production validation build. Do not publish.
+
+## 8. Evidence and closure
+
+Create:
+
+- `docs/content/phase37a-first-year-visual-direction.md`
+- `docs/content/phase37a-first-year-hub-phase-topic-ux.md`
+- `docs/content/phase37a-first-year-destination-audit.md`
+- `docs/content/phase37a-first-year-responsive-evidence.md`
+
+Append Phase 37A to `roadmap.md` without rewriting locked TTC or Pregnancy history. Reconcile the completion report from the final repository and browser evidence, including every requested image, destination, Companion, AI-separation, responsive and validation count.
+
+Close only if all gates pass as:
+
+**PHASE 37A — FIRST YEAR HUB, PHASE & TOPIC UX, VISUAL SYSTEM AND AI SEPARATION — CLOSED PASS / FIRST YEAR PUBLIC EXPERIENCE REFINED / VISUAL SYSTEM ALIGNED / NO NEW CONTENT**
+
+Do not begin the finished-experience visual review or the First Year content coverage audit automatically.

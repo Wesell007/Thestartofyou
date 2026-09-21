@@ -18,19 +18,17 @@ So the mapping fails on both halves: the owner is wrong, and the "partially cove
 
 - Travel/flying → `eating-well-in-pregnancy` mapping valid = **NO**.
 - `eating-well-in-pregnancy` is reclassified to its true evidence-backed action, **KEEP** (matching its own inventory record), and removed from EXPAND_EXISTING.
-- Moment 46 is reclassified from PARTIALLY_COVERED / EXPAND_EXISTING to an explicitly recorded **P3 future editorial decision with no current valid owner**. No existing Pregnancy surface can absorb travel/flying guidance without inventing content, so nothing is implemented and no article is created.
-- Phase 36B's Outcome B conclusion, the 64-moment total, blockers = 0 and new article candidates = 0 all stand.
+- Moment 46 coverage classification becomes **UNCOVERED**, priority **P3**, treatment **FUTURE EDITORIAL DECISION / NO CURRENT VALID OWNER**. Release blocker = NO; new article required before closure = NO. No existing Pregnancy surface can absorb travel/flying guidance without inventing content, so nothing is implemented.
+- Phase 36B's Outcome B conclusion, the 64-moment total, blockers = 0 and new article candidates = 0 all stand. `UNCOVERED = 0` is not preserved; the record reflects repository truth.
 
 ## Corrected counts
 
-- EXPAND_EXISTING: 5 → **4**
-- Valid expansion mappings: **4 / 4**
-- Valid EXPAND_EXISTING records addressed: **4 / 4**
-- Remaining expansion-owner mismatches: **0**
-- Article action totals: KEEP 96 → 97, EXPAND_EXISTING 5 → 4 (total stays 104)
-- Journey matrix: partially covered 9 → 8, plus 1 recorded as a P3 open editorial decision; the 64-row arithmetic is re-reconciled in the register itself
-- Remaining genuine P1/P2 gap: **NO** (one P3 item, non-blocking)
+- Article records 104 — KEEP **97**, EXPAND_EXISTING **4**, MERGE 2, REPOSITION 0, INTERNAL_LINK_ONLY 1, ARCHIVE_CANDIDATE 0 (97+4+2+0+1+0 = 104)
+- Valid expansion mappings: **4 / 4**; addressed **4 / 4**; remaining owner mismatches **0**
+- Journey moments 64 — covered 45, partially covered **8**, uncovered **1**, not required standalone 2, better served elsewhere 8 (45+8+1+2+8 = 64); arithmetic reconciled YES
+- Remaining genuine P1/P2 gap: **NO** (one uncovered P3 item, non-blocking)
 - Current Pregnancy release blockers: **0**
+
 
 ## Documentation edits (targeted only)
 

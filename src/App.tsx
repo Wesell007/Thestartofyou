@@ -32,6 +32,8 @@ const IVF = lazy(() => import("./pages/IVF.tsx"));
 // The legacy hub is kept at /postpartum/legacy for reference during rebuild.
 const Postpartum = lazy(() => import("./pages/Postpartum.tsx"));
 const FirstYear = lazy(() => import("./pages/FirstYear.tsx"));
+const FYBabyPathway = lazy(() => import("./pages/firstyear/BabyPathway.tsx"));
+const FYPostpartumPathway = lazy(() => import("./pages/firstyear/PostpartumPathway.tsx"));
 const FYPhaseZeroToThree = lazy(() => import("./pages/firstyear/PhaseZeroToThree.tsx"));
 const FYMonthPage = lazy(() => import("./pages/firstyear/MonthPage.tsx"));
 const FYPhaseThreeToSix = lazy(() => import("./pages/firstyear/PhaseThreeToSix.tsx"));
@@ -294,6 +296,8 @@ const App = () => (
           <Route path="/postpartum/early-weeks" element={<Navigate to="/first-year/postpartum-recovery/what-recovery-can-feel-like" replace />} />
           <Route path="/postpartum/ongoing-adjustment" element={<Navigate to="/first-year/emotional-wellbeing/feeling-like-yourself-again" replace />} />
           <Route path="/first-year" element={<FirstYear />} />
+          <Route path="/first-year/baby" element={<FYBabyPathway />} />
+          <Route path="/first-year/postpartum" element={<FYPostpartumPathway />} />
           {/* First Year phase bridge pages — must sit above /:journey/:stage */}
           <Route path="/first-year/0-3-months" element={<FYPhaseZeroToThree />} />
           <Route path="/first-year/3-6-months" element={<FYPhaseThreeToSix />} />

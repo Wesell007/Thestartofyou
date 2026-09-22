@@ -71,6 +71,8 @@ const familyStatic = [
 
 const firstYearStatic = [
   "/first-year",
+  "/first-year/baby",
+  "/first-year/postpartum",
   "/first-year/0-3-months",
   "/first-year/3-6-months",
   "/first-year/6-9-months",

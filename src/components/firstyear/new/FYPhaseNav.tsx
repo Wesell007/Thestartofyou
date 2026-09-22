@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
+import phaseZeroThree from "@/assets/firstyear-stage-0-3.jpg";
+import phaseThreeSix from "@/assets/firstyear-stage-3-6.jpg";
+import phaseSixNine from "@/assets/firstyear-stage-6-9.jpg";
+import phaseNineTwelve from "@/assets/firstyear-stage-9-12.jpg";
 
 const phases = [
   {
@@ -8,6 +12,7 @@ const phases = [
     baby: "Newborn rhythms, feeding, early sleep cues",
     you: "Bleeding, healing, early mood shifts",
     href: "/first-year/0-3-months",
+    image: phaseZeroThree,
   },
   {
     num: "02",
@@ -15,6 +20,7 @@ const phases = [
     baby: "Interaction, emerging routines, first foods",
     you: "Hormone shifts, energy returning unevenly",
     href: "/first-year/3-6-months",
+    image: phaseThreeSix,
   },
   {
     num: "03",
@@ -22,6 +28,7 @@ const phases = [
     baby: "Movement, curiosity, sleep regressions",
     you: "Pelvic floor, ongoing mood and identity shifts",
     href: "/first-year/6-9-months",
+    image: phaseSixNine,
   },
   {
     num: "04",
@@ -29,6 +36,7 @@ const phases = [
     baby: "Mobility, personality, transitions",
     you: "Long-arc recovery, cycles, intimacy",
     href: "/first-year/9-12-months",
+    image: phaseNineTwelve,
   },
 ];
 
@@ -52,14 +60,13 @@ const FYPhaseNav = () => {
           </p>
         </div>
 
-        {/* Mobile: horizontal snap carousel. md+: 2x2 / 4-up grid */}
-        <div className="-mx-5 sm:mx-0 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none scrollbar-none">
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 px-5 sm:px-0 md:px-0 items-stretch">
+        <div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 items-stretch">
             {phases.map((p) => (
               <Link
                 key={p.num}
                 to={p.href}
-                className="group relative snap-start shrink-0 w-[78%] sm:w-[58%] md:w-auto rounded-[22px] border bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-32px_rgba(20,30,60,0.28)] flex"
+                className="group relative rounded-lg border bg-card overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-32px_rgba(20,30,60,0.28)] flex flex-col"
                 style={{ borderColor: 'hsl(var(--stage-firstyear-accent) / 0.16)' }}
               >
                 {/* Soft First Year bloom top-left */}
@@ -80,6 +87,7 @@ const FYPhaseNav = () => {
                   aria-hidden
                 />
 
+                <img src={p.image} alt="" loading="lazy" className="relative aspect-[4/3] w-full object-cover" />
                 <div className="relative p-6 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-4">
                     <span

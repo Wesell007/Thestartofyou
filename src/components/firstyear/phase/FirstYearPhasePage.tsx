@@ -12,7 +12,7 @@ import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
 
 // Resolve hero asset via Vite's import.meta.glob (eager URL imports).
-const heroAssets = import.meta.glob("@/assets/firstyear-stage-*.jpg", {
+const heroAssets = import.meta.glob("@/assets/firstyear-*.jpg", {
   eager: true,
   import: "default",
   query: "?url",
@@ -283,6 +283,26 @@ const PairedSection = ({ config }: Props) => (
     </div>
   </section>
 );
+
+const PhaseImageBreak = ({ config }: Props) => {
+  const image = resolveHero(config.imageBreak?.image);
+  if (!image || !config.imageBreak) return null;
+  return (
+    <section className="bg-parchment py-4 md:py-8" data-phase-image-break={config.slug}>
+      <div className="container mx-auto max-w-5xl px-5 sm:px-8 md:px-10">
+        <figure className="overflow-hidden rounded-lg">
+          <img
+            src={image}
+            alt={config.imageBreak.alt}
+            loading="lazy"
+            className="aspect-[16/7] w-full object-cover"
+            style={{ objectPosition: config.imageBreak.objectPosition ?? "center" }}
+          />
+        </figure>
+      </div>
+    </section>
+  );
+};
 
 const CommonQuestions = ({
   items,
@@ -730,6 +750,7 @@ const FirstYearPhasePage = ({ config }: Props) => {
         <PhaseHero config={config} />
         <InPhaseAges ages={config.ages} />
         <PairedSection config={config} />
+        <PhaseImageBreak config={config} />
         {config.editorial && <PhaseEditorial text={config.editorial} />}
         <FeelsAndHelps feels={config.feelsHard} helps={config.whatHelps} />
         <WhenToAskForSupport items={config.support} />

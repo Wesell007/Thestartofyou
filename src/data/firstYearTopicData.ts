@@ -419,14 +419,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When do periods return after birth?",
         why: "How feeding, hormones and individual variation shape the timeline.",
-        image: null,
         href: "/first-year/body-and-hormones/body-changes-after-birth",
         tag: "start-here",
       },
       {
         title: "Your body, six to twelve months on",
         why: "A calmer perspective on the longer arc of postnatal change.",
-        image: null,
         href: "/first-year/body-and-hormones/sex-and-intimacy-after-birth",
       },
     ],

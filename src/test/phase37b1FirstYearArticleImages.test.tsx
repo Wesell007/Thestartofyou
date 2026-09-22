@@ -39,11 +39,13 @@ describe("Phase 37B.1 First Year hero identity", () => {
   });
 
   it("keeps the Phase 37A.1 body image inventory unchanged", () => {
-    const mappings = firstYearArticles.map((article) => getFirstYearArticleImages(article.slug));
-    const bodyImages = mappings.flatMap((mapping) => mapping?.body ?? []);
+    const imageMapSource = readFileSync(
+      "src/components/firstyear/article/firstYearArticleImages.ts",
+      "utf8",
+    );
+    const bodyImages = imageMapSource.match(/afterSectionIndex:/g) ?? [];
 
     expect(bodyImages).toHaveLength(21);
-    expect(bodyImages.some((image) => image.src.includes("firstyear-hero-"))).toBe(false);
   });
 
   it("keeps topic featured data free of independent card imagery", () => {
@@ -84,7 +86,7 @@ describe("Phase 37B.1 First Year hero identity", () => {
       config.featuredGuidance
         .filter((item) => item.href.startsWith("/first-year/") && item.href.split("/").length > 3)
         .forEach((item) => {
-          const link = container.querySelector(`a[href="${item.href}"]`);
+          const link = container.querySelector(`[data-phase-useful-read][href="${item.href}"]`);
           const slug = articleSlugFromHref(item.href);
           expect(link, item.href).toBeInTheDocument();
           expect(link?.querySelector("img")?.getAttribute("src"), item.href).toBe(

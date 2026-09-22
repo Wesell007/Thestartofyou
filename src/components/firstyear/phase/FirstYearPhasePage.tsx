@@ -613,6 +613,7 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
           <Link
             key={g.title}
             to={g.href}
+            data-phase-useful-read
             className="group relative overflow-hidden rounded-[22px] border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
             style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)" }}
           >

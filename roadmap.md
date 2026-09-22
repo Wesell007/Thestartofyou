@@ -207,3 +207,11 @@
 - [x] Added exactly one embedded contextual Companion after editorial discovery on each pathway, 2 of 2; duplicate modules 0; hub remains 1 and phase handoffs remain 4 of 4; AI runtime, prompts, context-builder and grounding changes 0
 - [x] Browser QA 29 checks PASS across hub, pathways, phases and topics; overflow, broken images, h1 failures and console errors 0; full suite 136 files / 1,559 tests PASS; typecheck and production build PASS; lint at established baseline
 - [x] New article content, medical guidance, lifecycle, database, TTC, Pregnancy and deployment changes 0; deployment NO; First Year content-coverage audit not started
+
+## Phase 37B.1 — First Year article hero and card image completion — IN PROGRESS / QUALITY GATE ACTIVE / NO DEPLOYMENT
+- [ ] Review the 11 original article heroes; preserve or defect-replace with documented accounting totalling 11
+- [ ] Remediate the 15 suppressed articles through approved existing assets plus accepted article-specific Nano Banana assets totalling 15
+- [ ] Reach 26 explicit distinct heroes with 0 fallback, duplication, suppression, unsafe imagery or unresolved quality gaps
+- [ ] Align pathway, topic, phase and related-guidance cards to each destination article hero without redesign
+- [ ] Complete focused and full validation, evidence documents and responsive QA at 1280, 834 and 390
+- [ ] Preserve locked boundaries: body imagery, content, routes, sources, reviewers, AI, grounding, lifecycles, database, TTC and Pregnancy unchanged; deployment NO

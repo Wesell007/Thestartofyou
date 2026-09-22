@@ -15,6 +15,7 @@ import {
   type FirstYearArticleTopic,
 } from "@/data/firstYearArticleData";
 import FirstYearArticleCard from "@/components/firstyear/article/FirstYearArticleCard";
+import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
@@ -281,14 +282,17 @@ const FirstYearTopicPage = ({ config }: Props) => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
               {config.featured.map((item) => {
+                const articleSlug = item.href.split("/").filter(Boolean).at(-1);
+                const articleHero = articleSlug ? getFirstYearArticleImages(articleSlug)?.hero : undefined;
                 const card = (
                   <>
-                  {item.image ? <div className="relative aspect-[4/3] overflow-hidden">
+                  {articleHero ? <div className="relative aspect-[4/3] overflow-hidden">
                     <img
-                      src={item.image}
-                      alt=""
-                      aria-hidden="true"
+                      src={articleHero.src}
+                      alt={articleHero.alt}
                       loading="lazy"
+                      width={1264}
+                      height={848}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       style={{ objectPosition: "center 35%" }}
                     />
@@ -311,8 +315,7 @@ const FirstYearTopicPage = ({ config }: Props) => {
                     )}
                   </div> : null}
                   <div
-                    className={`p-5 sm:p-6 ${item.image === null ? "flex min-h-[15rem] flex-col justify-center" : ""}`}
-                    data-image-treatment={item.image === null ? "text-led" : undefined}
+                    className="p-5 sm:p-6"
                   >
                     <h3 className="font-serif text-[1.1rem] sm:text-[1.18rem] text-foreground leading-snug mb-2.5">
                       {item.title}

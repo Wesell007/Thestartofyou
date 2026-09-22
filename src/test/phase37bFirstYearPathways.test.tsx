@@ -58,9 +58,9 @@ describe("Phase 37B First Year pathways", () => {
     expect(new Set(presented.map((article) => article.slug))).toEqual(new Set(owned.map((article) => article.slug)));
   });
 
-  it("keeps the source inventory at 26 ready articles and fifteen image-free heroes", () => {
+  it("keeps the source inventory at 26 ready articles with no current hero suppressions", () => {
     expect(firstYearArticles.filter((article) => article.status === "ready")).toHaveLength(26);
-    expect(firstYearArticles.filter((article) => article.suppressHeroImage)).toHaveLength(15);
+    expect(firstYearArticles.filter((article) => article.suppressHeroImage)).toHaveLength(0);
   });
 
   it("provides one contextual image break for every phase", () => {

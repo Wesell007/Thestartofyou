@@ -6,21 +6,15 @@
 // honest, unique owner were removed rather than routed to AI or duplicated.
 
 // ─── Imagery (curated from existing src/assets pool) ────────────────────
-import firstyearStage912 from "@/assets/firstyear-stage-9-12.jpg";
 import topicFeeding from "@/assets/firstyear-topic-feeding.jpg";
 import topicSleep from "@/assets/firstyear-topic-sleep.jpg";
 import topicDevelopment from "@/assets/firstyear-topic-development.jpg";
 import topicCareSafety from "@/assets/firstyear-topic-care-safety.jpg";
-import cardFresh from "@/assets/guidance-card-fresh.jpg";
-import cardQuiet from "@/assets/guidance-card-quiet.jpg";
 
 import postpartumScene from "@/assets/postpartum-scene.jpg";
 import postpartumJourney from "@/assets/postpartum-journey.jpg";
 import postpartumAdjustment from "@/assets/postpartum-stage-adjustment.jpg";
 import postpartumEarlyWeeks from "@/assets/postpartum-stage-early-weeks.jpg";
-import cardEmotional from "@/assets/guidance-card-emotional.jpg";
-import cardReflection from "@/assets/guidance-card-reflection.jpg";
-import cardPractical from "@/assets/guidance-card-practical.jpg";
 
 export type FirstYearTopicSlug =
   | "feeding"
@@ -132,7 +126,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Starting solids: a calm guide to the first month of weaning",
         why: "What to offer, what to skip, and how to take the pressure out of first foods.",
-        image: cardFresh,
         href: "/first-year/feeding/introducing-solid-foods",
       },
       {
@@ -286,7 +279,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Baby-proofing as your baby starts to move",
         why: "A calm walk-through of what to change at home through the second half of the year.",
-        image: firstyearStage912,
         href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
         tag: "start-here",
       },
@@ -388,14 +380,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Baby blues, PND and the difference between them",
         why: "A calm explainer of what's common, what's not, and what to do about it.",
-        image: cardEmotional,
         href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
         tag: "start-here",
       },
       {
         title: "The mental load and the early months",
         why: "Naming the invisible work, and small ways to share or lighten it.",
-        image: cardReflection,
         href: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
       },
     ],
@@ -489,14 +479,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Your six-week postnatal check: what to expect",
         why: "What's usually covered, and what to make sure you raise yourself.",
-        image: cardPractical,
         href: "/first-year/checkups-and-warning-signs/postnatal-checks-and-appointments",
         tag: "start-here",
       },
       {
         title: "Postnatal red flags you shouldn't ignore",
         why: "A calm but clear list of symptoms that mean getting help quickly.",
-        image: cardQuiet,
         href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth",
         tag: "when-to-get-help",
       },

@@ -10,6 +10,7 @@ import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
 import { HOME_CRUMB, FIRST_YEAR_CRUMB } from "@/lib/seo/journeyCrumbs";
+import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
 
 // Resolve hero asset via Vite's import.meta.glob (eager URL imports).
 const heroAssets = import.meta.glob("@/assets/firstyear-*.jpg", {
@@ -605,11 +606,14 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
         Useful reads shaped to this phase.
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-        {items.map((g) => (
+        {items.map((g) => {
+          const articleSlug = g.href.split("/").filter(Boolean).at(-1);
+          const hero = articleSlug ? getFirstYearArticleImages(articleSlug)?.hero : undefined;
+          return (
           <Link
             key={g.title}
             to={g.href}
-            className="group relative overflow-hidden rounded-[22px] border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
+            className="group relative overflow-hidden rounded-[22px] border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_58px_-32px_rgba(20,30,60,0.28)]"
             style={{ borderColor: "hsl(var(--stage-firstyear-accent) / 0.18)" }}
           >
             <div
@@ -622,7 +626,19 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
               style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.6), transparent)' }}
               aria-hidden
             />
-            <div className="relative">
+            {hero && (
+              <div className="aspect-[16/10] overflow-hidden">
+                <img
+                  src={hero.src}
+                  alt={hero.alt}
+                  loading="lazy"
+                  width={1264}
+                  height={848}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+            )}
+            <div className="relative p-6">
               <p
                 className="font-sans text-[10px] font-light tracking-[0.25em] uppercase mb-3"
                 style={{ color: "hsl(var(--stage-firstyear-deep))" }}
@@ -641,7 +657,8 @@ const FeaturedGuidance = ({ items }: { items: PhaseConfig["featuredGuidance"] })
               </span>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>

@@ -119,7 +119,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "How often should my baby feed in the early weeks?",
         why: "A grounded look at feeding rhythm in the newborn period, with realistic ranges.",
-        image: null,
         href: "/first-year/feeding/newborn-feeding-rhythms",
         tag: "start-here",
       },
@@ -131,7 +130,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When feeding feels harder than expected",
         why: "Honest support for the days that don't go smoothly, and when to seek help.",
-        image: null,
         href: "/first-year/feeding/bottle-and-breastfeeding-questions",
         tag: "common",
       },
@@ -171,21 +169,18 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Safer sleep in the first year: the essentials",
         why: "A clear summary of current safer-sleep guidance, written for tired parents.",
-        image: null,
         href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
         tag: "start-here",
       },
       {
         title: "Why is my baby suddenly waking again at night?",
         why: "What's usually behind a regression, and what tends to help it pass.",
-        image: null,
         href: "/first-year/sleep/when-sleep-suddenly-changes",
         tag: "common",
       },
       {
         title: "Wake windows and naps through the first year",
         why: "How daytime sleep changes month by month, without rigid schedules.",
-        image: null,
         href: "/first-year/sleep/helping-your-baby-settle",
       },
     ],
@@ -224,14 +219,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Milestones in the first year: a gentle overview",
         why: "What tends to emerge when, and why the timing range matters more than the dates.",
-        image: null,
         href: "/first-year/development/baby-development-in-the-first-year",
         tag: "start-here",
       },
       {
         title: "When should I raise a development question?",
         why: "Calm guidance on what's worth a conversation, without slipping into panic.",
-        image: null,
         href: "/first-year/development/when-milestones-feel-uneven",
         tag: "when-to-get-help",
       },
@@ -272,7 +265,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When should I call the GP about my baby?",
         why: "Clear guidance on signs that need a conversation and signs that need urgent care.",
-        image: null,
         href: "/first-year/care-and-safety/common-illnesses-in-the-first-year",
         tag: "when-to-get-help",
       },
@@ -285,7 +277,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Caring for baby skin in the first year",
         why: "What's usually normal, what helps, and when a skin change is worth checking.",
-        image: null,
         href: "/first-year/care-and-safety/baby-care-basics",
       },
     ],
@@ -326,20 +317,17 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "The first six weeks after birth: what to expect",
         why: "A grounded overview of early recovery, written without rushing you.",
-        image: null,
         href: "/first-year/postpartum-recovery/healing-after-birth",
         tag: "start-here",
       },
       {
         title: "Caesarean recovery: a gentle week-by-week guide",
         why: "What healing tends to look like, and what helps it along.",
-        image: null,
         href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
       },
       {
         title: "Pelvic floor in the months after birth",
         why: "Why it matters, what's normal, and when to ask for specialist support.",
-        image: null,
         href: "/first-year/body-and-hormones/separated-tummy-muscles",
         tag: "common",
       },
@@ -425,7 +413,6 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Postnatal hair loss: what's happening and what helps",
         why: "Why it peaks around three to four months, and when it usually settles.",
-        image: null,
         href: "/first-year/body-and-hormones/hormones-sweat-and-hair-loss",
         tag: "common",
       },

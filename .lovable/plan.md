@@ -30,6 +30,7 @@
 - Keep the established warm, intimate, lived-in UK-home direction and the Baby blue, sage and neutral or Postpartum plum, blush and neutral relationship.
 - Reject or regenerate any result with implausible anatomy, hands, infant age, head or neck support, feeding position, sleep cues, objects, fabric, faces or body positioning. Cropping will never conceal a safety or anatomy defect.
 - Review every accepted image for useful subject framing at desktop, tablet and mobile before wiring it into the product.
+- Image quality outranks the 26 of 26 target. If no acceptable asset can be produced after justified review and regeneration, keep that article explicitly suppressed, record `UNRESOLVED_HERO_QUALITY_GAP = 1`, and leave Phase 37B.1 open rather than accepting a weak, generic, duplicated, unsafe or implausible image.
 
 ### 3. Establish 26 explicit and unique article identities
 
@@ -95,4 +96,5 @@ Add focused tests proving:
 - Add only a new Phase 37B.1 section to `roadmap.md`; leave Phase 37A, 37A.1 and 37B history unchanged.
 - Return every requested completion-report field, including the measured existing-versus-generated split and established lint baseline.
 - Include the reconciliation equations: preserved original heroes plus documented replacements equals 11; existing assignments plus new generations for suppressed records equals 15; 11 original hero articles plus 15 remediated articles equals 26 final explicit heroes.
+- Report unresolved hero quality gaps explicitly. Closure additionally requires that count to be 0; any nonzero value blocks the locked closure statement.
 - Use the locked closure wording only when all image, uniqueness, safety, card, responsive and validation gates pass.

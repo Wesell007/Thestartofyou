@@ -26,29 +26,30 @@ const renderPage = (ui: React.ReactNode) =>
     </HelmetProvider>,
   );
 
-describe("Phase 37A.1 intentional First Year image absence", () => {
+describe("Phase 37B.1 First Year article image completion", () => {
   it("renders an article hero when an approved image is present", () => {
     renderPage(<FirstYearArticlePage article={article("teething")} tone="baby" />);
 
     expect(screen.getByRole("img", { name: /parent smiling and holding a baby/i })).toBeInTheDocument();
   });
 
-  it("renders an explicitly image-free article as text-led with no fallback", () => {
+  it("renders a remediated article with its explicit article hero", () => {
     renderPage(
       <FirstYearArticlePage article={article("bottle-and-breastfeeding-questions")} tone="baby" />,
     );
 
     expect(screen.getByRole("heading", { level: 1, name: "Bottle and breastfeeding questions" })).toBeInTheDocument();
-    expect(getFirstYearArticleImages("bottle-and-breastfeeding-questions")?.hero).toBeUndefined();
+    expect(getFirstYearArticleImages("bottle-and-breastfeeding-questions")?.hero).toBeDefined();
     const mappedSources = Object.values(getFirstYearArticleImages("bottle-and-breastfeeding-questions") ?? {})
       .flatMap((value) => Array.isArray(value) ? value.map((image) => image.src) : value?.src ?? []);
     expect(mappedSources.some((src) => src.includes("firstyear-scene"))).toBe(false);
   });
 
-  it("renders an explicitly image-free discovery card without a fallback or ratio box", () => {
-    renderPage(<FirstYearArticleCard article={article("bottle-and-breastfeeding-questions")} />);
+  it("keeps optional suppression as a text-led treatment for future records", () => {
+    const suppressedFixture = { ...article("teething"), slug: "future-suppressed", suppressHeroImage: true as const };
+    renderPage(<FirstYearArticleCard article={suppressedFixture} />);
 
-    const card = screen.getByRole("link", { name: /Bottle and breastfeeding questions/i });
+    const card = screen.getByRole("link", { name: /Teething/i });
     expect(card.querySelector("img")).toBeNull();
     expect(card.querySelector("[class*='aspect-']")).toBeNull();
     expect(card.querySelector('[data-image-treatment="text-led"]')).toBeInTheDocument();
@@ -77,28 +78,27 @@ describe("Phase 37A.1 intentional First Year image absence", () => {
     expect(container.querySelector("main > section img")).toBeNull();
   });
 
-  it("renders an explicitly image-free Start Here card without a blank image slot", () => {
+  it("renders destination article identity on a topic Start Here card", () => {
     renderPage(<FirstYearTopicPage config={firstYearTopicConfigs.feeding} />);
 
     const card = screen.getByRole("link", { name: /How often should my baby feed in the early weeks/i });
-    expect(card.querySelector("img")).toBeNull();
-    expect(card.querySelector("[class*='aspect-']")).toBeNull();
-    expect(card.querySelector('[data-image-treatment="text-led"]')).toBeInTheDocument();
+    const image = card.querySelector("img");
+    expect(image).toBeInTheDocument();
+    expect(image?.getAttribute("src")).toBe(getFirstYearArticleImages("newborn-feeding-rhythms")?.hero?.src);
   });
 
-  it("retains the normal topic fallback when no First Year suppression decision exists", () => {
+  it("does not restore a generic topic fallback for an unmapped article", () => {
     const unmapped = { ...article("teething"), slug: "unmapped-test-article" };
     renderPage(<FirstYearArticleCard article={unmapped} />);
 
-    expect(screen.getByRole("img", { name: /baby care and safety moment/i })).toBeInTheDocument();
+    expect(screen.queryByRole("img")).not.toBeInTheDocument();
   });
 
-  it("keeps every explicitly suppressed article free of a mapped hero", () => {
-    const suppressed = firstYearArticles.filter((item) => item.suppressHeroImage);
-
-    expect(suppressed).toHaveLength(15);
-    for (const item of suppressed) {
-      expect(getFirstYearArticleImages(item.slug)?.hero, item.slug).toBeUndefined();
-    }
+  it("maps every current article to a distinct explicit hero", () => {
+    const heroes = firstYearArticles.map((item) => getFirstYearArticleImages(item.slug)?.hero?.src);
+    expect(heroes).toHaveLength(26);
+    expect(heroes.every(Boolean)).toBe(true);
+    expect(new Set(heroes).size).toBe(26);
+    expect(firstYearArticles.filter((item) => item.suppressHeroImage)).toHaveLength(0);
   });
 });

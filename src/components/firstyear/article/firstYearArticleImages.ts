@@ -32,6 +32,21 @@ import bodySeparatedTummyMuscles2 from "@/assets/firstyear-body-separated-tummy-
 import heroSexAndIntimacyAfterBirth from "@/assets/firstyear-hero-sex-and-intimacy-after-birth.jpg";
 import bodySexAndIntimacyAfterBirth1 from "@/assets/firstyear-body-sex-and-intimacy-after-birth-1.jpg";
 import bodySexAndIntimacyAfterBirth2 from "@/assets/firstyear-body-sex-and-intimacy-after-birth-2.jpg";
+import heroNewbornFeedingRhythms from "@/assets/firstyear-hero-newborn-feeding-rhythms.jpg";
+import heroBottleAndBreastfeedingQuestions from "@/assets/firstyear-hero-bottle-and-breastfeeding-questions.jpg";
+import heroNewbornSleepExpectations from "@/assets/firstyear-hero-newborn-sleep-expectations.jpg";
+import heroHelpingYourBabySettle from "@/assets/firstyear-hero-helping-your-baby-settle.jpg";
+import heroBabyDevelopmentInTheFirstYear from "@/assets/firstyear-hero-baby-development-in-the-first-year.jpg";
+import heroWhenMilestonesFeelUneven from "@/assets/firstyear-hero-when-milestones-feel-uneven.jpg";
+import heroBabyCareBasics from "@/assets/firstyear-hero-baby-care-basics-v2.jpg";
+import heroSafeSleepAndHomeSafety from "@/assets/firstyear-hero-safe-sleep-and-home-safety.jpg";
+import heroHealingAfterBirth from "@/assets/firstyear-hero-healing-after-birth.jpg";
+import heroWhatRecoveryCanFeelLike from "@/assets/firstyear-hero-what-recovery-can-feel-like.jpg";
+import heroFeelingLikeYourselfAgain from "@/assets/firstyear-hero-feeling-like-yourself-again.jpg";
+import heroBodyChangesAfterBirth from "@/assets/firstyear-hero-body-changes-after-birth.jpg";
+import heroHormonesSweatAndHairLoss from "@/assets/firstyear-hero-hormones-sweat-and-hair-loss.jpg";
+import heroPostnatalChecksAndAppointments from "@/assets/firstyear-hero-postnatal-checks-and-appointments.jpg";
+import heroWhenToAskForHelpAfterBirth from "@/assets/firstyear-hero-when-to-ask-for-help-after-birth.jpg";
 
 export interface HubBodyImage {
   afterSectionIndex: number;
@@ -108,12 +123,12 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
       { afterSectionIndex: 3, src: bodySexAndIntimacyAfterBirth2, alt: 'A fully clothed couple cuddling on a sofa under a blanket, relaxed and at ease.' },
     ],
   },
-  // bespoke future: newborn asleep in a soft, warm-lit family bedroom
   "newborn-sleep-expectations": {
+    hero: { src: heroNewbornSleepExpectations, alt: "A newborn sleeping on their back in a clear cot with a firm flat mattress and fitted sheet." },
     body: [],
   },
-  // bespoke future: parent settling baby in warm evening light
   "helping-your-baby-settle": {
+    hero: { src: heroHelpingYourBabySettle, alt: "A parent holding a wakeful baby upright against their chest during a quiet evening at home." },
     body: [],
   },
   "when-sleep-suddenly-changes": {
@@ -137,56 +152,56 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
     ],
   },
 
-  // bespoke future: safe cot detail with breathable bedding
   "safe-sleep-and-home-safety": {
+    hero: { src: heroSafeSleepAndHomeSafety, alt: "A parent placing a baby on their back in a clear cot with a firm flat mattress and fitted sheet." },
     body: [],
   },
-  // bespoke future: parent bathing or changing baby in soft daylight
   "baby-care-basics": {
+    hero: { src: heroBabyCareBasics, alt: "A parent supporting a young baby's head and neck while bathing them in a shallow baby bath on the floor." },
     body: [],
   },
-  // bespoke future: parent resting after birth in soft natural light
   "healing-after-birth": {
+    hero: { src: heroHealingAfterBirth, alt: "A new parent resting beside their baby's clear bedside cot at home." },
     body: [],
   },
-  // bespoke future: new parent being supported during everyday recovery
   "what-recovery-can-feel-like": {
+    hero: { src: heroWhatRecoveryCanFeelLike, alt: "Two parents sharing newborn care in a lived-in kitchen during the early weeks after birth." },
     body: [],
   },
-  // bespoke future: respectful postpartum body-care moment without bounce-back framing
   "body-changes-after-birth": {
+    hero: { src: heroBodyChangesAfterBirth, alt: "A postpartum parent looking at their clothed body in a bedroom mirror at home." },
     body: [],
   },
-  // bespoke future: gentle postpartum self-care scene in warm morning light
   "hormones-sweat-and-hair-loss": {
+    hero: { src: heroHormonesSweatAndHairLoss, alt: "A postpartum parent gently checking loose hair in a brush while looking in a bathroom mirror." },
     body: [],
   },
-  // bespoke future: parent feeding newborn calmly in soft natural light
   "newborn-feeding-rhythms": {
+    hero: { src: heroNewbornFeedingRhythms, alt: "A parent bottle feeding a newborn in a supported semi-upright position at home." },
     body: [],
   },
-  // bespoke future: inclusive feeding scene showing calm, non-judgemental support
   "bottle-and-breastfeeding-questions": {
+    hero: { src: heroBottleAndBreastfeedingQuestions, alt: "Two parents calmly discussing feeding while one holds and feeds their baby at home." },
     body: [],
   },
-  // bespoke future: baby exploring through play with a parent nearby in soft natural light
   "baby-development-in-the-first-year": {
+    hero: { src: heroBabyDevelopmentInTheFirstYear, alt: "A parent watching closely as an older baby sits and explores stacking toys on a floor mat." },
     body: [],
   },
-  // bespoke future: reassuring parent and baby development moment without clinical or comparison framing
   "when-milestones-feel-uneven": {
+    hero: { src: heroWhenMilestonesFeelUneven, alt: "A parent and older baby sharing a picture book during relaxed floor play at home." },
     body: [],
   },
-  // bespoke future: calm parent and baby preparing for an early postnatal appointment at home
   "postnatal-checks-and-appointments": {
+    hero: { src: heroPostnatalChecksAndAppointments, alt: "A parent holding their newborn while speaking with a health professional in a clinic room." },
     body: [],
   },
-  // bespoke future: reassuring parent and baby support moment after birth, calm and non-clinical
   "when-to-ask-for-help-after-birth": {
+    hero: { src: heroWhenToAskForHelpAfterBirth, alt: "A new parent holding their baby while speaking with a supportive health professional at home." },
     body: [],
   },
-  // bespoke future: quiet parent and baby moment at home, calm emotional recovery after birth
   "feeling-like-yourself-again": {
+    hero: { src: heroFeelingLikeYourselfAgain, alt: "A new parent having a quiet cup of tea while their baby rests safely on a floor mat nearby." },
     body: [],
   },
   // bespoke future: calm supportive parent and baby moment after birth, emotionally honest but not crisis-led

@@ -2,28 +2,8 @@ import { Link } from "react-router-dom";
 import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
 import type { CSSProperties } from "react";
 import { ChevronRight, ShieldCheck, Clock } from "lucide-react";
-import type { FirstYearArticle, FirstYearArticleTopic } from "@/data/firstYearArticleData";
+import type { FirstYearArticle } from "@/data/firstYearArticleData";
 import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
-
-import fallbackFeeding from "@/assets/firstyear-scene.jpg";
-import fallbackSleep from "@/assets/firstyear-stage-0-3.jpg";
-import fallbackDevelopment from "@/assets/firstyear-stage-6-9.jpg";
-import fallbackCare from "@/assets/guidance-card-nursery.jpg";
-import fallbackRecovery from "@/assets/postpartum-stage-early-days.jpg";
-import fallbackEmotional from "@/assets/article-hero-emotional-feeling-like-yourself.jpg";
-import fallbackBody from "@/assets/postpartum-stage-adjustment.jpg";
-import fallbackCheckups from "@/assets/postpartum-stage-early-weeks.jpg";
-
-const TOPIC_FALLBACK: Record<FirstYearArticleTopic, { src: string; alt: string }> = {
-  "feeding": { src: fallbackFeeding, alt: "A calm feeding moment in the first year" },
-  "sleep": { src: fallbackSleep, alt: "A calm baby sleep moment" },
-  "development": { src: fallbackDevelopment, alt: "A gentle baby development moment" },
-  "care-and-safety": { src: fallbackCare, alt: "A calm baby care and safety moment" },
-  "postpartum-recovery": { src: fallbackRecovery, alt: "A quiet postpartum recovery moment" },
-  "emotional-wellbeing": { src: fallbackEmotional, alt: "A gentle emotional wellbeing moment after birth" },
-  "body-and-hormones": { src: fallbackBody, alt: "A calm body-care moment after birth" },
-  "checkups-and-warning-signs": { src: fallbackCheckups, alt: "A calm early postnatal check moment" },
-};
 
 interface Props {
   article: FirstYearArticle;
@@ -45,9 +25,7 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
 
   const isReady = article.status === "ready";
   const mappedHero = getFirstYearArticleImages(article.slug)?.hero;
-  const hero = article.suppressHeroImage
-    ? undefined
-    : mappedHero ?? TOPIC_FALLBACK[article.topic];
+  const hero = article.suppressHeroImage ? undefined : mappedHero;
 
   const cardClass =
     "group relative flex h-full flex-col overflow-hidden rounded-[22px] border bg-parchment transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-32px_rgba(50,50,70,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[var(--card-ring)]";
@@ -67,6 +45,8 @@ const FirstYearArticleCard = ({ article, tone = "baby" }: Props) => {
             src={hero.src}
             alt={hero.alt}
             loading="lazy"
+            width={1264}
+            height={848}
             className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ${
               isReady ? "group-hover:scale-[1.03]" : ""
             }`}

@@ -6,21 +6,15 @@
 // honest, unique owner were removed rather than routed to AI or duplicated.
 
 // ─── Imagery (curated from existing src/assets pool) ────────────────────
-import firstyearStage912 from "@/assets/firstyear-stage-9-12.jpg";
 import topicFeeding from "@/assets/firstyear-topic-feeding.jpg";
 import topicSleep from "@/assets/firstyear-topic-sleep.jpg";
 import topicDevelopment from "@/assets/firstyear-topic-development.jpg";
 import topicCareSafety from "@/assets/firstyear-topic-care-safety.jpg";
-import cardFresh from "@/assets/guidance-card-fresh.jpg";
-import cardQuiet from "@/assets/guidance-card-quiet.jpg";
 
 import postpartumScene from "@/assets/postpartum-scene.jpg";
 import postpartumJourney from "@/assets/postpartum-journey.jpg";
 import postpartumAdjustment from "@/assets/postpartum-stage-adjustment.jpg";
 import postpartumEarlyWeeks from "@/assets/postpartum-stage-early-weeks.jpg";
-import cardEmotional from "@/assets/guidance-card-emotional.jpg";
-import cardReflection from "@/assets/guidance-card-reflection.jpg";
-import cardPractical from "@/assets/guidance-card-practical.jpg";
 
 export type FirstYearTopicSlug =
   | "feeding"
@@ -125,20 +119,17 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "How often should my baby feed in the early weeks?",
         why: "A grounded look at feeding rhythm in the newborn period, with realistic ranges.",
-        image: null,
         href: "/first-year/feeding/newborn-feeding-rhythms",
         tag: "start-here",
       },
       {
         title: "Starting solids: a calm guide to the first month of weaning",
         why: "What to offer, what to skip, and how to take the pressure out of first foods.",
-        image: cardFresh,
         href: "/first-year/feeding/introducing-solid-foods",
       },
       {
         title: "When feeding feels harder than expected",
         why: "Honest support for the days that don't go smoothly, and when to seek help.",
-        image: null,
         href: "/first-year/feeding/bottle-and-breastfeeding-questions",
         tag: "common",
       },
@@ -178,21 +169,18 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Safer sleep in the first year: the essentials",
         why: "A clear summary of current safer-sleep guidance, written for tired parents.",
-        image: null,
         href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
         tag: "start-here",
       },
       {
         title: "Why is my baby suddenly waking again at night?",
         why: "What's usually behind a regression, and what tends to help it pass.",
-        image: null,
         href: "/first-year/sleep/when-sleep-suddenly-changes",
         tag: "common",
       },
       {
         title: "Wake windows and naps through the first year",
         why: "How daytime sleep changes month by month, without rigid schedules.",
-        image: null,
         href: "/first-year/sleep/helping-your-baby-settle",
       },
     ],
@@ -231,14 +219,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Milestones in the first year: a gentle overview",
         why: "What tends to emerge when, and why the timing range matters more than the dates.",
-        image: null,
         href: "/first-year/development/baby-development-in-the-first-year",
         tag: "start-here",
       },
       {
         title: "When should I raise a development question?",
         why: "Calm guidance on what's worth a conversation, without slipping into panic.",
-        image: null,
         href: "/first-year/development/when-milestones-feel-uneven",
         tag: "when-to-get-help",
       },
@@ -279,21 +265,18 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "When should I call the GP about my baby?",
         why: "Clear guidance on signs that need a conversation and signs that need urgent care.",
-        image: null,
         href: "/first-year/care-and-safety/common-illnesses-in-the-first-year",
         tag: "when-to-get-help",
       },
       {
         title: "Baby-proofing as your baby starts to move",
         why: "A calm walk-through of what to change at home through the second half of the year.",
-        image: firstyearStage912,
         href: "/first-year/care-and-safety/safe-sleep-and-home-safety",
         tag: "start-here",
       },
       {
         title: "Caring for baby skin in the first year",
         why: "What's usually normal, what helps, and when a skin change is worth checking.",
-        image: null,
         href: "/first-year/care-and-safety/baby-care-basics",
       },
     ],
@@ -334,20 +317,17 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "The first six weeks after birth: what to expect",
         why: "A grounded overview of early recovery, written without rushing you.",
-        image: null,
         href: "/first-year/postpartum-recovery/healing-after-birth",
         tag: "start-here",
       },
       {
         title: "Caesarean recovery: a gentle week-by-week guide",
         why: "What healing tends to look like, and what helps it along.",
-        image: null,
         href: "/first-year/postpartum-recovery/stitches-tears-and-perineal-healing",
       },
       {
         title: "Pelvic floor in the months after birth",
         why: "Why it matters, what's normal, and when to ask for specialist support.",
-        image: null,
         href: "/first-year/body-and-hormones/separated-tummy-muscles",
         tag: "common",
       },
@@ -388,14 +368,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Baby blues, PND and the difference between them",
         why: "A calm explainer of what's common, what's not, and what to do about it.",
-        image: cardEmotional,
         href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy",
         tag: "start-here",
       },
       {
         title: "The mental load and the early months",
         why: "Naming the invisible work, and small ways to share or lighten it.",
-        image: cardReflection,
         href: "/first-year/emotional-wellbeing/feeling-like-yourself-again",
       },
     ],
@@ -435,21 +413,18 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Postnatal hair loss: what's happening and what helps",
         why: "Why it peaks around three to four months, and when it usually settles.",
-        image: null,
         href: "/first-year/body-and-hormones/hormones-sweat-and-hair-loss",
         tag: "common",
       },
       {
         title: "When do periods return after birth?",
         why: "How feeding, hormones and individual variation shape the timeline.",
-        image: null,
         href: "/first-year/body-and-hormones/body-changes-after-birth",
         tag: "start-here",
       },
       {
         title: "Your body, six to twelve months on",
         why: "A calmer perspective on the longer arc of postnatal change.",
-        image: null,
         href: "/first-year/body-and-hormones/sex-and-intimacy-after-birth",
       },
     ],
@@ -489,14 +464,12 @@ export const firstYearTopicConfigs: Record<FirstYearTopicSlug, FirstYearTopicCon
       {
         title: "Your six-week postnatal check: what to expect",
         why: "What's usually covered, and what to make sure you raise yourself.",
-        image: cardPractical,
         href: "/first-year/checkups-and-warning-signs/postnatal-checks-and-appointments",
         tag: "start-here",
       },
       {
         title: "Postnatal red flags you shouldn't ignore",
         why: "A calm but clear list of symptoms that mean getting help quickly.",
-        image: cardQuiet,
         href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth",
         tag: "when-to-get-help",
       },

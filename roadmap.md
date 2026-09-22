@@ -198,3 +198,12 @@
 - [x] Shared asset safety check complete: one newly unreferenced weak asset deleted, shared assets retained, broken asset references 0, non First Year asset-reference changes 0
 - [x] Browser QA 13 hub, phase and topic surfaces plus 26 articles at 1280, 834 and 390 = 117 checks PASS; overflow 0, broken images 0, heading failures 0, console errors 0
 - [x] Article copy, sources, reviewer, grounding, AI runtime, lifecycle, TTC, Pregnancy, routes, database and deployment changes 0; First Year content coverage audit not started
+
+## Phase 37B — First Year pathway pages, phase visual storytelling and premium hub enhancement — CLOSED PASS / BABY AND POSTPARTUM PATHWAYS ESTABLISHED / FIRST YEAR PHASE EXPERIENCE VISUALLY UPGRADED / NO NEW ARTICLE CONTENT
+- [x] Added exactly two editorial discovery routes, `/first-year/baby` and `/first-year/postpartum`, before generic matching; dead pathway actions 0; canonicals, breadcrumbs and BreadcrumbList data 2 of 2; sitemap 352 to 354 unique entries
+- [x] Pathway ownership reconciled exactly: Baby 4 Start Here + 11 grouped = 15; Postpartum 4 Start Here + 7 grouped = 11; missing and duplicate owned articles 0; new records and duplicated body copy 0
+- [x] Upgraded both equal-weight hub pathway cards, the four image-led phase cards and `Everything, side by side`; Nano Banana direction board retained as non-production direction only
+- [x] Added one justified image break per phase, 4 of 4; new production images 0; inherited intentional image-free count 15; 37A.1 overrides and fallback restoration 0
+- [x] Added exactly one embedded contextual Companion after editorial discovery on each pathway, 2 of 2; duplicate modules 0; hub remains 1 and phase handoffs remain 4 of 4; AI runtime, prompts, context-builder and grounding changes 0
+- [x] Browser QA 29 checks PASS across hub, pathways, phases and topics; overflow, broken images, h1 failures and console errors 0; full suite 136 files / 1,559 tests PASS; typecheck and production build PASS; lint at established baseline
+- [x] New article content, medical guidance, lifecycle, database, TTC, Pregnancy and deployment changes 0; deployment NO; First Year content-coverage audit not started

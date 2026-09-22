@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import type { FirstYearTopicSlug } from "@/data/firstYearTopicData";
+import babyPathway from "@/assets/firstyear-journey.jpg";
+import recoveryPathway from "@/assets/postpartum-journey.jpg";
 
 // Each cluster card on the hub maps to one First Year topic landing page.
 // The whole card is the single click target; chips inside remain visual only.
@@ -21,6 +23,8 @@ interface ColumnProps {
   soft: string;
   accent: string;
   deep: string;
+  image: string;
+  imageAlt: string;
   clusters: Cluster[];
 }
 
@@ -33,6 +37,8 @@ const babyColumn: ColumnProps = {
   soft: "--stage-firstyear-soft",
   accent: "--stage-firstyear-accent",
   deep: "--stage-firstyear-deep",
+  image: babyPathway,
+  imageAlt: "A parent and baby playing together at home",
   clusters: [
     { slug: "feeding", title: "Feeding", sub: "Breast, bottle, mixed feeding, weaning, first foods.", items: ["Latching", "Bottle refusal", "Weaning", "First foods"] },
     { slug: "sleep", title: "Sleep", sub: "Patterns, naps, regressions, settling, night waking.", items: ["Naps", "Regressions", "Night waking", "Self-settling"] },
@@ -50,6 +56,8 @@ const recoveryColumn: ColumnProps = {
   soft: "--stage-recovery-soft",
   accent: "--stage-recovery-accent",
   deep: "--stage-recovery-deep",
+  image: recoveryPathway,
+  imageAlt: "A parent holding their baby in a calm room at home",
   clusters: [
     { slug: "postpartum-recovery", title: "Physical recovery", sub: "Bleeding, stitches, c-section healing, pelvic floor.", items: ["Bleeding", "Stitches", "C-section", "Pelvic floor"] },
     { slug: "emotional-wellbeing", title: "Emotional wellbeing", sub: "Mood, identity shifts, intrusive thoughts, asking for help.", items: ["Baby blues", "PND signs", "Anxiety", "Identity"] },
@@ -61,31 +69,10 @@ const recoveryColumn: ColumnProps = {
 const ClusterCard = ({ c, accent, soft, deep }: { c: Cluster; accent: string; soft: string; deep: string }) => (
   <Link
     to={`/first-year/${c.slug}`}
-    className="group relative overflow-hidden rounded-[22px] border bg-card p-5 sm:p-6 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_60px_-30px_rgba(20,30,60,0.28)]"
-    style={{ borderColor: `hsl(var(${accent}) / 0.18)` }}
+    className="group flex min-h-28 items-center justify-between gap-5 border-b p-4 transition-colors hover:bg-card/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    style={{ borderColor: `hsl(var(${accent}) / 0.22)` }}
   >
-    {/* Gradient background wash */}
-    <div
-      className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style={{
-        backgroundImage: `linear-gradient(135deg, hsl(var(${soft}) / 0.28) 0%, transparent 60%)`,
-      }}
-      aria-hidden
-    />
-    {/* Top-corner bloom */}
-    <div
-      className="absolute -top-10 -right-10 w-28 h-28 rounded-full blur-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
-      style={{ backgroundColor: `hsl(var(${soft}) / 0.7)` }}
-      aria-hidden
-    />
-    {/* Inner highlight */}
-    <div
-      className="absolute inset-x-0 top-0 h-px pointer-events-none"
-      style={{ backgroundImage: 'linear-gradient(to right, transparent, hsl(0 0% 100% / 0.65), transparent)' }}
-      aria-hidden
-    />
-
-    <div className="relative flex flex-col flex-1">
+    <div className="flex min-w-0 flex-1 flex-col">
       <div className="flex items-start gap-2.5 mb-2">
         <span
           className="mt-1 w-1 h-6 rounded-full shrink-0"
@@ -94,57 +81,20 @@ const ClusterCard = ({ c, accent, soft, deep }: { c: Cluster; accent: string; so
         <h4 className="font-serif text-[1.08rem] sm:text-[1.15rem] text-foreground leading-snug flex-1">
           {c.title}
         </h4>
-        <span
-          className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center border transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          style={{
-            borderColor: `hsl(var(${accent}) / 0.28)`,
-            backgroundColor: `hsl(var(${soft}) / 0.55)`,
-          }}
-        >
-          <ArrowUpRight
-            size={13}
-            strokeWidth={1.8}
-            style={{ color: `hsl(var(${deep}))` }}
-          />
-        </span>
       </div>
       <p className="font-sans text-[13px] font-light text-muted-foreground leading-relaxed mb-4 ml-[14px]">
         {c.sub}
       </p>
-      <ul className="flex flex-wrap gap-1.5 mt-auto ml-[14px]" aria-hidden="true">
-        {c.items.map((it) => (
-          <li
-            key={it}
-            className="font-sans text-[11.5px] font-light px-2.5 py-1 rounded-full border"
-            style={{
-              borderColor: `hsl(var(${accent}) / 0.22)`,
-              color: `hsl(var(${deep}))`,
-              backgroundColor: `hsl(var(${soft}) / 0.4)`,
-            }}
-          >
-            {it}
-          </li>
-        ))}
-      </ul>
+      <p className="ml-[14px] font-sans text-[11px] font-light text-foreground/55" aria-hidden="true">{c.items.join(" · ")}</p>
     </div>
+    <ArrowUpRight size={16} strokeWidth={1.8} className="shrink-0 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" style={{ color: `hsl(var(${deep}))` }} />
   </Link>
 );
 
 const Column = ({ col }: { col: ColumnProps }) => (
-  <div id={col.anchor} className="relative flex flex-col scroll-mt-24 rounded-[26px] p-5 sm:p-6 md:p-7 overflow-hidden border"
-    style={{
-      borderColor: `hsl(var(${col.accent}) / 0.14)`,
-      backgroundImage: `linear-gradient(180deg, hsl(var(${col.bg}) / 0.32) 0%, hsl(var(${col.bg}) / 0.12) 100%)`,
-    }}
-  >
-    {/* Ambient bloom */}
-    <div
-      className="absolute -top-16 -left-16 w-56 h-56 rounded-full blur-3xl opacity-55 pointer-events-none"
-      style={{ backgroundColor: `hsl(var(${col.soft}) / 0.5)` }}
-      aria-hidden
-    />
-    {/* Column header */}
-    <div className="relative mb-6">
+  <div id={col.anchor} className="flex scroll-mt-24 flex-col overflow-hidden">
+    <img src={col.image} alt={col.imageAlt} loading="lazy" className="aspect-[16/9] w-full rounded-lg object-cover" />
+    <div className="relative mb-4 mt-6">
       <div className="flex items-center gap-3">
         <span
           className="w-1.5 h-7 rounded-full"
@@ -166,7 +116,7 @@ const Column = ({ col }: { col: ColumnProps }) => (
         {col.subtitle}
       </p>
     </div>
-    <div className="relative grid grid-cols-1 gap-3.5">
+    <div className="relative grid grid-cols-1 border-t" style={{ borderColor: `hsl(var(${col.accent}) / 0.22)` }}>
       {col.clusters.map((c) => (
         <ClusterCard key={c.title} c={c} accent={col.accent} soft={col.soft} deep={col.deep} />
       ))}

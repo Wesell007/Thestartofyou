@@ -31,6 +31,7 @@ export type PhaseConfig = {
   relatedTopics: PhaseRelated[];
   heroImage?: string;
   heroObjectPosition?: string;
+  imageBreak?: { image: string; alt: string; objectPosition?: string };
   editorial?: string;
   feelsHard?: PhaseFeelsHard[];
   whatHelps?: PhaseWhatHelps[];
@@ -103,6 +104,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ages: ["Newborn", "1 month", "2 months", "3 months"],
     heroImage: "firstyear-stage-0-3.jpg",
     heroObjectPosition: "center 38%",
+    imageBreak: { image: "firstyear-topic-feeding.jpg", alt: "A parent feeding a newborn while another adult offers support nearby", objectPosition: "center 42%" },
     editorial:
       "The first three months are less about routines and more about survival, healing and learning your baby. Feeding, sleep and comfort take almost all of the day, and your body is still doing the quiet work of recovering from birth. It is a phase to be held, not conquered.",
     babyChanges: [
@@ -193,6 +195,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ages: ["4 months", "5 months", "6 months"],
     heroImage: "firstyear-stage-3-6.jpg",
     heroObjectPosition: "center 42%",
+    imageBreak: { image: "firstyear-topic-development.jpg", alt: "A parent beside a baby reaching and exploring during supervised floor play", objectPosition: "center 46%" },
     editorial:
       "This phase often feels like the first exhale. Your baby is more of a little person, and days start to have a shape. Confidence usually grows quietly, then gets tested again by a sleep change or a hard week, which is part of the pattern rather than a step back.",
     babyChanges: [
@@ -281,6 +284,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ages: ["7 months", "8 months", "9 months"],
     heroImage: "firstyear-stage-6-9.jpg",
     heroObjectPosition: "center 40%",
+    imageBreak: { image: "firstyear-hero-introducing-solid-foods.jpg", alt: "A baby sitting upright for first foods with a parent close beside them", objectPosition: "center 45%" },
     editorial:
       "Curiosity is the big story of this phase. Your baby wants to reach, touch and taste the world, and they want you close while they do it. It is often the phase where separation awareness, new tiredness and a fuller inner life for your baby all arrive together.",
     babyChanges: [
@@ -368,6 +372,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ages: ["10 months", "11 months", "12 months"],
     heroImage: "firstyear-stage-9-12.jpg",
     heroObjectPosition: "center 40%",
+    imageBreak: { image: "firstyear-stage-9-12.jpg", alt: "A baby practising supported standing with a parent at home", objectPosition: "center 42%" },
     editorial:
       "This phase often carries a quiet identity shift. Your baby is becoming a small person with clear preferences, and you are looking back at a year that changed you. First birthdays can feel joyful and tender at the same time, and both feelings deserve room.",
     babyChanges: [

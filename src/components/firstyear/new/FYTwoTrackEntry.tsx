@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import babyPathway from "@/assets/firstyear-journey.jpg";
+import recoveryPathway from "@/assets/postpartum-journey.jpg";
 
 interface Track {
   anchor: string;
@@ -14,6 +16,8 @@ interface Track {
   soft: string;
   accent: string;
   deep: string;
+  image: string;
+  imageAlt: string;
 }
 
 const tracks: Track[] = [
@@ -24,12 +28,14 @@ const tracks: Track[] = [
     desc: "Feeding, sleep and the milestones of the first twelve months.",
     scope: "",
     inside: ["Feeding", "Sleep", "Development", "Care & safety"],
-    cta: "Open baby's first year",
-    href: "#baby",
+    cta: "Explore baby's first year",
+    href: "/first-year/baby",
     bg: "--stage-firstyear",
     soft: "--stage-firstyear-soft",
     accent: "--stage-firstyear-accent",
     deep: "--stage-firstyear-deep",
+    image: babyPathway,
+    imageAlt: "A parent and baby playing together on the floor at home",
   },
   {
     anchor: "recovery",
@@ -38,12 +44,14 @@ const tracks: Track[] = [
     desc: "Healing, hormones and how you feel in the months after birth.",
     scope: "",
     inside: ["Physical recovery", "Emotional wellbeing", "Body & hormones", "Check-ups & red flags"],
-    cta: "Open your recovery",
-    href: "#recovery",
+    cta: "Explore postpartum recovery",
+    href: "/first-year/postpartum",
     bg: "--stage-recovery",
     soft: "--stage-recovery-soft",
     accent: "--stage-recovery-accent",
     deep: "--stage-recovery-deep",
+    image: recoveryPathway,
+    imageAlt: "A parent holding their baby by a bright window at home",
   },
 ];
 
@@ -55,18 +63,21 @@ const FYTwoTrackEntry = () => {
           {tracks.map((t) => (
             <article
               key={t.anchor}
-              className="relative rounded-2xl border overflow-hidden flex flex-col p-7 sm:p-8 md:p-9"
+              className="relative rounded-lg border overflow-hidden flex flex-col bg-card"
               style={{
                 backgroundColor: `hsl(var(${t.bg}) / 0.5)`,
                 borderColor: `hsl(var(${t.accent}) / 0.22)`,
               }}
             >
-              {/* Top accent bar */}
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <img src={t.image} alt={t.imageAlt} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]" />
+              </div>
               <div
                 className="absolute top-0 left-0 right-0 h-1"
                 style={{ backgroundColor: `hsl(var(${t.accent}) / 0.55)` }}
               />
 
+              <div className="flex flex-1 flex-col p-7 sm:p-8 md:p-9">
               <div className="flex items-center justify-between mb-5">
                 <p
                   className="font-sans text-[11px] font-light tracking-[0.22em] uppercase"
@@ -109,6 +120,7 @@ const FYTwoTrackEntry = () => {
                 {t.cta}
                 <ArrowUpRight size={14} />
               </Link>
+              </div>
             </article>
           ))}
         </div>

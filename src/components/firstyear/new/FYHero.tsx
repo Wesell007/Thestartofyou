@@ -142,7 +142,7 @@ const FYHero = () => {
           {/* Two equal CTAs — soft premium pills: light fill, deeper text, clear border */}
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              to="/first-year#baby-topics"
+              to="/first-year/baby"
               className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px]"
               style={{
                 backgroundColor: 'hsl(var(--stage-firstyear-soft) / 0.95)',
@@ -167,7 +167,7 @@ const FYHero = () => {
               Baby's first year
             </Link>
             <Link
-              to="/first-year#recovery-topics"
+              to="/first-year/postpartum"
               className="inline-flex items-center justify-center rounded-pill px-7 py-3.5 font-sans text-[13px] font-medium tracking-wide border transition-all duration-300 min-w-[220px] hover:-translate-y-[1px]"
               style={{
                 backgroundColor: 'hsl(var(--stage-recovery-soft) / 0.9)',

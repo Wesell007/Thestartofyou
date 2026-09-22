@@ -15,10 +15,12 @@
 ### 1. Create the article-specific image register before generation
 
 - Build the exact 15-article missing-hero list from repository data, preserving title, description, topic and Baby or Postpartum ownership.
+- Lock and review the 11 existing mapped heroes first. Preserve each assignment unless visual review proves a safety defect, anatomy defect, semantic mismatch, broken asset or damaging crop. Report preserved and defect-replaced totals separately, with preserved plus replaced equalling 11.
 - Review the full subject and surrounding visual system for each missing article.
 - Search the approved asset pool first. Assign an existing asset only when it is strong, subject-specific, safe and not already the hero identity of another First Year article.
 - Record one decision per missing article: `REUSE_STRONG_EXISTING_APPROVED_ASSET` or `GENERATE_ARTICLE_SPECIFIC_NANO_BANANA_ASSET`.
 - Do not predetermine the reuse or generation totals. The measured article-by-article audit will set them.
+- Reconcile the 15 missing records separately: existing approved assets assigned plus new Nano Banana assets generated must equal 15. Any justified replacement among the original 11 is excluded from this equation.
 
 ### 2. Generate only justified missing heroes
 
@@ -43,6 +45,7 @@
 - Keep the existing First Year article card layout and make it render only the article's explicit mapped hero for the current registry.
 - Pathways: show heroes on all Start Here cards and all grouped Baby and Postpartum library cards without changing ownership, order, copy or destinations.
 - Topic pages: resolve featured editorial cards to their destination article hero instead of independent topic-card imagery, and keep related-guidance cards on the same shared identity.
+- Remove all conflicting independent topic-feature imagery for First Year article destinations. Every such card must resolve to the destination article's explicit hero.
 - Phase pages: add each linked First Year article's explicit hero to useful-read cards while preserving their existing titles, descriptions, destinations and phase architecture.
 - Article pages: render the established split hero for all 26 articles and keep breadcrumbs, category, title, introduction, read time, update date and body structure unchanged.
 - Article related guidance: continue using the shared card so each related article carries its own hero.
@@ -54,6 +57,7 @@
 - Keep pathway accounting at Baby 4 Start Here plus 11 grouped equals 15, and Postpartum 4 Start Here plus 7 grouped equals 11.
 - Make zero article-copy, route, source, reviewer, grounding, AI-runtime, lifecycle, database, TTC or Pregnancy changes.
 - Do not modify or restore removed body imagery from Phase 37A.1.
+- Keep article body-image decisions unchanged: zero generated body images and zero previously removed filler images restored. Report any unavoidable broken-reference repair separately.
 - Before replacing or deleting any old asset, run repository-wide reference checks. Delete nothing unless it is proven unreferenced across every surface.
 - Do not deploy and do not begin the First Year content-coverage audit.
 
@@ -85,8 +89,10 @@ Add focused tests proving:
 
 - Run focused regressions, all locked First Year regressions, the full test suite, typecheck twice, lint and the production validation build.
 - Record each asset's slug, title, ownership, filename, generated or existing status, visual intent, safety pass and three crop passes in `docs/content/phase37b1-first-year-image-asset-register.md`.
+- Separate the register accounting into the 11 original heroes reviewed, original heroes preserved, original heroes replaced for documented defects, and the 15 missing heroes remediated through existing or newly generated assets.
 - Record final accounting and boundary checks in `docs/content/phase37b1-first-year-article-image-completion.md`.
 - Record the 78 hero checks, pathway checks, topic and phase sanity checks, screenshots, console and overflow results in `docs/content/phase37b1-first-year-responsive-evidence.md`.
 - Add only a new Phase 37B.1 section to `roadmap.md`; leave Phase 37A, 37A.1 and 37B history unchanged.
 - Return every requested completion-report field, including the measured existing-versus-generated split and established lint baseline.
+- Include the reconciliation equations: preserved original heroes plus documented replacements equals 11; existing assignments plus new generations for suppressed records equals 15; 11 original hero articles plus 15 remediated articles equals 26 final explicit heroes.
 - Use the locked closure wording only when all image, uniqueness, safety, card, responsive and validation gates pass.

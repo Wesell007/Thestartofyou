@@ -208,10 +208,11 @@
 - [x] Browser QA 29 checks PASS across hub, pathways, phases and topics; overflow, broken images, h1 failures and console errors 0; full suite 136 files / 1,559 tests PASS; typecheck and production build PASS; lint at established baseline
 - [x] New article content, medical guidance, lifecycle, database, TTC, Pregnancy and deployment changes 0; deployment NO; First Year content-coverage audit not started
 
-## Phase 37B.1 — First Year article hero and card image completion — IN PROGRESS / QUALITY GATE ACTIVE / NO DEPLOYMENT
-- [ ] Review the 11 original article heroes; preserve or defect-replace with documented accounting totalling 11
-- [ ] Remediate the 15 suppressed articles through approved existing assets plus accepted article-specific Nano Banana assets totalling 15
-- [ ] Reach 26 explicit distinct heroes with 0 fallback, duplication, suppression, unsafe imagery or unresolved quality gaps
-- [ ] Align pathway, topic, phase and related-guidance cards to each destination article hero without redesign
-- [ ] Complete focused and full validation, evidence documents and responsive QA at 1280, 834 and 390
-- [ ] Preserve locked boundaries: body imagery, content, routes, sources, reviewers, AI, grounding, lifecycles, database, TTC and Pregnancy unchanged; deployment NO
+## Phase 37B.1 — First Year article hero and card image completion — CLOSED PASS / ALL FIRST YEAR ARTICLES VISUALLY COMPLETE / ARTICLE DISCOVERY IMAGERY CONSISTENT / NO CONTENT CHANGES
+- [x] Existing heroes reviewed 11 of 11: preserved 11 + defect replaced 0 = 11
+- [x] Suppressed articles remediated 15 of 15: approved existing assignments 0 + accepted article specific Nano Banana assets 15 = 15
+- [x] Final heroes 26 of 26 explicit and distinct; fallback 0, duplication 0, current suppressions 0, unsafe or implausible accepted imagery 0, unresolved quality gaps 0
+- [x] Pathway, all 8 topic, all 4 phase useful read, related guidance and article surfaces use destination article identity; conflicting independent topic imagery 0; redesign 0
+- [x] Focused regressions 4 files / 45 tests PASS; full suite 137 files / 1,576 tests PASS; typecheck x2 PASS; production build PASS; sitemap 354 unique; lint unchanged at its established baseline
+- [x] Responsive QA covered 40 routes at 1280, 834 and 390 = 120 checks PASS; overflow, broken images, heading failures, nested controls and console errors 0
+- [x] Body images generated 0, restored 0, changed 0; content, routes, sources, reviewers, AI, grounding, lifecycles, database, TTC and Pregnancy changes 0; deployment NO; content coverage audit not started

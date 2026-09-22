@@ -24,7 +24,7 @@
 
 - Focused Phase 37B regression suite: 1 file / 9 tests PASS.
 - Locked focused regressions including Phase 37A and 37A.1: 3 files / 26 tests PASS before the final metadata additions; Phase 37B rerun PASS after additions.
-- Full suite: 136 files / 1,557 tests PASS.
+- Full suite: 136 files / 1,559 tests PASS.
 - Typecheck: PASS twice, including the final code state.
 - Production build: PASS.
 - Sitemap: 354 entries / 354 unique; expected increase 352 to 354 PASS.

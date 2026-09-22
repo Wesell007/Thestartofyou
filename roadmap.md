@@ -205,5 +205,5 @@
 - [x] Upgraded both equal-weight hub pathway cards, the four image-led phase cards and `Everything, side by side`; Nano Banana direction board retained as non-production direction only
 - [x] Added one justified image break per phase, 4 of 4; new production images 0; inherited intentional image-free count 15; 37A.1 overrides and fallback restoration 0
 - [x] Added exactly one embedded contextual Companion after editorial discovery on each pathway, 2 of 2; duplicate modules 0; hub remains 1 and phase handoffs remain 4 of 4; AI runtime, prompts, context-builder and grounding changes 0
-- [x] Browser QA 29 checks PASS across hub, pathways, phases and topics; overflow, broken images, h1 failures and console errors 0; full suite 136 files / 1,557 tests PASS; typecheck and production build PASS; lint at established baseline
+- [x] Browser QA 29 checks PASS across hub, pathways, phases and topics; overflow, broken images, h1 failures and console errors 0; full suite 136 files / 1,559 tests PASS; typecheck and production build PASS; lint at established baseline
 - [x] New article content, medical guidance, lifecycle, database, TTC, Pregnancy and deployment changes 0; deployment NO; First Year content-coverage audit not started

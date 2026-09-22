@@ -223,7 +223,6 @@ const HubArticleView = ({
                       src={heroImage.src}
                       alt={heroImage.alt}
                       loading="eager"
-                      fetchPriority="high"
                       decoding="async"
                       className="w-full h-auto aspect-[4/5] sm:aspect-[4/3] md:aspect-[5/6] lg:aspect-[4/5] object-cover"
                     />

@@ -1,100 +1,72 @@
 # Phase 37B.1 plan
 
-## Repository truth
+## Goal
 
-- The current First Year registry contains 26 ready articles: 15 Baby and 11 Postpartum.
-- Current hero state is 11 explicit mapped heroes and 15 intentionally image-free heroes. Arithmetic: 11 + 15 = 26.
-- The 15 suppressed records match the Phase 37A.1 audit. Their image-map entries contain no hero, and the article page and shared article card both honour `suppressHeroImage`.
-- The 11 current heroes are explicit article mappings using 11 distinct assets.
-- Pathway Start Here and grouped libraries use the shared First Year article card. Topic-page featured cards use their own image field, while topic related guidance uses the shared card. Phase useful reads currently use a separate text-led card. Article related guidance also uses the shared card.
-- The shared First Year card currently has a topic fallback for unsuppressed records without an explicit mapping. Phase 37B.1 will not use that fallback for any of the 26 current articles.
-- Phase 37B is closed. Its pathway ownership, routes, page structure, month navigation, image breaks and Companion placement remain locked.
+Complete the existing First Year visual system without redesigning Phase 37B. Every current First Year article receives one strong, article specific hero, and the same destination image appears consistently across article pages and editorial discovery cards.
 
-## Build
+## Image accounting and quality gate
 
-### 1. Create the article-specific image register before generation
+- Review all 11 original hero articles. Preserve each unless a genuine safety, anatomy, semantic, broken asset or damaging crop defect is confirmed.
+- Report `Existing heroes reviewed = 11 / 11`, with preserved and defect replaced totals satisfying `preserved + replaced = 11`.
+- Remediate the 15 currently suppressed articles individually. Search approved assets first, then use an article specific Nano Banana image only where no suitable approved asset exists.
+- Report approved existing asset assignments and newly generated assignments separately, satisfying `existing asset assignments + new Nano Banana assets = 15`. Replacements among the original 11 remain outside this equation.
+- Final accounting must satisfy `11 original hero articles + 15 remediated articles = 26 explicit heroes`.
+- Require 26 distinct assignments, 0 current suppressions, 0 cross article duplication, 0 generic fallback, 0 unsafe or implausible imagery and 0 missing card images.
+- Reject imagery that fails semantic relevance, anatomy, infant safety, age plausibility, feeding or sleep safety, believable interaction, or desktop, tablet and mobile crop review. Do not hide defects through cropping.
+- If an acceptable hero cannot be produced, keep that article explicitly suppressed and report `UNRESOLVED_HERO_QUALITY_GAP = 1`. Do not close until unresolved gaps equal 0.
+- Keep optional suppression capability available for future content. Keep generic fallback disabled for every current article.
+- Body imagery remains locked: 0 generated, 0 restored and 0 changed, unless a broken reference repair is separately identified and reported.
 
-- Build the exact 15-article missing-hero list from repository data, preserving title, description, topic and Baby or Postpartum ownership.
-- Lock and review the 11 existing mapped heroes first. Preserve each assignment unless visual review proves a safety defect, anatomy defect, semantic mismatch, broken asset or damaging crop. Report preserved and defect-replaced totals separately, with preserved plus replaced equalling 11.
-- Review the full subject and surrounding visual system for each missing article.
-- Search the approved asset pool first. Assign an existing asset only when it is strong, subject-specific, safe and not already the hero identity of another First Year article.
-- Record one decision per missing article: `REUSE_STRONG_EXISTING_APPROVED_ASSET` or `GENERATE_ARTICLE_SPECIFIC_NANO_BANANA_ASSET`.
-- Do not predetermine the reuse or generation totals. The measured article-by-article audit will set them.
-- Reconcile the 15 missing records separately: existing approved assets assigned plus new Nano Banana assets generated must equal 15. Any justified replacement among the original 11 is excluded from this equation.
+## Implementation
 
-### 2. Generate only justified missing heroes
+1. Add accepted explicit hero mappings and meaningful alt text for the 15 remediated articles while preserving the 11 accepted original hero mappings and every body image decision.
+2. Remove the 15 current suppression flags only after their explicit images pass review.
+3. Make shared First Year article cards use explicit destination article imagery for all 26 current articles, with no current article able to fall through to topic or category imagery.
+4. Make each topic featured card resolve its image from its destination article rather than its independent topic card image. Preserve titles, descriptions, order, routes and overall card layout.
+5. Add the destination article hero to First Year phase useful read cards without redesigning the phase template or changing guidance titles, descriptions, order or routes.
+6. Preserve article page hero behaviour, related guidance, both pathway pages, all eight topic pages and all four phase pages. No body image or editorial content changes.
+7. Remove only rejected generated files after confirming they have no references. Keep accepted image files local and imported through the existing asset pattern.
 
-- Use Nano Banana individually for every remaining gap, with prompts tied to the article subject rather than its broad category.
-- Baby imagery will show credible feeding, safer sleep or settling, age-appropriate play and movement, or real caregiving as the article requires.
-- Postpartum imagery will centre the parent and show believable recovery, rest, support, body recovery or healthcare context only where relevant.
-- Keep the established warm, intimate, lived-in UK-home direction and the Baby blue, sage and neutral or Postpartum plum, blush and neutral relationship.
-- Reject or regenerate any result with implausible anatomy, hands, infant age, head or neck support, feeding position, sleep cues, objects, fabric, faces or body positioning. Cropping will never conceal a safety or anatomy defect.
-- Review every accepted image for useful subject framing at desktop, tablet and mobile before wiring it into the product.
-- Image quality outranks the 26 of 26 target. If no acceptable asset can be produced after justified review and regeneration, keep that article explicitly suppressed, record `UNRESOLVED_HERO_QUALITY_GAP = 1`, and leave Phase 37B.1 open rather than accepting a weak, generic, duplicated, unsafe or implausible image.
+## Focused regressions
 
-### 3. Establish 26 explicit and unique article identities
+Add or update tests proving:
 
-- Add an explicit hero mapping and meaningful alt text for every current First Year article.
-- Remove `suppressHeroImage` from the current 15 records only after each has an approved explicit hero.
-- Preserve the optional hero type, suppression flag, image-free article rendering and image-free card rendering for future or other records.
-- Make explicit mapping the required source for all 26 current articles. Do not restore topic, category, pathway or neighbouring-article fallback imagery.
-- Verify 26 distinct hero assignments across 26 articles and zero article-to-article hero duplication.
-- Leave all article body-image decisions unchanged and generate zero body images.
+- 26 ready First Year articles have 26 explicit, valid and distinct hero assignments.
+- Current First Year suppressions equal 0 and current generic fallback use equals 0.
+- Optional future suppression behaviour remains supported without a blank image ratio box.
+- Article pages, pathway cards, all eight topic card surfaces, phase useful reads and related guidance use destination article identity.
+- Topic featured cards have 0 conflicting independent imagery.
+- Phase useful reads gain article heroes without architectural redesign.
+- Body image mappings are unchanged from the locked Phase 37A.1 decisions.
+- Existing Phase 37B pathway accounting, Companion counts and ordering remain intact.
+- AI runtime, prompts, context builder, grounding, database, lifecycle, TTC, Pregnancy, routes, article content, sources and reviewers remain unchanged.
 
-### 4. Make every article discovery surface use the same identity
+## Evidence and validation
 
-- Keep the existing First Year article card layout and make it render only the article's explicit mapped hero for the current registry.
-- Pathways: show heroes on all Start Here cards and all grouped Baby and Postpartum library cards without changing ownership, order, copy or destinations.
-- Topic pages: resolve featured editorial cards to their destination article hero instead of independent topic-card imagery, and keep related-guidance cards on the same shared identity.
-- Remove all conflicting independent topic-feature imagery for First Year article destinations. Every such card must resolve to the destination article's explicit hero.
-- Phase pages: add each linked First Year article's explicit hero to useful-read cards while preserving their existing titles, descriptions, destinations and phase architecture.
-- Article pages: render the established split hero for all 26 articles and keep breadcrumbs, category, title, introduction, read time, update date and body structure unchanged.
-- Article related guidance: continue using the shared card so each related article carries its own hero.
-- Do not add images to topic navigation, phase navigation, support rows or any non-article element.
+- Create `docs/content/phase37b1-first-year-article-image-completion.md`.
+- Create `docs/content/phase37b1-first-year-image-asset-register.md`.
+- Create `docs/content/phase37b1-first-year-responsive-evidence.md`.
+- Update only the Phase 37B.1 section of `roadmap.md`.
+- Run focused tests, the full test suite, typecheck twice, lint and production build.
+- Run responsive browser QA at 1280, 834 and 390 pixels across article pages and every affected discovery surface. Check crops, image identity, missing and broken images, overflow, interaction nesting, keyboard focus, touch targets, heading hierarchy, reduced motion and console errors.
+- Report visual evidence and all requested accounting fields before closure.
+- Do not deploy and do not start the First Year content coverage audit.
 
-### 5. Preserve locked boundaries
+## Locked boundaries
 
-- Do not redesign `/first-year`, either pathway page, the four phase pages, `Twelve months, four phases`, `Everything, side by side`, month navigation or Companion placement.
-- Keep pathway accounting at Baby 4 Start Here plus 11 grouped equals 15, and Postpartum 4 Start Here plus 7 grouped equals 11.
-- Make zero article-copy, route, source, reviewer, grounding, AI-runtime, lifecycle, database, TTC or Pregnancy changes.
-- Do not modify or restore removed body imagery from Phase 37A.1.
-- Keep article body-image decisions unchanged: zero generated body images and zero previously removed filler images restored. Report any unavoidable broken-reference repair separately.
-- Before replacing or deleting any old asset, run repository-wide reference checks. Delete nothing unless it is proven unreferenced across every surface.
-- Do not deploy and do not begin the First Year content-coverage audit.
+- New articles, article copy, medical guidance, routes, sources and reviewer changes: 0.
+- AI runtime, prompts, context builder, grounding, lifecycle, database, TTC and Pregnancy changes: 0.
+- Body images generated, restored or changed: 0, unless a broken reference repair is explicitly reported.
+- Deployment: NO.
 
-## Verification
+## Closure
 
-### Automated regression coverage
+Use the following wording only after every gate passes:
 
-Add focused tests proving:
+`PHASE 37B.1 — FIRST YEAR ARTICLE HERO & CARD IMAGE COMPLETION`
 
-- 26 ready articles, 26 explicit hero mappings, 0 current suppressions and 26 valid asset references.
-- 26 distinct article hero assignments, 0 cross-article duplication and 0 generic fallback use for current First Year articles.
-- 0 missing images across pathway Start Here, Baby pathway, Postpartum pathway, all topic article-card systems, phase useful reads and article related guidance.
-- The article page hero renders for every ready record.
-- Optional hero, explicit suppression and image-free rendering remain supported with a non-current fixture.
-- Article copy, routes, sources and reviewer metadata remain unchanged.
-- Phase 37B ownership and Companion invariants remain unchanged.
-- Grounding, AI runtime and lifecycle boundaries remain untouched.
+`CLOSED PASS / ALL FIRST YEAR ARTICLES VISUALLY COMPLETE /`
 
-### Visual and responsive review
+`ARTICLE DISCOVERY IMAGERY CONSISTENT /`
 
-- Inspect all 26 article pages at 1280, 834 and 390 pixels: 78 article and viewport combinations.
-- Inspect both pathway pages at all three widths.
-- Sanity-check all eight topic pages and all four phase pages for complete article-card imagery.
-- Capture representative close evidence for Baby and Postpartum heroes, Start Here, Browse by topic, topic featured cards, phase useful reads and article related guidance.
-- Verify no stretching, breakage, blank image areas, unexpected text-only article cards, unsafe or implausible imagery, damaging crops, horizontal overflow or new console errors.
-- Confirm meaningful alt text, keyboard-reachable links, visible focus, valid heading hierarchy and preserved reduced-motion behaviour.
-
-### Quality gates and evidence
-
-- Run focused regressions, all locked First Year regressions, the full test suite, typecheck twice, lint and the production validation build.
-- Record each asset's slug, title, ownership, filename, generated or existing status, visual intent, safety pass and three crop passes in `docs/content/phase37b1-first-year-image-asset-register.md`.
-- Separate the register accounting into the 11 original heroes reviewed, original heroes preserved, original heroes replaced for documented defects, and the 15 missing heroes remediated through existing or newly generated assets.
-- Record final accounting and boundary checks in `docs/content/phase37b1-first-year-article-image-completion.md`.
-- Record the 78 hero checks, pathway checks, topic and phase sanity checks, screenshots, console and overflow results in `docs/content/phase37b1-first-year-responsive-evidence.md`.
-- Add only a new Phase 37B.1 section to `roadmap.md`; leave Phase 37A, 37A.1 and 37B history unchanged.
-- Return every requested completion-report field, including the measured existing-versus-generated split and established lint baseline.
-- Include the reconciliation equations: preserved original heroes plus documented replacements equals 11; existing assignments plus new generations for suppressed records equals 15; 11 original hero articles plus 15 remediated articles equals 26 final explicit heroes.
-- Report unresolved hero quality gaps explicitly. Closure additionally requires that count to be 0; any nonzero value blocks the locked closure statement.
-- Use the locked closure wording only when all image, uniqueness, safety, card, responsive and validation gates pass.
+`NO CONTENT CHANGES`

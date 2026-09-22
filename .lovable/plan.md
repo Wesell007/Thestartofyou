@@ -52,6 +52,8 @@ Create `/first-year/baby` and `/first-year/postpartum` as thin route pages using
 
 Use the 26 existing ready records only. Each pathway page will curate one existing Start Here article per topic: 4 Baby Start Here plus 11 remaining Baby articles equals 15, and 4 Postpartum Start Here plus 7 remaining Postpartum articles equals 11. Start Here records will be excluded from the grouped library, giving 0 duplicate and 0 missing owned articles. Pathway copy will be limited to unique short orientation, headings, concise descriptions and existing metadata. Existing article paragraphs and substantial topic-page body copy will not be copied. No medical timeline, medical precision or new guidance will be invented.
 
+Each new pathway page will contain exactly one embedded contextual Companion after its primary editorial discovery. The global floating launcher is platform chrome and is excluded from embedded-module counts. No canonical surface may render duplicate embedded Companion modules.
+
 ### 3. Repair and strengthen hub discovery
 
 - Point the two primary pathway cards and the two hero pathway actions to the new dedicated pages.
@@ -98,11 +100,14 @@ Use the 26 existing ready records only. Each pathway page will curate one existi
 - Existing article body copy duplicated into pathway pages: 0. Substantial topic-page body copy duplicated: 0. Invented medical guidance and new medical precision: 0.
 - Phase 37A and Phase 37A.1 records remain unchanged.
 - Hub Companion count remains 1. Phase Companion handoffs remain 4 of 4.
+- Baby pathway contextual Companion remains 1, Postpartum pathway contextual Companion remains 1, and pathway contextual Companion handoffs total 2 of 2.
+- AI runtime, prompt and context-builder changes remain 0. The new pathway handoffs reuse the existing execution surface.
 - The First Year content-coverage audit will not begin.
 
 ## Verification and evidence
 
 - Add focused tests for both routes, all four repaired hub actions, zero dead primary actions, unchanged topic/phase/month inventories, complete reuse of the 26 existing records, zero article duplication per pathway page, visual treatment identity, image-free preservation, Companion counts and the locked product boundaries.
+- Companion regression coverage will prove exactly one embedded handoff on each pathway page, placement after primary editorial discovery, no second execution runtime, exclusion of the global launcher from embedded counts, hub count 1 and phase count 4 of 4.
 - Browser-check `/first-year`, both new pathway pages and all four phase pages at 1280, 834 and 390 pixels: 21 primary route and viewport combinations.
 - Sanity-check all 8 topic pages for shared-component regressions.
 - Verify crops, four-to-two-to-one phase layout, topic rows, parity, distortion, overflow, mobile card scale, destinations, broken images and console errors.
@@ -113,4 +118,4 @@ Use the 26 existing ready records only. Each pathway page will curate one existi
   - `docs/content/phase37b-first-year-phase-visual-system.md`
   - `docs/content/phase37b-first-year-responsive-evidence.md`
 - Update only the new Phase 37B section in `roadmap.md`.
-- Return visual evidence first, then every requested completion-template value plus the dependency, route, sitemap, article accounting, duplicated-copy, filler-image and accessibility additions. Use the exact closure statement only if every gate passes.
+- Return visual evidence first, then every requested completion-template value plus the dependency, route, sitemap, article accounting, duplicated-copy, filler-image, accessibility and Companion accounting additions. Use the exact closure statement only if every gate passes.

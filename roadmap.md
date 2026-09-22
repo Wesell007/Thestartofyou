@@ -190,3 +190,11 @@
 - [x] Preserved 4 phase, 13 month and 8 topic destinations; month data, route behaviour and page presentation unchanged; First Year to Toddler transition preserved
 - [x] Browser QA 13 surfaces × 3 widths = 39 checks PASS with overflow 0, console errors 0 and broken images 0; focused checks 5 files / 50 tests PASS; full suite 134 files / 1,543 tests PASS; typecheck x2 PASS; lint at established baseline; production validation build PASS
 - [x] New articles, routes, lifecycle, database, schema, AI runtime, grounding, memory, history, reviewer, TTC and Pregnancy changes 0; deployment NO; visual review and content-coverage audit not started
+
+## Phase 37A.1 — First Year image quality correction — CLOSED PASS / IRRELEVANT AND LOW QUALITY IMAGERY REMOVED / FIRST YEAR VISUAL SYSTEM APPROVED
+- [x] Canonical still placements reconciled at 96 exactly: KEEP 50, RECROP 0, REPLACE WITH EXISTING APPROVED ASSET 0, REPLACE WITH NEW JUSTIFIED ASSET 0, REMOVE 46; new generated images 0
+- [x] Pathway presentation still placements 0 and hub video audited separately; 26 of 26 article heroes, 37 of 37 body placements and 21 of 21 featured discovery placements audited
+- [x] Explicit First Year image suppression implemented without fallback photography, placeholders, blank image ratios or leakage outside First Year; Bottle and breastfeeding questions is intentionally image-free
+- [x] Shared asset safety check complete: one newly unreferenced weak asset deleted, shared assets retained, broken asset references 0, non First Year asset-reference changes 0
+- [x] Browser QA 13 hub, phase and topic surfaces plus 26 articles at 1280, 834 and 390 = 117 checks PASS; overflow 0, broken images 0, heading failures 0, console errors 0
+- [x] Article copy, sources, reviewer, grounding, AI runtime, lifecycle, TTC, Pregnancy, routes, database and deployment changes 0; First Year content coverage audit not started

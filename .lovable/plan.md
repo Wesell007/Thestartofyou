@@ -1,6 +1,8 @@
 # Phase 37D — First Year content remediation and workstream closure
 
-Implements only the reconciled 37C P1/P2 remediation. No redesign, no AI, grounding, database, lifecycle, TTC or Pregnancy changes. No deployment. Phase 37C documents are not edited.
+Implements only the reconciled 37C P1/P2 remediation. No redesign, no AI, grounding, database, lifecycle, TTC or Pregnancy changes. No deployment. Phase 37C documents and numbers are not edited; 37C stays the historical pre-remediation audit and 37D records the post-remediation state separately.
+
+Safeguards confirmed: new heroes come from the approved asset library first and otherwise from Nano Banana inside Lovable, never generic or duplicate imagery; the existing 26 heroes stay locked. "Published" means a complete ready repository record that resolves through the existing article architecture and passes every gate, not a deployment. Each P1/P2 finding is accounted for individually even where one article resolves several intents. No scope expansion beyond the items below.
 
 ## Scope confirmed against the repository
 

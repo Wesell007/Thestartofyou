@@ -63,8 +63,8 @@ Audit only. Each moment has exactly one primary classification. Priority is give
 ## Totals (checked in `src/test/phase38bToddlerAudit.test.ts`)
 
 - Moments 55. By age: 12-17m 10, 18-23m 9, 2y 12, 30m 8, 3y 8, shared 8.
-- COVERED 38, PARTIALLY_COVERED 10, UNCOVERED 1, NOT_REQUIRED_STANDALONE 2, BETTER_SERVED_ELSEWHERE 4. Sum 55.
-- Prioritised rows 17: P1 0, P2 3, P3 9, P4 5. Sum 17.
+- COVERED 40, PARTIALLY_COVERED 9, UNCOVERED 1, NOT_REQUIRED_STANDALONE 2, BETTER_SERVED_ELSEWHERE 3. Sum 55.
+- Prioritised rows 15: P1 0, P2 3, P3 8, P4 4. Sum 15.
 
 ## New article candidates
 

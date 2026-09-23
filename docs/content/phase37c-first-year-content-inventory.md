@@ -96,9 +96,9 @@ Discovery key: SH = pathway Start Here, G = pathway grouped list, T = topic libr
 | 23 | separated-tummy-muscles | Separated tummy muscles | Postpartum | body-and-hormones | G T F | 4 | 0 / 3 | KEEP |
 | 24 | sex-and-intimacy-after-birth | Sex and intimacy after birth | Postpartum | body-and-hormones | G T F P | 4 | 1 / 3 | KEEP |
 | 25 | postnatal-checks-and-appointments | Postnatal checks and appointments | Postpartum | checkups-and-warning-signs | SH T F M | 3 | 7 / 3 | KEEP |
-| 26 | when-to-ask-for-help-after-birth | When to ask for help after birth | Postpartum | checkups-and-warning-signs | G T F P M | 4 | 11 / 3 | KEEP |
+| 26 | when-to-ask-for-help-after-birth | When to ask for help after birth | Postpartum | checkups-and-warning-signs | G T F P M | 4 | 11 / 3 | EXPAND_EXISTING |
 
-Action arithmetic: KEEP 17 + EXPAND_EXISTING 5 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26 = measured article inventory.
+Action arithmetic: KEEP 16 + EXPAND_EXISTING 6 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26 = measured article inventory.
 
 `/articles/baby-milestones-first-year` is a legacy record in `src/data/articleData.ts` and is not one of these 26; it is tracked separately as an adjacent editorial overlap decision and is excluded from this denominator, which is why REPOSITION remains 0 here.
 

@@ -31,7 +31,7 @@ const bySlug = (slug: string) => firstYearArticles.find((article) => article.slu
 
 const monthHrefs = Object.values(firstYearMonths).flatMap((month) => [
   ...month.related.map((item) => item.href),
-  ...month.commonQuestions.flatMap((q) => (q.readMore ? [q.readMore.href] : [])),
+  ...month.questions.flatMap((q) => (q.readMore ? [q.readMore.href] : [])),
 ]);
 const phaseHrefs = Object.values(phaseData).flatMap((phase) => [
   ...phase.featuredGuidance.map((item) => item.href),

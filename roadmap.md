@@ -259,3 +259,9 @@
 - [x] Sections redesigned 0; copy, articles, topic order, imagery, routes, sitemap, Companion behaviour, AI, grounding, age pages and topic pages changed 0; inventory rows changed 0
 - [x] Validation: focused 6 of 6, full suite 139 files and 1,595 tests PASS; overflow 0, console errors 0 and 24 unchanged main links at every width; docs updated
 - [x] Locked changes 0; deployment NO; Toddler content coverage audit NOT STARTED
+
+## Phase 38B — Toddler content coverage & journey audit — AUDIT COMPLETE / OUTCOME B / NO DEPLOYMENT
+- [x] Measured: 1 hub, 5 ages, 8 topics, 16 ready articles, 30 sitemap URLs, 60 structured sources
+- [x] Articles: KEEP 13, EXPAND_EXISTING 3; journey 55 moments; P1 0, P2 3, P3 8, P4 4; new candidates 0
+- [x] Inventory drift 16 stale rows recorded, 0 repaired; 3 dormant reviewer-provenance findings recorded
+- [x] Docs and read-only audit test added; no remediation started, Phase 38C not begun

@@ -180,7 +180,7 @@ describe("content digest specification", () => {
 
 describe("registry unchanged at Stage 1", () => {
   it("keeps the registry totals from Phase 30J", () => {
-    expect(ARTICLE_GROUNDING_REGISTRY.length).toBe(231);
+    expect(ARTICLE_GROUNDING_REGISTRY.length).toBe(233);
     const counts = ARTICLE_GROUNDING_REGISTRY.reduce<Record<string, number>>(
       (acc, record) => {
         acc[record.editorialStatus] = (acc[record.editorialStatus] ?? 0) + 1;
@@ -188,7 +188,7 @@ describe("registry unchanged at Stage 1", () => {
       },
       {},
     );
-    expect(counts).toEqual({ live: 118, draft: 68, unknown: 45 });
+    expect(counts).toEqual({ live: 118, draft: 70, unknown: 45 });
   });
 
   it("has zero candidates and zero approvals", () => {

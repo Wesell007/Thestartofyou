@@ -70,10 +70,9 @@ describe("Phase 37A First Year public experience", () => {
     });
   });
 
-  it("reconciles 12 phase cards as 11 converted and 1 removed", () => {
+  it("reconciles phase cards after the Phase 37D discovery pass", () => {
     const mapped = Object.values(phaseData).flatMap((item) => item.featuredGuidance);
-    expect(mapped).toHaveLength(11);
-    expect(12 - mapped.length).toBe(1);
+    expect(mapped).toHaveLength(18);
     Object.values(phaseData).forEach((config) => {
       const hrefs = config.featuredGuidance.map((item) => item.href);
       expect(new Set(hrefs).size, config.slug).toBe(hrefs.length);
@@ -92,10 +91,10 @@ describe("Phase 37A First Year public experience", () => {
     expect(screen.queryByText("Ask more")).not.toBeInTheDocument();
   });
 
-  it("keeps fifteen genuine phase reads and no question needs an AI destination", () => {
+  it("keeps genuine phase reads and no question needs an AI destination", () => {
     const questions = Object.values(phaseData).flatMap((item) => item.commonQuestions);
-    expect(questions).toHaveLength(20);
-    expect(questions.filter((item) => item.readMore)).toHaveLength(15);
+    expect(questions).toHaveLength(22);
+    expect(questions.filter((item) => item.readMore)).toHaveLength(17);
   });
 
   it("preserves the Toddler transition", () => {

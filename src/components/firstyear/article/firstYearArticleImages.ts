@@ -47,6 +47,8 @@ import heroBodyChangesAfterBirth from "@/assets/firstyear-hero-body-changes-afte
 import heroHormonesSweatAndHairLoss from "@/assets/firstyear-hero-hormones-sweat-and-hair-loss.jpg";
 import heroPostnatalChecksAndAppointments from "@/assets/firstyear-hero-postnatal-checks-and-appointments.jpg";
 import heroWhenToAskForHelpAfterBirth from "@/assets/firstyear-hero-when-to-ask-for-help-after-birth.jpg";
+import heroBreastfeedingProblems from "@/assets/firstyear-hero-breastfeeding-problems-and-where-to-get-help.jpg";
+import heroPostpartumRecoveryLaterFirstYear from "@/assets/firstyear-hero-postpartum-recovery-in-the-later-first-year.jpg";
 
 export interface HubBodyImage {
   afterSectionIndex: number;
@@ -182,6 +184,14 @@ export const firstYearArticleImageMap: Record<string, FirstYearArticleImages> = 
   },
   "bottle-and-breastfeeding-questions": {
     hero: { src: heroBottleAndBreastfeedingQuestions, alt: "Two parents calmly discussing feeding while one holds and feeds their baby at home." },
+    body: [],
+  },
+  "breastfeeding-problems-and-where-to-get-help": {
+    hero: { src: heroBreastfeedingProblems, alt: "A parent holding their swaddled baby while talking with a health visitor in their living room." },
+    body: [],
+  },
+  "postpartum-recovery-in-the-later-first-year": {
+    hero: { src: heroPostpartumRecoveryLaterFirstYear, alt: "A parent standing with a mug of tea in their kitchen while their older baby plays on a floor mat nearby." },
     body: [],
   },
   "baby-development-in-the-first-year": {

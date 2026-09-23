@@ -28,14 +28,14 @@ const renderPage = (ui: React.ReactNode) => render(
 const articleSlugFromHref = (href: string) => href.split("/").filter(Boolean).at(-1);
 
 describe("Phase 37B.1 First Year hero identity", () => {
-  it("gives all 26 current articles one valid and distinct explicit hero", () => {
+  it("gives all 28 current articles one valid and distinct explicit hero", () => {
     const ready = firstYearArticles.filter((article) => article.status === "ready");
     const heroes = ready.map((article) => getFirstYearArticleImages(article.slug)?.hero);
 
-    expect(ready).toHaveLength(26);
+    expect(ready).toHaveLength(28);
     expect(ready.filter((article) => article.suppressHeroImage)).toHaveLength(0);
     expect(heroes.every((hero) => Boolean(hero?.src && hero.alt))).toBe(true);
-    expect(new Set(heroes.map((hero) => hero?.src)).size).toBe(26);
+    expect(new Set(heroes.map((hero) => hero?.src)).size).toBe(28);
   });
 
   it("keeps the Phase 37A.1 body image inventory unchanged", () => {

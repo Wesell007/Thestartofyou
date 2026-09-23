@@ -96,9 +96,9 @@ describe("Phase 37B.1 First Year article image completion", () => {
 
   it("maps every current article to a distinct explicit hero", () => {
     const heroes = firstYearArticles.map((item) => getFirstYearArticleImages(item.slug)?.hero?.src);
-    expect(heroes).toHaveLength(26);
+    expect(heroes).toHaveLength(28);
     expect(heroes.every(Boolean)).toBe(true);
-    expect(new Set(heroes).size).toBe(26);
+    expect(new Set(heroes).size).toBe(28);
     expect(firstYearArticles.filter((item) => item.suppressHeroImage)).toHaveLength(0);
   });
 });

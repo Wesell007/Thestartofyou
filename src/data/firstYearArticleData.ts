@@ -201,6 +201,21 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         ],
       },
       {
+        heading: "Common feeding worries, and what usually helps",
+        body: [
+          "Most feeding worries fall into a few familiar shapes: whether your baby is taking enough, why feeds seem so frequent or so short, whether wind and posseting are a problem, and whether anything you are doing is making it harder. In most cases the reassuring answer comes from watching the whole picture rather than a single feed.",
+          "Wet and dirty nappies, periods of settled alertness and steady growth tracked at your reviews tell you more than the clock does. Feeds that vary in length and spacing across the day are usual, and a baby who feeds often is not necessarily a baby who is going hungry.",
+          "Bringing up small amounts of milk after feeds is common and usually settles with time. Frequent forceful vomiting, persistent distress during feeds, or a baby who seems unwell are different, and worth raising with your health visitor or GP.",
+        ],
+      },
+      {
+        heading: "When feeding hurts or is not working",
+        body: [
+          "This article covers general feeding questions. If feeding is painful, if your baby is struggling to attach, if you have a tender lump in your breast or have been told tongue-tie might be involved, those are specific problems with specific support routes.",
+          "Our guide to breastfeeding problems and where to get help walks through pain, latch difficulty, blocked ducts, mastitis worries and who can assess a feed properly. Going there early tends to be easier than waiting to see whether it settles.",
+        ],
+      },
+      {
         heading: "Practical ideas you can try",
         body: [
           "Keep the messages you have absorbed in perspective. Try to focus on your baby in front of you and what feels workable in your family, rather than what an ideal feeding day should look like.",
@@ -210,15 +225,16 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     ],
     keyTakeaways: [
       "Feeding questions often feel bigger than they look, and that is understandable.",
+      "Nappies, alertness and growth over time tell you more than any single feed does.",
       "Responsive feeding applies to bottle feeding as well as breastfeeding.",
       "Formula feeding is safest when guidance on preparation and storage is followed directly.",
       "Expressing and mixed feeding are common and can be arranged in many ways.",
+      "Pain, latch difficulty or a tender lump need the specific feeding-problem support route.",
       "Changing your feeding plan is allowed at any point.",
-      "Support is available and asking early is usually easier than waiting.",
     ],
     relatedSlugs: [
+      "breastfeeding-problems-and-where-to-get-help",
       "newborn-feeding-rhythms",
-      "baby-care-basics",
       "helping-your-baby-settle",
     ],
     sources: [
@@ -249,6 +265,138 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       },
     ],
   },
+  {
+    slug: "breastfeeding-problems-and-where-to-get-help",
+    topic: "feeding",
+    title: "Breastfeeding problems and where to get help",
+    description:
+      "Pain, latch trouble, blocked ducts and mastitis worries, what they can mean and where real feeding support comes from.",
+    readTime: "8 min read",
+    status: "ready",
+    lastUpdated: "September 2026",
+    seoTitle: "Breastfeeding problems and where to get help | The Start of You",
+    seoDescription:
+      "Calm UK guidance on sore nipples, painful feeding, latch difficulty, blocked ducts, mastitis and tongue-tie, and the feeding support you can ask for.",
+    intro:
+      "Breastfeeding can be going broadly well and still hurt, still feel confusing, still leave you wondering whether this is just how it is. It often is not. Most feeding problems have a reason behind them, and most of them respond to skilled support rather than to gritting your teeth. This piece is about the difficulties themselves, what they can feel like, when they need to be looked at, and where the help actually lives. It is not a diagnosis, and it does not replace your midwife, health visitor, GP or infant feeding team.",
+    sections: [
+      {
+        heading: "Feeding pain is worth taking seriously",
+        body: [
+          "Tenderness in the first days is common as you and your baby learn together. Pain that lasts through a whole feed, pain that makes you dread the next one, or nipples that are cracked, bleeding or misshapen after feeds are all signals worth acting on rather than enduring.",
+          "Pain is information, not a test of how much you want to breastfeed. Asking about it early usually makes it easier to sort out, and it does not commit you to any particular feeding route.",
+        ],
+      },
+      {
+        heading: "Latch and positioning",
+        body: [
+          "A lot of feeding difficulty traces back to how your baby is positioned and how deeply they attach. Small changes to how you hold your baby, how close they are to you and how they come on to the breast can make a noticeable difference.",
+          "This is hard to fix from a written description alone. Someone watching a whole feed, in person or on a video call, will usually spot things you cannot see from where you are sitting.",
+        ],
+      },
+      {
+        heading: "Sore and cracked nipples",
+        body: [
+          "Sore nipples are one of the most common early problems, and they are most often linked to attachment. Damage that is not settling, or soreness that returns each feed, is a reason to have feeds watched rather than to keep trying different creams.",
+          "If a nipple becomes very red, swollen or painful, or the pain changes character, mention it to your midwife, health visitor or GP so it can be looked at properly.",
+        ],
+      },
+      {
+        heading: "Blocked ducts, engorgement and mastitis",
+        body: [
+          "Breasts can become uncomfortably full, and a tender lump can appear when milk is not moving well from part of the breast. Keeping feeds going, gentle handling and comfort measures often help.",
+          "Mastitis is inflammation of the breast tissue that can make you feel genuinely unwell, with a painful area of breast alongside flu-like symptoms such as aches, shivering or a high temperature. If you feel unwell in this way, contact your GP or NHS 111 the same day rather than waiting to see whether it passes. Mastitis can need treatment, and it is not a reason to stop feeding.",
+        ],
+      },
+      {
+        heading: "When tongue-tie comes up",
+        body: [
+          "Tongue-tie is when the strip of skin under the tongue is shorter or tighter than usual. For some babies it makes no difference at all. For others it affects how they attach and feed.",
+          "It is assessed by a trained health professional, usually alongside a full feeding assessment, because feeding difficulty has more than one possible cause. If tongue-tie has been suggested to you online or by a friend, take it to your midwife, health visitor or infant feeding team rather than acting on it alone.",
+        ],
+      },
+      {
+        heading: "Signs your baby may not be getting enough",
+        body: [
+          "Alongside how feeding feels for you, it is worth watching what your baby is doing: wet and dirty nappies, periods of settled alertness, and steady growth tracked at your reviews.",
+          "If your baby is feeding very sleepily, is difficult to wake for feeds, has far fewer wet nappies than usual, or you are worried about their weight, contact your midwife, health visitor or GP without waiting. If your baby seems unwell, is very floppy, or you are seriously worried, seek urgent medical advice.",
+        ],
+      },
+      {
+        heading: "Where the real support is",
+        body: [
+          "Your midwife in the early weeks, your health visitor after that, and local infant feeding services can all watch a feed and work through what is happening. Many areas also run breastfeeding groups and peer support.",
+          "The National Breastfeeding Helpline offers free, trained support by phone and webchat, including outside the working day. Your GP is the right route when there is pain, infection or your own health to consider.",
+        ],
+      },
+      {
+        heading: "Whatever you decide about feeding",
+        body: [
+          "Getting help with a feeding problem does not commit you to continuing exactly as you are. Some people work through the difficulty and carry on, some move to mixed feeding, some move to bottles. All of those are reasonable outcomes.",
+          "What matters is that a decision made with support and information usually sits better afterwards than one made alone at three in the morning in a lot of pain.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Ongoing feeding pain usually has a cause and is worth having looked at early.",
+      "Most feeding problems are best assessed by someone watching a whole feed.",
+      "Feeling unwell with a painful area of breast needs same-day advice from your GP or NHS 111.",
+      "Tongue-tie is assessed professionally alongside a full feeding assessment, not self-diagnosed.",
+      "Fewer wet nappies, a very sleepy baby or weight worries mean contacting your health visitor or GP.",
+      "Asking for help does not commit you to any particular feeding route.",
+    ],
+    relatedSlugs: [
+      "bottle-and-breastfeeding-questions",
+      "newborn-feeding-rhythms",
+      "healing-after-birth",
+    ],
+    crossLinks: [
+      {
+        label: "When to ask for help after birth",
+        href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth",
+        context: "For your own health and wellbeing alongside feeding.",
+      },
+    ],
+    sources: [
+      {
+        label: "Breastfeeding problems",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/",
+      },
+      {
+        label: "Sore or cracked nipples when breastfeeding",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/sore-nipples/",
+      },
+      {
+        label: "Breast pain and breastfeeding",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding-problems/breast-pain/",
+      },
+      {
+        label: "Mastitis",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/mastitis/",
+      },
+      {
+        label: "Tongue-tie",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/tongue-tie/",
+      },
+      {
+        label: "Breastfeeding: positioning and attachment",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/breastfeeding-and-bottle-feeding/breastfeeding/positioning-and-attachment/",
+      },
+      {
+        label: "National Breastfeeding Helpline",
+        publisher: "National Breastfeeding Helpline",
+        url: "https://www.nationalbreastfeedinghelpline.org.uk/",
+      },
+    ],
+  },
+
+
 
 
   // Sleep
@@ -613,6 +761,16 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         ],
       },
       {
+        heading: "Early sounds, babble and back-and-forth",
+        body: [
+          "Early sounds usually start as vowel-like cooing, then widen into strings of consonants and syllables that can sound like practice sentences without any words in them. Some babies babble loudly and constantly, others are quieter and more watchful. Both can be developing well.",
+          "Babble is most useful when it has somewhere to go. Pausing after your baby makes a sound, answering it, and leaving space for their reply teaches them that sounds get responses. Facing them while you talk, so they can see your mouth, helps too.",
+          "Understanding usually runs ahead of speaking. Babies often respond to their name, to familiar words and to tone well before they produce recognisable words themselves, so a baby with few clear words can still be communicating plenty.",
+          "Babble can also go quiet for a while when a baby is concentrating on a physical skill such as crawling or pulling up. What is worth mentioning at a review is a baby who is not making sounds at all, who does not seem to respond to sound or to your voice, or who has clearly stopped doing something they used to do. Your health visitor can talk this through with you, and hearing can be checked.",
+        ],
+      },
+
+      {
         heading: "Feeding, sleep and development can overlap",
         body: [
           "New skills, growth spurts and changes around feeding or sleep often bump into each other. A baby learning to roll or pull up may briefly wake more at night. A baby starting solids may still want lots of milk feeds.",
@@ -638,6 +796,8 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "Development in the first year is gradual and rarely tidy.",
       "Milestones are signposts, not deadlines.",
       "Movement, senses, play and communication all develop alongside each other.",
+      "Early sounds and babble grow through back-and-forth responses rather than drilling.",
+      "Understanding usually runs ahead of talking in the first year.",
       "Everyday responsive moments support learning as much as structured play.",
       "New skills often overlap with changes in feeding or sleep.",
       "Routine reviews and health visitor contacts are useful places to ask questions.",
@@ -649,9 +809,9 @@ const rawFirstYearArticles: FirstYearArticle[] = [
     ],
     crossLinks: [
       {
-        label: "Baby milestones in the first year",
+        label: "Baby milestones: when to relax about comparing",
         href: "/articles/baby-milestones-first-year",
-        context: "The full milestone guide, month by month.",
+        context: "A companion read for milestone worry and comparison.",
       },
     ],
     sources: [
@@ -659,6 +819,11 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Baby development: your baby's first year",
         publisher: "NHS Start for Life",
         url: "https://www.nhs.uk/start-for-life/baby/baby-development/",
+      },
+      {
+        label: "Learning to talk",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/learning-to-talk/",
       },
       {
         label: "Baby's development",
@@ -1034,6 +1199,17 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         ],
       },
       {
+        heading: "Recovering from a caesarean",
+        body: [
+          "A caesarean is abdominal surgery as well as a birth, and recovery reflects that. Soreness around the wound, tiredness that arrives suddenly, and difficulty with ordinary movements such as getting out of bed, standing from low chairs or coughing are all common in the early weeks.",
+          "Simple things help more than they sound like they should: taking the pain relief you have been advised to take rather than waiting until it hurts, supporting your tummy with a hand or cushion when you cough or laugh, rolling onto your side to get up rather than sitting straight upwards, and keeping what you need at waist height so you are not stretching or lifting.",
+          "You will be given advice about your wound dressing, showering and gentle movement before you go home. Short, regular walking is usually encouraged early, while heavier lifting and driving come back gradually. Your team and your insurer can tell you what applies to you rather than a general rule.",
+          "Contact your midwife, GP or NHS 111 if your wound becomes increasingly painful, red, hot or swollen, if it leaks fluid or starts to open, if you have a high temperature or feel generally unwell, or if you have heavy or foul-smelling bleeding. Seek urgent help, by calling 999, if you have sudden or severe pain, chest pain, breathlessness, or a painful, swollen or hot leg.",
+          "The emotional side matters too. Some people feel entirely at peace with their caesarean, others feel unexpected sadness, disappointment or a need to go over what happened. Both are normal, and you can ask your midwife, GP or health visitor for a conversation about your birth.",
+        ],
+      },
+
+      {
         heading: "Pelvic floor and core awareness",
         body: [
           "Your pelvic floor has been through a lot during pregnancy and birth. Gentle pelvic floor exercises, once you feel able, can support long-term recovery, and there is no rush to start heavy activity.",
@@ -1060,13 +1236,15 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "Rest is a form of care, and small setups can protect your energy through the day.",
       "Bleeding and soreness are common early on and usually ease over the weeks that follow.",
       "Stitches, wounds and caesarean scars each heal in their own time and often feel odd before they feel settled.",
+      "A caesarean is surgery as well as a birth, and early recovery needs pain relief, support and gentle movement.",
+      "A wound that becomes more painful, red, hot or leaking needs same-day advice.",
       "Gentle pelvic floor and core awareness supports long-term recovery more than pushing hard early on.",
       "You are always allowed to ask a midwife or GP if something does not feel right.",
     ],
     relatedSlugs: [
       "what-recovery-can-feel-like",
       "body-changes-after-birth",
-      "postnatal-checks-and-appointments",
+      "postpartum-recovery-in-the-later-first-year",
       "when-parenthood-feels-heavy",
     ],
     crossLinks: [
@@ -1466,9 +1644,34 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         heading: "Pelvic floor changes",
         body: [
           "Your pelvic floor has done a huge amount of work and often needs time to feel like itself. Some leaking or heaviness in the early weeks is common and usually improves with gentle pelvic floor exercises.",
+          "Pelvic floor exercises work best done regularly rather than intensely: squeezing as though you are stopping yourself passing wind and urine, holding briefly, releasing fully, and repeating a handful of times through the day. They can usually be started early, and your midwife, health visitor or GP can tell you what suits your birth.",
           "If symptoms are not easing, or you are noticing anything that feels beyond a passing shift, it is worth speaking to your GP or health visitor.",
         ],
       },
+      {
+        heading: "Leaking, urgency and continence",
+        body: [
+          "Leaking when you cough, sneeze, laugh or lift is common after birth, and so is a sudden urgent need to get to the loo. Common does not mean it has to be permanent, and it is not something you are expected to simply live with.",
+          "Symptoms that are still there after the early weeks, or that are affecting what you feel able to do, are worth taking to your GP. Pelvic floor exercises help many people, and your GP can also refer you to a specialist physiotherapy service where that is appropriate.",
+          "Any loss of bowel control, difficulty controlling wind, or a feeling of something bulging or dragging in the vagina should be raised with your GP rather than waited out. These are treatable, and earlier help is usually easier help.",
+        ],
+      },
+      {
+        heading: "When periods come back",
+        body: [
+          "There is no fixed point at which periods return. For some people they come back within a few months, for others much later in the first year, and feeding patterns are part of that picture. Early cycles can also be irregular, heavier or lighter than you remember.",
+          "It is possible to become pregnant again before your first period arrives, so it is worth thinking about contraception even if nothing has returned yet. Your GP, midwife or local sexual health service can talk through options that fit with feeding.",
+          "If bleeding is very heavy, if you are passing large clots, or if periods return in a way that worries you, speak to your GP.",
+        ],
+      },
+      {
+        heading: "When recovery carries on into the later first year",
+        body: [
+          "Not everything settles in the first few months, and that is more common than it sounds. Pelvic floor symptoms, fatigue and body changes can still be present much later in the year.",
+          "Our guide to postpartum recovery in the later first year covers that stage specifically, including when ongoing symptoms deserve professional support.",
+        ],
+      },
+
       {
         heading: "Scars, stitches and skin",
         body: [
@@ -1495,13 +1698,15 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "Body changes after birth are common and vary widely from person to person.",
       "Bleeding, breast changes and hormonal shifts are all part of the early weeks.",
       "Your tummy, posture and pelvic floor usually settle gradually with time and gentle movement.",
+      "Leaking, urgency or a dragging feeling are common but treatable, and worth raising with your GP.",
+      "There is no fixed point at which periods return, and pregnancy is possible before the first one.",
       "Scars, stitches and skin changes often soften over months rather than days.",
       "Feelings about your body can shift day to day, and kindness towards yourself matters.",
       "It is always reasonable to ask a midwife or GP if something does not feel right.",
     ],
     relatedSlugs: [
       "healing-after-birth",
-      "hormones-sweat-and-hair-loss",
+      "postpartum-recovery-in-the-later-first-year",
       "what-recovery-can-feel-like",
     ],
     crossLinks: [
@@ -1526,6 +1731,16 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Your post-pregnancy body",
         publisher: "NHS",
         url: "https://www.nhs.uk/baby/support-and-services/your-post-pregnancy-body/",
+      },
+      {
+        label: "Urinary incontinence",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/urinary-incontinence/",
+      },
+      {
+        label: "Sex and contraception after birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/sex-and-contraception-after-birth/",
       },
       {
         label: "Your pelvic floor",
@@ -1800,6 +2015,17 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         ],
       },
       {
+        heading: "Intrusive thoughts",
+        body: [
+          "Many new parents have sudden, unwanted thoughts or images about something terrible happening to their baby: dropping them on the stairs, something going wrong in the bath, harm arriving out of nowhere. These thoughts can be graphic, and they usually arrive with a jolt of horror precisely because they are the opposite of what you want.",
+          "This is more common than most people realise, and it is very rarely talked about. Having a thought is not the same as wanting something, planning it, or being likely to act on it. Parents who experience these thoughts are typically deeply distressed by them and go out of their way to keep their baby safe.",
+          "What tends to make them harder is silence. Many people worry that describing an intrusive thought will make professionals think they are dangerous. Midwives, health visitors and GPs are familiar with this, and a conversation about distressing thoughts is a normal part of postnatal care rather than an alarm being raised about you.",
+          "It is worth speaking to your GP, midwife or health visitor if these thoughts are frequent, if they are making you anxious or low, if you are avoiding ordinary things such as bathing or carrying your baby because of them, or if they are taking up a lot of your day. Talking therapies and other support can help, and perinatal mental health services exist for exactly this.",
+          "There is a difference between distressing thoughts you do not want and feeling that you might act on them. If you feel unable to keep yourself or your baby safe, if you are thinking about harming yourself or someone else, or if you become confused, unusually elated, or start seeing or hearing things others do not, this needs urgent help now: contact your GP urgently, call NHS 111, go to A&E, or call 999. These are recognised urgent situations and they can be treated.",
+        ],
+      },
+
+      {
         heading: "Practical support and exhaustion",
         body: [
           "Tiredness after birth is real and can affect how everything else feels. If you are running on very little rest, or if practical things at home feel overwhelming, that is worth mentioning too.",
@@ -1819,13 +2045,14 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "You do not need to wait until things feel serious to reach out.",
       "Trust your instinct about your body and your baby.",
       "Emotional wellbeing is as valid a reason to ask for help as physical recovery.",
+      "Unwanted, distressing thoughts about harm coming to your baby are common and can be talked about safely.",
+      "Feeling unable to keep yourself or your baby safe, or becoming confused or unusually elated, needs urgent help now.",
       "A simple, honest sentence is enough to start a conversation with a professional.",
-      "If you ever feel unable to keep yourself or your baby safe, seek urgent local help immediately.",
     ],
     relatedSlugs: [
       "postnatal-checks-and-appointments",
       "feeling-like-yourself-again",
-      "newborn-feeding-rhythms",
+      "when-parenthood-feels-heavy",
     ],
     sources: [
       {
@@ -1837,6 +2064,21 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Postnatal depression",
         publisher: "NHS",
         url: "https://www.nhs.uk/mental-health/conditions/post-natal-depression/",
+      },
+      {
+        label: "Postpartum psychosis",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/postpartum-psychosis/",
+      },
+      {
+        label: "Obsessive compulsive disorder (OCD)",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/obsessive-compulsive-disorder-ocd/",
+      },
+      {
+        label: "NHS mental health services",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/nhs-services/mental-health-services/",
       },
       {
         label: "Baby health",
@@ -2133,6 +2375,23 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         ],
       },
       {
+        heading: "Moving towards family meals",
+        body: [
+          "After the first tastes, weaning gradually turns into eating. Over the second half of the first year most babies move from a small amount of food once a day towards something at roughly three points in the day, alongside their usual milk. Milk stays important through the whole of the first year.",
+          "The easiest route is usually your own food, adapted: the same meal without added salt, stock cubes or sugar, cut or mashed to suit. Cooking twice rarely lasts, and eating the same thing teaches more than a separate baby menu does.",
+          "Eating together, even for part of a meal, does a lot of the work. Babies watch how adults chew, hold a cup and take their time, and they copy. Sitting your baby at the table with you, facing in, is worth the slight inconvenience.",
+        ],
+      },
+      {
+        heading: "Self-feeding and learning to manage food",
+        body: [
+          "Letting your baby feed themselves is messy and slow, and it is also how they learn. Soft finger foods they can hold, a preloaded spoon they can grab, and an open or free-flow cup of water with meals all build skills that a spoon held by an adult cannot.",
+          "Expect food on the floor, in the hair and apparently nowhere near the mouth. Appetite swings from day to day, and refusing something today says very little about tomorrow. Offering without pressure, and letting your baby decide how much, keeps mealtimes calmer than coaxing.",
+          "Always stay with your baby while they are eating, keep them sitting upright, and avoid hard, round or small foods that are a choking risk. Gagging, which is noisy, is different from choking, which is quiet.",
+          "If you are worried about how little is going in, about weight, or about your baby not moving on to lumpier textures at all, your health visitor is the right person to ask.",
+        ],
+      },
+      {
         heading: "How this can feel for you",
         body: [
           "Mealtimes can feel like a lot: the mess, the waste, the worry about how little went in. It helps to remember what this stage is actually for. You are introducing tastes and skills, not hitting targets.",
@@ -2144,6 +2403,9 @@ const rawFirstYearArticles: FirstYearArticle[] = [
       "Look for all three readiness signs together.",
       "Night waking and fist chewing are not readiness signs, and solids will not make a baby sleep through.",
       "Move from purées and soft pieces towards lumps and finger foods at your baby's pace.",
+      "Meals build up towards around three a day across the second half of the year, with milk continuing.",
+      "Adapted family food and eating together teach more than a separate baby menu.",
+      "Self-feeding is messy and is how babies learn to manage food.",
       "Introduce allergenic foods one at a time from around six months, in safe forms, and keep them in the diet.",
       "No added salt or sugar, and never leave your baby alone while eating.",
       "Ask a GP or health visitor first if there is existing allergy, eczema or a family history.",
@@ -2172,6 +2434,16 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Your baby's first solid foods",
         publisher: "NHS",
         url: "https://www.nhs.uk/baby/weaning-and-feeding/babys-first-solid-foods/",
+      },
+      {
+        label: "Help your baby enjoy new foods",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/weaning-and-feeding/help-your-baby-enjoy-new-foods/",
+      },
+      {
+        label: "What to feed your baby: 10 to 12 months",
+        publisher: "NHS Start for Life",
+        url: "https://www.nhs.uk/start-for-life/baby/weaning/what-to-feed-your-baby/10-to-12-months/",
       },
       {
         label: "Food allergies in babies and young children",
@@ -2770,6 +3042,136 @@ const rawFirstYearArticles: FirstYearArticle[] = [
         label: "Your 6-week postnatal check",
         publisher: "NHS",
         url: "https://www.nhs.uk/baby/support-and-services/your-6-week-postnatal-check/",
+      },
+    ],
+  },
+  {
+    slug: "postpartum-recovery-in-the-later-first-year",
+    topic: "postpartum-recovery",
+    title: "Postpartum recovery in the later first year",
+    description:
+      "Recovery does not always finish at six weeks. What can still be settling months later, and when ongoing symptoms deserve support.",
+    readTime: "8 min read",
+    status: "ready",
+    lastUpdated: "September 2026",
+    seoTitle: "Postpartum recovery in the later first year | The Start of You",
+    seoDescription:
+      "Calm UK guidance on recovery that continues months after birth, including pelvic floor symptoms, continence, fatigue, periods returning and when to ask for help.",
+    intro:
+      "A lot of postpartum guidance stops at six weeks, as though recovery has a finish line and everyone crosses it together. Many people find that months later something is still settling, or something they assumed would pass has quietly stayed. That is common, it is not a failure, and much of it can still be helped. This piece is about the later part of the first year, when the baby is growing fast and your own recovery can slip down the list.",
+    sections: [
+      {
+        heading: "Recovery does not run to a timetable",
+        body: [
+          "The postnatal check is a useful point of contact, not a discharge from your own body. Tissue healing, strength, sleep, hormones and confidence all move at different speeds, and they rarely all arrive together.",
+          "There is no universal schedule here. Some people feel broadly themselves within months, others are still noticing changes towards the end of the first year. Neither says anything about how well you are doing.",
+        ],
+      },
+      {
+        heading: "Pelvic floor symptoms later in the year",
+        body: [
+          "Leaking when you cough, laugh, run or lift, a feeling of heaviness or dragging, or discomfort during sex are all things people commonly carry quietly for months.",
+          "Symptoms that are still there later in the first year are worth raising rather than accepting. Pelvic floor exercises help many people, and your GP can also refer you to a specialist physiotherapy service where that is appropriate.",
+        ],
+      },
+      {
+        heading: "Continence and bowel changes",
+        body: [
+          "Bladder and bowel changes are among the least talked about parts of recovery. Urinary leaking, urgency, or any difficulty controlling wind or bowels are medical matters, not embarrassing personal failings.",
+          "Any loss of bowel control, or symptoms that are getting worse rather than better, should be taken to your GP. These are treatable, and earlier help is usually easier help.",
+        ],
+      },
+      {
+        heading: "Fatigue that is more than broken sleep",
+        body: [
+          "Tiredness is expected with a baby who still wakes. Fatigue that does not lift even after a better stretch of sleep is worth mentioning, because there are other reasons it can happen and some of them are simple to check.",
+          "Speak to your GP if you feel persistently exhausted, breathless, dizzy, or unlike yourself in a way that is not shifting.",
+        ],
+      },
+      {
+        heading: "Scars, aches and long-tail changes",
+        body: [
+          "Caesarean scars and perineal healing can stay sensitive, numb or tight long after they have technically healed. Back, hip and wrist aches are common when you spend your days lifting a growing baby.",
+          "Most of this eases gradually. Pain that is worsening, a scar that becomes red, hot, swollen or starts leaking, or any new pain that worries you should be looked at by your GP.",
+        ],
+      },
+      {
+        heading: "Periods, cycles and contraception",
+        body: [
+          "Periods return at very different points after birth, and feeding patterns are part of that picture. Some people see a period within a few months, others much later in the year, and early cycles can be irregular.",
+          "It is possible to conceive again before your first period returns, so contraception is worth thinking about even if nothing has come back yet. Your GP or local sexual health service can talk through the options that suit feeding and your own health.",
+        ],
+      },
+      {
+        heading: "Recovering while the demands grow",
+        body: [
+          "The later first year asks more of your body, not less. Your baby is heavier, more mobile, and awake for longer. It is a strange stage to still be recovering in, and it can feel as though the window for looking after yourself has closed.",
+          "It has not. Bringing something up at nine or eleven months is completely reasonable, and services are used to people who waited.",
+        ],
+      },
+      {
+        heading: "When to ask for support",
+        body: [
+          "Contact your GP about symptoms that are persisting, worsening, or affecting daily life: pelvic floor symptoms, continence changes, pain, fatigue, or anything that simply does not feel right.",
+          "If you feel unwell with a high temperature, have heavy or sudden bleeding, or are worried about your mental health, seek advice the same day through your GP or NHS 111. In an emergency, call 999.",
+        ],
+      },
+    ],
+    keyTakeaways: [
+      "Recovery does not reliably finish at six weeks, the postnatal check or three months.",
+      "Pelvic floor and continence symptoms later in the year are common and usually treatable.",
+      "Fatigue that does not lift after better sleep is worth raising with your GP.",
+      "Scars and aches can stay sensitive for a long time, but worsening pain needs checking.",
+      "Periods return at very different points, and conception is possible before the first one.",
+      "It is never too late in the first year to ask for help with your own recovery.",
+    ],
+    relatedSlugs: [
+      "body-changes-after-birth",
+      "healing-after-birth",
+      "when-to-ask-for-help-after-birth",
+    ],
+    crossLinks: [
+      {
+        label: "Postpartum recovery hub",
+        href: "/first-year/postpartum-recovery",
+        context: "More on recovery across the first year",
+      },
+    ],
+    sources: [
+      {
+        label: "Your post-pregnancy body",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/your-post-pregnancy-body/",
+      },
+      {
+        label: "Urinary incontinence",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/urinary-incontinence/",
+      },
+      {
+        label: "Pelvic organ prolapse",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/pelvic-organ-prolapse/",
+      },
+      {
+        label: "Your pelvic floor",
+        publisher: "RCOG",
+        url: "https://www.rcog.org.uk/for-the-public/perineal-tears-and-episiotomies-in-childbirth/your-pelvic-floor/",
+      },
+      {
+        label: "Caesarean section: recovery",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/tests-and-treatments/caesarean-section/recovery/",
+      },
+      {
+        label: "Sex and contraception after birth",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/baby/support-and-services/sex-and-contraception-after-birth/",
+      },
+      {
+        label: "Postnatal care (NG194)",
+        publisher: "NICE",
+        url: "https://www.nice.org.uk/guidance/ng194",
       },
     ],
   },

@@ -43,8 +43,8 @@ describe("Phase 37B First Year pathways", () => {
   });
 
   it.each([
-    ["baby", 15, 4, 11],
-    ["postpartum", 11, 4, 7],
+    ["baby", 16, 5, 11],
+    ["postpartum", 12, 4, 8],
   ] as const)("accounts for every %s article exactly once", (pathway, total, startCount, groupedCount) => {
     const config = firstYearPathways[pathway];
     const owned = getPathwayArticles(config);
@@ -58,8 +58,8 @@ describe("Phase 37B First Year pathways", () => {
     expect(new Set(presented.map((article) => article.slug))).toEqual(new Set(owned.map((article) => article.slug)));
   });
 
-  it("keeps the source inventory at 26 ready articles with no current hero suppressions", () => {
-    expect(firstYearArticles.filter((article) => article.status === "ready")).toHaveLength(26);
+  it("keeps the source inventory at 28 ready articles with no current hero suppressions", () => {
+    expect(firstYearArticles.filter((article) => article.status === "ready")).toHaveLength(28);
     expect(firstYearArticles.filter((article) => article.suppressHeroImage)).toHaveLength(0);
   });
 

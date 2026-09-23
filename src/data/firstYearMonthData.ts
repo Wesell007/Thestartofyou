@@ -308,6 +308,8 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
     ],
     related: [
       { label: "Newborn feeding rhythms", kicker: "Feeding", href: "/first-year/feeding/newborn-feeding-rhythms" },
+      { label: "Normal newborn quirks and reflexes", kicker: "Care and safety", href: "/first-year/care-and-safety/newborn-quirks-and-reflexes" },
+      { label: "Newborn skin: spots, marks and dry patches", kicker: "Care and safety", href: "/first-year/care-and-safety/newborn-skin-spots-and-marks" },
       { label: "Safe sleep and home safety", kicker: "Care and safety", href: "/first-year/care-and-safety/safe-sleep-and-home-safety" },
       { label: "Healing after birth", kicker: "Recovery", href: "/first-year/postpartum-recovery/healing-after-birth" },
     ],
@@ -503,6 +505,8 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
     ],
     related: [
       { label: "Helping your baby settle", kicker: "Sleep", href: "/first-year/sleep/helping-your-baby-settle" },
+      { label: "Colic and evening crying", kicker: "Care and safety", href: "/first-year/care-and-safety/colic-and-evening-crying" },
+      { label: "Breastfeeding problems and where to get help", kicker: "Feeding", href: "/first-year/feeding/breastfeeding-problems-and-where-to-get-help" },
       { label: "What recovery can feel like", kicker: "Recovery", href: "/first-year/postpartum-recovery/what-recovery-can-feel-like" },
       { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
     ],
@@ -698,6 +702,7 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
     related: [
       { label: "Postnatal checks and appointments", kicker: "Checkups", href: "/first-year/checkups-and-warning-signs/postnatal-checks-and-appointments" },
       { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
+      { label: "Colic and evening crying", kicker: "Care and safety", href: "/first-year/care-and-safety/colic-and-evening-crying" },
       { label: "When parenthood feels heavy", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy" },
     ],
     sources: [
@@ -2277,6 +2282,7 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
     ],
     related: [
       { label: "Safe sleep and home safety", kicker: "Care and safety", href: "/first-year/care-and-safety/safe-sleep-and-home-safety" },
+      { label: "Postpartum recovery in the later first year", kicker: "Recovery", href: "/first-year/postpartum-recovery/postpartum-recovery-in-the-later-first-year" },
       { label: "When parenthood feels heavy", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/when-parenthood-feels-heavy" },
       { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
     ],
@@ -2681,6 +2687,7 @@ export const firstYearMonths: Record<MonthSlug, MonthGuide> = {
     related: [
       { label: "Baby development in the first year", kicker: "Development", href: "/first-year/development/baby-development-in-the-first-year" },
       { label: "Body changes after birth", kicker: "Body and hormones", href: "/first-year/body-and-hormones/body-changes-after-birth" },
+      { label: "Postpartum recovery in the later first year", kicker: "Recovery", href: "/first-year/postpartum-recovery/postpartum-recovery-in-the-later-first-year" },
       { label: "Feeling like yourself again", kicker: "Emotional wellbeing", href: "/first-year/emotional-wellbeing/feeling-like-yourself-again" },
     ],
     sources: [

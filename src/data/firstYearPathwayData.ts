@@ -40,6 +40,7 @@ export const firstYearPathways: Record<FirstYearPathway, FirstYearPathwayConfig>
     topics: BABY_TOPICS,
     startHereSlugs: [
       "newborn-feeding-rhythms",
+      "breastfeeding-problems-and-where-to-get-help",
       "newborn-sleep-expectations",
       "baby-development-in-the-first-year",
       "safe-sleep-and-home-safety",

@@ -160,15 +160,55 @@ Shared totals: 8 moments. C 2, PC 4, U 0, NRS 0, BSE 2.
 
 Gap population = PARTIALLY_COVERED 34 + UNCOVERED 1 = 35.
 
+### Priority ledger (corrected)
+
+Recounted row by row from the matrices above. The earlier summary table (P1 2, P2 9, P3 14, P4 10) did not reconcile with the row-level priorities and is superseded. Coverage, moment, article and action arithmetic are unaffected.
+
 | Priority | Count |
 | --- | --- |
-| P1 | 2 |
-| P2 | 9 |
-| P3 | 14 |
-| P4 | 10 |
-| Total | 35 |
+| P1 | 3 |
+| P2 | 13 |
+| P3 | 19 |
+| P4 | 4 |
+| Total prioritised rows | 39 |
 
-P1 items: feeding-related physical recovery (mastitis, nipple pain, tongue tie) UNCOVERED; intrusive thoughts PARTIALLY_COVERED with only one article-level mention against 11 month-page mentions.
+Prioritised rows are not the same as coverage-gap rows:
+
+| Field | Count |
+| --- | --- |
+| Coverage-gap rows (PARTIALLY_COVERED 34 + UNCOVERED 1) | 35 |
+| COVERED rows carrying discovery-gap priorities (colic, teething, newborn quirks, newborn skin) | 4 |
+| Total prioritised rows | 39 (35 + 4) |
+
+### P1 ledger (3 / 3)
+
+| ID | Side | Intent | Coverage | Current owner | Treatment | Existing content genuinely owns the intent | Required before closure |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| P1-1 | Postpartum | Feeding-related physical recovery: nipple pain, engorgement, mastitis, tongue tie | UNCOVERED | NONE | NEW_ARTICLE (NC-1) | NO | YES |
+| P1-2 | Postpartum | Intrusive thoughts | PARTIALLY_COVERED | when-to-ask-for-help-after-birth | EXPAND_EXISTING + internal discovery support | NO (one article-level mention against 11 month-page mentions) | YES |
+| P1-3 | Baby | Breastfeeding practical support | PARTIALLY_COVERED | bottle-and-breastfeeding-questions | NEW_ARTICLE (NC-1) + internal links | NO (short reassurance Q&A only) | YES |
+
+P1-1 and P1-3 are two distinct intents served by the same single proposed article, NC-1. They are not two new-article candidates.
+
+### P2 ledger (13 / 13)
+
+| ID | Side | Intent | Coverage | Current owner | Issue category | Treatment | Required before closure |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| P2-1 | Baby | Feeding worries and when to seek feeding help | PARTIALLY_COVERED | bottle-and-breastfeeding-questions | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-2 | Baby | Crying and colic | COVERED, weak discovery | colic-and-evening-crying | DISCOVERY GAP | INTERNAL_LINK_ONLY | YES |
+| P2-3 | Baby | Teething | COVERED, weak discovery | teething | DISCOVERY GAP | INTERNAL_LINK_ONLY | YES |
+| P2-4 | Baby | Family meals and self-feeding at 9–12 months | PARTIALLY_COVERED | introducing-solid-foods | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-5 | Baby | Language and babble | PARTIALLY_COVERED | baby-development-in-the-first-year | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-6 | Baby | Transition toward toddler guidance | PARTIALLY_COVERED | phase 9-12 months | HANDOFF GAP | EXPAND_EXISTING (phase transition copy) + internal link | YES |
+| P2-7 | Postpartum | Caesarean recovery | PARTIALLY_COVERED | healing-after-birth | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-8 | Postpartum | Pelvic floor, early | PARTIALLY_COVERED | body-changes-after-birth | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-9 | Postpartum | Pelvic floor, ongoing, and continence | PARTIALLY_COVERED | body-changes-after-birth | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-10 | Postpartum | Return of periods and cycles | PARTIALLY_COVERED | body-changes-after-birth | CONTENT GAP | EXPAND_EXISTING | YES |
+| P2-11 | Postpartum | Long-tail physical recovery 6–12 months | PARTIALLY_COVERED | phase 6-9 / 9-12 parentRecovery blocks | CONTENT GAP | NEW_ARTICLE (NC-2) | YES |
+| P2-12 | Postpartum | Ongoing pelvic floor concerns later in the year | PARTIALLY_COVERED | phase pages | CONTENT GAP | NEW_ARTICLE (NC-2) | YES |
+| P2-13 | Shared | Feeding support for both parent and baby | PARTIALLY_COVERED | bottle-and-breastfeeding-questions | CONTENT GAP | NEW_ARTICLE (NC-1) + internal link | YES |
+
+P2 rows accounted = 13 / 13. Four of the P2 rows (P2-2, P2-3 and, at P3, newborn quirks and newborn skin) are discovery gaps on content that already exists and are not counted as uncovered content.
 
 ## 5. New article candidates (2)
 
@@ -178,6 +218,19 @@ P1 items: feeding-related physical recovery (mastitis, nipple pain, tongue tie) 
 | NC-2 | Postpartum recovery in the later first year (6–12 months) | Later first year | Only phase `parentRecovery` blocks of 667–699 bytes; no article owns months 6–12 recovery | Existing recovery articles are anchored to the early weeks; extending them would blur their stage promise and weaken the early-weeks answer | P2 |
 
 No other candidate passed the five-part test. Every other gap is either an expansion of an existing article, an internal-linking action, or better served elsewhere.
+
+### Strict five-part revalidation
+
+| Test | NC-1 | NC-2 |
+| --- | --- | --- |
+| 1. Materially important intent | YES (P1 escalation-bearing feeding symptoms) | YES (P2, the whole 6–12 month recovery stage) |
+| 2. No existing article can honestly own it | YES | YES |
+| 3. Cannot be solved by internal linking | YES (no target exists) | YES (no target exists) |
+| 4. Cannot be solved by expanding an existing article | YES (bottle-and-breastfeeding-questions would bury escalation wording) | YES (early-weeks articles would lose their stage promise) |
+| 5. Not better served by a tool / phase / month / topic / support surface | YES (a feeding support finder helps signposting only) | YES (phase `parentRecovery` blocks of 667–699 bytes are not an owner) |
+| Candidate remains valid | YES | YES |
+
+Unique new-article candidates = 2. NC-1 addresses two P1 intents (P1-1 and P1-3) and one shared P2 intent (P2-13); NC-2 addresses two P2 intents (P2-11 and P2-12). Candidate count reflects unique articles, not the number of gaps they resolve.
 
 ## 6. Tool / product opportunities (3)
 

@@ -253,3 +253,9 @@
 - [x] Responsive evidence records inherited local asset-pointer delivery failure; image replacements 0 and image campaign 0
 - [x] Locked changes 0; deployment NO; Toddler content coverage audit NOT STARTED
 - [x] Known inventory drift recorded: 16 stale rows, 0 ready articles hidden, inventory rows changed in Phase 38A = 0
+
+## Phase 38A.1 — Toddler hub section-order correction — CLOSED PASS / EDITORIAL START HERE MOVED AHEAD OF TOPIC EXPLORATION / NO OTHER TODDLER CHANGES
+- [x] "A few quiet places to start" moved above Toddler topics in the hub; measured order at 1280, 834 and 390 is Hero, Age pathways, Start Here, Toddler topics, Common questions, one late Companion, Where to next
+- [x] Sections redesigned 0; copy, articles, topic order, imagery, routes, sitemap, Companion behaviour, AI, grounding, age pages and topic pages changed 0; inventory rows changed 0
+- [x] Validation: focused 6 of 6, full suite 139 files and 1,595 tests PASS; overflow 0, console errors 0 and 24 unchanged main links at every width; docs updated
+- [x] Locked changes 0; deployment NO; Toddler content coverage audit NOT STARTED

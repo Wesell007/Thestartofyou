@@ -102,9 +102,9 @@ Action arithmetic: KEEP 16 + EXPAND_EXISTING 6 + MERGE 0 + REPOSITION 0 + INTERN
 
 `/articles/baby-milestones-first-year` is a legacy record in `src/data/articleData.ts` and is not one of these 26; it is tracked separately as an adjacent editorial overlap decision and is excluded from this denominator, which is why REPOSITION remains 0 here.
 
-### Action-to-gap mapping for the 9 non-KEEP records
+### Action-to-gap mapping for the 10 non-KEEP records
 
-EXPAND_EXISTING (5 / 5):
+EXPAND_EXISTING (6 / 6):
 
 | # | Slug | Gap / intent addressed | Priority | Required for closure |
 | --- | --- | --- | --- | --- |
@@ -113,6 +113,7 @@ EXPAND_EXISTING (5 / 5):
 | 3 | introducing-solid-foods | P2-4 family meals and self-feeding at 9–12 months | P2 | YES |
 | 4 | healing-after-birth | P2-7 caesarean recovery | P2 | YES |
 | 5 | body-changes-after-birth | P2-8 early pelvic floor; P2-9 ongoing pelvic floor and continence; P2-10 return of periods | P2 | YES |
+| 6 | when-to-ask-for-help-after-birth | P1-2 intrusive thoughts (section-level expansion plus discovery links) | P1 | YES |
 
 INTERNAL_LINK_ONLY (4 / 4):
 
@@ -123,7 +124,7 @@ INTERNAL_LINK_ONLY (4 / 4):
 | 3 | newborn-quirks-and-reflexes | P3 newborn quirks discovery (2 inbound links) | P3 | NO (carried by the same linking pass) |
 | 4 | newborn-skin-spots-and-marks | P3 newborn skin discovery (2 inbound links) | P3 | NO (carried by the same linking pass) |
 
-Separately, `when-to-ask-for-help-after-birth` is recommended KEEP at record level but carries the P1-2 intrusive-thoughts expansion; that is a section-level expansion of an otherwise sound article and does not change its record action.
+`when-to-ask-for-help-after-birth` is confirmed as one of the 26 records in `src/data/firstYearArticleData.ts` (record 17 in file order), so the P1-2 treatment is carried in this ledger as EXPAND_EXISTING rather than tracked outside it. Its `src/data/articleInventory.ts` entry is stale ("draft" / "publish"), which is the known inventory-staleness finding, not a separate action.
 
 No recommendation in this table has been implemented.
 

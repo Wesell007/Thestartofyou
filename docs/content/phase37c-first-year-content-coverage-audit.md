@@ -174,7 +174,7 @@ Publication quality and grounding eligibility were assessed separately; no artic
 | Secondary treatment | REPOSITION + internal link on the legacy record |
 | Priority | P2 |
 
-Because the record sits outside the 26, the First Year action arithmetic is unchanged: KEEP 17 + EXPAND_EXISTING 5 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26. The milestone decision is tracked separately as an ADJACENT / LEGACY EDITORIAL OVERLAP DECISION and is not counted in that denominator. Nothing has been merged, repositioned or linked.
+Because the record sits outside the 26, the First Year action arithmetic is unaffected by it: KEEP 16 + EXPAND_EXISTING 6 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26 (the KEEP / EXPAND split corrected after confirming `when-to-ask-for-help-after-birth` is one of the 26 records in `src/data/firstYearArticleData.ts`). The milestone decision is tracked separately as an ADJACENT / LEGACY EDITORIAL OVERLAP DECISION and is not counted in that denominator. Nothing has been merged, repositioned or linked.
 
 ## 13. Outcome
 
@@ -188,12 +188,11 @@ Current release blockers: 0. New content required before current-strategy closur
 
 ### Smallest evidence-backed remediation scope (proposed, not started)
 
-Accounts for 3/3 P1, 13/13 P2, 2/2 material AI-only needs, 5/5 EXPAND_EXISTING, 4/4 INTERNAL_LINK_ONLY, 2/2 candidates, both incomplete handoffs and the milestone decision.
+Accounts for 3/3 P1, 13/13 P2, 2/2 material AI-only needs, 6/6 EXPAND_EXISTING, 4/4 INTERNAL_LINK_ONLY, 2/2 candidates, both incomplete handoffs and the milestone decision.
 
 1. NC-1, breastfeeding problems and where to get help — resolves P1-1, P1-3, P2-13 and AI-only need 1.
 2. NC-2, postpartum recovery in the later first year — resolves P2-11, P2-12 and AI-only need 2.
-3. Expand `when-to-ask-for-help-after-birth` for intrusive thoughts — resolves P1-2.
-4. Expand the 5 EXPAND_EXISTING records — resolves P2-1, P2-4, P2-5, P2-7, P2-8, P2-9, P2-10.
+3. Expand the 6 EXPAND_EXISTING records — resolves P1-2 (`when-to-ask-for-help-after-birth`, intrusive thoughts) and P2-1, P2-4, P2-5, P2-7, P2-8, P2-9, P2-10. First Year article expansions required in 37D = 6. The intrusive-thoughts expansion is counted here only, not as a separate step.
 5. Internal-link pass on the 4 INTERNAL_LINK_ONLY records — resolves P2-2, P2-3 and the two P3 discovery rows carried by the same pass.
 6. Phase 9-12 toddler transition passage plus links — resolves P2-6 and the Toddler content handoff.
 7. First Year → Family internal links — resolves the Family handoff (P3, carried because it shares step 6's linking work).

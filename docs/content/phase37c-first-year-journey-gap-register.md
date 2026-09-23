@@ -185,7 +185,7 @@ Prioritised rows are not the same as coverage-gap rows:
 | ID | Side | Intent | Coverage | Current owner | Treatment | Existing content genuinely owns the intent | Required before closure |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | P1-1 | Postpartum | Feeding-related physical recovery: nipple pain, engorgement, mastitis, tongue tie | UNCOVERED | NONE | NEW_ARTICLE (NC-1) | NO | YES |
-| P1-2 | Postpartum | Intrusive thoughts | PARTIALLY_COVERED | when-to-ask-for-help-after-birth | EXPAND_EXISTING + internal discovery support | NO (one article-level mention against 11 month-page mentions) | YES |
+| P1-2 | Postpartum | Intrusive thoughts | PARTIALLY_COVERED | when-to-ask-for-help-after-birth | EXPAND_EXISTING + internal discovery support (carried in the record-level action ledger as the sixth EXPAND_EXISTING record) | NO (one article-level mention against 11 month-page mentions) | YES |
 | P1-3 | Baby | Breastfeeding practical support | PARTIALLY_COVERED | bottle-and-breastfeeding-questions | NEW_ARTICLE (NC-1) + internal links | NO (short reassurance Q&A only) | YES |
 
 P1-1 and P1-3 are two distinct intents served by the same single proposed article, NC-1. They are not two new-article candidates.

@@ -3335,8 +3335,8 @@ const articleDatabase: ArticleData[] = [
   {
     slug: "baby-milestones-first-year",
     title: "Baby milestones in the first year: what to expect and when to relax",
-    metaDescription: "A calm guide to baby milestones in the first year. What's typical, what varies, and when to speak with your health visitor.",
-    quickAnswer: "Baby development follows a general pattern but varies enormously in timing. Most milestones have a wide 'normal' window. Comparing your baby to others is natural but rarely helpful.",
+    metaDescription: "A calm guide to milestone worry in the first year. Why comparison rarely helps, what varies, and when to speak with your health visitor.",
+    quickAnswer: "Baby development follows a general pattern but varies enormously in timing. Most milestones have a wide 'normal' window. Comparing your baby to others is natural but rarely helpful. For the full month-by-month picture of first-year development, see our guide to baby development in the first year.",
     howThisFeels: ["Comparing your baby to others constantly", "Pride mixed with worry", "Not knowing when to be concerned"],
     whatHappening: {
       commonCauses: [
@@ -3359,7 +3359,7 @@ const articleDatabase: ArticleData[] = [
       { action: "Resist comparison", reason: "The range of normal is much wider than social media suggests." },
     ],
     whatHappensNext: "Development continues rapidly in the second year with walking, talking, and increasing independence.",
-    relatedStage: { intro: "Related:", links: [{ label: "First Year Hub", href: "/first-year" }, { label: "Baby Sleep Guide", href: "/articles/baby-sleep-first-year" }] },
+    relatedStage: { intro: "Related:", links: [{ label: "Baby development in the first year", href: "/first-year/development/baby-development-in-the-first-year" }, { label: "First Year Hub", href: "/first-year" }, { label: "Baby Sleep Guide", href: "/articles/baby-sleep-first-year" }] },
     aiPrompts: ["When should my baby start crawling?", "Is it normal that my baby isn't walking yet?"],
     captureIntro: "Each milestone, whenever it comes, is worth celebrating and remembering.",
     journey: ["first-year"],

@@ -177,6 +177,9 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
       { title: "What is normal in the first two weeks", description: "Bleeding, soreness, swings in mood and the rhythm of newborn feeds.", href: "/first-year/postpartum-recovery/healing-after-birth" },
       { title: "When to call your midwife or GP", description: "Calm, clear signs that something needs a closer look.", href: "/first-year/checkups-and-warning-signs/when-to-ask-for-help-after-birth" },
       { title: "Feeding in the early weeks", description: "Support for breastfeeding, bottle feeding or a mix, without judgement.", href: "/first-year/feeding/newborn-feeding-rhythms" },
+      { title: "When feeding hurts", description: "Pain, latch trouble, mastitis worries, and where skilled feeding support comes from.", href: "/first-year/feeding/breastfeeding-problems-and-where-to-get-help" },
+      { title: "Evening crying and colic", description: "What the long, unsettled evenings of the early weeks can be, and what helps.", href: "/first-year/care-and-safety/colic-and-evening-crying" },
+      { title: "Newborn quirks, noises and skin", description: "The jerks, snuffles, spots and marks that are usually nothing at all.", href: "/first-year/care-and-safety/newborn-quirks-and-reflexes" },
     ],
     relatedTopics: [
       { label: "Feeding", href: "/first-year/feeding" },
@@ -266,6 +269,8 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
       { title: "The four month sleep shift", description: "What is changing for your baby and what gentle adjustments help.", href: "/first-year/sleep/when-sleep-suddenly-changes" },
       { title: "Getting ready for first foods", description: "Calm, practical signs of readiness without pressure.", href: "/first-year/feeding/introducing-solid-foods" },
       { title: "Pelvic floor recovery, months in", description: "Why it still matters and how to ask for the right support.", href: "/first-year/body-and-hormones/body-changes-after-birth" },
+      { title: "Teething, and what it does not explain", description: "When teeth tend to arrive, what helps, and what is worth checking instead.", href: "/first-year/care-and-safety/teething" },
+      { title: "When feeding hurts", description: "Pain, latch trouble and where skilled feeding support comes from.", href: "/first-year/feeding/breastfeeding-problems-and-where-to-get-help" },
     ],
     relatedTopics: [
       { label: "Development", href: "/first-year/development" },
@@ -354,6 +359,8 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     featuredGuidance: [
       { title: "Sleep when everything is changing", description: "Calm ways to ride out shifts without overhauling everything.", href: "/first-year/sleep/when-sleep-suddenly-changes" },
       { title: "Looking after a tired body", description: "Recovery does not stop at six weeks. Practical, gentle steps.", href: "/first-year/postpartum-recovery/what-recovery-can-feel-like" },
+      { title: "Recovery in the later first year", description: "Pelvic floor symptoms, fatigue and cycle changes that are still around months on.", href: "/first-year/postpartum-recovery/postpartum-recovery-in-the-later-first-year" },
+      { title: "Teething, and what it does not explain", description: "When teeth tend to arrive, what helps, and what is worth checking instead.", href: "/first-year/care-and-safety/teething" },
     ],
     relatedTopics: [
       { label: "Development", href: "/first-year/development" },
@@ -374,7 +381,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     heroObjectPosition: "center 40%",
     imageBreak: { image: "firstyear-stage-9-12.jpg", alt: "A baby practising supported standing with a parent at home", objectPosition: "center 42%" },
     editorial:
-      "This phase often carries a quiet identity shift. Your baby is becoming a small person with clear preferences, and you are looking back at a year that changed you. First birthdays can feel joyful and tender at the same time, and both feelings deserve room.",
+      "This phase often carries a quiet identity shift. Your baby is becoming a small person with clear preferences, and you are looking back at a year that changed you. First birthdays can feel joyful and tender at the same time, and both feelings deserve room. Nothing stops at twelve months either: sleep, feeding, big feelings and language keep changing, and the guidance simply continues into our toddler stage when you are ready for it.",
     babyChanges: [
       { label: "Mobility and safety", body: "Cruising, pulling up and early walking signs. Safety at home matters more than ever." },
       { label: "Communication", body: "First sounds, gestures and clear preferences. Personality really starts to show." },
@@ -408,6 +415,18 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
         readMore: { label: "Hormones, sweat and hair loss", href: "/first-year/body-and-hormones/hormones-sweat-and-hair-loss" },
       },
       {
+        q: "What changes after twelve months, and where do I go next?",
+        a: "Nothing switches over on the birthday. Walking, words, big feelings, naps and mealtimes all keep developing, and the same kinds of questions carry on. Our toddler guidance picks up from here whenever it feels useful.",
+        askTopic: "toddler-transition",
+        readMore: { label: "Toddler guidance", href: "/toddler" },
+      },
+      {
+        q: "Is my recovery supposed to be finished by now?",
+        a: "Not necessarily. Pelvic floor symptoms, fatigue and body changes can still be present late in the first year, and they can still be helped.",
+        askTopic: "later-recovery",
+        readMore: { label: "Postpartum recovery in the later first year", href: "/first-year/postpartum-recovery/postpartum-recovery-in-the-later-first-year" },
+      },
+      {
         q: "When is the right time to think about another baby?",
         a: "There is no universal answer. Your own recovery, energy and life all matter as much as timing.",
         askTopic: "another-baby",
@@ -439,7 +458,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
     ],
     sources: [SRC.nhsBaby, SRC.nhsPostnatal, SRC.nhsMentalHealth, SRC.nctReturn, SRC.niceNG194],
     featuredGuidance: [
-      { title: "Recovery a year on", description: "What is still common, what is worth checking and how to ask for help.", href: "/first-year/postpartum-recovery/what-recovery-can-feel-like" },
+      { title: "Recovery in the later first year", description: "What can still be settling months on, and when ongoing symptoms deserve support.", href: "/first-year/postpartum-recovery/postpartum-recovery-in-the-later-first-year" },
       { title: "Cycles, contraception and intimacy", description: "Honest, calm guidance for this stage of recovery.", href: "/first-year/body-and-hormones/sex-and-intimacy-after-birth" },
       { title: "Easing into toddlerhood", description: "Small shifts that help the move from baby to toddler feel softer.", href: "/toddler" },
     ],
@@ -448,6 +467,7 @@ const phases: Record<PhaseSlug, PhaseConfig> = {
       { label: "Development", href: "/first-year/development" },
       { label: "Body and hormones", href: "/first-year/body-and-hormones" },
       { label: "Check-ups and warning signs", href: "/first-year/checkups-and-warning-signs" },
+      { label: "Relationships and family life", href: "/family/relationships" },
     ],
   },
 };

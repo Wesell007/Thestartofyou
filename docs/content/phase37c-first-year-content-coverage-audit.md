@@ -152,14 +152,53 @@ Publication quality and grounding eligibility were assessed separately; no artic
 | Production validation build | PASS |
 | Flaky tests | none; no rerun required |
 
-## 11. Outcome
+## 11. Handoff detail for the two incomplete editorial handoffs
 
-Coverage is broad and safe: 44 of 84 journey moments fully covered, 1 uncovered, 0 broken links, 0 unsupported claims, 0 orphaned articles, 0 indexable legacy surfaces. The gaps that remain are small, bounded and evidence-backed: one uncovered P1 feeding-recovery intent, one thin later-postpartum stage, one under-owned P1 escalation intent, and four weak-discovery Care and safety articles.
+| Handoff | Priority | Exact missing visitor need | Content already exists | Internal-link-only sufficient | Required for First Year closure |
+| --- | --- | --- | --- | --- | --- |
+| First Year → Toddler (content) | P2 | "My baby is nearly one — what changes next and where do I go now?" No editorial transition passage exists; only three bare `/toddler` references | Partially: Toddler hub content exists, First Year transition copy does not | NO — a short transition passage in phase 9-12 plus links is required | YES |
+| First Year → Family | P3 | "Where does wider family life, returning to work and childcare live?" Two shared journey moments (returning to work and childcare, wider family life) are BETTER_SERVED_ELSEWHERE with no route to Family | YES, on the Family hub | YES — internal links only | NO |
 
-**OUTCOME B — mostly sufficient, small gaps.**
+## 12. Milestone overlap decision input (adjacent / legacy record)
 
-Current release blockers: 0. New content required before current-strategy closure: YES (2 candidates, NC-1 at P1 and NC-2 at P2).
+| Field | Measured |
+| --- | --- |
+| Record | `/articles/baby-milestones-first-year` (`src/data/articleData.ts`, inventory id `legacy:baby-milestones-first-year`, system `legacy-article`) |
+| Inside the 26-record First Year article inventory | NO — the 26 records come from `src/data/firstYearArticleData.ts` |
+| Current inventory owner | `src/data/articleInventory.ts`, legacy `/articles/*` ledger |
+| Current `recommendedAction` | `needs-review` |
+| Current `canonicalRole` | `needs-decision` |
+| Technical duplicate | NO |
+| Editorial overlap | YES (high duplicate risk against `baby-development-in-the-first-year`) |
+| Recommended canonical owner | `baby-development-in-the-first-year` |
+| Secondary treatment | REPOSITION + internal link on the legacy record |
+| Priority | P2 |
 
-Smallest evidence-justified follow-up, recommended but not started: a single remediation phase covering NC-1, the four weak-discovery internal-link fixes and the milestones canonical decision. Not begun; awaiting review.
+Because the record sits outside the 26, the First Year action arithmetic is unchanged: KEEP 17 + EXPAND_EXISTING 5 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26. The milestone decision is tracked separately as an ADJACENT / LEGACY EDITORIAL OVERLAP DECISION and is not counted in that denominator. Nothing has been merged, repositioned or linked.
 
-PHASE 37C — FIRST YEAR CONTENT COVERAGE & JOURNEY AUDIT — AUDIT COMPLETE / OUTCOME B
+## 13. Outcome
+
+Coverage is broad and safe: 44 of 84 journey moments fully covered, 0 broken links, 0 unsupported claims, 0 orphaned articles, 0 indexable legacy surfaces. Architecture, discovery and public UX remain sound. The remaining gaps sit in the editorial content layer and, on the corrected priority ledger, are material rather than small: 3 P1 gaps (one of them UNCOVERED and escalation-bearing), 13 P2 gaps, 2 material AI-only editorial needs, 2 valid new-article candidates, Toddler content PARTIAL and Family MISSING.
+
+**OUTCOME C — FIRST YEAR CONTENT HAS MATERIAL GAPS.**
+
+This is not Outcome D: no structural rework is required. Routes, pathways, topics, phases, months, imagery and discovery architecture stand.
+
+Current release blockers: 0. New content required before current-strategy closure: YES.
+
+### Smallest evidence-backed remediation scope (proposed, not started)
+
+Accounts for 3/3 P1, 13/13 P2, 2/2 material AI-only needs, 5/5 EXPAND_EXISTING, 4/4 INTERNAL_LINK_ONLY, 2/2 candidates, both incomplete handoffs and the milestone decision.
+
+1. NC-1, breastfeeding problems and where to get help — resolves P1-1, P1-3, P2-13 and AI-only need 1.
+2. NC-2, postpartum recovery in the later first year — resolves P2-11, P2-12 and AI-only need 2.
+3. Expand `when-to-ask-for-help-after-birth` for intrusive thoughts — resolves P1-2.
+4. Expand the 5 EXPAND_EXISTING records — resolves P2-1, P2-4, P2-5, P2-7, P2-8, P2-9, P2-10.
+5. Internal-link pass on the 4 INTERNAL_LINK_ONLY records — resolves P2-2, P2-3 and the two P3 discovery rows carried by the same pass.
+6. Phase 9-12 toddler transition passage plus links — resolves P2-6 and the Toddler content handoff.
+7. First Year → Family internal links — resolves the Family handoff (P3, carried because it shares step 6's linking work).
+8. Milestone canonical decision, then REPOSITION plus internal link on the legacy record.
+
+P3 and P4 improvements are otherwise excluded from the closure phase.
+
+PHASE 37C — FIRST YEAR CONTENT COVERAGE & JOURNEY AUDIT — AUDIT COMPLETE / OUTCOME C — FIRST YEAR CONTENT HAS MATERIAL GAPS

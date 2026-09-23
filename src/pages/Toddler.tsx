@@ -22,8 +22,8 @@ const Toddler = () => {
       <main>
         <ToddlerHero />
         <ToddlerAgeNav />
-        <ToddlerTopicClusters />
         <ToddlerToolsResources />
+        <ToddlerTopicClusters />
         <ToddlerCommonQuestions />
         <ToddlerAISupport />
         <ToddlerPathways />

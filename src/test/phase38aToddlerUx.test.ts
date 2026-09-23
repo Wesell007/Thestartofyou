@@ -46,8 +46,8 @@ describe("Phase 38A Toddler UX rebuild", () => {
     const ordered = [
       "<ToddlerHero />",
       "<ToddlerAgeNav />",
-      "<ToddlerTopicClusters />",
       "<ToddlerToolsResources />",
+      "<ToddlerTopicClusters />",
       "<ToddlerCommonQuestions />",
       "<ToddlerAISupport />",
       "<ToddlerPathways />",

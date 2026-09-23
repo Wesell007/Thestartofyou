@@ -67,3 +67,38 @@ No content coverage audit, article creation, article expansion, route migration,
 ## Closure
 
 **PHASE 38A CLOSED PASS. TODDLER CONTENT COVERAGE AUDIT NOT STARTED. DEPLOYMENT NO.**
+
+## Phase 38A.1 — Toddler hub section-order correction
+
+### Change
+
+After visual review of the completed hub, the "A few quiet places to start" section (`ToddlerToolsResources`) was moved above the Toddler topics section (`ToddlerTopicClusters`) in `src/pages/Toddler.tsx`. No redesign of either section, and no copy, article, topic, imagery, route, Companion, AI, grounding, age-page, topic-page, TTC, Pregnancy or First Year change.
+
+Hub order after correction, measured in the rendered DOM at 1280, 834 and 390 pixels:
+
+1. Hero
+2. Age pathways ("Growing together through every stage")
+3. A few quiet places to start
+4. Toddler topics ("Start with what is happening today")
+5. Common parent questions ("What parents quietly wonder.")
+6. One late embedded Companion
+7. Where to next
+8. Footer
+
+### Accounting
+
+- Sections redesigned: 0. Sections reordered: 2.
+- Start Here articles changed: 0. Topic cards, topic order and copy changed: 0.
+- Routes, sitemap entries and article data changed: 0.
+- Age pages and topic pages changed: 0. Inventory rows changed: 0.
+- The Phase 38A focused test's expected hub order was updated to match; no other assertion changed.
+
+### Validation
+
+- Focused Phase 38A/38A.1 checks: 6 of 6 passed.
+- Full suite: 139 files and 1,595 tests passed.
+- Playwright at 1280, 834 and 390: section order correct, horizontal overflow 0, console errors 0, 24 main links present and unchanged at every width.
+
+## Final closure
+
+**PHASE 38A.1 — TODDLER HUB SECTION-ORDER CORRECTION — CLOSED PASS / EDITORIAL START HERE MOVED AHEAD OF TOPIC EXPLORATION / NO OTHER TODDLER CHANGES. TODDLER CONTENT COVERAGE AUDIT NOT STARTED. DEPLOYMENT NO.**

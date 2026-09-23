@@ -197,8 +197,8 @@ describe("phase 34D — contextual links resolve", () => {
 });
 
 describe("phase 34D — governance and grounding", () => {
-  it("registers the registry at 231 records", () => {
-    expect(ARTICLE_GROUNDING_REGISTRY).toHaveLength(231);
+  it("registers the registry at 233 records", () => {
+    expect(ARTICLE_GROUNDING_REGISTRY).toHaveLength(233);
   });
 
   it.each(NEW_SLUGS)("%s has exactly one default-deny grounding row", (slug) => {

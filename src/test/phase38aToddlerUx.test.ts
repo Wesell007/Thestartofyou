@@ -36,6 +36,9 @@ describe("Phase 38A Toddler UX rebuild", () => {
     );
     expect(stale).toHaveLength(16);
     expect(toddlerArticles.filter((article) => article.status === "ready")).toHaveLength(16);
+    Object.keys(toddlerTopicConfigs).forEach((topic) => {
+      expect(toddlerArticles.filter((article) => article.topic === topic && article.status === "ready"), topic).toHaveLength(2);
+    });
   });
 
   it("uses the approved hub hierarchy and one canonical topic system", () => {

@@ -243,11 +243,13 @@
 - [x] Validation: focused Phase 37D suite 13 of 13 PASS; full suite 137 files / 1,576 tests PASS; typecheck x2 PASS; lint 11 problems at its established baseline; production build PASS; flaky tests 0; responsive QA at 1280, 834 and 390 with overflow, heading failures and console errors 0
 - [x] Phase 37C documents and numbers unchanged; redesign, route architecture, lifecycle, journey-routing, database, RLS, auth, analytics, AI runtime, prompt, context-builder, reviewer-governance, TTC and Pregnancy changes 0; deployment NO; no further phase started
 
-## Phase 38A — Toddler hub, age guide and topic experience premium rebuild — IN PROGRESS / NO DEPLOYMENT
+## Phase 38A — Toddler hub, age guide and topic experience premium rebuild — CLOSED PASS / NO DEPLOYMENT
 - [x] Baseline measured: 1 hub, 5 age routes, 8 topic routes, 16 ready articles, 30 Toddler sitemap URLs including the hub
 - [x] Visual direction selected: Premium editorial journey; existing Toddler imagery remains the default
-- [ ] Rebuild hub hierarchy and consolidate duplicate topic navigation
-- [ ] Upgrade all 5 age guides and all 8 topic pages through their shared templates
-- [ ] Verify article discovery, AI separation, accessibility and responsive behaviour
-- [ ] Add focused tests, evidence documents and complete validation; deployment NO
+- [x] Hub hierarchy rebuilt exactly as approved; duplicate topic navigation consolidated into one canonical system
+- [x] All 5 age guides and all 8 topic pages upgraded through shared templates; routes, metadata and content preserved
+- [x] Discovery verified: 16 ready articles, exactly 2 per topic, hidden ready articles 0; one late Companion per hub, age and topic surface
+- [x] Validation: focused 6 of 6, full suite 139 files and 1,595 tests, typecheck twice and build PASS; lint unchanged at baseline; 1280, 834 and 390 overflow 0
+- [x] Responsive evidence records inherited local asset-pointer delivery failure; image replacements 0 and image campaign 0
+- [x] Locked changes 0; deployment NO; Toddler content coverage audit NOT STARTED
 - [x] Known inventory drift recorded: 16 stale rows, 0 ready articles hidden, inventory rows changed in Phase 38A = 0

@@ -216,3 +216,15 @@
 - [x] Focused regressions 4 files / 45 tests PASS; full suite 137 files / 1,576 tests PASS; typecheck x2 PASS; production build PASS; sitemap 354 unique; lint unchanged at its established baseline
 - [x] Responsive QA covered 40 routes at 1280, 834 and 390 = 120 checks PASS; overflow, broken images, heading failures, nested controls and console errors 0
 - [x] Body images generated 0, restored 0, changed 0; content, routes, sources, reviewers, AI, grounding, lifecycles, database, TTC and Pregnancy changes 0; deployment NO; content coverage audit not started
+
+## Phase 37C — First Year content coverage and journey audit — AUDIT COMPLETE / OUTCOME B / NO CONTENT CREATED / NO UX CHANGES / NO DEPLOYMENT
+- [x] Surface inventory measured: 29 canonical route definitions serving 54 concrete public URLs — 1 hub, 2 pathways, 8 topics, 4 phases, 13 month destinations (all distinct public URLs), 26 article URLs; route patterns never counted as visitor-facing surfaces
+- [x] Legacy ledger kept separate: 5 legacy `/postpartum*` routes, indexable legacy surfaces 0, legacy routes in sitemap 0, inbound internal links to legacy routes 0, redirect loops 0, broken legacy destinations 0, canonical duplicate surfaces 0
+- [x] Article inventory reconciled at 26 (Baby 15, Postpartum 11, ready 26, draft 0, unknown 0): KEEP 17 + EXPAND_EXISTING 5 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26; none implemented
+- [x] Journey matrices reconciled at 84 moments (Baby 40, Postpartum 36, Shared 8): COVERED 44 + PARTIALLY_COVERED 34 + UNCOVERED 1 + NOT_REQUIRED_STANDALONE 1 + BETTER_SERVED_ELSEWHERE 4 = 84; gaps 35 at P1 2, P2 9, P3 14, P4 10
+- [x] Discovery audit: orphaned articles 0, weak discovery 4, orphaned non-article surfaces 0, broken rendered internal links 0, wrong-destination links 0, stale references 0; 80 related-guidance links, 108 month hrefs and 42 phase hrefs all valid
+- [x] Source and claim audit: unsupported medical or numerical claims 0, NEEDS_SOURCE 0, structured source records 176, label-only 0, articles without sources 0, UNRESOLVED_PROVENANCE 16 (retained reviewer data fields, 0 rendered claims); milestone safety failures 0
+- [x] Duplication: technical duplicates 0, editorial overlap groups 7 (6 KEEP BOTH, 1 canonical decision required); new article candidates 2 (NC-1 P1, NC-2 P2); tool or support-surface opportunities 3; material needs covered only by AI 2
+- [x] Handoffs: Pregnancy to First Year COMPLETE, First Year to Toddler content PARTIAL and routing COMPLETE, First Year to Family MISSING, Baby to Postpartum COMPLETE
+- [x] Validation: focused First Year regressions 4 files / 45 tests PASS; full suite 137 files / 1,576 tests PASS; typecheck x2 PASS; lint at its established baseline; production validation build PASS; sitemap 354 unique; flaky tests 0
+- [x] Grounding changes 0, reviewer claims added 0, provenance invented 0, AI source-routing changes 0, AI_SOURCE_ROUTING_VERSION unchanged, content, route, image, database, lifecycle, analytics and visual changes 0; deployment NO; remediation not started

@@ -31,6 +31,16 @@ Audit only. No content created or edited, no UX, route, image, AI, grounding, da
 17. New article candidates only where the strict five-part test passes, each recorded with intent, stage, evidence, why no existing owner works, and priority. Backlog kept small.
 18. Tool/checklist/journey-feature/support-surface opportunities where an article is the wrong answer.
 
+## Legacy / canonical route accounting (separate ledger)
+
+The `/postpartum*` redirects are audited separately from canonical First Year surfaces. For each legacy route: legacy route, canonical destination, redirect mechanism, indexable YES/NO, sitemap presence YES/NO, inbound internal references YES/NO, redirect loop YES/NO, stale destination YES/NO.
+
+A working legacy redirect is never counted as a canonical surface, duplicate article, extra topic, extra pathway or journey-coverage owner unless evidence shows it still renders independent indexable content. Reported fields: canonical First Year public routes, legacy/redirect routes, indexable legacy surfaces, legacy routes in sitemap, internal links still pointing at legacy routes, redirect loops, broken legacy destinations, canonical duplicate surfaces — all kept out of the hub/pathway/topic/phase/month/article counts.
+
+## Audit principle: categories stay distinct
+
+CONTENT GAP, DISCOVERY GAP, SOURCE/PROVENANCE GAP, ROUTING/LEGACY GAP, EDITORIAL OVERLAP and AI-ONLY NEED are never converted into one another to simplify the outcome. An article that exists but is hard to find is a discovery gap, not uncovered content; unclear provenance is a provenance gap, not a new-article requirement; a legacy redirect is routing state, not duplicate content.
+
 ## Governance held at zero
 
 Grounding changes, approvals and candidates = 0; reviewer claims and provenance = 0; AI source-routing changes = 0; `AI_SOURCE_ROUTING_VERSION` unchanged. Publication quality stays separate from grounding eligibility.

@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { firstYearArticles } from "@/data/firstYearArticleData";
 import { firstYearPathways, getPathwayArticles, getPathwayStartHere } from "@/data/firstYearPathwayData";
 import { phaseData } from "@/data/firstYearPhaseData";
-import { monthData } from "@/data/firstYearMonthData";
+import { firstYearMonths } from "@/data/firstYearMonthData";
 import { getFirstYearArticleImages } from "@/components/firstyear/article/firstYearArticleImages";
 import { articleInventory } from "@/data/articleInventory";
 import { ARTICLE_GROUNDING_REGISTRY } from "@/lib/grounding/articleGroundingRegistry";
@@ -29,7 +29,7 @@ const WEAK = [
 
 const bySlug = (slug: string) => firstYearArticles.find((article) => article.slug === slug);
 
-const monthHrefs = Object.values(monthData).flatMap((month) => [
+const monthHrefs = Object.values(firstYearMonths).flatMap((month) => [
   ...month.related.map((item) => item.href),
   ...month.commonQuestions.flatMap((q) => (q.readMore ? [q.readMore.href] : [])),
 ]);

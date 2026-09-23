@@ -8,11 +8,13 @@ Rebuild the Toddler hub, all five age guides and all eight topic pages into a ca
 - Five canonical age guides: `12-17-months`, `18-23-months`, `2-years`, `30-months`, `3-years`.
 - Eight canonical topic pages using the existing repository slugs.
 - Sixteen Toddler article records, all ready, with two articles in each topic.
-- Twenty nine Toddler URLs in the current sitemap: five ages, eight topics and sixteen articles.
+- The canonical Toddler hub URL is one route and is included in the sitemap.
+- The current sitemap attributes thirty URLs to Toddler: one hub, five age guides, eight topics and sixteen ready articles.
 - The hub currently contains two separate eight-topic navigation systems.
 - The embedded Companion currently appears early on the hub and early within every shared age and topic page.
 - All five age heroes and all eight topic heroes have existing assets.
-- The article inventory metadata still describes the sixteen ready articles as drafts. This will be documented as baseline drift, not treated as a content finding.
+- The canonical Toddler dataset has sixteen ready articles. Separate inventory metadata contains sixteen stale draft/placeholder rows, but hides zero ready articles from public discovery.
+- The sixteen stale inventory rows will be documented as known baseline drift for the later Toddler content/governance phase. Phase 38A will change zero inventory metadata rows.
 - Live checks at 1280, 834 and 390 pixels found no horizontal overflow on the representative hub, age and topic routes. Some existing asset requests failed locally on representative inner pages and will be rechecked during implementation.
 
 ## Selected visual direction
@@ -28,6 +30,8 @@ Use the selected **Premium editorial journey** as the north star:
 ### 1. Record the complete pre-change baseline
 - Finish a scripted inventory of routes, embedded Companion sections, question sections, article-discovery surfaces, image placements and internal destinations.
 - Check all canonical Toddler routes and links before editing.
+- Report the hub, age, topic and article sitemap counts separately, using measured repository and build truth rather than a forced total.
+- Use the canonical Toddler article dataset as the availability source of truth and do not suppress any ready article because of stale inventory metadata.
 - Record measured results in the Phase 38A implementation document before the first product-file change.
 
 ### 2. Rebuild the Toddler hub hierarchy
@@ -86,6 +90,7 @@ Use this exact order:
 ## Technical boundaries
 - No route migration, new route architecture or sitemap strategy change.
 - No content coverage audit and no new articles.
+- No article expansions and no repair of the stale Toddler inventory metadata.
 - No changes to AI runtime, prompts, context builders, source routing, memory, grounding, reviewer governance, database, RLS, authentication, analytics, lifecycle definitions or journey routing.
 - No TTC, Pregnancy or First Year changes.
 - No deployment.

@@ -4,6 +4,10 @@ Implements only the reconciled 37C P1/P2 remediation. No redesign, no AI, ground
 
 Safeguards confirmed: new heroes come from the approved asset library first and otherwise from Nano Banana inside Lovable, never generic or duplicate imagery; the existing 26 heroes stay locked. "Published" means a complete ready repository record that resolves through the existing article architecture and passes every gate, not a deployment. Each P1/P2 finding is accounted for individually even where one article resolves several intents. No scope expansion beyond the items below.
 
+Grounding safeguard: the two new slugs are not added to grounding eligibility, candidates, approved sources or AI source routing. The existing article-grounding registry and drift-guard tests are checked first; only if repository governance requires every public article slug to carry a record is the minimum default-deny record added, using the established pattern with candidate, approved and eligible all false and no approval, reviewer, review-date or justification metadata. If no record is required, no grounding file is touched. Runtime behaviour and `AI_SOURCE_ROUTING_VERSION` stay unchanged, and this is reported as registry maintenance, not grounding enablement.
+
+Topic ownership uses the exact existing enum values in the repository (no new topic identifiers invented from labels), and both new records use the same ready/live conventions as equivalent First Year articles, with a consistent inventory record created at the same time so no new staleness is introduced.
+
 ## Scope confirmed against the repository
 
 - The 26 First Year articles live in `src/data/firstYearArticleData.ts` as typed records; adding two records creates two new pages through the existing dynamic route, so no route definitions change.

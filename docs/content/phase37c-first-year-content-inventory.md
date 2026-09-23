@@ -100,6 +100,31 @@ Discovery key: SH = pathway Start Here, G = pathway grouped list, T = topic libr
 
 Action arithmetic: KEEP 17 + EXPAND_EXISTING 5 + MERGE 0 + REPOSITION 0 + INTERNAL_LINK_ONLY 4 + ARCHIVE_CANDIDATE 0 = 26 = measured article inventory.
 
+`/articles/baby-milestones-first-year` is a legacy record in `src/data/articleData.ts` and is not one of these 26; it is tracked separately as an adjacent editorial overlap decision and is excluded from this denominator, which is why REPOSITION remains 0 here.
+
+### Action-to-gap mapping for the 9 non-KEEP records
+
+EXPAND_EXISTING (5 / 5):
+
+| # | Slug | Gap / intent addressed | Priority | Required for closure |
+| --- | --- | --- | --- | --- |
+| 1 | bottle-and-breastfeeding-questions | P2-1 feeding worries and when to seek feeding help (linked to P1-3, which NC-1 owns) | P2 | YES |
+| 2 | baby-development-in-the-first-year | P2-5 language and babble; P3 bonding, play and separation | P2 | YES |
+| 3 | introducing-solid-foods | P2-4 family meals and self-feeding at 9–12 months | P2 | YES |
+| 4 | healing-after-birth | P2-7 caesarean recovery | P2 | YES |
+| 5 | body-changes-after-birth | P2-8 early pelvic floor; P2-9 ongoing pelvic floor and continence; P2-10 return of periods | P2 | YES |
+
+INTERNAL_LINK_ONLY (4 / 4):
+
+| # | Slug | Gap / intent addressed | Priority | Required for closure |
+| --- | --- | --- | --- | --- |
+| 1 | teething | P2-3 teething discovery (2 inbound links) | P2 | YES |
+| 2 | colic-and-evening-crying | P2-2 crying and colic discovery (0 inbound links) | P2 | YES |
+| 3 | newborn-quirks-and-reflexes | P3 newborn quirks discovery (2 inbound links) | P3 | NO (carried by the same linking pass) |
+| 4 | newborn-skin-spots-and-marks | P3 newborn skin discovery (2 inbound links) | P3 | NO (carried by the same linking pass) |
+
+Separately, `when-to-ask-for-help-after-birth` is recommended KEEP at record level but carries the P1-2 intrusive-thoughts expansion; that is a section-level expansion of an otherwise sound article and does not change its record action.
+
 No recommendation in this table has been implemented.
 
 ## 5. Source record inventory

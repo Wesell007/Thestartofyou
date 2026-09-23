@@ -31,6 +31,12 @@ Audit only. No content created or edited, no UX, route, image, AI, grounding, da
 17. New article candidates only where the strict five-part test passes, each recorded with intent, stage, evidence, why no existing owner works, and priority. Backlog kept small.
 18. Tool/checklist/journey-feature/support-surface opportunities where an article is the wrong answer.
 
+## Route definitions versus concrete public URLs
+
+Route patterns such as `/first-year/:topic/:slug` are counted separately from the concrete URLs they serve, and a pattern is never counted as an extra visitor-facing surface on top of its articles. Month destinations stay their own inventory field at 13, counted as canonical routes only where repository truth shows 13 distinct public URLs; if any are anchors, stateful destinations, parameter values or shared-route variants, the exact mechanism is reported instead of inflating the count.
+
+Reported: canonical route definitions, concrete canonical First Year public URLs, hub URLs, pathway URLs, topic URLs, phase URLs, month destinations (13), month destinations that are distinct public URLs, article URLs, legacy/redirect URLs, indexable canonical duplicate URLs, sitemap URLs attributable to First Year.
+
 ## Legacy / canonical route accounting (separate ledger)
 
 The `/postpartum*` redirects are audited separately from canonical First Year surfaces. For each legacy route: legacy route, canonical destination, redirect mechanism, indexable YES/NO, sitemap presence YES/NO, inbound internal references YES/NO, redirect loop YES/NO, stale destination YES/NO.

@@ -18,6 +18,7 @@ import {
   type ToddlerArticleTopic,
 } from "@/data/toddlerArticleData";
 import ToddlerArticleCard from "@/components/toddler/article/ToddlerArticleCard";
+import ToddlerAgePathwayStrip from "@/components/toddler/ToddlerAgePathwayStrip";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
 import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import type { BreadcrumbItem } from "@/lib/seo/breadcrumbs";
@@ -77,7 +78,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
       <Navbar />
       <main className="overflow-hidden">
         {/* ─── HERO ───────────────────────────────────────────────────── */}
-        <section className="relative pt-8 sm:pt-12 md:pt-16 pb-16 md:pb-24">
+        <section className="relative pt-8 sm:pt-12 md:pt-16 pb-14 md:pb-20">
           {/* apricot-to-parchment vertical wash */}
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-[420px] md:h-[560px] -z-0"
@@ -274,46 +275,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
-        {/* ─── AI SUPPORT (now directly after What this covers) ─────── */}
-        <section
-          className="relative py-20 md:py-24"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--stage-toddler) / 0.6) 0%, hsl(var(--stage-toddler) / 0.28) 55%, hsl(var(--parchment)) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
-              <SectionLabel>Ask anything</SectionLabel>
-            </div>
-
-            <div
-              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                boxShadow:
-                  "0 36px 80px -46px rgba(70,40,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-              }}
-            >
-              <HubAISupport
-                heading={config.aiHeading}
-                description={config.aiDescription}
-                placeholder={config.aiPlaceholder}
-                suggestions={config.aiPrompts}
-                context={config.title}
-                stageBg="--stage-toddler"
-                stageAccent="--stage-toddler-accent"
-                stage="toddler"
-              />
-            </div>
-            <p
-              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
-              style={{ color: deepMuted }}
-            >
-              A quiet companion for the questions you'd rather not Google at 2am.
-            </p>
-          </div>
-        </section>
+        <ToddlerAgePathwayStrip />
 
         {/* ─── RELATED GUIDANCE (ARTICLES) ──────────────────────────── */}
         {(() => {
@@ -388,7 +350,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 <AccordionItem
                   key={i}
                   value={`q${i}`}
-                  className="group/q relative rounded-[18px] border bg-parchment/90 px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)] data-[state=open]:border-[hsl(var(--stage-toddler-accent)/0.32)]"
+                  className="group/q relative rounded-[8px] border bg-parchment/90 px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,40,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)] data-[state=open]:border-[hsl(var(--stage-toddler-accent)/0.32)]"
                   style={{ borderColor: accentBorderStrong }}
                 >
                   <span
@@ -419,6 +381,47 @@ const ToddlerTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
+        {/* ─── AI SUPPORT — one late, clearly separate Companion ───── */}
+        <section
+          className="relative py-20 md:py-24"
+          style={{
+            background:
+              "linear-gradient(to bottom, hsl(var(--stage-toddler) / 0.6) 0%, hsl(var(--stage-toddler) / 0.28) 55%, hsl(var(--parchment)) 100%)",
+          }}
+        >
+          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
+            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
+              <SectionLabel>Ask anything</SectionLabel>
+            </div>
+
+            <div
+              className="rounded-[8px] border bg-parchment/90 overflow-hidden"
+              style={{
+                borderColor: accentBorderStrong,
+                boxShadow:
+                  "0 36px 80px -46px rgba(70,40,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
+              }}
+            >
+              <HubAISupport
+                heading={config.aiHeading}
+                description={config.aiDescription}
+                placeholder={config.aiPlaceholder}
+                suggestions={config.aiPrompts}
+                context={config.title}
+                stageBg="--stage-toddler"
+                stageAccent="--stage-toddler-accent"
+                stage="toddler"
+              />
+            </div>
+            <p
+              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+              style={{ color: deepMuted }}
+            >
+              A quiet companion for the questions you'd rather not Google at 2am.
+            </p>
+          </div>
+        </section>
+
         {/* ─── MORE TODDLER TOPICS ──────────────────────────────────── */}
         <section
           className="relative py-20 md:py-24"
@@ -442,7 +445,7 @@ const ToddlerTopicPage = ({ config }: Props) => {
                 <Link
                   key={r.slug}
                   to={`/toddler/${r.slug}`}
-                  className="group relative flex h-full flex-col justify-between gap-6 rounded-[20px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
+                  className="group relative flex h-full flex-col justify-between gap-6 rounded-[8px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,40,20,0.32)]"
                   style={{
                     borderColor: accentBorderStrong,
                     background:

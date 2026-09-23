@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
+import { ChevronDown, ArrowUpRight, BookOpen } from "lucide-react";
 
 interface QItem {
   q: string;
   answer: string;
   readMoreHref: string;
   readMoreLabel: string;
-  askHref: string;
 }
 
 const questions: QItem[] = [
@@ -17,7 +16,6 @@ const questions: QItem[] = [
       "Tantrums can happen when toddlers have big feelings they cannot yet manage. Tiredness, hunger, transitions, frustration and wanting independence can all play a part.",
     readMoreHref: "/toddler/behaviour-emotions/understanding-toddler-tantrums",
     readMoreLabel: "Read: understanding toddler tantrums",
-    askHref: "/ask?stage=toddler&topic=tantrums",
   },
   {
     q: "How much sleep does a toddler need?",
@@ -25,7 +23,6 @@ const questions: QItem[] = [
       "Toddler sleep can vary, and needs can shift with naps, growth, routines and development. It can help to look at the whole day rather than one night in isolation.",
     readMoreHref: "/toddler/sleep/toddler-sleep-rhythms",
     readMoreLabel: "Read: toddler sleep rhythms",
-    askHref: "/ask?stage=toddler&topic=sleep",
   },
   {
     q: "Should I be worried about my toddler's speech?",
@@ -33,7 +30,6 @@ const questions: QItem[] = [
       "Speech and communication can develop at different speeds, but your concern matters. If speech, understanding, hearing or interaction worries you, it is okay to ask for advice.",
     readMoreHref: "/toddler/speech-language/when-to-ask-about-speech-delay",
     readMoreLabel: "Read: when to ask about speech delay",
-    askHref: "/ask?stage=toddler&topic=speech",
   },
   {
     q: "What do I do about picky eating?",
@@ -41,7 +37,6 @@ const questions: QItem[] = [
       "Picky eating can be frustrating, but pressure often makes meals harder. Calm repetition, small choices and a steady routine can help mealtimes feel less tense.",
     readMoreHref: "/toddler/food-feeding/picky-eating-in-toddlers",
     readMoreLabel: "Read: picky eating in toddlers",
-    askHref: "/ask?stage=toddler&topic=picky-eating",
   },
   {
     q: "When should we start potty training?",
@@ -49,7 +44,6 @@ const questions: QItem[] = [
       "Potty learning is usually easier when your child shows readiness signs, not just when they reach a certain age. Interest, awareness and cooperation all matter.",
     readMoreHref: "/toddler/potty-learning/signs-your-child-may-be-ready-for-potty-training",
     readMoreLabel: "Read: signs of potty readiness",
-    askHref: "/ask?stage=toddler&topic=potty-training",
   },
   {
     q: "How do I stay patient when the toddler years feel relentless?",
@@ -57,7 +51,6 @@ const questions: QItem[] = [
       "The toddler years can ask a lot from parents. You do not need to be perfectly calm all the time. Small pauses, repair and support can help you get through hard moments.",
     readMoreHref: "/toddler/behaviour-emotions/helping-your-toddler-with-big-feelings",
     readMoreLabel: "Read: helping your toddler with big feelings",
-    askHref: "/ask?stage=toddler&topic=parent-patience",
   },
 ];
 
@@ -86,7 +79,7 @@ const ToddlerCommonQuestions = () => {
           What parents quietly wonder.
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
-          A short, honest answer to start with. Then read more, or ask your own question for personalised guidance.
+          A short, honest answer to start with. Then follow the related guidance when you want more detail.
         </p>
 
         <div className="flex flex-col gap-3">
@@ -143,7 +136,7 @@ const ToddlerCommonQuestions = () => {
                     >
                       {item.answer}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <div className="flex">
                       <Link
                         to={item.readMoreHref}
                         className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
@@ -152,18 +145,6 @@ const ToddlerCommonQuestions = () => {
                         <BookOpen size={13} strokeWidth={1.9} />
                         {item.readMoreLabel}
                         <ArrowUpRight size={12} />
-                      </Link>
-                      <Link
-                        to={item.askHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
-                        style={{
-                          borderColor: s.border,
-                          backgroundColor: "hsl(var(--card))",
-                          color: s.color,
-                        }}
-                      >
-                        <Sparkles size={13} strokeWidth={1.9} />
-                        Ask more
                       </Link>
                     </div>
                   </div>

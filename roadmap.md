@@ -242,3 +242,12 @@
 - [x] Measured final state: First Year articles 28 (Baby 16, Postpartum 12), First Year public article URLs 28, concrete canonical First Year public URLs 56, sitemap 356 unique; all measured counts match the expected post-remediation arithmetic
 - [x] Validation: focused Phase 37D suite 13 of 13 PASS; full suite 137 files / 1,576 tests PASS; typecheck x2 PASS; lint 11 problems at its established baseline; production build PASS; flaky tests 0; responsive QA at 1280, 834 and 390 with overflow, heading failures and console errors 0
 - [x] Phase 37C documents and numbers unchanged; redesign, route architecture, lifecycle, journey-routing, database, RLS, auth, analytics, AI runtime, prompt, context-builder, reviewer-governance, TTC and Pregnancy changes 0; deployment NO; no further phase started
+
+## Phase 38A — Toddler hub, age guide and topic experience premium rebuild — IN PROGRESS / NO DEPLOYMENT
+- [x] Baseline measured: 1 hub, 5 age routes, 8 topic routes, 16 ready articles, 30 Toddler sitemap URLs including the hub
+- [x] Visual direction selected: Premium editorial journey; existing Toddler imagery remains the default
+- [ ] Rebuild hub hierarchy and consolidate duplicate topic navigation
+- [ ] Upgrade all 5 age guides and all 8 topic pages through their shared templates
+- [ ] Verify article discovery, AI separation, accessibility and responsive behaviour
+- [ ] Add focused tests, evidence documents and complete validation; deployment NO
+- [x] Known inventory drift recorded: 16 stale rows, 0 ready articles hidden, inventory rows changed in Phase 38A = 0

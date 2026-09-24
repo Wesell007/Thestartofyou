@@ -112,3 +112,13 @@ COMPANION MOVED TO SUPPORTING ROLE /
 NO CONTENT COVERAGE AUDIT YET
 
 Next safe step: PHASE 39B — FAMILY CONTENT COVERAGE & JOURNEY AUDIT. It has not been started.
+
+## Phase 39A.1 addendum: Family hub orientation section
+
+Status: PENDING VALIDATION
+
+Phase 39A remains closed and its closure record above is unchanged. Phase 39A.1 adds one concise, text only orientation section directly after the Family hero and before Start Here. It makes the purpose of Family explicit, including that Family supports the wider life around parenting across stages and is not another saved stage after Toddler.
+
+The section uses the existing Family palette and typography with a restrained editorial rule. It adds no navigation, cards, imagery or Companion surface. All other hub sections, all six topic pages, 18 ready articles, routes, sitemap entries, imagery and locked systems remain unchanged.
+
+Validation and closure evidence will be recorded after implementation checks complete. Phase 39B has not started.

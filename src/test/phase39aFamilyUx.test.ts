@@ -32,6 +32,7 @@ describe("Phase 39A Family UX rebuild", () => {
     const hub = source("src/pages/Family.tsx");
     const ordered = [
       "<FamilyHero />",
+      "<FamilyOrientation />",
       "<FamilyToolsResources />",
       "<FamilyTopicClusters />",
       "<FamilyCommonQuestions />",
@@ -42,6 +43,7 @@ describe("Phase 39A Family UX rebuild", () => {
 
     expect(ordered).toEqual([...ordered].sort((a, b) => a - b));
     expect(hub).not.toContain("FamilyQuickNav");
+    expect(hub.match(/<FamilyOrientation \/>/g)).toHaveLength(1);
     expect(hub.match(/<FamilyTopicClusters \/>/g)).toHaveLength(1);
     expect(hub.match(/<FamilyAISupport \/>/g)).toHaveLength(1);
   });

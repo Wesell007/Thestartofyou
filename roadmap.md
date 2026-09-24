@@ -283,3 +283,10 @@
 - [x] Strengthened editorial discovery and corrected two confirmed hub question destinations
 - [x] Completed focused 6/6, full 142 files and 1,614 tests, typecheck, build and 21-page-width browser validation; lint unchanged at baseline
 - [x] Closed Phase 39A without a content sufficiency classification; Phase 39B identified as the next safe step and not started
+
+## Phase 39A.1 — Family hub orientation section — CLOSED PASS / NO DEPLOYMENT
+- [x] Added one concise editorial orientation section after the Family hero and before Start Here
+- [x] Made the wider, cross stage purpose of Family explicit without adding navigation, imagery or another Companion surface
+- [x] Focused 6/6 and full 142 files / 1,614 tests passed; typecheck and build passed; lint unchanged at baseline
+- [x] Review at 1280, 834 and 390 passed with clean wrapping, controlled height, zero overflow and zero console errors
+- [x] Closed Phase 39A.1 without changing the Phase 39A closure record; Phase 39B remains unstarted

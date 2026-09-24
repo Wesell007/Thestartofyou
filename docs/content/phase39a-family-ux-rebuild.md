@@ -112,3 +112,27 @@ COMPANION MOVED TO SUPPORTING ROLE /
 NO CONTENT COVERAGE AUDIT YET
 
 Next safe step: PHASE 39B — FAMILY CONTENT COVERAGE & JOURNEY AUDIT. It has not been started.
+
+## Phase 39A.1 addendum: Family hub orientation section
+
+Status: CLOSED PASS
+
+Phase 39A remains closed and its closure record above is unchanged. Phase 39A.1 adds one concise, text only orientation section directly after the Family hero and before Start Here. It makes the purpose of Family explicit, including that Family supports the wider life around parenting across stages and is not another saved stage after Toddler.
+
+The section uses the existing Family palette and typography with a restrained editorial rule. It adds no navigation, cards, imagery or Companion surface. All other hub sections, all six topic pages, 18 ready articles, routes, sitemap entries, imagery and locked systems remain unchanged.
+
+Validation passed. The focused Family UX suite passed 6 of 6 tests, the full suite passed 142 files and 1,614 tests, typecheck passed and the production validation build passed. Lint remained at the established unrelated baseline of one generated-file error and ten warnings.
+
+The Family hub was reviewed at 1280, 834 and 390 pixels. The heading wrapped cleanly, body copy remained readable, the section height stayed controlled, both adjacent transitions felt intentional, horizontal overflow was zero and console errors were zero at every width. The section is labelled by its heading and introduces no new interactive controls.
+
+PHASE 39A.1 — FAMILY HUB ORIENTATION SECTION
+
+CLOSED PASS /
+
+FAMILY PURPOSE MADE EXPLICIT /
+
+HUB ORIENTATION ADDED BEFORE EDITORIAL DISCOVERY /
+
+NO OTHER FAMILY CHANGES
+
+Phase 39B has not started. Deployment remains NO.

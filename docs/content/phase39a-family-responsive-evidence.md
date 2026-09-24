@@ -28,3 +28,7 @@ The seven pages were the Family hub, Growing families, Relationships, Family bas
 ## Image evidence limitation
 
 The application contains managed asset pointers for the four hub images, six topic heroes and every ready guide image. The isolated localhost browser returned the application HTML shell for those managed asset URLs rather than the files, so it reported the images as unloaded. This is a preview harness limitation, not a missing mapping: the focused test verified all 18 ready guides resolve to an image record. No asset mappings were changed in Phase 39A.
+
+## Phase 39A.1 orientation check
+
+The new text only hub orientation section was reviewed at 1280, 834 and 390 pixels. At all three widths its heading wrapped cleanly, body copy remained readable, the section height stayed controlled, and its transitions from the hero and into Start Here remained visually intentional. Horizontal overflow and console errors were zero. The section is labelled by its heading and adds no interactive controls, imagery or navigation.

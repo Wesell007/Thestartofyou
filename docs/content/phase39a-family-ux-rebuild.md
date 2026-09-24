@@ -1,6 +1,6 @@
 # Phase 39A Family UX Rebuild
 
-Status: IN PROGRESS
+Status: CLOSED PASS
 
 ## Scope
 
@@ -72,3 +72,43 @@ These are route corrections only. Article bodies remain unchanged.
 ## Locked boundaries
 
 Ready Family articles remain 18. New articles, article body changes, content coverage decisions, grounding, reviewer governance, AI runtime, database, lifecycle, TTC, Pregnancy, First Year, Toddler and deployment changes remain zero.
+
+## Implemented result
+
+- Reordered the hub to Hero, Start Here, Family areas, Common questions, one late Companion, quiet note, Where to next and Footer.
+- Removed the duplicate pill navigation and retained one image-led six-area editorial system.
+- Kept the four existing ready Start Here guides and all existing Family imagery and routes.
+- Corrected the two stale hub question destinations and removed per-question AI fallback actions.
+- Upgraded the shared template for all six topic pages to render the configured introduction, Start Here guides and situations inside each area.
+- Deduplicated Start Here guides from the remaining guidance collection.
+- Kept one Companion section per public Family surface and placed it after editorial questions.
+- Preserved all 18 ready article records and their bodies without content-coverage decisions.
+
+## Validation
+
+- Focused Phase 39A tests: 6 of 6 passed.
+- Full suite: 142 files and 1,614 tests passed.
+- Typecheck: passed.
+- Production build: passed.
+- Lint: unchanged baseline, 1 error and 10 warnings. The error remains in the generated `previewAuthStorage.ts` file and was outside Phase 39A.
+- Browser review: hub plus all six topics at 1280, 834 and 390 pixels, 21 page-width combinations in total.
+- Browser results: no horizontal overflow, one Family Companion label per page and zero console errors across all 21 checks.
+- Managed asset pointers were present for the hub, topic and all 18 guide images. The isolated localhost browser returned the application shell for those managed image paths, so visual crop fidelity could not be evidenced from that environment. No asset records or mappings were changed.
+
+## Closure
+
+PHASE 39A — FAMILY HUB & TOPIC EXPERIENCE PREMIUM REBUILD
+
+CLOSED PASS /
+
+FAMILY HUB REFINED /
+
+ALL FAMILY TOPIC EXPERIENCES UPGRADED /
+
+EDITORIAL DISCOVERY STRENGTHENED /
+
+COMPANION MOVED TO SUPPORTING ROLE /
+
+NO CONTENT COVERAGE AUDIT YET
+
+Next safe step: PHASE 39B — FAMILY CONTENT COVERAGE & JOURNEY AUDIT. It has not been started.

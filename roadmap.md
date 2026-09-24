@@ -275,11 +275,11 @@
 - [x] Validation: 141 files / 1,608 tests, typecheck x2, lint baseline, build, responsive 9/9
 - Toddler workstream CLOSED for current strategy
 
-## Phase 39A — Family hub and topic experience premium rebuild — IN PROGRESS / NO DEPLOYMENT
+## Phase 39A — Family hub and topic experience premium rebuild — CLOSED PASS / NO DEPLOYMENT
 - [x] Baseline measured before product changes: 1 hub, 6 topics, 18 ready guides, 25 sitemap URLs, 7 embedded Companion sections, 7 question surfaces
 - [x] Premium editorial folio direction selected; existing imagery remains the default
-- [ ] Rebuild the hub in the approved eight-part hierarchy with one primary Family-area navigation system
-- [ ] Upgrade all six topic experiences through the shared template
-- [ ] Strengthen editorial discovery and correct two confirmed hub question destinations
-- [ ] Complete focused, regression, full-suite, typecheck, lint, build and responsive validation
-- [ ] Close Phase 39A without a content sufficiency classification; do not begin Phase 39B automatically
+- [x] Rebuilt the hub in the approved eight-part hierarchy with one primary Family-area navigation system
+- [x] Upgraded all six topic experiences through the shared template
+- [x] Strengthened editorial discovery and corrected two confirmed hub question destinations
+- [x] Completed focused 6/6, full 142 files and 1,614 tests, typecheck, build and 21-page-width browser validation; lint unchanged at baseline
+- [x] Closed Phase 39A without a content sufficiency classification; Phase 39B identified as the next safe step and not started

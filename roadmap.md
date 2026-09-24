@@ -266,3 +266,11 @@
 - [x] Inventory drift 16 stale rows recorded, 0 repaired; 3 dormant reviewer-provenance findings recorded
 - [x] Docs and read-only audit test added; no remediation started, Phase 38C not begun
 - [x] Final reconciliation: KEEP 10, EXPAND_EXISTING 6 (P2 TAN/PTP/HOM, P3 BED/SPH/PLY); 15 prioritised = 10 gaps + 4 handoff + 1 other; cot to bed P3 via BED; reviewer-metadata provenance debt 3, rendered claims 0; new articles NO, closure-level existing-content remediation YES; Phase 38C not begun
+
+## Phase 38C — Toddler content remediation, governance cleanup and workstream closure — CLOSED PASS / NO DEPLOYMENT
+- [x] P2 3/3 resolved: TAN hitting and biting, PTP withholding, HOM food choking (NHS sourced)
+- [x] Inventory 16/16 corrected to live/final/keep
+- [x] Reviewer-metadata debt 3/3 removed; helper no longer defaults reviewer or date
+- [x] Deferred and non-blocking: BED, SPH, PLY, night dryness, outdoor safety, friendships, A6/A8, sharing, Toddler to Family
+- [x] Validation: 141 files / 1,608 tests, typecheck x2, lint baseline, build, responsive 9/9
+- Toddler workstream CLOSED for current strategy

@@ -30,11 +30,11 @@ describe("Phase 38A Toddler UX rebuild", () => {
     expect(toddlerLocations).toHaveLength(30);
   });
 
-  it("keeps all canonical articles visible while leaving stale inventory untouched", () => {
-    const stale = articleInventory.filter(
-      (record) => record.id.startsWith("toddler:") && record.currentStatus === "draft" && record.contentState === "placeholder",
-    );
-    expect(stale).toHaveLength(16);
+  it("keeps all canonical articles visible regardless of inventory metadata", () => {
+    // 38A left 16 stale inventory rows untouched (historical); Phase 38C later
+    // corrected them. Visibility must never depend on inventory metadata.
+    const toddlerRows = articleInventory.filter((record) => record.id.startsWith("toddler:"));
+    expect(toddlerRows).toHaveLength(16);
     expect(toddlerArticles.filter((article) => article.status === "ready")).toHaveLength(16);
     Object.keys(toddlerTopicConfigs).forEach((topic) => {
       expect(toddlerArticles.filter((article) => article.topic === topic && article.status === "ready"), topic).toHaveLength(2);

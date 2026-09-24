@@ -174,6 +174,8 @@ describe("Phase 33.5 — reviewer claim governance", () => {
       const matches = readFileSync(join(root, f), "utf8").match(/Jenny Joines/g);
       return n + (matches?.length ?? 0);
     }, 0);
-    expect(total).toBeGreaterThanOrEqual(179);
+    // 179 at Phase 33.5. Phase 38C removed 4 unsupported Toddler occurrences
+    // (3 record fields + 1 helper default) that had no article-specific provenance.
+    expect(total).toBeGreaterThanOrEqual(175);
   });
 });

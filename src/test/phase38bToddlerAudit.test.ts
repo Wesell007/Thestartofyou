@@ -4,6 +4,15 @@ import { toddlerArticles } from "@/data/toddlerArticleData";
 import { toddlerAgeConfigs } from "@/data/toddlerAgeData";
 import { toddlerTopicConfigs } from "@/data/toddlerTopicData";
 
+// 38B PRE-REMEDIATION STATE (historical audit snapshot, 2026-09-24).
+// These constants are immutable audit evidence. Phase 38C changed the current
+// data; current post-remediation state is asserted in phase38cToddlerRemediation.test.ts.
+const PHASE_38B_SNAPSHOT = {
+  structuredSources: 60,
+  reviewerMetadataDebtRecords: 3,
+  staleInventoryRows: 16,
+} as const;
+
 const sitemap = readFileSync("public/sitemap.xml", "utf8");
 const locs = [...sitemap.matchAll(/<loc>https:\/\/thestartofyou\.com(\/toddler[^<]*)<\/loc>/g)].map((m) => m[1]);
 const register = readFileSync("docs/content/phase38b-toddler-journey-gap-register.md", "utf8");
@@ -37,11 +46,15 @@ describe("Phase 38B Toddler audit (read-only)", () => {
     for (const s of slugs) expect(inbound.get(s) ?? 0).toBeGreaterThan(0);
   });
 
-  it("counts structured sources", () => {
+  it("records the 38B pre-remediation source and governance snapshot", () => {
+    // Historical figures come from the locked 38B documents, not current data.
+    const inv = readFileSync("docs/content/phase38b-toddler-content-inventory.md", "utf8");
+    expect(inv).toContain(`Structured source records with verified URLs: ${PHASE_38B_SNAPSHOT.structuredSources}`);
+    expect(inv).toContain(`reviewer provenance findings ${PHASE_38B_SNAPSHOT.reviewerMetadataDebtRecords}`);
+    expect(inv).toContain(`Rows with stale status (draft): ${PHASE_38B_SNAPSHOT.staleInventoryRows}`);
+    // Current data only needs to remain structurally valid.
     const all = toddlerArticles.flatMap((a) => a.sources ?? []);
-    expect(all).toHaveLength(60);
     expect(all.every((s: { url?: string }) => /^https?:\/\//.test(s.url ?? ""))).toBe(true);
-    expect(toddlerArticles.filter((a) => a.medicallyReviewed)).toHaveLength(3);
   });
 
   it("reconciles journey and priority arithmetic", () => {

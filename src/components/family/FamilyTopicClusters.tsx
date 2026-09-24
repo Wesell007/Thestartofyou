@@ -1,234 +1,118 @@
-import { ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { familyTopics, type FamilyTopicSlug } from "@/data/familyTopicData";
 
-const CLUSTER_ROUTES: Record<string, string> = {
-  "family-growing": "/family/growing-families",
-  "family-relationships": "/family/relationships",
-  "family-basics": "/family/family-basics",
-  "family-health": "/family/health-safety",
-  "family-travel": "/family/travel-days-out",
-  "family-play": "/family/play-connection",
-};
-
-type Cluster = {
-  id: string;
-  eyebrow: string;
-  title: string;
-  body: string;
-  chips: string[];
-};
-
-const clusters: Cluster[] = [
-  {
-    id: "family-growing",
-    eyebrow: "Growing families",
-    title: "Growing families",
-    body: "For parents thinking about another baby, sibling changes, age gaps and the shape of family life as it grows.",
-    chips: [
-      "Second-time parents",
-      "Preparing for another baby",
-      "Sibling transitions",
-      "Age gaps",
-      "Blended family rhythms",
-    ],
-  },
-  {
-    id: "family-relationships",
-    eyebrow: "Relationships",
-    title: "Relationships",
-    body: "Support for the adult relationships and family boundaries that shape the home around your child.",
-    chips: [
-      "You and your partner",
-      "Grandparents and boundaries",
-      "Making parent friends",
-      "Family communication",
-      "Sharing the mental load",
-    ],
-  },
-  {
-    id: "family-basics",
-    eyebrow: "Family basics",
-    title: "Family basics",
-    body: "Everyday help for routines, childcare, money, home life and the practical pieces parents carry.",
-    chips: [
-      "Family routines",
-      "Childcare decisions",
-      "Finances",
-      "Moving home",
-      "Work and family life",
-    ],
-  },
-  {
-    id: "family-health",
-    eyebrow: "Health & safety",
-    title: "Health and safety",
-    body: "Calm guidance for whole-family safety, wellbeing and knowing when to ask for extra help.",
-    chips: [
-      "Home safety",
-      "Car safety",
-      "Illness in the family",
-      "Mental health in children",
-      "When to ask for help",
-    ],
-  },
-  {
-    id: "family-travel",
-    eyebrow: "Travel & days out",
-    title: "Travel and days out",
-    body: "Practical support for getting out of the house, planning trips and keeping family life moving.",
-    chips: [
-      "Travelling with children",
-      "Holidays with kids",
-      "Days out",
-      "Packing and planning",
-      "Car journeys",
-    ],
-  },
-  {
-    id: "family-play",
-    eyebrow: "Play & connection",
-    title: "Play, fun and connection",
-    body: "Ideas for joy, bonding, traditions and the small moments that make family life feel like yours.",
-    chips: [
-      "Family traditions",
-      "Birthdays and celebrations",
-      "Screen time as a family",
-      "Play ideas",
-      "Making memories",
-    ],
-  },
+const topicOrder: FamilyTopicSlug[] = [
+  "growing-families",
+  "relationships",
+  "family-basics",
+  "health-safety",
+  "travel-days-out",
+  "play-connection",
 ];
 
-const accent = "hsl(var(--stage-family-accent))";
-const accentSoft = "hsl(var(--stage-family-accent) / 0.1)";
-const accentMid = "hsl(var(--stage-family-accent) / 0.24)";
-const accentBorder = "hsl(var(--stage-family-accent) / 0.26)";
-const accentBorderStrong = "hsl(var(--stage-family-accent) / 0.36)";
-const deep = "hsl(var(--stage-family-deep))";
-const deepSoft = "hsl(var(--stage-family-deep) / 0.72)";
+const shortDescriptions: Record<FamilyTopicSlug, string> = {
+  "growing-families": "Another baby, sibling shifts and the shape of a family as it changes.",
+  relationships: "Partner connection, wider family boundaries and sharing what the home asks of you.",
+  "family-basics": "Routines, childcare, money and the practical work that keeps family life moving.",
+  "health-safety": "Everyday care, safer homes and knowing when it is time to ask for more help.",
+  "travel-days-out": "Journeys, holidays and realistic days out that fit the family you have.",
+  "play-connection": "Traditions, play, screens and the ordinary moments that build closeness.",
+};
 
 const FamilyTopicClusters = () => {
   return (
-    <section
-      id="family-topics"
-      className="relative py-24 md:py-28 overflow-hidden scroll-mt-24"
-    >
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-48 -z-0"
-        style={{
-          background:
-            "linear-gradient(to bottom, hsl(var(--stage-family) / 0.4) 0%, transparent 100%)",
-        }}
-        aria-hidden
-      />
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-6xl relative z-10">
-        <div className="text-center mb-14 md:mb-16">
-          <span
-            className="mx-auto block h-px w-10 mb-6"
-            style={{ backgroundColor: accentMid }}
-          />
+    <section id="family-topics" className="relative py-16 md:py-20 scroll-mt-24">
+      <div className="container mx-auto max-w-6xl px-5 sm:px-8 md:px-10">
+        <div
+          className="mb-10 grid gap-5 border-b pb-8 md:mb-12 md:grid-cols-[1fr_auto] md:items-end md:pb-10"
+          style={{ borderColor: "hsl(var(--stage-family-accent) / 0.24)" }}
+        >
+          <div>
+            <p
+              className="mb-3 font-sans text-[11px] font-light uppercase tracking-[0.34em]"
+              style={{ color: "hsl(var(--stage-family-accent))" }}
+            >
+              Family areas
+            </p>
+            <h2
+              className="font-serif text-[2rem] leading-tight md:text-[2.5rem]"
+              style={{ color: "hsl(var(--stage-family-deep))" }}
+            >
+              Six sides of family life
+            </h2>
+          </div>
           <p
-            className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3"
-            style={{ color: accent }}
+            className="max-w-md font-sans text-[15px] font-light leading-relaxed md:text-right"
+            style={{ color: "hsl(var(--stage-family-deep) / 0.7)" }}
           >
-            Family topics
-          </p>
-          <h2
-            className="font-serif text-[2rem] md:text-[2.4rem] mb-4 leading-tight"
-            style={{ color: deep }}
-          >
-            Explore by area of family life
-          </h2>
-          <p
-            className="font-sans text-[15px] font-light leading-relaxed max-w-xl mx-auto"
-            style={{ color: deepSoft }}
-          >
-            Six curated areas across family life — every side of the day-to-day, gently mapped.
+            Choose the part of family life that feels closest to what you need today.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-          {clusters.map(({ id, eyebrow, title, body, chips }) => {
-            const to = CLUSTER_ROUTES[id];
+        <div className="grid grid-cols-1 gap-x-8 gap-y-10 md:grid-cols-2 lg:grid-cols-12">
+          {topicOrder.map((slug, index) => {
+            const topic = familyTopics[slug];
+            const span = index === 0 || index === 5 ? "lg:col-span-7" : "lg:col-span-5";
+            const imageRatio = index === 0 || index === 5 ? "aspect-[16/9]" : "aspect-[4/3]";
+
             return (
-            <Link
-              key={id}
-              id={id}
-              to={to}
-              aria-label={`${title} — open topic`}
-              className="group relative flex h-full flex-col rounded-[22px] border p-9 md:p-10 overflow-hidden transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_60px_-30px_rgba(70,50,20,0.42)] scroll-mt-24 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-family-accent)/0.55)]"
-              style={{
-                borderColor: accentBorder,
-                background:
-                  "linear-gradient(155deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family-soft) / 0.55) 100%)",
-                boxShadow:
-                  "0 16px 36px -28px rgba(70,50,20,0.26), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
-              }}
-            >
-              <span
-                className="pointer-events-none absolute -top-20 -left-20 h-52 w-52 rounded-full blur-3xl opacity-80"
-                style={{ background: "hsl(var(--stage-family-accent) / 0.22)" }}
-                aria-hidden
-              />
-              <div className="relative flex items-center gap-3.5 mb-5">
-                <span
-                  className="h-px w-6"
-                  style={{ backgroundColor: "hsl(var(--stage-family-accent) / 0.5)" }}
-                  aria-hidden
-                />
-                <p
-                  className="font-sans text-[10.5px] font-light tracking-[0.3em] uppercase"
-                  style={{ color: accent }}
-                >
-                  {eyebrow}
-                </p>
-              </div>
-              <h3
-                className="relative font-serif text-[1.55rem] md:text-[1.7rem] mb-3 leading-snug"
-                style={{ color: deep }}
+              <Link
+                key={slug}
+                to={`/family/${slug}`}
+                className={`group ${span} block border-t pt-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--stage-family-accent)/0.55)] focus-visible:ring-offset-4 focus-visible:ring-offset-parchment`}
+                style={{ borderColor: "hsl(var(--stage-family-accent) / 0.3)" }}
               >
-                {title}
-              </h3>
-              <p
-                className="relative font-sans text-[14.75px] font-light leading-relaxed mb-6"
-                style={{ color: deepSoft }}
-              >
-                {body}
-              </p>
-              <div className="relative flex flex-wrap gap-1.5 mb-8">
-                {chips.map((c) => (
+                <div className={`relative mb-5 overflow-hidden ${imageRatio}`}>
+                  <img
+                    src={topic.heroImage.src}
+                    alt={topic.heroImage.alt}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-[1.025]"
+                  />
                   <span
-                    key={c}
-                    className="inline-flex items-center rounded-pill px-3 py-1 font-sans text-[11.5px] tracking-wide border"
-                    style={{
-                      backgroundColor: "hsl(var(--stage-family) / 0.7)",
-                      color: "hsl(var(--stage-family-deep) / 0.92)",
-                      borderColor: "hsl(var(--stage-family-accent) / 0.32)",
-                    }}
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "linear-gradient(to top, hsl(var(--stage-family-deep) / 0.26), transparent 55%)" }}
+                    aria-hidden
+                  />
+                  <span
+                    className="absolute bottom-4 left-4 font-sans text-[11px] font-medium tracking-[0.22em]"
+                    style={{ color: "hsl(var(--card))" }}
+                    aria-hidden
                   >
-                    {c}
+                    {String(index + 1).padStart(2, "0")}
                   </span>
-                ))}
-              </div>
-              <div className="relative mt-auto flex items-center justify-between">
-                <span
-                  className="font-sans text-[12.5px] font-medium tracking-wide"
-                  style={{ color: accent }}
-                >
-                  Open topic
-                </span>
-                <span
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-full border transition-transform group-hover:translate-x-1"
-                  style={{
-                    borderColor: accentBorderStrong,
-                    backgroundColor: accentSoft,
-                  }}
-                  aria-hidden
-                >
-                  <ChevronRight size={15} strokeWidth={1.8} style={{ color: accent }} />
-                </span>
-              </div>
-            </Link>
+                </div>
+                <div className="flex items-start justify-between gap-5">
+                  <div>
+                    <h3
+                      className="font-serif text-[1.55rem] leading-tight md:text-[1.75rem]"
+                      style={{ color: "hsl(var(--stage-family-deep))" }}
+                    >
+                      {topic.title}
+                    </h3>
+                    <p
+                      className="mt-2 max-w-[38rem] font-sans text-[14px] font-light leading-relaxed"
+                      style={{ color: "hsl(var(--stage-family-deep) / 0.7)" }}
+                    >
+                      {shortDescriptions[slug]}
+                    </p>
+                    <p
+                      className="mt-4 font-sans text-[10.5px] font-medium uppercase tracking-[0.18em]"
+                      style={{ color: "hsl(var(--stage-family-accent))" }}
+                    >
+                      {topic.areasInside.slice(0, 3).map((area) => area.title).join(" · ")}
+                    </p>
+                  </div>
+                  <span
+                    className="mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    style={{ borderColor: "hsl(var(--stage-family-accent) / 0.4)" }}
+                    aria-hidden
+                  >
+                    <ArrowUpRight size={16} strokeWidth={1.7} style={{ color: "hsl(var(--stage-family-accent))" }} />
+                  </span>
+                </div>
+              </Link>
             );
           })}
         </div>

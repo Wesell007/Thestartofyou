@@ -84,7 +84,7 @@ describe("Phase 39A Family UX rebuild", () => {
     expect(surfaced.size).toBe(18);
     ready.forEach((article) => {
       expect(surfaced.has(article.slug), article.slug).toBe(true);
-      expect(getFamilyArticleCardImage(article.slug), article.slug).toBeTruthy();
+      expect(getFamilyArticleCardImage(article), article.slug).toBeTruthy();
     });
   });
 });

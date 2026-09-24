@@ -31,3 +31,10 @@ BED cot to bed (DEFERRED P3), SPH, PLY, the friendships decision, A6/A8, sharing
 - Create `docs/content/phase38c-toddler-remediation.md` (finding, treatment, location, source, validation) and `docs/content/phase38c-toddler-closure.md` (measured final state).
 - Append Phase 38C to `roadmap.md` only.
 - Return the Section 21 report. Close as CLOSED PASS only if every Section 22 gate passes; otherwise report BLOCKED with the exact gate. No further phase is started.
+
+## 7. Final governance safeguards (approved)
+- `withToddlerDefaults` check before editing: report the records using the helper, the records that get reviewer data from it, and the records with and without genuine article-specific provenance. Remove only unsupported reviewer data: explicit `medicallyReviewed`, `reviewedBy` and the defaulted review date. Stop the helper from recreating them. Keep any proven provenance (targets: debt 0/3 remaining, fabricated 0, valid metadata removed 0).
+- The 38B test stays historical. Its pre-remediation assertions (3 reviewer records, 16 stale rows) move to explicit 38B snapshot constants, labelled PRE-REMEDIATION. The 38C test asserts the CURRENT state. No app data is changed to satisfy 38B, and the 38B documents stay unchanged.
+- Source verification: each new TAN, PTP or HOM claim is checked against the fetched source text, not just a working URL. Choking emergency steps are never reconstructed; the section links to the authoritative first-aid page instead.
+- Inventory: only the 16 Toddler rows change (16/16 corrected, 0 remaining). No other records are touched.
+- Phase 38C gets added to roadmap.md as the first build step.

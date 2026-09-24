@@ -36,3 +36,10 @@ Documentation only. No content, inventory, reviewer-field, link, source or produ
 - `roadmap.md`: append one reconciliation line.
 
 Close with the restated Outcome B string. Phase 38C is not started.
+
+## Closure terminology (final report)
+
+- New articles required: NO.
+- Closure-level existing-content remediation required: YES (TAN hitting and biting, PTP withholding, HOM food choking).
+- Deferred P3/P4 remediation required for current-strategy closure: NO.
+- Do not use the wording "new content required before closure = NO" anywhere in the documents.

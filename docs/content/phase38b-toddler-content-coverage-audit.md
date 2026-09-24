@@ -30,7 +30,7 @@ Each topic shows both of its articles, the five-age strip, FAQs and a late Compa
 - Development: patterns-over-time framing, no rigid deadlines, and clear routes to seek support. Findings 0.
 - Speech: everything covered except bilingual depth (content gap, P3). No invented thresholds.
 - Behaviour: no shaming language. Hitting and biting lack an owner (P2).
-- Sleep: no rigid schedules and no overconfident nap ages. Cot to bed is uncovered (P3).
+- Sleep: no rigid schedules and no overconfident nap ages. Cot to bed is uncovered (P3, owner NONE, EXPAND_EXISTING BED, deferred).
 - Food: covered in practice. Food choking safety sits only briefly in home safety (P2).
 - Potty: readiness is framed as not just age. Withholding (P2) and night dryness (P3) are thin.
 - Health and safety: GP escalation and home safety are covered. Outdoor safety is thin (P3).
@@ -40,7 +40,7 @@ Each topic shows both of its articles, the five-age strip, FAQs and a late Compa
 
 - Unsupported medical or numerical claims: 0. Numeric age claims appear only in the age-range framing.
 - NEEDS_SOURCE: 0.
-- UNRESOLVED_PROVENANCE: 3. These are dormant `medicallyReviewed`/`reviewedBy` data on three articles plus a reviewer default in `withToddlerDefaults`. The Toddler renderer does not display them. This is a governance follow-up only.
+- UNRESOLVED REVIEWER-METADATA / PROVENANCE DEBT: 3. Rendered unsupported reviewer claims: 0. These are dormant `medicallyReviewed`/`reviewedBy` data on three articles plus a reviewer default in `withToddlerDefaults`. The Toddler renderer does not display them. This is not a rendered claim violation; the fields are unchanged and the decision belongs to the next phase.
 - Source records: structured 60, label-only 0, articles without sources 0.
 
 ## Duplication
@@ -68,18 +68,26 @@ Grounding changes, approvals, candidates and eligibility changes: 0. Reviewer ch
 
 ## Completion report
 
-- Articles: KEEP 13, EXPAND_EXISTING 3, others 0. Total 16/16.
+- Articles: KEEP 10, EXPAND_EXISTING 6 (closure P2: TAN, PTP, HOM; deferred P3: BED, SPH, PLY), MERGE 0, REPOSITION 0, INTERNAL_LINK_ONLY 0, ARCHIVE_CANDIDATE 0. Total 16/16.
 - Journey moments: 55. By age: 12-17m 10, 18-23m 9, 2y 12, 30m 8, 3y 8, shared 8.
 - Classifications: COVERED 40, PARTIALLY 9, UNCOVERED 1, NOT_REQUIRED 2, ELSEWHERE 3. Reconciled YES.
-- Priorities: P1 0, P2 3, P3 8, P4 4 (15 rows). Reconciled YES.
+- Coverage-gap rows 10. Priorities: P1 0, P2 3, P3 8, P4 4 (15 rows): coverage gaps 10, COVERED 0, provenance 0, handoff 4, other 1. Reconciled YES.
+- Cot to bed: owner NONE, treatment EXPAND_EXISTING (`bedtime-battles-and-night-waking`), P3, not required before closure.
+- Reviewer provenance debt 3; rendered unsupported reviewer claims 0.
 - New candidates 0. Discovery: well 16, weak 0, orphaned 0. Broken links 0, wrong destinations 0, stale references 0.
-- Stale inventory rows 16, repaired 0. Release blockers 0. New content required before closure: NO.
+- Stale inventory rows 16, repaired 0. Release blockers 0.
+- New articles required: NO. Closure-level existing-content remediation required: YES (TAN hitting and biting, PTP withholding, HOM food choking). Deferred P3/P4 remediation required for current-strategy closure: NO.
 
 ## Outcome
 
-OUTCOME B — TODDLER CONTENT MOSTLY SUFFICIENT / SMALL GAPS. The smallest justified follow-up covers:
-- the three P2 expansions: TAN hitting and biting, PTP withholding, HOM food choking;
-- optionally, the P3 expansions;
-- inventory drift repair and the dormant reviewer-default cleanup as governance items.
+OUTCOME B — TODDLER CONTENT MOSTLY SUFFICIENT / SMALL GAPS. Reassessed after final reconciliation: P1 is 0, there are 3 closure-level P2 items, 0 candidates, 0 blockers and no structural problem, and the P3/P4 items can be deferred.
+
+Proposed 38C scope (not started):
+- A. Closure-level P2 expansions: TAN (hitting and biting), PTP (withholding), HOM (food choking).
+- B. Deferred P3/P4: the BED, SPH and PLY expansions, PTP night dryness, HOM outdoor safety, the E2 decision, the A6/A8 links, and C5.
+- C. Repair the 16 stale inventory rows (governance).
+- D. Decide on the 3 reviewer-metadata / provenance debt records (governance).
+- E. Toddler to Family PARTIAL: optional links from the 3-year page and S5 (P4).
+- F. Cot to bed: BED expansion at P3, deferred unless 38C includes it.
 
 Phase 38C was not started.

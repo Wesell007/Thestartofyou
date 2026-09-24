@@ -141,4 +141,12 @@ Record results in `docs/content/phase39a-family-responsive-evidence.md`.
 ## Closure
 Update the implementation record, responsive evidence and Phase 39A roadmap entry with measured before and after results. Close only if all required UX, discovery, route, accessibility and validation gates pass. Report the requested completion matrix and exact closure wording.
 
-Do not begin the Family content coverage audit automatically. If evidence supports Outcome B, recommend only the smallest follow up and do not start it.
+Do not judge Family content sufficiency in this phase. Do not create, expand, merge, archive or reprioritise Family articles. After closure, identify the next safe step as **Phase 39B — Family Content Coverage & Journey Audit**, but do not start it automatically.
+
+If all gates pass, close with this exact wording:
+
+**PHASE 39A — FAMILY HUB & TOPIC EXPERIENCE PREMIUM REBUILD**
+
+**CLOSED PASS / FAMILY HUB REFINED / ALL FAMILY TOPIC EXPERIENCES UPGRADED / EDITORIAL DISCOVERY STRENGTHENED / COMPANION MOVED TO SUPPORTING ROLE / NO CONTENT COVERAGE AUDIT YET**
+
+Locked final counts and boundaries: 18 ready Family articles, 0 new articles, 0 article body changes, 0 content coverage decisions, 0 grounding changes, 0 reviewer governance changes, 0 AI runtime changes, 0 database changes, 0 lifecycle changes, 0 TTC changes, 0 Pregnancy changes, 0 First Year changes, 0 Toddler changes and no deployment.

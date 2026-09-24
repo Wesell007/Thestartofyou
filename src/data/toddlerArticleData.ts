@@ -282,6 +282,16 @@ const rawToddlerArticles: ToddlerArticle[] = [
         ],
       },
       {
+        heading: "Hitting and biting",
+        body: [
+          "Hitting, biting and pushing are common in the toddler years, and most young children do it now and then. Toddlers are curious and may not yet understand that biting or pulling hair hurts. It does not mean your child will grow up to be aggressive.",
+          "It often shows up when feelings are bigger than words, such as frustration, tiredness or being crowded by other children. Impulse control is still developing, so a toddler cannot be expected to stop themselves reliably, even when they know the rule.",
+          "In the moment, keep everyone safe first. Calmly move your toddler away or gently hold their hand, and check on the child who was hurt. A short, clear phrase such as no biting, biting hurts works better than a long explanation or shouting.",
+          "Try to respond the same way each time, without shaming, smacking or biting back. Afterwards, help your toddler name the feeling behind it and show them something they can do instead, such as stamping their feet, squeezing a cushion or coming to find you.",
+          "If hitting or biting is frequent, is getting worse, or you are seriously concerned about your child's behaviour, talk to your health visitor or GP.",
+        ],
+      },
+      {
         heading: "When behaviour worries you",
         body: [
           "Some hard days are part of toddlerhood. It is worth taking your own instinct seriously if something about your toddler's behaviour is quietly starting to worry you over time.",
@@ -295,6 +305,7 @@ const rawToddlerArticles: ToddlerArticle[] = [
       "Tiredness, hunger and transitions are common triggers.",
       "Calm presence tends to help more than long explanations.",
       "You can hold a warm boundary and still be kind about the disappointment.",
+      "Hitting and biting are common, and calm, consistent responses help more than shame.",
       "Ask your health visitor or GP if behaviour starts to worry you over time.",
     ],
     relatedSlugs: [
@@ -317,6 +328,11 @@ const rawToddlerArticles: ToddlerArticle[] = [
         label: "Tiny Happy People",
         publisher: "BBC",
         url: "https://www.bbc.co.uk/tiny-happy-people",
+      },
+      {
+        label: "Temper tantrums (including hitting, biting, kicking and fighting)",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/babys-development/behaviour/temper-tantrums/",
       },
       {
         label: "Toddler tantrums and behaviour",
@@ -530,8 +546,6 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Signs it's worth a conversation with your health visitor or GP about your toddler's speech.",
     readTime: "6 min read",
-    medicallyReviewed: true,
-    reviewedBy: "Jenny Joines",
     status: "ready",
     lastUpdated: "2026-07",
     intro:
@@ -1163,6 +1177,15 @@ const rawToddlerArticles: ToddlerArticle[] = [
         ],
       },
       {
+        heading: "When your child holds on to poo or wee",
+        body: [
+          "Some children start holding on during potty learning. Constipation is common at this age, and feeling pressured, being regularly interrupted while trying, or feeling worried about a change such as a new baby or starting nursery can all play a part.",
+          "If pooing has hurt before, a child may not want to try again. This can become a vicious circle, because the more they hold back, the more constipated they can get.",
+          "Keeping things calm matters more than ever here. Try not to add pressure. A relaxed routine of sitting on the potty or toilet after meals or before bed, with praise whether or not anything happens, and feet resting flat on the floor or a step, can help.",
+          "Signs of constipation can include fewer than three poos in a week, or poo that is large, hard or like small pellets. If you think your child may be constipated, see a GP. It is better to get help early rather than wait.",
+        ],
+      },
+      {
         heading: "Nursery, childcare and days out",
         body: [
           "Talking to nursery or childcare about how they support potty learning can help everything feel more consistent. A short chat about language, timing and how to handle accidents is usually enough.",
@@ -1183,6 +1206,7 @@ const rawToddlerArticles: ToddlerArticle[] = [
       "Simple, calm language keeps wees and poos feeling normal.",
       "Accidents are part of learning and do not need a big reaction.",
       "Pausing and coming back later is a valid part of the process.",
+      "Holding on to poo can be linked to pressure or pain, so see a GP early if you think your child is constipated.",
       "Ask your health visitor or GP if you are worried or things feel stuck.",
     ],
     relatedSlugs: [
@@ -1200,6 +1224,11 @@ const rawToddlerArticles: ToddlerArticle[] = [
         label: "Toddler potty training",
         publisher: "NHS Start for Life",
         url: "https://www.nhs.uk/start-for-life/toddler/",
+      },
+      {
+        label: "Constipation in children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/health/constipation-in-children/",
       },
       {
         label: "Potty training and toilet training advice",
@@ -1222,8 +1251,6 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Room-by-room ideas for reducing everyday risks as your toddler grows more curious and mobile.",
     readTime: "6 min read",
-    medicallyReviewed: true,
-    reviewedBy: "Jenny Joines",
     status: "ready",
     lastUpdated: "2026-07",
     intro:
@@ -1258,6 +1285,15 @@ const rawToddlerArticles: ToddlerArticle[] = [
         ],
       },
       {
+        heading: "Food and choking",
+        body: [
+          "Choking in young children most often happens while they are playing or eating. Staying with your toddler whenever they eat, and having them sit down for meals and snacks, helps you notice quickly if something goes wrong.",
+          "How food is prepared matters too. Cut small, round foods such as grapes and cherry tomatoes into quarters, and remove hard pips, stones and bones. Whole nuts should not be given to children under 5 years old, though crushed or ground nuts, or nut butter spread onto toast, can be offered.",
+          "If your toddler is coughing loudly, encourage them to keep coughing and stay with them. If the coughing is silent, or they cannot breathe in properly, shout for help straight away.",
+          "The NHS guide on how to stop a child from choking sets out exactly what to do next, including when to call 999. It is worth reading it calmly now, before you ever need it, and a first aid course can build confidence.",
+        ],
+      },
+      {
         heading: "Medicines and cleaning products",
         body: [
           "Medicines, vitamins, cleaning products and laundry capsules are safest stored high up, out of sight and in their original packaging. Child-resistant does not mean child-proof.",
@@ -1283,6 +1319,7 @@ const rawToddlerArticles: ToddlerArticle[] = [
       "Toddler capability changes quickly, so setups need refreshing over time.",
       "Falls and climbing are common risks worth thinking about early.",
       "Hot drinks, cooking areas and small objects need everyday attention.",
+      "Stay with your toddler while they eat, and quarter small round foods like grapes.",
       "Medicines and cleaning products are safest stored high and out of sight.",
       "Never leave a toddler alone near water, even for a moment.",
       "Steady safety habits often protect more than one-off tidying blitzes.",
@@ -1309,6 +1346,21 @@ const rawToddlerArticles: ToddlerArticle[] = [
         url: "https://www.rospa.com/home-safety",
       },
       {
+        label: "How to stop a child from choking",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/first-aid-and-safety/first-aid/how-to-stop-a-child-from-choking/",
+      },
+      {
+        label: "Your baby's first solid foods (preparing food to reduce choking risk)",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/babys-first-solid-foods/",
+      },
+      {
+        label: "Foods to avoid giving babies and young children",
+        publisher: "NHS",
+        url: "https://www.nhs.uk/conditions/baby/weaning-and-feeding/foods-to-avoid-giving-babies-and-young-children/",
+      },
+      {
         label: "Baby and toddler safety",
         publisher: "NHS",
         url: "https://www.nhs.uk/conditions/baby/first-aid-and-safety/safety/baby-and-toddler-safety/",
@@ -1322,8 +1374,6 @@ const rawToddlerArticles: ToddlerArticle[] = [
     description:
       "Everyday illness signs, when to seek advice and how to trust your instinct without second-guessing it.",
     readTime: "6 min read",
-    medicallyReviewed: true,
-    reviewedBy: "Jenny Joines",
     status: "ready",
     lastUpdated: "2026-07",
     intro:
@@ -1651,11 +1701,8 @@ function withToddlerDefaults(
     ],
     relatedSlugs:
       article.relatedSlugs ?? (sibling ? [sibling.slug] : undefined),
-    lastUpdated:
-      article.lastUpdated ?? (article.medicallyReviewed ? "2026-07" : undefined),
-    reviewedBy:
-      article.reviewedBy ??
-      (article.medicallyReviewed ? "Jenny Joines" : undefined),
+    // Phase 38C: no reviewer or review-date defaults. Review metadata may only
+    // come from genuine article-specific provenance (Phase 33.5 governance).
   };
 }
 

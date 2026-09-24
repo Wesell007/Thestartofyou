@@ -1,5 +1,5 @@
+import { ArrowRight, Check, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronRight, Home, Check, Sparkles } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HubAISupport from "@/components/shared/HubAISupport";
@@ -9,10 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  FamilyTopicConfig,
-  FAMILY_TOPIC_INDEX,
-} from "@/data/familyTopicData";
+import { type FamilyTopicConfig, FAMILY_TOPIC_INDEX } from "@/data/familyTopicData";
 import { getFamilyArticlesByTopic, type FamilyArticleTopic } from "@/data/familyArticleData";
 import FamilyArticleImageCard from "@/components/family/article/FamilyArticleImageCard";
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
@@ -25,468 +22,182 @@ interface Props {
 
 const FamilyTopicPage = ({ config }: Props) => {
   const accent = "hsl(var(--stage-family-accent))";
-  const accentSoft = "hsl(var(--stage-family-accent) / 0.08)";
-  const accentMid = "hsl(var(--stage-family-accent) / 0.24)";
-  const accentBorder = "hsl(var(--stage-family-accent) / 0.22)";
-  const accentBorderStrong = "hsl(var(--stage-family-accent) / 0.32)";
-  const tintWash = "hsl(var(--stage-family) / 0.7)";
+  const accentSoft = "hsl(var(--stage-family-accent) / 0.1)";
+  const accentBorder = "hsl(var(--stage-family-accent) / 0.28)";
   const deep = "hsl(var(--stage-family-deep))";
   const deepSoft = "hsl(var(--stage-family-deep) / 0.72)";
-  const deepMuted = "hsl(var(--stage-family-deep) / 0.55)";
 
-  const related = config.related
-    .filter((s) => s !== config.slug)
-    .slice(0, 3)
-    .map((s) => ({ slug: s, ...FAMILY_TOPIC_INDEX[s] }));
-
-  // ─── Article surfacing ─────────────────────────────────────────
-  const readyArticles = getFamilyArticlesByTopic(
-    config.slug as FamilyArticleTopic
-  ).filter((a) => a.status === "ready");
-  const readyBySlug = new Map(readyArticles.map((a) => [a.slug, a]));
-
-
-
-
-  // Grouped guidance: include Start Here slugs too (shown as compact rows
-  // rather than large cards, so they serve a different visual purpose).
-  // De-duplicate within the grouped panel itself.
-  const seenInGroups = new Set<string>();
-  const articleGroups = (config.articleGroups ?? [])
-    .map((g) => {
-      const articles = g.slugs
-        .filter((s) => {
-          if (seenInGroups.has(s)) return false;
-          if (!readyBySlug.has(s)) return false;
-          seenInGroups.add(s);
-          return true;
-        })
-        .map((s) => readyBySlug.get(s)!);
-      return {
-        label: g.label,
-        description: g.description,
-        articles,
-      };
-    })
-    .filter((g) => g.articles.length > 0);
-
-  // Fallback: any ready article not already in a group.
-  const ungrouped = readyArticles.filter((a) => !seenInGroups.has(a.slug));
-  if (ungrouped.length > 0) {
-    articleGroups.push({
-      label: "More on this topic",
-      description: undefined,
-      articles: ungrouped,
-    });
-  }
-
-  const hasGuidance = articleGroups.length > 0;
-
-
-  const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-    <div className="flex items-center gap-3">
-      <span className="h-px w-8" style={{ background: accentMid }} aria-hidden />
-      <span
-        className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
-        style={{ color: accent }}
-      >
-        {children}
-      </span>
-    </div>
+  const readyArticles = getFamilyArticlesByTopic(config.slug as FamilyArticleTopic).filter(
+    (article) => article.status === "ready",
   );
+  const readyBySlug = new Map(readyArticles.map((article) => [article.slug, article]));
+  const startHere = (config.startHere ?? [])
+    .map((slug) => readyBySlug.get(slug))
+    .filter((article): article is (typeof readyArticles)[number] => Boolean(article));
+  const startHereSlugs = new Set(startHere.map((article) => article.slug));
+  const remainingGuidance = readyArticles.filter((article) => !startHereSlugs.has(article.slug));
+  const related = config.related
+    .filter((slug) => slug !== config.slug)
+    .slice(0, 3)
+    .map((slug) => ({ slug, ...FAMILY_TOPIC_INDEX[slug] }));
 
-  const heroCardShadow =
-    "0 36px 80px -50px rgba(70,50,20,0.34), inset 0 1px 0 hsl(0 0% 100% / 0.7)";
-
-  const abstractPanelShadow =
-    "0 28px 60px -34px rgba(70,50,20,0.42), inset 0 1px 0 hsl(0 0% 100% / 0.6)";
-
-  // Single authoritative crumb array: feeds the visible trail and the schema.
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
     { label: "Family", href: "/family" },
     { label: config.title, href: `/family/${config.slug}` },
   ];
 
+  const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) => (
+    <div className="mb-9 border-b pb-7" style={{ borderColor: "hsl(var(--stage-family-accent) / 0.22)" }}>
+      <p className="mb-3 font-sans text-[11px] font-light uppercase tracking-[0.3em]" style={{ color: accent }}>
+        {eyebrow}
+      </p>
+      <h2 className="font-serif text-[1.9rem] leading-tight md:text-[2.25rem]" style={{ color: deep }}>
+        {children}
+      </h2>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen font-sans bg-parchment">
+    <div className="min-h-screen bg-parchment font-sans">
       <Navbar />
       <main className="overflow-hidden">
-        {/* ─── HERO ───────────────────────────────────────────────────── */}
-        <section className="relative pt-8 sm:pt-12 md:pt-16 pb-16 md:pb-24">
+        <section className="relative pb-14 pt-8 sm:pt-12 md:pb-18 md:pt-16">
           <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-[420px] md:h-[560px] -z-0"
-            style={{
-              background: `linear-gradient(180deg, ${tintWash} 0%, hsl(var(--stage-family) / 0.25) 55%, transparent 100%)`,
-            }}
+            className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+            style={{ background: "linear-gradient(to bottom, hsl(var(--stage-family) / 0.62), transparent)" }}
             aria-hidden
           />
-          <div
-            className="pointer-events-none absolute -z-0 left-1/2 -translate-x-1/2 top-24 md:top-32 w-[680px] h-[420px] rounded-full blur-3xl opacity-60"
-            style={{ background: "hsl(var(--stage-family-accent) / 0.18)" }}
-            aria-hidden
-          />
-
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl relative z-10">
-            {/* Breadcrumb */}
+          <div className="container relative mx-auto max-w-6xl px-5 sm:px-8 md:px-10">
             <BreadcrumbJsonLd items={breadcrumbItems} />
             <Breadcrumbs
               tone="section"
               showHomeIcon
-              className="mb-10 md:mb-12 font-sans"
+              className="mb-8 font-sans md:mb-10"
               colors={{ base: deepSoft, link: accent, current: deep }}
               items={breadcrumbItems}
             />
 
-            {/* Hero card */}
-            <div
-              className="relative bg-parchment rounded-[28px] border overflow-hidden p-6 sm:p-8 md:p-10 lg:p-12"
-              style={{
-                borderColor: accentBorder,
-                boxShadow: heroCardShadow,
-              }}
-            >
-              <div className="relative grid grid-cols-1 md:grid-cols-12 md:gap-10 lg:gap-14 items-center">
-                {/* Hero image (or abstract fallback if missing) */}
-                <div className="md:col-span-5 md:order-2 mb-7 md:mb-0">
-                  <div
-                    className="relative w-full overflow-hidden rounded-[22px] border aspect-[5/4] md:aspect-[4/5]"
-                    style={{
-                      borderColor: accentBorderStrong,
-                      background:
-                        "linear-gradient(155deg, hsl(var(--stage-family) / 0.85) 0%, hsl(var(--stage-family-soft) / 0.85) 100%)",
-                      boxShadow: abstractPanelShadow,
-                    }}
+            <div className="grid items-end gap-8 border-b pb-10 md:grid-cols-12 md:gap-12 md:pb-14" style={{ borderColor: accentBorder }}>
+              <div className="md:col-span-7">
+                <p className="mb-5 font-sans text-[11px] font-light uppercase tracking-[0.3em]" style={{ color: accent }}>
+                  Family area · {config.eyebrow}
+                </p>
+                <h1 className="font-serif text-[2.6rem] leading-[1.03] md:text-[4rem]" style={{ color: deep }}>
+                  {config.title}
+                </h1>
+                <p className="mt-6 max-w-[38rem] font-sans text-[16px] font-light leading-[1.7]" style={{ color: deepSoft }}>
+                  {config.standfirst}
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="#family-topic-start"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[13px] font-medium"
+                    style={{ borderColor: accentBorder, backgroundColor: accentSoft, color: deep }}
                   >
-                    {config.heroImage?.src ? (
-                      <>
-                        <img
-                          src={config.heroImage.src}
-                          alt={config.heroImage.alt}
-                          width={1024}
-                          height={1216}
-                          loading="eager"
-                          fetchPriority="high"
-                          className="absolute inset-0 h-full w-full object-cover"
-                          style={{ objectPosition: "50% 40%" }}
-                        />
-                        {/* Warm buttercream wash overlay */}
-                        <span
-                          className="pointer-events-none absolute inset-0"
-                          style={{
-                            background:
-                              "linear-gradient(160deg, hsl(var(--stage-family) / 0.18) 0%, transparent 45%, hsl(var(--stage-family-deep) / 0.18) 100%)",
-                          }}
-                          aria-hidden
-                        />
-                        {/* Inner highlight frame */}
-                        <span
-                          className="pointer-events-none absolute inset-2.5 rounded-[18px] border"
-                          style={{ borderColor: "hsl(0 0% 100% / 0.28)" }}
-                          aria-hidden
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <span
-                          className="pointer-events-none absolute -top-16 -left-16 h-56 w-56 rounded-full blur-3xl opacity-80"
-                          style={{ background: "hsl(var(--stage-family-accent) / 0.28)" }}
-                          aria-hidden
-                        />
-                        <span
-                          className="pointer-events-none absolute -bottom-20 -right-16 h-60 w-60 rounded-full blur-3xl opacity-70"
-                          style={{ background: "hsl(var(--stage-family-soft) / 0.75)" }}
-                          aria-hidden
-                        />
-                        <span
-                          className="pointer-events-none absolute inset-6 rounded-[18px] border"
-                          style={{ borderColor: "hsl(var(--stage-family-accent) / 0.18)" }}
-                          aria-hidden
-                        />
-                        <span
-                          className="pointer-events-none absolute inset-0"
-                          style={{
-                            background:
-                              "radial-gradient(120% 90% at 50% 50%, transparent 55%, hsl(var(--stage-family-deep) / 0.22) 100%)",
-                          }}
-                          aria-hidden
-                        />
-                      </>
-                    )}
-                  </div>
+                    Start with guidance
+                    <ArrowRight size={14} aria-hidden />
+                  </a>
+                  <Link
+                    to="/family"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[13px] font-medium"
+                    style={{ borderColor: accentBorder, color: deep }}
+                  >
+                    <Home size={13} aria-hidden />
+                    Family hub
+                  </Link>
                 </div>
-
-                {/* Copy */}
-                <div className="md:col-span-7 md:order-1">
-                  <span
-                    className="block h-px w-8 mb-5"
-                    style={{ background: accentMid }}
-                    aria-hidden
+              </div>
+              <div className="md:col-span-5">
+                <div className="relative aspect-[5/4] overflow-hidden md:aspect-[4/5]">
+                  <img
+                    src={config.heroImage.src}
+                    alt={config.heroImage.alt}
+                    width={1024}
+                    height={1216}
+                    loading="eager"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
-                  <p
-                    className="font-sans text-[11px] font-light tracking-[0.3em] uppercase"
-                    style={{ color: accent }}
-                  >
-                    Family guide · {config.eyebrow}
-                  </p>
-                  <h1
-                    className="mt-6 font-serif text-[2.1rem] sm:text-[2.5rem] md:text-[2.7rem] lg:text-[3rem] leading-[1.05] tracking-[-0.005em]"
-                    style={{ color: deep }}
-                  >
-                    {config.title}
-                  </h1>
-                  <p
-                    className="mt-6 md:mt-7 font-sans text-[15.5px] md:text-[16px] font-light leading-[1.65] max-w-[34rem]"
-                    style={{ color: deepSoft }}
-                  >
-                    {config.standfirst}
-                  </p>
-
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a
-                      href="#family-topic-ai"
-                      className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgba(70,50,20,0.38)]"
-                      style={{
-                        borderColor: accentBorderStrong,
-                        backgroundColor: accentSoft,
-                        color: deep,
-                      }}
-                    >
-                      <Sparkles size={13} strokeWidth={1.8} style={{ color: accent }} />
-                      Ask a question
-                    </a>
-                    <Link
-                      to="/family"
-                      className="inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5"
-                      style={{
-                        borderColor: accentBorder,
-                        color: deep,
-                      }}
-                    >
-                      <Home size={13} strokeWidth={1.8} style={{ color: accent }} />
-                      Back to Family Hub
-                    </Link>
-                  </div>
+                  <span className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(to top, hsl(var(--stage-family-deep) / 0.24), transparent 55%)" }} aria-hidden />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ─── WHAT THIS COVERS ─────────────────────────────────────── */}
-        <section
-          className="relative pb-16 md:pb-20"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.32) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-4xl">
-            <div
-              className="relative rounded-[26px] border p-7 sm:p-10 md:p-12 overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                background:
-                  "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.5) 100%)",
-                boxShadow:
-                  "0 28px 64px -40px rgba(70,50,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
-              }}
-            >
-              <span
-                className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
-                style={{ background: "hsl(var(--stage-family-accent) / 0.18)" }}
-                aria-hidden
-              />
-              <div className="relative">
-                <SectionLabel>What this covers</SectionLabel>
-                <h2
-                  className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                  style={{ color: deep }}
-                >
-                  A calm overview
-                </h2>
-
-                <div className="mt-5 flex gap-4 max-w-2xl">
-                  <span
-                    className="mt-1.5 w-[2px] shrink-0 rounded-full"
-                    style={{ background: accentMid }}
-                    aria-hidden
-                  />
-                  <p
-                    className="font-serif italic text-[15px] leading-[1.7]"
-                    style={{ color: deepSoft }}
-                  >
-                    {config.whatThisCovers.lead}
-                  </p>
-                </div>
-
-                <ul className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5">
-                  {config.whatThisCovers.bullets.map((b, i) => (
-                    <li key={i} className="flex items-start gap-3.5">
-                      <span
-                        className="mt-0.5 grid place-items-center h-5 w-5 rounded-full shrink-0 border"
-                        style={{
-                          backgroundColor: accentSoft,
-                          borderColor: accentBorderStrong,
-                        }}
-                        aria-hidden
-                      >
-                        <Check size={11} strokeWidth={2.2} style={{ color: accent }} />
-                      </span>
-                      <span
-                        className="font-sans text-[14.75px] font-light leading-[1.65]"
-                        style={{ color: deepSoft }}
-                      >
-                        {b}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+        <section className="py-14 md:py-18">
+          <div className="container mx-auto grid max-w-5xl gap-10 px-5 sm:px-8 md:grid-cols-12 md:px-10">
+            <div className="md:col-span-5">
+              <p className="font-sans text-[11px] font-light uppercase tracking-[0.3em]" style={{ color: accent }}>
+                What this area helps with
+              </p>
+              <h2 className="mt-4 font-serif text-[1.9rem] leading-tight" style={{ color: deep }}>
+                A grounded place to begin
+              </h2>
+              <p className="mt-5 font-serif text-[17px] italic leading-[1.7]" style={{ color: deepSoft }}>
+                {config.intro}
+              </p>
             </div>
+            <ul className="grid gap-x-8 gap-y-4 md:col-span-7 md:grid-cols-2">
+              {config.whatThisCovers.bullets.map((bullet) => (
+                <li key={bullet} className="flex items-start gap-3 border-t pt-4" style={{ borderColor: accentBorder }}>
+                  <Check size={15} className="mt-1 shrink-0" style={{ color: accent }} aria-hidden />
+                  <span className="font-sans text-[14px] font-light leading-relaxed" style={{ color: deepSoft }}>{bullet}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
-
-        {/* ─── GROUPED GUIDANCE ─────────────────────────────────────── */}
-        {hasGuidance && (
-          <section
-            className="relative py-20 md:py-24"
-            style={{
-              background:
-                "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.28) 100%)",
-            }}
-          >
-            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-              <div
-                className="relative rounded-[28px] border p-6 sm:p-10 md:p-12 overflow-hidden"
-                style={{
-                  borderColor: accentBorderStrong,
-                  background:
-                    "linear-gradient(165deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.5) 100%)",
-                  boxShadow:
-                    "0 28px 64px -40px rgba(70,50,20,0.32), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
-                }}
-              >
-                <span
-                  className="pointer-events-none absolute -top-16 -right-16 h-56 w-56 rounded-full blur-3xl opacity-60"
-                  style={{ background: "hsl(var(--stage-family-accent) / 0.18)" }}
-                  aria-hidden
-                />
-                <div className="relative">
-                  <SectionLabel>Guidance</SectionLabel>
-                  <h2
-                    className="mt-5 font-serif text-[1.75rem] md:text-[2rem] leading-tight"
-                    style={{ color: deep }}
-                  >
-                    Helpful reads for this part of family life
-                  </h2>
-                  <p
-                    className="mt-4 font-sans text-[14.5px] font-light leading-[1.65] max-w-2xl"
-                    style={{ color: deepSoft }}
-                  >
-                    Choose the guide that best matches what you need today.
-                  </p>
-
-                  {(() => {
-                    const allSingle =
-                      articleGroups.length > 1 &&
-                      articleGroups.every((g) => g.articles.length === 1);
-                    if (allSingle) {
-                      const flat = articleGroups.flatMap((g) => g.articles);
-                      return (
-                        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                          {flat.map((a) => (
-                            <FamilyArticleImageCard key={a.slug} article={a} />
-                          ))}
-                        </div>
-                      );
-                    }
-                    return (
-                      <div className="mt-10 space-y-10">
-                        {articleGroups.map((group) => (
-                          <div key={group.label}>
-                            <div className="mb-4 flex flex-col gap-1.5">
-                              <p
-                                className="font-sans text-[11px] font-light tracking-[0.28em] uppercase"
-                                style={{ color: accent }}
-                              >
-                                {group.label}
-                              </p>
-                              {group.description && (
-                                <p
-                                  className="font-sans text-[13.5px] font-light leading-[1.65] max-w-2xl"
-                                  style={{ color: deepSoft }}
-                                >
-                                  {group.description}
-                                </p>
-                              )}
-                            </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                              {group.articles.map((a) => (
-                                <FamilyArticleImageCard key={a.slug} article={a} />
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    );
-                  })()}
-
-                </div>
+        {startHere.length > 0 && (
+          <section id="family-topic-start" className="py-14 scroll-mt-24 md:py-18" style={{ backgroundColor: "hsl(var(--stage-family) / 0.28)" }}>
+            <div className="container mx-auto max-w-5xl px-5 sm:px-8 md:px-10">
+              <SectionHeading eyebrow="Start here">The most useful first reads</SectionHeading>
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {startHere.map((article) => <FamilyArticleImageCard key={article.slug} article={article} />)}
               </div>
             </div>
           </section>
         )}
 
-
-        {/* ─── COMMON QUESTIONS ─────────────────────────────────────── */}
-        <section
-          className="relative py-20 md:py-24"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.32) 50%, hsl(var(--parchment)) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-3xl">
-            <div className="mb-10 md:mb-12 flex flex-col items-start gap-4">
-              <SectionLabel>Common questions</SectionLabel>
-              <h2
-                className="font-serif text-[1.9rem] md:text-[2.2rem] leading-tight"
-                style={{ color: deep }}
-              >
-                What families quietly wonder
-              </h2>
+        <section className="py-14 md:py-18">
+          <div className="container mx-auto max-w-5xl px-5 sm:px-8 md:px-10">
+            <SectionHeading eyebrow="Key situations">The family-life moments inside this area</SectionHeading>
+            <div className="grid grid-cols-1 border-y md:grid-cols-2 lg:grid-cols-3" style={{ borderColor: accentBorder }}>
+              {config.areasInside.map((area, index) => (
+                <article key={area.title} className="border-b px-1 py-6 md:px-6 lg:border-b-0" style={{ borderColor: accentBorder }}>
+                  <span className="font-sans text-[10px] font-medium tracking-[0.2em]" style={{ color: accent }}>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-3 font-serif text-[1.25rem] leading-snug" style={{ color: deep }}>{area.title}</h3>
+                  <p className="mt-2 font-sans text-[13.5px] font-light leading-relaxed" style={{ color: deepSoft }}>{area.body}</p>
+                </article>
+              ))}
             </div>
+          </div>
+        </section>
 
-            <Accordion type="single" collapsible className="space-y-3">
-              {config.commonQuestions.map(({ q, a }, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`q${i}`}
-                  className="group/q relative rounded-[18px] border bg-parchment/90 px-6 md:px-7 overflow-hidden transition-all duration-300 hover:-translate-y-[1px] hover:shadow-[0_18px_42px_-26px_rgba(70,50,20,0.3)] data-[state=open]:shadow-[0_22px_50px_-30px_rgba(70,50,20,0.32)] data-[state=open]:border-[hsl(var(--stage-family-accent)/0.34)]"
-                  style={{ borderColor: accentBorderStrong }}
-                >
-                  <span
-                    className="pointer-events-none absolute left-0 top-3 bottom-3 w-[2px] rounded-r opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                    style={{ background: accent }}
-                    aria-hidden
-                  />
-                  <span
-                    className="pointer-events-none absolute inset-0 opacity-0 group-data-[state=open]/q:opacity-100 transition-opacity"
-                    style={{ background: "hsl(var(--stage-family-accent) / 0.10)" }}
-                    aria-hidden
-                  />
-                  <AccordionTrigger
-                    className="relative text-left font-serif text-[17px] md:text-[18px] py-5 hover:no-underline"
-                    style={{ color: deep }}
-                  >
+        {remainingGuidance.length > 0 && (
+          <section className="py-14 md:py-18" style={{ backgroundColor: "hsl(var(--stage-family) / 0.22)" }}>
+            <div className="container mx-auto max-w-5xl px-5 sm:px-8 md:px-10">
+              <SectionHeading eyebrow="Relevant guidance">Continue with what fits today</SectionHeading>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {remainingGuidance.map((article) => <FamilyArticleImageCard key={article.slug} article={article} />)}
+              </div>
+            </div>
+          </section>
+        )}
+
+        <section className="py-14 md:py-18">
+          <div className="container mx-auto max-w-3xl px-5 sm:px-8 md:px-10">
+            <SectionHeading eyebrow="Common questions">What families quietly wonder</SectionHeading>
+            <Accordion type="single" collapsible className="space-y-2">
+              {config.commonQuestions.map(({ q, a }, index) => (
+                <AccordionItem key={q} value={`question-${index}`} className="border-b px-1" style={{ borderColor: accentBorder }}>
+                  <AccordionTrigger className="min-h-14 py-4 text-left font-serif text-[17px] hover:no-underline" style={{ color: deep }}>
                     {q}
                   </AccordionTrigger>
-                  <AccordionContent
-                    className="relative font-sans text-[15px] font-light leading-[1.7] pb-6 max-w-prose"
-                    style={{ color: deepSoft }}
-                  >
+                  <AccordionContent className="max-w-prose pb-6 font-sans text-[15px] font-light leading-[1.75]" style={{ color: deepSoft }}>
                     {a}
                   </AccordionContent>
                 </AccordionItem>
@@ -495,28 +206,13 @@ const FamilyTopicPage = ({ config }: Props) => {
           </div>
         </section>
 
-        {/* ─── AI SUPPORT ───────────────────────────────────────────── */}
-        <section
-          id="family-topic-ai"
-          className="relative py-20 md:py-24 scroll-mt-24"
-          style={{
-            background:
-              "linear-gradient(to bottom, hsl(var(--stage-family) / 0.6) 0%, hsl(var(--stage-family) / 0.28) 55%, hsl(var(--parchment)) 100%)",
-          }}
-        >
-          <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
-            <div className="mb-7 md:mb-8 flex flex-col items-center text-center gap-3">
-              <SectionLabel>Ask anything</SectionLabel>
+        <section id="family-topic-ai" className="scroll-mt-24 py-14 md:py-18" style={{ backgroundColor: "hsl(var(--stage-family) / 0.34)" }}>
+          <div className="container mx-auto max-w-3xl px-5 sm:px-8 md:px-10">
+            <div className="mb-7 text-center">
+              <p className="font-sans text-[11px] font-light uppercase tracking-[0.3em]" style={{ color: accent }}>Family Companion</p>
+              <h2 className="mt-3 font-serif text-[1.9rem] leading-tight" style={{ color: deep }}>When the edited guidance does not quite fit</h2>
             </div>
-
-            <div
-              className="rounded-[28px] border bg-parchment/85 backdrop-blur-sm overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                boxShadow:
-                  "0 36px 80px -46px rgba(70,50,20,0.38), inset 0 1px 0 hsl(0 0% 100% / 0.7)",
-              }}
-            >
+            <div className="overflow-hidden border bg-parchment" style={{ borderColor: accentBorder }}>
               <HubAISupport
                 heading={config.aiHeading}
                 description={config.aiDescription}
@@ -528,80 +224,21 @@ const FamilyTopicPage = ({ config }: Props) => {
                 stage="family"
               />
             </div>
-            <p
-              className="mt-7 text-center font-sans text-[12.5px] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
-              style={{ color: deepMuted }}
-            >
-              A quiet companion for the questions family life quietly raises.
-            </p>
           </div>
         </section>
 
-
-        {/* ─── MORE FAMILY TOPICS ───────────────────────────────────── */}
         {related.length > 0 && (
-          <section
-            className="relative py-20 md:py-24"
-            style={{
-              background:
-                "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.28) 100%)",
-            }}
-          >
-            <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-5xl">
-              <div className="mb-9 md:mb-11 flex flex-col items-start gap-3">
-                <SectionLabel>More Family topics</SectionLabel>
-                <h2
-                  className="font-serif text-[1.7rem] md:text-[1.95rem] leading-tight"
-                  style={{ color: deep }}
-                >
-                  Continue exploring
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-                {related.map((r) => (
-                  <Link
-                    key={r.slug}
-                    to={`/family/${r.slug}`}
-                    className="group relative flex h-full flex-col justify-between gap-6 rounded-[20px] border px-6 py-6 overflow-hidden transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_22px_50px_-30px_rgba(70,50,20,0.32)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-parchment focus-visible:ring-[hsl(var(--stage-family-accent)/0.5)]"
-                    style={{
-                      borderColor: accentBorderStrong,
-                      background:
-                        "linear-gradient(160deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.5) 100%)",
-                      boxShadow:
-                        "0 14px 32px -28px rgba(70,50,20,0.24), inset 0 1px 0 hsl(0 0% 100% / 0.65)",
-                    }}
-                  >
-                    <span
-                      className="pointer-events-none absolute -top-10 -left-10 h-32 w-32 rounded-full blur-2xl opacity-60"
-                      style={{ background: "hsl(var(--stage-family-accent) / 0.16)" }}
-                      aria-hidden
-                    />
-                    <div className="relative">
-                      <p
-                        className="font-sans text-[10.5px] font-light tracking-[0.28em] uppercase mb-2"
-                        style={{ color: accent }}
-                      >
-                        {r.eyebrow}
-                      </p>
-                      <p
-                        className="font-serif text-[17px] leading-snug"
-                        style={{ color: deep }}
-                      >
-                        {r.title}
-                      </p>
+          <section className="py-14 md:py-18">
+            <div className="container mx-auto max-w-5xl px-5 sm:px-8 md:px-10">
+              <SectionHeading eyebrow="Related Family areas">Continue exploring</SectionHeading>
+              <div className="grid grid-cols-1 border-t md:grid-cols-3" style={{ borderColor: accentBorder }}>
+                {related.map((area, index) => (
+                  <Link key={area.slug} to={`/family/${area.slug}`} className="group flex min-h-32 items-center justify-between gap-4 border-b px-1 py-6 md:px-5" style={{ borderColor: accentBorder }}>
+                    <div>
+                      <span className="font-sans text-[10px] font-medium tracking-[0.2em]" style={{ color: accent }}>{String(index + 1).padStart(2, "0")}</span>
+                      <h3 className="mt-2 font-serif text-[1.2rem]" style={{ color: deep }}>{area.title}</h3>
                     </div>
-                    <div className="relative flex items-center justify-end">
-                      <span
-                        className="inline-flex items-center justify-center h-8 w-8 rounded-full border transition-transform group-hover:translate-x-1"
-                        style={{
-                          borderColor: accentBorderStrong,
-                          backgroundColor: accentSoft,
-                        }}
-                        aria-hidden
-                      >
-                        <ChevronRight size={15} strokeWidth={1.8} style={{ color: accent }} />
-                      </span>
-                    </div>
+                    <ChevronRight size={17} className="transition-transform group-hover:translate-x-1" style={{ color: accent }} aria-hidden />
                   </Link>
                 ))}
               </div>
@@ -609,48 +246,13 @@ const FamilyTopicPage = ({ config }: Props) => {
           </section>
         )}
 
-        {/* ─── BACK TO HUB CTA ──────────────────────────────────────── */}
-        <section className="pb-28 md:pb-32">
-          <div className="container mx-auto px-5 sm:px-6 md:px-10 max-w-2xl">
-            <div
-              className="relative rounded-[28px] border px-7 py-10 md:px-12 md:py-12 text-center overflow-hidden"
-              style={{
-                borderColor: accentBorderStrong,
-                background:
-                  "linear-gradient(170deg, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.55) 100%)",
-                boxShadow:
-                  "0 32px 76px -42px rgba(70,50,20,0.34), inset 0 1px 0 hsl(0 0% 100% / 0.75)",
-              }}
-            >
-              <span
-                className="pointer-events-none absolute -top-20 left-1/2 -translate-x-1/2 h-56 w-72 rounded-full blur-3xl opacity-60"
-                style={{ background: "hsl(var(--stage-family) / 0.4)" }}
-                aria-hidden
-              />
-              <span
-                className="relative mx-auto block h-px w-10 mb-6"
-                style={{ backgroundColor: accentMid }}
-                aria-hidden
-              />
-              <p
-                className="relative font-serif italic text-[15.5px] mb-7 max-w-md mx-auto leading-relaxed"
-                style={{ color: deepSoft }}
-              >
-                Back to the wider Family hub when you're ready.
-              </p>
-              <Link
-                to="/family"
-                className="relative inline-flex items-center gap-2 rounded-full border px-7 py-3 font-sans text-[13px] font-medium tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-26px_rgba(70,50,20,0.4)]"
-                style={{
-                  borderColor: accentBorderStrong,
-                  backgroundColor: accentSoft,
-                  color: deep,
-                }}
-              >
-                Return to Family
-                <ArrowRight size={14} strokeWidth={1.8} style={{ color: accent }} />
-              </Link>
-            </div>
+        <section className="pb-20 pt-4 md:pb-24">
+          <div className="container mx-auto max-w-2xl px-5 text-center sm:px-8 md:px-10">
+            <p className="font-serif text-[1.3rem] italic" style={{ color: deepSoft }}>Return to the wider Family collection when you are ready.</p>
+            <Link to="/family" className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border px-6 py-2.5 font-sans text-[13px] font-medium" style={{ borderColor: accentBorder, backgroundColor: accentSoft, color: deep }}>
+              Return to Family
+              <ArrowRight size={14} aria-hidden />
+            </Link>
           </div>
         </section>
       </main>

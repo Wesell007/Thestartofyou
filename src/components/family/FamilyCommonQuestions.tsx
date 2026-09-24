@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowUpRight, BookOpen, Sparkles } from "lucide-react";
+import { ChevronDown, ArrowUpRight, BookOpen } from "lucide-react";
 
 interface QItem {
   q: string;
   answer: string;
   readMoreHref: string;
   readMoreLabel: string;
-  askHref: string;
 }
 
 const questions: QItem[] = [
@@ -17,7 +16,6 @@ const questions: QItem[] = [
       "There may not be a perfect moment. It can help to look at your home rhythm, emotional capacity, support, finances and how your existing child may experience the change.",
     readMoreHref: "/family/growing-families/preparing-for-another-baby",
     readMoreLabel: "Read: preparing for another baby",
-    askHref: "/ask?stage=family&topic=another-baby",
   },
   {
     q: "How do I help my child adjust to a new sibling?",
@@ -25,7 +23,6 @@ const questions: QItem[] = [
       "Children can feel excited, unsure, jealous or proud all at once. Small preparation, predictable routines and gentle reassurance can help them feel included.",
     readMoreHref: "/family/growing-families/helping-your-child-adjust-to-a-new-sibling",
     readMoreLabel: "Read: helping your child adjust",
-    askHref: "/ask?stage=family&topic=new-sibling",
   },
   {
     q: "How do we make family routines easier?",
@@ -33,7 +30,6 @@ const questions: QItem[] = [
       "Family routines do not need to be strict to be helpful. Simple repeatable steps can make mornings, evenings and busy days feel calmer.",
     readMoreHref: "/family/family-basics/building-family-routines",
     readMoreLabel: "Read: building family routines",
-    askHref: "/ask?stage=family&topic=routines",
   },
   {
     q: "How do I set boundaries with relatives?",
@@ -41,23 +37,20 @@ const questions: QItem[] = [
       "Boundaries can be kind and still be clear. It helps to decide what matters, use calm language and stay consistent when family expectations feel difficult.",
     readMoreHref: "/family/relationships/setting-boundaries-with-grandparents",
     readMoreLabel: "Read: setting boundaries with grandparents",
-    askHref: "/ask?stage=family&topic=boundaries",
   },
   {
     q: "How do we manage money stress as a family?",
     answer:
       "Money stress can feel heavy, especially with childcare, food, travel and everyday costs. A calmer plan often starts with visibility, small choices and honest conversations.",
-    readMoreHref: "/family/family-basics/managing-childcare-costs-without-feeling-overwhelmed",
+    readMoreHref: "/family/family-basics/managing-childcare-costs",
     readMoreLabel: "Read: managing childcare costs",
-    askHref: "/ask?stage=family&topic=money-stress",
   },
   {
     q: "How do I feel less overwhelmed by family life?",
     answer:
       "Feeling overwhelmed does not mean you are failing. It may help to lower the pressure, share the load where possible and choose one small thing to make today easier.",
-    readMoreHref: "/family/relationships/sharing-the-mental-load-in-family-life",
+    readMoreHref: "/family/relationships/sharing-the-mental-load",
     readMoreLabel: "Read: sharing the mental load",
-    askHref: "/ask?stage=family&topic=family-overwhelm",
   },
 ];
 
@@ -74,7 +67,7 @@ const FamilyCommonQuestions = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-parchment py-14 md:py-20">
+    <section id="family-questions" className="bg-parchment py-16 md:py-20">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-3xl">
         <div className="flex items-center gap-2 mb-3">
           <span className="h-px w-10" style={{ backgroundColor: "hsl(var(--stage-family-accent) / 0.55)" }} />
@@ -86,7 +79,7 @@ const FamilyCommonQuestions = () => {
           What parents quietly wonder.
         </h2>
         <p className="font-sans text-sm font-light text-muted-foreground leading-relaxed mb-9 max-w-xl">
-          A short, honest answer to start with. Then read more, or ask your own question for personalised guidance.
+          A short editorial answer to start with, followed by a relevant guide when you want to go deeper.
         </p>
 
         <div className="flex flex-col gap-3">
@@ -143,7 +136,7 @@ const FamilyCommonQuestions = () => {
                     >
                       {item.answer}
                     </p>
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <div className="flex">
                       <Link
                         to={item.readMoreHref}
                         className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium transition-all hover:-translate-y-[1px]"
@@ -152,18 +145,6 @@ const FamilyCommonQuestions = () => {
                         <BookOpen size={13} strokeWidth={1.9} />
                         {item.readMoreLabel}
                         <ArrowUpRight size={12} />
-                      </Link>
-                      <Link
-                        to={item.askHref}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 font-sans text-[12.5px] font-medium border transition-all hover:-translate-y-[1px]"
-                        style={{
-                          borderColor: s.border,
-                          backgroundColor: "hsl(var(--card))",
-                          color: s.color,
-                        }}
-                      >
-                        <Sparkles size={13} strokeWidth={1.9} />
-                        Ask more
                       </Link>
                     </div>
                   </div>

@@ -10,7 +10,7 @@ const FamilyAISupport = () => {
   return (
     <section
       id="family-ai"
-      className="relative py-20 md:py-28 scroll-mt-24"
+      className="relative py-16 md:py-20 scroll-mt-24"
       style={{
         background:
           "linear-gradient(to bottom, hsl(var(--stage-family) / 0.55) 0%, hsl(var(--stage-family) / 0.25) 60%, hsl(var(--parchment)) 100%)",
@@ -26,13 +26,13 @@ const FamilyAISupport = () => {
             className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3"
             style={{ color: accent }}
           >
-            Ask The Start of You
+            Family Companion
           </p>
           <h2
             className="font-serif text-[1.9rem] md:text-[2.4rem] leading-tight"
             style={{ color: deep }}
           >
-            A calm answer, whenever family life asks one
+            When the edited guidance does not quite fit
           </h2>
         </div>
 
@@ -56,7 +56,7 @@ const FamilyAISupport = () => {
           />
           <HubAISupport
             heading="Ask anything about family life"
-            description="From sibling transitions to grandparent boundaries and the everyday questions that don't fit anywhere else — ask in plain words and get a calm, considered answer."
+            description="For a question shaped by your own circumstances, ask in plain words and receive calm, considered support after exploring the edited guidance above."
             placeholder="What's on your mind about family life?"
             suggestions={[
               "How do I prepare my child for a new baby?",

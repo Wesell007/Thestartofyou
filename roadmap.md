@@ -265,3 +265,4 @@
 - [x] Articles: KEEP 13, EXPAND_EXISTING 3; journey 55 moments; P1 0, P2 3, P3 8, P4 4; new candidates 0
 - [x] Inventory drift 16 stale rows recorded, 0 repaired; 3 dormant reviewer-provenance findings recorded
 - [x] Docs and read-only audit test added; no remediation started, Phase 38C not begun
+- [x] Final reconciliation: KEEP 10, EXPAND_EXISTING 6 (P2 TAN/PTP/HOM, P3 BED/SPH/PLY); 15 prioritised = 10 gaps + 4 handoff + 1 other; cot to bed P3 via BED; reviewer-metadata provenance debt 3, rendered claims 0; new articles NO, closure-level existing-content remediation YES; Phase 38C not begun

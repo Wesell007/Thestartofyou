@@ -64,11 +64,13 @@ Audit only. Each moment has exactly one primary classification. Priority is give
 
 - Moments 55. By age: 12-17m 10, 18-23m 9, 2y 12, 30m 8, 3y 8, shared 8.
 - COVERED 40, PARTIALLY_COVERED 9, UNCOVERED 1, NOT_REQUIRED_STANDALONE 2, BETTER_SERVED_ELSEWHERE 3. Sum 55.
-- Prioritised rows 15: P1 0, P2 3, P3 8, P4 4. Sum 15.
+- Prioritised rows 15: P1 0, P2 3, P3 8, P4 4. Sum 15. Every non-COVERED row is prioritised, with no duplicates.
+- By category: coverage gaps 10 (PARTIALLY_COVERED 9 + UNCOVERED 1; P2 3: B4, D6, S1; P3 7: A6, C3, C7, C11, E2, E6, S4). Prioritised COVERED rows 0. Provenance/governance rows 0 (the 3 reviewer-metadata debt items are tracked separately in the inventory). Handoff rows 4 (A8 P3; E8, S5, S7 P4). Other rows 1 (C5 P4, age guide sufficient). Total 15.
+- Cot to bed (C7): P3, current owner NONE, treatment EXPAND_EXISTING `bedtime-battles-and-night-waking`, not required before current-strategy closure.
 
 ## New article candidates
 
-0. Every gap fails strict test 4 because expanding an existing owner can solve it: hitting and biting go to TAN; withholding and night dryness to PTP; choking and outdoor safety to HOM; cot to bed to BED; bilingual to SPH; screen time to PLY.
+0. Every content gap fails strict test 4 because expanding an existing owner can solve it, and each expansion is counted in the article ledger (EXPAND_EXISTING 6): hitting and biting go to TAN; withholding and night dryness to PTP; choking and outdoor safety to HOM; cot to bed to BED; bilingual to SPH; screen time to PLY.
 
 ## AI-only needs
 

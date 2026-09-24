@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ChevronRight, Home, Sparkles } from "lucide-react";
+import { ArrowRight, Check, ChevronRight, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";

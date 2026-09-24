@@ -274,3 +274,12 @@
 - [x] Deferred and non-blocking: BED, SPH, PLY, night dryness, outdoor safety, friendships, A6/A8, sharing, Toddler to Family
 - [x] Validation: 141 files / 1,608 tests, typecheck x2, lint baseline, build, responsive 9/9
 - Toddler workstream CLOSED for current strategy
+
+## Phase 39A — Family hub and topic experience premium rebuild — IN PROGRESS / NO DEPLOYMENT
+- [x] Baseline measured before product changes: 1 hub, 6 topics, 18 ready guides, 25 sitemap URLs, 7 embedded Companion sections, 7 question surfaces
+- [x] Premium editorial folio direction selected; existing imagery remains the default
+- [ ] Rebuild the hub in the approved eight-part hierarchy with one primary Family-area navigation system
+- [ ] Upgrade all six topic experiences through the shared template
+- [ ] Strengthen editorial discovery and correct two confirmed hub question destinations
+- [ ] Complete focused, regression, full-suite, typecheck, lint, build and responsive validation
+- [ ] Close Phase 39A without a content sufficiency classification; do not begin Phase 39B automatically

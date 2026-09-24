@@ -1,7 +1,7 @@
 const FamilySupportNote = () => {
   return (
     <section
-      className="relative py-24 md:py-28"
+      className="relative py-14 md:py-16"
       style={{
         background:
           "linear-gradient(to bottom, hsl(var(--parchment)) 0%, hsl(var(--stage-family) / 0.5) 50%, hsl(var(--parchment)) 100%)",
@@ -9,7 +9,7 @@ const FamilySupportNote = () => {
     >
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-2xl text-center">
         <div
-          className="relative rounded-[28px] border bg-parchment/85 backdrop-blur-sm px-8 py-12 md:px-12 md:py-14 overflow-hidden shadow-[0_24px_64px_-36px_rgba(70,50,20,0.32)]"
+          className="relative border-y bg-parchment/70 px-6 py-9 md:px-10 md:py-10 overflow-hidden"
           style={{ borderColor: "hsl(var(--stage-family-accent) / 0.22)" }}
         >
           <span

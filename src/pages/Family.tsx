@@ -1,7 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FamilyHero from "@/components/family/FamilyHero";
-import FamilyQuickNav from "@/components/family/FamilyQuickNav";
 import FamilyAISupport from "@/components/family/FamilyAISupport";
 import FamilyToolsResources from "@/components/family/FamilyToolsResources";
 import FamilyTopicClusters from "@/components/family/FamilyTopicClusters";
@@ -22,11 +21,10 @@ const Family = () => {
       <Navbar />
       <main>
         <FamilyHero />
-        <FamilyQuickNav />
-        <FamilyAISupport />
         <FamilyToolsResources />
         <FamilyTopicClusters />
         <FamilyCommonQuestions />
+        <FamilyAISupport />
         <FamilySupportNote />
         <FamilyPathways />
       </main>

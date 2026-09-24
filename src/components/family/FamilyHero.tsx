@@ -108,7 +108,7 @@ const FamilyHero = () => {
                     borderColor: "hsl(var(--stage-family-accent) / 0.5)",
                   }}
                 >
-                  Ask a family question
+                  Ask the Family Companion
                 </Link>
               </div>
             </div>
@@ -185,7 +185,7 @@ const FamilyHero = () => {
                   borderColor: "hsl(var(--stage-family-accent) / 0.5)",
                 }}
               >
-                Ask a family question
+                Ask the Family Companion
               </Link>
             </div>
           </div>

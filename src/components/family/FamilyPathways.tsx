@@ -2,19 +2,19 @@ import { Link } from "react-router-dom";
 
 const pathways = [
   {
-    eyebrow: "Earlier stage",
+    eyebrow: "You may also need",
     label: "Back to Toddler",
     sub: "For guidance through the toddler years — behaviour, sleep, speech and daily rhythms.",
     to: "/toddler",
   },
   {
-    eyebrow: "Earlier stage",
+    eyebrow: "You may also need",
     label: "First Year guidance",
     sub: "For gentle support through feeding, sleep, milestones and everyday care in the first year.",
     to: "/first-year",
   },
   {
-    eyebrow: "Earlier stage",
+    eyebrow: "You may also need",
     label: "Pregnancy guidance",
     sub: "For week-by-week support, symptoms, appointments and preparing calmly for a baby.",
     to: "/pregnancy",
@@ -23,7 +23,7 @@ const pathways = [
 
 const FamilyPathways = () => {
   return (
-    <section className="py-24 md:py-28">
+    <section className="py-16 md:py-20">
       <div className="container mx-auto px-5 sm:px-8 md:px-10 max-w-5xl">
         <div className="text-center mb-14">
           <span
@@ -34,7 +34,7 @@ const FamilyPathways = () => {
             className="font-sans text-[11px] font-light tracking-[0.34em] uppercase mb-3"
             style={{ color: "hsl(var(--stage-family-accent))" }}
           >
-            Pathways
+            Around your journey
           </p>
           <h2
             className="font-serif text-[2rem] md:text-[2.4rem] leading-tight"

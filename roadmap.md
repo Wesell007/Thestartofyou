@@ -296,3 +296,9 @@
 - [x] Article actions KEEP 16 / INTERNAL_LINK_ONLY 2; 58 moments, P1 0 / P2 0 / P3 12 / P4 12
 - [x] Governance drift recorded, not repaired: 12 stale plus 6 missing inventory rows; 2 unsupported reviewer defaults (0 rendered); grounding 18/18 default deny
 - [x] No content, inventory, reviewer, grounding, route or UX changes; no deployment; Phase 39C not started
+
+## Phase 39C — Family Governance Cleanup, Pregnancy Handoff & Workstream Closure (CLOSED PASS)
+- [x] Inventory: 12/12 stale rows corrected, 6/6 missing rows created, 18/18 matching
+- [x] Unsupported reviewer metadata 2/2 removed, including the Family helper default; reviewer count test set to measured 174
+- [x] One Pregnancy → Family link on the Preparing for baby topic
+- [x] Validation passed; no deployment; no further phase started

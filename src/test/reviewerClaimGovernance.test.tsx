@@ -176,6 +176,8 @@ describe("Phase 33.5 — reviewer claim governance", () => {
     }, 0);
     // 179 at Phase 33.5. Phase 38C removed 4 unsupported Toddler occurrences
     // (3 record fields + 1 helper default) that had no article-specific provenance.
-    expect(total).toBeGreaterThanOrEqual(175);
+    // Phase 39C removed the unsupported Family helper default (1 occurrence) that
+    // fabricated a reviewer from `medicallyReviewed`. Measured current count: 174.
+    expect(total).toBe(174);
   });
 });

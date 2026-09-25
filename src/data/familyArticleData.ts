@@ -544,7 +544,6 @@ const rawFamilyArticles: FamilyArticle[] = [
     description:
       "A calm, general guide to noticing common home risks and making small, steady improvements as your child grows.",
     readTime: "6 min read",
-    medicallyReviewed: true,
     status: "ready",
     seoTitle: "Making your home feel safer for family life",
     seoDescription:
@@ -647,7 +646,6 @@ const rawFamilyArticles: FamilyArticle[] = [
     description:
       "A supportive guide to noticing when family life feels too heavy to manage alone, and how asking for help can be a normal part of caring for a family.",
     readTime: "6 min read",
-    medicallyReviewed: true,
     status: "ready",
     seoTitle: "When to ask for help as a family",
     seoDescription:
@@ -1607,11 +1605,6 @@ function withFamilyDefaults(article: FamilyArticle, all: FamilyArticle[]): Famil
     ],
     relatedSlugs:
       article.relatedSlugs ?? (sibling ? [sibling.slug] : undefined),
-    lastUpdated:
-      article.lastUpdated ?? (article.medicallyReviewed ? "2026-07" : undefined),
-    reviewedBy:
-      article.reviewedBy ??
-      (article.medicallyReviewed ? "Jenny Joines" : undefined),
   };
 }
 

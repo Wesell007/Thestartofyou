@@ -290,3 +290,9 @@
 - [x] Focused 6/6 and full 142 files / 1,614 tests passed; typecheck and build passed; lint unchanged at baseline
 - [x] Review at 1280, 834 and 390 passed with clean wrapping, controlled height, zero overflow and zero console errors
 - [x] Closed Phase 39A.1 without changing the Phase 39A closure record; Phase 39B remains unstarted
+
+## Phase 39B — Family Content Coverage & Journey Audit (AUDIT COMPLETE / OUTCOME B)
+- [x] Measured 1 hub, 6 areas, 18 ready guides, 25 Family site map URLs, 0 broken links
+- [x] Article actions KEEP 16 / INTERNAL_LINK_ONLY 2; 58 moments, P1 0 / P2 0 / P3 12 / P4 12
+- [x] Governance drift recorded, not repaired: 12 stale plus 6 missing inventory rows; 2 unsupported reviewer defaults (0 rendered); grounding 18/18 default deny
+- [x] No content, inventory, reviewer, grounding, route or UX changes; no deployment; Phase 39C not started

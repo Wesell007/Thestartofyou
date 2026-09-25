@@ -4,7 +4,6 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { familyArticles } from "@/data/familyArticleData";
 import { familyTopics } from "@/data/familyTopicData";
-import { articleInventory } from "@/data/articleInventory";
 import { ARTICLE_GROUNDING_REGISTRY } from "@/lib/grounding/articleGroundingRegistry";
 import { isGroundingEligible } from "@/lib/grounding/articleGroundingEligibility";
 import { hasReviewClaim, reviewSurfaceKey } from "@/lib/reviewClaims";
@@ -41,16 +40,15 @@ describe("Phase 39B repository truth", () => {
 });
 
 describe("Phase 39B governance drift", () => {
-  it("records 12 stale inventory rows and 6 missing rows", () => {
-    const rows = articleInventory.filter((r) => r.hub === "family" && r.system === "hub-article");
-    expect(rows).toHaveLength(12);
-    expect(rows.filter((r) => r.currentStatus === "draft" && r.contentState === "placeholder" && r.recommendedAction === "publish")).toHaveLength(12);
-    const rowSlugs = new Set(rows.map((r) => r.slug));
-    expect(familyArticles.filter((a) => !rowSlugs.has(a.slug))).toHaveLength(6);
+  // Pinned to the locked 39B audit evidence; Phase 39C remediated live state.
+  it("records 12 stale inventory rows and 6 missing rows (39B evidence)", () => {
+    const inv = read("docs/content/phase39b-family-content-inventory.md").split("\n").filter((l) => /^\| \d+ \|/.test(l));
+    expect(inv.filter((l) => l.includes("| draft / placeholder / publish |"))).toHaveLength(12);
+    expect(inv.filter((l) => l.includes("| missing row |"))).toHaveLength(6);
   });
 
-  it("has 2 unsupported reviewer metadata records and 0 rendered claims", () => {
-    expect(familyArticles.filter((a) => a.reviewedBy)).toHaveLength(2);
+  it("has 2 unsupported reviewer metadata records (39B evidence) and 0 rendered claims", () => {
+    expect(read("docs/content/phase39b-family-content-coverage-audit.md")).toContain("UNRESOLVED_PROVENANCE 2 (the reviewer metadata above)");
     for (const a of familyArticles) expect(hasReviewClaim(reviewSurfaceKey("article", a.slug))).toBe(false);
   });
 

@@ -71,3 +71,28 @@ Verdict: First Year correctly models up to four simultaneous babies from one bir
 **OUTCOME D — CURRENT ARCHITECTURE HAS DATA-INTEGRITY / SAFETY RISKS THAT SHOULD BE RESOLVED BEFORE FURTHER CONTINUITY WORK.**
 
 Chosen on correctness: reachable paths today let a second pregnancy inherit the previous pregnancy's status, reflections, week photos and toolkit records, and let a new First Year setup delete an earlier child's babies and cascade their records. Multi-child support additionally requires a domain-model rework (Outcome C scope), but the reachable integrity risks come first.
+
+## Final evidence reconciliation (supersedes conflicting wording above)
+
+Live structure queries: Q1 and Q2 as above; Q3 (2026-09-26) primary/unique keys on `pregnancy_journeys`, `journeys`, `first_year_journeys` and every foreign key from First Year tables to `babies`. Catalog only; no customer rows.
+
+| Claim | Result | Measured fact | Evidence |
+|---|---|---|---|
+| `pregnancy_journeys` key | VERIFIED | `PRIMARY KEY (user_id)` | REPOSITORY-DEFINES `20260720120000_atomic_journey_lifecycle.sql` lineage; VERIFIED-PRODUCTION Q3 |
+| `save_pregnancy_journey` conflict/updates | VERIFIED | `on conflict (user_id) do update set lmp_date, due_date, updated_at`; status, status_changed_at, outcome_date untouched | REPOSITORY-DEFINES latest `20260803231512_*.sql`; VERIFIED-PRODUCTION Q2 |
+| `journeys` active lifecycle | VERIFIED | `PRIMARY KEY (user_id)`: one lifecycle row per person | REPOSITORY-DEFINES `20260424105940_*.sql`; VERIFIED-PRODUCTION Q3 |
+| `save_first_year_journey` deletion | VERIFIED | explicit `DELETE FROM public.babies WHERE user_id = v_user_id` before insert | REPOSITORY-DEFINES `20260804110355_*.sql`; VERIFIED-PRODUCTION Q2 |
+| `first_year_entries.baby_id` | VERIFIED | `ON DELETE CASCADE` | REPOSITORY-DEFINES `20260806202830_*.sql`; VERIFIED-PRODUCTION Q3 |
+| `first_year_care_events.baby_id` | MEASURED | `NOT NULL`, `ON DELETE CASCADE` | REPOSITORY-DEFINES `20260818161415_*.sql`; VERIFIED-PRODUCTION Q3 |
+| `first_year_memories.baby_id` | CORRECTED | `ON DELETE SET NULL`, but CHECK requires `baby_id` when scope is `baby`; outcome of deleting such a baby is a schema conflict, runtime untested | REPOSITORY-DEFINES `20260810130036_*.sql`; VERIFIED-PRODUCTION Q1, Q3 |
+| `first_year_reminders.baby_id` | MEASURED | `ON DELETE CASCADE` | REPOSITORY-DEFINES `20260819193611_*.sql`; VERIFIED-PRODUCTION Q3 |
+
+Analysis (not runtime-tested): with one `pregnancy_journeys` row per person that a new save updates in place, a later pregnancy cannot be stored as a separate episode alongside an earlier one.
+
+UNVERIFIED RUNTIME BEHAVIOUR: whether an ended pregnancy is persisted as a past chapter; what `/my-week` renders after a pregnancy ends; whether First Year setup fails when baby-scoped memories exist.
+
+Content count (unit: rendered page). Files searched 3 (`src/data/weekData.ts`, `trimesterData.ts`, `pregnancyTopicData.ts`). Pages assessed 51 (42 week pages, 3 trimester pages, 6 live topic pages). Singleton-assumption pages 37 (page text matches "your baby", "baby's", "baby is" or "the baby"); 14 do not. Medical/source-review 37 (singleton pages that also state size, weight, growth, movement, scan or labour information, which differs for multiples); copy-only 0; 37 = 37 + 0. Method is a text-pattern heuristic, not an editorial review.
+
+Data objects audited 24: multi-pregnancy-safe 1 (`archived_journeys`); per-child keyed 5 (`babies`, `first_year_entries`, `first_year_care_events`, `first_year_memories`, `first_year_reminders`), but replaced by First Year setup; ambiguous ownership 14 (reflections, week photos, week media, 8 toolkit tables, 3 companion tables); singleton by design 4 (`pregnancy_journeys`, `saved_journeys`, `journeys`, `first_year_journeys`). 1 + 5 + 14 + 4 = 24.
+
+Outcome D retained: the verified facts still show reachable data-integrity risks (P0 4).

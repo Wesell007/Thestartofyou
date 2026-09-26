@@ -69,15 +69,24 @@ For each affected table, answer separately:
 
 Any gap names the exact rule or combination and is fixed in the RLS plan.
 
-**B. Constraint table.** This replaces the earlier assumption of 11. Write one row per constraint on each table, with:
+**B. Constraint table.** This replaces every earlier assumed or grouped count. Write one row per actual target constraint, with:
 - CONSTRAINT, TABLE and PURPOSE;
 - PREVIOUSLY COUNTED IN 41B.0;
 - NEWLY ADDED BY THIS RECONCILIATION;
 - TARGET ONLY = YES.
 
-The earlier item 6 is split into its 12 per-table links. The new baby items are added: unique `(id, user_id)` on babies and 4 composite baby links.
+Episode ownership links:
+- Do not assume a number. Read the target design and list every table meant to have a composite `(episode, user_id)` link.
+- Return "Episode composite ownership links = X" with the exact table list, and derive the count only from that list.
+- If the migration plan and the RLS plan disagree on which tables get the link, reconcile the documents first and record the corrected design count. For example, the RLS plan adds `babies` and `journeys`, which the migration plan's list of 11 does not name.
 
-Derive "New constraints proposed" from the table, and keep "Constraints changed / removed" as a separate count. Update the RLS plan and the Section 26 figures to match.
+Separately list:
+- the episode `(id, user_id)` uniqueness;
+- the `babies (id, user_id)` uniqueness;
+- each of the 4 First Year `(baby_id, user_id)` links;
+- every other designed target constraint.
+
+Derive "New constraints proposed = X" and "Constraints changed / removed = Y" from the completed table. No earlier figure (9, 11, 12, 13) is kept unless the table produces it. Update the RLS plan, and the migration plan if needed, plus the Section 26 figures to match. No database constraint is created or changed.
 
 **C. Evidence.** Structure-only catalog reads: `pg_policies`, `pg_constraint`, `pg_indexes`. Customer rows read: 0. Labels:
 - CURRENT POLICY = REPOSITORY-DEFINES

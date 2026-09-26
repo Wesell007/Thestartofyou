@@ -10,13 +10,13 @@ Reporting only. No product, database, route, UI, AI or content changes. No deplo
   - Companion context: `companionJourneyContext`, `companionRequestFoundation`, `companionContext`, `journeySuggestionFreshness`.
   - Journal context: `journalEntrySelection`, `journalSearchRouting`, `journalPermissionUi`, `journalEntryTransparency`, `journalEntryCta`.
   - Focused: `src/test/phase41aMultiplesReadinessAudit.test.ts`.
-- Work out the number of unique files and unique tests across all groups without counting a file twice when it appears in more than one group.
+- Run each group with the JSON reporter. Deduplicate tests by identity (repository file path + full suite and test name), never by subtracting file counts. Report raw group test executions, unique test identities, and unique files.
 - The earlier combined run (13 files / 112 tests) is recorded as "previously run". Group files added beyond that set are recorded as "newly run".
 - If anything fails, report the failure and fix nothing.
 
 ## 2. Fill counts not yet measured (read-only)
 - Data objects audited: count every table in the ownership matrix. Classify each as multi-pregnancy-safe, multi-child-safe, or ambiguous ownership.
-- Content: search pregnancy content files (week, trimester and pregnancy topic data, plus week pages) to count the pages or files that assume one baby. Split them into copy-only plurality issues and medical differences that need a later source review. Count by file or page and state the method used.
+- Content: headline unit is the rendered page (each pregnancy week page, trimester page and pregnancy topic page generated from the data). Fall back to source data record, or to file, only if page-level counting is impossible, and state the unit used. Never mix units in one total. Report files searched, pages assessed, pages that assume one baby, copy-only plurality issues, medical/source-review issues, and a separate neutral category if needed. Copy-only + medical + neutral must add up to the pages that assume one baby.
 
 ## 3. Risk register reconciliation
 Reclassify the 10 findings into P0 data integrity, P1 safety or wrong context, P2 functional limitation, P3 UX or copy limitation, and existing safeguards. Keep the two Companion safeguards outside the active-risk total. Check that the numbers add up: active = P0+P1+P2+P3, then active + safeguards = total. Do not raise any severity to make the numbers work.

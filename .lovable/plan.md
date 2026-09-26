@@ -35,7 +35,15 @@ For each table, record which of view, add, edit and delete rules exist, with the
 Composite link check against the RLS plan:
 - Episodes: unique `(id, user_id)` is present (constraint 2), with composite links on the 11 tables, `babies` and `journeys`.
 - Babies: no unique `(id, user_id)` and no composite `(baby_id, user_id)` links exist in the plan today. The existing validation triggers on entries, care events, memories and reminders check baby ownership, but only when a row is added or edited, not as a database relationship.
-- Planned fix: add unique `(id, user_id)` on `babies` and composite `(baby_id, user_id)` links on the 4 First Year child tables. The Section 26 new-constraint count becomes 11. Both are marked TARGET COMPOSITE OWNERSHIP CONTROL = DESIGN-ADDRESSED / IMPLEMENTATION REQUIRED IN 41B.1 and are never described as live.
+- Planned fix: add unique `(id, user_id)` on `babies` and composite `(baby_id, user_id)` links on the 4 First Year child tables. Both are marked TARGET COMPOSITE OWNERSHIP CONTROL = DESIGN-ADDRESSED / IMPLEMENTATION REQUIRED IN 41B.1 and are never described as live.
+- The Section 26 new-constraint count is NOT predetermined. It comes only from the completed constraint table, which has one row per target constraint. The table:
+  - splits the grouped episode links into one row per table;
+  - counts the episode `(id, user_id)` uniqueness separately;
+  - adds the `babies (id, user_id)` uniqueness and the 4 baby links;
+  - lists every other designed constraint individually.
+
+  No earlier headline number (9, 11 or any other) is kept unless the table produces it. Outputs: New constraints proposed = X and Constraints changed / removed = Y.
+- Optional baby links: where `baby_id` is meant to be empty (family-scoped memories, reminders not tied to one baby), the composite link applies only when a baby is set, and it then blocks other users' babies. When empty, the row's user-level ownership rules protect it. An empty link is not counted as a failure.
 
 Outcome rules:
 - If any rule is missing a required row filter or row check (for example, an edit rule with no check on the resulting row), do not keep 0. Name each table and rule, add its replacement to the RLS plan and revise the Section 26 count.
@@ -50,7 +58,7 @@ Keep READY FOR 41B.1 only if all 8 findings have concrete controls and step 4 re
 - whether it is permissive or restrictive;
 - its row filter and new-row check.
 
-Where the new-row check is omitted, Postgres applies the row filter to the edited row; record that explicitly. Combine several rules on the same operation (permissive by OR, restrictive by AND) before judging.
+For edit (UPDATE) rules only: where a rule has a row filter (USING) but no explicit new-row check (WITH CHECK), record whether Postgres uses that filter as the check on the edited row under the effective rule set. This is not applied to add (INSERT) rules. For adds, protection must come from an INSERT or ALL rule whose effective WITH CHECK protects the new row. Evaluate the full rule set by table, operation, role, mode, USING and WITH CHECK, combining several rules on the same operation (permissive by OR, restrictive by AND) before assigning YES or NO.
 
 For each affected table, answer separately:
 - VIEW OWNER-SCOPED

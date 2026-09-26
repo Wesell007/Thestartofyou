@@ -308,3 +308,8 @@
 - [x] Claims accounting kept in two sets: current About claims (36) and strategic statements (16)
 - [x] Capability map 50 records; six-layer, calm, moat, claims, priorities documented in docs/strategy
 - [x] No product, UI, AI, flag, database or About changes; no deployment; next phase not started
+
+## Phase 40B — About / Our Story Truth-Led Narrative Rebuild (CLOSED PASS)
+- [x] /about rebuilt as 10-section editorial narrative from the Phase 40A claims registry
+- [x] Feature counts and unsupported memory, grounding and journal-integration claims removed; future direction in a labelled band
+- [x] Claims test checks specific false claims, not keywords; full suite, typecheck ×2, lint baseline, build PASS; no deployment

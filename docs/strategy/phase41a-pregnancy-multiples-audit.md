@@ -133,3 +133,17 @@ Ownership rules. MULTI-PREGNANCY-SAFE: a row identifies one specific pregnancy, 
 Counts (from the table): objects 24; multi-pregnancy-safe 1; multi-child-safe 5; ambiguous 15; none of the three / other 4 (`pregnancy_journeys`, `saved_journeys`, `journeys`, `first_year_journeys`). Overlap: `first_year_reminders` is in both multi-child and ambiguous. Coverage: all 24 appear at least once. Multi-child-safe describes the key only; First Year setup still deletes and replaces all babies (finding 5).
 
 Memory delete interaction stays UNVERIFIED RUNTIME BEHAVIOUR. Outcome D does not depend on it.
+
+## Closure (2026-09-26)
+
+Measured reconciliation accepted: 30 unique files / 249 unique tests / 249 PASS. Findings 10; active 8 (P0 4, P1 1, P2 3, P3 0); safeguards 2; handoff tasks 12 (9 / 2 / 1). Memory delete interaction: UNVERIFIED RUNTIME BEHAVIOUR.
+
+PHASE 41A — PREGNANCY MULTIPLES & MULTI-CHILD READINESS AUDIT
+
+AUDIT COMPLETE /
+CURRENT MULTIPLES CAPABILITY ESTABLISHED /
+MULTI-CHILD DATA OWNERSHIP MAPPED /
+CONTEXT-CONTAMINATION RISKS IDENTIFIED /
+PREGNANCY-TO-FIRST-YEAR READINESS TESTED /
+LOVABLE VS CLAUDE IMPLEMENTATION BOUNDARY DEFINED /
+OUTCOME D

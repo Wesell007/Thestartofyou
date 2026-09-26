@@ -314,9 +314,13 @@
 - [x] Feature counts and unsupported memory, grounding and journal-integration claims removed; future direction in a labelled band
 - [x] Claims test checks specific false claims, not keywords; full suite, typecheck ×2, lint baseline, build PASS; no deployment
 
-## Phase 41A — Pregnancy Multiples & Multi-Child Readiness Audit (AUDIT COMPLETE / OUTCOME D)
+## Phase 41A — Pregnancy Multiples & Multi-Child Readiness Audit (CLOSED / OUTCOME D)
 - [x] Four strategy docs and read-only test created; no product, schema or deployment changes
 - [x] Outcome D: reachable cross-pregnancy and baby-replacement integrity risks before further continuity work
-- [x] Final evidence reconciliation: 6 groups, 218 unique tests PASS; 8 database claims verified or corrected; risks P0 4 / P1 1 / P2 3 / P3 0 + 2 safeguards
-- [ ] Closure evidence patch: ownership 24 objects counted (1 / 5 / 15 / other 4); test path gate BLOCKED (re-run measured 30 files / 249 PASS, not 28 / 218)
-- [ ] Phase 41B not started (awaiting approval)
+- [x] Final evidence reconciliation: 6 groups, 30 unique files / 249 unique tests / 249 PASS; 8 database claims verified or corrected; risks P0 4 / P1 1 / P2 3 / P3 0 + 2 safeguards
+- [x] Closure evidence patch: ownership 24 objects counted (1 / 5 / 15 / other 4); measured 30 / 249 accepted as authoritative
+
+## Phase 41B.0 — Family Entity Foundation: Architecture & Migration Design (DESIGN ONLY, LOVABLE)
+- [ ] Re-verify current-state facts (repository + catalog structure only, no customer rows)
+- [ ] Five design docs in docs/strategy/phase41b-*
+- [ ] Section 26 report and architecture decision; 41B.1 NOT STARTED

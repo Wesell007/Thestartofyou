@@ -39,3 +39,6 @@ Child A may already be in Toddler / Family content.
 
 ## Verdict
 The family graph is not representable. Multi-birth within one First Year is. Everything pregnancy-side is keyed to the person, not to a pregnancy.
+
+## Final evidence reconciliation
+Reminders now measured: `first_year_reminders.baby_id` cascades on baby delete (VERIFIED-PRODUCTION). Memories: `SET NULL` conflicts with the baby-scope CHECK; runtime untested. Current model: INADEQUATE for the family graph.

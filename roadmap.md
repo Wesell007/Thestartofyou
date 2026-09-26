@@ -317,4 +317,5 @@
 ## Phase 41A — Pregnancy Multiples & Multi-Child Readiness Audit (AUDIT COMPLETE / OUTCOME D)
 - [x] Four strategy docs and read-only test created; no product, schema or deployment changes
 - [x] Outcome D: reachable cross-pregnancy and baby-replacement integrity risks before further continuity work
+- [x] Final evidence reconciliation: 6 groups, 218 unique tests PASS; 8 database claims verified or corrected; risks P0 4 / P1 1 / P2 3 / P3 0 + 2 safeguards
 - [ ] Phase 41B not started (awaiting approval)

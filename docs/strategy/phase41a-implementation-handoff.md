@@ -20,3 +20,6 @@ Nothing below has been started. Phase 41B requires explicit approval.
 Totals: CLAUDE-CODE-SUITABLE 9, LOVABLE-SUITABLE 2, EITHER 1 = 12.
 
 Recommended order: 1, 5, then 2 and 3 together, then 4 and 7, then 6, 8, 9 to 12.
+
+## Final evidence reconciliation
+Totals unchanged: 9 + 2 + 1 = 12. Task 4 also covers the memory `SET NULL` versus baby-scope CHECK conflict.

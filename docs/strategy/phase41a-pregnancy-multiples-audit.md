@@ -96,3 +96,40 @@ Content count (unit: rendered page). Files searched 3 (`src/data/weekData.ts`, `
 Data objects audited 24: multi-pregnancy-safe 1 (`archived_journeys`); per-child keyed 5 (`babies`, `first_year_entries`, `first_year_care_events`, `first_year_memories`, `first_year_reminders`), but replaced by First Year setup; ambiguous ownership 14 (reflections, week photos, week media, 8 toolkit tables, 3 companion tables); singleton by design 4 (`pregnancy_journeys`, `saved_journeys`, `journeys`, `first_year_journeys`). 1 + 5 + 14 + 4 = 24.
 
 Outcome D retained: the verified facts still show reachable data-integrity risks (P0 4).
+
+## Closure evidence patch (2026-09-26)
+
+Test paths. The JSON reports from the earlier reconciliation no longer existed in the sandbox, so the six groups were re-run with the JSON reporter. File selection was rebuilt from the named tests plus filename search. Measured: 30 unique files, 249 unique tests, 249 PASS (Pregnancy 4 / 27, First Year 11 / 99, Lifecycle 5 / 46, Companion 4 / 38, Journal 5 / 33, Focused 1 / 6; no file in two groups). This does not match the recorded 28 files / 218 tests because the earlier search-based file selection cannot be reproduced exactly. Gate "path inventory reconciles to 28 / 218": FAILED.
+
+Ownership rules. MULTI-PREGNANCY-SAFE: a row identifies one specific pregnancy, so pregnancies cannot overwrite or share it. MULTI-CHILD-SAFE: the row is a child or is bound to one child by `baby_id`. AMBIGUOUS OWNERSHIP: rows can exist with only user (or user + week) ownership and no pregnancy or child binding. OTHER EXPLICIT SCOPE: an explicit scope that meets none of these.
+
+| Object | Multi-pregnancy-safe | Multi-child-safe | Ambiguous | Other explicit scope |
+|---|---|---|---|---|
+| archived_journeys | YES | NO | NO | none |
+| pregnancy_journeys | NO | NO | NO | single per user (is the pregnancy) |
+| saved_journeys | NO | NO | NO | single per user (legacy) |
+| journeys | NO | NO | NO | lifecycle pointer, single per user |
+| first_year_journeys | NO | NO | NO | single per user (First Year) |
+| babies | NO | YES | NO | none |
+| first_year_entries | NO | YES | NO | none |
+| first_year_care_events | NO | YES | NO | none |
+| first_year_memories | NO | YES | NO | all_babies / family scope rows |
+| first_year_reminders | NO | YES | YES (rows without `baby_id`) | none |
+| reflections | NO | NO | YES | none |
+| week_photos | NO | NO | YES | none |
+| week_media_memories | NO | NO | YES | none |
+| pregnancy_appointments | NO | NO | YES | none |
+| pregnancy_symptom_notes | NO | NO | YES | none |
+| baby_movement_notes | NO | NO | YES | none |
+| birth_plans | NO | NO | YES | none |
+| hospital_bag_items | NO | NO | YES | none |
+| midwife_questions | NO | NO | YES | none |
+| contraction_sessions | NO | NO | YES | none |
+| contraction_events | NO | NO | YES | none |
+| companion_conversations | NO | NO | YES | none |
+| companion_messages | NO | NO | YES | none |
+| companion_memories | NO | NO | YES | none |
+
+Counts (from the table): objects 24; multi-pregnancy-safe 1; multi-child-safe 5; ambiguous 15; none of the three / other 4 (`pregnancy_journeys`, `saved_journeys`, `journeys`, `first_year_journeys`). Overlap: `first_year_reminders` is in both multi-child and ambiguous. Coverage: all 24 appear at least once. Multi-child-safe describes the key only; First Year setup still deletes and replaces all babies (finding 5).
+
+Memory delete interaction stays UNVERIFIED RUNTIME BEHAVIOUR. Outcome D does not depend on it.

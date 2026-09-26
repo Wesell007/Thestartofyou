@@ -189,8 +189,21 @@ Use D internally as the north star; E is the candidate public expression once pr
 Named ideas: "Most guidance ... is noise" soften; "What we built" reframe as outcomes; "The journey rarely feels guided" keep; "So we built something connected" qualify; "One journey, connected across every stage" qualify to saved stages; "Support that adapts to where you are" qualify; "Some moments need somewhere offline to live" keep; "Designed differently" keep, weak; "Why this exists" keep.
 
 ## Final verdict
-1. Today: a calm, well-governed UK editorial guidance product across five stages, with a journey-aware Companion, strong deterministic safety routing, three saved lifecycles, private pregnancy and first year keeping tools, and a separate physical journal.
+1. Today, The Start of You is a calm guidance platform spanning TTC, pregnancy, the first year, toddler life and wider family support, with three saved journeys and a context-aware Companion. PUBLIC SUPPORT AREAS (5): TTC, Pregnancy, First Year, Toddler, Family. SAVED JOURNEYS (3): ttc, pregnancy, first_year. Family and Toddler are public support areas, not saved journeys.
 2. Should become: one relationship with support that evolves with the family, carrying forward only what people choose.
 3. Gap: context is invisible, answers never become actions, continuity breaks at TTC → pregnancy, memory is off, and journal keeping is disconnected.
-4. Defensible: not AI or memory (commodity/expected, E1–E4) but the combination of honest trust governance, consented longitudinal continuity and calm design (HYP).
-5. Next smallest phase: Visible context and trust, smallest version (priority 1). Not started.
+4. Potential system advantage (defensibility hypothesis, not market validated): not AI or memory (commodity/expected, E1–E4) but the combination of honest trust governance, consented longitudinal continuity and calm design (HYP).
+5. Next smallest phase: VISIBLE ANSWER PROVENANCE & TRUST, smallest version (priority 1). Not started.
+
+## Appendix: final evidence reconciliation (2026-09-26)
+
+Previously run in 40A: phase40aProductThesisAudit (5/5); reviewerClaimGovernance, aiVersions, phase39cFamilyClosure (23/23 combined). Companion, Safety and Lifecycle groups were NOT RUN previously; all four groups below were newly run in this reconciliation (Reviewer files re-run).
+
+| Group | Exact files | Files | Tests | Result | Status |
+|---|---|---|---|---|---|
+| Companion | src/test/aiSearchCallerModes.test.tsx, companionBoundaryRouter.test.ts, companionConversation.test.ts, companionEntryPoints.test.tsx, companionEntryRemainder.test.ts, companionJourneyContext.test.ts, companionMemoryIntent.test.ts, companionMemoryInteraction.test.tsx, companionMemoryPolicy.test.ts, companionNaming.test.tsx, companionNextActionsComposition.test.tsx, companionNextActionsUi.test.tsx, companionRequestFoundation.test.ts, companionSurfaces.test.tsx, companionVoiceInfrastructure.test.ts (all under src/test/) | 15 | 180 | 180/180 PASS | newly run |
+| Safety | src/lib/safety/safetyClassifierProbeSchema.test.ts; src/test/aiSearchBoundaryRouting.test.ts, aiSearchSafetyComposition.test.ts, aiSearchSafetyRouting.test.ts, amberSafety.test.ts, enrichmentSafety.test.ts, safetyRouter.test.ts, urgentPatterns.test.ts | 8 | 180 | 180/180 PASS | newly run |
+| Lifecycle | src/test/firstYearPendingSetup.test.ts, homepageJourneyEvolution.test.tsx, journeyContextFreshness.test.tsx, journeyNextActions.test.ts, journeyPersonalResolution.test.ts, journeyStateSignal.test.ts, journeySuggestionFreshness.test.tsx, journeySuggestions.test.ts, pregnancySetupRoute.test.ts, startYourJourney.test.tsx | 10 | 97 | 97/97 PASS | newly run |
+| Reviewer | src/test/phase39cFamilyClosure.test.ts, src/test/reviewerClaimGovernance.test.tsx | 2 | 17 | 17/17 PASS | previously run, re-run |
+
+Failures: 0. Product changes: 0. "Defensible system capabilities identified" means candidate compound capabilities supported by this audit, not proof that a competitive moat exists.

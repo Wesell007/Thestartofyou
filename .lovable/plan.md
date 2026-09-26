@@ -9,7 +9,9 @@ Run the existing groups now (read-only, no code changes) and report exact file l
 - Lifecycle: `journey*` tests, `startYourJourney`, `homepageJourneyEvolution`, `pregnancySetupRoute`, `firstYearPendingSetup`
 - Reviewer: `reviewerClaimGovernance`, `phase39cFamilyClosure`
 
-Output: `X / X PASS` or failure details per group. Any failure blocks closure (no fixes in this phase).
+Before running each group, resolve the patterns with a file listing and record the exact repository paths (especially `companion*`, `journey*`, `src/lib/safety/*.test.ts`).
+
+Per group report: GROUP, matched test files (exact paths), Files = X, Tests = X, Result = `X / X PASS` or exact failure details, and whether each file was run previously or newly run here. Any failure blocks closure and is reported as evidence; no product fixes.
 
 ## 2–4. Documentation wording (strategy docs only)
 - `phase40a-product-thesis-audit.md` verdict line 192: replace "five stages" sentence with the required wording; add note distinguishing PUBLIC SUPPORT AREAS (5) from SAVED JOURNEYS (3).

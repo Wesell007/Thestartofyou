@@ -98,9 +98,9 @@ Safeguards #7 and #8 are kept unchanged by the resolver contract.
 - Deterministic backfills = 3.
 - High-confidence derivable backfills = 2.
 - Ambiguous legacy backfills = 10 (not auto-assigned).
-- New constraints proposed = 9.
-- Constraints to remove/change = 5.
-- RLS policies requiring change = 4 new on 1 new table; 0 existing modified.
+- New constraints proposed = 26 (ledger in RLS plan section 2: 21 previously designed, counted per table, plus 5 new baby ownership controls).
+- Constraints changed / removed = 5 (RLS plan section 3).
+- RLS policies requiring change = 4 new on 1 new table; 0 existing modified (all 18 affected tables verified owner-scoped for view, add, edit and delete; RLS plan section 1).
 - Database functions requiring replacement/change = 5 (3 replaced, 2 new).
 - Client write paths requiring migration = 17.
 - Potential destructive behaviours removed = 4 (babies delete in First Year setup; hard deletes in `delete_active_journey`; cascade from baby to entries/care/reminders; SET NULL on baby-scoped memories).
@@ -115,3 +115,7 @@ Safeguards #7 and #8 are kept unchanged by the resolver contract.
 
 ## 8. Architecture decision
 READY FOR 41B.1 IMPLEMENTATION. Every readiness item is covered: target model, legacy migration, compatibility, RLS, transactional writes, context contract, First Year reset replacement, memory FK resolution, test plan, rollback plan, production preconditions.
+
+
+## 9. Final closure reconciliation (2026-09-26)
+Access rules verified per operation from live structure (no customer rows). Baby cross-user ownership gap closed in design with `babies (id, user_id)` and 4 composite baby links. Constraint ledger: 26 new, 5 changed / removed. Decision unchanged: READY FOR 41B.1 IMPLEMENTATION.

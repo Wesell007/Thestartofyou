@@ -323,4 +323,5 @@
 ## Phase 41B.0 — Family Entity Foundation: Architecture & Migration Design (CLOSED PASS, DESIGN ONLY)
 - [x] Re-verify current-state facts (repository + catalog structure only, no customer rows)
 - [x] Five design docs in docs/strategy/phase41b-*
-- [x] Section 26 report and architecture decision READY FOR 41B.1; 41B.1 NOT STARTED (awaiting approval)
+- [x] Section 26 report and architecture decision READY FOR 41B.1
+- [x] Final closure reconciliation: access rules verified per operation (0 existing to modify), baby composite ownership added, constraint ledger 26 new / 5 changed; 41B.1 NOT STARTED (awaiting approval)

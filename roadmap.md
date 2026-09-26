@@ -313,3 +313,8 @@
 - [x] /about rebuilt as 10-section editorial narrative from the Phase 40A claims registry
 - [x] Feature counts and unsupported memory, grounding and journal-integration claims removed; future direction in a labelled band
 - [x] Claims test checks specific false claims, not keywords; full suite, typecheck ×2, lint baseline, build PASS; no deployment
+
+## Phase 41A — Pregnancy Multiples & Multi-Child Readiness Audit (AUDIT COMPLETE / OUTCOME D)
+- [x] Four strategy docs and read-only test created; no product, schema or deployment changes
+- [x] Outcome D: reachable cross-pregnancy and baby-replacement integrity risks before further continuity work
+- [ ] Phase 41B not started (awaiting approval)

@@ -302,3 +302,9 @@
 - [x] Unsupported reviewer metadata 2/2 removed, including the Family helper default; reviewer count test set to measured 174
 - [x] One Pregnancy → Family link on the Preparing for baby topic
 - [x] Validation passed; no deployment; no further phase started
+
+## Phase 40A — Product Thesis Alignment & Future Capability Audit (AUDIT COMPLETE)
+- [x] Evidence safeguards applied: fresh repository checks, dated market sources, production truth split, strict claims registry
+- [x] Claims accounting kept in two sets: current About claims (36) and strategic statements (16)
+- [x] Capability map 50 records; six-layer, calm, moat, claims, priorities documented in docs/strategy
+- [x] No product, UI, AI, flag, database or About changes; no deployment; next phase not started

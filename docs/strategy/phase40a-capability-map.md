@@ -107,19 +107,19 @@ Columns: status / flag / dependency / safety-privacy / strategic value (S) / dif
 | 49 | IVF saved lifecycle | INTENTIONALLY_NOT_BUILDING | standing constraint |
 | 50 | Family saved lifecycle | INTENTIONALLY_NOT_BUILDING | Family is cross cutting (39A.1) |
 
-## Totals
+## Totals (reconciled row by row)
 
-| Status | Count |
-|---|---|
-| LIVE_PRODUCTION | 15 |
-| LIVE_PARTIAL | 15 |
-| BUILT_FLAGGED_OFF | 5 |
-| PROTOTYPE_ONLY | 1 |
-| PLANNED_NOT_BUILT | 2 |
-| BLOCKED_GOVERNANCE | 2 |
-| BLOCKED_LEGAL_PRIVACY | 1 |
-| ABSENT | 7 |
-| INTENTIONALLY_NOT_BUILDING | 4 |
-| **Total** | **52 status assignments?** see reconciliation |
+| Status | Rows | Count |
+|---|---|---|
+| LIVE_PRODUCTION | 1–15 | 15 |
+| LIVE_PARTIAL | 16, 17, 18, 19, 29, 32, 33, 34, 37, 38, 39, 40, 41 | 13 |
+| BUILT_FLAGGED_OFF | 20, 21, 22, 31 | 4 |
+| PROTOTYPE_ONLY | 23 | 1 |
+| PLANNED_NOT_BUILT | 24, 25 | 2 |
+| BLOCKED_GOVERNANCE | 27, 28 | 2 |
+| BLOCKED_LEGAL_PRIVACY | 26 | 1 |
+| ABSENT | 30, 35, 36, 42, 43, 44, 45, 46 | 8 |
+| INTENTIONALLY_NOT_BUILDING | 47–50 | 4 |
+| **Total** | | **50** |
 
-Reconciliation: rows 1–15 LIVE_PRODUCTION (15); LIVE_PARTIAL rows 16, 17, 18, 19, 29, 32, 33, 34, 37, 38, 39, 40, 41 (13); BUILT_FLAGGED_OFF rows 20, 21, 22, 31 (4); PROTOTYPE_ONLY 23 (1); PLANNED_NOT_BUILT 24, 25 (2); BLOCKED_GOVERNANCE 27, 28 (2); BLOCKED_LEGAL_PRIVACY 26 (1); ABSENT 30, 35, 36, 42, 43, 44, 45, 46 (8); INTENTIONALLY_NOT_BUILDING 47–50 (4). 15+13+4+1+2+2+1+8+4 = **50**. The row-level classification is authoritative; the preliminary table above is superseded by this line.
+Production-state split: VERIFIED 15 (AIC-R1 or public sitemap), UNVERIFIED but unflagged 13 (all LIVE_PARTIAL), repository default OFF 22.

@@ -29,3 +29,9 @@ Final safeguards applied to Part 2:
 - Context rule: no personal context is safer than wrong context; the resolver never guesses between several pregnancies or children.
 
 Then return every Section 26 field with exact counts traceable to the documents (risks addressed out of 4 / 1 / 3, unresolved risks), plus: product, database, migration file, RLS, customer data read, Companion, memory and grounding changes all 0; deployment NO; 41B.1 NOT STARTED. READY FOR 41B.1 is returned only if every item in the readiness bar is covered; otherwise DESIGN BLOCKED with the missing decision named. The supplied closure wording is used only if the design is complete.
+
+## Reporting rule and tooling
+- For each P0 / P1 / P2 finding, Section 26 shows five fields: the 41A finding, the 41B.0 design response, the document and section, IMPLEMENTATION REQUIRED IN 41B.1 = YES, and RESOLVED IN CURRENT PRODUCT = NO.
+- Findings the design covers are called DESIGN-ADDRESSED, never implemented, fixed or resolved.
+- The 41A closure wording is recorded exactly as supplied, including its historical "Lovable vs Claude" line.
+- The 41B documents treat 41B.0 as Lovable design work, with no Claude Code handoff language. 41B.1 is not started.

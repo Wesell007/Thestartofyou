@@ -41,3 +41,11 @@ Asserts only objective facts: lifecycle set is exactly ttc | pregnancy | first_y
 
 ## Step 5 — Report and close
 Return the section 23 report with every number filled from the documents, the five-part strategic verdict and one recommended next smallest phase (not started). Close with the exact section 24 wording only if all accounting reconciles; otherwise report BLOCKED naming the failed gate.
+
+## Evidence safeguards (approved addendum)
+1. Expected facts are not assertions yet. The lifecycle set, empty reviewer registry, routing version, default-deny grounding and off-by-default flags are checked fresh first. If the repository differs, product code and history stay as they are: the difference is reported, the capability is classified from what was measured, and the test encodes the truthful current state. BLOCKED only if a difference prevents reliable completion.
+2. Market evidence boundary. The moat map labels every competitive claim as VERIFIED_CURRENT_MARKET_EVIDENCE, SUPPORTED_STRATEGIC_INFERENCE or STRATEGIC_HYPOTHESIS_NOT_MARKET_VERIFIED, and keeps repository evidence, external market evidence and inference separate. Web search may be used for current competitor evidence, with source URLs cited. If none is available, the claim stays a hypothesis. Each potential moat answers the six questions: what compounds, what accumulated asset, why copying the visible feature is not enough, what is easy to reproduce, what stays hard, and what evidence supports this.
+3. Production truth. Each capability records REPOSITORY DEFAULT, VERIFIED PRODUCTION STATE (only from prior release/verification docs) or UNVERIFIED PRODUCTION STATE. UNVERIFIED is never promoted to LIVE_PRODUCTION.
+4. Strict claims registry. Each statement records its evidence, bucket, the qualification it needs, the reason and any future dependency. Anything that depends on an off flag, pending governance or privacy/legal approval, or unverified production config cannot be TRUE NOW.
+5. Priorities come out of the audit. The five hypotheses can be merged, narrowed, reordered or rejected. Fewer, deeper system capabilities are preferred.
+6. `roadmap.md` records the addendum as part of the 40A entry.

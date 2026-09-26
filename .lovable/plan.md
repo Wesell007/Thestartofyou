@@ -43,3 +43,47 @@ Outcome rules:
 
 ## 5. Decision and closure
 Keep READY FOR 41B.1 only if all 8 findings have concrete controls and step 4 reveals no open decision. Otherwise return DESIGN BLOCKED and name the missing decision. Return the supplied closure wording only on pass, and record the result in the Phase 41B.0 roadmap entry.
+
+## Final reconciliation safeguards
+**A. How the rules work together.** List every relevant rule with:
+- its name, table, operation and roles;
+- whether it is permissive or restrictive;
+- its row filter and new-row check.
+
+Where the new-row check is omitted, Postgres applies the row filter to the edited row; record that explicitly. Combine several rules on the same operation (permissive by OR, restrictive by AND) before judging.
+
+For each affected table, answer separately:
+- VIEW OWNER-SCOPED
+- ADD NEW-ROW OWNERSHIP PROTECTED
+- EDIT EXISTING-ROW OWNERSHIP PROTECTED
+- EDIT RESULTING-ROW OWNERSHIP PROTECTED
+- DELETE OWNER-SCOPED (YES, NO or NOT APPLICABLE)
+
+Any gap names the exact rule or combination and is fixed in the RLS plan.
+
+**B. Constraint table.** This replaces the earlier assumption of 11. Write one row per constraint on each table, with:
+- CONSTRAINT, TABLE and PURPOSE;
+- PREVIOUSLY COUNTED IN 41B.0;
+- NEWLY ADDED BY THIS RECONCILIATION;
+- TARGET ONLY = YES.
+
+The earlier item 6 is split into its 12 per-table links. The new baby items are added: unique `(id, user_id)` on babies and 4 composite baby links.
+
+Derive "New constraints proposed" from the table, and keep "Constraints changed / removed" as a separate count. Update the RLS plan and the Section 26 figures to match.
+
+**C. Evidence.** Structure-only catalog reads: `pg_policies`, `pg_constraint`, `pg_indexes`. Customer rows read: 0. Labels:
+- CURRENT POLICY = REPOSITORY-DEFINES
+- CURRENT POLICY = VERIFIED-PRODUCTION-STRUCTURE
+- TARGET COMPOSITE OWNERSHIP CONTROL = DESIGN-ADDRESSED
+
+No target constraint is described as live.
+
+**D. Closure gate.** READY FOR 41B.1 only if all of these hold:
+- all 24 tables reconcile (11 + 5 + 6 + 2);
+- all 8 findings have controls;
+- the combined access rules have been checked;
+- cross-user ownership is protected by design for both pregnancies and children;
+- the constraint count reconciles;
+- no decision remains open.
+
+Otherwise DESIGN BLOCKED, naming the exact unresolved decision. 41B.1 stays NOT STARTED.

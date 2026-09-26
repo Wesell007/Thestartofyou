@@ -4,7 +4,8 @@ Five hypotheses tested: (1) Journey continuity engine, (2) Permissioned context 
 
 Result: 1 and 2 merged (memory has little value without continuity and a visible "what we use" surface, and memory alone is an expected category feature). 3 moved first. 5 kept but last. Four priorities, in order. Nothing here is started.
 
-## 1. Visible context and trust
+## 1. VISIBLE ANSWER PROVENANCE & TRUST
+- Rule: expose only provenance the runtime can truthfully establish for that individual answer. Do not imply article grounding, NHS grounding, reviewer approval, source use or context use unless that answer actually used it. Grounding stays parked/default deny.
 - User problem: "Why should I trust this, and should I talk to a person instead?"
 - Why it matters: every later layer (memory, action, journal awareness) needs a place where people can see what an answer used.
 - What exists: safety routing (#12), source trust line and links (#18), saved-journey next actions (#14), structured article sources (#29).

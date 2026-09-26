@@ -38,10 +38,10 @@ Undated pages are not used as proof of history or leadership. No source was foun
 | Deterministic safety routing + provenance governance made visible | DIFFERENTIATING_WHEN_COMBINED | HYP |
 | Answer → action into the user's own preparation tools | DIFFERENTIATING_WHEN_COMBINED | HYP |
 | Physical keepsake + private digital memories | DIFFERENTIATING_WHEN_COMBINED | HYP |
-| Longitudinal, permissioned continuity across lifecycles | POTENTIAL_SYSTEM_MOAT | HYP |
-| Trust and safety governance system | POTENTIAL_SYSTEM_MOAT | HYP |
+| Longitudinal, permissioned continuity across lifecycles | POTENTIAL_SYSTEM_ADVANTAGE (defensibility hypothesis) | HYP |
+| Trust and safety governance system | POTENTIAL_SYSTEM_ADVANTAGE (defensibility hypothesis) | HYP |
 
-Counts: COMMODITY 6, EXPECTED 5, DIFFERENTIATING 4, POTENTIAL MOAT 2.
+Counts: COMMODITY 6, EXPECTED 5, DIFFERENTIATING 4, POTENTIAL SYSTEM ADVANTAGE 2 (strategic hypotheses, not market-validated moats).
 
 Key inference (SSI): "AI that knows your child/journey" is no longer distinctive (E1–E3). Distinctiveness must come from what a trusted, calm, cross-stage system does with context, not from having context.
 
@@ -58,7 +58,7 @@ Key inference (SSI): "AI that knows your child/journey" is no longer distinctive
 | 7 | Digital + physical memory continuity | WEAK (#10 live, #36 absent) | MODERATE | MEDIUM | export, packaging | medium | HOLD |
 | 8 | Calm / low-mental-load philosophy | STRONG (no streaks, design rules) | EASY to claim, hard to keep | MEDIUM | discipline | none | STRENGTHEN |
 
-### Six questions for each potential system moat
+### Six questions for each potential system advantage (compound differentiation hypothesis; not a proven competitive advantage)
 
 **Longitudinal, permissioned continuity (moats 2 + 3 + 5)**
 1. Value that compounds: every stage starts already understood; less re-explaining; answers reflect what was chosen to be kept.

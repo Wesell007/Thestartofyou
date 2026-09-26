@@ -11,14 +11,16 @@ Each gains nullable `pregnancy_episode_id` with composite FK `(pregnancy_episode
 ### Tables requiring baby_id changes = 5
 | Table | Change |
 |---|---|
-| babies | add `pregnancy_episode_id`, `archived_at` |
-| first_year_entries | `baby_id` FK CASCADE to RESTRICT |
-| first_year_care_events | `baby_id` FK CASCADE to RESTRICT |
-| first_year_reminders | `baby_id` FK CASCADE to RESTRICT |
-| first_year_memories | `baby_id` FK SET NULL to RESTRICT |
+| babies | add `pregnancy_episode_id` (composite FK `(pregnancy_episode_id, user_id)`), `archived_at`, UNIQUE `(id, user_id)` |
+| first_year_entries | single-column `baby_id` FK (CASCADE) replaced by composite `(baby_id, user_id)` FK, RESTRICT |
+| first_year_care_events | single-column `baby_id` FK (CASCADE) replaced by composite `(baby_id, user_id)` FK, RESTRICT |
+| first_year_reminders | single-column `baby_id` FK (CASCADE) replaced by composite `(baby_id, user_id)` FK, RESTRICT |
+| first_year_memories | single-column `baby_id` FK (SET NULL) replaced by composite `(baby_id, user_id)` FK, RESTRICT |
 
 ### Structural context changes = 2
-pregnancy_journeys (becomes compatibility mirror, then retired), journeys (gains `active_pregnancy_episode_id`).
+pregnancy_journeys (becomes compatibility mirror, then retired), journeys (gains `active_pregnancy_episode_id` with composite FK `(active_pregnancy_episode_id, user_id)`).
+
+Episode composite ownership links = 13 (the 11 tables above, `babies`, `journeys`); see RLS plan section 2.
 
 ### Tables requiring no ownership change = 6
 archived_journeys (kept as history), saved_journeys (legacy, frozen, read-only fallback), first_year_journeys (user-level First Year status), companion_conversations, companion_messages, companion_memories (user-level by design; context is resolved per request; memory stays off).

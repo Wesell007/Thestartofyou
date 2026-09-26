@@ -320,7 +320,7 @@
 - [x] Final evidence reconciliation: 6 groups, 30 unique files / 249 unique tests / 249 PASS; 8 database claims verified or corrected; risks P0 4 / P1 1 / P2 3 / P3 0 + 2 safeguards
 - [x] Closure evidence patch: ownership 24 objects counted (1 / 5 / 15 / other 4); measured 30 / 249 accepted as authoritative
 
-## Phase 41B.0 — Family Entity Foundation: Architecture & Migration Design (DESIGN ONLY, LOVABLE)
-- [ ] Re-verify current-state facts (repository + catalog structure only, no customer rows)
-- [ ] Five design docs in docs/strategy/phase41b-*
-- [ ] Section 26 report and architecture decision; 41B.1 NOT STARTED
+## Phase 41B.0 — Family Entity Foundation: Architecture & Migration Design (CLOSED PASS, DESIGN ONLY)
+- [x] Re-verify current-state facts (repository + catalog structure only, no customer rows)
+- [x] Five design docs in docs/strategy/phase41b-*
+- [x] Section 26 report and architecture decision READY FOR 41B.1; 41B.1 NOT STARTED (awaiting approval)

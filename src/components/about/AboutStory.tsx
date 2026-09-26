@@ -167,7 +167,7 @@ export const AboutFuture = () => (
           We are building toward a product that can carry the context you choose from one part of the journey into the next, show you more clearly what important answers are based on, help useful guidance become a practical next step, and keep reflection and memory closer to the support that helped you through the moment.
         </p>
       </div>
-      <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8 border-t border-current/20 pt-10 mb-12">
+      <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8 border-t border-[hsl(var(--parchment)/0.2)] pt-10 mb-12">
         {futures.map((f) => (
           <div key={f.title}>
             <h3 className="font-serif text-xl mb-2">{f.title}</h3>

@@ -99,7 +99,7 @@ Outcome D retained: the verified facts still show reachable data-integrity risks
 
 ## Closure evidence patch (2026-09-26)
 
-Test paths. The JSON reports from the earlier reconciliation no longer existed in the sandbox, so the six groups were re-run with the JSON reporter. File selection was rebuilt from the named tests plus filename search. Measured: 30 unique files, 249 unique tests, 249 PASS (Pregnancy 4 / 27, First Year 11 / 99, Lifecycle 5 / 46, Companion 4 / 38, Journal 5 / 33, Focused 1 / 6; no file in two groups). This does not match the recorded 28 files / 218 tests because the earlier search-based file selection cannot be reproduced exactly. Gate "path inventory reconciles to 28 / 218": FAILED.
+Test paths (authoritative). The six groups were re-run with the JSON reporter and the repository-relative path inventory was rebuilt from the named tests plus filename search. Authoritative validation: 30 unique files / 249 unique tests / 249 PASS (Pregnancy 4 / 27, First Year 11 / 99, Lifecycle 5 / 46, Companion 4 / 38, Journal 5 / 33, Focused 1 / 6; 0 duplicate files across groups). Typecheck PASS. This measured reconciliation supersedes the earlier provisional figures; the old set is not recreated.
 
 Ownership rules. MULTI-PREGNANCY-SAFE: a row identifies one specific pregnancy, so pregnancies cannot overwrite or share it. MULTI-CHILD-SAFE: the row is a child or is bound to one child by `baby_id`. AMBIGUOUS OWNERSHIP: rows can exist with only user (or user + week) ownership and no pregnancy or child binding. OTHER EXPLICIT SCOPE: an explicit scope that meets none of these.
 

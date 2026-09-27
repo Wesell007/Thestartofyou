@@ -37,7 +37,26 @@ Decision: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED**
   - On reflections, week_photos, week_media_memories, pregnancy_appointments, pregnancy_symptom_notes, baby_movement_notes, birth_plans, hospital_bag_items, midwife_questions, contraction_sessions, contraction_events and babies: nullable column `pregnancy_episode_id`, FK `<table>_pregnancy_episode_owner_fkey` on (pregnancy_episode_id, user_id), and index `<table>_pregnancy_episode_idx`.
   - On journeys: nullable column `active_pregnancy_episode_id`, FK `journeys_active_pregnancy_episode_owner_fkey`, and index `journeys_active_pregnancy_episode_idx`.
 - `babies_id_user_id_key` UNIQUE (id, user_id).
-- Note: `pregnancy_episodes.user_id` references `auth.users` ON DELETE CASCADE, matching every existing user-owned table, so account deletion keeps working. No CASCADE is used between episodes and records.
+
+## Deletion semantics
+- ACCOUNT DELETION CASCADE = **INTENTIONAL**. `pregnancy_episodes.user_id` references `auth.users` ON DELETE CASCADE and is not replaced with RESTRICT. Purpose: when a person explicitly deletes their entire account, pregnancy episodes belonging to that account must also be eligible for deletion under the platform's account-deletion process.
+- PREGNANCY-LEVEL DEPENDENCY DELETE = **RESTRICT**. Purpose: deleting an individual pregnancy episode must never silently cascade into children, pregnancy history or episode-bound records.
+- ACCOUNT DELETION WITH NEW PREGNANCY STRUCTURE = **PENDING APPLICATION / RUNTIME VERIFICATION**.
+- The target design preserves account-deletion semantics. Runtime compatibility with the new RESTRICT relationships must be verified after application.
+
+## Future application-gate test: ACCOUNT DELETION INTEGRITY TEST
+Status: NOT RUN. Never run against customer data.
+
+Fixture (non-customer test data only): a user; a pregnancy episode; an episode-bound pregnancy record; a baby linked to the pregnancy; a First Year child-bound record where applicable.
+
+Verify:
+1. normal deletion of the pregnancy episode alone is blocked where protected dependants exist;
+2. the approved whole-account deletion workflow successfully removes or processes all owned data in the required order;
+3. no orphaned pregnancy, child or journey records remain;
+4. no other user's data is touched.
+
+Stop rule: if whole-account deletion fails because RESTRICT dependencies prevent the existing account deletion flow, stop the release and redesign the deletion transaction or order before production.
+
 
 ## Scope held
 - Backfilled 0; customer rows read 0; customer rows changed 0.

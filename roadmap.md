@@ -331,5 +331,6 @@
 - [x] Pending additive migration: docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql (19 of 26 target controls; 7 deferred)
 - [x] Static contract tests 13/13; full suite 148 files 1661/1661; typecheck PASS; build PASS
 - [x] Evidence doc: docs/strategy/phase41b1a-family-entity-foundation-implementation.md
+- [x] Account deletion clarification (docs only): account-level cascade INTENTIONAL; pregnancy-level delete RESTRICT; runtime compatibility PENDING APPLICATION; Account Deletion Integrity Test added as an application gate (NOT RUN)
 - [ ] Apply migration — BLOCKED: needs a verified database backup/restore path and user approval
 - 41B.1B NOT STARTED

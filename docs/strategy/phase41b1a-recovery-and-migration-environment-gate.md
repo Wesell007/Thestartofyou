@@ -161,3 +161,16 @@ Exact required actions:
 
 ## Closure
 PHASE 41B.1A-R — RECOVERY & MIGRATION ENVIRONMENT GATE: BLOCKED / USER ACTION REQUIRED. The pending migration is not applied automatically.
+
+## Staging environment and parity (in progress)
+- The user approved an isolated staging environment. Draft "41B.1A staging rehearsal" created (draft id drft_01m3jayw0pfe2vj8k0v9kz2mmb).
+- Staging isolation: PENDING. The draft must report a backend reference other than the live one and zero rows in customer tables.
+- Live snapshot: `phase41b1a-live-catalogue-snapshot.md` (public schema: 280 columns, 5 enums, 22 functions, 35 triggers, 32 tables with RLS flags, 124 policies, 138 constraints, 84 indexes, 32 grant ACLs). Catalogue only; no customer rows read.
+- Scope is APP-SCHEMA PARITY. A difference in data shape, RLS, ownership, constraints, functions/triggers, delete semantics or app reads/writes is a MATERIAL PARITY DIFFERENCE, and the matching area FAILS. Project identifiers, internal objects and equivalent ownership metadata (for example the `sandbox_exec` ACL entry) are listed as EXPECTED ENVIRONMENT DIFFERENCE. No difference is dropped without being listed, and none is repaired automatically.
+- Pending migration applied = NO (staging or live). Synthetic data only; none created yet.
+- Live backup verification: PENDING (user).
+
+### Open support question
+1. Can a Lovable Cloud database backup be restored into a separate project or environment instead of overwriting the shared database?
+2. If not, can a complete logical backup (schema and data) be produced for a full restore elsewhere?
+Nothing is restored and no credentials are exposed.

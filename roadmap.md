@@ -338,6 +338,8 @@
 ## Phase 41B.1A-R — Recovery & Migration Environment Gate (BLOCKED / USER ACTION REQUIRED)
 - [x] Audit recorded in `docs/strategy/phase41b1a-recovery-and-migration-environment-gate.md`. Decision E. Database changes 0, customer rows read 0, migration applied NO, 41B.1B NOT STARTED.
 - [x] Isolated staging approved by the user. Draft "41B.1A staging rehearsal" created. Live catalogue snapshot recorded in `docs/strategy/phase41b1a-live-catalogue-snapshot.md`.
-- [ ] Staging isolation and parity report: waiting on the draft's catalogue snapshot. Classify each difference as MATERIAL PARITY DIFFERENCE or EXPECTED ENVIRONMENT DIFFERENCE. Pending migration applied = NO.
+- [x] Draft isolation FAILED (shared live backend). Decision: use a remix. Live snapshot ALREADY EXISTS AND REUSED; customer rows read 0.
+- [ ] Blocked on user: create the remix "41B.1A staging rehearsal" and run the remix isolation brief in it.
+- [ ] Staging isolation and parity report: waiting on the remix catalogue snapshot. Classify each difference as MATERIAL PARITY DIFFERENCE or EXPECTED ENVIRONMENT DIFFERENCE. Pending migration applied = NO.
 - [ ] Blocked on user: verify the latest live backup (date, retention).
 - [ ] OPEN support question: can a backup be restored into a separate project instead of overwriting the shared database? If not, can a complete logical backup (schema and data) be produced for a restore elsewhere?

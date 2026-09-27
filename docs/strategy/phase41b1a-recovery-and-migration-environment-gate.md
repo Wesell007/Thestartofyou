@@ -174,3 +174,31 @@ PHASE 41B.1A-R — RECOVERY & MIGRATION ENVIRONMENT GATE: BLOCKED / USER ACTION 
 1. Can a Lovable Cloud database backup be restored into a separate project or environment instead of overwriting the shared database?
 2. If not, can a complete logical backup (schema and data) be produced for a full restore elsewhere?
 Nothing is restored and no credentials are exposed.
+
+## Draft isolation finding (FAILED)
+- Draft "41B.1A staging rehearsal" reported the same backend reference as live (`wogepxfipdipogyogced`). STAGING ISOLATED = NO.
+- No row counts, snapshot or migration were run there. Database changes 0.
+
+## Decision: use a remix
+- The rehearsal environment will be a remix named "41B.1A staging rehearsal", created by the user (Settings, Remix this project). Lovable cannot create a remix from inside this project.
+- The remix runs the user's "Remix isolation & catalogue snapshot" brief in its own chat. It proves the backend reference differs from live and counts rows without reading them. It checks the migration baseline against `supabase/migrations/`, captures `docs/strategy/phase41b1a-remix-catalogue-snapshot.md` and makes no repairs.
+
+## Live baseline status
+- LIVE STRUCTURAL SNAPSHOT = ALREADY EXISTS AND REUSED (`phase41b1a-live-catalogue-snapshot.md`, captured 2026-09-27T21:05:14Z). The earlier request for permission was redundant.
+- The file was re-read and holds catalogue metadata only (columns, enums, functions, triggers, RLS flags, policies, constraints, indexes, relacl grants). It contains no customer rows. No new live queries were run.
+- CUSTOMER ROWS READ FROM LIVE = 0
+
+## Remix isolation proof and parity results
+PENDING: waiting for the remix to be created and its snapshot to be read in this project.
+- REMIX CREATED = NO (user action pending)
+- REMIX BACKEND REFERENCE DIFFERENT FROM LIVE = NOT YET VERIFIED
+- STAGING DATABASE ISOLATED = NOT YET VERIFIED
+- CUSTOMER DATA COPIED = NO
+- CUSTOMER ROWS READ FROM LIVE = 0
+- PENDING 41B.1A MIGRATION APPLIED = NO
+- SCHEMA / RLS / FUNCTION-TRIGGER / CONSTRAINT-INDEX / GRANT-OWNERSHIP PARITY = NOT RUN
+- EXPECTED ENVIRONMENT DIFFERENCES = NOT RUN; MATERIAL PARITY DIFFERENCES = NOT RUN
+- Difference list: none yet.
+
+## Status
+Production migration permitted = NO. Live backup verification = PENDING USER. Restore-to-separate-project support question = OPEN. 41B.1A = IMPLEMENTATION BUILT / APPLICATION BLOCKED. 41B.1B = NOT STARTED.

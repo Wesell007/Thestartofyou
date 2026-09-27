@@ -325,3 +325,4 @@
 - [x] Five design docs in docs/strategy/phase41b-*
 - [x] Section 26 report and architecture decision READY FOR 41B.1
 - [x] Final closure reconciliation: access rules verified per operation (0 existing to modify), baby composite ownership added, constraint ledger 26 new / 5 changed; 41B.1 NOT STARTED (awaiting approval)
+- [x] Closure evidence return (2026-09-27): 18 tables, 72 coverage positions, 72 distinct policy objects (no FOR ALL, no restrictive), all BOTH; 8/8 findings DESIGN-ADDRESSED. CLOSED PASS / PREGNANCY EPISODE MODEL DESIGNED / MULTI-CHILD RELATIONSHIPS DESIGNED / DESTRUCTIVE FIRST-YEAR RESET REPLACEMENT DESIGNED / LEGACY DATA MIGRATION PATH DEFINED / RLS AND CONTEXT BOUNDARIES DEFINED / ROLLBACK AND TEST STRATEGY DEFINED / READY FOR 41B.1 IMPLEMENTATION

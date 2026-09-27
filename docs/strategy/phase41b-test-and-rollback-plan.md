@@ -10,6 +10,7 @@ Database (against a non-production copy):
 - Baby delete is blocked while baby-scoped memories exist; the permanent-delete function handles them explicitly.
 - A row cannot reference another user's episode (composite FK).
 - Backfill is idempotent; row counts before and after match; ambiguous rows remain unbound.
+- Account Deletion Integrity Test (application gate, non-customer fixture: user, pregnancy episode, episode-bound record, linked baby, First Year child-bound record where applicable): deleting the episode alone is blocked where protected dependants exist; whole-account deletion removes or processes all owned data in the required order; no orphaned pregnancy, child or journey records; no other user's data touched. If RESTRICT blocks account deletion, stop the release and redesign the deletion order.
 
 Client (Vitest, Supabase mocked at the boundary): each of the 17 write paths sends or receives the active episode; missing episode means no write.
 
@@ -37,6 +38,7 @@ Steps 1 to 6 are reversible without data loss. Step 8 onwards needs a fresh back
 - Structure-only catalog check matches the repository (no customer rows read).
 - Backfill run first on a copy; only aggregate counts reported.
 - Explicit approval for each production migration; no deployment implied by this design.
+- Account Deletion Integrity Test passes on a non-production copy before release.
 
 ## 4. Query and index review
 - Index `(user_id, status)` on episodes; the partial unique covers active lookups.

@@ -334,3 +334,7 @@
 - [x] Account deletion clarification (docs only): account-level cascade INTENTIONAL; pregnancy-level delete RESTRICT; runtime compatibility PENDING APPLICATION; Account Deletion Integrity Test added as an application gate (NOT RUN)
 - [ ] Apply migration — BLOCKED: needs a verified database backup/restore path and user approval
 - 41B.1B NOT STARTED
+
+## Phase 41B.1A-R — Recovery & Migration Environment Gate (BLOCKED / USER ACTION REQUIRED)
+- [x] Audit recorded in `docs/strategy/phase41b1a-recovery-and-migration-environment-gate.md`. Decision E. Database changes 0, customer rows read 0, migration applied NO, 41B.1B NOT STARTED.
+- [ ] Blocked on user: confirm the backup list and date in Cloud → Database → Backups; approve an isolated draft or staging backend for the rehearsal.

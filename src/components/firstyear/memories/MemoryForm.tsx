@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { BabyRecord } from "@/lib/firstYearJourney";
-import MemoryScopeSelector, { type ScopeValue } from "./MemoryScopeSelector";
+import MemoryScopeSelector from "./MemoryScopeSelector";
+import type { ScopeValue } from "./memoryScope";
 import MemoryPhotoField, { type MemoryPhotoFieldProps } from "./MemoryPhotoField";
 import {
   MEMORY_NOTE_MAX_LENGTH,

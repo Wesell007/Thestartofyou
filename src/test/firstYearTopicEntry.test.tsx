@@ -54,7 +54,8 @@ vi.mock("@/lib/companion/memory/useCompanionMemoryInteraction", () => ({
   }),
 }));
 
-import { CompanionProvider, useCompanion } from "@/components/companion/CompanionProvider";
+import { CompanionProvider } from "@/components/companion/CompanionProvider";
+import { useCompanion } from "@/components/companion/useCompanion";
 import FirstYearTopicPage from "@/components/firstyear/topic/FirstYearTopicPage";
 import { firstYearTopicConfigs } from "@/data/firstYearTopicData";
 import { resetPersonalJourneyCache } from "@/hooks/useCompanionPersonalJourney";

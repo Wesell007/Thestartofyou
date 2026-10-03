@@ -6,29 +6,7 @@ import {
   FY_CHIP_SELECTED,
   FY_SHEET_LEGEND,
 } from "@/components/firstyear/journey/firstYearStyles";
-
-export const babyDisplayName = (baby: BabyRecord, index: number): string =>
-  baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
-
-export const ALL_BABIES_VALUE = "__all_babies__";
-export const FAMILY_VALUE = "__family__";
-
-/** One selector value covers both the scope and the baby it points at. */
-export type ScopeValue = string;
-
-export const scopeValueToDraft = (
-  value: ScopeValue,
-): { scope: MemoryScope; babyId: string | null } => {
-  if (value === FAMILY_VALUE) return { scope: "family", babyId: null };
-  if (value === ALL_BABIES_VALUE) return { scope: "all_babies", babyId: null };
-  return { scope: "baby", babyId: value };
-};
-
-export const draftToScopeValue = (scope: MemoryScope, babyId: string | null): ScopeValue => {
-  if (scope === "family") return FAMILY_VALUE;
-  if (scope === "all_babies") return ALL_BABIES_VALUE;
-  return babyId ?? FAMILY_VALUE;
-};
+import { ALL_BABIES_VALUE, FAMILY_VALUE, babyDisplayName, type ScopeValue } from "./memoryScope";
 
 type Props = {
   babies: BabyRecord[];

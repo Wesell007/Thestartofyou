@@ -13,8 +13,8 @@ import {
   SHEET_LEGEND,
   SHEET_LINK_CLASS,
   SHEET_PRIMARY_CLASS,
-  SHEET_PRIMARY_STYLE,
 } from "@/components/firstyear/today/sheetControls";
+import { SHEET_PRIMARY_STYLE } from "@/components/firstyear/today/sheetHelpers";
 import { FY_FIELD_FOCUS_RING } from "@/components/firstyear/journey/firstYearStyles";
 import {
   REMINDER_LABEL_MAX_LENGTH,

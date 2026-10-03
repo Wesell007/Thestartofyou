@@ -23,10 +23,9 @@ import {
   NoteArea,
   SheetActions,
   TimeField,
-  timeValue,
-  withTime,
   type SheetContext,
 } from "@/components/firstyear/today/sheetControls";
+import { timeValue, withTime } from "@/components/firstyear/today/sheetHelpers";
 
 /** Nappy logging with the detail a parent may want to mention at a check-up. */
 const NappySheet = ({ context }: { context: SheetContext }) => {

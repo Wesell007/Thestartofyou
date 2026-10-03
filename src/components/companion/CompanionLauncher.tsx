@@ -10,7 +10,7 @@
 
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
-import { useCompanion } from "./CompanionProvider";
+import { useCompanion } from "./useCompanion";
 import { companionStyles } from "./companionStyles";
 import { companionLauncherLabel } from "@/lib/companion/companionName";
 import {

@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SeoHead from "@/components/seo/SeoHead";
-import { useSuppressCompanion } from "@/components/companion/CompanionProvider";
+import { useSuppressCompanion } from "@/components/companion/useCompanion";
 
 const NotFound = () => {
   const location = useLocation();

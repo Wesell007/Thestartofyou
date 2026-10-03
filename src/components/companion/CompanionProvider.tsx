@@ -10,7 +10,6 @@
 
 import {
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -292,24 +291,4 @@ export function CompanionProvider({ children }: { children: ReactNode }) {
   );
 
   return <CompanionContext.Provider value={value}>{children}</CompanionContext.Provider>;
-}
-
-export function useCompanion(): CompanionContextValue {
-  const ctx = useContext(CompanionContext);
-  if (!ctx) throw new Error("useCompanion must be used inside CompanionProvider");
-  return ctx;
-}
-
-/**
- * Hide the companion launcher, and keep the panel closed, for as long as the
- * calling page is mounted. Used by the 404 page. Safe to call outside the
- * provider (tests, isolated renders).
- */
-export function useSuppressCompanion(): void {
-  const ctx = useContext(CompanionContext);
-  const suppress = ctx?.suppress;
-  useEffect(() => {
-    if (!suppress) return;
-    return suppress();
-  }, [suppress]);
 }

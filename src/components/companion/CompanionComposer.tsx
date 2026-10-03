@@ -7,7 +7,7 @@
 
 import { useState, type FormEvent, type KeyboardEvent } from "react";
 import { Send, Square } from "lucide-react";
-import { useCompanion } from "./CompanionProvider";
+import { useCompanion } from "./useCompanion";
 import { companionStyles } from "./companionStyles";
 
 export default function CompanionComposer() {

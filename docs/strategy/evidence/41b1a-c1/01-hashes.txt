@@ -1,0 +1,16 @@
+# 41B.1A-C1 — 01 Hashes and tooling (Project 1)
+
+Authoritative pending files at 735a07e6 (SHA-256) — NOT applied in C1.1:
+e6ad0bc82b245beb03131023bb9ce122a451f40c2fe9b75cd43f047b674585cb  41b1a_family_entity_foundation.sql
+8645fd67f0b0211beb613b9d440e1f964d50e737f31862c11292c0103781b508  41b1a_family_entity_foundation_validate.sql
+0d00895514b4e2dc623383436952fd534d5f879cdf4011024596dae303a36077  41b1a_family_entity_foundation_rollback.sql
+
+Baseline migration manifest: 47 files under supabase/migrations at 735a07e6, hashed from the commit blobs
+and re-hashed from the scratch checkout (identical after LF normalisation).
+Manifest file SHA-256: 01fbe1f80a2d479c7d38f76af9c8bcb3693a023c063a59a810c726e162b73c60
+
+Tooling:
+Supabase CLI 2.119.0 (via npx.cmd, scratch clone)
+psql: not installed on the operator workstation at C1.1 (not needed for the CLI baseline push; required before C1.3)
+Git for Windows (clone/worktree)
+

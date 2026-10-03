@@ -1,0 +1,145 @@
+{
+ "columns": {
+  "live": 280,
+  "baseline": 289,
+  "only_live": [],
+  "only_baseline": [
+   "c1_rehearsal_marker|created_at|timestamp with time zone|timestamptz|NO|now()",
+   "c1_rehearsal_marker|project_ref|text|text|NO|",
+   "c1_rehearsal_marker|run_label|text|text|NO|",
+   "email_delivery_claims|claimed_at|timestamp with time zone|timestamptz|NO|now()",
+   "email_delivery_claims|completed_at|timestamp with time zone|timestamptz|YES|",
+   "email_delivery_claims|lease_until|timestamp with time zone|timestamptz|NO|",
+   "email_delivery_claims|message_id|text|text|NO|",
+   "email_delivery_claims|status|text|text|NO|",
+   "email_delivery_claims|updated_at|timestamp with time zone|timestamptz|NO|now()"
+  ]
+ },
+ "enums": {
+  "live": 5,
+  "baseline": 5,
+  "only_live": [],
+  "only_baseline": []
+ },
+ "functions": {
+  "live": 22,
+  "baseline": 25,
+  "only_live": [
+   "consume_ai_rate_limit|p_key text, p_limit integer, p_window_seconds integer|t|4ab5761578815827cb3a2d723ed50697",
+   "delete_active_journey|p_lifecycle text|f|e7e7cfa9fb798ce089007a5852801d9c",
+   "delete_email|queue_name text, message_id bigint|t|b2402d49265cdeb0aa776000d69c517a",
+   "email_queue_dispatch||t|19eb73eb375c234d9a5e73da1481050e",
+   "email_queue_wake||t|30337a2518c051e7abb96111941135e1",
+   "enqueue_email|queue_name text, payload jsonb|t|00b80b2a8363a5d3d7043cb006bc22f6",
+   "move_to_dlq|source_queue text, dlq_name text, message_id bigint, payload jsonb|t|0bbe686fd2cb5a303e8f2334e39590cd",
+   "normalise_companion_memory|p_value text|f|4577b4fa84ea7a4124a3b466c11b8bdd",
+   "read_email_batch|queue_name text, batch_size integer, vt integer|t|f1655016b6b155d3f8e6590b01f0192c",
+   "save_first_year_journey|p_babies jsonb|f|20b2382b3dcdfa61f76c6fe85b9e3f9f",
+   "save_pregnancy_journey|p_lmp_date date, p_due_date date|f|a88847905fa9a66d6199ed6a88964bc2",
+   "save_ttc_journey|p_stage text, p_last_period_date date, p_cycle_length_days integer, p_period_length_days integer, p_cycle_regularity text, p_actively_trying text, p_uses_ovulation_tests text, p_tracks_symptoms text, p_support_status text, p_ivf_consideration text, p_likely_ovulation_date date, p_fertile_window_start date, p_fertile_window_end date, p_expected_period_date date, p_possible_test_date date|f|53ba3d5caa204e8ab3736d0229743823",
+   "set_updated_at||f|79bdd57c6d1eda0a97a0f17733c0f713",
+   "touch_companion_conversation||t|8bd015f7b58ce239f2cf242f68dcaff4",
+   "validate_baby_date_of_birth||f|b27ed47cd11749c9e28ca77ae7cb2a81",
+   "validate_companion_conversation||f|291484d6abde3b2c50c4955e1d5c3fbf",
+   "validate_companion_memory||f|009e6ecb016c80f246a2c17aa7144b47",
+   "validate_companion_message||f|878d76d97a48df9e914359896c9683c6",
+   "validate_first_year_care_event||f|6f568abf570076af9f167c519ca93fd0",
+   "validate_first_year_entry||f|79987ef46f38ba3ce05609cbde5cec8e",
+   "validate_first_year_memory||f|7a76026d0f5ff36caa51c70d3747a7d2",
+   "validate_first_year_reminder||f|1ad577bd6dd6486407763ad18fee2e42"
+  ],
+  "only_baseline": [
+   "claim_email_delivery|p_message_id text, p_lease_seconds integer|t|5a5e83c89942429c2de94af570283481",
+   "complete_email_delivery|p_queue_name text, p_queue_message_id bigint, p_message_id text, p_template_name text, p_recipient_email text|t|b9b842819dfbfbaf9ef6ce9038a8cf34",
+   "consume_ai_rate_limit|p_key text, p_limit integer, p_window_seconds integer|t|c1302c150b1bdd972e3f6ba35c216878",
+   "delete_active_journey|p_lifecycle text|f|2189e96d4274dc790143aff992e24fa2",
+   "delete_email|queue_name text, message_id bigint|t|2cd34cff7c6bdf2db1f6935ec51dc8db",
+   "email_queue_dispatch||t|3fbf638ebd923b22242ad18e9c97fd9b",
+   "email_queue_wake||t|33381986701860bacc0059e01a56f984",
+   "enqueue_email|queue_name text, payload jsonb|t|4483879669e0c80ecb876151dee937d2",
+   "move_to_dlq|source_queue text, dlq_name text, message_id bigint, payload jsonb|t|121ff5ca3d6e8e9fe91e278ab48a947a",
+   "normalise_companion_memory|p_value text|f|faa6b3510860f68750960495551fb5ed",
+   "read_email_batch|queue_name text, batch_size integer, vt integer|t|dc27c68544dfcdf9792bc9fd50bf705c",
+   "release_email_delivery|p_message_id text|t|a19b376d224e2a130f05b81d29d0bee2",
+   "save_first_year_journey|p_babies jsonb|f|c5592b26b48e86dd9b5ae8dd01452028",
+   "save_pregnancy_journey|p_lmp_date date, p_due_date date|f|157aa72c2f1a23f86fe89da6b00b4e4d",
+   "save_ttc_journey|p_stage text, p_last_period_date date, p_cycle_length_days integer, p_period_length_days integer, p_cycle_regularity text, p_actively_trying text, p_uses_ovulation_tests text, p_tracks_symptoms text, p_support_status text, p_ivf_consideration text, p_likely_ovulation_date date, p_fertile_window_start date, p_fertile_window_end date, p_expected_period_date date, p_possible_test_date date|f|87c3aff94cae456a255213fcea6c4e55",
+   "set_updated_at||f|5b733ab523bad442e4b10f836de9e4ba",
+   "touch_companion_conversation||t|b2117221a114bb090d0ee72488eee183",
+   "validate_baby_date_of_birth||f|d927d47375f04019c83e1e349e426b63",
+   "validate_companion_conversation||f|cb059ef81ec59aa48557b9b44cd46e6c",
+   "validate_companion_memory||f|7bf2a1a0ca6e7ad8e85c77dd5f175b99",
+   "validate_companion_message||f|b18ac549bdc9ce29902a2ebb1296a8f3",
+   "validate_first_year_care_event||f|e189d01ff9a8f82a546fa036e9da8bd7",
+   "validate_first_year_entry||f|9c3eb7f2ae9195ed93c49ab5c0c941bb",
+   "validate_first_year_memory||f|e942f5362c64ebd0e4f3254cdb71c24a",
+   "validate_first_year_reminder||f|7f7a8ea199bc1951c509de67bcbd2400"
+  ]
+ },
+ "triggers": {
+  "live": 35,
+  "baseline": 35,
+  "only_live": [],
+  "only_baseline": []
+ },
+ "rls": {
+  "live": 32,
+  "baseline": 34,
+  "only_live": [],
+  "only_baseline": [
+   "c1_rehearsal_marker|t",
+   "email_delivery_claims|t"
+  ]
+ },
+ "policies": {
+  "live": 124,
+  "baseline": 114,
+  "only_live": [
+   "   FROM companion_conversations c",
+   "  WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))",
+   "  WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|",
+   "  WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|((user_id = auth.uid()) AND (EXISTS ( SELECT 1",
+   "companion_messages|Owners create their messages|INSERT|{authenticated}|PERMISSIVE||((user_id = auth.uid()) AND (EXISTS ( SELECT 1",
+   "companion_messages|Owners delete their messages|DELETE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1",
+   "companion_messages|Owners read their messages|SELECT|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1",
+   "companion_messages|Owners update their messages|UPDATE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1"
+  ],
+  "only_baseline": [
+   "companion_messages|Owners create their messages|INSERT|{authenticated}|PERMISSIVE||((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))",
+   "companion_messages|Owners delete their messages|DELETE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|",
+   "companion_messages|Owners read their messages|SELECT|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|",
+   "companion_messages|Owners update their messages|UPDATE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))"
+  ]
+ },
+ "constraints": {
+  "live": 138,
+  "baseline": 141,
+  "only_live": [
+   "email_send_log|email_send_log_status_check|CHECK ((status = ANY (ARRAY['pending'::text, 'sent'::text, 'suppressed'::text, 'failed'::text, 'bounced'::text, 'complained'::text, 'dlq'::text])))"
+  ],
+  "only_baseline": [
+   "c1_rehearsal_marker|c1_rehearsal_marker_pkey|PRIMARY KEY (project_ref)",
+   "email_delivery_claims|email_delivery_claims_pkey|PRIMARY KEY (message_id)",
+   "email_delivery_claims|email_delivery_claims_status_check|CHECK ((status = ANY (ARRAY['processing'::text, 'sent'::text])))",
+   "email_send_log|email_send_log_status_check|CHECK ((status = ANY (ARRAY['pending'::text, 'sent'::text, 'suppressed'::text, 'failed'::text, 'rate_limited'::text, 'bounced'::text, 'complained'::text, 'dlq'::text])))"
+  ]
+ },
+ "indexes": {
+  "live": 84,
+  "baseline": 86,
+  "only_live": [],
+  "only_baseline": [
+   "c1_rehearsal_marker|c1_rehearsal_marker_pkey|CREATE UNIQUE INDEX c1_rehearsal_marker_pkey ON public.c1_rehearsal_marker USING btree (project_ref)",
+   "email_delivery_claims|email_delivery_claims_pkey|CREATE UNIQUE INDEX email_delivery_claims_pkey ON public.email_delivery_claims USING btree (message_id)"
+  ]
+ },
+ "grants": {
+  "live": 32,
+  "baseline": 34,
+  "only_live": [],
+  "only_baseline": [
+   "c1_rehearsal_marker|{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+   "email_delivery_claims|{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+  ]
+ }
+}

@@ -1,6 +1,6 @@
 # Phase 41B.1A-C1 — Isolated Hosted Supabase Rehearsal: Plan
 
-Status: **PLAN FOR REVIEW. NOT AUTHORISED FOR EXECUTION.** Planning only; nothing in this document has been run. No project exists, no credential has been issued, no database has been connected to.
+Status: **FINAL PLAN. NOT AUTHORISED FOR EXECUTION.** Independently reviewed (PASS, no blockers) and finalised on 3 October 2026 with the two non-blocking corrections from that review folded in (rollback-refusal reachability and sequencing; PostgREST as the authoritative RLS channel). Planning only; nothing in this document has been run. No project exists, no credential has been issued, no database has been connected to. C1 has NOT started.
 
 Date: 3 October 2026. Author of record: Claude Code (implementation owner). Approver: the owner.
 
@@ -30,7 +30,7 @@ The bytes rehearsed must equal the bytes at `735a07e6`. No rehearsal-specific ed
 
 **Never used:** the Lovable-managed production project (`wogepxfipdipogyogced`), any staging or preview that shares the production database, any project holding real users, any project another workflow depends on.
 
-**Who creates.** The owner, in the Supabase dashboard, choosing the region closest to production and the same Postgres major as production if the owner can read it from the production dashboard (version is structure, not customer data; if unknown, the default is accepted and recorded). The owner records the project ref, region, Postgres version and creation timestamp in `00-identity.md` of the evidence package.
+**Who creates.** The owner, in the Supabase dashboard, choosing the region closest to production. The rehearsal projects should match production's PostgreSQL major version; the owner reads it from the production dashboard (version is structure, not customer data, and is not retrieved by the operator). If Supabase cannot provide that same major version for a new project, execution requires explicit owner acceptance of the mismatch, recorded in `00-identity.md`, before C1.0 continues. The owner records the project ref, region, Postgres version and creation timestamp in `00-identity.md` of the evidence package.
 
 **Identity recording and proof.** Immediately after creation the operator runs, as the project `postgres` role, one bootstrap statement creating `public.c1_rehearsal_marker(project_ref text primary key, run_label text, created_at timestamptz default now())` with one row holding the real project ref. Every rehearsal script and every wrapper begins with a preamble that:
 
@@ -187,19 +187,30 @@ Each stage records: purpose, setup, action, expected result, evidence, PASS, STO
 - PASS: all as listed. STOP: any divergence.
 
 ### C1.11 — RLS matrix
-- Execute section H using real role switching (`set local role authenticated; select set_config('request.jwt.claims', '{"sub":"<A>","role":"authenticated"}', true)`), and, as a second channel, PostgREST calls with a signed-in synthetic user's JWT.
-- Evidence: `13-rls-privilege-matrix.md`.
-- PASS: every row matches. STOP: any cross-owner row visible, or any authenticated write succeeds.
+- Authoritative channel: **PostgREST (the project's REST API) with a genuine JWT for the synthetic user**, obtained by signing that user in through Supabase Auth. Every starred row H-1 to H-5 is proven through this channel. Reason: `auth.uid()` is platform-defined and the GUC it reads can vary between platform versions; PostgREST with an actual synthetic authenticated JWT most faithfully represents the production Supabase request path.
+- Corroborating channel only: direct `psql` role switching as the `postgres` role, setting both claim forms so either `auth.uid()` implementation resolves the same synthetic UUID: `set local role authenticated; select set_config('request.jwt.claim.sub', '<A>', true); select set_config('request.jwt.claims', '{"sub":"<A>","role":"authenticated"}', true);`. The same UUID is used in both settings. A disagreement between the two channels is itself a STOP, investigated before continuing.
+- anon (H-7) is proven through PostgREST with the anon key and corroborated with `set local role anon`. service_role (H-8) is proven through PostgREST with the service-role key, used only from the operator's shell, never stored in evidence.
+- Evidence: `13-rls-privilege-matrix.md`, with the HTTP status and response body for each PostgREST row (keys redacted) and the psql transcript for each corroborating row.
+- PASS: every row matches on the authoritative channel and the corroborating channel agrees. STOP: any cross-owner row visible, any authenticated write succeeds, or the channels disagree.
 
 ### C1.12 — Grant and RLS interaction proof
-- Capture the exact server message for authenticated INSERT, UPDATE and DELETE (`permission denied for table pregnancy_episodes`, error 42501), demonstrating that the INSERT, UPDATE and DELETE policies do not confer a privilege the role lacks. Record the ACL from `pg_class.relacl` and `information_schema.role_table_grants` alongside.
+- Capture the exact outcome for authenticated INSERT, UPDATE and DELETE on both channels: through PostgREST the HTTP 401/403 response carrying PostgreSQL error 42501, and through psql the message `permission denied for table pregnancy_episodes` (42501). This demonstrates that the INSERT, UPDATE and DELETE policies do not confer a privilege the role lacks. Record the ACL from `pg_class.relacl` and `information_schema.role_table_grants` alongside.
 - Why four policies exist: the policies are the row rules for a later phase in which `INSERT` and `UPDATE` are granted under the 41B.1C transition trigger; today the table privileges deny direct writes regardless; `DELETE` is never granted. This architecture is not changed in C1.
 - Evidence: in `13-rls-privilege-matrix.md`.
 
 ### C1.13 — Rollback refusal tests (run as table owner)
-- Execute section K refusals, each followed by the full catalogue capture and diff against C1.5 (must be empty) to prove no partial rollback.
-- Evidence: `14-rollback-refusals.log`, per-case empty diffs.
-- PASS: every case aborts with the expected `ROLLBACK REFUSED` message and empty diff. STOP: any case proceeds or any diff.
+- Purpose: prove that the rollback refuses in every independently reachable unsafe state, that the guards fire in the frozen order, and that a refusal leaves the schema untouched.
+- Guard order in the frozen rollback file: (1) episode rows exist; (2) a foreign key outside the 13 owned links references `pregnancy_episodes`; (3) a journeys pointer is populated; (4) a looped table has a bound row; (5) a foreign key depends on `babies_id_user_id_key`. Guards 3 and 4 cannot be reached on their own: the pointer and every bound row are protected by composite foreign keys to `pregnancy_episodes`, so under valid FK integrity an episode row must exist, and guard 1 fires first. They are defence in depth, present in the authoritative file and verified by the static test, and are not claimed as separately triggerable.
+- Action, in this sequence (section K gives the setups and messages):
+  1. Refusal R1, fixture present: run the rollback; expect the guard-1 message.
+  2. Combined-state run: with the fixture still present, add the scratch later-phase FK and the scratch babies-key dependant so that guards 1, 2, 3, 4 and 5 are all true; run the rollback; expect the guard-1 message only, proving that the earliest applicable guard wins in the frozen order. Drop both scratch FKs.
+  3. Remove the fixture episode state as in C1.14 (unbind links and pointer or delete fixture rows, delete episodes) so that guards 1, 3 and 4 are false.
+  4. Refusal R2, later-phase FK: add the scratch later-phase FK; run the rollback; expect the guard-2 message. Drop the scratch FK.
+  5. Refusal R3, babies-key dependant: add the scratch dependant; run the rollback; expect the guard-5 message. Drop the scratch dependant.
+  Each run is followed by the full catalogue capture and a diff against the C1.5 capture, which must be empty apart from the scratch table deliberately present for that run.
+- Evidence: `14-rollback-refusals.log` with the five run transcripts and five diffs.
+- PASS: R1, R2 and R3 each abort with the expected message and an empty diff; the combined-state run aborts with the guard-1 message and an empty diff. STOP: any run proceeds past its guard, any wrong message, or any diff.
+- Cleanup: no scratch object remains (`count(*) from pg_class where relname like 'c1_scratch%'` = 0).
 
 ### C1.14 — Rollback success-path preparation
 - Action: run the safe-state query set (section K) and the explicit cleanup sequence inside one transaction as `postgres`: null the 12 link columns and the journeys pointer on fixture rows (or delete the fixture rows), delete fixture episodes, drop the scratch tables created for refusal cases, confirm no later-phase FK and no dependant of `babies_id_user_id_key`.
@@ -210,6 +221,7 @@ Each stage records: purpose, setup, action, expected result, evidence, PASS, STO
 ### C1.15 — Successful rollback
 - Action: wrapper + runner on the rollback file, as table owner, one transaction.
 - Expected: exit 0; catalogue equals the C1.1 baseline exactly; no legacy object missing; `pg_depend` shows nothing dropped by cascade (the file contains no CASCADE).
+- Baseline-equality exclusions (the only permitted differences): rows in `supabase_migrations.schema_migrations` bookkeeping, which is outside the public-schema capture in any case; object OIDs, which the structural snapshot never records because it captures names and definitions only; and the `c1_rehearsal_marker` table created at C1.0, which is present in both captures. Any other difference, structural or in a definition, is STOP/HOLD. The exclusion list is not widened during execution.
 - Evidence: `16-rollback-success.log`, `17-catalogue-diff-rollback.txt` (empty against baseline).
 - PASS: empty diff. STOP: any residual or missing object.
 
@@ -290,6 +302,8 @@ After rollback: Q-ABSENT null, G-12 diff empty against baseline.
 
 ## H. RLS and privilege matrix
 
+Authoritative channel for every starred row: PostgREST with a genuine synthetic-user JWT (C1.11). Direct `psql` role switching with both `request.jwt.claim.sub` and `request.jwt.claims` set to the same synthetic UUID is corroborating evidence only.
+
 | # | Actor | Operation | Expected |
 |---|---|---|---|
 | H-1 ★ | authenticated as A | SELECT own episodes | rows of A only |
@@ -345,15 +359,19 @@ For user A unless stated:
 
 ## K. Rollback refusal and success matrix
 
-Refusals (each as table owner, one transaction, followed by an empty catalogue diff):
+Guard order in the frozen rollback: (1) episode rows; (2) later-phase FK on `pregnancy_episodes`; (3) journeys pointer; (4) bound rows in the looped tables; (5) dependant of `babies_id_user_id_key`.
 
-| Case | Setup | Expected message |
+Independently reachable refusal proofs (each as table owner, one transaction, followed by an empty catalogue diff):
+
+| Case | Setup | Expected message (guard) |
 |---|---|---|
-| ★ episode rows exist | fixture present | `ROLLBACK REFUSED: public.pregnancy_episodes holds N row(s)` |
-| bound links exist, no episodes | delete episodes impossible while bound; instead test with one bound reflection after moving episodes… (ordering: run after episodes deleted but one link re-pointed to a surviving scratch episode) | `… row(s) in public.reflections are bound …` |
-| pointer populated | journeys pointer set | `… journeys row(s) point at a pregnancy episode` |
-| later-phase FK exists | scratch table `c1_scratch_episode_dep(episode_id, user_id)` with FK to `pregnancy_episodes(id, user_id)` | `… foreign key(s) from a later phase reference pregnancy_episodes` |
-| dependant of babies key | scratch table with FK `(baby_id, user_id) → babies(id, user_id)` | `… foreign key(s) depend on babies_id_user_id_key` |
+| ★ R1 episode rows exist | fixture present | `ROLLBACK REFUSED: public.pregnancy_episodes holds N row(s). This file never destroys history.` (1) |
+| R2 later-phase FK exists | fixture episode state removed first (C1.14 steps); scratch table `c1_scratch_episode_dep(episode_id uuid, user_id uuid)` with FK `(episode_id, user_id) → pregnancy_episodes(id, user_id)` | `ROLLBACK REFUSED: 1 foreign key(s) from a later phase reference pregnancy_episodes.` (2) |
+| R3 dependant of babies key | safe state otherwise established; scratch table `c1_scratch_baby_dep(baby_id uuid, user_id uuid)` with FK `(baby_id, user_id) → babies(id, user_id)` | `ROLLBACK REFUSED: 1 foreign key(s) depend on babies_id_user_id_key.` (5) |
+
+Combined-state / guard-order proof: with the fixture present (episodes, a populated pointer and bound rows) and both scratch FKs added, so that all five guards are true, the rollback must abort with the guard-1 message and nothing else, proving that the earliest applicable guard wins in the frozen order. Empty diff required.
+
+Defence-in-depth guards, not independently reachable: the journeys-pointer guard (3) and the bound-row guard (4) are present in the authoritative rollback and verified by the static test (`refuses to run when any new-model row or later-phase dependency exists`). Under valid foreign-key integrity neither condition can exist without an episode row, because the pointer and every bound row carry a composite FK to `pregnancy_episodes`, so guard 1 fires first. The rehearsal does not claim to trigger them separately and does not disable FK integrity to manufacture that state.
 
 Safe-state query set (all must return 0 before C1.15): `count(*) from pregnancy_episodes`; `count(*) from journeys where current_pregnancy_episode_id is not null`; for each of the 12 tables `count(*) where pregnancy_episode_id is not null`; `count(*) from pg_constraint where confrelid = 'public.pregnancy_episodes'::regclass and conname <> all(<13 names>)`; `count(*) from pg_constraint f join pg_constraint u on u.conindid = f.conindid where f.contype='f' and u.conname='babies_id_user_id_key'`; `count(*) from pg_class where relname like 'c1_scratch%'`.
 
@@ -435,7 +453,7 @@ All mandatory:
 11. Open-uniqueness and `removed_at` semantics as in section J, including removed episodes retained with no fabricated outcome (C1.9).
 12. CHECK constraints accept and reject exactly as the file states (C1.10).
 13. Authenticated SELECT-only proven at privilege level; owner isolation proven under RLS; anon denied (C1.11, C1.12).
-14. Every rollback guard refuses with no partial change (C1.13).
+14. Rollback refusal proven for every independently reachable unsafe state (R1 episode rows, R2 later-phase FK, R3 babies-key dependant), the combined-state run aborts on guard 1 proving the frozen guard order, and every refusal leaves an empty catalogue diff; the pointer and bound-row guards are recorded as defence in depth (C1.13).
 15. Successful rollback restores the baseline exactly (C1.15).
 16. Re-application succeeds with identical results (C1.16).
 17. Fresh-project run reproduces the results (C1.17).
@@ -470,3 +488,19 @@ Classification for any such row: **ambiguous — do not create automatically**. 
 ## R. Post-C1 gate
 
 C1 PASS establishes **41B.1A = REHEARSAL PASS**. It does not authorise production application (41B.0-R §11 evidence ladder still applies: owner-observed platform backup within 24 hours, restore procedure written down, quiet window, explicit approval) and it does not authorise 41B.1B. The next action after C1 PASS is to close the mandatory pre-41B.1B account-deletion gate by one of the three recorded routes (structure-only production `pg_trigger` inspection; owner-approved deferrable `NO ACTION`; explicit deletion ordering in the account-deletion function). No route is chosen here.
+
+---
+
+## S. Execution prerequisites
+
+C1 execution may be authorised only when all of the following are in place. None of them is satisfied by this document.
+
+1. Owner approval of this plan.
+2. Owner cost approval for two temporary hosted Supabase projects in the owner's organisation, with deletion after evidence acceptance.
+3. Production PostgreSQL major version supplied by the owner from the dashboard, or explicit owner acceptance of a mismatch if Supabase cannot provide that major for a new project (section B).
+4. The production project ref `wogepxfipdipogyogced` placed in the wrapper's denylist file outside the repository, together with any other ref holding real users.
+5. Confirmation of the authorised creator and operator, and of the Supabase organisation used.
+6. Temporary-project credentials (database password, service-role key, access token) held in the owner's password manager and the operator's shell session only; never committed.
+7. A clean scratch clone at `735a07e6` whose `supabase/config.toml` `project_id` is replaced by the rehearsal ref; the repository copy unchanged.
+8. Tooling on the operator workstation: a suitable `psql` client (16 or 17) for the preferred runner; the Supabase CLI available through the project convention (`npx supabase`) for the baseline replay and the fallback runner; both versions recorded in `01-hashes.txt`. Nothing is installed or linked until execution is authorised.
+9. The wrapper script with the identity preamble, the denylist check and the three SHA-256 constants, reviewed before first use.

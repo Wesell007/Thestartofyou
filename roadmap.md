@@ -353,7 +353,9 @@
 - [x] 41B.1A SQL AMENDED (3 October 2026: S1–S12 applied; S13 resolved as `pregnancy_episodes.removed_at`; validate and rollback files; static tests rewritten) / NOT APPLIED
 - [x] 41B.1A pre-push review passed and branch pushed (commit 9dbdfa46); pre-rehearsal hardening committed separately (comment fix, structural static tests, `SUPERSEDED BY 41B.0-R` markers on the five 41B.0 documents).
 - [x] 41B.1A STATIC PRE-REHEARSAL GATE = CLOSED PASS (3 October 2026). Hardening commits 68ccc6d4 and 735a07e6 independently reviewed and pushed; authoritative rehearsal source is `735a07e6` (forward e6ad0bc8…, validate 8645fd67…, rollback 0d008955…, SHA-256). No further static hardening planned.
-- [ ] 41B.1A-C1 rehearsal plan written for owner review: `docs/strategy/phase41b1a-c1-rehearsal-plan.md`. Execution NOT authorised; no project created; no database accessed.
+- [x] 41B.1A-C1 rehearsal plan written, independently reviewed (PASS, no blockers) and finalised: `docs/strategy/phase41b1a-c1-rehearsal-plan.md` (refusal reachability and guard order corrected; PostgREST authoritative for RLS; diff exclusions, version-mismatch owner gate and tooling prerequisites added).
+- [ ] 41B.1A-C1 execution NOT authorised; C1 NOT STARTED; no project created; no database accessed. Awaiting owner execution decision and the section S prerequisites.
+- 41B.1B NOT STARTED (pre-41B.1B account-deletion gate still open)
 - [ ] PRE-41B.1B GATE (owner decision or evidence): account deletion under the 13 `ON DELETE RESTRICT` links depends on RI-trigger firing order on `auth.users`, which is OID-based and not portable from rehearsal to production. Close by structure-only production `pg_trigger` evidence, an approved design change (e.g. deferrable `NO ACTION`), or explicit deletion ordering in `delete-account`. No row may be bound before this closes. See 41B.0-R §29.
 - 41B.1A-C1 NOT STARTED
 - 41B.1B NOT STARTED

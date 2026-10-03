@@ -62,6 +62,7 @@ Change `first_year_memories.baby_id` to `ON DELETE RESTRICT`. A deliberate baby 
 ## 5. Migration order
 
 > **SUPERSEDED BY 41B.0-R** §18 — the nine-step order is replaced by the corrected subphases 41B.1A / 1A-C1 / 1B / 1C (five internal steps) / 1D; the reflections split and the other four unique-key splits move from tightening (step 8) to 41B.1C step 3.
+
 1. Create `pregnancy_episodes` with grants, RLS, constraints. No reads change.
 2. Deterministic and derivable backfills (section 2), run once, idempotent, row counts logged (counts only, no content).
 3. Add nullable episode columns and `babies` columns; composite FKs `NOT VALID`, then validate.
@@ -77,10 +78,12 @@ Change `first_year_memories.baby_id` to `ON DELETE RESTRICT`. A deliberate baby 
 - Unbound legacy pregnancy rows: shown only with the current active episode and labelled as notes from before pregnancies were kept separately, until the person confirms or hides them. Never shown for a different, later episode after confirmation, and never sent to the Companion.
 
 > **SUPERSEDED BY 41B.0-R** §7 — unbound rows stay readable under the bounded compatibility rule (one episode: shown in that chapter, any status; two or more: a separate "earlier notes" area), until confirmed or hidden by the person.
+
 - Clients that do not yet send an episode id: the save functions fill in the active episode server-side; if there is no active episode the write is rejected rather than guessed.
 
 ## 7. Client write paths to migrate = 17
 
 > **SUPERSEDED BY 41B.0-R** §10 — replaced by `phase41b0r-write-path-inventory.md` (74 paths; three listed files do not write; storage writes and the status update were missing).
+
 `src/lib/savedJourney.ts`, `src/lib/firstYearJourney.ts`, `src/lib/useLifecycle.ts`, `src/lib/authIntent.ts`, `src/hooks/usePublicAccountLink.ts`, `src/pages/Setup.tsx`, `src/pages/setup/FirstYearSetup.tsx`, `src/components/myweek/SlotReflection.tsx`, `src/components/myweek/SlotPhotoMemory.tsx`, `src/components/myweek/SectionKeepThisWeek.tsx`, `src/hooks/usePregnancyAppointments.ts`, `src/hooks/usePregnancySymptomNotes.ts`, `src/hooks/useBabyMovementNotes.ts`, `src/hooks/useBirthPlan.ts`, `src/hooks/useHospitalBag.ts`, `src/hooks/useMidwifeQuestions.ts`, `src/hooks/useContractionTimer.ts`.
 Read-side files to review (not write paths): `MyJourney.tsx`, `KeptChapter.tsx`, `MyPregnancyChapter.tsx`, `SlotCompanionRecall.tsx`, `AccountSettings.tsx`, `journeyPersonalSource.ts`.

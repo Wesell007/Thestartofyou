@@ -111,6 +111,7 @@ Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (sup
 - Design drift check: the five 41B.0 docs reconcile (24 = 11 + 5 + 6 + 2; 13 links; 26 target controls; 5 changed/removed). No drift.
 
 > **SUPERSEDED BY 41B.0-R** §12 — ten architecture drift items (D1–D10) and thirteen SQL amendments (S1–S13) were found; see the amendment record above.
+
 - Recovery gate: **BLOCKED**. There is no verified backup/restore path, and one database serves both preview and production. The user chose "create file only".
 
 ## Migration
@@ -151,6 +152,7 @@ Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (sup
 - ACCOUNT DELETION WITH NEW PREGNANCY STRUCTURE = **PENDING APPLICATION / RUNTIME VERIFICATION**.
 
 > **SUPERSEDED (3 October 2026 review)** — runtime verification in a rehearsal project is necessary but not sufficient; see "Account deletion under RESTRICT — mandatory pre-41B.1B gate" in the amendment record above.
+
 - The target design preserves account-deletion semantics. Runtime compatibility with the new RESTRICT relationships must be verified after application.
 
 ## Future application-gate test: ACCOUNT DELETION INTEGRITY TEST

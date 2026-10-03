@@ -7,13 +7,18 @@ import { describe, expect, it } from "vitest";
 // the files. They do NOT prove runtime database behaviour, which stays PENDING
 // APPLICATION until the 41B.1A-C1 rehearsal runs the files.
 //
-// Hardened 3 October 2026 after the pre-push review: structural grant parsing, a
-// complete policy surface, a rollback DROP whitelist, composite-FK enforcement,
-// identifier-length and wider DML / transaction detectors. Every detector has a
-// self-test so a regex that silently stops matching cannot hide a defect.
+// Hardened 3 October 2026 after the pre-push review (structural grant parsing, complete
+// policy surface, rollback DROP whitelist, composite-FK enforcement, identifier length,
+// wider DML / transaction detectors), then made case-insensitive after the independent
+// review of that commit: SQL keyword casing must never decide whether a defect is seen.
+// Every structural matcher is registered and asserted case-insensitive, captured
+// identifiers are canonicalised, and each detector has an adversarial self-test.
 
 const PENDING = "docs/strategy/migrations-pending";
 const squash = (sql: string) => sql.replace(/\s+/g, " ").trim();
+const lc = (s: string) => s.toLowerCase();
+// Canonical identifier: unquoted SQL identifiers fold to lower case; the format() placeholder stays %I.
+const ident = (s: string) => lc(s).replace(/%i/g, "%I");
 const load = (name: string) => {
   const raw = readFileSync(resolve(process.cwd(), PENDING, name), "utf8");
   const noComments = raw.replace(/--[^\n]*/g, "");
@@ -26,105 +31,219 @@ const rollback = load("41b1a_family_entity_foundation_rollback.sql");
 const ALL_FILES = [forward, validate, rollback];
 
 // ---------------------------------------------------------------------------
-// Parsers and detectors
+// Structural matchers. All are registered here so a self-test can prove none depends on casing.
 // ---------------------------------------------------------------------------
-
-// The looped table list is parsed from the SQL itself (S8: never count our own array).
-const parseLoopTables = (flat: string): string[] => {
-  const m = flat.match(/tables text\[\] := ARRAY\[([^\]]*)\]/);
-  if (!m) return [];
-  return [...m[1].matchAll(/'([a-z_]+)'/g)].map((x) => x[1]);
+const M = {
+  loopTables: /tables text\[\] := array\[([^\]]*)\]/i,
+  quotedName: /'([a-z_]+)'/gi,
+  grant: /\bgrant\s+([a-z ,()]+?)\s+on\s+(?:table\s+)?([a-z_."]+)\s+to\s+([a-z_, ]+?)\s*;/gi,
+  grantToken: /\bgrant\b/gi,
+  revoke: /\brevoke\b[^;]*;/gi,
+  policyStatement: /create policy [^;]*;/gi,
+  policyGuard: /tablename = '([a-z_]+)' and policyname = '([a-z_]+)'/gi,
+  tableDef: /create table if not exists public\.pregnancy_episodes \((.*?)\); create unique index/i,
+  constraintName: /(?<!pg_)constraint ([a-z_%i]+)/gi, // not the pg_constraint catalogue in the guards
+  addConstraint: /add constraint ([a-z_%i]+)/gi,
+  createIndex: /create (?:unique )?index if not exists ([a-z_%i]+) on public\.([a-z_%i]+)/gi,
+  createUniqueIndex: /create unique index/gi,
+  createTrigger: /create trigger/gi,
+  createPolicy: /create policy/gi,
+  foreignKey: /foreign key/gi,
+  episodeRef: /references public\.pregnancy_episodes/gi,
+  compositeEpisodeLink:
+    /foreign key \((current_pregnancy_episode_id|pregnancy_episode_id), user_id\) references public\.pregnancy_episodes \(id, user_id\) on delete restrict not valid/gi,
+  singleColumnEpisodeRef: /references public\.pregnancy_episodes\s*\(\s*id\s*\)/i,
+  singleColumnEpisodeFk: /foreign key \((current_)?pregnancy_episode_id\)/i,
+  cascadingEpisodeRef: /references public\.pregnancy_episodes[^;']*(?:cascade|set null|deferrable)/i,
+  inlineValidatedEpisodeLink: /references public\.pregnancy_episodes \(id, user_id\) on delete restrict(?! not valid)/i,
+  onDeleteCascade: /on delete cascade/gi,
+  pgConstraintGuard: /from pg_constraint where ([^)]*)\)/gi,
+  validateStatement: /alter table public\.([a-z_]+) validate constraint ([a-z_]+);/gi,
+  alterTable: /\balter table\b/gi,
+  dropAny: /\bdrop\b/gi,
+  dropStatement: /\bdrop\b[^;]*;/gi,
+  dropColumn: /alter table public\.([a-z_%i]+) drop column(?: if exists)? ([a-z_%i]+)/gi,
+  dropConstraint: /alter table public\.([a-z_%i]+) drop constraint(?: if exists)? ([a-z_%i]+)/gi,
+  dropIndex: /drop index(?: if exists)? (?:public\.)?([a-z_%i]+)/gi,
+  dropPolicy: /drop policy(?: if exists)? ([a-z_]+) on ([a-z_.]+)/gi,
+  dropTrigger: /drop trigger(?: if exists)? ([a-z_]+) on ([a-z_.]+)/gi,
+  dropTable: /drop table(?: if exists)? (?:public\.)?([a-z_]+)/gi,
+  dropObject: /\bdrop (table|index|policy|trigger|constraint|column)\b(?: if exists)?/gi,
+  refusal: /raise exception 'rollback refused/gi,
+  publicName: /(?<!drop index if exists )public\.([a-z_]+)/gi,
+  expectedFks: /expected_fks text\[\] := array\[([^\]]*)\]/i,
 };
 
-const LOOP_TABLES = parseLoopTables(forward.flat);
-const LINK_FKS = [
-  "journeys_current_pregnancy_episode_owner_fkey",
-  ...LOOP_TABLES.map((t) => `${t}_pregnancy_episode_owner_fkey`),
-];
-const LINK_INDEXES = [
-  "journeys_current_pregnancy_episode_idx",
-  ...LOOP_TABLES.map((t) => `${t}_pregnancy_episode_idx`),
-];
-
-type Grant = { privileges: string[]; object: string; roles: string[] };
-
-// Structural GRANT parser: optional TABLE keyword, any casing, any whitespace, role lists.
-const GRANT_RE = /\bGRANT\s+([A-Za-z ,()]+?)\s+ON\s+(?:TABLE\s+)?([A-Za-z_."]+)\s+TO\s+([A-Za-z_, ]+?)\s*;/gi;
-const parseGrants = (sql: string): Grant[] =>
-  [...squash(sql).matchAll(GRANT_RE)].map((m) => ({
-    privileges: m[1].split(",").map((p) => p.trim().toUpperCase()).filter(Boolean),
-    object: m[2].toLowerCase(),
-    roles: m[3].split(",").map((r) => r.trim().toLowerCase()).filter(Boolean),
-  }));
-
-// Approved surface: authenticated may hold SELECT only, on pregnancy_episodes only.
-// anon and PUBLIC may hold nothing. Anything else is a violation.
-const grantViolations = (grants: Grant[]): string[] => {
-  const out: string[] = [];
-  for (const g of grants) {
-    const desc = `GRANT ${g.privileges.join(", ")} ON ${g.object} TO ${g.roles.join(", ")}`;
-    if (g.roles.some((r) => r === "anon" || r === "public")) out.push(`anon/PUBLIC granted: ${desc}`);
-    if (g.roles.includes("authenticated")) {
-      if (g.object !== "public.pregnancy_episodes") out.push(`authenticated granted on another object: ${desc}`);
-      if (g.privileges.length !== 1 || g.privileges[0] !== "SELECT") out.push(`authenticated beyond SELECT: ${desc}`);
-    }
-  }
-  return out;
-};
-
-const POLICY_STATEMENT_RE = /CREATE POLICY [^;]*;/g;
-const EXPECTED_POLICIES = [
-  "CREATE POLICY pregnancy_episodes_select_own ON public.pregnancy_episodes FOR SELECT TO authenticated USING (auth.uid() = user_id);",
-  "CREATE POLICY pregnancy_episodes_insert_own ON public.pregnancy_episodes FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);",
-  "CREATE POLICY pregnancy_episodes_update_own ON public.pregnancy_episodes FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);",
-  "CREATE POLICY pregnancy_episodes_delete_own ON public.pregnancy_episodes FOR DELETE TO authenticated USING (auth.uid() = user_id);",
-];
-
-// DML and destructive statement detectors. They match whole statements, so
-// "BEFORE UPDATE ON", "FOR UPDATE TO", "ON DELETE RESTRICT" and "GRANT SELECT" do not trip them.
 const DML = [
-  /\bUPDATE\s+(?:ONLY\s+)?(?:public\.)?[a-z_%I"]+(?:\s+(?:AS\s+)?[a-z_]+)?\s+SET\b/i,
-  /\bINSERT\s+INTO\b/i,
-  /\bDELETE\s+FROM\b/i,
-  /\bTRUNCATE\b/i,
-  /\bMERGE\s+INTO\b/i,
-  /\bCOPY\b/i,
+  /\bupdate\s+(?:only\s+)?(?:public\.)?[a-z_%i"]+(?:\s+(?:as\s+)?[a-z_]+)?\s+set\b/i,
+  /\binsert\s+into\b/i,
+  /\bdelete\s+from\b/i,
+  /\btruncate\b/i,
+  /\bmerge\s+into\b/i,
+  /\bcopy\b/i,
   // SELECT may appear only as a privilege word (GRANT SELECT ON / FOR SELECT TO), a catalogue
   // existence check (SELECT 1 FROM pg_* / information_schema) or an aggregate count.
-  /\bSELECT\s+(?!1\s+FROM\s+(?:pg_|information_schema\.)|count\(\*\)|ON\b|TO\b)/i,
+  /\bselect\s+(?!1\s+from\s+(?:pg_|information_schema\.)|count\(\*\)|on\b|to\b)/i,
 ];
 const DESTRUCTIVE_DDL = [
-  /\bDROP\s+(TABLE|COLUMN|CONSTRAINT|POLICY|INDEX|TYPE|FUNCTION|SCHEMA|ROLE|SEQUENCE)\b/i,
-  /\bALTER\s+TYPE\b/i,
-  /\bSET\s+NOT\s+NULL\b/i,
-  /\bALTER\s+TABLE\s+(?:ONLY\s+)?(?:public\.)?[a-z_%I"]+\s+DROP\b/i,
-  /\bRENAME\b/i,
+  /\bdrop\s+(table|column|constraint|policy|index|type|function|schema|role|sequence)\b/i,
+  /\balter\s+type\b/i,
+  /\bset\s+not\s+null\b/i,
+  /\balter\s+table\s+(?:only\s+)?(?:public\.)?[a-z_%i"]+\s+drop\b/i,
+  /\brename\b/i,
 ];
 const TRANSACTION_CONTROL = [
-  /\bBEGIN\s*;/i,
-  /\bBEGIN\s+(TRANSACTION|WORK|ISOLATION|READ|DEFERRABLE)\b/i,
-  /\bSTART\s+TRANSACTION\b/i,
-  /\bCOMMIT\b/i,
-  /\bROLLBACK\s*(;|TO\b|WORK\b|TRANSACTION\b|PREPARED\b)/i,
-  /\bSAVEPOINT\b/i,
-  /\bPREPARE\s+TRANSACTION\b/i,
+  /\bbegin\s*;/i,
+  /\bbegin\s+(transaction|work|isolation|read|deferrable)\b/i,
+  /\bstart\s+transaction\b/i,
+  /\bcommit\b/i,
+  /\brollback\s*(;|to\b|work\b|transaction\b|prepared\b)/i,
+  /\bsavepoint\b/i,
+  /\bprepare\s+transaction\b/i,
 ];
 const PRIVILEGE_ESCAPES = [
-  /\bDISABLE\s+ROW\s+LEVEL\s+SECURITY\b/i,
-  /\bALTER\s+POLICY\b/i,
-  /\bON\s+ALL\s+(TABLES|SEQUENCES|FUNCTIONS|ROUTINES)\s+IN\s+SCHEMA\b/i,
-  /\bALTER\s+DEFAULT\s+PRIVILEGES\b/i,
-  /\bSECURITY\s+DEFINER\b/i,
-  /\bBYPASSRLS\b/i,
+  /\bdisable\s+row\s+level\s+security\b/i,
+  /\balter\s+policy\b/i,
+  /\bon\s+all\s+(tables|sequences|functions|routines)\s+in\s+schema\b/i,
+  /\balter\s+default\s+privileges\b/i,
+  /\bsecurity\s+definer\b/i,
+  /\bbypassrls\b/i,
 ];
+const POLICY_ESCAPES = [/\bfor all\b/i, /\bto (public|anon)\b/i, /using \(true\)|with check \(true\)/i, /as (restrictive|permissive)/i];
 
 const MAX_IDENTIFIER_BYTES = 63;
 
 // ---------------------------------------------------------------------------
-// Detector self-tests: each detector must trip on the defect it exists to catch.
+// Parsers (every one returns canonical lower-case identifiers)
+// ---------------------------------------------------------------------------
+const parseLoopTables = (flat: string): string[] => {
+  const m = flat.match(M.loopTables);
+  if (!m) return [];
+  return [...m[1].matchAll(M.quotedName)].map((x) => ident(x[1]));
+};
+
+type Grant = { privileges: string[]; object: string; roles: string[] };
+const ROLE_TOKEN = /^[a-z_][a-z0-9_]*$/;
+const PRIVILEGE_TOKEN = /^(select|insert|update|delete|truncate|references|trigger|all|all privileges)$/;
+
+const parseGrants = (sql: string): Grant[] =>
+  [...squash(sql).matchAll(M.grant)].map((m) => ({
+    privileges: m[1].split(",").map((p) => lc(p.trim())).filter(Boolean),
+    object: lc(m[2]),
+    roles: m[3].split(",").map((r) => lc(r.trim())).filter(Boolean),
+  }));
+
+// Approved surface: authenticated may hold SELECT only, on pregnancy_episodes only; anon and
+// PUBLIC may hold nothing. Any token outside the accepted grammar is itself a violation
+// (fail closed), so "GROUP authenticated" or "authenticated GRANTED BY x" can never read as safe.
+const grantViolations = (grants: Grant[]): string[] => {
+  const out: string[] = [];
+  for (const g of grants) {
+    const desc = `GRANT ${g.privileges.join(", ")} ON ${g.object} TO ${g.roles.join(", ")}`;
+    for (const r of g.roles) if (!ROLE_TOKEN.test(r)) out.push(`unrecognised role token "${r}": ${desc}`);
+    for (const p of g.privileges) if (!PRIVILEGE_TOKEN.test(p)) out.push(`unrecognised privilege token "${p}": ${desc}`);
+    if (g.roles.some((r) => r === "anon" || r === "public")) out.push(`anon/PUBLIC granted: ${desc}`);
+    if (g.roles.some((r) => r === "authenticated" || r.includes("authenticated"))) {
+      if (g.object !== "public.pregnancy_episodes") out.push(`authenticated granted on another object: ${desc}`);
+      if (g.privileges.length !== 1 || g.privileges[0] !== "select") out.push(`authenticated beyond SELECT: ${desc}`);
+    }
+  }
+  return out;
+};
+// Fail-closed wrapper: every GRANT token must have produced exactly one parsed grant.
+const grantAudit = (sql: string) => {
+  const grants = parseGrants(sql);
+  const tokens = (squash(sql).match(M.grantToken) ?? []).length;
+  const violations = grantViolations(grants);
+  if (grants.length !== tokens) violations.push(`unparsed GRANT syntax: ${tokens} GRANT token(s), ${grants.length} parsed`);
+  return { grants, violations };
+};
+
+const EXPECTED_POLICIES = [
+  "create policy pregnancy_episodes_select_own on public.pregnancy_episodes for select to authenticated using (auth.uid() = user_id);",
+  "create policy pregnancy_episodes_insert_own on public.pregnancy_episodes for insert to authenticated with check (auth.uid() = user_id);",
+  "create policy pregnancy_episodes_update_own on public.pregnancy_episodes for update to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);",
+  "create policy pregnancy_episodes_delete_own on public.pregnancy_episodes for delete to authenticated using (auth.uid() = user_id);",
+];
+const policySurface = (flat: string) => [...flat.matchAll(M.policyStatement)].map((m) => lc(m[0]));
+const policyEscapes = (flat: string) => POLICY_ESCAPES.filter((re) => re.test(flat)).map(String);
+
+// Episode-reference audit over the format()-joined text.
+const episodeReferenceAudit = (flat: string) => {
+  const joined = flat.replace(/' '/g, "");
+  return {
+    allRefs: (joined.match(M.episodeRef) ?? []).length,
+    composite: [...joined.matchAll(M.compositeEpisodeLink)].map((m) => ident(m[1])).sort(),
+    foreignKeys: (joined.match(M.foreignKey) ?? []).length,
+    singleColumn: M.singleColumnEpisodeRef.test(joined) || M.singleColumnEpisodeFk.test(joined),
+    cascading: M.cascadingEpisodeRef.test(joined),
+    inlineValidated: M.inlineValidatedEpisodeLink.test(joined),
+  };
+};
+
+// Surface counts used to prove the parsers do not undercount on any casing.
+const surfaceCounts = (flat: string) => ({
+  foreignKeys: (flat.match(M.foreignKey) ?? []).length,
+  episodeRefs: (flat.match(M.episodeRef) ?? []).length,
+  policies: (flat.match(M.createPolicy) ?? []).length,
+  indexes: [...flat.matchAll(M.createIndex)].map((m) => `${ident(m[2])}.${ident(m[1])}`),
+  uniqueIndexes: (flat.match(M.createUniqueIndex) ?? []).length,
+  triggers: (flat.match(M.createTrigger) ?? []).length,
+  constraints: [...flat.matchAll(M.constraintName)].map((m) => ident(m[1])).filter((n) => n !== "for"),
+  validations: [...flat.matchAll(M.validateStatement)].map((m) => `${ident(m[1])}.${ident(m[2])}`),
+  cascades: (flat.match(M.onDeleteCascade) ?? []).length,
+});
+
+// Rollback DROP categorisation; every DROP must fall into exactly one owned category.
+const categoriseDrops = (flat: string) => {
+  const columns = [...flat.matchAll(M.dropColumn)].map((m) => `${ident(m[1])}.${ident(m[2])}`).sort();
+  const constraints = [...flat.matchAll(M.dropConstraint)].map((m) => `${ident(m[1])}.${ident(m[2])}`).sort();
+  const indexes = [...flat.matchAll(M.dropIndex)].map((m) => ident(m[1])).sort();
+  const policies = [...flat.matchAll(M.dropPolicy)].map((m) => `${ident(m[2])}.${ident(m[1])}`).sort();
+  const triggers = [...flat.matchAll(M.dropTrigger)].map((m) => `${ident(m[2])}.${ident(m[1])}`).sort();
+  const tables = [...flat.matchAll(M.dropTable)].map((m) => ident(m[1])).sort();
+  const total = (flat.match(M.dropAny) ?? []).length;
+  const categorised = columns.length + constraints.length + indexes.length + policies.length + triggers.length + tables.length;
+  return { columns, constraints, indexes, policies, triggers, tables, total, categorised };
+};
+const OWNED_DROPS = {
+  columns: ["%I.pregnancy_episode_id", "journeys.current_pregnancy_episode_id"],
+  constraints: ["%I.%I", "babies.babies_id_user_id_key", "journeys.journeys_current_pregnancy_episode_owner_fkey"],
+  indexes: ["%I", "journeys_current_pregnancy_episode_idx", "pregnancy_episodes_one_open_per_user_idx", "pregnancy_episodes_user_id_idx"].sort(),
+  policies: ["select", "insert", "update", "delete"].map((op) => `public.pregnancy_episodes.pregnancy_episodes_${op}_own`).sort(),
+  triggers: ["public.pregnancy_episodes.pregnancy_episodes_set_updated_at"],
+  tables: ["pregnancy_episodes"],
+};
+
+// Deterministic mixed-case transform for adversarial inputs: alternate letter case outside quotes.
+const mixCase = (sql: string) => {
+  let inQuote = false;
+  let i = 0;
+  return sql
+    .split("")
+    .map((c) => {
+      if (c === "'") inQuote = !inQuote;
+      if (inQuote || !/[a-z]/i.test(c)) return c;
+      i += 1;
+      return i % 2 ? c.toUpperCase() : c.toLowerCase();
+    })
+    .join("");
+};
+
+const LOOP_TABLES = parseLoopTables(forward.flat);
+const LINK_FKS = ["journeys_current_pregnancy_episode_owner_fkey", ...LOOP_TABLES.map((t) => `${t}_pregnancy_episode_owner_fkey`)];
+const LINK_INDEXES = ["journeys_current_pregnancy_episode_idx", ...LOOP_TABLES.map((t) => `${t}_pregnancy_episode_idx`)];
+
+// ---------------------------------------------------------------------------
+// Detector self-tests: each detector must trip on the defect it exists to catch, in any casing.
 // ---------------------------------------------------------------------------
 describe("detector self-tests (a silent regex regression must fail here)", () => {
-  it("grant parser rejects every forbidden authenticated / anon shape, with and without TABLE, any case or spacing", () => {
+  it("every structural matcher and detector is case-insensitive by construction", () => {
+    for (const [name, re] of Object.entries(M)) expect(re.flags, name).toContain("i");
+    for (const re of [...DML, ...DESTRUCTIVE_DDL, ...TRANSACTION_CONTROL, ...PRIVILEGE_ESCAPES, ...POLICY_ESCAPES]) expect(re.flags, String(re)).toContain("i");
+  });
+
+  it("grant audit rejects every forbidden shape, with and without TABLE, any case or spacing, and fails closed on unparsed grammar", () => {
     const forbidden = [
       "GRANT ALL ON public.pregnancy_episodes TO authenticated;",
       "GRANT ALL ON TABLE public.pregnancy_episodes TO authenticated;",
@@ -135,60 +254,131 @@ describe("detector self-tests (a silent regex regression must fail here)", () =>
       "GRANT SELECT, INSERT, UPDATE, DELETE ON public.pregnancy_episodes TO authenticated;",
       "GRANT SELECT,DELETE ON public.pregnancy_episodes TO authenticated;",
       "grant   insert ,  update   on   table   public.pregnancy_episodes   to   authenticated ;",
-      "GRANT SELECT ON public.pregnancy_episodes TO anon;",
+      "Grant Select On public.pregnancy_episodes To Anon;",
       "GRANT SELECT ON public.pregnancy_episodes TO PUBLIC;",
       "GRANT SELECT ON public.pregnancy_episodes TO service_role, authenticated, anon;",
       "GRANT SELECT ON public.babies TO authenticated;",
       "GRANT ALL ON TABLE public.pregnancy_episodes TO service_role, authenticated;",
+      // decorated or multi-word role syntax must never read as a plain authenticated SELECT
+      "GRANT SELECT ON public.pregnancy_episodes TO GROUP authenticated;",
+      "grant select on public.pregnancy_episodes to group authenticated;",
+      "GRANT ALL ON public.pregnancy_episodes TO GROUP authenticated;",
+      "GRANT SELECT ON public.pregnancy_episodes TO authenticated GRANTED BY postgres;",
+      "GRANT SELECT ON public.pregnancy_episodes TO authenticated WITH GRANT OPTION;",
+      "GRANT SELECT ON public.pregnancy_episodes TO \"authenticated\";",
+      "GRANT ALL ON ALL TABLES IN SCHEMA public TO authenticated;",
+      "GRANT authenticated TO anon;",
+      "GRANT EXECUTE ON FUNCTION public.f() TO authenticated;",
     ];
-    for (const sql of forbidden) {
-      const grants = parseGrants(sql);
-      expect(grants, sql).toHaveLength(1);
-      expect(grantViolations(grants), sql).not.toHaveLength(0);
-    }
+    for (const sql of forbidden) expect(grantAudit(sql).violations, sql).not.toHaveLength(0);
     const allowed = [
       "GRANT SELECT ON TABLE public.pregnancy_episodes TO authenticated;",
-      "GRANT  select  ON  public.pregnancy_episodes  TO  authenticated ;",
+      "grant  select  on  public.pregnancy_episodes  to  authenticated ;",
+      "Grant Select On Table public.pregnancy_episodes To Authenticated;",
       "GRANT ALL ON TABLE public.pregnancy_episodes TO service_role;",
     ];
-    for (const sql of allowed) expect(grantViolations(parseGrants(sql)), sql).toEqual([]);
+    for (const sql of allowed) expect(grantAudit(sql).violations, sql).toEqual([]);
   });
 
-  it("DML detectors trip inside EXECUTE strings and on MERGE / COPY / aliased UPDATE", () => {
-    expect("EXECUTE format('UPDATE public.%I SET x = 1', t)").toMatch(DML[0]);
-    expect("UPDATE public.babies AS b SET x = 1").toMatch(DML[0]);
-    expect("UPDATE ONLY public.babies SET x = 1").toMatch(DML[0]);
-    expect("EXECUTE 'INSERT INTO public.x VALUES (1)'").toMatch(DML[1]);
-    expect("EXECUTE format('DELETE FROM public.%I', t)").toMatch(DML[2]);
-    expect("TRUNCATE public.babies").toMatch(DML[3]);
-    expect("MERGE INTO public.babies USING s ON true WHEN MATCHED THEN DO NOTHING").toMatch(DML[4]);
-    expect("COPY public.babies FROM '/tmp/x.csv'").toMatch(DML[5]);
-    expect("SELECT * FROM public.reflections").toMatch(DML[6]);
-    // and do not trip on the permitted grammar positions
-    for (const ok of ["BEFORE UPDATE ON public.x", "FOR UPDATE TO authenticated", "ON DELETE RESTRICT", "GRANT SELECT ON TABLE public.x TO y", "FOR SELECT TO authenticated", "SELECT 1 FROM pg_constraint", "SELECT count(*) FROM public.x"]) {
+  it("DML detectors trip inside EXECUTE strings, on MERGE / COPY / aliased UPDATE, in any casing", () => {
+    const bad = [
+      ["EXECUTE format('UPDATE public.%I SET x = 1', t)", 0],
+      ["update public.babies as b set x = 1", 0],
+      ["Update Only public.babies Set x = 1", 0],
+      ["EXECUTE 'insert into public.x VALUES (1)'", 1],
+      ["EXECUTE format('Delete From public.%I', t)", 2],
+      ["truncate public.babies", 3],
+      ["merge into public.babies USING s ON true WHEN MATCHED THEN DO NOTHING", 4],
+      ["Copy public.babies FROM '/tmp/x.csv'", 5],
+      ["select * from public.reflections", 6],
+    ] as const;
+    for (const [sql, idx] of bad) expect(sql).toMatch(DML[idx]);
+    for (const ok of ["before update on public.x", "FOR UPDATE TO authenticated", "on delete restrict", "GRANT SELECT ON TABLE public.x TO y", "for select to authenticated", "SELECT 1 FROM pg_constraint", "select count(*) from public.x"]) {
       for (const re of DML) expect(ok, `${ok} vs ${re}`).not.toMatch(re);
     }
   });
 
-  it("transaction detectors trip on every transaction-control spelling", () => {
-    for (const bad of ["BEGIN;", "BEGIN TRANSACTION;", "BEGIN WORK;", "START TRANSACTION;", "COMMIT;", "COMMIT WORK;", "ROLLBACK;", "ROLLBACK TO s1;", "SAVEPOINT s1;", "PREPARE TRANSACTION 'x';"]) {
-      expect(TRANSACTION_CONTROL.some((re) => re.test(bad)), bad).toBe(true);
+  it("transaction detectors trip on every spelling and casing, but not on plpgsql blocks or the guard message", () => {
+    for (const sql of ["BEGIN;", "begin;", "Begin Transaction;", "BEGIN WORK;", "start transaction;", "COMMIT;", "commit work;", "ROLLBACK;", "rollback to s1;", "SAVEPOINT s1;", "prepare transaction 'x';"]) {
+      expect(TRANSACTION_CONTROL.some((re) => re.test(sql)), sql).toBe(true);
     }
-    // plpgsql block delimiters and the guard's message text are not transaction control
-    for (const ok of ["DO $$ BEGIN IF true THEN null; END IF; END $$;", "RAISE EXCEPTION 'ROLLBACK REFUSED: % row(s)'", "FOREACH t IN ARRAY tables LOOP END LOOP;"]) {
+    for (const ok of ["DO $$ BEGIN IF true THEN null; END IF; END $$;", "do $$ begin if true then null; end if; end $$;", "RAISE EXCEPTION 'ROLLBACK REFUSED: % row(s)'", "FOREACH t IN ARRAY tables LOOP END LOOP;"]) {
       expect(TRANSACTION_CONTROL.some((re) => re.test(ok)), ok).toBe(false);
     }
   });
 
-  it("privilege-escape detectors trip on RLS disable, ALTER POLICY, schema-wide grants and default privileges", () => {
-    for (const bad of [
-      "ALTER TABLE public.pregnancy_episodes DISABLE ROW LEVEL SECURITY;",
-      "ALTER POLICY pregnancy_episodes_select_own ON public.pregnancy_episodes USING (true);",
+  it("privilege-escape detectors trip on RLS disable, ALTER POLICY, schema-wide grants and default privileges, in any casing", () => {
+    for (const sql of [
+      "alter table public.pregnancy_episodes disable row level security;",
+      "Alter Policy pregnancy_episodes_select_own On public.pregnancy_episodes Using (true);",
       "GRANT ALL ON ALL TABLES IN SCHEMA public TO authenticated;",
-      "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon;",
+      "alter default privileges in schema public grant all on tables to anon;",
     ]) {
-      expect(PRIVILEGE_ESCAPES.some((re) => re.test(bad)), bad).toBe(true);
+      expect(PRIVILEGE_ESCAPES.some((re) => re.test(sql)), sql).toBe(true);
     }
+  });
+
+  it("policy regression: a lowercase or mixed-case permissive policy to anon is counted and flagged", () => {
+    for (const leak of [
+      "create policy leak on public.pregnancy_episodes for select to anon using (true);",
+      "Create Policy Leak On public.pregnancy_episodes For Select To Anon Using (TRUE);",
+      "create policy leak2 on public.pregnancy_episodes for all to authenticated using (true);",
+    ]) {
+      const injected = `${forward.flat} ${leak}`;
+      expect(policySurface(injected), leak).toHaveLength(5);
+      expect(policyEscapes(injected), leak).not.toHaveLength(0);
+      expect(surfaceCounts(injected).policies, leak).toBe(5);
+    }
+    // the committed surface itself raises no escape
+    expect(policyEscapes(forward.flat)).toEqual([]);
+  });
+
+  it("single-column ownership regression: a lowercase or mixed-case single-column episode FK is detected", () => {
+    for (const bad of [
+      "alter table public.reflections add constraint x foreign key (pregnancy_episode_id) references public.pregnancy_episodes (id);",
+      "Alter Table public.babies Add Constraint y Foreign Key (pregnancy_episode_id) References public.pregnancy_episodes(ID);",
+      "alter table public.journeys add constraint z foreign key (current_pregnancy_episode_id) references public.pregnancy_episodes (id) on delete cascade;",
+    ]) {
+      const audit = episodeReferenceAudit(`${forward.flat} ${bad}`);
+      expect(audit.singleColumn, bad).toBe(true);
+      expect(audit.allRefs, bad).toBe(3);
+      expect(audit.composite, bad).toHaveLength(2); // the extra reference is not composite
+      expect(audit.foreignKeys, bad).toBe(4);
+    }
+    const inline = "alter table public.babies add constraint w foreign key (pregnancy_episode_id, user_id) references public.pregnancy_episodes (id, user_id) on delete restrict;";
+    expect(episodeReferenceAudit(`${forward.flat} ${inline}`).inlineValidated).toBe(true);
+  });
+
+  it("rollback legacy-column regression: a lowercase or mixed-case DROP COLUMN on a legacy column fails the whitelist", () => {
+    for (const bad of [
+      "alter table public.babies drop column if exists birth_order;",
+      "Alter Table public.reflections Drop Column week;",
+      "ALTER TABLE public.babies DROP COLUMN IF EXISTS name;",
+    ]) {
+      const d = categoriseDrops(`${rollback.flat} ${bad}`);
+      expect(d.columns, bad).not.toEqual(OWNED_DROPS.columns);
+      expect(d.total, bad).toBe(16);
+      expect(d.total, bad).toBe(d.categorised); // still categorised, so the whitelist comparison is what fails
+    }
+    // an unrecognised DROP form is caught by the total/categorised reconciliation instead
+    const odd = categoriseDrops(`${rollback.flat} drop type public.pregnancy_journey_status;`);
+    expect(odd.total).toBe(16);
+    expect(odd.categorised).toBe(15);
+  });
+
+  it("structural counts: lower-case and mixed-case spellings of the whole forward file count identically", () => {
+    const base = surfaceCounts(forward.flat);
+    expect(surfaceCounts(lc(forward.flat))).toEqual(base);
+    expect(surfaceCounts(mixCase(forward.flat))).toEqual(base);
+    expect(surfaceCounts(lc(validate.flat)).validations).toEqual(surfaceCounts(validate.flat).validations);
+    expect(surfaceCounts(mixCase(validate.flat)).validations).toHaveLength(13);
+    expect(categoriseDrops(lc(rollback.flat))).toEqual(categoriseDrops(rollback.flat));
+    expect(categoriseDrops(mixCase(rollback.flat))).toEqual(categoriseDrops(rollback.flat));
+    expect(parseLoopTables(mixCase(forward.flat))).toEqual(LOOP_TABLES);
+    expect(episodeReferenceAudit(mixCase(forward.flat))).toEqual(episodeReferenceAudit(forward.flat));
+    expect(policySurface(mixCase(forward.flat))).toEqual(policySurface(forward.flat));
+    // and the counts are the real ones, not zero in every variant
+    expect(base).toMatchObject({ foreignKeys: 3, episodeRefs: 2, policies: 4, uniqueIndexes: 1, triggers: 1, cascades: 1 });
   });
 });
 
@@ -215,8 +405,8 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
 
     it("S1: every file bounds lock waits with SET LOCAL lock_timeout as its first statement", () => {
       for (const f of ALL_FILES) {
-        expect(f.flat).toMatch(/SET LOCAL lock_timeout = '\d+s';/);
-        expect(f.flat.indexOf("SET LOCAL lock_timeout")).toBe(0);
+        expect(f.flat).toMatch(/set local lock_timeout = '\d+s';/i);
+        expect(f.flat.search(/set local lock_timeout/i)).toBe(0);
       }
     });
 
@@ -224,70 +414,65 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
       for (const f of ALL_FILES) for (const re of PRIVILEGE_ESCAPES) expect(f.flat).not.toMatch(re);
     });
 
-    it("every identifier this phase introduces fits PostgreSQL's 63-byte limit", () => {
+    it("every identifier this phase introduces fits PostgreSQL's 63-byte limit and is lower-case", () => {
       const introduced = new Set<string>([
-        ...[...forward.flat.matchAll(/CONSTRAINT ([a-z_]+)/g)].map((m) => m[1]),
-        ...[...forward.flat.matchAll(/INDEX IF NOT EXISTS ([a-z_]+)/g)].map((m) => m[1]),
-        ...[...forward.flat.matchAll(/CREATE POLICY ([a-z_]+)/g)].map((m) => m[1]),
-        ...[...forward.flat.matchAll(/CREATE TRIGGER ([a-z_]+)/g)].map((m) => m[1]),
-        ...[...forward.flat.matchAll(/ADD COLUMN IF NOT EXISTS ([a-z_]+)/g)].map((m) => m[1]),
-        ...[...validate.flat.matchAll(/VALIDATE CONSTRAINT ([a-z_]+)/g)].map((m) => m[1]),
+        ...surfaceCounts(forward.flat).constraints,
+        ...surfaceCounts(forward.flat).indexes.map((x) => x.split(".")[1]),
+        ...policySurface(forward.flat).map((p) => (p.match(/create policy ([a-z_]+)/) as RegExpMatchArray)[1]),
+        ...[...forward.flat.matchAll(/create trigger ([a-z_]+)/gi)].map((m) => ident(m[1])),
+        ...[...forward.flat.matchAll(/add column if not exists ([a-z_]+)/gi)].map((m) => ident(m[1])),
+        ...surfaceCounts(validate.flat).validations.map((x) => x.split(".")[1]),
         ...LINK_FKS,
         ...LINK_INDEXES,
         "pregnancy_episodes", "removed_at", "current_pregnancy_episode_id", "pregnancy_episode_id",
       ]);
-      introduced.delete("for"); // "CONSTRAINT for" is prose inside the format() template, not a name
+      introduced.delete("%I");
       expect(introduced.size).toBeGreaterThanOrEqual(13 + 13 + 6 + 4 + 1);
       for (const name of introduced) {
         expect(Buffer.byteLength(name, "utf8"), name).toBeLessThanOrEqual(MAX_IDENTIFIER_BYTES);
         expect(name, name).toMatch(/^[a-z_]+$/);
       }
+      // raw spellings in the files are lower-case too (unquoted identifiers fold; mixed case would be a smell)
+      for (const f of ALL_FILES) expect(f.flat).not.toMatch(/\b(?:constraint|index if not exists|policy|trigger) [a-z_]*[A-Z][a-z_]*\b/);
     });
   });
 
   describe("pregnancy episode entity", () => {
+    const tableDef = () => (forward.flat.match(M.tableDef) as RegExpMatchArray)[1];
+
     it("rows 1–2: table with primary key and (id, user_id) owner key", () => {
-      expect(forward.flat).toMatch(/CREATE TABLE IF NOT EXISTS public\.pregnancy_episodes \(/);
-      expect(forward.flat).toMatch(/CONSTRAINT pregnancy_episodes_pkey PRIMARY KEY \(id\)/);
-      expect(forward.flat).toMatch(/CONSTRAINT pregnancy_episodes_id_user_id_key UNIQUE \(id, user_id\)/);
+      expect(forward.flat).toMatch(/create table if not exists public\.pregnancy_episodes \(/i);
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_pkey primary key \(id\)/i);
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_id_user_id_key unique \(id, user_id\)/i);
     });
 
     it("A/C: no plain unique on user_id, so one person may hold many episodes", () => {
-      expect(forward.flat).not.toMatch(/UNIQUE \(user_id\)/);
+      expect(forward.flat).not.toMatch(/unique \(user_id\)/i);
     });
 
     it("account-level cascade is intentional: user_id references auth.users ON DELETE CASCADE, and it is the only CASCADE", () => {
-      expect(forward.flat).toMatch(
-        /CONSTRAINT pregnancy_episodes_user_id_fkey FOREIGN KEY \(user_id\) REFERENCES auth\.users \(id\) ON DELETE CASCADE/,
-      );
-      expect([...forward.flat.matchAll(/ON DELETE CASCADE/g)]).toHaveLength(1);
-      expect(forward.flat).not.toMatch(/ON DELETE SET (NULL|DEFAULT)/);
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_user_id_fkey foreign key \(user_id\) references auth\.users \(id\) on delete cascade/i);
+      expect(surfaceCounts(forward.flat).cascades).toBe(1);
+      expect(forward.flat).not.toMatch(/on delete set (null|default)/i);
     });
 
     it("S4: lmp_date and due_date are NOT NULL and carry the save function's date rule as a CHECK", () => {
-      expect(forward.flat).toMatch(/\blmp_date date NOT NULL\b/);
-      expect(forward.flat).toMatch(/\bdue_date date NOT NULL\b/);
-      expect(forward.flat).toMatch(
-        /CONSTRAINT pregnancy_episodes_dates_check CHECK \(due_date > lmp_date AND due_date <= lmp_date \+ 300\)/,
-      );
+      expect(forward.flat).toMatch(/\blmp_date date not null\b/i);
+      expect(forward.flat).toMatch(/\bdue_date date not null\b/i);
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_dates_check check \(due_date > lmp_date and due_date <= lmp_date \+ 300\)/i);
     });
 
     it("row 4: expected_count accepts null or 1 to 4", () => {
-      expect(forward.flat).toMatch(
-        /CONSTRAINT pregnancy_episodes_expected_count_check CHECK \(expected_count IS NULL OR expected_count BETWEEN 1 AND 4\)/,
-      );
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_expected_count_check check \(expected_count is null or expected_count between 1 and 4\)/i);
     });
 
     it("row 5: ended_at is null exactly when status is active or paused", () => {
-      expect(forward.flat).toMatch(
-        /CONSTRAINT pregnancy_episodes_ended_at_status_check CHECK \(\(status IN \('active', 'paused'\)\) = \(ended_at IS NULL\)\)/,
-      );
+      expect(forward.flat).toMatch(/constraint pregnancy_episodes_ended_at_status_check check \(\(status in \('active', 'paused'\)\) = \(ended_at is null\)\)/i);
     });
 
     it("exactly six table constraints and nothing on removed_at, outcome_date or status beyond the approved set", () => {
-      const tableDef = forward.flat.match(/CREATE TABLE IF NOT EXISTS public\.pregnancy_episodes \((.*?)\); CREATE UNIQUE INDEX/);
-      expect(tableDef).not.toBeNull();
-      const names = [...(tableDef as RegExpMatchArray)[1].matchAll(/CONSTRAINT ([a-z_]+)/g)].map((m) => m[1]);
+      expect(forward.flat.match(M.tableDef)).not.toBeNull();
+      const names = [...tableDef().matchAll(M.constraintName)].map((m) => ident(m[1]));
       expect(names).toEqual([
         "pregnancy_episodes_pkey",
         "pregnancy_episodes_id_user_id_key",
@@ -296,93 +481,81 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
         "pregnancy_episodes_expected_count_check",
         "pregnancy_episodes_ended_at_status_check",
       ]);
-      expect((tableDef as RegExpMatchArray)[1]).not.toMatch(/CHECK \([^)]*removed_at/);
+      expect(tableDef()).not.toMatch(/check \([^)]*removed_at/i);
+      // and these six are the only constraints defined outside ADD CONSTRAINT statements
+      const allNames = surfaceCounts(forward.flat).constraints;
+      expect(allNames).toEqual([...names, "journeys_current_pregnancy_episode_owner_fkey", "%I", "babies_id_user_id_key"]);
     });
 
     it("S13 (final): removed_at is an episode-local nullable timestamptz, orthogonal to status", () => {
-      const tableDef = (forward.flat.match(/CREATE TABLE IF NOT EXISTS public\.pregnancy_episodes \((.*?)\); CREATE UNIQUE INDEX/) as RegExpMatchArray)[1];
-      expect(tableDef).toMatch(/\bremoved_at timestamptz,/);
-      expect(tableDef).not.toMatch(/removed_at timestamptz NOT NULL/);
-      expect(tableDef).not.toMatch(/removed_at timestamptz DEFAULT/);
+      expect(tableDef()).toMatch(/\bremoved_at timestamptz,/i);
+      expect(tableDef()).not.toMatch(/removed_at timestamptz not null/i);
+      expect(tableDef()).not.toMatch(/removed_at timestamptz default/i);
       for (const f of ALL_FILES) {
-        expect(f.flat).not.toMatch(/'removed'/);
-        expect(f.flat).not.toMatch(/\bALTER TYPE\b/i);
-        expect(f.flat).not.toMatch(/ADD VALUE/i);
-        expect(f.flat).not.toMatch(/\barchived_at\b/);
+        expect(f.flat).not.toMatch(/'removed'/i);
+        expect(f.flat).not.toMatch(/\balter type\b/i);
+        expect(f.flat).not.toMatch(/add value/i);
+        expect(f.flat).not.toMatch(/\barchived_at\b/i);
       }
-      // removal is never expressed through the status dimension or a fabricated end
-      expect(forward.flat).not.toMatch(/removed_at IS NOT NULL/);
-      expect(forward.flat).not.toMatch(/removed_at[^,;]*(ended_at|outcome_date|status)/);
+      expect(forward.flat).not.toMatch(/removed_at is not null/i);
+      expect(forward.flat).not.toMatch(/removed_at[^,;]*(ended_at|outcome_date|status)/i);
     });
 
     it("S5 + S13: one OPEN episode per user — active or paused, and not removed — and it is the only unique index", () => {
       expect(forward.flat).toMatch(
-        /CREATE UNIQUE INDEX IF NOT EXISTS pregnancy_episodes_one_open_per_user_idx ON public\.pregnancy_episodes \(user_id\) WHERE status IN \('active', 'paused'\) AND removed_at IS NULL;/,
+        /create unique index if not exists pregnancy_episodes_one_open_per_user_idx on public\.pregnancy_episodes \(user_id\) where status in \('active', 'paused'\) and removed_at is null;/i,
       );
-      expect([...forward.flat.matchAll(/CREATE UNIQUE INDEX/g)]).toHaveLength(1);
-      expect(forward.flat).not.toMatch(/WHERE status = 'active'/);
-      expect(forward.flat).not.toMatch(/one_active_per_user/);
+      expect(surfaceCounts(forward.flat).uniqueIndexes).toBe(1);
+      expect(forward.flat).not.toMatch(/where status = 'active'/i);
+      expect(forward.flat).not.toMatch(/one_active_per_user/i);
     });
 
-    it("S3: plain (user_id) index kept; exactly two indexes on the episode table", () => {
-      expect(forward.flat).toMatch(/CREATE INDEX IF NOT EXISTS pregnancy_episodes_user_id_idx ON public\.pregnancy_episodes \(user_id\);/);
-      const onEpisodes = [...forward.flat.matchAll(/INDEX IF NOT EXISTS ([a-z_]+) ON public\.pregnancy_episodes/g)].map((m) => m[1]);
-      expect(onEpisodes).toEqual(["pregnancy_episodes_one_open_per_user_idx", "pregnancy_episodes_user_id_idx"]);
+    it("S3: plain (user_id) index kept; the index surface is exactly the four approved statements", () => {
+      expect(forward.flat).toMatch(/create index if not exists pregnancy_episodes_user_id_idx on public\.pregnancy_episodes \(user_id\);/i);
+      expect(surfaceCounts(forward.flat).indexes).toEqual([
+        "pregnancy_episodes.pregnancy_episodes_one_open_per_user_idx",
+        "pregnancy_episodes.pregnancy_episodes_user_id_idx",
+        "journeys.journeys_current_pregnancy_episode_idx",
+        "%I.%I",
+      ]);
     });
 
     it("S11: updated_at trigger is drop-and-create on set_updated_at (no CREATE OR REPLACE TRIGGER)", () => {
-      expect(forward.flat).toMatch(/DROP TRIGGER IF EXISTS pregnancy_episodes_set_updated_at ON public\.pregnancy_episodes;/);
-      expect(forward.flat).toMatch(
-        /CREATE TRIGGER pregnancy_episodes_set_updated_at BEFORE UPDATE ON public\.pregnancy_episodes FOR EACH ROW EXECUTE FUNCTION public\.set_updated_at\(\);/,
-      );
-      expect(forward.flat).not.toMatch(/CREATE OR REPLACE TRIGGER/i);
-      expect([...forward.flat.matchAll(/CREATE TRIGGER/g)]).toHaveLength(1);
+      expect(forward.flat).toMatch(/drop trigger if exists pregnancy_episodes_set_updated_at on public\.pregnancy_episodes;/i);
+      expect(forward.flat).toMatch(/create trigger pregnancy_episodes_set_updated_at before update on public\.pregnancy_episodes for each row execute function public\.set_updated_at\(\);/i);
+      expect(forward.flat).not.toMatch(/create or replace trigger/i);
+      expect(surfaceCounts(forward.flat).triggers).toBe(1);
     });
   });
 
   describe("privileges and RLS", () => {
     it("S2: exactly one REVOKE, from PUBLIC, anon and authenticated, placed before any grant", () => {
-      const revokes = [...forward.flat.matchAll(/\bREVOKE\b[^;]*;/gi)].map((m) => m[0]);
-      expect(revokes).toEqual(["REVOKE ALL ON TABLE public.pregnancy_episodes FROM PUBLIC, anon, authenticated;"]);
-      const grantAt = forward.flat.search(/\bGRANT\b/);
-      expect(grantAt).toBeGreaterThan(forward.flat.indexOf(revokes[0]));
+      const revokes = [...forward.flat.matchAll(M.revoke)].map((m) => lc(m[0]));
+      expect(revokes).toEqual(["revoke all on table public.pregnancy_episodes from public, anon, authenticated;"]);
+      expect(forward.flat.search(/\bgrant\b/i)).toBeGreaterThan(lc(forward.flat).indexOf(revokes[0]));
     });
 
     it("owner decision 2: every GRANT in every file is parsed, and authenticated holds SELECT only on pregnancy_episodes", () => {
-      for (const f of ALL_FILES) {
-        const grants = parseGrants(f.flat);
-        // nothing escapes the parser (e.g. GRANT ... ON FUNCTION / SCHEMA / ALL TABLES)
-        expect(grants.length).toBe((f.flat.match(/\bGRANT\b/gi) ?? []).length);
-        expect(grantViolations(grants)).toEqual([]);
-      }
-      expect(parseGrants(forward.flat)).toEqual([
-        { privileges: ["SELECT"], object: "public.pregnancy_episodes", roles: ["authenticated"] },
-        { privileges: ["ALL"], object: "public.pregnancy_episodes", roles: ["service_role"] },
+      for (const f of ALL_FILES) expect(grantAudit(f.flat).violations).toEqual([]);
+      expect(grantAudit(forward.flat).grants).toEqual([
+        { privileges: ["select"], object: "public.pregnancy_episodes", roles: ["authenticated"] },
+        { privileges: ["all"], object: "public.pregnancy_episodes", roles: ["service_role"] },
       ]);
-      expect(parseGrants(validate.flat)).toEqual([]);
-      expect(parseGrants(rollback.flat)).toEqual([]);
+      expect(grantAudit(validate.flat).grants).toEqual([]);
+      expect(grantAudit(rollback.flat).grants).toEqual([]);
     });
 
     it("RLS is enabled and the policy surface is exactly the four owner policies", () => {
-      expect(forward.flat).toMatch(/ALTER TABLE public\.pregnancy_episodes ENABLE ROW LEVEL SECURITY;/);
-      const created = [...forward.flat.matchAll(POLICY_STATEMENT_RE)].map((m) => m[0]);
+      expect(forward.flat).toMatch(/alter table public\.pregnancy_episodes enable row level security;/i);
+      const created = policySurface(forward.flat);
       expect(created).toHaveLength(4);
       expect([...created].sort()).toEqual([...EXPECTED_POLICIES].sort());
-      expect((forward.flat.match(/CREATE POLICY/g) ?? []).length).toBe(4);
-      // the idempotency guards name exactly the same four policies, on the same table
-      const guarded = [...forward.flat.matchAll(/tablename = '([a-z_]+)' AND policyname = '([a-z_]+)'/g)].map((m) => `${m[1]}.${m[2]}`);
-      expect([...guarded].sort()).toEqual(
-        ["select", "insert", "update", "delete"].map((op) => `pregnancy_episodes.pregnancy_episodes_${op}_own`).sort(),
-      );
-      // no policy exists in the companion files, and no policy is permissive-to-all or restrictive
-      expect(validate.flat).not.toMatch(/CREATE POLICY/);
-      expect(rollback.flat).not.toMatch(/CREATE POLICY/);
-      for (const f of ALL_FILES) {
-        expect(f.flat).not.toMatch(/\bFOR ALL\b/);
-        expect(f.flat).not.toMatch(/\bTO (public|anon)\b/);
-        expect(f.flat).not.toMatch(/USING \(true\)|WITH CHECK \(true\)/);
-        expect(f.flat).not.toMatch(/AS (RESTRICTIVE|PERMISSIVE)/i);
-      }
+      expect(surfaceCounts(forward.flat).policies).toBe(4);
+      const guarded = [...forward.flat.matchAll(M.policyGuard)].map((m) => `${ident(m[1])}.${ident(m[2])}`);
+      expect([...guarded].sort()).toEqual(["select", "insert", "update", "delete"].map((op) => `pregnancy_episodes.pregnancy_episodes_${op}_own`).sort());
+      expect(policySurface(validate.flat)).toEqual([]);
+      expect(policySurface(rollback.flat)).toEqual([]);
+      for (const f of ALL_FILES) expect(policyEscapes(f.flat)).toEqual([]);
     });
   });
 
@@ -393,74 +566,64 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
     });
 
     it("S9: journeys pointer is current_pregnancy_episode_id, nullable, with a composite same-user FK", () => {
-      expect(forward.flat).toMatch(/ALTER TABLE public\.journeys ADD COLUMN IF NOT EXISTS current_pregnancy_episode_id uuid;/);
+      expect(forward.flat).toMatch(/alter table public\.journeys add column if not exists current_pregnancy_episode_id uuid;/i);
       expect(forward.flat).toMatch(
-        /ADD CONSTRAINT journeys_current_pregnancy_episode_owner_fkey FOREIGN KEY \(current_pregnancy_episode_id, user_id\) REFERENCES public\.pregnancy_episodes \(id, user_id\) ON DELETE RESTRICT NOT VALID;/,
+        /add constraint journeys_current_pregnancy_episode_owner_fkey foreign key \(current_pregnancy_episode_id, user_id\) references public\.pregnancy_episodes \(id, user_id\) on delete restrict not valid;/i,
       );
-      expect(forward.flat).toMatch(/CREATE INDEX IF NOT EXISTS journeys_current_pregnancy_episode_idx ON public\.journeys \(current_pregnancy_episode_id, user_id\);/);
-      for (const f of ALL_FILES) expect(f.flat).not.toMatch(/active_pregnancy_episode/);
+      expect(forward.flat).toMatch(/create index if not exists journeys_current_pregnancy_episode_idx on public\.journeys \(current_pregnancy_episode_id, user_id\);/i);
+      for (const f of ALL_FILES) expect(f.flat).not.toMatch(/active_pregnancy_episode/i);
     });
 
     it("S1: journeys is altered before the 12-table loop (lock order)", () => {
-      const journeysAt = forward.flat.indexOf("ALTER TABLE public.journeys ADD COLUMN IF NOT EXISTS current_pregnancy_episode_id");
-      const loopAt = forward.flat.indexOf("FOREACH t IN ARRAY tables LOOP");
+      const journeysAt = forward.flat.search(/alter table public\.journeys add column if not exists current_pregnancy_episode_id/i);
+      const loopAt = forward.flat.search(/foreach t in array tables loop/i);
       expect(journeysAt).toBeGreaterThan(-1);
       expect(loopAt).toBeGreaterThan(journeysAt);
     });
 
     it("rows 6–17: looped tables gain a nullable episode id, a composite same-user FK (RESTRICT, NOT VALID) and a composite index", () => {
-      expect(forward.flat).toMatch(/ADD COLUMN IF NOT EXISTS pregnancy_episode_id uuid'/);
-      expect(forward.flat).toMatch(
-        /FOREIGN KEY \(pregnancy_episode_id, user_id\) ' 'REFERENCES public\.pregnancy_episodes \(id, user_id\) ON DELETE RESTRICT NOT VALID'/,
-      );
-      expect(forward.flat).toMatch(/t \|\| '_pregnancy_episode_owner_fkey'/);
-      expect(forward.flat).toMatch(/CREATE INDEX IF NOT EXISTS %I ON public\.%I \(pregnancy_episode_id, user_id\)'/);
+      expect(forward.flat).toMatch(/add column if not exists pregnancy_episode_id uuid'/i);
+      expect(forward.flat).toMatch(/foreign key \(pregnancy_episode_id, user_id\) ' 'references public\.pregnancy_episodes \(id, user_id\) on delete restrict not valid'/i);
+      expect(forward.flat).toMatch(/t \|\| '_pregnancy_episode_owner_fkey'/i);
+      expect(forward.flat).toMatch(/create index if not exists %I on public\.%I \(pregnancy_episode_id, user_id\)'/i);
     });
 
     it("every reference to pregnancy_episodes is the composite (id, user_id) key, RESTRICT and NOT VALID; no single-column episode FK exists", () => {
-      const joined = forward.flat.replace(/' '/g, ""); // join the format() string-literal halves
-      const allRefs = joined.match(/REFERENCES public\.pregnancy_episodes/g) ?? [];
-      const compositeRefs = [
-        ...joined.matchAll(
-          /FOREIGN KEY \((current_pregnancy_episode_id|pregnancy_episode_id), user_id\) REFERENCES public\.pregnancy_episodes \(id, user_id\) ON DELETE RESTRICT NOT VALID/g,
-        ),
-      ];
-      expect(allRefs).toHaveLength(2); // the journeys statement and the loop template
-      expect(compositeRefs).toHaveLength(2);
-      expect(compositeRefs.map((m) => m[1]).sort()).toEqual(["current_pregnancy_episode_id", "pregnancy_episode_id"]);
-      expect(joined).not.toMatch(/REFERENCES public\.pregnancy_episodes\s*\(\s*id\s*\)/);
-      expect(joined).not.toMatch(/FOREIGN KEY \((current_)?pregnancy_episode_id\)/);
-      expect(joined).not.toMatch(/REFERENCES public\.pregnancy_episodes[^;']*(?:CASCADE|SET NULL|DEFERRABLE)/);
-      // three FOREIGN KEY clauses in total: account cascade + the two composite links
-      expect(joined.match(/FOREIGN KEY/g)).toHaveLength(3);
-      // no validated-inline episode link anywhere
-      expect(joined).not.toMatch(/REFERENCES public\.pregnancy_episodes \(id, user_id\) ON DELETE RESTRICT(?! NOT VALID)/);
+      const audit = episodeReferenceAudit(forward.flat);
+      expect(audit).toEqual({
+        allRefs: 2, // the journeys statement and the loop template
+        composite: ["current_pregnancy_episode_id", "pregnancy_episode_id"],
+        foreignKeys: 3, // account cascade + the two composite links
+        singleColumn: false,
+        cascading: false,
+        inlineValidated: false,
+      });
     });
 
     it("S10: existence guards are scoped to the table (conrelid), never by name alone", () => {
-      const guards = [...forward.flat.matchAll(/FROM pg_constraint WHERE ([^)]*)\)/g)].map((m) => m[1]);
+      const guards = [...forward.flat.matchAll(M.pgConstraintGuard)].map((m) => lc(m[1]));
       expect(guards).toHaveLength(3);
       for (const g of guards) expect(g).toMatch(/^conrelid = /);
-      expect(forward.flat).not.toMatch(/FROM pg_constraint WHERE conname =/);
+      expect(forward.flat).not.toMatch(/from pg_constraint where conname =/i);
     });
 
     it("G: link columns are never NOT NULL (legacy and unlinked children stay valid)", () => {
-      expect(forward.flat).not.toMatch(/pregnancy_episode_id uuid NOT NULL/);
-      expect(forward.flat).not.toMatch(/current_pregnancy_episode_id uuid NOT NULL/);
-      expect(forward.flat).not.toMatch(/SET NOT NULL/);
-      expect(forward.flat).not.toMatch(/pregnancy_episode_id uuid DEFAULT/);
+      expect(forward.flat).not.toMatch(/pregnancy_episode_id uuid not null/i);
+      expect(forward.flat).not.toMatch(/current_pregnancy_episode_id uuid not null/i);
+      expect(forward.flat).not.toMatch(/set not null/i);
+      expect(forward.flat).not.toMatch(/pregnancy_episode_id uuid default/i);
     });
 
     it("H/I: no child row required, no unique on any episode link, no pointer CHECK (row 19 is 41B.1D)", () => {
-      expect(forward.flat).not.toMatch(/UNIQUE \(pregnancy_episode_id/);
-      expect(forward.flat).not.toMatch(/UNIQUE \(current_pregnancy_episode_id/);
-      expect(forward.flat).not.toMatch(/lifecycle/);
+      expect(forward.flat).not.toMatch(/unique \(pregnancy_episode_id/i);
+      expect(forward.flat).not.toMatch(/unique \(current_pregnancy_episode_id/i);
+      expect(forward.flat).not.toMatch(/lifecycle/i);
     });
 
     it("row 22: babies (id, user_id) owner key, table-scoped guard, and the only constraint added outside the loop besides the pointer", () => {
-      expect(forward.flat).toMatch(/conrelid = 'public\.babies'::regclass AND conname = 'babies_id_user_id_key'/);
-      expect(forward.flat).toMatch(/ALTER TABLE public\.babies ADD CONSTRAINT babies_id_user_id_key UNIQUE \(id, user_id\);/);
-      const added = [...forward.flat.matchAll(/ADD CONSTRAINT ([a-z_%I]+)/g)].map((m) => m[1]);
+      expect(forward.flat).toMatch(/conrelid = 'public\.babies'::regclass and conname = 'babies_id_user_id_key'/i);
+      expect(forward.flat).toMatch(/alter table public\.babies add constraint babies_id_user_id_key unique \(id, user_id\);/i);
+      const added = [...forward.flat.matchAll(M.addConstraint)].map((m) => ident(m[1]));
       expect(added).toEqual(["journeys_current_pregnancy_episode_owner_fkey", "%I", "babies_id_user_id_key"]);
     });
   });
@@ -469,9 +632,8 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
     it("L: forward file contains no DML, no destructive DDL, no enum change", () => {
       for (const re of DML) expect(forward.flat).not.toMatch(re);
       for (const re of DESTRUCTIVE_DDL) expect(forward.flat).not.toMatch(re);
-      // the one permitted DROP is the idempotent trigger re-create on our own table
-      const drops = [...forward.flat.matchAll(/\bDROP\b[^;]*;/gi)].map((m) => m[0]);
-      expect(drops).toEqual(["DROP TRIGGER IF EXISTS pregnancy_episodes_set_updated_at ON public.pregnancy_episodes;"]);
+      const drops = [...forward.flat.matchAll(M.dropStatement)].map((m) => lc(m[0]));
+      expect(drops).toEqual(["drop trigger if exists pregnancy_episodes_set_updated_at on public.pregnancy_episodes;"]);
     });
 
     it("does not touch deferred or legacy objects, functions or the backfill log", () => {
@@ -483,13 +645,13 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
         "first_year_care_events_baby_id_fkey", "first_year_memories_baby_id_fkey",
         "first_year_reminders_baby_id_fkey",
       ]) {
-        for (const f of ALL_FILES) expect(f.flat).not.toContain(name);
+        for (const f of ALL_FILES) expect(lc(f.flat)).not.toContain(name);
       }
       for (const f of ALL_FILES) {
-        expect(f.flat).not.toMatch(/baby_id, user_id/);
-        expect(f.flat).not.toMatch(/pregnancy_journeys|saved_journeys|archived_journeys|first_year_/);
-        expect(f.flat).not.toMatch(/CREATE (OR REPLACE )?FUNCTION/i);
-        expect(f.flat).not.toMatch(/family_entity_backfill_log/);
+        expect(f.flat).not.toMatch(/baby_id, user_id/i);
+        expect(f.flat).not.toMatch(/pregnancy_journeys|saved_journeys|archived_journeys|first_year_/i);
+        expect(f.flat).not.toMatch(/create (or replace )?function/i);
+        expect(f.flat).not.toMatch(/family_entity_backfill_log/i);
         expect(f.flat).not.toMatch(/\b(60|sixty)\b/i);
       }
     });
@@ -497,15 +659,15 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
 
   describe("validate file (S1, second step)", () => {
     it("validates every NOT VALID link and nothing else", () => {
-      const validated = [...validate.flat.matchAll(/ALTER TABLE public\.([a-z_]+) VALIDATE CONSTRAINT ([a-z_]+);/g)].map((m) => ({
-        table: m[1],
-        name: m[2],
-      }));
-      expect(validated.map((v) => v.name).sort()).toEqual([...LINK_FKS].sort());
-      for (const v of validated) expect(v.name).toBe(v.table === "journeys" ? "journeys_current_pregnancy_episode_owner_fkey" : `${v.table}_pregnancy_episode_owner_fkey`);
+      const validated = surfaceCounts(validate.flat).validations;
+      expect(validated.map((v) => v.split(".")[1]).sort()).toEqual([...LINK_FKS].sort());
+      for (const v of validated) {
+        const [table, name] = v.split(".");
+        expect(name).toBe(table === "journeys" ? "journeys_current_pregnancy_episode_owner_fkey" : `${table}_pregnancy_episode_owner_fkey`);
+      }
       const statements = validate.flat.split(";").map((s) => s.trim()).filter(Boolean);
       expect(statements).toHaveLength(1 + 13); // SET LOCAL + 13 validations
-      expect((validate.flat.match(/\bALTER TABLE\b/g) ?? []).length).toBe(13);
+      expect((validate.flat.match(M.alterTable) ?? []).length).toBe(13);
     });
 
     it("validate file changes no data and drops nothing", () => {
@@ -516,86 +678,65 @@ describe("Phase 41B.1A pending migration (static contract, amended per 41B.0-R)"
 
   describe("rollback file (S7)", () => {
     it("refuses to run when any new-model row or later-phase dependency exists", () => {
-      expect(rollback.flat).toMatch(/SELECT count\(\*\) FROM public\.pregnancy_episodes/);
-      expect(rollback.flat).toMatch(/SELECT count\(\*\) FROM public\.journeys WHERE current_pregnancy_episode_id IS NOT NULL/);
-      expect(rollback.flat).toMatch(/SELECT count\(\*\) FROM public\.%I WHERE pregnancy_episode_id IS NOT NULL/);
-      expect(rollback.flat).toMatch(/confrelid = 'public\.pregnancy_episodes'::regclass AND conname <> ALL \(expected_fks\)/);
-      expect(rollback.flat).toMatch(/u\.conname = 'babies_id_user_id_key'/);
-      const refusals = [...rollback.flat.matchAll(/RAISE EXCEPTION 'ROLLBACK REFUSED/g)];
-      expect(refusals).toHaveLength(5);
-      // the guard runs before the first drop
-      const firstRefusal = rollback.flat.indexOf("RAISE EXCEPTION 'ROLLBACK REFUSED");
-      const firstDrop = rollback.flat.search(/\bDROP\b/);
+      expect(rollback.flat).toMatch(/select count\(\*\) from public\.pregnancy_episodes/i);
+      expect(rollback.flat).toMatch(/select count\(\*\) from public\.journeys where current_pregnancy_episode_id is not null/i);
+      expect(rollback.flat).toMatch(/select count\(\*\) from public\.%I where pregnancy_episode_id is not null/i);
+      expect(rollback.flat).toMatch(/confrelid = 'public\.pregnancy_episodes'::regclass and conname <> all \(expected_fks\)/i);
+      expect(rollback.flat).toMatch(/u\.conname = 'babies_id_user_id_key'/i);
+      expect([...rollback.flat.matchAll(M.refusal)]).toHaveLength(5);
+      const firstRefusal = rollback.flat.search(M.refusal);
+      const firstDrop = rollback.flat.search(/\bdrop\b/i);
       expect(firstRefusal).toBeGreaterThan(-1);
       expect(firstDrop).toBeGreaterThan(firstRefusal);
     });
 
     it("guard list of expected foreign keys matches the links the forward file creates", () => {
-      const m = rollback.flat.match(/expected_fks text\[\] := ARRAY\[([^\]]*)\]/);
+      const m = rollback.flat.match(M.expectedFks);
       expect(m).not.toBeNull();
-      const listed = [...(m as RegExpMatchArray)[1].matchAll(/'([a-z_]+)'/g)].map((x) => x[1]);
+      const listed = [...(m as RegExpMatchArray)[1].matchAll(M.quotedName)].map((x) => ident(x[1]));
       expect(listed.sort()).toEqual([...LINK_FKS].sort());
     });
 
-    it("whitelist: every DROP in the rollback names a 41B.1A-owned object, and every owned object is dropped", () => {
-      const r = rollback.flat;
-
-      const droppedColumns = [...r.matchAll(/ALTER TABLE public\.([a-z_%I]+) DROP COLUMN(?: IF EXISTS)? ([a-z_]+)/g)].map((m) => `${m[1]}.${m[2]}`);
-      expect(droppedColumns.sort()).toEqual(["%I.pregnancy_episode_id", "journeys.current_pregnancy_episode_id"]);
-      expect(r).toMatch(/DROP COLUMN IF EXISTS pregnancy_episode_id', t\)/); // the %I is the loop variable
-
-      const droppedConstraints = [...r.matchAll(/ALTER TABLE public\.([a-z_%I]+) DROP CONSTRAINT(?: IF EXISTS)? ([a-z_%I]+)/g)].map((m) => `${m[1]}.${m[2]}`);
-      expect(droppedConstraints.sort()).toEqual(["%I.%I", "babies.babies_id_user_id_key", "journeys.journeys_current_pregnancy_episode_owner_fkey"]);
-      expect(r).toMatch(/DROP CONSTRAINT IF EXISTS %I', t, t \|\| '_pregnancy_episode_owner_fkey'\)/);
-
-      const droppedIndexes = [...r.matchAll(/DROP INDEX(?: IF EXISTS)? (?:public\.)?([a-z_%I]+)/g)].map((m) => m[1]);
-      expect(droppedIndexes.sort()).toEqual(["%I", "journeys_current_pregnancy_episode_idx", "pregnancy_episodes_one_open_per_user_idx", "pregnancy_episodes_user_id_idx"].sort());
-      expect(r).toMatch(/DROP INDEX IF EXISTS public\.%I', t \|\| '_pregnancy_episode_idx'\)/);
-
-      const droppedPolicies = [...r.matchAll(/DROP POLICY(?: IF EXISTS)? ([a-z_]+) ON ([a-z_.]+)/g)].map((m) => `${m[2]}.${m[1]}`);
-      expect(droppedPolicies.sort()).toEqual(
-        ["select", "insert", "update", "delete"].map((op) => `public.pregnancy_episodes.pregnancy_episodes_${op}_own`).sort(),
-      );
-
-      const droppedTriggers = [...r.matchAll(/DROP TRIGGER(?: IF EXISTS)? ([a-z_]+) ON ([a-z_.]+)/g)].map((m) => `${m[2]}.${m[1]}`);
-      expect(droppedTriggers).toEqual(["public.pregnancy_episodes.pregnancy_episodes_set_updated_at"]);
-
-      const droppedTables = [...r.matchAll(/DROP TABLE(?: IF EXISTS)? (?:public\.)?([a-z_]+)/g)].map((m) => m[1]);
-      expect(droppedTables).toEqual(["pregnancy_episodes"]);
-
-      // every DROP is one of the categories above: nothing uncategorised (no DROP TYPE / FUNCTION / SCHEMA / ROLE)
-      const totalDrops = (r.match(/\bDROP\b/g) ?? []).length;
-      expect(totalDrops).toBe(
-        droppedColumns.length + droppedConstraints.length + droppedIndexes.length +
-        droppedPolicies.length + droppedTriggers.length + droppedTables.length,
-      );
-      expect(totalDrops).toBe(15);
+    it("whitelist: every DROP in the rollback names a 41B.1A-owned object, every owned object is dropped, and nothing is uncategorised", () => {
+      const d = categoriseDrops(rollback.flat);
+      expect(d.columns).toEqual(OWNED_DROPS.columns);
+      expect(d.constraints).toEqual(OWNED_DROPS.constraints);
+      expect(d.indexes).toEqual(OWNED_DROPS.indexes);
+      expect(d.policies).toEqual(OWNED_DROPS.policies);
+      expect(d.triggers).toEqual(OWNED_DROPS.triggers);
+      expect(d.tables).toEqual(OWNED_DROPS.tables);
+      expect(d.total).toBe(d.categorised);
+      expect(d.total).toBe(15);
+      // the %I placeholders are the loop variable, bound to the parsed table list
+      expect(rollback.flat).toMatch(/drop column if exists pregnancy_episode_id', t\)/i);
+      expect(rollback.flat).toMatch(/drop constraint if exists %I', t, t \|\| '_pregnancy_episode_owner_fkey'\)/i);
+      expect(rollback.flat).toMatch(/drop index if exists public\.%I', t \|\| '_pregnancy_episode_idx'\)/i);
       // every DROP uses IF EXISTS so a partial forward run can still be reversed; none cascades
-      for (const d of r.matchAll(/\bDROP (TABLE|INDEX|POLICY|TRIGGER|CONSTRAINT|COLUMN)\b(?: IF EXISTS)?/g)) expect(d[0]).toMatch(/IF EXISTS$/);
-      expect(r).not.toMatch(/\bCASCADE\b/);
+      for (const m of rollback.flat.matchAll(M.dropObject)) expect(lc(m[0])).toMatch(/if exists$/);
+      expect(rollback.flat).not.toMatch(/\bcascade\b/i);
     });
 
     it("dependency order: pointer, looped links, babies key, policies, trigger, indexes, table", () => {
+      const hay = lc(rollback.flat);
       const order = [
-        "DROP CONSTRAINT IF EXISTS journeys_current_pregnancy_episode_owner_fkey",
-        "DROP INDEX IF EXISTS public.journeys_current_pregnancy_episode_idx",
-        "DROP COLUMN IF EXISTS current_pregnancy_episode_id",
-        "FOREACH t IN ARRAY tables LOOP EXECUTE format('ALTER TABLE public.%I DROP CONSTRAINT",
-        "DROP CONSTRAINT IF EXISTS babies_id_user_id_key",
-        "DROP POLICY IF EXISTS pregnancy_episodes_select_own",
-        "DROP TRIGGER IF EXISTS pregnancy_episodes_set_updated_at",
-        "DROP INDEX IF EXISTS public.pregnancy_episodes_one_open_per_user_idx",
-        "DROP TABLE IF EXISTS public.pregnancy_episodes",
-      ].map((s) => rollback.flat.indexOf(s));
+        "drop constraint if exists journeys_current_pregnancy_episode_owner_fkey",
+        "drop index if exists public.journeys_current_pregnancy_episode_idx",
+        "drop column if exists current_pregnancy_episode_id",
+        "foreach t in array tables loop execute format('alter table public.%i drop constraint",
+        "drop constraint if exists babies_id_user_id_key",
+        "drop policy if exists pregnancy_episodes_select_own",
+        "drop trigger if exists pregnancy_episodes_set_updated_at",
+        "drop index if exists public.pregnancy_episodes_one_open_per_user_idx",
+        "drop table if exists public.pregnancy_episodes",
+      ].map((s) => hay.indexOf(s));
       for (const i of order) expect(i).toBeGreaterThan(-1);
       expect([...order].sort((a, b) => a - b)).toEqual(order);
     });
 
     it("rollback destroys no customer history: no DML, no enum change, no other table named", () => {
       for (const re of DML) expect(rollback.flat).not.toMatch(re);
-      expect(rollback.flat).not.toMatch(/\bALTER TYPE\b/i);
-      // every public.<name> that is not an index being dropped must be one of the three tables this phase touches
-      const tablesNamed = new Set([...rollback.flat.matchAll(/(?<!DROP INDEX IF EXISTS )public\.([a-z_]+)/g)].map((m) => m[1]));
+      expect(rollback.flat).not.toMatch(/\balter type\b/i);
+      const tablesNamed = new Set([...rollback.flat.matchAll(M.publicName)].map((m) => ident(m[1])));
       expect([...tablesNamed].sort()).toEqual(["babies", "journeys", "pregnancy_episodes"]);
     });
   });

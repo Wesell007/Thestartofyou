@@ -25,6 +25,7 @@ Playwright: pregnancy setup, birth to First Year, second pregnancy from First Ye
 ## 2. Rollback per step
 
 > **SUPERSEDED BY 41B.0-R** §5 — backfilled rows are identified through the `family_entity_backfill_log` audit table by `batch_id`, not by a marker column on the episode.
+
 | Step | Rollback |
 |---|---|
 | 1 New table | drop it (no reads depend on it yet) |
@@ -40,6 +41,7 @@ Steps 1 to 6 are reversible without data loss. Step 8 onwards needs a fresh back
 ## 3. Production preconditions
 
 > **SUPERSEDED BY 41B.0-R** §11, §14 — point-in-time backup is not required (it cannot be met on this platform); the minimum recovery evidence ladder of §11 applies; "catalogue matches the repository" becomes "every difference listed and classified, none touching a 41B object".
+
 - Point-in-time backup confirmed before steps 2 and 8.
 - Structure-only catalog check matches the repository (no customer rows read).
 - Backfill run first on a copy; only aggregate counts reported.
@@ -49,6 +51,7 @@ Steps 1 to 6 are reversible without data loss. Step 8 onwards needs a fresh back
 ## 4. Query and index review
 
 > **SUPERSEDED BY 41B.0-R** S3 — the episode index stays `(user_id)` and the child indexes `(pregnancy_episode_id, user_id)`; the partial unique index serves the open-episode lookup.
+
 - Index `(user_id, status)` on episodes; the partial unique covers active lookups.
 - Index `(pregnancy_episode_id)` on each of the 11 tables and on `babies`.
 - Reflections look-ups use the new partial unique indexes.

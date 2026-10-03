@@ -64,6 +64,7 @@ No household entity. The only existing shared scope is `first_year_memories.memo
 ## 4. Pregnancy loss and ended journeys
 
 > **SUPERSEDED BY 41B.0-R** §6 — the pointer is kept after a loss, a pause, a birth and the move to First Year; it is not cleared when an episode ends. "Remove this journey" is `removed_at` (§28), not a status.
+
 - Ending a pregnancy updates the episode status and `ended_at`; records stay bound to it.
 - An ended episode is never reactivated by starting a new pregnancy; a new episode is created.
 - The Companion receives no pregnancy context from an ended episode (keeps 41A safeguard #7).
@@ -128,10 +129,12 @@ Safeguards #7 and #8 are kept unchanged by the resolver contract.
 ## 8. Architecture decision
 
 > **SUPERSEDED BY 41B.0-R** §25, §26 — readiness recorded here is suspended; the decision is READY TO AMEND 41B.1A, and implementation readiness returns only after the amended 41B.1A SQL is rehearsed (41B.1A-C1).
+
 READY FOR 41B.1 IMPLEMENTATION. Every readiness item is covered: target model, legacy migration, compatibility, RLS, transactional writes, context contract, First Year reset replacement, memory FK resolution, test plan, rollback plan, production preconditions.
 
 
 ## 9. Final closure reconciliation (2026-09-26)
 
 > **SUPERSEDED BY 41B.0-R** §26 — "READY FOR 41B.1 IMPLEMENTATION" is superseded as above; the 41B.0 closure itself stands as history.
+
 Access rules verified per operation from live structure (no customer rows). Baby cross-user ownership gap closed in design with `babies (id, user_id)` and 4 composite baby links. Constraint ledger: 26 new, 5 changed / removed. Decision unchanged: READY FOR 41B.1 IMPLEMENTATION.

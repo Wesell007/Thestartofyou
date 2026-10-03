@@ -12,11 +12,13 @@ One `journeys` row per user (unchanged key):
 - `active_pregnancy_episode_id`: required when `lifecycle = 'pregnancy'` (enforced after tightening), null otherwise.
 
 > **SUPERSEDED BY 41B.0-R** §6, S9 — `current_pregnancy_episode_id`; a pointer is permitted outside lifecycle `pregnancy` (kept-chapter reference after First Year); ledger row 19 requires one only when lifecycle is `pregnancy`.
+
 - First Year cohort: babies with `archived_at is null`; the selected baby follows the existing `is_primary` rule.
 
 ## 2. Transitions (all in one transaction each)
 
 > **SUPERSEDED BY 41B.0-R** §6, §9 — a pregnancy that ends does not clear the pointer; a save over an open pregnancy is not "rejected" but returns a result code (`created`, `unchanged`, `updated`, `needs_confirmation`); a legacy or background save with different dates returns `needs_confirmation` (owner decision 4, no automatic threshold).
+
 ```text
 none/ttc  --start pregnancy-->  pregnancy (CREATE episode, set pointer)
 pregnancy --ends (loss, no longer pregnant)--> none or ttc (UPDATE episode status, clear pointer)
@@ -39,4 +41,5 @@ Input: session. Output: derived values only (week, trimester, TTC stage, baby ag
 ## 4. Companion boundary
 
 > **SUPERSEDED BY 41B.0-R** §8 — the client resolver is not the only personal-context source: the two server-side journal readers are in scope and move to the pointer in 41B.1C; the journal flag stays off until then.
+
 The resolver above is the only personal-context source. Conversations and memories stay user-level; they are not re-labelled by episode in 41B. Memory, history and grounding stay off. Implementing this contract in `src/lib/companion/journeyPersonalSource.ts` is 41B.1 work; no behaviour change now.

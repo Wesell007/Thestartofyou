@@ -21,7 +21,8 @@ const harness = vi.hoisted(() => ({
 }));
 const { resolvePersonalJourneyContext, authListeners } = harness;
 
-import { CompanionProvider, useCompanion } from "@/components/companion/CompanionProvider";
+import { CompanionProvider } from "@/components/companion/CompanionProvider";
+import { useCompanion } from "@/components/companion/useCompanion";
 import { CompanionNextActions } from "@/components/companion/CompanionNextActions";
 import { notifyJourneyStateChanged } from "@/lib/journeyStateSignal";
 

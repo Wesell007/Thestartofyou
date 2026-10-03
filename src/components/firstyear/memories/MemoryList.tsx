@@ -4,7 +4,7 @@ import { parseDateOnly } from "@/lib/dateOnly";
 import type { BabyRecord } from "@/lib/firstYearJourney";
 import type { FirstYearMemory } from "@/lib/firstYearMemories";
 import { memoryMonthKey, memoryMonthLabel } from "@/lib/firstYearMemoriesSchema";
-import { babyDisplayName } from "./MemoryScopeSelector";
+import { memoryScopeLabel } from "./memoryScope";
 import {
   FY_CARD_RADIUS,
   FY_CHIP,
@@ -25,15 +25,6 @@ type Props = {
   /** Short-lived signed URLs, keyed by stored photo path. */
   photoUrls?: Record<string, string>;
   onOpenPhoto?: (memory: FirstYearMemory) => void;
-};
-
-/** Who a kept moment is about, in plain words. */
-export const memoryScopeLabel = (memory: FirstYearMemory, babies: BabyRecord[]): string => {
-  if (memory.memory_scope === "family") return "Your family";
-  if (memory.memory_scope === "all_babies") return "All babies";
-  const index = babies.findIndex((baby) => baby.id === memory.baby_id);
-  const baby = babies[index];
-  return baby ? babyDisplayName(baby, index) : "Your baby";
 };
 
 /**

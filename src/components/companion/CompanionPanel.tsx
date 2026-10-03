@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { ExternalLink, RotateCcw } from "lucide-react";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useCompanion } from "./CompanionProvider";
+import { useCompanion } from "./useCompanion";
 import { companionStyles } from "./companionStyles";
 import CompanionMessageList from "./CompanionMessageList";
 import CompanionComposer from "./CompanionComposer";

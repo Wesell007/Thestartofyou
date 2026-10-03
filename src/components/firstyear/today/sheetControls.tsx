@@ -10,6 +10,7 @@ import {
   FY_FIELD_FOCUS_RING,
   FY_FOCUS_RING,
 } from "@/components/firstyear/journey/firstYearStyles";
+import { SHEET_PRIMARY_STYLE, babyLabel } from "@/components/firstyear/today/sheetHelpers";
 
 /** Shared pieces used by each logging sheet, so every step looks the same. */
 
@@ -28,11 +29,6 @@ export const SHEET_FIELD_CLASS = `min-h-11 rounded-[14px] border border-border/6
 export const SHEET_LINK_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 items-center rounded-sm font-sans text-[13.5px] text-[hsl(var(--stage-firstyear-text))] underline underline-offset-4 hover:text-foreground`;
 
 export const SHEET_PRIMARY_CLASS = `${FY_CTA} w-full disabled:opacity-60`;
-
-export const SHEET_PRIMARY_STYLE = {
-  backgroundColor: "hsl(var(--stage-firstyear-accent))",
-  color: "hsl(var(--background))",
-} as const;
 
 export const SHEET_SECONDARY_CLASS = `${FY_FOCUS_RING} inline-flex min-h-11 w-full items-center justify-center rounded-pill border border-border/60 bg-parchment px-5 py-2.5 font-sans text-[14px] font-medium text-foreground transition-colors hover:border-foreground/25 disabled:opacity-60`;
 
@@ -172,22 +168,6 @@ export type SheetContext = {
   onClose: () => void;
   saving: boolean;
 };
-
-export const timeValue = (date: Date): string => {
-  const pad = (part: number) => String(part).padStart(2, "0");
-  return `${pad(date.getHours())}:${pad(date.getMinutes())}`;
-};
-
-export const withTime = (base: Date, value: string): Date | null => {
-  const [hours, minutes] = value.split(":").map(Number);
-  if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
-  const next = new Date(base);
-  next.setHours(hours, minutes, 0, 0);
-  return next;
-};
-
-export const babyLabel = (baby: BabyRecord, index: number): string =>
-  baby.name?.trim() ? baby.name.trim() : `Baby ${baby.birth_order ?? index + 1}`;
 
 /** Only shown when there is more than one baby on the account. */
 export const BabyChips = ({

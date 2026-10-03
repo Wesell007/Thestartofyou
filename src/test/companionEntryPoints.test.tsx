@@ -52,7 +52,8 @@ vi.mock("@/lib/companion/memory/useCompanionMemoryInteraction", () => ({
   }),
 }));
 
-import { CompanionProvider, useCompanion } from "@/components/companion/CompanionProvider";
+import { CompanionProvider } from "@/components/companion/CompanionProvider";
+import { useCompanion } from "@/components/companion/useCompanion";
 import AskAboutThis from "@/components/companion/AskAboutThis";
 
 const Probe = () => {

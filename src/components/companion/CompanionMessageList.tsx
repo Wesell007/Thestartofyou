@@ -11,7 +11,7 @@ import {
   APPROVED_SOURCES_TRUST_LINE,
   sanitiseAnswerForDisplay,
 } from "@/lib/aiAnswerSafety";
-import { useCompanion } from "./CompanionProvider";
+import { useCompanion } from "./useCompanion";
 import { CompanionNextActions } from "./CompanionNextActions";
 import { CompanionJournalNote } from "./CompanionJournalNote";
 import { companionStyles } from "./companionStyles";

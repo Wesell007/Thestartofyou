@@ -4,10 +4,9 @@ import {
   NoteArea,
   SheetActions,
   TimeField,
-  timeValue,
-  withTime,
   type SheetContext,
 } from "@/components/firstyear/today/sheetControls";
+import { timeValue, withTime } from "@/components/firstyear/today/sheetHelpers";
 
 /** A moment is a time and a few words. Nothing else is asked. */
 const MomentSheet = ({ context }: { context: SheetContext }) => {

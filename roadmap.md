@@ -327,23 +327,23 @@
 - [x] Final closure reconciliation: access rules verified per operation (0 existing to modify), baby composite ownership added, constraint ledger 26 new / 5 changed; 41B.1 NOT STARTED (awaiting approval)
 - [x] Closure evidence return (2026-09-27): 18 tables, 72 coverage positions, 72 distinct policy objects (no FOR ALL, no restrictive), all BOTH; 8/8 findings DESIGN-ADDRESSED. CLOSED PASS / PREGNANCY EPISODE MODEL DESIGNED / MULTI-CHILD RELATIONSHIPS DESIGNED / DESTRUCTIVE FIRST-YEAR RESET REPLACEMENT DESIGNED / LEGACY DATA MIGRATION PATH DEFINED / RLS AND CONTEXT BOUNDARIES DEFINED / ROLLBACK AND TEST STRATEGY DEFINED / READY FOR 41B.1 IMPLEMENTATION
 
-## Phase 41B.1A — Family Entity Foundation (BUILT / APPLICATION BLOCKED)
+## Phase 41B.1A — Family Entity Foundation (AMENDED / NOT APPLIED / AWAITING 41B.1A-C1 REHEARSAL)
 - [x] Pending additive migration: docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql (19 of 26 target controls; 7 deferred)
 - [x] Static contract tests 13/13; full suite 148 files 1661/1661; typecheck PASS; build PASS
 - [x] Evidence doc: docs/strategy/phase41b1a-family-entity-foundation-implementation.md
 - [x] Amended per 41B.0-R (3 October 2026): `current_pregnancy_episode_id`; one OPEN episode (`active`/`paused`, `removed_at IS NULL`); dates NOT NULL + date CHECK; `removed_at`; authenticated SELECT-only; links NOT VALID + validate file; guarded rollback file; no BEGIN/COMMIT; table-scoped guards; amendment record in the evidence doc. NOT APPLIED.
 - [x] Account deletion clarification (docs only): account-level cascade INTENTIONAL; pregnancy-level delete RESTRICT; runtime compatibility PENDING APPLICATION; Account Deletion Integrity Test added as an application gate (NOT RUN)
-- [ ] Apply migration — BLOCKED: needs a verified database backup/restore path and user approval
+- [ ] Apply migration — NOT AUTHORISED until the 41B.0-R §11 evidence ladder is met: isolated rehearsal passed twice from a fresh project including the rollback file; catalogue parity diff classified; rehearsed file byte-identical to the production file; `lock_timeout` set and a quiet window agreed; a platform backup observed by the owner within 24 hours with the restore procedure written down; explicit owner approval. (Point-in-time recovery is no longer a precondition; it cannot be met on this platform.)
 - 41B.1B NOT STARTED
 
-## Phase 41B.1A-R — Recovery & Migration Environment Gate (BLOCKED / USER ACTION REQUIRED)
+## Phase 41B.1A-R — Recovery & Migration Environment Gate (CLOSED / SUPERSEDED BY 41B.0-R §11 AND §19)
 - [x] Audit recorded in `docs/strategy/phase41b1a-recovery-and-migration-environment-gate.md`. Decision E. Database changes 0, customer rows read 0, migration applied NO, 41B.1B NOT STARTED.
 - [x] Isolated staging approved by the user. Draft "41B.1A staging rehearsal" created. Live catalogue snapshot recorded in `docs/strategy/phase41b1a-live-catalogue-snapshot.md`.
 - [x] Draft isolation FAILED (shared live backend). Decision: use a remix. Live snapshot ALREADY EXISTS AND REUSED; customer rows read 0.
-- [ ] Blocked on user: create the remix "41B.1A staging rehearsal" and run the remix isolation brief in it.
-- [ ] Staging isolation and parity report: waiting on the remix catalogue snapshot. Classify each difference as MATERIAL PARITY DIFFERENCE or EXPECTED ENVIRONMENT DIFFERENCE. Pending migration applied = NO.
-- [ ] Blocked on user: verify the latest live backup (date, retention).
-- [ ] OPEN support question: can a backup be restored into a separate project instead of overwriting the shared database? If not, can a complete logical backup (schema and data) be produced for a restore elsewhere?
+- [x] Remix path CLOSED (superseded 2 October 2026): the rehearsal environment is a new isolated hosted Supabase project in the owner's organisation, created only after the owner confirms its cost (41B.0-R §19). No remix is created.
+- [ ] Parity report moves to 41B.1A-C1: diff the fresh project's catalogue against the 27 September live snapshot, classify every difference (41B.0-R §14), none may touch a 41B object. Pending migration applied = NO.
+- [ ] Owner to observe the latest platform backup (date, retention) within 24 hours of any production schema step (41B.0-R §11). Not a precondition for the rehearsal.
+- [ ] OPEN support question (no longer blocks 41B.1A, per 41B.0-R §11): can a backup be restored into a separate project instead of overwriting the shared database? If not, can a complete logical backup (schema and data) be produced for a restore elsewhere? Needed before any later destructive retirement, which is outside 41B.
 
 ## Phase 41B.0-R — Family Entity Architecture Reconciliation (CLOSED PASS / READY TO AMEND 41B.1A)
 - [x] 41B.0 historical closure preserved. The corrective addendum supersedes only the passages listed in its §22; the five 41B.0 documents keep their original text.
@@ -351,6 +351,8 @@
 - [x] Evidence restored to the repository (3 October 2026): `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md`, `docs/strategy/phase41b0r-write-path-inventory.md`, `docs/strategy/stabilisation-local-dev-production-safety.md`, `docs/strategy/phase41b0r-roadmap-entry-proposed.md`, each with a dated recovery addendum recording later owner decisions and repository facts.
 - [x] Owner decisions 1–6 recorded: `current_pregnancy_episode_id`; episodes `SELECT`-only for authenticated clients in 41B.1A; pointer kept after Pregnancy → First Year with `babies.pregnancy_episode_id` as the durable link; no automatic 60-day rule (differing legacy dates → `needs_confirmation`); `babies.archived_at` kept and never user-facing; "Remove this journey" = closed and hidden, records retained, episode-local, no automatic widening of the shared status enum.
 - [x] 41B.1A SQL AMENDED (3 October 2026: S1–S12 applied; S13 resolved as `pregnancy_episodes.removed_at`; validate and rollback files; static tests rewritten) / NOT APPLIED
+- [x] 41B.1A pre-push review passed and branch pushed (commit 9dbdfa46); pre-rehearsal hardening committed separately (comment fix, structural static tests, `SUPERSEDED BY 41B.0-R` markers on the five 41B.0 documents).
+- [ ] PRE-41B.1B GATE (owner decision or evidence): account deletion under the 13 `ON DELETE RESTRICT` links depends on RI-trigger firing order on `auth.users`, which is OID-based and not portable from rehearsal to production. Close by structure-only production `pg_trigger` evidence, an approved design change (e.g. deferrable `NO ACTION`), or explicit deletion ordering in `delete-account`. No row may be bound before this closes. See 41B.0-R §29.
 - 41B.1A-C1 NOT STARTED
 - 41B.1B NOT STARTED
 - IVF-SAVE-R PARKED

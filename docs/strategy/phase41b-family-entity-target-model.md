@@ -1,5 +1,7 @@
 # Phase 41B.0 — Family Entity Target Model
 
+> **Historical 41B.0 text (CLOSED PASS, 2026-09-26).** Passages marked `SUPERSEDED BY 41B.0-R` below are governed by `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md` (its §22 lists each one). The original wording is preserved; nothing below has been rewritten.
+
 Design only (Lovable architecture and migration design). Nothing here is implemented. Baseline: the closed Phase 41A documents (Outcome D).
 
 Evidence labels: REPOSITORY-DEFINES (migration or source file), VERIFIED-PRODUCTION-STRUCTURE (live catalog, 41A reconciliation), DESIGN INFERENCE (a proposal, not current truth).
@@ -37,10 +39,14 @@ Conceptual names below (`pregnancy_episodes`, `pregnancy_episode_id`, `expected_
 ### 2.1 Pregnancy episode
 New table, one row per pregnancy: `id`, `user_id`, `lmp_date`, `due_date`, `status` (reuse `pregnancy_journey_status`), `status_changed_at`, `outcome_date`, `expected_count` (nullable, 1 to 4, null = not stated), `started_at`, `ended_at`, `created_at`, `updated_at`. At most one `active` episode per user. Ended episodes are never updated by a new pregnancy save.
 
+> **SUPERSEDED BY 41B.0-R** §6 — at most one OPEN episode per person: `status IN ('active','paused') AND removed_at IS NULL`.
+
 `pregnancy_journeys` stays during compatibility as a derived mirror of the active episode, then is retired (migration plan steps 4 and 9).
 
 ### 2.2 Child
 `babies` stays the child entity. Adds `pregnancy_episode_id` (nullable: legacy and direct adds may have no known episode) and `archived_at` (child leaves the current First Year view without being deleted). Multiples = several babies with the same episode. No separate birth-group table: the episode already groups them.
+
+> **SUPERSEDED BY 41B.0-R** §17 — `babies.pregnancy_episode_id` is nullable permanently, by design (legacy, direct add, adoption, surrogacy); no later tightening.
 
 ### 2.3 Family / shared scope
 No household entity. The only existing shared scope is `first_year_memories.memory_scope` (`family`, `all_babies`), already user-owned. No requirement justifies more.
@@ -48,12 +54,16 @@ No household entity. The only existing shared scope is `first_year_memories.memo
 ### 2.4 Current context
 `journeys` keeps one row per user (F3) and gains `active_pregnancy_episode_id`. The First Year cohort is the user's babies with `archived_at is null`. Defined in the context contract.
 
+> **SUPERSEDED BY 41B.0-R** §6, S9 — the pointer is `current_pregnancy_episode_id`, the pregnancy chapter currently presented; it is not an "active" flag and is permitted under any lifecycle.
+
 ## 3. Multiples semantics
 - `expected_count` is what the person states in pregnancy; null means singleton assumptions must not be made in copy (plural-aware copy is a later task).
 - Number of babies at First Year setup is authoritative after birth; it may differ from `expected_count` and that is not an error.
 - Cap of 4 stays (existing CHECK/RPC/UI).
 
 ## 4. Pregnancy loss and ended journeys
+
+> **SUPERSEDED BY 41B.0-R** §6 — the pointer is kept after a loss, a pause, a birth and the move to First Year; it is not cleared when an episode ends. "Remove this journey" is `removed_at` (§28), not a status.
 - Ending a pregnancy updates the episode status and `ended_at`; records stay bound to it.
 - An ended episode is never reactivated by starting a new pregnancy; a new episode is created.
 - The Companion receives no pregnancy context from an ended episode (keeps 41A safeguard #7).
@@ -88,6 +98,8 @@ Safeguards #7 and #8 are kept unchanged by the resolver contract.
 
 ## 7. Section 26 report
 
+> **SUPERSEDED BY 41B.0-R** §10, §18, §25 — constraints changed / removed = 11 (not 5); client and edge write paths = 74 (not 17); new constraints = 37 (not 26); database functions = 18 (not 5); backfill rules are the identity rule and state table of §4 (not 3 deterministic + 2 derivable).
+
 - Current core identity problem = pregnancy, context and toolkit data are keyed to the person (`user_id`), not to a pregnancy; First Year setup replaces children by deleting them.
 - Proposed Pregnancy entity = durable pregnancy episode table, many per user, one active at a time, own id, status, outcome, `expected_count`.
 - Proposed Child relationship = `babies` linked to its episode (nullable for legacy), multiples share an episode, archived not deleted.
@@ -114,8 +126,12 @@ Safeguards #7 and #8 are kept unchanged by the resolver contract.
 - Product changes = 0. Database changes = 0. Migration files created = 0. RLS changes = 0. Customer data reads = 0. Companion changes = 0. Memory changes = 0. Grounding changes = 0. Deployment = NO. 41B.1 = NOT STARTED.
 
 ## 8. Architecture decision
+
+> **SUPERSEDED BY 41B.0-R** §25, §26 — readiness recorded here is suspended; the decision is READY TO AMEND 41B.1A, and implementation readiness returns only after the amended 41B.1A SQL is rehearsed (41B.1A-C1).
 READY FOR 41B.1 IMPLEMENTATION. Every readiness item is covered: target model, legacy migration, compatibility, RLS, transactional writes, context contract, First Year reset replacement, memory FK resolution, test plan, rollback plan, production preconditions.
 
 
 ## 9. Final closure reconciliation (2026-09-26)
+
+> **SUPERSEDED BY 41B.0-R** §26 — "READY FOR 41B.1 IMPLEMENTATION" is superseded as above; the 41B.0 closure itself stands as history.
 Access rules verified per operation from live structure (no customer rows). Baby cross-user ownership gap closed in design with `babies (id, user_id)` and 4 composite baby links. Constraint ledger: 26 new, 5 changed / removed. Decision unchanged: READY FOR 41B.1 IMPLEMENTATION.

@@ -729,3 +729,17 @@ The transition returns an explicit result code. It replaces the `delete_active_j
 **Account deletion.** A removed pregnancy remains owned by the account and is removed when the approved whole-account deletion workflow runs. The account-deletion implementation is not changed in 41B.1A; runtime compatibility stays a rehearsal and release-gate test.
 
 Superseded by this section: section 6 paragraph "Remove this journey" (the `removed` status recommendation); section 12 row S13; section 13 "status list and the ended-state CHECK accept `removed`"; section 24 item 6's recommended option. Decision 6's product semantics in section 27 stand.
+
+---
+
+## 29. Pre-rehearsal hardening note (3 October 2026) — account deletion under RESTRICT
+
+Added after the pre-push review of the amended 41B.1A files. Section 19's sentence "Static analysis says whole-account deletion should succeed, because every dependant also cascades from the account and Postgres runs the restrict checks after the first round of cascades" is withdrawn as overstated; the original text is kept above.
+
+Corrected statement: RESTRICT checks queued by the nested cascade `DELETE` on `pregnancy_episodes` fire at the end of that nested statement. Whether a bound dependant still exists then depends on the alphabetical firing order of the RI triggers on `auth.users`, whose names embed OIDs. OIDs differ between a rehearsal project and production, so the order observed at 41B.1A-C1 does not transfer. Rehearsal remains required and remains insufficient on its own.
+
+Consequences, recorded without changing any file in this phase:
+
+- 41B.1A is unaffected: nothing is bound and no pointer is populated, so RESTRICT has nothing to act on.
+- **Mandatory pre-41B.1B gate (owner decision or evidence):** one of (1) a structure-only read of production `pg_trigger` order on `auth.users` (0 customer rows) proving the episode cascade fires after every dependant cascade; (2) an owner-approved design change such as `NO ACTION DEFERRABLE INITIALLY DEFERRED` on the 13 ownership links; (3) explicit deletion ordering in the `delete-account` function. None is chosen here; none is authorised by this note.
+- Rehearsal execution contract, restated: each SQL file runs as exactly one transaction under a runner that wraps the file (Supabase CLI migration runner, or `psql -1 -v ON_ERROR_STOP=1 -f`); statement-by-statement GUI execution is forbidden; the rollback runs as the table owner, because an RLS-constrained role could see zero rows and defeat its guards.

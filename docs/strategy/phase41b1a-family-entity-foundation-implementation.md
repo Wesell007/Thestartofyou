@@ -85,11 +85,21 @@ Rows 1–7 are relaxations the 41B.1C write paths depend on; they land in 41B.1C
 
 Recorded in the 41B.1A report for this amendment: focused static test file, lint (`--max-warnings=0`), typecheck. Build not run (no application code or asset changed). Nothing executed against a database.
 
+### Account deletion under RESTRICT — mandatory pre-41B.1B gate
+
+Recorded by the 3 October 2026 pre-push review. Not resolved in 41B.1A, by instruction.
+
+- **What the files do.** `pregnancy_episodes.user_id` cascades from `auth.users`. The 13 ownership links are `ON DELETE RESTRICT`. All 13 linked tables also cascade from `auth.users` (live snapshot: every one carries `REFERENCES auth.users(id) ON DELETE CASCADE`).
+- **Why it is not proven.** When an account is deleted, Postgres fires the `auth.users` cascade triggers one at a time, in alphabetical order of trigger name. The cascade into `pregnancy_episodes` runs a nested `DELETE`, and the RESTRICT checks queued by that nested statement fire at its end, before the remaining sibling cascades (reflections, babies, journeys, …) have run. Whether a bound row still exists at that moment therefore depends on the firing order. RI trigger names embed OIDs, and OIDs differ between a rehearsal project and production, so the order observed at 41B.1A-C1 is **not portable** to production. The earlier wording "Postgres runs the restrict checks after the first round of cascades" is withdrawn as overstated.
+- **Why it cannot bite in 41B.1A.** RESTRICT only acts when a referencing row exists. 41B.1A binds nothing and populates no pointer, so whole-account deletion is unchanged until 41B.1B backfills links.
+- **Gate.** Before any 41B.1B row is bound, the owner must close this with one of: (1) a structure-only read of production's RI trigger order on `auth.users` (`pg_trigger` names, 0 customer rows) showing the episode cascade fires after every dependant cascade, plus the same check repeated after any later FK; (2) an owner-approved design change such as `NO ACTION DEFERRABLE INITIALLY DEFERRED` on the 13 links; or (3) explicit deletion ordering in the account-deletion function. No option is chosen here. The rehearsal still runs the real deletion path with populated links and records the trigger order it observes.
+
 ### Still open before 41B.1A-C1
 
 - The five 41B.0 documents still carry the passages listed in 41B.0-R §22 without a "SUPERSEDED BY 41B.0-R" marker.
 - Generated Supabase types are regenerated only after the schema exists somewhere (rehearsal project), never from this file.
-- Account deletion with populated links, trigger order on `auth.users`, Postgres version and default privileges on new tables: all rehearsal evidence, not static.
+- Postgres version and default privileges on new tables: rehearsal evidence, not static.
+- Account deletion with populated links: see the mandatory pre-41B.1B gate below. Rehearsal evidence alone does not close it.
 
 ---
 
@@ -99,6 +109,8 @@ Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (sup
 
 ## Gates
 - Design drift check: the five 41B.0 docs reconcile (24 = 11 + 5 + 6 + 2; 13 links; 26 target controls; 5 changed/removed). No drift.
+
+> **SUPERSEDED BY 41B.0-R** §12 — ten architecture drift items (D1–D10) and thirteen SQL amendments (S1–S13) were found; see the amendment record above.
 - Recovery gate: **BLOCKED**. There is no verified backup/restore path, and one database serves both preview and production. The user chose "create file only".
 
 ## Migration
@@ -109,7 +121,7 @@ Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (sup
 - Implemented in SQL = 19: rows 1 to 5, rows 6 to 16, row 17, row 18, row 22.
 - Deferred = 7:
   - row 19 (journeys pointer CHECK), 41B.1D;
-  - rows 20 and 21 (reflections unique split), 41B.1D;
+  - rows 20 and 21 (reflections unique split), 41B.1D; *(SUPERSEDED BY 41B.0-R §18: 41B.1C step 3)*
   - rows 23 to 26 (baby composite FKs), 41B.1D.
 - 19 + 7 = 26. The 5 legacy changed/removed constraints are also deferred to 41B.1D, and are outside the 26.
 - Also deferred: `babies.archived_at` (41B.1C).
@@ -137,6 +149,8 @@ Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (sup
 - ACCOUNT DELETION CASCADE = **INTENTIONAL**. `pregnancy_episodes.user_id` references `auth.users` ON DELETE CASCADE and is not replaced with RESTRICT. Purpose: when a person explicitly deletes their entire account, pregnancy episodes belonging to that account must also be eligible for deletion under the platform's account-deletion process.
 - PREGNANCY-LEVEL DEPENDENCY DELETE = **RESTRICT**. Purpose: deleting an individual pregnancy episode must never silently cascade into children, pregnancy history or episode-bound records.
 - ACCOUNT DELETION WITH NEW PREGNANCY STRUCTURE = **PENDING APPLICATION / RUNTIME VERIFICATION**.
+
+> **SUPERSEDED (3 October 2026 review)** — runtime verification in a rehearsal project is necessary but not sufficient; see "Account deletion under RESTRICT — mandatory pre-41B.1B gate" in the amendment record above.
 - The target design preserves account-deletion semantics. Runtime compatibility with the new RESTRICT relationships must be verified after application.
 
 ## Future application-gate test: ACCOUNT DELETION INTEGRITY TEST

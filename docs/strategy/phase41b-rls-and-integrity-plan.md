@@ -1,5 +1,7 @@
 # Phase 41B.0 — RLS and Integrity Plan
 
+> **Historical 41B.0 text (CLOSED PASS, 2026-09-26).** Passages marked `SUPERSEDED BY 41B.0-R` below are governed by `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md` (its §22 lists each one). The original wording is preserved; nothing below has been rewritten.
+
 Design only. RLS changes made: 0.
 
 ## 1. RLS
@@ -29,6 +31,8 @@ Optional links: `baby_id` is intentionally nullable on entries (parent lane), me
 
 ## 2. Constraint ledger (every row TARGET ONLY = YES; nothing is live)
 
+> **SUPERSEDED BY 41B.0-R** §6, §12, §18 — row 3 is one OPEN episode (`status IN ('active','paused') AND removed_at IS NULL`); row 19 is added `NOT VALID` in 41B.1D; rows 20–21 move to 41B.1C step 3; the new table also gains `NOT NULL` dates, a date CHECK and `removed_at` (§28).
+
 Episode composite ownership links = 13. Tables: reflections, week_photos, week_media_memories, pregnancy_appointments, pregnancy_symptom_notes, baby_movement_notes, birth_plans, hospital_bag_items, midwife_questions, contraction_sessions, contraction_events, babies, journeys. (Reconciled: the migration plan now names the `babies` and `journeys` links that this plan already had.)
 
 | # | Constraint | Table | Purpose | Previously counted | Newly added |
@@ -53,6 +57,8 @@ Episode composite ownership links = 13. Tables: reflections, week_photos, week_m
 New constraints proposed = 26 (21 previously designed, counted per table; 5 newly added).
 
 ## 3. Constraints changed / removed = 5
+
+> **SUPERSEDED BY 41B.0-R** §18 — eleven, not five: the five above plus `week_photos_user_id_week_key`, `week_media_memories_user_id_week_media_type_key`, `birth_plans_user_id_key`, `hospital_bag_items_user_id_category_item_key_key`, `babies_user_birth_order_idx`, `babies_one_primary_per_user_idx` (rows 1–7 in 41B.1C, rows 8–11 in 41B.1D).
 1. Remove `reflections_user_id_week_key` UNIQUE (user_id, week); replaced by rows 20 and 21.
 2. Drop `first_year_entries_baby_id_fkey` (CASCADE); replaced by row 23.
 3. Drop `first_year_care_events` single-column baby FK (CASCADE); replaced by row 24.
@@ -62,6 +68,8 @@ Additions and removals are counted separately; each replacement FK is counted on
 (Retiring legacy `journeys` lifecycle values `ivf`, `postpartum` stays a separate handoff task.)
 
 ## 4. Database functions = 5
+
+> **SUPERSEDED BY 41B.0-R** §9, §6, §18 — eighteen functions, not five; `save_pregnancy_journey` returns result codes instead of rejecting a save over an open pregnancy; the status-change function keeps the pointer rather than clearing it; `delete_active_journey` is replaced by the `removed_at` transition of §28.
 Replace: `save_pregnancy_journey` (create episode, reject over an active one, never touch ended ones, mirror to `pregnancy_journeys` during compatibility); `save_first_year_journey` (no delete; archive or update by id; link babies to the ended episode); `delete_active_journey` (end/archive instead of delete).
 New: `end_pregnancy_episode` (status, outcome date, clear pointer); `delete_baby_permanently` (explicit memory decision, then delete).
 All `SECURITY INVOKER` so RLS applies, matching the current First Year RPC.

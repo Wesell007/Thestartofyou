@@ -1,5 +1,7 @@
 # Phase 41B.0 — Migration Plan
 
+> **Historical 41B.0 text (CLOSED PASS, 2026-09-26).** Passages marked `SUPERSEDED BY 41B.0-R` below are governed by `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md` (its §22 lists each one). The original wording is preserved; nothing below has been rewritten.
+
 Design only. Migration files created: 0.
 
 ## 1. Ownership change per audited object (24)
@@ -29,6 +31,8 @@ archived_journeys (kept as history), saved_journeys (legacy, frozen, read-only f
 
 ## 2. Backfills
 
+> **SUPERSEDED BY 41B.0-R** §4, §5 — deterministic backfill 1 and derivable backfill 1 are not independent: one historic pregnancy is identified by `(user_id, lmp_date)` and yields at most one episode; the full legacy-state table and the `family_entity_backfill_log` audit table govern 41B.1B.
+
 ### Deterministic = 3
 1. Each `pregnancy_journeys` row to one episode (same dates, status, outcome, `started_at`).
 2. `journeys.active_pregnancy_episode_id` for users whose `lifecycle = 'pregnancy'`: the episode from step 1.
@@ -56,6 +60,8 @@ No baby row is deleted, so entries, care events, reminders and memories are unto
 Change `first_year_memories.baby_id` to `ON DELETE RESTRICT`. A deliberate baby deletion goes through one function that first asks the person to delete the baby's memories or convert them to `family` scope, then deletes. The CHECK stays. This removes the SET NULL versus CHECK interaction without claiming what it does today.
 
 ## 5. Migration order
+
+> **SUPERSEDED BY 41B.0-R** §18 — the nine-step order is replaced by the corrected subphases 41B.1A / 1A-C1 / 1B / 1C (five internal steps) / 1D; the reflections split and the other four unique-key splits move from tightening (step 8) to 41B.1C step 3.
 1. Create `pregnancy_episodes` with grants, RLS, constraints. No reads change.
 2. Deterministic and derivable backfills (section 2), run once, idempotent, row counts logged (counts only, no content).
 3. Add nullable episode columns and `babies` columns; composite FKs `NOT VALID`, then validate.
@@ -69,8 +75,12 @@ Change `first_year_memories.baby_id` to `ON DELETE RESTRICT`. A deliberate baby 
 ## 6. Compatibility
 - Old reads of `pregnancy_journeys` keep working through step 8 because the functions mirror the active episode into it.
 - Unbound legacy pregnancy rows: shown only with the current active episode and labelled as notes from before pregnancies were kept separately, until the person confirms or hides them. Never shown for a different, later episode after confirmation, and never sent to the Companion.
+
+> **SUPERSEDED BY 41B.0-R** §7 — unbound rows stay readable under the bounded compatibility rule (one episode: shown in that chapter, any status; two or more: a separate "earlier notes" area), until confirmed or hidden by the person.
 - Clients that do not yet send an episode id: the save functions fill in the active episode server-side; if there is no active episode the write is rejected rather than guessed.
 
 ## 7. Client write paths to migrate = 17
+
+> **SUPERSEDED BY 41B.0-R** §10 — replaced by `phase41b0r-write-path-inventory.md` (74 paths; three listed files do not write; storage writes and the status update were missing).
 `src/lib/savedJourney.ts`, `src/lib/firstYearJourney.ts`, `src/lib/useLifecycle.ts`, `src/lib/authIntent.ts`, `src/hooks/usePublicAccountLink.ts`, `src/pages/Setup.tsx`, `src/pages/setup/FirstYearSetup.tsx`, `src/components/myweek/SlotReflection.tsx`, `src/components/myweek/SlotPhotoMemory.tsx`, `src/components/myweek/SectionKeepThisWeek.tsx`, `src/hooks/usePregnancyAppointments.ts`, `src/hooks/usePregnancySymptomNotes.ts`, `src/hooks/useBabyMovementNotes.ts`, `src/hooks/useBirthPlan.ts`, `src/hooks/useHospitalBag.ts`, `src/hooks/useMidwifeQuestions.ts`, `src/hooks/useContractionTimer.ts`.
 Read-side files to review (not write paths): `MyJourney.tsx`, `KeptChapter.tsx`, `MyPregnancyChapter.tsx`, `SlotCompanionRecall.tsx`, `AccountSettings.tsx`, `journeyPersonalSource.ts`.

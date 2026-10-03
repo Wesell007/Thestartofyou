@@ -11,7 +11,8 @@
 -- 41B.0-R additions on the new table (NOT NULL dates, date CHECK, removed_at).
 -- No backfill, no data manipulation, no destructive statement, no existing policy,
 -- constraint or function touched. The 11 legacy constraints in the 41B.0-R ledger are
--- all deferred (rows 1–7 to 41B.1C, rows 8–11 to 41B.1D). Rows 19, 20–21, 23–26 deferred to 41B.1D.
+-- all deferred (rows 1–7 to 41B.1C, rows 8–11 to 41B.1D). Ledger rows 20–21 (reflections unique
+-- split) are deferred to 41B.1C step 3 with the other unique-key splits; rows 19 and 23–26 to 41B.1D.
 --
 -- Transaction control (S6): none in this file. The migration runner wraps the file; the
 -- rehearsal proves atomicity with a forced failure. SET LOCAL therefore applies to the run.

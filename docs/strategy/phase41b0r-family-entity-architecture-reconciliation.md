@@ -692,3 +692,40 @@ Later repository facts that affect this document's status rows, recorded without
 
 - N16 and the separate stabilisation track (`stabilisation-local-dev-production-safety.md`): the fix landed on `main` as commit `b487c7aa` (LOCAL-0, "prevent silent production backend fallback") before this restoration. See the recovery addendum in that document.
 - The repository state reviewed above was commit `9593d13`. This restoration was made on branch `feat/41b1a-family-entity-foundation` from `main` at `4f280362`. The pending 41B.1A SQL is unchanged by this restoration and still NEEDS AMENDMENT.
+
+---
+
+## 28. Final S13 resolution (owner, 3 October 2026) — "Remove this journey"
+
+Owner resolution received after section 27. It replaces conditional S13 and the `removed` status recommendation in section 6. The original text above is kept for history.
+
+**Representation.** An episode-local nullable timestamp: `pregnancy_episodes.removed_at timestamptz NULL`. Not any of: a new `removed` value in `pregnancy_journey_status`; any widening of the shared legacy enum; `pregnancy_loss`; `no_longer_pregnant`; `given_birth`; permanent deletion of the episode; deletion of its dependent records.
+
+**Meaning.** The person explicitly removed this Pregnancy chapter from normal and current journey presentation while the retained episode and its owned records continue to exist. It is not a medical outcome. It is not permanent deletion.
+
+**Open-pregnancy semantics.** OPEN PREGNANCY = `status IN ('active', 'paused') AND removed_at IS NULL`. The one-open uniqueness rule excludes rows where `removed_at IS NOT NULL`; a removed episode never blocks a later pregnancy. Any query that decides whether a pregnancy is open or current must consider `removed_at`.
+
+**Outcome semantics.** Removal states no outcome. A removed open pregnancy keeps `outcome_date = NULL`. Its status is not rewritten into an ended or outcome status merely to make it non-open. The `removed_at` dimension is intentionally orthogonal to the status dimension.
+
+**41B.1A.** The foundation file adds `removed_at`, uses the open-pregnancy predicate in `pregnancy_episodes_one_open_per_user_idx`, and reflects the column in the validate, rollback and static-test artefacts. No removal write path is implemented in 41B.1A.
+
+**Required 41B.1C transition behaviour (recorded, not implemented).** When "Remove this journey" is explicitly confirmed, one server function in one transaction must:
+
+1. require ownership of the pointed Pregnancy episode;
+2. permit removal only for an appropriate open, no-outcome episode unless a later approved design explicitly expands the feature;
+3. set `pregnancy_episodes.removed_at` to the server or database timestamp;
+4. if `journeys.current_pregnancy_episode_id` points to that episode, clear that current pointer as part of the controlled transaction;
+5. retain the pregnancy episode;
+6. retain all Pregnancy-owned records;
+7. retain export and account ownership;
+8. leave `outcome_date` null;
+9. prevent the removed episode from being returned as the person's open or current Pregnancy;
+10. prevent its records from ever being inherited by another Pregnancy.
+
+The transition returns an explicit result code. It replaces the `delete_active_journey('pregnancy')` branch described in J4 of the write-path inventory.
+
+**Visibility and history.** `removed_at IS NOT NULL` means hidden from normal and current journey presentation. It does not mean hard deleted. Removed chapters are not automatically exposed in normal history UI. Future export and account-control behaviour may still include retained records as the approved product and privacy design requires.
+
+**Account deletion.** A removed pregnancy remains owned by the account and is removed when the approved whole-account deletion workflow runs. The account-deletion implementation is not changed in 41B.1A; runtime compatibility stays a rehearsal and release-gate test.
+
+Superseded by this section: section 6 paragraph "Remove this journey" (the `removed` status recommendation); section 12 row S13; section 13 "status list and the ended-state CHECK accept `removed`"; section 24 item 6's recommended option. Decision 6's product semantics in section 27 stand.

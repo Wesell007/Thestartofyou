@@ -1,6 +1,101 @@
 # Phase 41B.1A — Family Entity Foundation: Implementation Evidence
 
-Decision: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED**
+## Amendment record (3 October 2026) — 41B.0-R applied
+
+Decision: **41B.1A SQL AMENDED / NOT APPLIED / READY FOR 41B.1A REVIEW**
+
+This record describes the pending files as they now are. The 27 September record below it is kept as history; where the two disagree, this record governs. Nothing has been applied to any database. No customer row was read. No product code changed.
+
+### Files
+
+| File | Role |
+|---|---|
+| `docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql` | Foundation schema (amended) |
+| `docs/strategy/migrations-pending/41b1a_family_entity_foundation_validate.sql` | `VALIDATE CONSTRAINT` for the 13 `NOT VALID` links (S1, second step) |
+| `docs/strategy/migrations-pending/41b1a_family_entity_foundation_rollback.sql` | Guarded reversal (S7) |
+| `src/test/phase41b1aMigration.test.ts` | Static contract tests over all three files (S8) |
+
+### S1–S13 incorporation
+
+| # | Decision in 41B.0-R §12 | In the amended SQL |
+|---|---|---|
+| S1 | FKs `NOT VALID`, validate in a second file, `SET LOCAL lock_timeout`, `journeys` before the loop | All 13 links `ON DELETE RESTRICT NOT VALID`; validate file with 13 `VALIDATE CONSTRAINT`; `SET LOCAL lock_timeout = '5s'` in all three files; `journeys` pointer block precedes the loop |
+| S2 | Explicit revoke | `REVOKE ALL ON TABLE public.pregnancy_episodes FROM PUBLIC, anon, authenticated` before the grants |
+| S3 | Keep `(user_id)` index and composite child indexes | Unchanged |
+| S4 | Dates `NOT NULL`, date rule as CHECK, `SELECT` only for `authenticated` | `lmp_date`/`due_date` `NOT NULL`; `pregnancy_episodes_dates_check` = `due_date > lmp_date AND due_date <= lmp_date + 300` (the rule in `save_pregnancy_journey`, migration `20260803231512`); `GRANT SELECT` only; four policies kept |
+| S5 | One open episode | Partial unique index predicate `status IN ('active','paused')` (combined with S13 below) |
+| S6 | No transaction control | `BEGIN`/`COMMIT` removed from the forward file; none in the companion files |
+| S7 | Real rollback file, guarded | Created; refuses when any episode row, any non-null link, any later-phase FK on episodes, or any dependant of `babies_id_user_id_key` exists |
+| S8 | Static test must be able to fail | Rewritten: table list parsed from the SQL, RESTRICT + NOT VALID asserted on every episode link, account CASCADE counted once, all three CHECKs, revoke-before-grant, SELECT-only grant list, open-episode predicate, no transaction control, DML detectors that also see inside `EXECUTE` strings (with a self-test), validate file covers exactly the 13 links, rollback names every created object in dependency order and drops only its own |
+| S9 | Pointer rename | `journeys.current_pregnancy_episode_id`, `journeys_current_pregnancy_episode_owner_fkey`, `journeys_current_pregnancy_episode_idx` |
+| S10 | Table-scoped guards | Every `pg_constraint` guard filters on `conrelid` |
+| S11 | `CREATE OR REPLACE TRIGGER` needs PG 14 | Replaced by `DROP TRIGGER IF EXISTS` + `CREATE TRIGGER`; no version dependency; rehearsal still records the version |
+| S12 | Keep `contraction_events` link | Kept; server-filled from the session in 41B.1C |
+| S13 | Conditional `removed` status | **Replaced by the owner's final resolution:** `pregnancy_episodes.removed_at timestamptz NULL`. No enum change. See 41B.0-R §28. |
+
+### Owner decisions 1–6
+
+1. `current_pregnancy_episode_id` — applied (S9).
+2. `SELECT`-only for signed-in clients; no direct `INSERT`/`UPDATE`/`DELETE` — applied by privilege. The three write policies exist but are inert until 41B.1C grants `INSERT` and `UPDATE`; `DELETE` is never granted.
+3. Pointer kept after Pregnancy → First Year; `babies.pregnancy_episode_id` is the durable link — nothing in 41B.1A clears or constrains the pointer by lifecycle (row 19 stays in 41B.1D and is `NOT VALID` there).
+4. No automatic 60-day rule — not a schema matter; recorded for the 41B.1C save function (result code `needs_confirmation`).
+5. `babies.archived_at` kept, internal, never user-facing — not in 41B.1A (41B.1C with the two `babies` index replacements).
+6. "Remove this journey" — `removed_at`, episode-local, orthogonal to status, no outcome, not deletion. OPEN = `status IN ('active','paused') AND removed_at IS NULL`, which is exactly the one-open index predicate. The 41B.1C removal transition is recorded in 41B.0-R §28 and is **not** implemented here.
+
+### Ledger split after amendment
+
+- Prepared in 41B.1A = 19 of the 26 target controls: rows 1–5, rows 6–16, row 17, row 18, row 22. Plus, from 41B.0-R: `NOT NULL` on both dates, `pregnancy_episodes_dates_check`, and `removed_at`.
+- Deferred = 7: row 19 (pointer CHECK, 41B.1D, added `NOT VALID`); rows 20–21 (reflections unique split, now 41B.1C per 41B.0-R §18 step 3); rows 23–26 (baby composite RESTRICT links, 41B.1D).
+- Legacy constraints changed or removed = 11, none in 41B.1A:
+
+| # | Constraint | Subphase |
+|---|---|---|
+| 1 | `reflections_user_id_week_key` | 41B.1C |
+| 2 | `week_photos_user_id_week_key` | 41B.1C |
+| 3 | `week_media_memories_user_id_week_media_type_key` | 41B.1C |
+| 4 | `birth_plans_user_id_key` | 41B.1C |
+| 5 | `hospital_bag_items_user_id_category_item_key_key` | 41B.1C |
+| 6 | `babies_user_birth_order_idx` | 41B.1C |
+| 7 | `babies_one_primary_per_user_idx` | 41B.1C |
+| 8 | `first_year_entries_baby_id_fkey` | 41B.1D |
+| 9 | `first_year_care_events_baby_id_fkey` | 41B.1D |
+| 10 | `first_year_memories_baby_id_fkey` | 41B.1D |
+| 11 | `first_year_reminders_baby_id_fkey` | 41B.1D |
+
+Rows 1–7 are relaxations the 41B.1C write paths depend on; they land in 41B.1C step 3, after readers (step 1) and singleton writers (step 2). Rows 8–11 are tightenings and stay in 41B.1D.
+
+### Final objects
+
+- Table `public.pregnancy_episodes`: `id`, `user_id`, `lmp_date NOT NULL`, `due_date NOT NULL`, `status` (`pregnancy_journey_status`, default `active`), `status_changed_at`, `outcome_date`, `expected_count`, `removed_at`, `started_at`, `ended_at`, `created_at`, `updated_at`.
+- Constraints: `pregnancy_episodes_pkey`; `pregnancy_episodes_id_user_id_key`; `pregnancy_episodes_user_id_fkey` (→ `auth.users`, CASCADE, intentional); `pregnancy_episodes_dates_check`; `pregnancy_episodes_expected_count_check`; `pregnancy_episodes_ended_at_status_check`.
+- Indexes: `pregnancy_episodes_one_open_per_user_idx` UNIQUE `(user_id) WHERE status IN ('active','paused') AND removed_at IS NULL`; `pregnancy_episodes_user_id_idx`.
+- Trigger `pregnancy_episodes_set_updated_at` (drop-and-create). Privileges: revoke from `PUBLIC`, `anon`, `authenticated`; `SELECT` to `authenticated`; `ALL` to `service_role`. RLS enabled; four owner policies.
+- 13 ownership links, all `(…, user_id) → pregnancy_episodes (id, user_id) ON DELETE RESTRICT NOT VALID`, each with a composite index: `journeys.current_pregnancy_episode_id` and `pregnancy_episode_id` on reflections, week_photos, week_media_memories, pregnancy_appointments, pregnancy_symptom_notes, baby_movement_notes, birth_plans, hospital_bag_items, midwife_questions, contraction_sessions, contraction_events, babies.
+- `babies_id_user_id_key` UNIQUE `(id, user_id)`.
+
+### Rollback review
+
+- Reversibility: every created object is dropped by name; every `DROP` is `IF EXISTS`, so a partially applied forward file can still be reversed. No `CASCADE`.
+- Dependency order: `journeys` pointer, then the 12 looped links (constraint, index, column), then `babies_id_user_id_key`, then policies, trigger, indexes, table.
+- No customer-history destruction: the guard aborts if `pregnancy_episodes` has any row or any link column is non-null. Only aggregate counts are read.
+- No assumption about later phases: the guard also aborts on any foreign key to `pregnancy_episodes` outside the 13 it owns, and on any dependant of `babies_id_user_id_key`.
+- Run inside one explicit transaction at rehearsal (test Q in 41B.0-R §19 covers the refusal path).
+
+### Validation performed (3 October 2026)
+
+Recorded in the 41B.1A report for this amendment: focused static test file, lint (`--max-warnings=0`), typecheck. Build not run (no application code or asset changed). Nothing executed against a database.
+
+### Still open before 41B.1A-C1
+
+- The five 41B.0 documents still carry the passages listed in 41B.0-R §22 without a "SUPERSEDED BY 41B.0-R" marker.
+- Generated Supabase types are regenerated only after the schema exists somewhere (rehearsal project), never from this file.
+- Account deletion with populated links, trigger order on `auth.users`, Postgres version and default privileges on new tables: all rehearsal evidence, not static.
+
+---
+
+## Historical record (27 September 2026, file-only build)
+
+Decision at the time: **41B.1A IMPLEMENTATION BUILT / APPLICATION BLOCKED** (superseded by the amendment record above)
 
 ## Gates
 - Design drift check: the five 41B.0 docs reconcile (24 = 11 + 5 + 6 + 2; 13 links; 26 target controls; 5 changed/removed). No drift.

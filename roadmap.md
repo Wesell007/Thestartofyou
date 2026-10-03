@@ -331,6 +331,7 @@
 - [x] Pending additive migration: docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql (19 of 26 target controls; 7 deferred)
 - [x] Static contract tests 13/13; full suite 148 files 1661/1661; typecheck PASS; build PASS
 - [x] Evidence doc: docs/strategy/phase41b1a-family-entity-foundation-implementation.md
+- [x] Amended per 41B.0-R (3 October 2026): `current_pregnancy_episode_id`; one OPEN episode (`active`/`paused`, `removed_at IS NULL`); dates NOT NULL + date CHECK; `removed_at`; authenticated SELECT-only; links NOT VALID + validate file; guarded rollback file; no BEGIN/COMMIT; table-scoped guards; amendment record in the evidence doc. NOT APPLIED.
 - [x] Account deletion clarification (docs only): account-level cascade INTENTIONAL; pregnancy-level delete RESTRICT; runtime compatibility PENDING APPLICATION; Account Deletion Integrity Test added as an application gate (NOT RUN)
 - [ ] Apply migration — BLOCKED: needs a verified database backup/restore path and user approval
 - 41B.1B NOT STARTED
@@ -349,7 +350,7 @@
 - [x] Documentation and design only (2 October 2026): D1–D10 reconciled; SQL amendment ledger S1–S12; conditional S13 replaced by owner decision 6; legacy constraints changed 5 → 11 with corrected 41B.1A / 1B / 1C / 1D sequencing; write paths 17 → 74; functions 5 → 18. Database changes 0, customer rows read 0, product code changes 0.
 - [x] Evidence restored to the repository (3 October 2026): `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md`, `docs/strategy/phase41b0r-write-path-inventory.md`, `docs/strategy/stabilisation-local-dev-production-safety.md`, `docs/strategy/phase41b0r-roadmap-entry-proposed.md`, each with a dated recovery addendum recording later owner decisions and repository facts.
 - [x] Owner decisions 1–6 recorded: `current_pregnancy_episode_id`; episodes `SELECT`-only for authenticated clients in 41B.1A; pointer kept after Pregnancy → First Year with `babies.pregnancy_episode_id` as the durable link; no automatic 60-day rule (differing legacy dates → `needs_confirmation`); `babies.archived_at` kept and never user-facing; "Remove this journey" = closed and hidden, records retained, episode-local, no automatic widening of the shared status enum.
-- [ ] 41B.1A SQL NEEDS AMENDMENT / NOT APPLIED
+- [x] 41B.1A SQL AMENDED (3 October 2026: S1–S12 applied; S13 resolved as `pregnancy_episodes.removed_at`; validate and rollback files; static tests rewritten) / NOT APPLIED
 - 41B.1A-C1 NOT STARTED
 - 41B.1B NOT STARTED
 - IVF-SAVE-R PARKED

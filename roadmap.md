@@ -343,3 +343,14 @@
 - [ ] Staging isolation and parity report: waiting on the remix catalogue snapshot. Classify each difference as MATERIAL PARITY DIFFERENCE or EXPECTED ENVIRONMENT DIFFERENCE. Pending migration applied = NO.
 - [ ] Blocked on user: verify the latest live backup (date, retention).
 - [ ] OPEN support question: can a backup be restored into a separate project instead of overwriting the shared database? If not, can a complete logical backup (schema and data) be produced for a restore elsewhere?
+
+## Phase 41B.0-R — Family Entity Architecture Reconciliation (CLOSED PASS / READY TO AMEND 41B.1A)
+- [x] 41B.0 historical closure preserved. The corrective addendum supersedes only the passages listed in its §22; the five 41B.0 documents keep their original text.
+- [x] Documentation and design only (2 October 2026): D1–D10 reconciled; SQL amendment ledger S1–S12; conditional S13 replaced by owner decision 6; legacy constraints changed 5 → 11 with corrected 41B.1A / 1B / 1C / 1D sequencing; write paths 17 → 74; functions 5 → 18. Database changes 0, customer rows read 0, product code changes 0.
+- [x] Evidence restored to the repository (3 October 2026): `docs/strategy/phase41b0r-family-entity-architecture-reconciliation.md`, `docs/strategy/phase41b0r-write-path-inventory.md`, `docs/strategy/stabilisation-local-dev-production-safety.md`, `docs/strategy/phase41b0r-roadmap-entry-proposed.md`, each with a dated recovery addendum recording later owner decisions and repository facts.
+- [x] Owner decisions 1–6 recorded: `current_pregnancy_episode_id`; episodes `SELECT`-only for authenticated clients in 41B.1A; pointer kept after Pregnancy → First Year with `babies.pregnancy_episode_id` as the durable link; no automatic 60-day rule (differing legacy dates → `needs_confirmation`); `babies.archived_at` kept and never user-facing; "Remove this journey" = closed and hidden, records retained, episode-local, no automatic widening of the shared status enum.
+- [ ] 41B.1A SQL NEEDS AMENDMENT / NOT APPLIED
+- 41B.1A-C1 NOT STARTED
+- 41B.1B NOT STARTED
+- IVF-SAVE-R PARKED
+- Claude Code = canonical implementation owner; the GitHub repository is the single source of truth

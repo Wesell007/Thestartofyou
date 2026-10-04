@@ -1,0 +1,26 @@
+{
+  "project_ref": "wwtcnbjhttjtklpxhrkd",
+  "run_label": "41B.1A-C1-run1",
+  "created_utc": "2026-10-04T00:24Z",
+  "users": {
+    "A": { "id": "b09cd318-8f3e-4853-8d97-fc10267b3d69", "email": "c1-user-a@example.invalid", "journey_lifecycle": "pregnancy" },
+    "B": { "id": "820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb", "email": "c1-user-b@example.invalid", "journey_lifecycle": "first_year" },
+    "C": { "id": "6e65487d-ddb0-43b6-a623-fb24b5318dab", "email": "c1-user-c@example.invalid", "journey_lifecycle": "ttc" }
+  },
+  "rows": {
+    "babies": { "B-1-primary": "00000000-0000-4c10-8000-00000000b001", "B-2": "00000000-0000-4c10-8000-00000000b002" },
+    "reflections": { "A-w12": "00000000-0000-4c10-8000-00000000a101", "B-w30": "00000000-0000-4c10-8000-00000000b101" },
+    "week_photos": { "A-w12": "00000000-0000-4c10-8000-00000000a102" },
+    "week_media_memories": { "A-w12-video": "00000000-0000-4c10-8000-00000000a103" },
+    "pregnancy_appointments": { "A-w12": "00000000-0000-4c10-8000-00000000a104", "B-w30": "00000000-0000-4c10-8000-00000000b104" },
+    "pregnancy_symptom_notes": { "A": "00000000-0000-4c10-8000-00000000a105" },
+    "baby_movement_notes": { "A": "00000000-0000-4c10-8000-00000000a106" },
+    "birth_plans": { "A": "00000000-0000-4c10-8000-00000000a107" },
+    "hospital_bag_items": { "A": "00000000-0000-4c10-8000-00000000a108" },
+    "midwife_questions": { "A": "00000000-0000-4c10-8000-00000000a109" },
+    "contraction_sessions": { "A": "00000000-0000-4c10-8000-00000000a110" },
+    "contraction_events": { "A-1": "00000000-0000-4c10-8000-00000000a111", "A-2": "00000000-0000-4c10-8000-00000000a112" }
+  },
+  "row_total": 21,
+  "secrets_in_this_file": false
+}

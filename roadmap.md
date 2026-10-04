@@ -356,7 +356,8 @@
 - [x] 41B.1A-C1 rehearsal plan written, independently reviewed (PASS, no blockers) and finalised: `docs/strategy/phase41b1a-c1-rehearsal-plan.md` (refusal reachability and guard order corrected; PostgREST authoritative for RLS; diff exclusions, version-mismatch owner gate and tooling prerequisites added).
 - [x] 41B.1A-C1 execution authorised by the owner (PostgreSQL 17.11 accepted; live version unknown). Two isolated projects exist in the owner's organisation: `tsoy-41b1a-c1-run1` (`wwtcnbjhttjtklpxhrkd`) and `tsoy-41b1a-c1-run2` (`dlftnirrnirlkhxpofoq`).
 - [x] C1.0 PASS (identity, marker, zero users). C1.1 PASS (2026-10-04): 47 migrations from `735a07e6` replayed on Project 1 via Supabase CLI 2.119.0, history 47/47, baseline catalogue captured and classified against the live snapshot with no unexpected drift, `pregnancy_episodes` absent. Evidence: `docs/strategy/evidence/41b1a-c1/`.
-- [ ] C1.2 onward NOT STARTED. 41B.1A pending files NOT applied anywhere.
+- [x] C1.2 PASS (2026-10-04): three synthetic Auth users (`@example.invalid`, confirmed, sign-in verified) and 21 legacy fixture rows per plan §F on Project 1; schema hashes identical to C1.1; history 47/47. Evidence `07-c1-2-fixture-manifest.md`, `07a-synthetic-ids.json`.
+- [ ] C1.3 onward NOT STARTED. 41B.1A pending files NOT applied anywhere.
 - 41B.1B NOT STARTED (pre-41B.1B account-deletion gate still open)
 - [ ] PRE-41B.1B GATE (owner decision or evidence): account deletion under the 13 `ON DELETE RESTRICT` links depends on RI-trigger firing order on `auth.users`, which is OID-based and not portable from rehearsal to production. Close by structure-only production `pg_trigger` evidence, an approved design change (e.g. deferrable `NO ACTION`), or explicit deletion ordering in `delete-account`. No row may be bound before this closes. See 41B.0-R §29.
 - 41B.1A-C1 NOT STARTED

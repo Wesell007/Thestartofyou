@@ -1,0 +1,33 @@
+[c1_psql_notx] file=C1_3b_blocker.sql sha256=2570bc22bb99a8a633e57f38095fae053e04a99632e4b6087fbf7e4d98d1a778
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+BEGIN;
+BEGIN
+SELECT pg_backend_pid() AS blocker_pid, now() AS tx_started_at;
+ blocker_pid |         tx_started_at         
+-------------+-------------------------------
+      106342 | 2026-10-04 22:10:22.576706+00
+(1 row)
+
+LOCK TABLE public.journeys IN ACCESS EXCLUSIVE MODE;
+LOCK TABLE
+SELECT 'lock held' AS state, now() AS lock_acquired_at;
+   state   |       lock_acquired_at        
+-----------+-------------------------------
+ lock held | 2026-10-04 22:10:22.576706+00
+(1 row)
+
+SELECT pg_sleep(25);
+ pg_sleep 
+----------
+ 
+(1 row)
+
+ROLLBACK;
+ROLLBACK
+SELECT 'blocker rolled back' AS state, now() AS released_at;
+        state        |          released_at          
+---------------------+-------------------------------
+ blocker rolled back | 2026-10-04 22:10:47.645454+00
+(1 row)
+
+[c1_psql_notx] exit=0

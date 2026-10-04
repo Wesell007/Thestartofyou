@@ -1,0 +1,29 @@
+# observer 1 (22:10:28Z, A holding lock, before B)
+  pid   | state  | wait_event_type | wait_event | blocked_by |  xact_start  |        query         
+--------+--------+-----------------+------------+------------+--------------+----------------------
+ 106342 | active | Timeout         | PgSleep    | {}         | 22:10:22.576 | SELECT pg_sleep(25);
+(1 row)
+  pid   |        mode         | granted | relname  
+--------+---------------------+---------+----------
+ 106342 | AccessExclusiveLock | t       | journeys
+(1 row)
+
+# observer 2 (22:10:31Z, B waiting on A)
+  pid   | state  | wait_event_type | wait_event | blocked_by |  xact_start  |                                      query                                       
+--------+--------+-----------------+------------+------------+--------------+----------------------------------------------------------------------------------
+ 106342 | active | Timeout         | PgSleep    | {}         | 22:10:22.576 | SELECT pg_sleep(25);
+ 106345 | active | Lock            | relation   | {106342}   | 22:10:27.077 | ALTER TABLE public.journeys ADD COLUMN IF NOT EXISTS current_pregnancy_episode_i
+(2 rows)
+  pid   |        mode         | granted | relname  
+--------+---------------------+---------+----------
+ 106342 | AccessExclusiveLock | t       | journeys
+ 106345 | AccessExclusiveLock | f       | journeys
+(2 rows)
+
+# observer 3 (22:10:50Z, after both sessions)
+ pid | state | wait_event_type | wait_event | blocked_by | xact_start | query 
+-----+-------+-----------------+------------+------------+------------+-------
+(0 rows)
+ pid | mode | granted | relname 
+-----+------+---------+---------
+(0 rows)

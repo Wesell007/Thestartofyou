@@ -35,3 +35,6 @@ supabase/.temp/
 
 # AIC-5B local probe output (never committed)
 .probe-output/
+
+# Rehearsal evidence logs are tracked (they are redacted transcripts, not runtime logs)
+!docs/strategy/evidence/**/*.log

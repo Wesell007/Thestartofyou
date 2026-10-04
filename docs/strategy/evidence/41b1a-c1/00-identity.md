@@ -1,6 +1,6 @@
 # 41B.1A-C1 — 00 Identity (Project 1)
 
-Status: C1.0 PASS (performed by the owner through the Supabase integration). C1.1 PASS (2026-10-04T00:00Z; see `99-c1-1-summary.md`). C1.2 PASS (2026-10-04T00:26Z; see `07-c1-2-fixture-manifest.md`): 3 synthetic Auth users (all `@example.invalid`, confirmed, login verified) and 21 legacy fixture rows; schema unchanged versus C1.1. C1.3 NOT STARTED.
+Status: C1.0 PASS (performed by the owner through the Supabase integration). C1.1 PASS (2026-10-04T00:00Z; see `99-c1-1-summary.md`). C1.2 PASS (2026-10-04T00:26Z; see `07-c1-2-fixture-manifest.md`): 3 synthetic Auth users (all `@example.invalid`, confirmed, login verified) and 21 legacy fixture rows; schema unchanged versus C1.1. C1.3 PASS (2026-10-04T22:00Z; see `08a-c1-3-atomicity-summary.md`): forced-failure transaction atomicity proven with psql 17.11 `-1` + `ON_ERROR_STOP=1`; exit 3 at the appended failure; empty structural diff afterwards. C1.3b NOT STARTED. Forward migration NOT applied.
 
 Post-replay identity (2026-10-03T23:38:31Z): marker unchanged; `auth.users` 0; non-synthetic 0; `supabase_migrations.schema_migrations` 47 rows (`20260420164527..20260915224603`); public base tables 34; public policies 114; public functions 25; `pregnancy_episodes` NULL; episode link columns 0; episode constraints 0; episode indexes 0; episode policies 0; `babies_id_user_id_key` 0.
 

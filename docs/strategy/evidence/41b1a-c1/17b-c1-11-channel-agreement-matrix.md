@@ -1,0 +1,17 @@
+# 41B.1A-C1 — 17b C1.11 RLS channel-agreement matrix (Project 1)
+
+Authoritative channel: PostgREST at the Project 1 endpoint with a genuine JWT obtained by signing synthetic user A in through Supabase Auth (`POST /auth/v1/token?grant_type=password`, HTTP 200, session user `b09cd318-8f3e-4853-8d97-fc10267b3d69`, role `authenticated`, aud `authenticated`, token length 848, token not stored, not fabricated). Machine record `17a-c1-11-postgrest.json` (secrets redacted at source; request headers never recorded). Corroborating channel: `17-c1-11-rls-corroboration.log` (psql as `postgres`, then `set local role authenticated` with both `request.jwt.claim.sub` and `request.jwt.claims` set to A; `auth.uid()` read back as A; `row_security = on`; then `set local role anon`; rollback-only). Starred rows are marked `*`.
+
+| H case | Actor | Operation | Expected (plan section H) | PostgREST status/result | psql result | Channels agree | PASS |
+|---|---|---|---|---|---|---|---|
+| H-1 * | authenticated as A (genuine JWT) | SELECT own episodes | rows of A only | HTTP 200, rows [('ea01', 'b09cd318')] | rows [('ea01', 'b09cd318')] | YES | PASS |
+| H-2 * | authenticated as A | SELECT where user_id = B | zero rows, no error | HTTP 200, rows [] / by E-B1 id: HTTP 200, rows [] | rows []; count with B filter = 0 | YES | PASS |
+| H-3 * | authenticated as A | INSERT episode for A | 42501 permission denied | HTTP 403, code 42501: permission denied for table pregnancy_episodes | 42501 permission denied for table pregnancy_episodes | YES | PASS |
+| H-4 * | authenticated as A | UPDATE own episode (E-A1 expected_count) | 42501 | HTTP 403, code 42501: permission denied for table pregnancy_episodes | 42501 permission denied for table pregnancy_episodes | YES | PASS |
+| H-5 * | authenticated as A | DELETE own episode (E-A1) | 42501 | HTTP 403, code 42501: permission denied for table pregnancy_episodes | 42501 permission denied for table pregnancy_episodes | YES | PASS |
+| H-6 | authenticated as A via PostgREST | SELECT with the A JWT | same as H-1 | HTTP 200, rows [('ea01', 'b09cd318')] | (PostgREST-only row; H-1 psql shown above) | n/a (single channel by plan) | PASS |
+| H-7 | anon (anon key, no user JWT) | SELECT | 42501 | HTTP 401, code 42501: permission denied for table pregnancy_episodes | 42501 permission denied for table pregnancy_episodes | YES | PASS |
+| H-8 | service_role | SELECT all; INSERT (temporary row for C); UPDATE it | succeeds (bypasses RLS) | HTTP 200, rows [('ea01', 'b09cd318'), ('eb01', '820f49d1')] / INSERT HTTP 201, rows [('ec11', '6e65487d')] / UPDATE HTTP 200, rows [('ec11', '6e65487d')] / cleanup DELETE HTTP 200, rows [('ec11', '6e65487d')] | (PostgREST-only row per plan) | n/a (single channel by plan) | PASS |
+| H-9 | postgres (owner) | SELECT all | succeeds | (psql-only row per plan) | rows [('ea01', 'b09cd318'), ('eb01', '820f49d1')] | n/a (single channel by plan) | PASS |
+
+All rows PASS: YES. Owner isolation: through PostgREST with the A JWT the only row returned is E-A1 (`...ea01`, user_id A); the B filter and the E-B1 id filter both return an empty array with HTTP 200; no row of another user was ever returned. Every authenticated write (INSERT, UPDATE, DELETE) was refused with code 42501 on both channels, so no write succeeded. Interpretation recorded per plan section H: policy presence never grants a privilege; the four owner policies exist for the later controlled write path.

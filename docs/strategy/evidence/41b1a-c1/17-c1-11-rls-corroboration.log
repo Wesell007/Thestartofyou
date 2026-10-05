@@ -1,0 +1,138 @@
+[c1_psql_notx] file=C1_11_rls_corroboration.sql sha256=5d042263fea048e60ad8ad2f3515f840c20cab3636831ce25072fd97917d51ec
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.11 psql corroboration start
+select now() as started_at, current_user, session_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+          started_at           | current_user | session_user |                marker                 
+-------------------------------+--------------+--------------+---------------------------------------
+ 2026-10-05 20:56:59.395446+00 | postgres     | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+=== security structure (owner, read-only)
+select relrowsecurity, relforcerowsecurity from pg_class where oid = 'public.pregnancy_episodes'::regclass;
+ relrowsecurity | relforcerowsecurity 
+----------------+---------------------
+ t              | f
+
+select grantee, string_agg(privilege_type, ',' order by privilege_type) as privileges from information_schema.role_table_grants where table_schema='public' and table_name='pregnancy_episodes' group by grantee order by grantee;
+    grantee    |                       privileges                        
+---------------+---------------------------------------------------------
+ authenticated | SELECT
+ postgres      | DELETE,INSERT,REFERENCES,SELECT,TRIGGER,TRUNCATE,UPDATE
+ service_role  | DELETE,INSERT,REFERENCES,SELECT,TRIGGER,TRUNCATE,UPDATE
+
+select polname, polcmd, array(select rolname from pg_roles where oid = any(polroles)) as roles from pg_policy where polrelid='public.pregnancy_episodes'::regclass order by polname;
+            polname            | polcmd |      roles      
+-------------------------------+--------+-----------------
+ pregnancy_episodes_delete_own | d      | {authenticated}
+ pregnancy_episodes_insert_own | a      | {authenticated}
+ pregnancy_episodes_select_own | r      | {authenticated}
+ pregnancy_episodes_update_own | w      | {authenticated}
+
+### CASE H-9|postgres owner|SELECT all|OK
+select id, user_id, status from public.pregnancy_episodes order by id;
+                  id                  |               user_id                |   status    
+--------------------------------------+--------------------------------------+-------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active
+ 00000000-0000-4c10-8000-00000000eb01 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | given_birth
+
+=== switch to authenticated as A (dual GUC)
+set local role authenticated;
+SET
+select set_config('request.jwt.claim.sub', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', true);
+              set_config              
+--------------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69
+
+select set_config('request.jwt.claims', '{"sub":"b09cd318-8f3e-4853-8d97-fc10267b3d69","role":"authenticated"}', true);
+                              set_config                               
+-----------------------------------------------------------------------
+ {"sub":"b09cd318-8f3e-4853-8d97-fc10267b3d69","role":"authenticated"}
+
+select current_user, session_user, auth.uid() as auth_uid, current_setting('request.jwt.claim.sub', true) as claim_sub, current_setting('request.jwt.claims', true) as claims, current_setting('row_security') as row_security;
+ current_user  | session_user |               auth_uid               |              claim_sub               |                                claims                                 | row_security 
+---------------+--------------+--------------------------------------+--------------------------------------+-----------------------------------------------------------------------+--------------
+ authenticated | postgres     | b09cd318-8f3e-4853-8d97-fc10267b3d69 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | {"sub":"b09cd318-8f3e-4853-8d97-fc10267b3d69","role":"authenticated"} | on
+
+### CASE H-1|authenticated A|SELECT own episodes|OK
+select id, user_id, status from public.pregnancy_episodes order by id;
+                  id                  |               user_id                | status 
+--------------------------------------+--------------------------------------+--------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active
+
+### CASE H-2|authenticated A|SELECT where user_id = B|OK
+select id, user_id, status from public.pregnancy_episodes where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb' order by id;
+ id | user_id | status 
+----+---------+--------
+
+select count(*) as rows_visible_for_b_filter from public.pregnancy_episodes where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+ rows_visible_for_b_filter 
+---------------------------
+                         0
+
+### CASE H-3|authenticated A|INSERT episode for A|42501
+savepoint s3;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, outcome_date) values ('00000000-0000-4c10-8000-00000000ec03', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2025-01-01', date '2025-10-08', 'given_birth', timestamptz '2025-10-01T10:00:00Z', date '2025-10-01');
+psql:C1_11_rls_corroboration.sql:30: ERROR:  42501: permission denied for table pregnancy_episodes
+HINT:  Grant the required privileges to the current role with: GRANT INSERT ON public.pregnancy_episodes TO authenticated;
+LOCATION:  aclcheck_error, aclchk.c:2843
+rollback to savepoint s3;
+ROLLBACK
+### CASE H-4|authenticated A|UPDATE own episode|42501
+savepoint s4;
+SAVEPOINT
+update public.pregnancy_episodes set expected_count = 2 where id = '00000000-0000-4c10-8000-00000000ea01';
+psql:C1_11_rls_corroboration.sql:34: ERROR:  42501: permission denied for table pregnancy_episodes
+HINT:  Grant the required privileges to the current role with: GRANT UPDATE ON public.pregnancy_episodes TO authenticated;
+LOCATION:  aclcheck_error, aclchk.c:2843
+rollback to savepoint s4;
+ROLLBACK
+### CASE H-5|authenticated A|DELETE own episode|42501
+savepoint s5;
+SAVEPOINT
+delete from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ea01';
+psql:C1_11_rls_corroboration.sql:38: ERROR:  42501: permission denied for table pregnancy_episodes
+HINT:  Grant the required privileges to the current role with: GRANT DELETE ON public.pregnancy_episodes TO authenticated;
+LOCATION:  aclcheck_error, aclchk.c:2843
+rollback to savepoint s5;
+ROLLBACK
+### CASE H-1-after|authenticated A|own row still present and unchanged|OK
+select id, user_id, status, expected_count from public.pregnancy_episodes order by id;
+                  id                  |               user_id                | status | expected_count 
+--------------------------------------+--------------------------------------+--------+----------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |              1
+
+=== switch to anon
+reset role;
+RESET
+set local role anon;
+SET
+select current_user, session_user;
+ current_user | session_user 
+--------------+--------------
+ anon         | postgres
+
+### CASE H-7|anon|SELECT|42501
+savepoint s7;
+SAVEPOINT
+select id, user_id from public.pregnancy_episodes;
+psql:C1_11_rls_corroboration.sql:49: ERROR:  42501: permission denied for table pregnancy_episodes
+HINT:  Grant the required privileges to the current role with: GRANT SELECT ON public.pregnancy_episodes TO anon;
+LOCATION:  aclcheck_error, aclchk.c:2843
+rollback to savepoint s7;
+ROLLBACK
+reset role;
+RESET
+select current_user as back_to, (select count(*) from public.pregnancy_episodes) as episode_rows_owner_view;
+ back_to  | episode_rows_owner_view 
+----------+-------------------------
+ postgres |                       2
+
+=== ROLLBACK
+ROLLBACK;
+ROLLBACK
+=== C1.11 psql corroboration end
+[c1_psql_notx] exit=0

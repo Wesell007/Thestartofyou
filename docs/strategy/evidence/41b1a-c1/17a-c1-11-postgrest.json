@@ -1,0 +1,267 @@
+{
+ "stage": "C1.11",
+ "project_ref": "wwtcnbjhttjtklpxhrkd",
+ "endpoint": "https://wwtcnbjhttjtklpxhrkd.supabase.co",
+ "started_at": "2026-10-05T20:56:56.400799+00:00",
+ "cases": [
+  {
+   "case": "H-1",
+   "actor": "authenticated A",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    }
+   ],
+   "expected": "200, rows of A only (E-A1)",
+   "pass": true,
+   "note": "ids=['ea01']"
+  },
+  {
+   "case": "H-2",
+   "actor": "authenticated A",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id&user_id=eq.820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb",
+   "http_status": 200,
+   "body": [],
+   "expected": "200, zero rows",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-2b",
+   "actor": "authenticated A",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id&id=eq.00000000-0000-4c10-8000-00000000eb01",
+   "http_status": 200,
+   "body": [],
+   "expected": "200, zero rows (E-B1 invisible)",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-3",
+   "actor": "authenticated A",
+   "request": "POST /rest/v1/pregnancy_episodes",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT INSERT ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501 permission denied",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-4",
+   "actor": "authenticated A",
+   "request": "PATCH /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT UPDATE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501 permission denied",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-5",
+   "actor": "authenticated A",
+   "request": "DELETE /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT DELETE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501 permission denied",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-6",
+   "actor": "authenticated A",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    }
+   ],
+   "expected": "same as H-1",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-7",
+   "actor": "anon",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 401,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT SELECT ON public.pregnancy_episodes TO anon;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501 permission denied",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-8a",
+   "actor": "service_role",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    },
+    {
+     "id": "00000000-0000-4c10-8000-00000000eb01",
+     "user_id": "820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb",
+     "status": "given_birth",
+     "removed_at": null
+    }
+   ],
+   "expected": "200, all rows (A and B)",
+   "pass": true,
+   "note": "ids=['ea01', 'eb01']"
+  },
+  {
+   "case": "H-8b",
+   "actor": "service_role",
+   "request": "POST /rest/v1/pregnancy_episodes",
+   "http_status": 201,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ec11",
+     "user_id": "6e65487d-ddb0-43b6-a623-fb24b5318dab",
+     "lmp_date": "2026-09-01",
+     "due_date": "2027-06-08",
+     "status": "active",
+     "status_changed_at": null,
+     "outcome_date": null,
+     "expected_count": null,
+     "removed_at": null,
+     "started_at": "2026-10-05T20:56:58.574041+00:00",
+     "ended_at": null,
+     "created_at": "2026-10-05T20:56:58.574041+00:00",
+     "updated_at": "2026-10-05T20:56:58.574041+00:00"
+    }
+   ],
+   "expected": "201, row for C inserted (temporary)",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-8c",
+   "actor": "service_role",
+   "request": "PATCH /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ec11",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ec11",
+     "user_id": "6e65487d-ddb0-43b6-a623-fb24b5318dab",
+     "lmp_date": "2026-09-01",
+     "due_date": "2027-06-08",
+     "status": "active",
+     "status_changed_at": null,
+     "outcome_date": null,
+     "expected_count": 3,
+     "removed_at": null,
+     "started_at": "2026-10-05T20:56:58.574041+00:00",
+     "ended_at": null,
+     "created_at": "2026-10-05T20:56:58.574041+00:00",
+     "updated_at": "2026-10-05T20:56:58.642535+00:00"
+    }
+   ],
+   "expected": "200, expected_count updated to 3",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-8-cleanup",
+   "actor": "service_role",
+   "request": "DELETE /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ec11",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ec11",
+     "user_id": "6e65487d-ddb0-43b6-a623-fb24b5318dab",
+     "lmp_date": "2026-09-01",
+     "due_date": "2027-06-08",
+     "status": "active",
+     "status_changed_at": null,
+     "outcome_date": null,
+     "expected_count": 3,
+     "removed_at": null,
+     "started_at": "2026-10-05T20:56:58.574041+00:00",
+     "ended_at": null,
+     "created_at": "2026-10-05T20:56:58.574041+00:00",
+     "updated_at": "2026-10-05T20:56:58.642535+00:00"
+    }
+   ],
+   "expected": "200, temporary row removed",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "post",
+   "actor": "service_role",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    },
+    {
+     "id": "00000000-0000-4c10-8000-00000000eb01",
+     "user_id": "820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb",
+     "status": "given_birth",
+     "removed_at": null
+    }
+   ],
+   "expected": "exactly E-A1 and E-B1 remain",
+   "pass": true,
+   "note": ""
+  }
+ ],
+ "auth": {
+  "endpoint": "POST /auth/v1/token?grant_type=password",
+  "http_status": 200,
+  "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+  "role": "authenticated",
+  "aud": "authenticated",
+  "email": "c1-user-a@example.invalid",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "access_token_length": 848,
+  "access_token_sha256_prefix": "d86b15cd0bdc",
+  "token_stored": false,
+  "fabricated": false,
+  "pass": true
+ },
+ "finished_at": "2026-10-05T20:56:58.932125+00:00",
+ "summary": {
+  "cases": 13,
+  "pass": 13,
+  "fail": []
+ }
+}

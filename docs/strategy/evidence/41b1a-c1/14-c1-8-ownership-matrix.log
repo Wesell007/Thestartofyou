@@ -1,0 +1,1193 @@
+[c1_psql_notx] file=C1_8_ownership_matrix.sql sha256=9f3cafaa15f4291bc124100e5ebccea8571004b82f5c23cc1d8ad3d3b772c69e
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.8 start
+select now() as started_at, current_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+          started_at          | current_user |                marker                 
+------------------------------+--------------+---------------------------------------
+ 2026-10-05 20:22:44.78314+00 | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+=== episodes present (E-B1 exists, so a single-column FK on episode id alone would pass; only the composite (episode, user) key can reject)
+select id, user_id, status from public.pregnancy_episodes order by id;
+                  id                  |               user_id                |   status    
+--------------------------------------+--------------------------------------+-------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active
+ 00000000-0000-4c10-8000-00000000eb01 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | given_birth
+
+select conname, condeferrable, condeferred from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass order by conname;
+                       conname                        | condeferrable | condeferred 
+------------------------------------------------------+---------------+-------------
+ babies_pregnancy_episode_owner_fkey                  | f             | f
+ baby_movement_notes_pregnancy_episode_owner_fkey     | f             | f
+ birth_plans_pregnancy_episode_owner_fkey             | f             | f
+ contraction_events_pregnancy_episode_owner_fkey      | f             | f
+ contraction_sessions_pregnancy_episode_owner_fkey    | f             | f
+ hospital_bag_items_pregnancy_episode_owner_fkey      | f             | f
+ journeys_current_pregnancy_episode_owner_fkey        | f             | f
+ midwife_questions_pregnancy_episode_owner_fkey       | f             | f
+ pregnancy_appointments_pregnancy_episode_owner_fkey  | f             | f
+ pregnancy_symptom_notes_pregnancy_episode_owner_fkey | f             | f
+ reflections_pregnancy_episode_owner_fkey             | f             | f
+ week_media_memories_pregnancy_episode_owner_fkey     | f             | f
+ week_photos_pregnancy_episode_owner_fkey             | f             | f
+
+=== relationship reflections (reflections_pregnancy_episode_owner_fkey)
+### CASE reflections|I1 same-user insert -> own episode|OK
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c80b', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 31, 'C1 synthetic c1.8', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000c80b';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c80b | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE reflections|I2 cross-user insert -> other-user episode|FK
+savepoint s1;
+SAVEPOINT
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c80c', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 32, 'C1 synthetic c1.8', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:20: ERROR:  23503: insert or update on table "reflections" violates foreign key constraint "reflections_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  reflections
+CONSTRAINT NAME:  reflections_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s1;
+ROLLBACK
+select count(*) as residue from public.reflections where id = '00000000-0000-4c10-8000-00000000c80c';
+ residue 
+---------
+       0
+
+### CASE reflections|I3 insert with NULL link|OK
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c80d', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 33, 'C1 synthetic c1.8', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000c80d';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c80d | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE reflections|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s2;
+SAVEPOINT
+update public.reflections set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a101';
+psql:C1_8_ownership_matrix.sql:28: ERROR:  23503: insert or update on table "reflections" violates foreign key constraint "reflections_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  reflections
+CONSTRAINT NAME:  reflections_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s2;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000a101';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a101 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE reflections|I5a update legacy A row -> E-A1|OK
+update public.reflections set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a101';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000a101';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a101 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE reflections|I5b update back to NULL|OK
+update public.reflections set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a101';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000a101';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a101 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE reflections|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s3;
+SAVEPOINT
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c810', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 36, 'C1 synthetic c1.8', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:39: ERROR:  23503: insert or update on table "reflections" violates foreign key constraint "reflections_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  reflections
+CONSTRAINT NAME:  reflections_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s3;
+ROLLBACK
+select count(*) as residue from public.reflections where id = '00000000-0000-4c10-8000-00000000c810';
+ residue 
+---------
+       0
+
+=== relationship week_photos (week_photos_pregnancy_episode_owner_fkey)
+### CASE week_photos|I1 same-user insert -> own episode|OK
+insert into public.week_photos (id, user_id, week, storage_path, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c815', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 31, 'b09cd318-8f3e-4853-8d97-fc10267b3d69/31.jpg', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.week_photos where id = '00000000-0000-4c10-8000-00000000c815';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c815 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE week_photos|I2 cross-user insert -> other-user episode|FK
+savepoint s4;
+SAVEPOINT
+insert into public.week_photos (id, user_id, week, storage_path, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c816', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 32, 'b09cd318-8f3e-4853-8d97-fc10267b3d69/32.jpg', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:48: ERROR:  23503: insert or update on table "week_photos" violates foreign key constraint "week_photos_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_photos
+CONSTRAINT NAME:  week_photos_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s4;
+ROLLBACK
+select count(*) as residue from public.week_photos where id = '00000000-0000-4c10-8000-00000000c816';
+ residue 
+---------
+       0
+
+### CASE week_photos|I3 insert with NULL link|OK
+insert into public.week_photos (id, user_id, week, storage_path, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c817', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 33, 'b09cd318-8f3e-4853-8d97-fc10267b3d69/33.jpg', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.week_photos where id = '00000000-0000-4c10-8000-00000000c817';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c817 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_photos|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s5;
+SAVEPOINT
+update public.week_photos set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a102';
+psql:C1_8_ownership_matrix.sql:56: ERROR:  23503: insert or update on table "week_photos" violates foreign key constraint "week_photos_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_photos
+CONSTRAINT NAME:  week_photos_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s5;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.week_photos where id = '00000000-0000-4c10-8000-00000000a102';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a102 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_photos|I5a update legacy A row -> E-A1|OK
+update public.week_photos set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a102';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.week_photos where id = '00000000-0000-4c10-8000-00000000a102';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a102 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE week_photos|I5b update back to NULL|OK
+update public.week_photos set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a102';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.week_photos where id = '00000000-0000-4c10-8000-00000000a102';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a102 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_photos|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s6;
+SAVEPOINT
+insert into public.week_photos (id, user_id, week, storage_path, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c81a', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 36, 'b09cd318-8f3e-4853-8d97-fc10267b3d69/36.jpg', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:67: ERROR:  23503: insert or update on table "week_photos" violates foreign key constraint "week_photos_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_photos
+CONSTRAINT NAME:  week_photos_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s6;
+ROLLBACK
+select count(*) as residue from public.week_photos where id = '00000000-0000-4c10-8000-00000000c81a';
+ residue 
+---------
+       0
+
+=== relationship week_media_memories (week_media_memories_pregnancy_episode_owner_fkey)
+### CASE week_media_memories|I1 same-user insert -> own episode|OK
+insert into public.week_media_memories (id, user_id, week, media_type, mime_type, storage_path, file_size_bytes, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c81f', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 31, 'video', 'video/mp4', 'b09cd318-8f3e-4853-8d97-fc10267b3d69/31.mp4', 1024, '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000c81f';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c81f | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE week_media_memories|I2 cross-user insert -> other-user episode|FK
+savepoint s7;
+SAVEPOINT
+insert into public.week_media_memories (id, user_id, week, media_type, mime_type, storage_path, file_size_bytes, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c820', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 32, 'video', 'video/mp4', 'b09cd318-8f3e-4853-8d97-fc10267b3d69/32.mp4', 1024, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:76: ERROR:  23503: insert or update on table "week_media_memories" violates foreign key constraint "week_media_memories_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_media_memories
+CONSTRAINT NAME:  week_media_memories_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s7;
+ROLLBACK
+select count(*) as residue from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000c820';
+ residue 
+---------
+       0
+
+### CASE week_media_memories|I3 insert with NULL link|OK
+insert into public.week_media_memories (id, user_id, week, media_type, mime_type, storage_path, file_size_bytes, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c821', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 33, 'video', 'video/mp4', 'b09cd318-8f3e-4853-8d97-fc10267b3d69/33.mp4', 1024, NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000c821';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c821 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_media_memories|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s8;
+SAVEPOINT
+update public.week_media_memories set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a103';
+psql:C1_8_ownership_matrix.sql:84: ERROR:  23503: insert or update on table "week_media_memories" violates foreign key constraint "week_media_memories_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_media_memories
+CONSTRAINT NAME:  week_media_memories_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s8;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000a103';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a103 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_media_memories|I5a update legacy A row -> E-A1|OK
+update public.week_media_memories set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a103';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000a103';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a103 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE week_media_memories|I5b update back to NULL|OK
+update public.week_media_memories set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a103';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000a103';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a103 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE week_media_memories|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s9;
+SAVEPOINT
+insert into public.week_media_memories (id, user_id, week, media_type, mime_type, storage_path, file_size_bytes, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c824', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 36, 'video', 'video/mp4', 'b09cd318-8f3e-4853-8d97-fc10267b3d69/36.mp4', 1024, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:95: ERROR:  23503: insert or update on table "week_media_memories" violates foreign key constraint "week_media_memories_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  week_media_memories
+CONSTRAINT NAME:  week_media_memories_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s9;
+ROLLBACK
+select count(*) as residue from public.week_media_memories where id = '00000000-0000-4c10-8000-00000000c824';
+ residue 
+---------
+       0
+
+=== relationship pregnancy_appointments (pregnancy_appointments_pregnancy_episode_owner_fkey)
+### CASE pregnancy_appointments|I1 same-user insert -> own episode|OK
+insert into public.pregnancy_appointments (id, user_id, week, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c829', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 31, '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000c829';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c829 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE pregnancy_appointments|I2 cross-user insert -> other-user episode|FK
+savepoint s10;
+SAVEPOINT
+insert into public.pregnancy_appointments (id, user_id, week, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c82a', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 32, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:104: ERROR:  23503: insert or update on table "pregnancy_appointments" violates foreign key constraint "pregnancy_appointments_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_appointments
+CONSTRAINT NAME:  pregnancy_appointments_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s10;
+ROLLBACK
+select count(*) as residue from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000c82a';
+ residue 
+---------
+       0
+
+### CASE pregnancy_appointments|I3 insert with NULL link|OK
+insert into public.pregnancy_appointments (id, user_id, week, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c82b', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 33, NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000c82b';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c82b | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_appointments|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s11;
+SAVEPOINT
+update public.pregnancy_appointments set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a104';
+psql:C1_8_ownership_matrix.sql:112: ERROR:  23503: insert or update on table "pregnancy_appointments" violates foreign key constraint "pregnancy_appointments_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_appointments
+CONSTRAINT NAME:  pregnancy_appointments_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s11;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000a104';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a104 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_appointments|I5a update legacy A row -> E-A1|OK
+update public.pregnancy_appointments set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a104';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000a104';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a104 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE pregnancy_appointments|I5b update back to NULL|OK
+update public.pregnancy_appointments set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a104';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000a104';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a104 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_appointments|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s12;
+SAVEPOINT
+insert into public.pregnancy_appointments (id, user_id, week, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c82e', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 36, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:123: ERROR:  23503: insert or update on table "pregnancy_appointments" violates foreign key constraint "pregnancy_appointments_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_appointments
+CONSTRAINT NAME:  pregnancy_appointments_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s12;
+ROLLBACK
+select count(*) as residue from public.pregnancy_appointments where id = '00000000-0000-4c10-8000-00000000c82e';
+ residue 
+---------
+       0
+
+=== relationship pregnancy_symptom_notes (pregnancy_symptom_notes_pregnancy_episode_owner_fkey)
+### CASE pregnancy_symptom_notes|I1 same-user insert -> own episode|OK
+insert into public.pregnancy_symptom_notes (id, user_id, symptom_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c833', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic symptom', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000c833';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c833 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE pregnancy_symptom_notes|I2 cross-user insert -> other-user episode|FK
+savepoint s13;
+SAVEPOINT
+insert into public.pregnancy_symptom_notes (id, user_id, symptom_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c834', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic symptom', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:132: ERROR:  23503: insert or update on table "pregnancy_symptom_notes" violates foreign key constraint "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_symptom_notes
+CONSTRAINT NAME:  pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s13;
+ROLLBACK
+select count(*) as residue from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000c834';
+ residue 
+---------
+       0
+
+### CASE pregnancy_symptom_notes|I3 insert with NULL link|OK
+insert into public.pregnancy_symptom_notes (id, user_id, symptom_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c835', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic symptom', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000c835';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c835 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_symptom_notes|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s14;
+SAVEPOINT
+update public.pregnancy_symptom_notes set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a105';
+psql:C1_8_ownership_matrix.sql:140: ERROR:  23503: insert or update on table "pregnancy_symptom_notes" violates foreign key constraint "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_symptom_notes
+CONSTRAINT NAME:  pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s14;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000a105';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a105 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_symptom_notes|I5a update legacy A row -> E-A1|OK
+update public.pregnancy_symptom_notes set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a105';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000a105';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a105 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE pregnancy_symptom_notes|I5b update back to NULL|OK
+update public.pregnancy_symptom_notes set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a105';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000a105';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a105 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE pregnancy_symptom_notes|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s15;
+SAVEPOINT
+insert into public.pregnancy_symptom_notes (id, user_id, symptom_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c838', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic symptom', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:151: ERROR:  23503: insert or update on table "pregnancy_symptom_notes" violates foreign key constraint "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_symptom_notes
+CONSTRAINT NAME:  pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s15;
+ROLLBACK
+select count(*) as residue from public.pregnancy_symptom_notes where id = '00000000-0000-4c10-8000-00000000c838';
+ residue 
+---------
+       0
+
+=== relationship baby_movement_notes (baby_movement_notes_pregnancy_episode_owner_fkey)
+### CASE baby_movement_notes|I1 same-user insert -> own episode|OK
+insert into public.baby_movement_notes (id, user_id, pattern_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c83d', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic pattern', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000c83d';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c83d | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE baby_movement_notes|I2 cross-user insert -> other-user episode|FK
+savepoint s16;
+SAVEPOINT
+insert into public.baby_movement_notes (id, user_id, pattern_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c83e', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic pattern', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:160: ERROR:  23503: insert or update on table "baby_movement_notes" violates foreign key constraint "baby_movement_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  baby_movement_notes
+CONSTRAINT NAME:  baby_movement_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s16;
+ROLLBACK
+select count(*) as residue from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000c83e';
+ residue 
+---------
+       0
+
+### CASE baby_movement_notes|I3 insert with NULL link|OK
+insert into public.baby_movement_notes (id, user_id, pattern_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c83f', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic pattern', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000c83f';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c83f | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE baby_movement_notes|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s17;
+SAVEPOINT
+update public.baby_movement_notes set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a106';
+psql:C1_8_ownership_matrix.sql:168: ERROR:  23503: insert or update on table "baby_movement_notes" violates foreign key constraint "baby_movement_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  baby_movement_notes
+CONSTRAINT NAME:  baby_movement_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s17;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000a106';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a106 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE baby_movement_notes|I5a update legacy A row -> E-A1|OK
+update public.baby_movement_notes set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a106';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000a106';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a106 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE baby_movement_notes|I5b update back to NULL|OK
+update public.baby_movement_notes set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a106';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000a106';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a106 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE baby_movement_notes|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s18;
+SAVEPOINT
+insert into public.baby_movement_notes (id, user_id, pattern_label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c842', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic pattern', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:179: ERROR:  23503: insert or update on table "baby_movement_notes" violates foreign key constraint "baby_movement_notes_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  baby_movement_notes
+CONSTRAINT NAME:  baby_movement_notes_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s18;
+ROLLBACK
+select count(*) as residue from public.baby_movement_notes where id = '00000000-0000-4c10-8000-00000000c842';
+ residue 
+---------
+       0
+
+=== relationship birth_plans (birth_plans_pregnancy_episode_owner_fkey) — UNIQUE (user_id): A already has a birth plan, so the insert cases use user B (B row -> E-B1 accepted; B row -> E-A1 rejected); the update cases use A legacy row a107.
+### CASE birth_plans|I1 same-user insert -> own episode|OK
+insert into public.birth_plans (id, user_id, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c847', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', '00000000-0000-4c10-8000-00000000eb01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c847';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c847 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | 00000000-0000-4c10-8000-00000000eb01
+
+delete from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c847';
+DELETE 1
+### CASE birth_plans|I2 cross-user insert -> other-user episode|FK
+savepoint s19;
+SAVEPOINT
+insert into public.birth_plans (id, user_id, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c848', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', '00000000-0000-4c10-8000-00000000ea01');
+psql:C1_8_ownership_matrix.sql:188: ERROR:  23503: insert or update on table "birth_plans" violates foreign key constraint "birth_plans_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  birth_plans
+CONSTRAINT NAME:  birth_plans_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s19;
+ROLLBACK
+select count(*) as residue from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c848';
+ residue 
+---------
+       0
+
+### CASE birth_plans|I3 insert with NULL link|OK
+insert into public.birth_plans (id, user_id, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c849', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c849';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c849 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | 
+
+delete from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c849';
+DELETE 1
+### CASE birth_plans|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s20;
+SAVEPOINT
+update public.birth_plans set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a107';
+psql:C1_8_ownership_matrix.sql:196: ERROR:  23503: insert or update on table "birth_plans" violates foreign key constraint "birth_plans_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  birth_plans
+CONSTRAINT NAME:  birth_plans_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s20;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.birth_plans where id = '00000000-0000-4c10-8000-00000000a107';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a107 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE birth_plans|I5a update legacy A row -> E-A1|OK
+update public.birth_plans set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a107';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.birth_plans where id = '00000000-0000-4c10-8000-00000000a107';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a107 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE birth_plans|I5b update back to NULL|OK
+update public.birth_plans set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a107';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.birth_plans where id = '00000000-0000-4c10-8000-00000000a107';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a107 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE birth_plans|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s21;
+SAVEPOINT
+insert into public.birth_plans (id, user_id, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c84c', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', '00000000-0000-4c10-8000-00000000ea01');
+psql:C1_8_ownership_matrix.sql:207: ERROR:  23503: insert or update on table "birth_plans" violates foreign key constraint "birth_plans_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  birth_plans
+CONSTRAINT NAME:  birth_plans_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s21;
+ROLLBACK
+select count(*) as residue from public.birth_plans where id = '00000000-0000-4c10-8000-00000000c84c';
+ residue 
+---------
+       0
+
+=== relationship hospital_bag_items (hospital_bag_items_pregnancy_episode_owner_fkey)
+### CASE hospital_bag_items|I1 same-user insert -> own episode|OK
+insert into public.hospital_bag_items (id, user_id, category, item_key, label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c851', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'parent', 'c1_c8_item_81', 'C1 synthetic item', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000c851';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c851 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE hospital_bag_items|I2 cross-user insert -> other-user episode|FK
+savepoint s22;
+SAVEPOINT
+insert into public.hospital_bag_items (id, user_id, category, item_key, label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c852', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'parent', 'c1_c8_item_82', 'C1 synthetic item', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:216: ERROR:  23503: insert or update on table "hospital_bag_items" violates foreign key constraint "hospital_bag_items_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  hospital_bag_items
+CONSTRAINT NAME:  hospital_bag_items_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s22;
+ROLLBACK
+select count(*) as residue from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000c852';
+ residue 
+---------
+       0
+
+### CASE hospital_bag_items|I3 insert with NULL link|OK
+insert into public.hospital_bag_items (id, user_id, category, item_key, label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c853', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'parent', 'c1_c8_item_83', 'C1 synthetic item', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000c853';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c853 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE hospital_bag_items|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s23;
+SAVEPOINT
+update public.hospital_bag_items set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a108';
+psql:C1_8_ownership_matrix.sql:224: ERROR:  23503: insert or update on table "hospital_bag_items" violates foreign key constraint "hospital_bag_items_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  hospital_bag_items
+CONSTRAINT NAME:  hospital_bag_items_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s23;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000a108';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a108 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE hospital_bag_items|I5a update legacy A row -> E-A1|OK
+update public.hospital_bag_items set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a108';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000a108';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a108 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE hospital_bag_items|I5b update back to NULL|OK
+update public.hospital_bag_items set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a108';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000a108';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a108 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE hospital_bag_items|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s24;
+SAVEPOINT
+insert into public.hospital_bag_items (id, user_id, category, item_key, label, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c856', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'parent', 'c1_c8_item_86', 'C1 synthetic item', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:235: ERROR:  23503: insert or update on table "hospital_bag_items" violates foreign key constraint "hospital_bag_items_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  hospital_bag_items
+CONSTRAINT NAME:  hospital_bag_items_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s24;
+ROLLBACK
+select count(*) as residue from public.hospital_bag_items where id = '00000000-0000-4c10-8000-00000000c856';
+ residue 
+---------
+       0
+
+=== relationship midwife_questions (midwife_questions_pregnancy_episode_owner_fkey)
+### CASE midwife_questions|I1 same-user insert -> own episode|OK
+insert into public.midwife_questions (id, user_id, category, question, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c85b', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'other', 'C1 synthetic question?', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000c85b';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c85b | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE midwife_questions|I2 cross-user insert -> other-user episode|FK
+savepoint s25;
+SAVEPOINT
+insert into public.midwife_questions (id, user_id, category, question, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c85c', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'other', 'C1 synthetic question?', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:244: ERROR:  23503: insert or update on table "midwife_questions" violates foreign key constraint "midwife_questions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  midwife_questions
+CONSTRAINT NAME:  midwife_questions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s25;
+ROLLBACK
+select count(*) as residue from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000c85c';
+ residue 
+---------
+       0
+
+### CASE midwife_questions|I3 insert with NULL link|OK
+insert into public.midwife_questions (id, user_id, category, question, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c85d', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'other', 'C1 synthetic question?', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000c85d';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c85d | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE midwife_questions|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s26;
+SAVEPOINT
+update public.midwife_questions set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a109';
+psql:C1_8_ownership_matrix.sql:252: ERROR:  23503: insert or update on table "midwife_questions" violates foreign key constraint "midwife_questions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  midwife_questions
+CONSTRAINT NAME:  midwife_questions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s26;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000a109';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a109 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE midwife_questions|I5a update legacy A row -> E-A1|OK
+update public.midwife_questions set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a109';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000a109';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a109 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE midwife_questions|I5b update back to NULL|OK
+update public.midwife_questions set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a109';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000a109';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a109 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE midwife_questions|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s27;
+SAVEPOINT
+insert into public.midwife_questions (id, user_id, category, question, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c860', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'other', 'C1 synthetic question?', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:263: ERROR:  23503: insert or update on table "midwife_questions" violates foreign key constraint "midwife_questions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  midwife_questions
+CONSTRAINT NAME:  midwife_questions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s27;
+ROLLBACK
+select count(*) as residue from public.midwife_questions where id = '00000000-0000-4c10-8000-00000000c860';
+ residue 
+---------
+       0
+
+=== relationship contraction_sessions (contraction_sessions_pregnancy_episode_owner_fkey)
+### CASE contraction_sessions|I1 same-user insert -> own episode|OK
+insert into public.contraction_sessions (id, user_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c865', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', timestamptz '2026-10-02T20:00:00Z', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000c865';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c865 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_sessions|I2 cross-user insert -> other-user episode|FK
+savepoint s28;
+SAVEPOINT
+insert into public.contraction_sessions (id, user_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c866', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', timestamptz '2026-10-02T20:00:00Z', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:272: ERROR:  23503: insert or update on table "contraction_sessions" violates foreign key constraint "contraction_sessions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_sessions
+CONSTRAINT NAME:  contraction_sessions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s28;
+ROLLBACK
+select count(*) as residue from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000c866';
+ residue 
+---------
+       0
+
+### CASE contraction_sessions|I3 insert with NULL link|OK
+insert into public.contraction_sessions (id, user_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c867', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', timestamptz '2026-10-02T20:00:00Z', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000c867';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c867 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_sessions|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s29;
+SAVEPOINT
+update public.contraction_sessions set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a110';
+psql:C1_8_ownership_matrix.sql:280: ERROR:  23503: insert or update on table "contraction_sessions" violates foreign key constraint "contraction_sessions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_sessions
+CONSTRAINT NAME:  contraction_sessions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s29;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000a110';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a110 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_sessions|I5a update legacy A row -> E-A1|OK
+update public.contraction_sessions set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a110';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000a110';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a110 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_sessions|I5b update back to NULL|OK
+update public.contraction_sessions set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a110';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000a110';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a110 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_sessions|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s30;
+SAVEPOINT
+insert into public.contraction_sessions (id, user_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c86a', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', timestamptz '2026-10-02T20:00:00Z', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:291: ERROR:  23503: insert or update on table "contraction_sessions" violates foreign key constraint "contraction_sessions_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_sessions
+CONSTRAINT NAME:  contraction_sessions_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s30;
+ROLLBACK
+select count(*) as residue from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000c86a';
+ residue 
+---------
+       0
+
+=== relationship contraction_events (contraction_events_pregnancy_episode_owner_fkey) — New events are attached to the existing A session a110, so the pre-existing (session_id, user_id) FK is satisfied and only the ownership FK can reject.
+### CASE contraction_events|I1 same-user insert -> own episode|OK
+insert into public.contraction_events (id, user_id, session_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c86f', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', '00000000-0000-4c10-8000-00000000a110', timestamptz '2026-10-01T20:00:00Z' + 111 * interval '1 second', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.contraction_events where id = '00000000-0000-4c10-8000-00000000c86f';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c86f | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_events|I2 cross-user insert -> other-user episode|FK
+savepoint s31;
+SAVEPOINT
+insert into public.contraction_events (id, user_id, session_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c870', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', '00000000-0000-4c10-8000-00000000a110', timestamptz '2026-10-01T20:00:00Z' + 112 * interval '1 second', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:300: ERROR:  23503: insert or update on table "contraction_events" violates foreign key constraint "contraction_events_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_events
+CONSTRAINT NAME:  contraction_events_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s31;
+ROLLBACK
+select count(*) as residue from public.contraction_events where id = '00000000-0000-4c10-8000-00000000c870';
+ residue 
+---------
+       0
+
+### CASE contraction_events|I3 insert with NULL link|OK
+insert into public.contraction_events (id, user_id, session_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c871', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', '00000000-0000-4c10-8000-00000000a110', timestamptz '2026-10-01T20:00:00Z' + 113 * interval '1 second', NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.contraction_events where id = '00000000-0000-4c10-8000-00000000c871';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c871 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_events|I4 update legacy NULL-link A row -> E-B1|FK
+savepoint s32;
+SAVEPOINT
+update public.contraction_events set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a111';
+psql:C1_8_ownership_matrix.sql:308: ERROR:  23503: insert or update on table "contraction_events" violates foreign key constraint "contraction_events_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_events
+CONSTRAINT NAME:  contraction_events_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s32;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.contraction_events where id = '00000000-0000-4c10-8000-00000000a111';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a111 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_events|I5a update legacy A row -> E-A1|OK
+update public.contraction_events set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a111';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.contraction_events where id = '00000000-0000-4c10-8000-00000000a111';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a111 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_events|I5b update back to NULL|OK
+update public.contraction_events set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a111';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.contraction_events where id = '00000000-0000-4c10-8000-00000000a111';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000a111 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE contraction_events|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s33;
+SAVEPOINT
+insert into public.contraction_events (id, user_id, session_id, started_at, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c874', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', '00000000-0000-4c10-8000-00000000a110', timestamptz '2026-10-01T20:00:00Z' + 116 * interval '1 second', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:319: ERROR:  23503: insert or update on table "contraction_events" violates foreign key constraint "contraction_events_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  contraction_events
+CONSTRAINT NAME:  contraction_events_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s33;
+ROLLBACK
+select count(*) as residue from public.contraction_events where id = '00000000-0000-4c10-8000-00000000c874';
+ residue 
+---------
+       0
+
+### CASE contraction_events|I7a bind session a110 -> E-A1|OK
+update public.contraction_sessions set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a110';
+UPDATE 1
+select id, pregnancy_episode_id from public.contraction_sessions where id = '00000000-0000-4c10-8000-00000000a110';
+                  id                  |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a110 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_events|I7b bind events a111,a112 -> E-A1 (consistent with session)|OK
+update public.contraction_events set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id in ('00000000-0000-4c10-8000-00000000a111','00000000-0000-4c10-8000-00000000a112');
+UPDATE 2
+select id, session_id, pregnancy_episode_id from public.contraction_events where session_id = '00000000-0000-4c10-8000-00000000a110' order by id;
+                  id                  |              session_id              |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a111 | 00000000-0000-4c10-8000-00000000a110 | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000a112 | 00000000-0000-4c10-8000-00000000a110 | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000c86f | 00000000-0000-4c10-8000-00000000a110 | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000c871 | 00000000-0000-4c10-8000-00000000a110 | 
+
+### CASE contraction_events|I7c mismatch: event a112 -> NULL while session stays E-A1 (not constrained in 41B.1A; recorded for the 41B.1C trigger)|OK
+update public.contraction_events set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a112';
+UPDATE 1
+select e.id, e.pregnancy_episode_id as event_episode, s.pregnancy_episode_id as session_episode from public.contraction_events e join public.contraction_sessions s on s.id = e.session_id where e.session_id = '00000000-0000-4c10-8000-00000000a110' order by e.id;
+                  id                  |            event_episode             |           session_episode            
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a111 | 00000000-0000-4c10-8000-00000000ea01 | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000a112 |                                      | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000c86f | 00000000-0000-4c10-8000-00000000ea01 | 00000000-0000-4c10-8000-00000000ea01
+ 00000000-0000-4c10-8000-00000000c871 |                                      | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE contraction_events|I7d reset session and events to NULL|OK
+update public.contraction_events set pregnancy_episode_id = NULL where session_id = '00000000-0000-4c10-8000-00000000a110';
+UPDATE 4
+update public.contraction_sessions set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000a110';
+UPDATE 1
+select (select count(*) from public.contraction_events where pregnancy_episode_id is not null) as events_linked, (select count(*) from public.contraction_sessions where pregnancy_episode_id is not null) as sessions_linked;
+ events_linked | sessions_linked 
+---------------+-----------------
+             0 |               1
+
+=== relationship babies (babies_pregnancy_episode_owner_fkey) — A has no legacy baby: the legacy-row update cases use B babies b001/b002 with B episode E-B1 (same user) and A episode E-A1 (cross user).
+### CASE babies|I1 same-user insert -> own episode|OK
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c879', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic baby', date '2026-09-20', 2, false, '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000c879';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c879 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE babies|I2 cross-user insert -> other-user episode|FK
+savepoint s34;
+SAVEPOINT
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c87a', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic baby', date '2026-09-20', 3, false, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:340: ERROR:  23503: insert or update on table "babies" violates foreign key constraint "babies_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  babies
+CONSTRAINT NAME:  babies_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s34;
+ROLLBACK
+select count(*) as residue from public.babies where id = '00000000-0000-4c10-8000-00000000c87a';
+ residue 
+---------
+       0
+
+### CASE babies|I3 insert with NULL link|OK
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c87b', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic baby', date '2026-09-20', 4, false, NULL);
+INSERT 0 1
+select id, user_id, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000c87b';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000c87b | b09cd318-8f3e-4853-8d97-fc10267b3d69 | 
+
+### CASE babies|I4 update legacy NULL-link row -> other-user episode (B b002 -> E-A1)|FK
+savepoint s35;
+SAVEPOINT
+update public.babies set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000b002';
+psql:C1_8_ownership_matrix.sql:348: ERROR:  23503: insert or update on table "babies" violates foreign key constraint "babies_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  babies
+CONSTRAINT NAME:  babies_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s35;
+ROLLBACK
+select id, user_id, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000b002';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000b002 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | 
+
+### CASE babies|I5a update legacy row -> own episode (B b001 -> E-B1)|OK
+update public.babies set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000b001';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000b001';
+                  id                  |               user_id                |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000b001 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | 00000000-0000-4c10-8000-00000000eb01
+
+### CASE babies|I5b update back to NULL (B b001)|OK
+update public.babies set pregnancy_episode_id = NULL where id = '00000000-0000-4c10-8000-00000000b001';
+UPDATE 1
+select id, user_id, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000b001';
+                  id                  |               user_id                | pregnancy_episode_id 
+--------------------------------------+--------------------------------------+----------------------
+ 00000000-0000-4c10-8000-00000000b001 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | 
+
+### CASE babies|I6 composite mismatch insert (own user_id + other-user existing episode id)|FK
+savepoint s36;
+SAVEPOINT
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4c10-8000-00000000c87e', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic baby', date '2026-09-20', 3, false, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_8_ownership_matrix.sql:359: ERROR:  23503: insert or update on table "babies" violates foreign key constraint "babies_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  babies
+CONSTRAINT NAME:  babies_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s36;
+ROLLBACK
+select count(*) as residue from public.babies where id = '00000000-0000-4c10-8000-00000000c87e';
+ residue 
+---------
+       0
+
+=== relationship journeys (journeys_current_pregnancy_episode_owner_fkey) — one row per user, so every case is an update of current_pregnancy_episode_id
+### CASE journeys|I1/I5a same-user: A pointer -> E-A1|OK
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+               user_id                | lifecycle |     current_pregnancy_episode_id     
+--------------------------------------+-----------+--------------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE journeys|I2/I6 cross-user: A pointer -> E-B1 (composite mismatch, E-B1 exists)|FK
+savepoint s37;
+SAVEPOINT
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+psql:C1_8_ownership_matrix.sql:368: ERROR:  23503: insert or update on table "journeys" violates foreign key constraint "journeys_current_pregnancy_episode_owner_fkey"
+DETAIL:  Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  journeys
+CONSTRAINT NAME:  journeys_current_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s37;
+ROLLBACK
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+               user_id                | lifecycle |     current_pregnancy_episode_id     
+--------------------------------------+-----------+--------------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy | 00000000-0000-4c10-8000-00000000ea01
+
+### CASE journeys|I5b back to NULL: A pointer -> NULL|OK
+update public.journeys set current_pregnancy_episode_id = NULL where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+               user_id                | lifecycle | current_pregnancy_episode_id 
+--------------------------------------+-----------+------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy | 
+
+### CASE journeys|I4 update legacy NULL-pointer row of another user: C pointer -> E-A1|FK
+savepoint s38;
+SAVEPOINT
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = '6e65487d-ddb0-43b6-a623-fb24b5318dab';
+psql:C1_8_ownership_matrix.sql:376: ERROR:  23503: insert or update on table "journeys" violates foreign key constraint "journeys_current_pregnancy_episode_owner_fkey"
+DETAIL:  Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 6e65487d-ddb0-43b6-a623-fb24b5318dab) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  journeys
+CONSTRAINT NAME:  journeys_current_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s38;
+ROLLBACK
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = '6e65487d-ddb0-43b6-a623-fb24b5318dab';
+               user_id                | lifecycle | current_pregnancy_episode_id 
+--------------------------------------+-----------+------------------------------
+ 6e65487d-ddb0-43b6-a623-fb24b5318dab | ttc       | 
+
+### CASE journeys|I4b B pointer -> E-A1 (cross-user)|FK
+savepoint s39;
+SAVEPOINT
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+psql:C1_8_ownership_matrix.sql:381: ERROR:  23503: insert or update on table "journeys" violates foreign key constraint "journeys_current_pregnancy_episode_owner_fkey"
+DETAIL:  Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  journeys
+CONSTRAINT NAME:  journeys_current_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s39;
+ROLLBACK
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+               user_id                | lifecycle  | current_pregnancy_episode_id 
+--------------------------------------+------------+------------------------------
+ 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | first_year | 
+
+### CASE journeys|I1b B pointer -> E-B1 (same-user) then NULL|OK
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+UPDATE 1
+update public.journeys set current_pregnancy_episode_id = NULL where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+               user_id                | lifecycle  | current_pregnancy_episode_id 
+--------------------------------------+------------+------------------------------
+ 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | first_year | 
+
+### CASE journeys|I3 NULL pointer accepted (explicit)|OK
+update public.journeys set current_pregnancy_episode_id = NULL where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys order by lifecycle;
+               user_id                | lifecycle  | current_pregnancy_episode_id 
+--------------------------------------+------------+------------------------------
+ 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | first_year | 
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy  | 
+ 6e65487d-ddb0-43b6-a623-fb24b5318dab | ttc        | 
+
+=== in-transaction summary before rollback
+select (select count(*) from public.pregnancy_episodes) as episode_rows, (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and convalidated) as validated;
+ episode_rows | validated 
+--------------+-----------
+            2 |        13
+
+=== ROLLBACK (rollback-only harness: nothing from this matrix persists)
+ROLLBACK;
+ROLLBACK
+=== post-state (autocommit, new snapshot)
+select now() as finished_at, (select count(*) from public.pregnancy_episodes) as episode_rows, (select count(*) from public.journeys where current_pregnancy_episode_id is not null) as pointer_non_null, ((select count(*) from public.reflections where pregnancy_episode_id is not null)+(select count(*) from public.week_photos where pregnancy_episode_id is not null)+(select count(*) from public.week_media_memories where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_appointments where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_symptom_notes where pregnancy_episode_id is not null)+(select count(*) from public.baby_movement_notes where pregnancy_episode_id is not null)+(select count(*) from public.birth_plans where pregnancy_episode_id is not null)+(select count(*) from public.hospital_bag_items where pregnancy_episode_id is not null)+(select count(*) from public.midwife_questions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_sessions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_events where pregnancy_episode_id is not null)+(select count(*) from public.babies where pregnancy_episode_id is not null)) as links_non_null, ((select count(*) from public.journeys)+(select count(*) from public.pregnancy_journeys)+(select count(*) from public.first_year_journeys)+(select count(*) from public.ttc_journeys)+(select count(*) from public.babies)+(select count(*) from public.reflections)+(select count(*) from public.week_photos)+(select count(*) from public.week_media_memories)+(select count(*) from public.pregnancy_appointments)+(select count(*) from public.pregnancy_symptom_notes)+(select count(*) from public.baby_movement_notes)+(select count(*) from public.birth_plans)+(select count(*) from public.hospital_bag_items)+(select count(*) from public.midwife_questions)+(select count(*) from public.contraction_sessions)+(select count(*) from public.contraction_events)) as legacy_fixture_rows, (select count(*) from public.reflections where id::text like '00000000-0000-4c10-8000-00000000c8%') + (select count(*) from public.babies where id::text like '00000000-0000-4c10-8000-00000000c8%') as c8_residue_sample, (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and convalidated) as validated, (select count(*) from supabase_migrations.schema_migrations) as history, (select max(updated_at) from public.journeys) as journeys_max_updated_at;
+          finished_at          | episode_rows | pointer_non_null | links_non_null | legacy_fixture_rows | c8_residue_sample | validated | history |   journeys_max_updated_at    
+-------------------------------+--------------+------------------+----------------+---------------------+-------------------+-----------+---------+------------------------------
+ 2026-10-05 20:22:48.215413+00 |            2 |                0 |              0 |                  21 |                 0 |        13 |      47 | 2026-10-05 20:01:11.06538+00
+
+=== C1.8 end
+[c1_psql_notx] exit=0

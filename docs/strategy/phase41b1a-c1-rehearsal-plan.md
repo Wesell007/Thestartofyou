@@ -204,12 +204,12 @@ Each stage records: purpose, setup, action, expected result, evidence, PASS, STO
 - Action, in this sequence (section K gives the setups and messages):
   1. Refusal R1, fixture present: run the rollback; expect the guard-1 message.
   2. Combined-state run: with the fixture still present, add the scratch later-phase FK and the scratch babies-key dependant so that guards 1, 2, 3, 4 and 5 are all true; run the rollback; expect the guard-1 message only, proving that the earliest applicable guard wins in the frozen order. Drop both scratch FKs.
-  3. Remove the fixture episode state as in C1.14 (unbind links and pointer or delete fixture rows, delete episodes) so that guards 1, 3 and 4 are false.
+  3. Safe-state transition (setup, not a rollback execution): remove the fixture episode state as in C1.14 (unbind links and pointer or delete fixture rows, delete episodes) so that guards 1, 3 and 4 are false. Recorded in its own transcript.
   4. Refusal R2, later-phase FK: add the scratch later-phase FK; run the rollback; expect the guard-2 message. Drop the scratch FK.
   5. Refusal R3, babies-key dependant: add the scratch dependant; run the rollback; expect the guard-5 message. Drop the scratch dependant.
-  Each run is followed by the full catalogue capture and a diff against the C1.5 capture, which must be empty apart from the scratch table deliberately present for that run.
-- Evidence: `14-rollback-refusals.log` with the five run transcripts and five diffs.
-- PASS: R1, R2 and R3 each abort with the expected message and an empty diff; the combined-state run aborts with the guard-1 message and an empty diff. STOP: any run proceeds past its guard, any wrong message, or any diff.
+  Equality reference for every rollback execution (R1, combined-state, R2, R3): a deterministic per-case PRE-RUN snapshot of the current validated foundation, not the C1.5 capture. For each execution: (a) establish the exact intended setup, including any scratch table/FK for that case; (b) capture the full nine-section catalogue immediately before invoking the rollback; (c) run the frozen rollback file through the approved hash-gated transaction runner; (d) expect the specified `ROLLBACK REFUSED` guard message; (e) capture the full nine-section catalogue immediately after the failed rollback; (f) diff POST against that case's PRE snapshot; (g) require the diff to be EMPTY with no exceptions (the scratch structure, when part of the setup, is present in both snapshots). Only after the empty diff is proven is the plan-defined cleanup for that case performed. The C1.5 capture remains the historical post-forward reference only: after C1.7 the 13 ownership FKs are validated (`NOT VALID` suffix gone, see `13b-c1-7-constraints-diff-vs-c1-5.md`), so a literal empty diff against C1.5 is neither expected nor required, and validation is not undone to recreate it.
+- Evidence: `14-rollback-refusals.log` with four rollback-refusal transcripts (R1, combined-state, R2, R3), four per-case pre/post catalogue diffs (each empty), one separately recorded safe-state transition/setup transcript between the combined-state run and R2, and a final cleanup proof showing no `c1_scratch%` object remains. There are exactly four rollback executions in C1.13; the safe-state transition is not a fifth refusal.
+- PASS: R1, R2 and R3 each abort with the expected message and an empty post-versus-pre diff; the combined-state run aborts with the guard-1 message and an empty post-versus-pre diff. STOP: any run proceeds past its guard, any wrong message, or any post-versus-pre difference.
 - Cleanup: no scratch object remains (`count(*) from pg_class where relname like 'c1_scratch%'` = 0).
 
 ### C1.14 — Rollback success-path preparation
@@ -361,7 +361,7 @@ For user A unless stated:
 
 Guard order in the frozen rollback: (1) episode rows; (2) later-phase FK on `pregnancy_episodes`; (3) journeys pointer; (4) bound rows in the looped tables; (5) dependant of `babies_id_user_id_key`.
 
-Independently reachable refusal proofs (each as table owner, one transaction, followed by an empty catalogue diff):
+Independently reachable refusal proofs (each as table owner, one transaction, each preceded by a per-case pre-run nine-section catalogue snapshot and followed by an empty diff of the post-refusal catalogue against that same pre-run snapshot; three independent refusals R1, R2, R3 plus one combined-state proof = four rollback executions):
 
 | Case | Setup | Expected message (guard) |
 |---|---|---|
@@ -369,7 +369,7 @@ Independently reachable refusal proofs (each as table owner, one transaction, fo
 | R2 later-phase FK exists | fixture episode state removed first (C1.14 steps); scratch table `c1_scratch_episode_dep(episode_id uuid, user_id uuid)` with FK `(episode_id, user_id) → pregnancy_episodes(id, user_id)` | `ROLLBACK REFUSED: 1 foreign key(s) from a later phase reference pregnancy_episodes.` (2) |
 | R3 dependant of babies key | safe state otherwise established; scratch table `c1_scratch_baby_dep(baby_id uuid, user_id uuid)` with FK `(baby_id, user_id) → babies(id, user_id)` | `ROLLBACK REFUSED: 1 foreign key(s) depend on babies_id_user_id_key.` (5) |
 
-Combined-state / guard-order proof: with the fixture present (episodes, a populated pointer and bound rows) and both scratch FKs added, so that all five guards are true, the rollback must abort with the guard-1 message and nothing else, proving that the earliest applicable guard wins in the frozen order. Empty diff required.
+Combined-state / guard-order proof: with the fixture present (episodes, a populated pointer and bound rows) and both scratch FKs added, so that all five guards are true, the rollback must abort with the guard-1 message and nothing else, proving that the earliest applicable guard wins in the frozen order. Empty post-versus-pre diff required (its own pre-run snapshot, taken after both scratch FKs are added).
 
 Defence-in-depth guards, not independently reachable: the journeys-pointer guard (3) and the bound-row guard (4) are present in the authoritative rollback and verified by the static test (`refuses to run when any new-model row or later-phase dependency exists`). Under valid foreign-key integrity neither condition can exist without an episode row, because the pointer and every bound row carry a composite FK to `pregnancy_episodes`, so guard 1 fires first. The rehearsal does not claim to trigger them separately and does not disable FK integrity to manufacture that state.
 

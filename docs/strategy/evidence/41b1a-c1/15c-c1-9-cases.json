@@ -1,0 +1,341 @@
+{
+ "summary": {
+  "cases": 20,
+  "ok": 20,
+  "unexpected": [],
+  "uv_required": 6,
+  "uv_ok": 6,
+  "ok_required": 14,
+  "ok_ok": 14
+ },
+ "cases": [
+  {
+   "case": "J1",
+   "description": "one active for A already exists (E-A1): OPEN count for A is exactly 1",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [],
+   "errors": []
+  },
+  {
+   "case": "J2",
+   "description": "second active for A while E-A1 is open",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J3a",
+   "description": "active + paused: new paused for A while E-A1 is active",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J3b-setup",
+   "description": "E-A1 status active -> paused (open status, single-column update)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "UPDATE 1"
+   ],
+   "readback": [
+    "id                  | status | ended_at | removed_at",
+    "00000000-0000-4c10-8000-00000000ea01 | paused |          |"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J3b",
+   "description": "paused + active: new active for A while E-A1 is paused",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J3c",
+   "description": "paused + paused: new paused for A while E-A1 is paused",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J3-restore",
+   "description": "E-A1 back to active after rollback to savepoint s3",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "id                  | status | ended_at | removed_at",
+    "00000000-0000-4c10-8000-00000000ea01 | active |          |"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J4",
+   "description": "ended (B: E-B1 given_birth) + new active E-B2 for B (plan section F)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "readback": [
+    "user_id                | open_episodes",
+    "820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb |             1",
+    "b09cd318-8f3e-4853-8d97-fc10267b3d69 |             1"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J4b",
+   "description": "per-user independence: second open for B while E-B2 is open (A unaffected)",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J8",
+   "description": "setting removed_at requires no other column change: single-column UPDATE on E-A1 (S13 removal)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "UPDATE 1"
+   ],
+   "readback": [
+    "id                  | status | ended_at | outcome_date | removed_at | status_changed_at |      updated_at_before",
+    "00000000-0000-4c10-8000-00000000ea01 | active |          |              |            |                   | 2026-10-05 20:01:11.06538+00"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J7",
+   "description": "removed episode still exists, status unchanged (active), ended_at NULL, outcome_date NULL, removed_at set",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "id                  |               user_id                | status | ended_at | outcome_date |          removed_at          | status_changed_at | expected_count |       updated_at_after       | s13_shape_ok",
+    "00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-05 20:33:34.46646+00 |                   |              1 | 2026-10-05 20:33:34.46646+00 | t"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J10",
+   "description": "updated_at advanced on the removal UPDATE (set_updated_at trigger)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "updated_at_advanced | equals_transaction_now",
+    "t                   | t"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J5a",
+   "description": "removed E-A1 no longer matches the OPEN predicate: A open count is 0",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [],
+   "errors": []
+  },
+  {
+   "case": "J5",
+   "description": "set removed_at on E-A1, then insert new active E-A2 for A",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "readback": [
+    "id                  |               user_id                | status | ended_at | outcome_date |          removed_at",
+    "00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-05 20:33:34.46646+00",
+    "00000000-0000-4c10-8000-00000000ea02 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              |"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J11",
+   "description": "removed E-A1 retained alongside open E-A2 (two distinct rows, old one not reused, not deleted)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "a_rows | a_removed | a_open | ids_as_expected",
+    "2 |         1 |      1 | t"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J9",
+   "description": "clearing removed_at on E-A1 while E-A2 is open (re-opening blocked by the index on UPDATE)",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [
+    "id                  | status | still_removed",
+    "00000000-0000-4c10-8000-00000000ea01 | active | t"
+   ],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J6-setup",
+   "description": "E-A2 active -> paused (open), then removed_at set (single-column update)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "UPDATE 1",
+    "UPDATE 1"
+   ],
+   "readback": [
+    "id                  | status | ended_at | outcome_date |          removed_at",
+    "00000000-0000-4c10-8000-00000000ea02 | paused |          |              | 2026-10-05 20:33:34.46646+00"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J6",
+   "description": "removed paused (E-A2) + new active E-A3 for A",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ea01 | active | t",
+    "00000000-0000-4c10-8000-00000000ea02 | paused | t",
+    "00000000-0000-4c10-8000-00000000ea03 | active | f"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J6-restore",
+   "description": "after rollback to savepoint s8: E-A2 open active again, E-A3 absent",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "id                  | status | removed",
+    "00000000-0000-4c10-8000-00000000ea01 | active | t",
+    "00000000-0000-4c10-8000-00000000ea02 | active | f"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J13",
+   "description": "no outcome coupling: removal changed only removed_at and updated_at on E-A1 (status active, outcome_date NULL, ended_at NULL, status_changed_at NULL, expected_count 1)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "status_unchanged | outcome_date_null | ended_at_null | status_changed_at_null | expected_count_unchanged | dates_unchanged | removed",
+    "t                | t                 | t             | t                      | t                        | t               | t"
+   ],
+   "errors": []
+  }
+ ]
+}

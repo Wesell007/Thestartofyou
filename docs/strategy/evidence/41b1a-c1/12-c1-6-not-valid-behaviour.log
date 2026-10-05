@@ -1,0 +1,238 @@
+[c1_psql_notx] file=C1_6_not_valid_behaviour.sql sha256=19e0ad71e9543dfdf5670e971f67861ee7652b62bae7fc0bf1898e2d16fdd801
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.6 start
+select now() as started_at, current_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+          started_at           | current_user |                marker                 
+-------------------------------+--------------+---------------------------------------
+ 2026-10-05 20:01:11.039152+00 | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+=== (1) convalidated flag of the 13 ownership links (expect 13 x false)
+select c.relname, k.conname, k.convalidated, k.confdeltype::text as del
+from pg_constraint k join pg_class c on c.oid = k.conrelid
+where k.contype = 'f' and k.confrelid = 'public.pregnancy_episodes'::regclass order by c.relname;
+         relname         |                       conname                        | convalidated | del 
+-------------------------+------------------------------------------------------+--------------+-----
+ babies                  | babies_pregnancy_episode_owner_fkey                  | f            | r
+ baby_movement_notes     | baby_movement_notes_pregnancy_episode_owner_fkey     | f            | r
+ birth_plans             | birth_plans_pregnancy_episode_owner_fkey             | f            | r
+ contraction_events      | contraction_events_pregnancy_episode_owner_fkey      | f            | r
+ contraction_sessions    | contraction_sessions_pregnancy_episode_owner_fkey    | f            | r
+ hospital_bag_items      | hospital_bag_items_pregnancy_episode_owner_fkey      | f            | r
+ journeys                | journeys_current_pregnancy_episode_owner_fkey        | f            | r
+ midwife_questions       | midwife_questions_pregnancy_episode_owner_fkey       | f            | r
+ pregnancy_appointments  | pregnancy_appointments_pregnancy_episode_owner_fkey  | f            | r
+ pregnancy_symptom_notes | pregnancy_symptom_notes_pregnancy_episode_owner_fkey | f            | r
+ reflections             | reflections_pregnancy_episode_owner_fkey             | f            | r
+ week_media_memories     | week_media_memories_pregnancy_episode_owner_fkey     | f            | r
+ week_photos             | week_photos_pregnancy_episode_owner_fkey             | f            | r
+
+=== fixture: post-migration episodes E-A1 (A, active) and E-B1 (B, given_birth), plan section F; these persist for C1.7+
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, expected_count)
+values ('00000000-0000-4c10-8000-00000000ea01', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2026-06-01', date '2027-03-08', 'active', 1);
+INSERT 0 1
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, status_changed_at, outcome_date, expected_count, ended_at)
+values ('00000000-0000-4c10-8000-00000000eb01', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', date '2025-09-01', date '2026-06-08', 'given_birth', timestamptz '2026-06-05T10:00:00Z', date '2026-06-05', 2, timestamptz '2026-06-05T10:00:00Z');
+INSERT 0 1
+select id, user_id, status, lmp_date, due_date, ended_at, outcome_date, removed_at, expected_count from public.pregnancy_episodes order by id;
+                  id                  |               user_id                |   status    |  lmp_date  |  due_date  |        ended_at        | outcome_date | removed_at | expected_count 
+--------------------------------------+--------------------------------------+-------------+------------+------------+------------------------+--------------+------------+----------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active      | 2026-06-01 | 2027-03-08 |                        |              |            |              1
+ 00000000-0000-4c10-8000-00000000eb01 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | given_birth | 2025-09-01 | 2026-06-08 | 2026-06-05 10:00:00+00 | 2026-06-05   |            |              2
+
+=== (2) reflections: insert A row bound to E-A1 (expect success)
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id)
+values ('00000000-0000-4c10-8000-00000000c601', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 20, 'C1 synthetic c1.6 reflection', '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, week, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000c601';
+                  id                  |               user_id                | week |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c601 | b09cd318-8f3e-4853-8d97-fc10267b3d69 |   20 | 00000000-0000-4c10-8000-00000000ea01
+
+=== (3) reflections: insert A row bound to E-B1 (expect FK violation naming reflections_pregnancy_episode_owner_fkey)
+savepoint s3;
+SAVEPOINT
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id)
+values ('00000000-0000-4c10-8000-00000000c602', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 21, 'C1 synthetic c1.6 cross-user', '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_6_not_valid_behaviour.sql:38: ERROR:  23503: insert or update on table "reflections" violates foreign key constraint "reflections_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  reflections
+CONSTRAINT NAME:  reflections_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s3;
+ROLLBACK
+select count(*) as c602_rows_present from public.reflections where id = '00000000-0000-4c10-8000-00000000c602';
+ c602_rows_present 
+-------------------
+                 0
+
+=== (4) reflections: update legacy NULL-link A row a101 (week 12) to E-B1 (expect FK violation)
+savepoint s4;
+SAVEPOINT
+update public.reflections set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where id = '00000000-0000-4c10-8000-00000000a101';
+psql:C1_6_not_valid_behaviour.sql:44: ERROR:  23503: insert or update on table "reflections" violates foreign key constraint "reflections_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  reflections
+CONSTRAINT NAME:  reflections_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s4;
+ROLLBACK
+select id, week, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000a101';
+                  id                  | week | pregnancy_episode_id 
+--------------------------------------+------+----------------------
+ 00000000-0000-4c10-8000-00000000a101 |   12 | 
+
+=== (5-journeys-2) journeys: set A pointer to E-A1 (expect success; journeys has one row per user, so the insert form becomes an update)
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+               user_id                | lifecycle |     current_pregnancy_episode_id     
+--------------------------------------+-----------+--------------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy | 00000000-0000-4c10-8000-00000000ea01
+
+=== (5-journeys-3) journeys: set A pointer to E-B1 (expect FK violation naming journeys_current_pregnancy_episode_owner_fkey)
+savepoint s5j3;
+SAVEPOINT
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000eb01' where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+psql:C1_6_not_valid_behaviour.sql:54: ERROR:  23503: insert or update on table "journeys" violates foreign key constraint "journeys_current_pregnancy_episode_owner_fkey"
+DETAIL:  Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  journeys
+CONSTRAINT NAME:  journeys_current_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s5j3;
+ROLLBACK
+=== (5-journeys-4) journeys: legacy NULL-pointer C row to E-A1 (cross-user; expect FK violation)
+savepoint s5j4;
+SAVEPOINT
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = '6e65487d-ddb0-43b6-a623-fb24b5318dab';
+psql:C1_6_not_valid_behaviour.sql:59: ERROR:  23503: insert or update on table "journeys" violates foreign key constraint "journeys_current_pregnancy_episode_owner_fkey"
+DETAIL:  Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 6e65487d-ddb0-43b6-a623-fb24b5318dab) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  journeys
+CONSTRAINT NAME:  journeys_current_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s5j4;
+ROLLBACK
+=== (5-journeys-cleanup) journeys: A pointer back to NULL (expect success; restores the legacy fixture state)
+update public.journeys set current_pregnancy_episode_id = null where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys order by lifecycle;
+               user_id                | lifecycle  | current_pregnancy_episode_id 
+--------------------------------------+------------+------------------------------
+ 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | first_year | 
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy  | 
+ 6e65487d-ddb0-43b6-a623-fb24b5318dab | ttc        | 
+
+=== (5-babies-2) babies: insert A baby bound to E-A1 (expect success)
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id)
+values ('00000000-0000-4c10-8000-00000000c603', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic c1.6 baby', date '2026-09-20', 1, true, '00000000-0000-4c10-8000-00000000ea01');
+INSERT 0 1
+select id, user_id, birth_order, is_primary, pregnancy_episode_id from public.babies where id = '00000000-0000-4c10-8000-00000000c603';
+                  id                  |               user_id                | birth_order | is_primary |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+-------------+------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000c603 | b09cd318-8f3e-4853-8d97-fc10267b3d69 |           1 | t          | 00000000-0000-4c10-8000-00000000ea01
+
+=== (5-babies-3) babies: insert A baby bound to E-B1 (expect FK violation naming babies_pregnancy_episode_owner_fkey)
+savepoint s5b3;
+SAVEPOINT
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id)
+values ('00000000-0000-4c10-8000-00000000c604', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', 'C1 synthetic c1.6 cross-user', date '2026-09-20', 2, false, '00000000-0000-4c10-8000-00000000eb01');
+psql:C1_6_not_valid_behaviour.sql:74: ERROR:  23503: insert or update on table "babies" violates foreign key constraint "babies_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  babies
+CONSTRAINT NAME:  babies_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s5b3;
+ROLLBACK
+=== (5-babies-4) babies: update legacy NULL-link row to the other users episode (A has no legacy baby, so Bs legacy row b002 -> E-A1; expect FK violation)
+savepoint s5b4;
+SAVEPOINT
+update public.babies set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000b002';
+psql:C1_6_not_valid_behaviour.sql:79: ERROR:  23503: insert or update on table "babies" violates foreign key constraint "babies_pregnancy_episode_owner_fkey"
+DETAIL:  Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table "pregnancy_episodes".
+SCHEMA NAME:  public
+TABLE NAME:  babies
+CONSTRAINT NAME:  babies_pregnancy_episode_owner_fkey
+LOCATION:  ri_ReportViolation, ri_triggers.c:2599
+rollback to savepoint s5b4;
+ROLLBACK
+select id, user_id, birth_order, pregnancy_episode_id from public.babies order by user_id, birth_order;
+                  id                  |               user_id                | birth_order |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+-------------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000b001 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb |           1 | 
+ 00000000-0000-4c10-8000-00000000b002 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb |           2 | 
+ 00000000-0000-4c10-8000-00000000c603 | b09cd318-8f3e-4853-8d97-fc10267b3d69 |           1 | 00000000-0000-4c10-8000-00000000ea01
+
+=== (6) existing rows: every legacy row keeps its NULL link (only the two rows inserted in (2) carry a link) and the 13 flags are still false
+select 'journeys' as t, count(*) filter (where current_pregnancy_episode_id is not null) as non_null from public.journeys
+union all select 'reflections', count(*) filter (where pregnancy_episode_id is not null) from public.reflections
+union all select 'babies', count(*) filter (where pregnancy_episode_id is not null) from public.babies
+union all select 'week_photos', count(*) filter (where pregnancy_episode_id is not null) from public.week_photos
+union all select 'week_media_memories', count(*) filter (where pregnancy_episode_id is not null) from public.week_media_memories
+union all select 'pregnancy_appointments', count(*) filter (where pregnancy_episode_id is not null) from public.pregnancy_appointments
+union all select 'pregnancy_symptom_notes', count(*) filter (where pregnancy_episode_id is not null) from public.pregnancy_symptom_notes
+union all select 'baby_movement_notes', count(*) filter (where pregnancy_episode_id is not null) from public.baby_movement_notes
+union all select 'birth_plans', count(*) filter (where pregnancy_episode_id is not null) from public.birth_plans
+union all select 'hospital_bag_items', count(*) filter (where pregnancy_episode_id is not null) from public.hospital_bag_items
+union all select 'midwife_questions', count(*) filter (where pregnancy_episode_id is not null) from public.midwife_questions
+union all select 'contraction_sessions', count(*) filter (where pregnancy_episode_id is not null) from public.contraction_sessions
+union all select 'contraction_events', count(*) filter (where pregnancy_episode_id is not null) from public.contraction_events;
+            t            | non_null 
+-------------------------+----------
+ journeys                |        0
+ reflections             |        1
+ babies                  |        1
+ week_photos             |        0
+ week_media_memories     |        0
+ pregnancy_appointments  |        0
+ pregnancy_symptom_notes |        0
+ baby_movement_notes     |        0
+ birth_plans             |        0
+ hospital_bag_items      |        0
+ midwife_questions       |        0
+ contraction_sessions    |        0
+ contraction_events      |        0
+
+select count(*) as ownership_fks, count(*) filter (where not convalidated) as not_valid, count(*) filter (where convalidated) as validated
+from pg_constraint where contype = 'f' and confrelid = 'public.pregnancy_episodes'::regclass;
+ ownership_fks | not_valid | validated 
+---------------+-----------+-----------
+            13 |        13 |         0
+
+=== cleanup: delete the rows inserted in (2) and (5-babies-2); the fixture (21 legacy rows + E-A1 + E-B1) remains
+delete from public.reflections where id = '00000000-0000-4c10-8000-00000000c601';
+DELETE 1
+delete from public.babies where id = '00000000-0000-4c10-8000-00000000c603';
+DELETE 1
+COMMIT;
+COMMIT
+=== post-state (autocommit, new snapshot)
+select now() as finished_at,
+ (select count(*) from public.pregnancy_episodes) as episode_rows,
+ (select count(*) from public.journeys where current_pregnancy_episode_id is not null) as pointer_non_null,
+ (select (select count(*) from public.reflections where pregnancy_episode_id is not null)+(select count(*) from public.week_photos where pregnancy_episode_id is not null)+(select count(*) from public.week_media_memories where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_appointments where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_symptom_notes where pregnancy_episode_id is not null)+(select count(*) from public.baby_movement_notes where pregnancy_episode_id is not null)+(select count(*) from public.birth_plans where pregnancy_episode_id is not null)+(select count(*) from public.hospital_bag_items where pregnancy_episode_id is not null)+(select count(*) from public.midwife_questions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_sessions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_events where pregnancy_episode_id is not null)+(select count(*) from public.babies where pregnancy_episode_id is not null)) as links_non_null,
+ (select (select count(*) from public.journeys)+(select count(*) from public.pregnancy_journeys)+(select count(*) from public.first_year_journeys)+(select count(*) from public.ttc_journeys)+(select count(*) from public.babies)+(select count(*) from public.reflections)+(select count(*) from public.week_photos)+(select count(*) from public.week_media_memories)+(select count(*) from public.pregnancy_appointments)+(select count(*) from public.pregnancy_symptom_notes)+(select count(*) from public.baby_movement_notes)+(select count(*) from public.birth_plans)+(select count(*) from public.hospital_bag_items)+(select count(*) from public.midwife_questions)+(select count(*) from public.contraction_sessions)+(select count(*) from public.contraction_events)) as legacy_fixture_rows,
+ (select count(*) from pg_constraint where contype = 'f' and confrelid = 'public.pregnancy_episodes'::regclass) as ownership_fks,
+ (select count(*) from pg_constraint where contype = 'f' and confrelid = 'public.pregnancy_episodes'::regclass and not convalidated) as not_valid,
+ (select count(*) from pg_constraint where contype = 'f' and confrelid = 'public.pregnancy_episodes'::regclass and convalidated) as validated,
+ (select count(*) from supabase_migrations.schema_migrations) as history,
+ (select count(*) from auth.users) as auth_users;
+          finished_at          | episode_rows | pointer_non_null | links_non_null | legacy_fixture_rows | ownership_fks | not_valid | validated | history | auth_users 
+-------------------------------+--------------+------------------+----------------+---------------------+---------------+-----------+-----------+---------+------------
+ 2026-10-05 20:01:11.488708+00 |            2 |                0 |              0 |                  21 |            13 |        13 |         0 |      47 |          3
+
+select id, user_id, status, ended_at is not null as ended, outcome_date, removed_at, expected_count from public.pregnancy_episodes order by id;
+                  id                  |               user_id                |   status    | ended | outcome_date | removed_at | expected_count 
+--------------------------------------+--------------------------------------+-------------+-------+--------------+------------+----------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active      | f     |              |            |              1
+ 00000000-0000-4c10-8000-00000000eb01 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | given_birth | t     | 2026-06-05   |            |              2
+
+=== C1.6 end
+[c1_psql_notx] exit=0

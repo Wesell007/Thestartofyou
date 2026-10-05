@@ -1,0 +1,113 @@
+[c1_psql_notx] file=c1_14_cleanup.sql sha256=ce8a45988a80da78ca8759af1fa1f57f72881a4f5fb31423c2f046a460cdfca6
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+Output format is aligned.
+=== C1.14 cleanup transaction start
+select now() as started_at, current_user;
+          started_at           | current_user 
+-------------------------------+--------------
+ 2026-10-05 22:30:39.577767+00 | postgres
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+with u as (update public.journeys set current_pregnancy_episode_id = NULL where current_pregnancy_episode_id is not null returning 1) select 'journeys pointer nulled' as action, count(*) as rows from u;
+         action          | rows 
+-------------------------+------
+ journeys pointer nulled |    0
+
+with u as (update public.reflections set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'reflections links nulled' as action, count(*) as rows from u;
+          action          | rows 
+--------------------------+------
+ reflections links nulled |    0
+
+with u as (update public.week_photos set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'week_photos links nulled' as action, count(*) as rows from u;
+          action          | rows 
+--------------------------+------
+ week_photos links nulled |    0
+
+with u as (update public.week_media_memories set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'week_media_memories links nulled' as action, count(*) as rows from u;
+              action              | rows 
+----------------------------------+------
+ week_media_memories links nulled |    0
+
+with u as (update public.pregnancy_appointments set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'pregnancy_appointments links nulled' as action, count(*) as rows from u;
+               action                | rows 
+-------------------------------------+------
+ pregnancy_appointments links nulled |    0
+
+with u as (update public.pregnancy_symptom_notes set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'pregnancy_symptom_notes links nulled' as action, count(*) as rows from u;
+                action                | rows 
+--------------------------------------+------
+ pregnancy_symptom_notes links nulled |    0
+
+with u as (update public.baby_movement_notes set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'baby_movement_notes links nulled' as action, count(*) as rows from u;
+              action              | rows 
+----------------------------------+------
+ baby_movement_notes links nulled |    0
+
+with u as (update public.birth_plans set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'birth_plans links nulled' as action, count(*) as rows from u;
+          action          | rows 
+--------------------------+------
+ birth_plans links nulled |    0
+
+with u as (update public.hospital_bag_items set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'hospital_bag_items links nulled' as action, count(*) as rows from u;
+             action              | rows 
+---------------------------------+------
+ hospital_bag_items links nulled |    0
+
+with u as (update public.midwife_questions set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'midwife_questions links nulled' as action, count(*) as rows from u;
+             action             | rows 
+--------------------------------+------
+ midwife_questions links nulled |    0
+
+with u as (update public.contraction_sessions set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'contraction_sessions links nulled' as action, count(*) as rows from u;
+              action               | rows 
+-----------------------------------+------
+ contraction_sessions links nulled |    0
+
+with u as (update public.contraction_events set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'contraction_events links nulled' as action, count(*) as rows from u;
+             action              | rows 
+---------------------------------+------
+ contraction_events links nulled |    0
+
+with u as (update public.babies set pregnancy_episode_id = NULL where pregnancy_episode_id is not null returning 1) select 'babies links nulled' as action, count(*) as rows from u;
+       action        | rows 
+---------------------+------
+ babies links nulled |    0
+
+with d as (delete from public.pregnancy_episodes where id in ('00000000-0000-4c10-8000-00000000ea01','00000000-0000-4c10-8000-00000000eb01') returning 1) select 'fixture episodes deleted' as action, count(*) as rows from d;
+          action          | rows 
+--------------------------+------
+ fixture episodes deleted |    0
+
+select 'pregnancy_episodes rows remaining' as action, count(*) as rows from public.pregnancy_episodes;
+              action               | rows 
+-----------------------------------+------
+ pregnancy_episodes rows remaining |    0
+
+drop table if exists public.c1_scratch_episode_dep;
+psql:c1_14_cleanup.sql:26: NOTICE:  table "c1_scratch_episode_dep" does not exist, skipping
+DROP TABLE
+drop table if exists public.c1_scratch_baby_dep;
+psql:c1_14_cleanup.sql:27: NOTICE:  table "c1_scratch_baby_dep" does not exist, skipping
+DROP TABLE
+select 'later-phase FKs on pregnancy_episodes' as action, count(*) as rows from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and conname not like '%\_pregnancy\_episode\_owner\_fkey';
+                action                 | rows 
+---------------------------------------+------
+ later-phase FKs on pregnancy_episodes |    0
+
+select 'dependants of babies_id_user_id_key' as action, count(*) as rows from pg_constraint f join pg_constraint u on u.conindid = f.conindid where f.contype='f' and u.contype='u' and u.conname='babies_id_user_id_key';
+               action                | rows 
+-------------------------------------+------
+ dependants of babies_id_user_id_key |    0
+
+select 'scratch objects' as action, count(*) as rows from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%';
+     action      | rows 
+-----------------+------
+ scratch objects |    0
+
+COMMIT;
+COMMIT
+=== C1.14 cleanup transaction end
+[c1_psql_notx] exit=0

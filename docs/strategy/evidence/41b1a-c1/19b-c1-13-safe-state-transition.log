@@ -1,0 +1,62 @@
+[c1_psql_notx] file=c1_13_safe_state.sql sha256=a4814c95f5a27ad8e30d5307c9aaa6da5d04fd520bca9fd106dcd9280b04d22f
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== safe-state transition start
+select now() as started_at, current_user;
+          started_at          | current_user 
+------------------------------+--------------
+ 2026-10-05 22:23:17.71198+00 | postgres
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+update public.journeys set current_pregnancy_episode_id = NULL where current_pregnancy_episode_id is not null;
+UPDATE 1
+update public.reflections set pregnancy_episode_id = NULL where pregnancy_episode_id is not null;
+UPDATE 1
+delete from public.pregnancy_episodes where id in ('00000000-0000-4c10-8000-00000000ea01','00000000-0000-4c10-8000-00000000eb01');
+DELETE 2
+COMMIT;
+COMMIT
+=== safe-state read-back (autocommit)
+select 'journeys' as t, count(*) filter (where current_pregnancy_episode_id is not null) as non_null from public.journeys
+union all select 'reflections', count(*) filter (where pregnancy_episode_id is not null) from public.reflections
+union all select 'week_photos', count(*) filter (where pregnancy_episode_id is not null) from public.week_photos
+union all select 'week_media_memories', count(*) filter (where pregnancy_episode_id is not null) from public.week_media_memories
+union all select 'pregnancy_appointments', count(*) filter (where pregnancy_episode_id is not null) from public.pregnancy_appointments
+union all select 'pregnancy_symptom_notes', count(*) filter (where pregnancy_episode_id is not null) from public.pregnancy_symptom_notes
+union all select 'baby_movement_notes', count(*) filter (where pregnancy_episode_id is not null) from public.baby_movement_notes
+union all select 'birth_plans', count(*) filter (where pregnancy_episode_id is not null) from public.birth_plans
+union all select 'hospital_bag_items', count(*) filter (where pregnancy_episode_id is not null) from public.hospital_bag_items
+union all select 'midwife_questions', count(*) filter (where pregnancy_episode_id is not null) from public.midwife_questions
+union all select 'contraction_sessions', count(*) filter (where pregnancy_episode_id is not null) from public.contraction_sessions
+union all select 'contraction_events', count(*) filter (where pregnancy_episode_id is not null) from public.contraction_events
+union all select 'babies', count(*) filter (where pregnancy_episode_id is not null) from public.babies;
+            t            | non_null 
+-------------------------+----------
+ journeys                |        0
+ reflections             |        0
+ week_photos             |        0
+ week_media_memories     |        0
+ pregnancy_appointments  |        0
+ pregnancy_symptom_notes |        0
+ baby_movement_notes     |        0
+ birth_plans             |        0
+ hospital_bag_items      |        0
+ midwife_questions       |        0
+ contraction_sessions    |        0
+ contraction_events      |        0
+ babies                  |        0
+
+select (select count(*) from public.pregnancy_episodes) as episode_rows,
+ (select count(*) from public.pregnancy_episodes where id in ('00000000-0000-4c10-8000-00000000ea01','00000000-0000-4c10-8000-00000000eb01')) as fixture_episodes_remaining,
+ ((select count(*) from public.journeys)+(select count(*) from public.pregnancy_journeys)+(select count(*) from public.first_year_journeys)+(select count(*) from public.ttc_journeys)+(select count(*) from public.babies)+(select count(*) from public.reflections)+(select count(*) from public.week_photos)+(select count(*) from public.week_media_memories)+(select count(*) from public.pregnancy_appointments)+(select count(*) from public.pregnancy_symptom_notes)+(select count(*) from public.baby_movement_notes)+(select count(*) from public.birth_plans)+(select count(*) from public.hospital_bag_items)+(select count(*) from public.midwife_questions)+(select count(*) from public.contraction_sessions)+(select count(*) from public.contraction_events)) as legacy_fixture_rows,
+ (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%') as scratch_objects,
+ to_regclass('public.pregnancy_episodes')::text as episodes_table_still_exists,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and convalidated) as validated_ownership_fks;
+ episode_rows | fixture_episodes_remaining | legacy_fixture_rows | scratch_objects | episodes_table_still_exists | validated_ownership_fks 
+--------------+----------------------------+---------------------+-----------------+-----------------------------+-------------------------
+            0 |                          0 |                  21 |               0 | pregnancy_episodes          |                      13
+
+=== safe-state transition end
+[c1_psql_notx] exit=0

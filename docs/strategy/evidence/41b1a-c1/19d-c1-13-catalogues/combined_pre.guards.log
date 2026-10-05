@@ -1,0 +1,36 @@
+[c1_psql] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+select now() as checked_at, current_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker,
+ (select count(*) from supabase_migrations.schema_migrations) as history, (select count(*) from auth.users) as users,
+ (select count(*) from auth.users where email is null or email not like '%@example.invalid') as non_synthetic;
+          checked_at           | current_user |                marker                 | history | users | non_synthetic 
+-------------------------------+--------------+---------------------------------------+---------+-------+---------------
+ 2026-10-05 22:22:55.395913+00 | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1 |      47 |     3 |             0
+
+--- guard-state queries (frozen rollback guard order 1..5)
+select (select count(*) from public.pregnancy_episodes) as g1_episode_rows,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and conname not in ('journeys_current_pregnancy_episode_owner_fkey','reflections_pregnancy_episode_owner_fkey','week_photos_pregnancy_episode_owner_fkey','week_media_memories_pregnancy_episode_owner_fkey','pregnancy_appointments_pregnancy_episode_owner_fkey','pregnancy_symptom_notes_pregnancy_episode_owner_fkey','baby_movement_notes_pregnancy_episode_owner_fkey','birth_plans_pregnancy_episode_owner_fkey','hospital_bag_items_pregnancy_episode_owner_fkey','midwife_questions_pregnancy_episode_owner_fkey','contraction_sessions_pregnancy_episode_owner_fkey','contraction_events_pregnancy_episode_owner_fkey','babies_pregnancy_episode_owner_fkey')) as g2_later_phase_fks,
+ (select count(*) from public.journeys where current_pregnancy_episode_id is not null) as g3_pointers,
+ ((select count(*) from public.reflections where pregnancy_episode_id is not null)+(select count(*) from public.week_photos where pregnancy_episode_id is not null)+(select count(*) from public.week_media_memories where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_appointments where pregnancy_episode_id is not null)+(select count(*) from public.pregnancy_symptom_notes where pregnancy_episode_id is not null)+(select count(*) from public.baby_movement_notes where pregnancy_episode_id is not null)+(select count(*) from public.birth_plans where pregnancy_episode_id is not null)+(select count(*) from public.hospital_bag_items where pregnancy_episode_id is not null)+(select count(*) from public.midwife_questions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_sessions where pregnancy_episode_id is not null)+(select count(*) from public.contraction_events where pregnancy_episode_id is not null)+(select count(*) from public.babies where pregnancy_episode_id is not null)) as g4_bound_rows,
+ (select count(*) from pg_constraint f join pg_constraint u on u.conindid = f.conindid where f.contype='f' and u.conname='babies_id_user_id_key') as g5_babies_key_dependants,
+ (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%') as scratch_objects;
+ g1_episode_rows | g2_later_phase_fks | g3_pointers | g4_bound_rows | g5_babies_key_dependants | scratch_objects 
+-----------------+--------------------+-------------+---------------+--------------------------+-----------------
+               2 |                  1 |           1 |             1 |                        1 |               2
+
+--- fixture and foundation
+select (select (select count(*) from public.journeys)+(select count(*) from public.pregnancy_journeys)+(select count(*) from public.first_year_journeys)+(select count(*) from public.ttc_journeys)+(select count(*) from public.babies)+(select count(*) from public.reflections)+(select count(*) from public.week_photos)+(select count(*) from public.week_media_memories)+(select count(*) from public.pregnancy_appointments)+(select count(*) from public.pregnancy_symptom_notes)+(select count(*) from public.baby_movement_notes)+(select count(*) from public.birth_plans)+(select count(*) from public.hospital_bag_items)+(select count(*) from public.midwife_questions)+(select count(*) from public.contraction_sessions)+(select count(*) from public.contraction_events)) as legacy_fixture_rows,
+ (select string_agg(id::text || ':' || user_id::text || ':' || status::text, ' ;; ' order by id) from public.pregnancy_episodes) as episodes,
+ to_regclass('public.pregnancy_episodes')::text as episodes_table,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass) as ownership_fks,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and convalidated) as validated,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and confdeltype='r') as restrict_fks,
+ (select count(*) from pg_constraint where conname='babies_id_user_id_key') as babies_key,
+ (select count(*) from pg_policy where polrelid='public.pregnancy_episodes'::regclass) as policies,
+ (select count(*) from pg_indexes where schemaname='public' and (indexname like '%pregnancy_episode%')) as episode_related_indexes,
+ (select count(*) from pg_stat_activity where state='idle in transaction') as idle_in_tx,
+ (select count(*) from pg_locks l join pg_class c on c.oid=l.relation join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and l.mode='AccessExclusiveLock') as access_exclusive;
+ legacy_fixture_rows |                                                                                 episodes                                                                                  |   episodes_table   | ownership_fks | validated | restrict_fks | babies_key | policies | episode_related_indexes | idle_in_tx | access_exclusive 
+---------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+---------------+-----------+--------------+------------+----------+-------------------------+------------+------------------
+                  21 | 00000000-0000-4c10-8000-00000000ea01:b09cd318-8f3e-4853-8d97-fc10267b3d69:active ;; 00000000-0000-4c10-8000-00000000eb01:820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb:given_birth | pregnancy_episodes |            14 |        14 |           13 |          1 |        4 |                      17 |          0 |                0
+
+[c1_psql] exit=0

@@ -1,0 +1,174 @@
+######## combined_setup ########
+[c1_psql_notx] file=c1_13_combined_setup.sql sha256=68e8b0ea98a45765f90977d5fab87cae46f052678fd8d3358d1c4bce400c3fe7
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== combined-state setup start
+select now() as started_at, current_user;
+          started_at           | current_user 
+-------------------------------+--------------
+ 2026-10-05 22:22:54.524931+00 | postgres
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+create table public.c1_scratch_episode_dep (
+  episode_id uuid,
+  user_id uuid,
+  constraint c1_scratch_episode_dep_fk foreign key (episode_id, user_id) references public.pregnancy_episodes (id, user_id)
+);
+CREATE TABLE
+create table public.c1_scratch_baby_dep (
+  baby_id uuid,
+  user_id uuid,
+  constraint c1_scratch_baby_dep_fk foreign key (baby_id, user_id) references public.babies (id, user_id)
+);
+CREATE TABLE
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+UPDATE 1
+update public.reflections set pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ea01' where id = '00000000-0000-4c10-8000-00000000a101';
+UPDATE 1
+COMMIT;
+COMMIT
+=== combined-state read-back (autocommit)
+select conname, conrelid::regclass as tbl, confrelid::regclass as refs, pg_get_constraintdef(oid) as def from pg_constraint where conname in ('c1_scratch_episode_dep_fk','c1_scratch_baby_dep_fk') order by conname;
+          conname          |          tbl           |        refs        |                                     def                                      
+---------------------------+------------------------+--------------------+------------------------------------------------------------------------------
+ c1_scratch_baby_dep_fk    | c1_scratch_baby_dep    | babies             | FOREIGN KEY (baby_id, user_id) REFERENCES babies(id, user_id)
+ c1_scratch_episode_dep_fk | c1_scratch_episode_dep | pregnancy_episodes | FOREIGN KEY (episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id)
+
+select user_id, lifecycle, current_pregnancy_episode_id from public.journeys where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69';
+               user_id                | lifecycle |     current_pregnancy_episode_id     
+--------------------------------------+-----------+--------------------------------------
+ b09cd318-8f3e-4853-8d97-fc10267b3d69 | pregnancy | 00000000-0000-4c10-8000-00000000ea01
+
+select id, user_id, week, pregnancy_episode_id from public.reflections where id = '00000000-0000-4c10-8000-00000000a101';
+                  id                  |               user_id                | week |         pregnancy_episode_id         
+--------------------------------------+--------------------------------------+------+--------------------------------------
+ 00000000-0000-4c10-8000-00000000a101 | b09cd318-8f3e-4853-8d97-fc10267b3d69 |   12 | 00000000-0000-4c10-8000-00000000ea01
+
+select (select count(*) from public.c1_scratch_episode_dep) as scratch_episode_dep_rows, (select count(*) from public.c1_scratch_baby_dep) as scratch_baby_dep_rows;
+ scratch_episode_dep_rows | scratch_baby_dep_rows 
+--------------------------+-----------------------
+                        0 |                     0
+
+=== combined-state setup end
+[c1_psql_notx] exit=0
+
+######## combined_cleanup ########
+[c1_psql_notx] file=c1_13_combined_cleanup.sql sha256=6c4af2a4aabad8ae9ecd78b84ee6c33ea19ba661ebe4f67ffb4623587c43c188
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== combined-state cleanup start
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+drop table public.c1_scratch_episode_dep;
+DROP TABLE
+drop table public.c1_scratch_baby_dep;
+DROP TABLE
+COMMIT;
+COMMIT
+select (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%') as scratch_objects,
+ (select count(*) from pg_constraint where conname in ('c1_scratch_episode_dep_fk','c1_scratch_baby_dep_fk')) as scratch_fks,
+ (select count(*) from public.pregnancy_episodes) as episode_rows,
+ (select count(*) from public.journeys where current_pregnancy_episode_id is not null) as pointers,
+ (select count(*) from public.reflections where pregnancy_episode_id is not null) as bound_reflections;
+ scratch_objects | scratch_fks | episode_rows | pointers | bound_reflections 
+-----------------+-------------+--------------+----------+-------------------
+               0 |           0 |            2 |        1 |                 1
+
+=== combined-state cleanup end
+[c1_psql_notx] exit=0
+
+######## r2_setup ########
+[c1_psql_notx] file=c1_13_r2_setup.sql sha256=3915ceb8066606ba2e970f056f4b051773f46622b298807ae9c660ef969f0163
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+create table public.c1_scratch_episode_dep (
+  episode_id uuid,
+  user_id uuid,
+  constraint c1_scratch_episode_dep_fk foreign key (episode_id, user_id) references public.pregnancy_episodes (id, user_id)
+);
+CREATE TABLE
+COMMIT;
+COMMIT
+select conname, conrelid::regclass as tbl, confrelid::regclass as refs, pg_get_constraintdef(oid) as def from pg_constraint where conname = 'c1_scratch_episode_dep_fk';
+          conname          |          tbl           |        refs        |                                     def                                      
+---------------------------+------------------------+--------------------+------------------------------------------------------------------------------
+ c1_scratch_episode_dep_fk | c1_scratch_episode_dep | pregnancy_episodes | FOREIGN KEY (episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id)
+
+select count(*) as scratch_rows from public.c1_scratch_episode_dep;
+ scratch_rows 
+--------------
+            0
+
+[c1_psql_notx] exit=0
+
+######## r2_cleanup ########
+[c1_psql_notx] file=c1_13_r2_cleanup.sql sha256=9f1b5ef42d2fdab978460200bb7ee706e65ce798bef7909d35150f388cf6a5fb
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+drop table public.c1_scratch_episode_dep;
+DROP TABLE
+COMMIT;
+COMMIT
+select (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%') as scratch_objects,
+ (select count(*) from pg_constraint where contype='f' and confrelid='public.pregnancy_episodes'::regclass and conname not like '%_pregnancy_episode_owner_fkey') as later_phase_fks;
+ scratch_objects | later_phase_fks 
+-----------------+-----------------
+               0 |               0
+
+[c1_psql_notx] exit=0
+
+######## r3_setup ########
+[c1_psql_notx] file=c1_13_r3_setup.sql sha256=07e5a2e562e09e8faa3f4f0d785bca9abe7e8eb49d62c7042bdc03a8c349dc5a
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+create table public.c1_scratch_baby_dep (
+  baby_id uuid,
+  user_id uuid,
+  constraint c1_scratch_baby_dep_fk foreign key (baby_id, user_id) references public.babies (id, user_id)
+);
+CREATE TABLE
+COMMIT;
+COMMIT
+select f.conname, f.conrelid::regclass as tbl, u.conname as depends_on_unique, pg_get_constraintdef(f.oid) as def from pg_constraint f join pg_constraint u on u.conindid = f.conindid where f.conname = 'c1_scratch_baby_dep_fk';
+        conname         |         tbl         |   depends_on_unique    |                              def                              
+------------------------+---------------------+------------------------+---------------------------------------------------------------
+ c1_scratch_baby_dep_fk | c1_scratch_baby_dep | babies_id_user_id_key  | FOREIGN KEY (baby_id, user_id) REFERENCES babies(id, user_id)
+ c1_scratch_baby_dep_fk | c1_scratch_baby_dep | c1_scratch_baby_dep_fk | FOREIGN KEY (baby_id, user_id) REFERENCES babies(id, user_id)
+
+select count(*) as scratch_rows from public.c1_scratch_baby_dep;
+ scratch_rows 
+--------------
+            0
+
+[c1_psql_notx] exit=0
+
+######## r3_cleanup ########
+[c1_psql_notx] file=c1_13_r3_cleanup.sql sha256=a3e7eb6ff5c68dbc12a652dc7cd792fe3df304fa8cc95d567478e89b2ae3c553
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+drop table public.c1_scratch_baby_dep;
+DROP TABLE
+COMMIT;
+COMMIT
+select (select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname like 'c1\_scratch%') as scratch_objects,
+ (select count(*) from pg_constraint f join pg_constraint u on u.conindid = f.conindid where f.contype='f' and u.contype='u' and u.conname='babies_id_user_id_key') as babies_key_dependants;
+ scratch_objects | babies_key_dependants 
+-----------------+-----------------------
+               0 |                     0
+
+[c1_psql_notx] exit=0

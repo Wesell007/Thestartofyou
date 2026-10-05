@@ -1,0 +1,452 @@
+{
+ "summary": {
+  "cases": 25,
+  "ok": 25,
+  "unexpected": [],
+  "plan_cases": 13,
+  "plan_ok": 13,
+  "by_rule": {
+   "dates": {
+    "cases": 5,
+    "ok": 5,
+    "accepted_req": 2,
+    "accepted_ok": 2,
+    "rejected_req": 3,
+    "rejected_ok": 3,
+    "plan": 3,
+    "equivalent": 2
+   },
+   "not_null": {
+    "cases": 2,
+    "ok": 2,
+    "accepted_req": 0,
+    "accepted_ok": 0,
+    "rejected_req": 2,
+    "rejected_ok": 2,
+    "plan": 1,
+    "equivalent": 1
+   },
+   "expected_count": {
+    "cases": 8,
+    "ok": 8,
+    "accepted_req": 5,
+    "accepted_ok": 5,
+    "rejected_req": 3,
+    "rejected_ok": 3,
+    "plan": 5,
+    "equivalent": 3
+   },
+   "status_ended_at": {
+    "cases": 10,
+    "ok": 10,
+    "accepted_req": 5,
+    "accepted_ok": 5,
+    "rejected_req": 5,
+    "rejected_ok": 5,
+    "plan": 4,
+    "equivalent": 6
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "C10-01",
+   "rule": "dates",
+   "description": "due_date = lmp_date (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2026-09-01 status=active ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_dates_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_dates_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca01, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2026-09-01, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-02",
+   "rule": "dates",
+   "description": "due_date = lmp_date + 300 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2026-09-01 + 300 status=active ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca02 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-28 |           300 | active |          |              1 |"
+   ]
+  },
+  {
+   "id": "C10-03",
+   "rule": "dates",
+   "description": "due_date = lmp_date + 301 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2026-09-01 + 301 status=active ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_dates_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_dates_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca03, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-29, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-04",
+   "rule": "dates",
+   "description": "due_date = lmp_date + 1 (boundary equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2026-09-01 + 1 status=active ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca04 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2026-09-02 |             1 | active |          |              1 |"
+   ]
+  },
+  {
+   "id": "C10-05",
+   "rule": "dates",
+   "description": "due_date = lmp_date - 1 (boundary equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2026-09-01 - 1 status=active ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "CK:pregnancy_episodes_dates_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_dates_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca05, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2026-08-31, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-06",
+   "rule": "not_null",
+   "description": "lmp_date NULL (plan)",
+   "values": "lmp=NULL due=date 2027-06-08 status=active ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "NN:lmp_date",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23502",
+   "constraint": "NOT NULL lmp_date",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca06, 6e65487d-ddb0-43b6-a623-fb24b5318dab, null, 2027-06-08, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-07",
+   "rule": "not_null",
+   "description": "due_date NULL (equivalent)",
+   "values": "lmp=date 2026-09-01 due=NULL status=active ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "NN:due_date",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23502",
+   "constraint": "NOT NULL due_date",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca07, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, null, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-08",
+   "rule": "expected_count",
+   "description": "expected_count 0 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=0",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_expected_count_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_expected_count_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca08, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 0, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-09",
+   "rule": "expected_count",
+   "description": "expected_count 1 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca09 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              1 |"
+   ]
+  },
+  {
+   "id": "C10-10",
+   "rule": "expected_count",
+   "description": "expected_count 4 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=4",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca0a | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              4 |"
+   ]
+  },
+  {
+   "id": "C10-11",
+   "rule": "expected_count",
+   "description": "expected_count 5 (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=5",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_expected_count_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_expected_count_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca0b, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 5, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-12",
+   "rule": "expected_count",
+   "description": "expected_count NULL (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=NULL",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca0c | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |                |"
+   ]
+  },
+  {
+   "id": "C10-13",
+   "rule": "expected_count",
+   "description": "expected_count 2 (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=2",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca0d | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              2 |"
+   ]
+  },
+  {
+   "id": "C10-14",
+   "rule": "expected_count",
+   "description": "expected_count 3 (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=3",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca0e | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              3 |"
+   ]
+  },
+  {
+   "id": "C10-15",
+   "rule": "expected_count",
+   "description": "expected_count -1 (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=-1",
+   "origin": "equivalent",
+   "expect": "CK:pregnancy_episodes_expected_count_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_expected_count_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca0f, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, -1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-16",
+   "rule": "status_ended_at",
+   "description": "active + ended_at set (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_ended_at_status_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_ended_at_status_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca10, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, 2027-06-01 10:00:00+00, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-17",
+   "rule": "status_ended_at",
+   "description": "given_birth + ended_at NULL (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=given_birth ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "CK:pregnancy_episodes_ended_at_status_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_ended_at_status_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca11, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, given_birth, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-18",
+   "rule": "status_ended_at",
+   "description": "paused + ended_at NULL (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=paused ended_at=NULL expected_count=1",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca12 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | paused |          |              1 |"
+   ]
+  },
+  {
+   "id": "C10-19",
+   "rule": "status_ended_at",
+   "description": "pregnancy_loss + ended_at set (plan)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=pregnancy_loss ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1",
+   "origin": "plan",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca13 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | pregnancy_loss | 2027-06-01 10:00:00+00 |              1 |"
+   ]
+  },
+  {
+   "id": "C10-20",
+   "rule": "status_ended_at",
+   "description": "active + ended_at NULL (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca14 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              1 |"
+   ]
+  },
+  {
+   "id": "C10-21",
+   "rule": "status_ended_at",
+   "description": "paused + ended_at set (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=paused ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1",
+   "origin": "equivalent",
+   "expect": "CK:pregnancy_episodes_ended_at_status_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_ended_at_status_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca15, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, paused, null, null, 1, null, 2026-10-05 20:42:54.560718+00, 2027-06-01 10:00:00+00, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-22",
+   "rule": "status_ended_at",
+   "description": "given_birth + ended_at set (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=given_birth ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca16 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | given_birth | 2027-06-01 10:00:00+00 |              1 |"
+   ]
+  },
+  {
+   "id": "C10-23",
+   "rule": "status_ended_at",
+   "description": "no_longer_pregnant + ended_at set (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=no_longer_pregnant ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1",
+   "origin": "equivalent",
+   "expect": "OK",
+   "actual": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "residue": 0,
+   "readback": [
+    "00000000-0000-4c10-8000-00000000ca17 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | no_longer_pregnant | 2027-06-01 10:00:00+00 |              1 |"
+   ]
+  },
+  {
+   "id": "C10-24",
+   "rule": "status_ended_at",
+   "description": "no_longer_pregnant + ended_at NULL (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=no_longer_pregnant ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "CK:pregnancy_episodes_ended_at_status_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_ended_at_status_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca18, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, no_longer_pregnant, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  },
+  {
+   "id": "C10-25",
+   "rule": "status_ended_at",
+   "description": "pregnancy_loss + ended_at NULL (equivalent)",
+   "values": "lmp=date 2026-09-01 due=date 2027-06-08 status=pregnancy_loss ended_at=NULL expected_count=1",
+   "origin": "equivalent",
+   "expect": "CK:pregnancy_episodes_ended_at_status_check",
+   "actual": "rejected",
+   "ok": true,
+   "sqlstate": "23514",
+   "constraint": "pregnancy_episodes_ended_at_status_check",
+   "detail": "Failing row contains (00000000-0000-4c10-8000-00000000ca19, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, pregnancy_loss, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).",
+   "residue": 0,
+   "readback": []
+  }
+ ]
+}

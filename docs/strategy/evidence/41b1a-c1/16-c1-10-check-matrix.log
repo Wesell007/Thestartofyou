@@ -1,0 +1,476 @@
+[c1_psql_notx] file=C1_10_check_matrix.sql sha256=d156ce999628ae7d675c5f6efcee964f6f9877f72453b9a0a57df4fbd56c5fca
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.10 start
+select now() as started_at, current_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+          started_at           | current_user |                marker                 
+-------------------------------+--------------+---------------------------------------
+ 2026-10-05 20:42:54.551485+00 | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+=== live CHECK definitions and nullability (read-only)
+select conname, pg_get_constraintdef(oid) as def, convalidated from pg_constraint where conrelid = 'public.pregnancy_episodes'::regclass and contype = 'c' order by conname;
+                 conname                  |                                                              def                                                              | convalidated 
+------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------+--------------
+ pregnancy_episodes_dates_check           | CHECK (((due_date > lmp_date) AND (due_date <= (lmp_date + 300))))                                                            | t
+ pregnancy_episodes_ended_at_status_check | CHECK (((status = ANY (ARRAY['active'::pregnancy_journey_status, 'paused'::pregnancy_journey_status])) = (ended_at IS NULL))) | t
+ pregnancy_episodes_expected_count_check  | CHECK (((expected_count IS NULL) OR ((expected_count >= 1) AND (expected_count <= 4))))                                       | t
+
+select column_name, is_nullable from information_schema.columns where table_schema = 'public' and table_name = 'pregnancy_episodes' and column_name in ('lmp_date','due_date','status','ended_at','expected_count') order by ordinal_position;
+  column_name   | is_nullable 
+----------------+-------------
+ lmp_date       | NO
+ due_date       | NO
+ status         | NO
+ expected_count | YES
+ ended_at       | YES
+
+select count(*) as c_episodes_before from public.pregnancy_episodes where user_id = '6e65487d-ddb0-43b6-a623-fb24b5318dab';
+ c_episodes_before 
+-------------------
+                 0
+
+### CASE C10-01|dates|due_date = lmp_date (plan)|lmp=date 2026-09-01 due=date 2026-09-01 status=active ended_at=NULL expected_count=1|CK:pregnancy_episodes_dates_check|plan
+savepoint sp1;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca01', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2026-09-01', 'active', NULL, 1);
+psql:C1_10_check_matrix.sql:17: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_dates_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca01, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2026-09-01, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_dates_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp1;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca01';
+ residue 
+---------
+       0
+
+### CASE C10-02|dates|due_date = lmp_date + 300 (plan)|lmp=date 2026-09-01 due=date 2026-09-01 + 300 status=active ended_at=NULL expected_count=1|OK|plan
+savepoint sp2;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca02', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2026-09-01' + 300, 'active', NULL, 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca02';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca02 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-28 |           300 | active |          |              1 | 
+
+rollback to savepoint sp2;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca02';
+ residue 
+---------
+       0
+
+### CASE C10-03|dates|due_date = lmp_date + 301 (plan)|lmp=date 2026-09-01 due=date 2026-09-01 + 301 status=active ended_at=NULL expected_count=1|CK:pregnancy_episodes_dates_check|plan
+savepoint sp3;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca03', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2026-09-01' + 301, 'active', NULL, 1);
+psql:C1_10_check_matrix.sql:28: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_dates_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca03, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-29, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_dates_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp3;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca03';
+ residue 
+---------
+       0
+
+### CASE C10-04|dates|due_date = lmp_date + 1 (boundary equivalent)|lmp=date 2026-09-01 due=date 2026-09-01 + 1 status=active ended_at=NULL expected_count=1|OK|equivalent
+savepoint sp4;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca04', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2026-09-01' + 1, 'active', NULL, 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca04';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca04 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2026-09-02 |             1 | active |          |              1 | 
+
+rollback to savepoint sp4;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca04';
+ residue 
+---------
+       0
+
+### CASE C10-05|dates|due_date = lmp_date - 1 (boundary equivalent)|lmp=date 2026-09-01 due=date 2026-09-01 - 1 status=active ended_at=NULL expected_count=1|CK:pregnancy_episodes_dates_check|equivalent
+savepoint sp5;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca05', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2026-09-01' - 1, 'active', NULL, 1);
+psql:C1_10_check_matrix.sql:39: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_dates_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca05, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2026-08-31, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_dates_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp5;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca05';
+ residue 
+---------
+       0
+
+### CASE C10-06|not_null|lmp_date NULL (plan)|lmp=NULL due=date 2027-06-08 status=active ended_at=NULL expected_count=1|NN:lmp_date|plan
+savepoint sp6;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca06', '6e65487d-ddb0-43b6-a623-fb24b5318dab', NULL, date '2027-06-08', 'active', NULL, 1);
+psql:C1_10_check_matrix.sql:44: ERROR:  23502: null value in column "lmp_date" of relation "pregnancy_episodes" violates not-null constraint
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca06, 6e65487d-ddb0-43b6-a623-fb24b5318dab, null, 2027-06-08, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+COLUMN NAME:  lmp_date
+LOCATION:  ExecConstraints, execMain.c:2022
+rollback to savepoint sp6;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca06';
+ residue 
+---------
+       0
+
+### CASE C10-07|not_null|due_date NULL (equivalent)|lmp=date 2026-09-01 due=NULL status=active ended_at=NULL expected_count=1|NN:due_date|equivalent
+savepoint sp7;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca07', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', NULL, 'active', NULL, 1);
+psql:C1_10_check_matrix.sql:49: ERROR:  23502: null value in column "due_date" of relation "pregnancy_episodes" violates not-null constraint
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca07, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, null, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+COLUMN NAME:  due_date
+LOCATION:  ExecConstraints, execMain.c:2022
+rollback to savepoint sp7;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca07';
+ residue 
+---------
+       0
+
+### CASE C10-08|expected_count|expected_count 0 (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=0|CK:pregnancy_episodes_expected_count_check|plan
+savepoint sp8;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca08', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 0);
+psql:C1_10_check_matrix.sql:54: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_expected_count_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca08, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 0, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_expected_count_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp8;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca08';
+ residue 
+---------
+       0
+
+### CASE C10-09|expected_count|expected_count 1 (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=1|OK|plan
+savepoint sp9;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca09', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca09';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca09 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              1 | 
+
+rollback to savepoint sp9;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca09';
+ residue 
+---------
+       0
+
+### CASE C10-10|expected_count|expected_count 4 (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=4|OK|plan
+savepoint sp10;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0a', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 4);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0a';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca0a | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              4 | 
+
+rollback to savepoint sp10;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0a';
+ residue 
+---------
+       0
+
+### CASE C10-11|expected_count|expected_count 5 (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=5|CK:pregnancy_episodes_expected_count_check|plan
+savepoint sp11;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0b', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 5);
+psql:C1_10_check_matrix.sql:71: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_expected_count_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca0b, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 5, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_expected_count_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp11;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0b';
+ residue 
+---------
+       0
+
+### CASE C10-12|expected_count|expected_count NULL (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=NULL|OK|plan
+savepoint sp12;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0c', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, NULL);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0c';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca0c | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |                | 
+
+rollback to savepoint sp12;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0c';
+ residue 
+---------
+       0
+
+### CASE C10-13|expected_count|expected_count 2 (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=2|OK|equivalent
+savepoint sp13;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0d', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 2);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0d';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca0d | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              2 | 
+
+rollback to savepoint sp13;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0d';
+ residue 
+---------
+       0
+
+### CASE C10-14|expected_count|expected_count 3 (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=3|OK|equivalent
+savepoint sp14;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0e', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 3);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0e';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca0e | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              3 | 
+
+rollback to savepoint sp14;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0e';
+ residue 
+---------
+       0
+
+### CASE C10-15|expected_count|expected_count -1 (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=-1|CK:pregnancy_episodes_expected_count_check|equivalent
+savepoint sp15;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca0f', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, -1);
+psql:C1_10_check_matrix.sql:94: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_expected_count_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca0f, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, -1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_expected_count_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp15;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca0f';
+ residue 
+---------
+       0
+
+### CASE C10-16|status_ended_at|active + ended_at set (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1|CK:pregnancy_episodes_ended_at_status_check|plan
+savepoint sp16;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca10', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', timestamptz '2027-06-01T10:00:00Z', 1);
+psql:C1_10_check_matrix.sql:99: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_ended_at_status_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca10, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, active, null, null, 1, null, 2026-10-05 20:42:54.560718+00, 2027-06-01 10:00:00+00, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_ended_at_status_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp16;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca10';
+ residue 
+---------
+       0
+
+### CASE C10-17|status_ended_at|given_birth + ended_at NULL (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=given_birth ended_at=NULL expected_count=1|CK:pregnancy_episodes_ended_at_status_check|plan
+savepoint sp17;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca11', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'given_birth', NULL, 1);
+psql:C1_10_check_matrix.sql:104: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_ended_at_status_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca11, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, given_birth, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_ended_at_status_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp17;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca11';
+ residue 
+---------
+       0
+
+### CASE C10-18|status_ended_at|paused + ended_at NULL (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=paused ended_at=NULL expected_count=1|OK|plan
+savepoint sp18;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca12', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'paused', NULL, 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca12';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca12 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | paused |          |              1 | 
+
+rollback to savepoint sp18;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca12';
+ residue 
+---------
+       0
+
+### CASE C10-19|status_ended_at|pregnancy_loss + ended_at set (plan)|lmp=date 2026-09-01 due=date 2027-06-08 status=pregnancy_loss ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1|OK|plan
+savepoint sp19;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca13', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'pregnancy_loss', timestamptz '2027-06-01T10:00:00Z', 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca13';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp |     status     |        ended_at        | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+----------------+------------------------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca13 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | pregnancy_loss | 2027-06-01 10:00:00+00 |              1 | 
+
+rollback to savepoint sp19;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca13';
+ residue 
+---------
+       0
+
+### CASE C10-20|status_ended_at|active + ended_at NULL (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=active ended_at=NULL expected_count=1|OK|equivalent
+savepoint sp20;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca14', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'active', NULL, 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca14';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp | status | ended_at | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------+----------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca14 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | active |          |              1 | 
+
+rollback to savepoint sp20;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca14';
+ residue 
+---------
+       0
+
+### CASE C10-21|status_ended_at|paused + ended_at set (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=paused ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1|CK:pregnancy_episodes_ended_at_status_check|equivalent
+savepoint sp21;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca15', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'paused', timestamptz '2027-06-01T10:00:00Z', 1);
+psql:C1_10_check_matrix.sql:127: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_ended_at_status_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca15, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, paused, null, null, 1, null, 2026-10-05 20:42:54.560718+00, 2027-06-01 10:00:00+00, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_ended_at_status_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp21;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca15';
+ residue 
+---------
+       0
+
+### CASE C10-22|status_ended_at|given_birth + ended_at set (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=given_birth ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1|OK|equivalent
+savepoint sp22;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca16', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'given_birth', timestamptz '2027-06-01T10:00:00Z', 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca16';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp |   status    |        ended_at        | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+-------------+------------------------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca16 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | given_birth | 2027-06-01 10:00:00+00 |              1 | 
+
+rollback to savepoint sp22;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca16';
+ residue 
+---------
+       0
+
+### CASE C10-23|status_ended_at|no_longer_pregnant + ended_at set (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=no_longer_pregnant ended_at=timestamptz 2027-06-01T10:00:00Z expected_count=1|OK|equivalent
+savepoint sp23;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca17', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'no_longer_pregnant', timestamptz '2027-06-01T10:00:00Z', 1);
+INSERT 0 1
+select id, user_id, lmp_date, due_date, (due_date - lmp_date) as due_minus_lmp, status, ended_at, expected_count, removed_at from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca17';
+                  id                  |               user_id                |  lmp_date  |  due_date  | due_minus_lmp |       status       |        ended_at        | expected_count | removed_at 
+--------------------------------------+--------------------------------------+------------+------------+---------------+--------------------+------------------------+----------------+------------
+ 00000000-0000-4c10-8000-00000000ca17 | 6e65487d-ddb0-43b6-a623-fb24b5318dab | 2026-09-01 | 2027-06-08 |           280 | no_longer_pregnant | 2027-06-01 10:00:00+00 |              1 | 
+
+rollback to savepoint sp23;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca17';
+ residue 
+---------
+       0
+
+### CASE C10-24|status_ended_at|no_longer_pregnant + ended_at NULL (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=no_longer_pregnant ended_at=NULL expected_count=1|CK:pregnancy_episodes_ended_at_status_check|equivalent
+savepoint sp24;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca18', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'no_longer_pregnant', NULL, 1);
+psql:C1_10_check_matrix.sql:144: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_ended_at_status_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca18, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, no_longer_pregnant, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_ended_at_status_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp24;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca18';
+ residue 
+---------
+       0
+
+### CASE C10-25|status_ended_at|pregnancy_loss + ended_at NULL (equivalent)|lmp=date 2026-09-01 due=date 2027-06-08 status=pregnancy_loss ended_at=NULL expected_count=1|CK:pregnancy_episodes_ended_at_status_check|equivalent
+savepoint sp25;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, expected_count) values ('00000000-0000-4c10-8000-00000000ca19', '6e65487d-ddb0-43b6-a623-fb24b5318dab', date '2026-09-01', date '2027-06-08', 'pregnancy_loss', NULL, 1);
+psql:C1_10_check_matrix.sql:149: ERROR:  23514: new row for relation "pregnancy_episodes" violates check constraint "pregnancy_episodes_ended_at_status_check"
+DETAIL:  Failing row contains (00000000-0000-4c10-8000-00000000ca19, 6e65487d-ddb0-43b6-a623-fb24b5318dab, 2026-09-01, 2027-06-08, pregnancy_loss, null, null, 1, null, 2026-10-05 20:42:54.560718+00, null, 2026-10-05 20:42:54.560718+00, 2026-10-05 20:42:54.560718+00).
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_ended_at_status_check
+LOCATION:  ExecConstraints, execMain.c:2074
+rollback to savepoint sp25;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ca19';
+ residue 
+---------
+       0
+
+=== in-transaction summary before rollback
+select count(*) as episode_rows, count(*) filter (where user_id = '6e65487d-ddb0-43b6-a623-fb24b5318dab') as c_rows from public.pregnancy_episodes;
+ episode_rows | c_rows 
+--------------+--------
+            2 |      0
+
+=== ROLLBACK (rollback-only harness)
+ROLLBACK;
+ROLLBACK
+=== post-state (autocommit, new snapshot)
+select now() as finished_at, (select count(*) from public.pregnancy_episodes) as episode_rows, (select count(*) from public.pregnancy_episodes where id::text like '00000000-0000-4c10-8000-00000000ca%') as c10_residue, (select string_agg(id::text || '|' || status::text || '|removed_at=' || coalesce(removed_at::text,'NULL') || '|updated_at=' || updated_at, ' ;; ' order by id) from public.pregnancy_episodes) as episodes, (select count(*) from supabase_migrations.schema_migrations) as history;
+          finished_at          | episode_rows | c10_residue |                                                                                                    episodes                                                                                                     | history 
+-------------------------------+--------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------
+ 2026-10-05 20:42:57.478756+00 |            2 |           0 | 00000000-0000-4c10-8000-00000000ea01|active|removed_at=NULL|updated_at=2026-10-05 20:01:11.06538+00 ;; 00000000-0000-4c10-8000-00000000eb01|given_birth|removed_at=NULL|updated_at=2026-10-05 20:01:11.06538+00 |      47
+
+=== C1.10 end
+[c1_psql_notx] exit=0

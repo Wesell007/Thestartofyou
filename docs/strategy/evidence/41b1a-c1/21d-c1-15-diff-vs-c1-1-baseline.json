@@ -1,0 +1,90 @@
+{
+ "sections": {
+  "columns": {
+   "baseline": 289,
+   "post": 289,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "289|089827c5211d2e8e0e34e57aa854eb49",
+   "post_hash": "289|089827c5211d2e8e0e34e57aa854eb49"
+  },
+  "enums": {
+   "baseline": 5,
+   "post": 5,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "5|e01eb2548fddcc41e7f642a4337f3019",
+   "post_hash": "5|e01eb2548fddcc41e7f642a4337f3019"
+  },
+  "functions": {
+   "baseline": 25,
+   "post": 25,
+   "removed": [],
+   "added": [],
+   "functiondef_removed": [],
+   "functiondef_added": [],
+   "empty": true,
+   "baseline_hash_prosrc": "25|c4a01c43648862bc267784f572393037",
+   "post_hash_prosrc": "25|c4a01c43648862bc267784f572393037",
+   "baseline_hash_functiondef": "25|920ec2f6ef04bb28c0544cba706e2f6c",
+   "post_hash_functiondef": "25|920ec2f6ef04bb28c0544cba706e2f6c"
+  },
+  "triggers": {
+   "baseline": 35,
+   "post": 35,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "35|c76db9052a48890ef16e7106f8627abf",
+   "post_hash": "35|c76db9052a48890ef16e7106f8627abf"
+  },
+  "rls": {
+   "baseline": 34,
+   "post": 34,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "34|5c82068f66de6c08d25a0647333b2c19",
+   "post_hash": "34|5c82068f66de6c08d25a0647333b2c19"
+  },
+  "policies": {
+   "baseline": 114,
+   "post": 114,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "114|e87cd9928f64cef637fe1798ea939fc9",
+   "post_hash": "114|e87cd9928f64cef637fe1798ea939fc9"
+  },
+  "constraints": {
+   "baseline": 141,
+   "post": 141,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "141|ece1b4e90c32a1bf1b61202f95bf4b30",
+   "post_hash": "141|ece1b4e90c32a1bf1b61202f95bf4b30"
+  },
+  "indexes": {
+   "baseline": 86,
+   "post": 86,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "86|b844916ed32fa546ebdc04f7f427957a",
+   "post_hash": "86|b844916ed32fa546ebdc04f7f427957a"
+  },
+  "grants": {
+   "baseline": 34,
+   "post": 34,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "baseline_hash": "34|22bb3e64a7ac85dc6565d9047b457d2a",
+   "post_hash": "34|22bb3e64a7ac85dc6565d9047b457d2a"
+  }
+ },
+ "all_empty": true
+}

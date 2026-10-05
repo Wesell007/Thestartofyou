@@ -1,0 +1,415 @@
+-[ RECORD 1 ]---------+------------------------------------------------------------------------------
+checked_at            | 2026-10-05 19:28:31.80469+00
+current_database      | postgres
+current_user          | postgres
+version               | PostgreSQL 17.11 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 15.2.0, 64-bit
+marker                | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+q_absent_regclass     | pregnancy_episodes
+q_absent_link_columns | 13
+
+-[ RECORD 1 ]----+-----------------------------------
+ordinal_position | 1
+column_name      | id
+data_type        | uuid
+udt_name         | uuid
+is_nullable      | NO
+column_default   | gen_random_uuid()
+-[ RECORD 2 ]----+-----------------------------------
+ordinal_position | 2
+column_name      | user_id
+data_type        | uuid
+udt_name         | uuid
+is_nullable      | NO
+column_default   | 
+-[ RECORD 3 ]----+-----------------------------------
+ordinal_position | 3
+column_name      | lmp_date
+data_type        | date
+udt_name         | date
+is_nullable      | NO
+column_default   | 
+-[ RECORD 4 ]----+-----------------------------------
+ordinal_position | 4
+column_name      | due_date
+data_type        | date
+udt_name         | date
+is_nullable      | NO
+column_default   | 
+-[ RECORD 5 ]----+-----------------------------------
+ordinal_position | 5
+column_name      | status
+data_type        | USER-DEFINED
+udt_name         | pregnancy_journey_status
+is_nullable      | NO
+column_default   | 'active'::pregnancy_journey_status
+-[ RECORD 6 ]----+-----------------------------------
+ordinal_position | 6
+column_name      | status_changed_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | YES
+column_default   | 
+-[ RECORD 7 ]----+-----------------------------------
+ordinal_position | 7
+column_name      | outcome_date
+data_type        | date
+udt_name         | date
+is_nullable      | YES
+column_default   | 
+-[ RECORD 8 ]----+-----------------------------------
+ordinal_position | 8
+column_name      | expected_count
+data_type        | smallint
+udt_name         | int2
+is_nullable      | YES
+column_default   | 
+-[ RECORD 9 ]----+-----------------------------------
+ordinal_position | 9
+column_name      | removed_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | YES
+column_default   | 
+-[ RECORD 10 ]---+-----------------------------------
+ordinal_position | 10
+column_name      | started_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | NO
+column_default   | now()
+-[ RECORD 11 ]---+-----------------------------------
+ordinal_position | 11
+column_name      | ended_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | YES
+column_default   | 
+-[ RECORD 12 ]---+-----------------------------------
+ordinal_position | 12
+column_name      | created_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | NO
+column_default   | now()
+-[ RECORD 13 ]---+-----------------------------------
+ordinal_position | 13
+column_name      | updated_at
+data_type        | timestamp with time zone
+udt_name         | timestamptz
+is_nullable      | NO
+column_default   | now()
+
+-[ RECORD 1 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_dates_check
+contype      | c
+convalidated | t
+def          | CHECK (((due_date > lmp_date) AND (due_date <= (lmp_date + 300))))
+-[ RECORD 2 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_ended_at_status_check
+contype      | c
+convalidated | t
+def          | CHECK (((status = ANY (ARRAY['active'::pregnancy_journey_status, 'paused'::pregnancy_journey_status])) = (ended_at IS NULL)))
+-[ RECORD 3 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_expected_count_check
+contype      | c
+convalidated | t
+def          | CHECK (((expected_count IS NULL) OR ((expected_count >= 1) AND (expected_count <= 4))))
+-[ RECORD 4 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_id_user_id_key
+contype      | u
+convalidated | t
+def          | UNIQUE (id, user_id)
+-[ RECORD 5 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_pkey
+contype      | p
+convalidated | t
+def          | PRIMARY KEY (id)
+-[ RECORD 6 ]+------------------------------------------------------------------------------------------------------------------------------
+conname      | pregnancy_episodes_user_id_fkey
+contype      | f
+convalidated | t
+def          | FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+
+-[ RECORD 1 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+indexname | pregnancy_episodes_id_user_id_key
+indexdef  | CREATE UNIQUE INDEX pregnancy_episodes_id_user_id_key ON public.pregnancy_episodes USING btree (id, user_id)
+-[ RECORD 2 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+indexname | pregnancy_episodes_one_open_per_user_idx
+indexdef  | CREATE UNIQUE INDEX pregnancy_episodes_one_open_per_user_idx ON public.pregnancy_episodes USING btree (user_id) WHERE ((status = ANY (ARRAY['active'::pregnancy_journey_status, 'paused'::pregnancy_journey_status])) AND (removed_at IS NULL))
+-[ RECORD 3 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+indexname | pregnancy_episodes_pkey
+indexdef  | CREATE UNIQUE INDEX pregnancy_episodes_pkey ON public.pregnancy_episodes USING btree (id)
+-[ RECORD 4 ]----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+indexname | pregnancy_episodes_user_id_idx
+indexdef  | CREATE INDEX pregnancy_episodes_user_id_idx ON public.pregnancy_episodes USING btree (user_id)
+
+-[ RECORD 1 ]-----------------------------------------------------------------------------------------------------------------------------------------
+tgname    | pregnancy_episodes_set_updated_at
+tgenabled | O
+def       | CREATE TRIGGER pregnancy_episodes_set_updated_at BEFORE UPDATE ON public.pregnancy_episodes FOR EACH ROW EXECUTE FUNCTION set_updated_at()
+
+-[ RECORD 1 ]-------+--
+relrowsecurity      | t
+relforcerowsecurity | f
+
+-[ RECORD 1 ]-+------------------------------
+polname       | pregnancy_episodes_delete_own
+polcmd        | d
+polpermissive | t
+roles         | {authenticated}
+qual          | (auth.uid() = user_id)
+with_check    | 
+-[ RECORD 2 ]-+------------------------------
+polname       | pregnancy_episodes_insert_own
+polcmd        | a
+polpermissive | t
+roles         | {authenticated}
+qual          | 
+with_check    | (auth.uid() = user_id)
+-[ RECORD 3 ]-+------------------------------
+polname       | pregnancy_episodes_select_own
+polcmd        | r
+polpermissive | t
+roles         | {authenticated}
+qual          | (auth.uid() = user_id)
+with_check    | 
+-[ RECORD 4 ]-+------------------------------
+polname       | pregnancy_episodes_update_own
+polcmd        | w
+polpermissive | t
+roles         | {authenticated}
+qual          | (auth.uid() = user_id)
+with_check    | (auth.uid() = user_id)
+
+-[ RECORD 1 ]--------------------------------------------------------------------------------
+relacl | {postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}
+
+-[ RECORD 1 ]-------------------------------------------------------
+grantee    | authenticated
+privileges | SELECT
+-[ RECORD 2 ]-------------------------------------------------------
+grantee    | postgres
+privileges | DELETE,INSERT,REFERENCES,SELECT,TRIGGER,TRUNCATE,UPDATE
+-[ RECORD 3 ]-------------------------------------------------------
+grantee    | service_role
+privileges | DELETE,INSERT,REFERENCES,SELECT,TRIGGER,TRUNCATE,UPDATE
+
+-[ RECORD 1 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | babies
+conname      | babies_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 2 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | baby_movement_notes
+conname      | baby_movement_notes_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 3 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | birth_plans
+conname      | birth_plans_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 4 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | contraction_events
+conname      | contraction_events_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 5 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | contraction_sessions
+conname      | contraction_sessions_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 6 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | hospital_bag_items
+conname      | hospital_bag_items_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 7 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | journeys
+conname      | journeys_current_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (current_pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 8 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | midwife_questions
+conname      | midwife_questions_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 9 ]+----------------------------------------------------------------------------------------------------------------------------
+relname      | pregnancy_appointments
+conname      | pregnancy_appointments_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 10 ]----------------------------------------------------------------------------------------------------------------------------
+relname      | pregnancy_symptom_notes
+conname      | pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 11 ]----------------------------------------------------------------------------------------------------------------------------
+relname      | reflections
+conname      | reflections_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 12 ]----------------------------------------------------------------------------------------------------------------------------
+relname      | week_media_memories
+conname      | week_media_memories_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+-[ RECORD 13 ]----------------------------------------------------------------------------------------------------------------------------
+relname      | week_photos
+conname      | week_photos_pregnancy_episode_owner_fkey
+del          | r
+convalidated | f
+def          | FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID
+
+-[ RECORD 1 ]---+---
+fk_total        | 13
+restrict_count  | 13
+not_valid_count | 13
+
+-[ RECORD 1 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | babies
+indexname | babies_pregnancy_episode_idx
+indexdef  | CREATE INDEX babies_pregnancy_episode_idx ON public.babies USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 2 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | baby_movement_notes
+indexname | baby_movement_notes_pregnancy_episode_idx
+indexdef  | CREATE INDEX baby_movement_notes_pregnancy_episode_idx ON public.baby_movement_notes USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 3 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | birth_plans
+indexname | birth_plans_pregnancy_episode_idx
+indexdef  | CREATE INDEX birth_plans_pregnancy_episode_idx ON public.birth_plans USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 4 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | contraction_events
+indexname | contraction_events_pregnancy_episode_idx
+indexdef  | CREATE INDEX contraction_events_pregnancy_episode_idx ON public.contraction_events USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 5 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | contraction_sessions
+indexname | contraction_sessions_pregnancy_episode_idx
+indexdef  | CREATE INDEX contraction_sessions_pregnancy_episode_idx ON public.contraction_sessions USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 6 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | hospital_bag_items
+indexname | hospital_bag_items_pregnancy_episode_idx
+indexdef  | CREATE INDEX hospital_bag_items_pregnancy_episode_idx ON public.hospital_bag_items USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 7 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | journeys
+indexname | journeys_current_pregnancy_episode_idx
+indexdef  | CREATE INDEX journeys_current_pregnancy_episode_idx ON public.journeys USING btree (current_pregnancy_episode_id, user_id)
+-[ RECORD 8 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | midwife_questions
+indexname | midwife_questions_pregnancy_episode_idx
+indexdef  | CREATE INDEX midwife_questions_pregnancy_episode_idx ON public.midwife_questions USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 9 ]---------------------------------------------------------------------------------------------------------------------------------------
+tablename | pregnancy_appointments
+indexname | pregnancy_appointments_pregnancy_episode_idx
+indexdef  | CREATE INDEX pregnancy_appointments_pregnancy_episode_idx ON public.pregnancy_appointments USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 10 ]--------------------------------------------------------------------------------------------------------------------------------------
+tablename | pregnancy_symptom_notes
+indexname | pregnancy_symptom_notes_pregnancy_episode_idx
+indexdef  | CREATE INDEX pregnancy_symptom_notes_pregnancy_episode_idx ON public.pregnancy_symptom_notes USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 11 ]--------------------------------------------------------------------------------------------------------------------------------------
+tablename | reflections
+indexname | reflections_pregnancy_episode_idx
+indexdef  | CREATE INDEX reflections_pregnancy_episode_idx ON public.reflections USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 12 ]--------------------------------------------------------------------------------------------------------------------------------------
+tablename | week_media_memories
+indexname | week_media_memories_pregnancy_episode_idx
+indexdef  | CREATE INDEX week_media_memories_pregnancy_episode_idx ON public.week_media_memories USING btree (pregnancy_episode_id, user_id)
+-[ RECORD 13 ]--------------------------------------------------------------------------------------------------------------------------------------
+tablename | week_photos
+indexname | week_photos_pregnancy_episode_idx
+indexdef  | CREATE INDEX week_photos_pregnancy_episode_idx ON public.week_photos USING btree (pregnancy_episode_id, user_id)
+
+-[ RECORD 1 ]------------------
+tbl     | babies
+conname | babies_id_user_id_key
+def     | UNIQUE (id, user_id)
+
+-[ RECORD 1 ]+---------------------------------------------------------------
+tbl          | birth_plans
+conname      | birth_plans_user_id_key
+convalidated | t
+def          | UNIQUE (user_id)
+-[ RECORD 2 ]+---------------------------------------------------------------
+tbl          | contraction_sessions
+conname      | contraction_sessions_id_user_id_key
+convalidated | t
+def          | UNIQUE (id, user_id)
+-[ RECORD 3 ]+---------------------------------------------------------------
+tbl          | first_year_care_events
+conname      | first_year_care_events_baby_id_fkey
+convalidated | t
+def          | FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+-[ RECORD 4 ]+---------------------------------------------------------------
+tbl          | first_year_entries
+conname      | first_year_entries_baby_id_fkey
+convalidated | t
+def          | FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+-[ RECORD 5 ]+---------------------------------------------------------------
+tbl          | first_year_memories
+conname      | first_year_memories_baby_id_fkey
+convalidated | t
+def          | FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE SET NULL
+-[ RECORD 6 ]+---------------------------------------------------------------
+tbl          | first_year_reminders
+conname      | first_year_reminders_baby_id_fkey
+convalidated | t
+def          | FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+-[ RECORD 7 ]+---------------------------------------------------------------
+tbl          | hospital_bag_items
+conname      | hospital_bag_items_user_id_category_item_key_key
+convalidated | t
+def          | UNIQUE (user_id, category, item_key)
+-[ RECORD 8 ]+---------------------------------------------------------------
+tbl          | reflections
+conname      | reflections_user_id_week_key
+convalidated | t
+def          | UNIQUE (user_id, week)
+-[ RECORD 9 ]+---------------------------------------------------------------
+tbl          | week_media_memories
+conname      | week_media_memories_user_id_week_media_type_key
+convalidated | t
+def          | UNIQUE (user_id, week, media_type)
+-[ RECORD 10 ]---------------------------------------------------------------
+tbl          | week_photos
+conname      | week_photos_user_id_week_key
+convalidated | t
+def          | UNIQUE (user_id, week)
+
+-[ RECORD 1 ]----------------------------------------------------------------------------------------------------------
+indexname | babies_one_primary_per_user_idx
+indexdef  | CREATE UNIQUE INDEX babies_one_primary_per_user_idx ON public.babies USING btree (user_id) WHERE is_primary
+-[ RECORD 2 ]----------------------------------------------------------------------------------------------------------
+indexname | babies_user_birth_order_idx
+indexdef  | CREATE UNIQUE INDEX babies_user_birth_order_idx ON public.babies USING btree (user_id, birth_order)
+
+-[ RECORD 1 ]-------------+---
+episode_rows              | 0
+journey_pointers_non_null | 0
+link_values_non_null      | 0
+fixture_rows              | 21
+auth_users                | 3
+non_synthetic_users       | 0
+
+-[ RECORD 1 ]---------+---------------
+history_rows          | 47
+first_version         | 20260420164527
+last_version          | 20260915224603
+rows_outside_baseline | 1
+
+-[ RECORD 1 ]-----------------+--
+idle_in_transaction           | 0
+access_exclusive_locks_public | 0
+scratch_objects               | 0
+

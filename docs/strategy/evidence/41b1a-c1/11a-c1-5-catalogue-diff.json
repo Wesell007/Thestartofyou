@@ -1,0 +1,353 @@
+{
+ "captured_at": "2026-10-05T19:28:31Z",
+ "baseline": "02-baseline-catalogue.md",
+ "post_forward": "11-c1-5-post-forward-catalogue.md",
+ "sections": {
+  "columns": {
+   "baseline": 289,
+   "post_forward": 315,
+   "removed": [],
+   "added": [
+    {
+     "line": "babies|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "baby_movement_notes|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "birth_plans|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "contraction_events|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "contraction_sessions|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "hospital_bag_items|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "journeys|current_pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "midwife_questions|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "pregnancy_appointments|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "pregnancy_episodes|created_at|timestamp with time zone|timestamptz|NO|now()",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|due_date|date|date|NO|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|ended_at|timestamp with time zone|timestamptz|YES|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|expected_count|smallint|int2|YES|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|id|uuid|uuid|NO|gen_random_uuid()",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|lmp_date|date|date|NO|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|outcome_date|date|date|YES|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|removed_at|timestamp with time zone|timestamptz|YES|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|started_at|timestamp with time zone|timestamptz|NO|now()",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|status_changed_at|timestamp with time zone|timestamptz|YES|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|status|USER-DEFINED|pregnancy_journey_status|NO|'active'::pregnancy_journey_status",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|updated_at|timestamp with time zone|timestamptz|NO|now()",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_episodes|user_id|uuid|uuid|NO|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes columns"
+    },
+    {
+     "line": "pregnancy_symptom_notes|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "reflections|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "week_media_memories|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    },
+    {
+     "line": "week_photos|pregnancy_episode_id|uuid|uuid|YES|",
+     "class": "EXPECTED 41B.1A: ownership link column"
+    }
+   ]
+  },
+  "enums": {
+   "baseline": 5,
+   "post_forward": 5,
+   "removed": [],
+   "added": []
+  },
+  "functions": {
+   "baseline": 25,
+   "post_forward": 25,
+   "removed": [],
+   "added": []
+  },
+  "triggers": {
+   "baseline": 35,
+   "post_forward": 36,
+   "removed": [],
+   "added": [
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_set_updated_at|168ef023745594e33f8756c2d93cb2b8",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes triggers"
+    }
+   ]
+  },
+  "rls": {
+   "baseline": 34,
+   "post_forward": 35,
+   "removed": [],
+   "added": [
+    {
+     "line": "pregnancy_episodes|true",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes rls"
+    }
+   ]
+  },
+  "policies": {
+   "baseline": 114,
+   "post_forward": 118,
+   "removed": [],
+   "added": [
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes policies"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes policies"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes policies"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes policies"
+    }
+   ]
+  },
+  "constraints": {
+   "baseline": 141,
+   "post_forward": 161,
+   "removed": [],
+   "added": [
+    {
+     "line": "babies|babies_id_user_id_key|UNIQUE (id, user_id)",
+     "class": "EXPECTED 41B.1A: babies composite key"
+    },
+    {
+     "line": "babies|babies_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "baby_movement_notes|baby_movement_notes_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "birth_plans|birth_plans_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "contraction_events|contraction_events_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "contraction_sessions|contraction_sessions_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "hospital_bag_items|hospital_bag_items_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "journeys|journeys_current_pregnancy_episode_owner_fkey|FOREIGN KEY (current_pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "midwife_questions|midwife_questions_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "pregnancy_appointments|pregnancy_appointments_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_dates_check|CHECK (((due_date > lmp_date) AND (due_date <= (lmp_date + 300))))",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_ended_at_status_check|CHECK (((status = ANY (ARRAY['active'::pregnancy_journey_status, 'paused'::pregnancy_journey_status])) = (ended_at IS NULL)))",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_expected_count_check|CHECK (((expected_count IS NULL) OR ((expected_count >= 1) AND (expected_count <= 4))))",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_id_user_id_key|UNIQUE (id, user_id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_pkey|PRIMARY KEY (id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes constraints"
+    },
+    {
+     "line": "pregnancy_symptom_notes|pregnancy_symptom_notes_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "reflections|reflections_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "week_media_memories|week_media_memories_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    },
+    {
+     "line": "week_photos|week_photos_pregnancy_episode_owner_fkey|FOREIGN KEY (pregnancy_episode_id, user_id) REFERENCES pregnancy_episodes(id, user_id) ON DELETE RESTRICT NOT VALID",
+     "class": "EXPECTED 41B.1A: composite RESTRICT ownership FK (NOT VALID)"
+    }
+   ]
+  },
+  "indexes": {
+   "baseline": 86,
+   "post_forward": 104,
+   "removed": [],
+   "added": [
+    {
+     "line": "babies|babies_id_user_id_key|CREATE UNIQUE INDEX babies_id_user_id_key ON public.babies USING btree (id, user_id)",
+     "class": "EXPECTED 41B.1A: babies composite key index"
+    },
+    {
+     "line": "babies|babies_pregnancy_episode_idx|CREATE INDEX babies_pregnancy_episode_idx ON public.babies USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "baby_movement_notes|baby_movement_notes_pregnancy_episode_idx|CREATE INDEX baby_movement_notes_pregnancy_episode_idx ON public.baby_movement_notes USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "birth_plans|birth_plans_pregnancy_episode_idx|CREATE INDEX birth_plans_pregnancy_episode_idx ON public.birth_plans USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "contraction_events|contraction_events_pregnancy_episode_idx|CREATE INDEX contraction_events_pregnancy_episode_idx ON public.contraction_events USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "contraction_sessions|contraction_sessions_pregnancy_episode_idx|CREATE INDEX contraction_sessions_pregnancy_episode_idx ON public.contraction_sessions USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "hospital_bag_items|hospital_bag_items_pregnancy_episode_idx|CREATE INDEX hospital_bag_items_pregnancy_episode_idx ON public.hospital_bag_items USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "journeys|journeys_current_pregnancy_episode_idx|CREATE INDEX journeys_current_pregnancy_episode_idx ON public.journeys USING btree (current_pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "midwife_questions|midwife_questions_pregnancy_episode_idx|CREATE INDEX midwife_questions_pregnancy_episode_idx ON public.midwife_questions USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "pregnancy_appointments|pregnancy_appointments_pregnancy_episode_idx|CREATE INDEX pregnancy_appointments_pregnancy_episode_idx ON public.pregnancy_appointments USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_id_user_id_key|CREATE UNIQUE INDEX pregnancy_episodes_id_user_id_key ON public.pregnancy_episodes USING btree (id, user_id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes indexes"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_one_open_per_user_idx|CREATE UNIQUE INDEX pregnancy_episodes_one_open_per_user_idx ON public.pregnancy_episodes USING btree (user_id) WHERE ((status = ANY (ARRAY['active'::pregnancy_journey_status, 'paused'::pregnancy_journey_status])) AND (removed_at IS NULL))",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes indexes"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_pkey|CREATE UNIQUE INDEX pregnancy_episodes_pkey ON public.pregnancy_episodes USING btree (id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes indexes"
+    },
+    {
+     "line": "pregnancy_episodes|pregnancy_episodes_user_id_idx|CREATE INDEX pregnancy_episodes_user_id_idx ON public.pregnancy_episodes USING btree (user_id)",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes indexes"
+    },
+    {
+     "line": "pregnancy_symptom_notes|pregnancy_symptom_notes_pregnancy_episode_idx|CREATE INDEX pregnancy_symptom_notes_pregnancy_episode_idx ON public.pregnancy_symptom_notes USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "reflections|reflections_pregnancy_episode_idx|CREATE INDEX reflections_pregnancy_episode_idx ON public.reflections USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "week_media_memories|week_media_memories_pregnancy_episode_idx|CREATE INDEX week_media_memories_pregnancy_episode_idx ON public.week_media_memories USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    },
+    {
+     "line": "week_photos|week_photos_pregnancy_episode_idx|CREATE INDEX week_photos_pregnancy_episode_idx ON public.week_photos USING btree (pregnancy_episode_id, user_id)",
+     "class": "EXPECTED 41B.1A: ownership link index"
+    }
+   ]
+  },
+  "grants": {
+   "baseline": 34,
+   "post_forward": 35,
+   "removed": [],
+   "added": [
+    {
+     "line": "pregnancy_episodes|{postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres}",
+     "class": "EXPECTED 41B.1A: pregnancy_episodes grants"
+    }
+   ]
+  }
+ },
+ "unexpected": []
+}

@@ -1,0 +1,41 @@
+-- 41B.1A-C1 C1.12 — corroborating psql channel for the grant-vs-RLS proof. Starts as postgres (owner); inside one
+-- rollback-only transaction switches to authenticated with BOTH JWT claim forms set to synthetic user A.
+-- No GRANT, no policy change, no row_security change, no bypass.
+\set ON_ERROR_STOP 0
+\set VERBOSITY verbose
+\pset footer off
+\echo === C1.12 psql corroboration start
+select now() as started_at, current_user, session_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+BEGIN;
+SET LOCAL lock_timeout = '5s';
+set local role authenticated;
+select set_config('request.jwt.claim.sub', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', true);
+select set_config('request.jwt.claims', '{"sub":"b09cd318-8f3e-4853-8d97-fc10267b3d69","role":"authenticated"}', true);
+\echo ### CASE CTX|context after role switch|OK
+select current_user, session_user, auth.uid() as auth_uid, current_setting('request.jwt.claim.sub', true) as claim_sub, current_setting('request.jwt.claims', true) as claims, current_setting('row_security') as row_security;
+\echo ### CASE PRIV|has_table_privilege evaluated as the current (authenticated) role|OK
+select has_table_privilege('public.pregnancy_episodes', 'SELECT') as can_select, has_table_privilege('public.pregnancy_episodes', 'INSERT') as can_insert, has_table_privilege('public.pregnancy_episodes', 'UPDATE') as can_update, has_table_privilege('public.pregnancy_episodes', 'DELETE') as can_delete;
+\echo ### CASE SEL-pre|SELECT own (RLS): only E-A1|OK
+select id, user_id, status, expected_count from public.pregnancy_episodes order by id;
+\echo ### CASE INSERT|INSERT valid non-open episode for A|42501
+savepoint s1;
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, ended_at, outcome_date, expected_count) values ('00000000-0000-4c10-8000-00000000ec12', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2025-01-01', date '2025-10-08', 'given_birth', timestamptz '2025-10-01T10:00:00Z', date '2025-10-01', 1);
+rollback to savepoint s1;
+\echo ### CASE UPDATE|UPDATE own E-A1 expected_count 1 -> 2|42501
+savepoint s2;
+update public.pregnancy_episodes set expected_count = 2 where id = '00000000-0000-4c10-8000-00000000ea01';
+rollback to savepoint s2;
+\echo ### CASE DELETE|DELETE own E-A1|42501
+savepoint s3;
+delete from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ea01';
+rollback to savepoint s3;
+\echo ### CASE SEL-post|SELECT own after denied writes: E-A1 unchanged, B invisible|OK
+select id, user_id, status, expected_count from public.pregnancy_episodes order by id;
+select count(*) as b_rows_visible from public.pregnancy_episodes where user_id = '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb';
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ec12';
+reset role;
+\echo ### CASE OWNER|owner view after tests (inside the same transaction)|OK
+select current_user, (select count(*) from public.pregnancy_episodes) as episode_rows, (select expected_count from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ea01') as ea1_expected_count;
+\echo === ROLLBACK
+ROLLBACK;
+\echo === C1.12 psql corroboration end

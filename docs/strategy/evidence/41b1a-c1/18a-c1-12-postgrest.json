@@ -1,0 +1,135 @@
+{
+ "stage": "C1.12",
+ "project_ref": "wwtcnbjhttjtklpxhrkd",
+ "endpoint": "https://wwtcnbjhttjtklpxhrkd.supabase.co",
+ "started_at": "2026-10-05T21:47:26.075977+00:00",
+ "cases": [
+  {
+   "case": "SEL-pre",
+   "operation": "SELECT own",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,expected_count,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "expected_count": 1,
+     "removed_at": null
+    }
+   ],
+   "expected": "200, only E-A1",
+   "pass": true,
+   "note": "ids=['ea01']"
+  },
+  {
+   "case": "INSERT",
+   "operation": "INSERT episode for A",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "POST /rest/v1/pregnancy_episodes",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT INSERT ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "401/403, code 42501, permission denied for table pregnancy_episodes",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "UPDATE",
+   "operation": "UPDATE own episode E-A1 expected_count 1 -> 2",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "PATCH /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT UPDATE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "401/403, code 42501",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "DELETE",
+   "operation": "DELETE own episode E-A1",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "DELETE /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT DELETE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "401/403, code 42501",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "SEL-post",
+   "operation": "SELECT own after denied writes",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,expected_count,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "expected_count": 1,
+     "removed_at": null
+    }
+   ],
+   "expected": "200, only E-A1, identical to SEL-pre",
+   "pass": true,
+   "note": "identical_to_pre=True"
+  },
+  {
+   "case": "SEL-B",
+   "operation": "SELECT where user_id = B",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,expected_count,removed_at&order=id&user_id=eq.820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb",
+   "http_status": 200,
+   "body": [],
+   "expected": "200, zero rows",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "RESIDUE",
+   "operation": "SELECT the attempted insert id",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,expected_count,removed_at&order=id&id=eq.00000000-0000-4c10-8000-00000000ec12",
+   "http_status": 200,
+   "body": [],
+   "expected": "200, zero rows",
+   "pass": true,
+   "note": ""
+  }
+ ],
+ "auth": {
+  "endpoint": "POST /auth/v1/token?grant_type=password",
+  "http_status": 200,
+  "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+  "role": "authenticated",
+  "aud": "authenticated",
+  "token_type": "bearer",
+  "access_token_length": 848,
+  "access_token_sha256_prefix": "b5fbd0d7e8ea",
+  "token_stored": false,
+  "fabricated": false,
+  "pass": true
+ },
+ "finished_at": "2026-10-05T21:47:27.864592+00:00",
+ "summary": {
+  "cases": 7,
+  "pass": 7,
+  "fail": []
+ }
+}

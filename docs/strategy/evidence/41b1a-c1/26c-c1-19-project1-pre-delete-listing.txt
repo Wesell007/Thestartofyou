@@ -1,0 +1,2 @@
+wwtcnbjhttjtklpxhrkd tsoy-41b1a-c1-run1 INACTIVE eu-west-2
+Project 1 listed: True | Project 2 listed: False | total listed: 1

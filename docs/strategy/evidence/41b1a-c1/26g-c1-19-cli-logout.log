@@ -1,0 +1,2 @@
+Do you want to log out? This will remove the access token from your system. [y/N] y
+{"message":"Access token deleted successfully. You are now logged out."}

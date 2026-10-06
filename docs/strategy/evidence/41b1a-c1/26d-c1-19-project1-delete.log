@@ -1,0 +1,4 @@
+START 2026-10-06T23:47:13.823Z cmd: npx supabase projects delete wwtcnbjhttjtklpxhrkd --yes
+Do you want to delete project wwtcnbjhttjtklpxhrkd? This action is irreversible. [y/N] y
+{"name":"tsoy-41b1a-c1-run1","message":"Deleted project"}
+END 2026-10-06T23:47:18.573Z rc=0

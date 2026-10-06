@@ -1,0 +1,5 @@
+Project 2 pre-delete management-plane listing (supabase projects list -o json, 2026-10-06 ~23:42Z, production masked).
+Transcribed from the operator session output; it was printed but not saved to a file at the time.
+
+dlftnirrnirlkhxpofoq tsoy-41b1a-c1-run2 INACTIVE eu-west-2 xzickmpbmsjgkowcqpbg
+wwtcnbjhttjtklpxhrkd tsoy-41b1a-c1-run1 ACTIVE_HEALTHY eu-west-2 xzickmpbmsjgkowcqpbg

@@ -1,0 +1,11 @@
+{
+ "observation_path": "auth.admin.deleteUser equivalent: DELETE /auth/v1/admin/users/{user_id} (service role)",
+ "user_id": "e30d53e5-5a15-4d6a-8df4-cb19975906e6",
+ "email": "c1-user-d-deletion@example.invalid",
+ "started_at": "2026-10-06T23:26:51.293943+00:00",
+ "finished_at": "2026-10-06T23:26:51.699873+00:00",
+ "elapsed_s": 0.406,
+ "http_status": 200,
+ "response": {},
+ "attempts": 1
+}

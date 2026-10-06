@@ -1,0 +1,250 @@
+[c1_psql] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== FKs referencing auth.users from the tables in the User D graph
+select c.relname as child_table, k.conname, k.confrelid::regclass as parent, k.confdeltype::text as on_delete, k.condeferrable as deferrable, k.condeferred as initially_deferred, k.convalidated as validated
+from pg_constraint k join pg_class c on c.oid = k.conrelid
+where k.contype = 'f' and k.confrelid = 'auth.users'::regclass and c.relnamespace = 'public'::regnamespace
+  and c.relname in ('journeys','pregnancy_episodes','reflections','week_photos','pregnancy_appointments','birth_plans','contraction_sessions','contraction_events','babies','first_year_entries','first_year_care_events','first_year_reminders','first_year_memories')
+order by c.relname, k.conname;
+      child_table       |               conname               |   parent   | on_delete | deferrable | initially_deferred | validated 
+------------------------+-------------------------------------+------------+-----------+------------+--------------------+-----------
+ babies                 | babies_user_id_fkey                 | auth.users | c         | f          | f                  | t
+ birth_plans            | birth_plans_user_id_fkey            | auth.users | c         | f          | f                  | t
+ contraction_events     | contraction_events_user_id_fkey     | auth.users | c         | f          | f                  | t
+ contraction_sessions   | contraction_sessions_user_id_fkey   | auth.users | c         | f          | f                  | t
+ first_year_care_events | first_year_care_events_user_id_fkey | auth.users | c         | f          | f                  | t
+ first_year_entries     | first_year_entries_user_id_fkey     | auth.users | c         | f          | f                  | t
+ first_year_memories    | first_year_memories_user_id_fkey    | auth.users | c         | f          | f                  | t
+ first_year_reminders   | first_year_reminders_user_id_fkey   | auth.users | c         | f          | f                  | t
+ journeys               | journeys_user_id_fkey               | auth.users | c         | f          | f                  | t
+ pregnancy_appointments | pregnancy_appointments_user_id_fkey | auth.users | c         | f          | f                  | t
+ pregnancy_episodes     | pregnancy_episodes_user_id_fkey     | auth.users | c         | f          | f                  | t
+ reflections            | reflections_user_id_fkey            | auth.users | c         | f          | f                  | f
+ week_photos            | week_photos_user_id_fkey            | auth.users | c         | f          | f                  | f
+
+=== FKs referencing public.pregnancy_episodes (the 13 RESTRICT links)
+select c.relname as child_table, k.conname, k.confdeltype::text as on_delete, k.condeferrable as deferrable, k.condeferred as initially_deferred, k.convalidated as validated
+from pg_constraint k join pg_class c on c.oid = k.conrelid where k.contype = 'f' and k.confrelid = 'public.pregnancy_episodes'::regclass order by c.relname;
+       child_table       |                       conname                        | on_delete | deferrable | initially_deferred | validated 
+-------------------------+------------------------------------------------------+-----------+------------+--------------------+-----------
+ babies                  | babies_pregnancy_episode_owner_fkey                  | r         | f          | f                  | t
+ baby_movement_notes     | baby_movement_notes_pregnancy_episode_owner_fkey     | r         | f          | f                  | t
+ birth_plans             | birth_plans_pregnancy_episode_owner_fkey             | r         | f          | f                  | t
+ contraction_events      | contraction_events_pregnancy_episode_owner_fkey      | r         | f          | f                  | t
+ contraction_sessions    | contraction_sessions_pregnancy_episode_owner_fkey    | r         | f          | f                  | t
+ hospital_bag_items      | hospital_bag_items_pregnancy_episode_owner_fkey      | r         | f          | f                  | t
+ journeys                | journeys_current_pregnancy_episode_owner_fkey        | r         | f          | f                  | t
+ midwife_questions       | midwife_questions_pregnancy_episode_owner_fkey       | r         | f          | f                  | t
+ pregnancy_appointments  | pregnancy_appointments_pregnancy_episode_owner_fkey  | r         | f          | f                  | t
+ pregnancy_symptom_notes | pregnancy_symptom_notes_pregnancy_episode_owner_fkey | r         | f          | f                  | t
+ reflections             | reflections_pregnancy_episode_owner_fkey             | r         | f          | f                  | t
+ week_media_memories     | week_media_memories_pregnancy_episode_owner_fkey     | r         | f          | f                  | t
+ week_photos             | week_photos_pregnancy_episode_owner_fkey             | r         | f          | f                  | t
+
+=== FKs referencing public.babies and contraction_sessions (child-bound and nested cascades)
+select c.relname as child_table, k.conname, k.confrelid::regclass as parent, k.confdeltype::text as on_delete, k.condeferrable as deferrable, k.convalidated as validated
+from pg_constraint k join pg_class c on c.oid = k.conrelid where k.contype = 'f' and k.confrelid in ('public.babies'::regclass, 'public.contraction_sessions'::regclass) order by parent, c.relname;
+      child_table       |                  conname                   |        parent        | on_delete | deferrable | validated 
+------------------------+--------------------------------------------+----------------------+-----------+------------+-----------
+ contraction_events     | contraction_events_session_id_user_id_fkey | contraction_sessions | c         | f          | t
+ first_year_care_events | first_year_care_events_baby_id_fkey        | babies               | c         | f          | t
+ first_year_entries     | first_year_entries_baby_id_fkey            | babies               | c         | f          | t
+ first_year_memories    | first_year_memories_baby_id_fkey           | babies               | n         | f          | t
+ first_year_reminders   | first_year_reminders_baby_id_fkey          | babies               | c         | f          | t
+
+=== All triggers on auth.users in firing order (plan: select tgname from pg_trigger where tgrelid = auth.users::regclass order by tgname)
+select tgname from pg_trigger where tgrelid = 'auth.users'::regclass order by tgname;
+            tgname            
+------------------------------
+ RI_ConstraintTrigger_a_16694
+ RI_ConstraintTrigger_a_16695
+ RI_ConstraintTrigger_a_16722
+ RI_ConstraintTrigger_a_16723
+ RI_ConstraintTrigger_a_16759
+ RI_ConstraintTrigger_a_16760
+ RI_ConstraintTrigger_a_16950
+ RI_ConstraintTrigger_a_16951
+ RI_ConstraintTrigger_a_17029
+ RI_ConstraintTrigger_a_17030
+ RI_ConstraintTrigger_a_17048
+ RI_ConstraintTrigger_a_17049
+ RI_ConstraintTrigger_a_17143
+ RI_ConstraintTrigger_a_17144
+ RI_ConstraintTrigger_a_17160
+ RI_ConstraintTrigger_a_17161
+ RI_ConstraintTrigger_a_17185
+ RI_ConstraintTrigger_a_17186
+ RI_ConstraintTrigger_a_17233
+ RI_ConstraintTrigger_a_17234
+ RI_ConstraintTrigger_a_17628
+ RI_ConstraintTrigger_a_17629
+ RI_ConstraintTrigger_a_17649
+ RI_ConstraintTrigger_a_17650
+ RI_ConstraintTrigger_a_18028
+ RI_ConstraintTrigger_a_18029
+ RI_ConstraintTrigger_a_18045
+ RI_ConstraintTrigger_a_18046
+ RI_ConstraintTrigger_a_18065
+ RI_ConstraintTrigger_a_18066
+ RI_ConstraintTrigger_a_18087
+ RI_ConstraintTrigger_a_18088
+ RI_ConstraintTrigger_a_18113
+ RI_ConstraintTrigger_a_18114
+ RI_ConstraintTrigger_a_18156
+ RI_ConstraintTrigger_a_18157
+ RI_ConstraintTrigger_a_18161
+ RI_ConstraintTrigger_a_18162
+ RI_ConstraintTrigger_a_18182
+ RI_ConstraintTrigger_a_18183
+ RI_ConstraintTrigger_a_18207
+ RI_ConstraintTrigger_a_18208
+ RI_ConstraintTrigger_a_18229
+ RI_ConstraintTrigger_a_18230
+ RI_ConstraintTrigger_a_18251
+ RI_ConstraintTrigger_a_18252
+ RI_ConstraintTrigger_a_18275
+ RI_ConstraintTrigger_a_18276
+ RI_ConstraintTrigger_a_18294
+ RI_ConstraintTrigger_a_18295
+ RI_ConstraintTrigger_a_18324
+ RI_ConstraintTrigger_a_18325
+ RI_ConstraintTrigger_a_18348
+ RI_ConstraintTrigger_a_18349
+ RI_ConstraintTrigger_a_18391
+ RI_ConstraintTrigger_a_18392
+ RI_ConstraintTrigger_a_18430
+ RI_ConstraintTrigger_a_18431
+ RI_ConstraintTrigger_a_18459
+ RI_ConstraintTrigger_a_18460
+ RI_ConstraintTrigger_a_18498
+ RI_ConstraintTrigger_a_18499
+ RI_ConstraintTrigger_a_18534
+ RI_ConstraintTrigger_a_18535
+ RI_ConstraintTrigger_a_18591
+ RI_ConstraintTrigger_a_18592
+ RI_ConstraintTrigger_a_18629
+ RI_ConstraintTrigger_a_18630
+ RI_ConstraintTrigger_a_18683
+ RI_ConstraintTrigger_a_18684
+ RI_ConstraintTrigger_a_18710
+ RI_ConstraintTrigger_a_18711
+ RI_ConstraintTrigger_a_18734
+ RI_ConstraintTrigger_a_18735
+ RI_ConstraintTrigger_a_19067
+ RI_ConstraintTrigger_a_19068
+
+=== RI triggers on auth.users with OID, function, enabled, constraint and child table (internal RI triggers fire in name order)
+select t.tgname, t.oid as trigger_oid, t.tgfoid::regproc as function, t.tgenabled as enabled, t.tgisinternal as internal, k.conname as constraint_name, k.conrelid::regclass as child_table, k.confdeltype::text as on_delete
+from pg_trigger t left join pg_constraint k on k.oid = t.tgconstraint where t.tgrelid = 'auth.users'::regclass and t.tgisinternal order by t.tgname;
+            tgname            | trigger_oid |        function        | enabled | internal |           constraint_name            |         child_table         | on_delete 
+------------------------------+-------------+------------------------+---------+----------+--------------------------------------+-----------------------------+-----------
+ RI_ConstraintTrigger_a_16694 |       16694 | "RI_FKey_cascade_del"  | O       | t        | identities_user_id_fkey              | auth.identities             | c
+ RI_ConstraintTrigger_a_16695 |       16695 | "RI_FKey_noaction_upd" | O       | t        | identities_user_id_fkey              | auth.identities             | c
+ RI_ConstraintTrigger_a_16722 |       16722 | "RI_FKey_cascade_del"  | O       | t        | sessions_user_id_fkey                | auth.sessions               | c
+ RI_ConstraintTrigger_a_16723 |       16723 | "RI_FKey_noaction_upd" | O       | t        | sessions_user_id_fkey                | auth.sessions               | c
+ RI_ConstraintTrigger_a_16759 |       16759 | "RI_FKey_cascade_del"  | O       | t        | mfa_factors_user_id_fkey             | auth.mfa_factors            | c
+ RI_ConstraintTrigger_a_16760 |       16760 | "RI_FKey_noaction_upd" | O       | t        | mfa_factors_user_id_fkey             | auth.mfa_factors            | c
+ RI_ConstraintTrigger_a_16950 |       16950 | "RI_FKey_cascade_del"  | O       | t        | one_time_tokens_user_id_fkey         | auth.one_time_tokens        | c
+ RI_ConstraintTrigger_a_16951 |       16951 | "RI_FKey_noaction_upd" | O       | t        | one_time_tokens_user_id_fkey         | auth.one_time_tokens        | c
+ RI_ConstraintTrigger_a_17029 |       17029 | "RI_FKey_cascade_del"  | O       | t        | oauth_authorizations_user_id_fkey    | auth.oauth_authorizations   | c
+ RI_ConstraintTrigger_a_17030 |       17030 | "RI_FKey_noaction_upd" | O       | t        | oauth_authorizations_user_id_fkey    | auth.oauth_authorizations   | c
+ RI_ConstraintTrigger_a_17048 |       17048 | "RI_FKey_cascade_del"  | O       | t        | oauth_consents_user_id_fkey          | auth.oauth_consents         | c
+ RI_ConstraintTrigger_a_17049 |       17049 | "RI_FKey_noaction_upd" | O       | t        | oauth_consents_user_id_fkey          | auth.oauth_consents         | c
+ RI_ConstraintTrigger_a_17143 |       17143 | "RI_FKey_cascade_del"  | O       | t        | webauthn_credentials_user_id_fkey    | auth.webauthn_credentials   | c
+ RI_ConstraintTrigger_a_17144 |       17144 | "RI_FKey_noaction_upd" | O       | t        | webauthn_credentials_user_id_fkey    | auth.webauthn_credentials   | c
+ RI_ConstraintTrigger_a_17160 |       17160 | "RI_FKey_cascade_del"  | O       | t        | webauthn_challenges_user_id_fkey     | auth.webauthn_challenges    | c
+ RI_ConstraintTrigger_a_17161 |       17161 | "RI_FKey_noaction_upd" | O       | t        | webauthn_challenges_user_id_fkey     | auth.webauthn_challenges    | c
+ RI_ConstraintTrigger_a_17185 |       17185 | "RI_FKey_setnull_del"  | O       | t        | scim_users_user_id_fkey              | auth.scim_users             | n
+ RI_ConstraintTrigger_a_17186 |       17186 | "RI_FKey_noaction_upd" | O       | t        | scim_users_user_id_fkey              | auth.scim_users             | n
+ RI_ConstraintTrigger_a_17233 |       17233 | "RI_FKey_cascade_del"  | O       | t        | mfa_recovery_code_sets_user_id_fkey  | auth.mfa_recovery_code_sets | c
+ RI_ConstraintTrigger_a_17234 |       17234 | "RI_FKey_noaction_upd" | O       | t        | mfa_recovery_code_sets_user_id_fkey  | auth.mfa_recovery_code_sets | c
+ RI_ConstraintTrigger_a_17628 |       17628 | "RI_FKey_cascade_del"  | O       | t        | profiles_user_id_fkey                | profiles                    | c
+ RI_ConstraintTrigger_a_17629 |       17629 | "RI_FKey_noaction_upd" | O       | t        | profiles_user_id_fkey                | profiles                    | c
+ RI_ConstraintTrigger_a_17649 |       17649 | "RI_FKey_cascade_del"  | O       | t        | saved_journeys_user_id_fkey          | saved_journeys              | c
+ RI_ConstraintTrigger_a_17650 |       17650 | "RI_FKey_noaction_upd" | O       | t        | saved_journeys_user_id_fkey          | saved_journeys              | c
+ RI_ConstraintTrigger_a_18028 |       18028 | "RI_FKey_cascade_del"  | O       | t        | journeys_user_id_fkey                | journeys                    | c
+ RI_ConstraintTrigger_a_18029 |       18029 | "RI_FKey_noaction_upd" | O       | t        | journeys_user_id_fkey                | journeys                    | c
+ RI_ConstraintTrigger_a_18045 |       18045 | "RI_FKey_cascade_del"  | O       | t        | pregnancy_journeys_user_id_fkey      | pregnancy_journeys          | c
+ RI_ConstraintTrigger_a_18046 |       18046 | "RI_FKey_noaction_upd" | O       | t        | pregnancy_journeys_user_id_fkey      | pregnancy_journeys          | c
+ RI_ConstraintTrigger_a_18065 |       18065 | "RI_FKey_cascade_del"  | O       | t        | archived_journeys_user_id_fkey       | archived_journeys           | c
+ RI_ConstraintTrigger_a_18066 |       18066 | "RI_FKey_noaction_upd" | O       | t        | archived_journeys_user_id_fkey       | archived_journeys           | c
+ RI_ConstraintTrigger_a_18087 |       18087 | "RI_FKey_cascade_del"  | O       | t        | ttc_journeys_user_id_fkey            | ttc_journeys                | c
+ RI_ConstraintTrigger_a_18088 |       18088 | "RI_FKey_noaction_upd" | O       | t        | ttc_journeys_user_id_fkey            | ttc_journeys                | c
+ RI_ConstraintTrigger_a_18113 |       18113 | "RI_FKey_cascade_del"  | O       | t        | ttc_logs_user_id_fkey                | ttc_logs                    | c
+ RI_ConstraintTrigger_a_18114 |       18114 | "RI_FKey_noaction_upd" | O       | t        | ttc_logs_user_id_fkey                | ttc_logs                    | c
+ RI_ConstraintTrigger_a_18156 |       18156 | "RI_FKey_cascade_del"  | O       | t        | reflections_user_id_fkey             | reflections                 | c
+ RI_ConstraintTrigger_a_18157 |       18157 | "RI_FKey_noaction_upd" | O       | t        | reflections_user_id_fkey             | reflections                 | c
+ RI_ConstraintTrigger_a_18161 |       18161 | "RI_FKey_cascade_del"  | O       | t        | week_photos_user_id_fkey             | week_photos                 | c
+ RI_ConstraintTrigger_a_18162 |       18162 | "RI_FKey_noaction_upd" | O       | t        | week_photos_user_id_fkey             | week_photos                 | c
+ RI_ConstraintTrigger_a_18182 |       18182 | "RI_FKey_cascade_del"  | O       | t        | birth_plans_user_id_fkey             | birth_plans                 | c
+ RI_ConstraintTrigger_a_18183 |       18183 | "RI_FKey_noaction_upd" | O       | t        | birth_plans_user_id_fkey             | birth_plans                 | c
+ RI_ConstraintTrigger_a_18207 |       18207 | "RI_FKey_cascade_del"  | O       | t        | hospital_bag_items_user_id_fkey      | hospital_bag_items          | c
+ RI_ConstraintTrigger_a_18208 |       18208 | "RI_FKey_noaction_upd" | O       | t        | hospital_bag_items_user_id_fkey      | hospital_bag_items          | c
+ RI_ConstraintTrigger_a_18229 |       18229 | "RI_FKey_cascade_del"  | O       | t        | pregnancy_appointments_user_id_fkey  | pregnancy_appointments      | c
+ RI_ConstraintTrigger_a_18230 |       18230 | "RI_FKey_noaction_upd" | O       | t        | pregnancy_appointments_user_id_fkey  | pregnancy_appointments      | c
+ RI_ConstraintTrigger_a_18251 |       18251 | "RI_FKey_cascade_del"  | O       | t        | baby_movement_notes_user_id_fkey     | baby_movement_notes         | c
+ RI_ConstraintTrigger_a_18252 |       18252 | "RI_FKey_noaction_upd" | O       | t        | baby_movement_notes_user_id_fkey     | baby_movement_notes         | c
+ RI_ConstraintTrigger_a_18275 |       18275 | "RI_FKey_cascade_del"  | O       | t        | contraction_sessions_user_id_fkey    | contraction_sessions        | c
+ RI_ConstraintTrigger_a_18276 |       18276 | "RI_FKey_noaction_upd" | O       | t        | contraction_sessions_user_id_fkey    | contraction_sessions        | c
+ RI_ConstraintTrigger_a_18294 |       18294 | "RI_FKey_cascade_del"  | O       | t        | contraction_events_user_id_fkey      | contraction_events          | c
+ RI_ConstraintTrigger_a_18295 |       18295 | "RI_FKey_noaction_upd" | O       | t        | contraction_events_user_id_fkey      | contraction_events          | c
+ RI_ConstraintTrigger_a_18324 |       18324 | "RI_FKey_cascade_del"  | O       | t        | pregnancy_symptom_notes_user_id_fkey | pregnancy_symptom_notes     | c
+ RI_ConstraintTrigger_a_18325 |       18325 | "RI_FKey_noaction_upd" | O       | t        | pregnancy_symptom_notes_user_id_fkey | pregnancy_symptom_notes     | c
+ RI_ConstraintTrigger_a_18348 |       18348 | "RI_FKey_cascade_del"  | O       | t        | midwife_questions_user_id_fkey       | midwife_questions           | c
+ RI_ConstraintTrigger_a_18349 |       18349 | "RI_FKey_noaction_upd" | O       | t        | midwife_questions_user_id_fkey       | midwife_questions           | c
+ RI_ConstraintTrigger_a_18391 |       18391 | "RI_FKey_cascade_del"  | O       | t        | week_media_memories_user_id_fkey     | week_media_memories         | c
+ RI_ConstraintTrigger_a_18392 |       18392 | "RI_FKey_noaction_upd" | O       | t        | week_media_memories_user_id_fkey     | week_media_memories         | c
+ RI_ConstraintTrigger_a_18430 |       18430 | "RI_FKey_cascade_del"  | O       | t        | first_year_journeys_user_id_fkey     | first_year_journeys         | c
+ RI_ConstraintTrigger_a_18431 |       18431 | "RI_FKey_noaction_upd" | O       | t        | first_year_journeys_user_id_fkey     | first_year_journeys         | c
+ RI_ConstraintTrigger_a_18459 |       18459 | "RI_FKey_cascade_del"  | O       | t        | babies_user_id_fkey                  | babies                      | c
+ RI_ConstraintTrigger_a_18460 |       18460 | "RI_FKey_noaction_upd" | O       | t        | babies_user_id_fkey                  | babies                      | c
+ RI_ConstraintTrigger_a_18498 |       18498 | "RI_FKey_cascade_del"  | O       | t        | first_year_entries_user_id_fkey      | first_year_entries          | c
+ RI_ConstraintTrigger_a_18499 |       18499 | "RI_FKey_noaction_upd" | O       | t        | first_year_entries_user_id_fkey      | first_year_entries          | c
+ RI_ConstraintTrigger_a_18534 |       18534 | "RI_FKey_cascade_del"  | O       | t        | first_year_memories_user_id_fkey     | first_year_memories         | c
+ RI_ConstraintTrigger_a_18535 |       18535 | "RI_FKey_noaction_upd" | O       | t        | first_year_memories_user_id_fkey     | first_year_memories         | c
+ RI_ConstraintTrigger_a_18591 |       18591 | "RI_FKey_cascade_del"  | O       | t        | first_year_care_events_user_id_fkey  | first_year_care_events      | c
+ RI_ConstraintTrigger_a_18592 |       18592 | "RI_FKey_noaction_upd" | O       | t        | first_year_care_events_user_id_fkey  | first_year_care_events      | c
+ RI_ConstraintTrigger_a_18629 |       18629 | "RI_FKey_cascade_del"  | O       | t        | first_year_reminders_user_id_fkey    | first_year_reminders        | c
+ RI_ConstraintTrigger_a_18630 |       18630 | "RI_FKey_noaction_upd" | O       | t        | first_year_reminders_user_id_fkey    | first_year_reminders        | c
+ RI_ConstraintTrigger_a_18683 |       18683 | "RI_FKey_cascade_del"  | O       | t        | companion_memories_user_id_fkey      | companion_memories          | c
+ RI_ConstraintTrigger_a_18684 |       18684 | "RI_FKey_noaction_upd" | O       | t        | companion_memories_user_id_fkey      | companion_memories          | c
+ RI_ConstraintTrigger_a_18710 |       18710 | "RI_FKey_cascade_del"  | O       | t        | companion_conversations_user_id_fkey | companion_conversations     | c
+ RI_ConstraintTrigger_a_18711 |       18711 | "RI_FKey_noaction_upd" | O       | t        | companion_conversations_user_id_fkey | companion_conversations     | c
+ RI_ConstraintTrigger_a_18734 |       18734 | "RI_FKey_cascade_del"  | O       | t        | companion_messages_user_id_fkey      | companion_messages          | c
+ RI_ConstraintTrigger_a_18735 |       18735 | "RI_FKey_noaction_upd" | O       | t        | companion_messages_user_id_fkey      | companion_messages          | c
+ RI_ConstraintTrigger_a_19067 |       19067 | "RI_FKey_cascade_del"  | O       | t        | pregnancy_episodes_user_id_fkey      | pregnancy_episodes          | c
+ RI_ConstraintTrigger_a_19068 |       19068 | "RI_FKey_noaction_upd" | O       | t        | pregnancy_episodes_user_id_fkey      | pregnancy_episodes          | c
+
+=== RI action triggers on public.pregnancy_episodes and public.babies (parent side; fire for deletes on those parents)
+select t.tgrelid::regclass as on_table, t.tgname, t.oid as trigger_oid, t.tgfoid::regproc as function, t.tgenabled as enabled, k.conname as constraint_name, k.conrelid::regclass as child_table, k.confdeltype::text as on_delete
+from pg_trigger t join pg_constraint k on k.oid = t.tgconstraint where t.tgrelid in ('public.pregnancy_episodes'::regclass, 'public.babies'::regclass) and t.tgisinternal and t.tgfoid::regproc::text like 'RI_FKey_%del' order by t.tgrelid::regclass::text, t.tgname;
+ on_table | tgname | trigger_oid | function | enabled | constraint_name | child_table | on_delete 
+----------+--------+-------------+----------+---------+-----------------+-------------+-----------
+
+[c1_psql] exit=0
+
+[c1_psql] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== RI action triggers on public.pregnancy_episodes and public.babies (parent side, corrected filter)
+select t.tgrelid::regclass as on_table, t.tgname, t.oid as trigger_oid, t.tgfoid::regproc as function, t.tgenabled as enabled, k.conname as constraint_name, k.conrelid::regclass as child_table, k.confdeltype::text as on_delete
+from pg_trigger t join pg_constraint k on k.oid = t.tgconstraint where t.tgrelid in ('public.pregnancy_episodes'::regclass, 'public.babies'::regclass, 'public.contraction_sessions'::regclass) and t.tgisinternal and t.tgfoid::regproc::text like '%del%' order by t.tgrelid::regclass::text, t.tgname;
+       on_table       |            tgname            | trigger_oid |        function        | enabled |                   constraint_name                    |       child_table       | on_delete 
+----------------------+------------------------------+-------------+------------------------+---------+------------------------------------------------------+-------------------------+-----------
+ babies               | RI_ConstraintTrigger_a_18503 |       18503 | "RI_FKey_cascade_del"  | O       | first_year_entries_baby_id_fkey                      | first_year_entries      | c
+ babies               | RI_ConstraintTrigger_a_18539 |       18539 | "RI_FKey_setnull_del"  | O       | first_year_memories_baby_id_fkey                     | first_year_memories     | n
+ babies               | RI_ConstraintTrigger_a_18596 |       18596 | "RI_FKey_cascade_del"  | O       | first_year_care_events_baby_id_fkey                  | first_year_care_events  | c
+ babies               | RI_ConstraintTrigger_a_18634 |       18634 | "RI_FKey_cascade_del"  | O       | first_year_reminders_baby_id_fkey                    | first_year_reminders    | c
+ contraction_sessions | RI_ConstraintTrigger_a_18299 |       18299 | "RI_FKey_cascade_del"  | O       | contraction_events_session_id_user_id_fkey           | contraction_events      | c
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19079 |       19079 | "RI_FKey_restrict_del" | O       | journeys_current_pregnancy_episode_owner_fkey        | journeys                | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19085 |       19085 | "RI_FKey_restrict_del" | O       | reflections_pregnancy_episode_owner_fkey             | reflections             | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19091 |       19091 | "RI_FKey_restrict_del" | O       | week_photos_pregnancy_episode_owner_fkey             | week_photos             | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19097 |       19097 | "RI_FKey_restrict_del" | O       | week_media_memories_pregnancy_episode_owner_fkey     | week_media_memories     | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19103 |       19103 | "RI_FKey_restrict_del" | O       | pregnancy_appointments_pregnancy_episode_owner_fkey  | pregnancy_appointments  | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19109 |       19109 | "RI_FKey_restrict_del" | O       | pregnancy_symptom_notes_pregnancy_episode_owner_fkey | pregnancy_symptom_notes | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19115 |       19115 | "RI_FKey_restrict_del" | O       | baby_movement_notes_pregnancy_episode_owner_fkey     | baby_movement_notes     | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19121 |       19121 | "RI_FKey_restrict_del" | O       | birth_plans_pregnancy_episode_owner_fkey             | birth_plans             | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19127 |       19127 | "RI_FKey_restrict_del" | O       | hospital_bag_items_pregnancy_episode_owner_fkey      | hospital_bag_items      | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19133 |       19133 | "RI_FKey_restrict_del" | O       | midwife_questions_pregnancy_episode_owner_fkey       | midwife_questions       | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19139 |       19139 | "RI_FKey_restrict_del" | O       | contraction_sessions_pregnancy_episode_owner_fkey    | contraction_sessions    | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19145 |       19145 | "RI_FKey_restrict_del" | O       | contraction_events_pregnancy_episode_owner_fkey      | contraction_events      | r
+ pregnancy_episodes   | RI_ConstraintTrigger_a_19151 |       19151 | "RI_FKey_restrict_del" | O       | babies_pregnancy_episode_owner_fkey                  | babies                  | r
+
+[c1_psql] exit=0

@@ -1,0 +1,96 @@
+[c1_psql] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+select now() as checked_at, (select count(*) from auth.users where id = 'e30d53e5-5a15-4d6a-8df4-cb19975906e6') as d_auth_user, (select count(*) from auth.users) as auth_users,
+ (select count(*) from supabase_migrations.schema_migrations) as history;
+          checked_at           | d_auth_user | auth_users | history 
+-------------------------------+-------------+------------+---------
+ 2026-10-06 23:26:52.051204+00 |           0 |          3 |      47
+
+=== User D rows per public table with a user_id column
+select c.table_name, (xpath('/row/n/text()', query_to_xml(format('select count(*) as n from public.%I where user_id = %L', c.table_name, 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'), false, true, '')))[1]::text::int as d_rows
+from information_schema.columns c join information_schema.tables t on t.table_schema = c.table_schema and t.table_name = c.table_name and t.table_type = 'BASE TABLE'
+where c.table_schema = 'public' and c.column_name = 'user_id' order by c.table_name;
+       table_name        | d_rows 
+-------------------------+--------
+ archived_journeys       |      0
+ babies                  |      0
+ baby_movement_notes     |      0
+ birth_plans             |      0
+ companion_conversations |      0
+ companion_memories      |      0
+ companion_messages      |      0
+ contraction_events      |      0
+ contraction_sessions    |      0
+ first_year_care_events  |      0
+ first_year_entries      |      0
+ first_year_journeys     |      0
+ first_year_memories     |      0
+ first_year_reminders    |      0
+ hospital_bag_items      |      0
+ journeys                |      0
+ midwife_questions       |      0
+ pregnancy_appointments  |      0
+ pregnancy_episodes      |      0
+ pregnancy_journeys      |      0
+ pregnancy_symptom_notes |      0
+ profiles                |      0
+ reflections             |      0
+ saved_journeys          |      0
+ ttc_journeys            |      0
+ ttc_logs                |      0
+ week_media_memories     |      0
+ week_photos             |      0
+
+=== User D graph by deterministic id
+select 'pregnancy_episodes' as t, count(*) from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ed01'
+union all select 'babies d001', count(*) from public.babies where id = '00000000-0000-4c10-8000-00000000d001'
+union all select 'rows with id prefix ...d1xx/d2xx/d0xx in fixture tables', ((select count(*) from public.reflections where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.week_photos where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.pregnancy_appointments where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.birth_plans where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.contraction_sessions where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.contraction_events where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.first_year_entries where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.first_year_care_events where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.first_year_reminders where id::text like '00000000-0000-4c10-8000-00000000d%')+(select count(*) from public.first_year_memories where id::text like '00000000-0000-4c10-8000-00000000d%'))
+union all select 'rows bound to E-D1 (12 link columns)', ((select count(*) from public.reflections where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.week_photos where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.week_media_memories where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.pregnancy_appointments where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.pregnancy_symptom_notes where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.baby_movement_notes where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.birth_plans where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.hospital_bag_items where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.midwife_questions where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.contraction_sessions where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.contraction_events where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01')+(select count(*) from public.babies where pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01'))
+union all select 'journeys pointing at E-D1', count(*) from public.journeys where current_pregnancy_episode_id = '00000000-0000-4c10-8000-00000000ed01'
+union all select 'First Year rows referencing baby d001', ((select count(*) from public.first_year_entries where baby_id = '00000000-0000-4c10-8000-00000000d001')+(select count(*) from public.first_year_care_events where baby_id = '00000000-0000-4c10-8000-00000000d001')+(select count(*) from public.first_year_reminders where baby_id = '00000000-0000-4c10-8000-00000000d001')+(select count(*) from public.first_year_memories where baby_id = '00000000-0000-4c10-8000-00000000d001'));
+                            t                            | count 
+---------------------------------------------------------+-------
+ pregnancy_episodes                                      |     0
+ babies d001                                             |     0
+ rows with id prefix ...d1xx/d2xx/d0xx in fixture tables |     0
+ rows bound to E-D1 (12 link columns)                    |     0
+ journeys pointing at E-D1                               |     0
+ First Year rows referencing baby d001                   |     0
+
+=== control users A, B, C and legacy fixture fingerprints
+select u.email, (select count(*) from public.journeys where user_id = u.id) + (select count(*) from public.babies where user_id = u.id) + (select count(*) from public.reflections where user_id = u.id) + (select count(*) from public.pregnancy_episodes where user_id = u.id) as headline_rows from auth.users u where u.email in ('c1-user-a@example.invalid','c1-user-b@example.invalid','c1-user-c@example.invalid') order by u.email;
+           email           | headline_rows 
+---------------------------+---------------
+ c1-user-a@example.invalid |             3
+ c1-user-b@example.invalid |             5
+ c1-user-c@example.invalid |             1
+
+select md5(string_agg(x::text, '' order by x::text)) as control_tuple_identity_md5 from (
+ select xmin, ctid, tableoid from public.journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.babies where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.reflections where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.pregnancy_episodes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.week_photos where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.week_media_memories where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.pregnancy_appointments where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.pregnancy_symptom_notes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.baby_movement_notes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.birth_plans where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.hospital_bag_items where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.midwife_questions where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.contraction_sessions where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6' union all select xmin, ctid, tableoid from public.contraction_events where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select xmin, ctid, tableoid from public.pregnancy_journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6') x;
+    control_tuple_identity_md5    
+----------------------------------
+ c7818124e107b0eabf04470ffd098b6f
+
+select md5(string_agg(t, '' order by t)) as control_content_md5, count(*) as control_rows from (
+ select 'j' || user_id || lifecycle || coalesce(current_pregnancy_episode_id::text,'') || updated_at as t from public.journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select 'b' || id || user_id || date_of_birth || birth_order || coalesce(pregnancy_episode_id::text,'') || updated_at from public.babies where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select 'r' || id || user_id || week || content || coalesce(pregnancy_episode_id::text,'') || updated_at from public.reflections where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select 'e' || id || user_id || status || coalesce(removed_at::text,'') || updated_at from public.pregnancy_episodes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6'
+ union all select 'pj' || user_id || status || updated_at from public.pregnancy_journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6') y;
+       control_content_md5        | control_rows 
+----------------------------------+--------------
+ 61d9fceb618088a087b33345c694e203 |           11
+
+select ((select count(*) from public.journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.pregnancy_journeys where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.babies where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.reflections where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.week_photos where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.week_media_memories where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.pregnancy_appointments where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.pregnancy_symptom_notes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.baby_movement_notes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.birth_plans where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.hospital_bag_items where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.midwife_questions where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.contraction_sessions where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')+(select count(*) from public.contraction_events where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6')) as legacy_fixture_rows_other_users,
+ (select count(*) from public.pregnancy_episodes where user_id <> 'e30d53e5-5a15-4d6a-8df4-cb19975906e6') as other_users_episodes;
+ legacy_fixture_rows_other_users | other_users_episodes 
+---------------------------------+----------------------
+                              21 |                    2
+
+[c1_psql] exit=0

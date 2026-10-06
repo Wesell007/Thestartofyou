@@ -1,0 +1,82 @@
+[c1_psql_notx] file=C1_16_star_J.sql sha256=344d26e1feb4a68ddb23d56200dcfc456a87edd493d077e5a29c4a48b6328bc3
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.16 star J start
+select now() as started_at, current_user, (select project_ref || ' / ' || run_label from public.c1_rehearsal_marker) as marker;
+          started_at          | current_user |                marker                 
+------------------------------+--------------+---------------------------------------
+ 2026-10-06 00:06:15.87757+00 | postgres     | wwtcnbjhttjtklpxhrkd / 41B.1A-C1-run1
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+### CASE J1|one active for A already exists (E-A1): OPEN count for A is exactly 1|OK
+select count(*) as a_open from public.pregnancy_episodes where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69' and status in ('active','paused') and removed_at is null;
+ a_open 
+--------
+      1
+
+### CASE J2|second active for A while E-A1 is open|UV
+savepoint s1;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, expected_count) values ('00000000-0000-4c10-8000-00000000ea0a', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2026-09-01', date '2027-06-08', 'active', 1);
+psql:C1_16_star_J.sql:13: ERROR:  23505: duplicate key value violates unique constraint "pregnancy_episodes_one_open_per_user_idx"
+DETAIL:  Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_one_open_per_user_idx
+LOCATION:  _bt_check_unique, nbtinsert.c:666
+rollback to savepoint s1;
+ROLLBACK
+select count(*) as residue from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ea0a';
+ residue 
+---------
+       0
+
+### CASE J3a|active + paused: new paused for A while E-A1 is active|UV
+savepoint s2;
+SAVEPOINT
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, expected_count) values ('00000000-0000-4c10-8000-00000000ea0b', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2026-09-01', date '2027-06-08', 'paused', 1);
+psql:C1_16_star_J.sql:18: ERROR:  23505: duplicate key value violates unique constraint "pregnancy_episodes_one_open_per_user_idx"
+DETAIL:  Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.
+SCHEMA NAME:  public
+TABLE NAME:  pregnancy_episodes
+CONSTRAINT NAME:  pregnancy_episodes_one_open_per_user_idx
+LOCATION:  _bt_check_unique, nbtinsert.c:666
+rollback to savepoint s2;
+ROLLBACK
+### CASE J8|single-column removal UPDATE on E-A1 (setup for the starred removal rows)|OK
+update public.pregnancy_episodes set removed_at = now() where id = '00000000-0000-4c10-8000-00000000ea01';
+UPDATE 1
+### CASE J7|removed episode still exists, status unchanged (active), ended_at NULL, outcome_date NULL, removed_at set|OK
+select id, user_id, status, ended_at, outcome_date, removed_at, expected_count, (status = 'active' and ended_at is null and outcome_date is null and removed_at is not null) as s13_shape_ok from public.pregnancy_episodes where id = '00000000-0000-4c10-8000-00000000ea01';
+                  id                  |               user_id                | status | ended_at | outcome_date |          removed_at           | expected_count | s13_shape_ok 
+--------------------------------------+--------------------------------------+--------+----------+--------------+-------------------------------+----------------+--------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-06 00:06:15.886333+00 |              1 | t
+
+### CASE J5a|removed E-A1 no longer matches the OPEN predicate: A open count is 0|OK
+select count(*) as a_open from public.pregnancy_episodes where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69' and status in ('active','paused') and removed_at is null;
+ a_open 
+--------
+      0
+
+### CASE J5|set removed_at on E-A1, then insert new active E-A2 for A|OK
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status) values ('00000000-0000-4c10-8000-00000000ea02', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2026-09-01', date '2027-06-08', 'active');
+INSERT 0 1
+select id, user_id, status, ended_at, outcome_date, removed_at from public.pregnancy_episodes where user_id = 'b09cd318-8f3e-4853-8d97-fc10267b3d69' order by id;
+                  id                  |               user_id                | status | ended_at | outcome_date |          removed_at           
+--------------------------------------+--------------------------------------+--------+----------+--------------+-------------------------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-06 00:06:15.886333+00
+ 00000000-0000-4c10-8000-00000000ea02 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 
+
+=== ROLLBACK (rollback-only harness)
+ROLLBACK;
+ROLLBACK
+=== post-state (autocommit)
+select now() as finished_at, (select count(*) from public.pregnancy_episodes) as episode_rows, (select string_agg(id::text || '|' || status::text || '|removed_at=' || coalesce(removed_at::text,'NULL'), ' ;; ' order by id) from public.pregnancy_episodes) as episodes;
+          finished_at          | episode_rows |                                                            episodes                                                             
+-------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------------------
+ 2026-10-06 00:06:16.012839+00 |            2 | 00000000-0000-4c10-8000-00000000ea01|active|removed_at=NULL ;; 00000000-0000-4c10-8000-00000000eb01|given_birth|removed_at=NULL
+
+=== C1.16 star J end
+[c1_psql_notx] exit=0

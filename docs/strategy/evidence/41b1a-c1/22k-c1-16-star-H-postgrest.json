@@ -1,0 +1,113 @@
+{
+ "stage": "C1.16 star H",
+ "project_ref": "wwtcnbjhttjtklpxhrkd",
+ "started_at": "2026-10-06T00:06:16.360587+00:00",
+ "cases": [
+  {
+   "case": "H-1",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    }
+   ],
+   "expected": "200, rows of A only (E-A1)",
+   "pass": true,
+   "note": "ids=['ea01']"
+  },
+  {
+   "case": "H-2",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id&user_id=eq.820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb",
+   "http_status": 200,
+   "body": [],
+   "expected": "200, zero rows",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-3",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "POST /rest/v1/pregnancy_episodes",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT INSERT ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-4",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "PATCH /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT UPDATE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "H-5",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "DELETE /rest/v1/pregnancy_episodes?id=eq.00000000-0000-4c10-8000-00000000ea01",
+   "http_status": 403,
+   "body": {
+    "code": "42501",
+    "details": null,
+    "hint": "Grant the required privileges to the current role with: GRANT DELETE ON public.pregnancy_episodes TO authenticated;",
+    "message": "permission denied for table pregnancy_episodes"
+   },
+   "expected": "42501",
+   "pass": true,
+   "note": ""
+  },
+  {
+   "case": "post",
+   "actor": "authenticated A (genuine JWT)",
+   "request": "GET /rest/v1/pregnancy_episodes?select=id,user_id,status,removed_at&order=id",
+   "http_status": 200,
+   "body": [
+    {
+     "id": "00000000-0000-4c10-8000-00000000ea01",
+     "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+     "status": "active",
+     "removed_at": null
+    }
+   ],
+   "expected": "E-A1 still present, unchanged",
+   "pass": true,
+   "note": ""
+  }
+ ],
+ "auth": {
+  "http_status": 200,
+  "user_id": "b09cd318-8f3e-4853-8d97-fc10267b3d69",
+  "role": "authenticated",
+  "aud": "authenticated",
+  "access_token_length": 848,
+  "access_token_sha256_prefix": "1d3bba534ebd",
+  "token_stored": false,
+  "fabricated": false,
+  "pass": true
+ },
+ "finished_at": "2026-10-06T00:06:17.660617+00:00",
+ "summary": {
+  "cases": 6,
+  "pass": 6,
+  "fail": []
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "summary": {
+  "cases": 7,
+  "ok": 7,
+  "unexpected": [],
+  "uv_required": 2,
+  "uv_ok": 2,
+  "ok_required": 5,
+  "ok_ok": 5
+ },
+ "cases": [
+  {
+   "case": "J1",
+   "description": "one active for A already exists (E-A1): OPEN count for A is exactly 1",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [],
+   "errors": []
+  },
+  {
+   "case": "J2",
+   "description": "second active for A while E-A1 is open",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J3a",
+   "description": "active + paused: new paused for A while E-A1 is active",
+   "expect": "UV",
+   "verdict": "rejected by pregnancy_episodes_one_open_per_user_idx",
+   "ok": true,
+   "sqlstate": "23505",
+   "index": "pregnancy_episodes_one_open_per_user_idx",
+   "detail": "Key (user_id)=(b09cd318-8f3e-4853-8d97-fc10267b3d69) already exists.",
+   "acks": [],
+   "readback": [],
+   "errors": [
+    "duplicate key value violates unique constraint \"pregnancy_episodes_one_open_per_user_idx\""
+   ]
+  },
+  {
+   "case": "J8",
+   "description": "single-column removal UPDATE on E-A1 (setup for the starred removal rows)",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "UPDATE 1"
+   ],
+   "readback": [],
+   "errors": []
+  },
+  {
+   "case": "J7",
+   "description": "removed episode still exists, status unchanged (active), ended_at NULL, outcome_date NULL, removed_at set",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [
+    "id                  |               user_id                | status | ended_at | outcome_date |          removed_at           | expected_count | s13_shape_ok",
+    "00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-06 00:06:15.886333+00 |              1 | t"
+   ],
+   "errors": []
+  },
+  {
+   "case": "J5a",
+   "description": "removed E-A1 no longer matches the OPEN predicate: A open count is 0",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [],
+   "readback": [],
+   "errors": []
+  },
+  {
+   "case": "J5",
+   "description": "set removed_at on E-A1, then insert new active E-A2 for A",
+   "expect": "OK",
+   "verdict": "as expected",
+   "ok": true,
+   "sqlstate": "",
+   "index": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "readback": [
+    "id                  |               user_id                | status | ended_at | outcome_date |          removed_at",
+    "00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              | 2026-10-06 00:06:15.886333+00",
+    "00000000-0000-4c10-8000-00000000ea02 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active |          |              |"
+   ],
+   "errors": []
+  }
+ ]
+}

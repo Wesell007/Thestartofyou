@@ -1,0 +1,28 @@
+[c1_psql_notx] file=c1_16_fixture_episodes.sql sha256=8973d8070b5e60259baf6e4606f775ca52747fd77f587a542ba40ac4a3ccf8fb
+[c1_psql_notx] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+=== C1.16 episode fixture start
+select now() as started_at, current_user, (select count(*) from public.pregnancy_episodes) as episodes_before;
+          started_at          | current_user | episodes_before 
+------------------------------+--------------+-----------------
+ 2026-10-06 00:06:15.06947+00 | postgres     |               0
+
+BEGIN;
+BEGIN
+SET LOCAL lock_timeout = '5s';
+SET
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, expected_count)
+values ('00000000-0000-4c10-8000-00000000ea01', 'b09cd318-8f3e-4853-8d97-fc10267b3d69', date '2026-06-01', date '2027-03-08', 'active', 1);
+INSERT 0 1
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, status_changed_at, outcome_date, expected_count, ended_at)
+values ('00000000-0000-4c10-8000-00000000eb01', '820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb', date '2025-09-01', date '2026-06-08', 'given_birth', timestamptz '2026-06-05T10:00:00Z', date '2026-06-05', 2, timestamptz '2026-06-05T10:00:00Z');
+INSERT 0 1
+COMMIT;
+COMMIT
+select id, user_id, status, lmp_date, due_date, ended_at, outcome_date, removed_at, expected_count from public.pregnancy_episodes order by id;
+                  id                  |               user_id                |   status    |  lmp_date  |  due_date  |        ended_at        | outcome_date | removed_at | expected_count 
+--------------------------------------+--------------------------------------+-------------+------------+------------+------------------------+--------------+------------+----------------
+ 00000000-0000-4c10-8000-00000000ea01 | b09cd318-8f3e-4853-8d97-fc10267b3d69 | active      | 2026-06-01 | 2027-03-08 |                        |              |            |              1
+ 00000000-0000-4c10-8000-00000000eb01 | 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb | given_birth | 2025-09-01 | 2026-06-08 | 2026-06-05 10:00:00+00 | 2026-06-05   |            |              2
+
+=== C1.16 episode fixture end
+[c1_psql_notx] exit=0

@@ -1,0 +1,576 @@
+{
+ "summary": {
+  "cases": 26,
+  "ok": 26,
+  "unexpected": [],
+  "tables": 13,
+  "same_required": 13,
+  "same_ok": 13,
+  "cross_required": 13,
+  "cross_ok": 13
+ },
+ "matrix": [
+  {
+   "table": "reflections",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "reflections_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "week_photos",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "week_photos_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "week_media_memories",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "week_media_memories_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "pregnancy_appointments",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "pregnancy_appointments_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "pregnancy_symptom_notes",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "baby_movement_notes",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "baby_movement_notes_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "birth_plans",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "birth_plans_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "hospital_bag_items",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "hospital_bag_items_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "midwife_questions",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "midwife_questions_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "contraction_sessions",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "contraction_sessions_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "contraction_events",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "contraction_events_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "babies",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "babies_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  },
+  {
+   "table": "journeys",
+   "cases": 2,
+   "same_user_required": 1,
+   "same_user_accepted": 1,
+   "cross_user_required": 1,
+   "cross_user_rejected": 1,
+   "sqlstates": [
+    "23503"
+   ],
+   "constraints": [
+    "journeys_current_pregnancy_episode_owner_fkey"
+   ],
+   "all_ok": true
+  }
+ ],
+ "cases": [
+  {
+   "table": "reflections",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "reflections",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "reflections_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"reflections\" violates foreign key constraint \"reflections_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "week_photos",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "week_photos",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "week_photos_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"week_photos\" violates foreign key constraint \"week_photos_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "week_media_memories",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "week_media_memories",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "week_media_memories_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"week_media_memories\" violates foreign key constraint \"week_media_memories_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "pregnancy_appointments",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "pregnancy_appointments",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"pregnancy_appointments\" violates foreign key constraint \"pregnancy_appointments_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "pregnancy_symptom_notes",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "pregnancy_symptom_notes",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"pregnancy_symptom_notes\" violates foreign key constraint \"pregnancy_symptom_notes_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "baby_movement_notes",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "baby_movement_notes",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "baby_movement_notes_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"baby_movement_notes\" violates foreign key constraint \"baby_movement_notes_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "birth_plans",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1",
+    "DELETE 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "birth_plans",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "birth_plans_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000ea01, 820f49d1-2ebc-4bf1-a1e5-f6d32491bbbb) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"birth_plans\" violates foreign key constraint \"birth_plans_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "hospital_bag_items",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "hospital_bag_items",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "hospital_bag_items_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"hospital_bag_items\" violates foreign key constraint \"hospital_bag_items_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "midwife_questions",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "midwife_questions",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "midwife_questions_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"midwife_questions\" violates foreign key constraint \"midwife_questions_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "contraction_sessions",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "contraction_sessions",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "contraction_sessions_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"contraction_sessions\" violates foreign key constraint \"contraction_sessions_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "contraction_events",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "contraction_events",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "contraction_events_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"contraction_events\" violates foreign key constraint \"contraction_events_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "babies",
+   "case": "I1 same-user insert -> own episode",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "INSERT 0 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "babies",
+   "case": "I2 cross-user insert -> other-user episode",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "babies_pregnancy_episode_owner_fkey",
+   "detail": "Key (pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"babies\" violates foreign key constraint \"babies_pregnancy_episode_owner_fkey\""
+   ]
+  },
+  {
+   "table": "journeys",
+   "case": "I1/I5a same-user: A pointer -> E-A1",
+   "expect": "OK",
+   "verdict": "accepted",
+   "ok": true,
+   "sqlstate": "",
+   "constraint": "",
+   "detail": "",
+   "acks": [
+    "UPDATE 1"
+   ],
+   "errors": []
+  },
+  {
+   "table": "journeys",
+   "case": "I2/I6 cross-user: A pointer -> E-B1 (composite mismatch, E-B1 exists)",
+   "expect": "FK",
+   "verdict": "rejected",
+   "ok": true,
+   "sqlstate": "23503",
+   "constraint": "journeys_current_pregnancy_episode_owner_fkey",
+   "detail": "Key (current_pregnancy_episode_id, user_id)=(00000000-0000-4c10-8000-00000000eb01, b09cd318-8f3e-4853-8d97-fc10267b3d69) is not present in table \"pregnancy_episodes\".",
+   "acks": [],
+   "errors": [
+    "insert or update on table \"journeys\" violates foreign key constraint \"journeys_current_pregnancy_episode_owner_fkey\""
+   ]
+  }
+ ]
+}

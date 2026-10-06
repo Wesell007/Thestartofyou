@@ -1,0 +1,11 @@
+## c1_16_post_validate vs pre_c1_15 (C1.14 pre-rollback validated reference)
+EMPTY
+
+## c1_16_post_validate vs r1_pre (C1.13 first validated snapshot)
+EMPTY
+
+## c1_16_post_validate vs c1_16_final (after the starred rows)
+EMPTY
+
+## c1_15_post vs c1_16_pre (pre-reapplication equals post-rollback)
+EMPTY

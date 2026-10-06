@@ -1,0 +1,135 @@
+START 2026-10-06T00:04:35.935Z
+[c1_psql] file=41b1a_family_entity_foundation.sql sha256=e6ad0bc82b245beb03131023bb9ce122a451f40c2fe9b75cd43f047b674585cb
+[c1_psql] mode=direct host=db.wwtcnbjhttjtklpxhrkd.supabase.co user=postgres db=postgres port=5432 target=wwtcnbjhttjtklpxhrkd
+SET LOCAL lock_timeout = '5s';
+SET
+CREATE TABLE IF NOT EXISTS public.pregnancy_episodes (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  user_id uuid NOT NULL,
+  lmp_date date NOT NULL,                                                       -- S4
+  due_date date NOT NULL,                                                       -- S4
+  status public.pregnancy_journey_status NOT NULL DEFAULT 'active',
+  status_changed_at timestamptz,
+  outcome_date date,
+  expected_count smallint,
+  -- S13 (final): the person explicitly removed this chapter from current-journey
+  -- presentation. Orthogonal to status. Not an outcome. Not deletion.
+  removed_at timestamptz,
+  started_at timestamptz NOT NULL DEFAULT now(),
+  ended_at timestamptz,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  CONSTRAINT pregnancy_episodes_pkey PRIMARY KEY (id),                         -- row 1
+  CONSTRAINT pregnancy_episodes_id_user_id_key UNIQUE (id, user_id),           -- row 2
+  -- Account-level cascade is INTENTIONAL (whole-account deletion). Episode-level
+  -- dependants below are RESTRICT.
+  CONSTRAINT pregnancy_episodes_user_id_fkey
+    FOREIGN KEY (user_id) REFERENCES auth.users (id) ON DELETE CASCADE,
+  -- S4: the same rule save_pregnancy_journey enforces (20260803231512).
+  CONSTRAINT pregnancy_episodes_dates_check
+    CHECK (due_date > lmp_date AND due_date <= lmp_date + 300),
+  CONSTRAINT pregnancy_episodes_expected_count_check                           -- row 4
+    CHECK (expected_count IS NULL OR expected_count BETWEEN 1 AND 4),
+  CONSTRAINT pregnancy_episodes_ended_at_status_check                          -- row 5
+    CHECK ((status IN ('active', 'paused')) = (ended_at IS NULL))
+);
+CREATE TABLE
+CREATE UNIQUE INDEX IF NOT EXISTS pregnancy_episodes_one_open_per_user_idx
+  ON public.pregnancy_episodes (user_id)
+  WHERE status IN ('active', 'paused') AND removed_at IS NULL;
+CREATE INDEX
+CREATE INDEX IF NOT EXISTS pregnancy_episodes_user_id_idx
+  ON public.pregnancy_episodes (user_id);
+CREATE INDEX
+DROP TRIGGER IF EXISTS pregnancy_episodes_set_updated_at ON public.pregnancy_episodes;
+psql:src-735a07e6/docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql:71: NOTICE:  trigger "pregnancy_episodes_set_updated_at" for relation "public.pregnancy_episodes" does not exist, skipping
+DROP TRIGGER
+CREATE TRIGGER pregnancy_episodes_set_updated_at
+  BEFORE UPDATE ON public.pregnancy_episodes
+  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
+CREATE TRIGGER
+REVOKE ALL ON TABLE public.pregnancy_episodes FROM PUBLIC, anon, authenticated;
+REVOKE
+GRANT SELECT ON TABLE public.pregnancy_episodes TO authenticated;
+GRANT
+GRANT ALL ON TABLE public.pregnancy_episodes TO service_role;
+GRANT
+ALTER TABLE public.pregnancy_episodes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'pregnancy_episodes' AND policyname = 'pregnancy_episodes_select_own') THEN
+    CREATE POLICY pregnancy_episodes_select_own ON public.pregnancy_episodes
+      FOR SELECT TO authenticated USING (auth.uid() = user_id);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'pregnancy_episodes' AND policyname = 'pregnancy_episodes_insert_own') THEN
+    CREATE POLICY pregnancy_episodes_insert_own ON public.pregnancy_episodes
+      FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'pregnancy_episodes' AND policyname = 'pregnancy_episodes_update_own') THEN
+    CREATE POLICY pregnancy_episodes_update_own ON public.pregnancy_episodes
+      FOR UPDATE TO authenticated USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE schemaname = 'public' AND tablename = 'pregnancy_episodes' AND policyname = 'pregnancy_episodes_delete_own') THEN
+    CREATE POLICY pregnancy_episodes_delete_own ON public.pregnancy_episodes
+      FOR DELETE TO authenticated USING (auth.uid() = user_id);
+  END IF;
+END $$;
+DO
+ALTER TABLE public.journeys ADD COLUMN IF NOT EXISTS current_pregnancy_episode_id uuid;
+ALTER TABLE
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conrelid = 'public.journeys'::regclass
+      AND conname = 'journeys_current_pregnancy_episode_owner_fkey'
+  ) THEN
+    ALTER TABLE public.journeys ADD CONSTRAINT journeys_current_pregnancy_episode_owner_fkey
+      FOREIGN KEY (current_pregnancy_episode_id, user_id)
+      REFERENCES public.pregnancy_episodes (id, user_id) ON DELETE RESTRICT NOT VALID;
+  END IF;
+END $$;
+DO
+CREATE INDEX IF NOT EXISTS journeys_current_pregnancy_episode_idx
+  ON public.journeys (current_pregnancy_episode_id, user_id);
+CREATE INDEX
+DO $$
+DECLARE
+  t text;
+  tables text[] := ARRAY[
+    'reflections', 'week_photos', 'week_media_memories', 'pregnancy_appointments',
+    'pregnancy_symptom_notes', 'baby_movement_notes', 'birth_plans', 'hospital_bag_items',
+    'midwife_questions', 'contraction_sessions', 'contraction_events', 'babies'
+  ];
+BEGIN
+  FOREACH t IN ARRAY tables LOOP
+    EXECUTE format('ALTER TABLE public.%I ADD COLUMN IF NOT EXISTS pregnancy_episode_id uuid', t);
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint
+      WHERE conrelid = format('public.%I', t)::regclass
+        AND conname = t || '_pregnancy_episode_owner_fkey'
+    ) THEN
+      EXECUTE format(
+        'ALTER TABLE public.%I ADD CONSTRAINT %I FOREIGN KEY (pregnancy_episode_id, user_id) '
+        'REFERENCES public.pregnancy_episodes (id, user_id) ON DELETE RESTRICT NOT VALID',
+        t, t || '_pregnancy_episode_owner_fkey');
+    END IF;
+    EXECUTE format('CREATE INDEX IF NOT EXISTS %I ON public.%I (pregnancy_episode_id, user_id)',
+      t || '_pregnancy_episode_idx', t);
+  END LOOP;
+END $$;
+DO
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conrelid = 'public.babies'::regclass
+      AND conname = 'babies_id_user_id_key'
+  ) THEN
+    ALTER TABLE public.babies ADD CONSTRAINT babies_id_user_id_key UNIQUE (id, user_id);
+  END IF;
+END $$;
+DO
+[c1_psql] exit=0
+END 2026-10-06T00:04:36.495Z rc=0

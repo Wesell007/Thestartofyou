@@ -1,0 +1,91 @@
+{
+ "reference": "11-c1-5-post-forward-catalogue.md",
+ "sections": {
+  "columns": {
+   "reference": 315,
+   "captured": 315,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "315|f0281fd66e61ca80ee8dfdff9dd9076f",
+   "captured_hash": "315|f0281fd66e61ca80ee8dfdff9dd9076f"
+  },
+  "enums": {
+   "reference": 5,
+   "captured": 5,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "5|e01eb2548fddcc41e7f642a4337f3019",
+   "captured_hash": "5|e01eb2548fddcc41e7f642a4337f3019"
+  },
+  "functions": {
+   "reference": 25,
+   "captured": 25,
+   "removed": [],
+   "added": [],
+   "functiondef_removed": [],
+   "functiondef_added": [],
+   "empty": true,
+   "reference_hash_prosrc": "25|c4a01c43648862bc267784f572393037",
+   "captured_hash_prosrc": "25|c4a01c43648862bc267784f572393037",
+   "reference_hash_functiondef": "25|920ec2f6ef04bb28c0544cba706e2f6c",
+   "captured_hash_functiondef": "25|920ec2f6ef04bb28c0544cba706e2f6c"
+  },
+  "triggers": {
+   "reference": 36,
+   "captured": 36,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "36|a4b05c5abb99287b808c5b7725fd507b",
+   "captured_hash": "36|a4b05c5abb99287b808c5b7725fd507b"
+  },
+  "rls": {
+   "reference": 35,
+   "captured": 35,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "35|a02d18c7827236a4a0b239e641b0fc3e",
+   "captured_hash": "35|a02d18c7827236a4a0b239e641b0fc3e"
+  },
+  "policies": {
+   "reference": 118,
+   "captured": 118,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "118|c5a61c1cbd875a2278c27248f6035d3f",
+   "captured_hash": "118|c5a61c1cbd875a2278c27248f6035d3f"
+  },
+  "constraints": {
+   "reference": 161,
+   "captured": 161,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "161|9c67159cf4c5092259d395a0892b8d30",
+   "captured_hash": "161|9c67159cf4c5092259d395a0892b8d30"
+  },
+  "indexes": {
+   "reference": 104,
+   "captured": 104,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "104|001b4ec0c45d85d8ed48ff0bc2153a64",
+   "captured_hash": "104|001b4ec0c45d85d8ed48ff0bc2153a64"
+  },
+  "grants": {
+   "reference": 35,
+   "captured": 35,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "35|0a9026c0907ba7d6718455b992d6f911",
+   "captured_hash": "35|0a9026c0907ba7d6718455b992d6f911"
+  }
+ },
+ "all_empty": true
+}

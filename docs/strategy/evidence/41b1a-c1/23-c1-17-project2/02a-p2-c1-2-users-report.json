@@ -1,0 +1,33 @@
+{
+ "project_ref": "dlftnirrnirlkhxpofoq",
+ "created_at": "2026-10-06T00:41:46.881994+00:00",
+ "users": {
+  "A": {
+   "id": "f5d043b9-a04c-4195-8d94-ed0f0c487516",
+   "email": "c1-user-a@example.invalid",
+   "created_http": "existing",
+   "login_http": 200,
+   "session_user_id_matches": true,
+   "role": "authenticated",
+   "aud": "authenticated"
+  },
+  "B": {
+   "id": "1d9fc1ea-2b56-4d1f-acbb-357dc92dbc00",
+   "email": "c1-user-b@example.invalid",
+   "created_http": "existing",
+   "login_http": 200,
+   "session_user_id_matches": true,
+   "role": "authenticated",
+   "aud": "authenticated"
+  },
+  "C": {
+   "id": "de626f6c-b4ac-4c56-9c90-9464ab9214d7",
+   "email": "c1-user-c@example.invalid",
+   "created_http": "existing",
+   "login_http": 200,
+   "session_user_id_matches": true,
+   "role": "authenticated",
+   "aud": "authenticated"
+  }
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "project_ref": "dlftnirrnirlkhxpofoq",
+ "run_label": "41B.1A-C1-run2",
+ "users": {
+  "A": {
+   "id": "f5d043b9-a04c-4195-8d94-ed0f0c487516",
+   "email": "c1-user-a@example.invalid"
+  },
+  "B": {
+   "id": "1d9fc1ea-2b56-4d1f-acbb-357dc92dbc00",
+   "email": "c1-user-b@example.invalid"
+  },
+  "C": {
+   "id": "de626f6c-b4ac-4c56-9c90-9464ab9214d7",
+   "email": "c1-user-c@example.invalid"
+  }
+ },
+ "episode_fixture": {
+  "E-A1": "00000000-0000-4c10-8000-00000000ea01",
+  "E-B1": "00000000-0000-4c10-8000-00000000eb01"
+ },
+ "legacy_row_ids_same_as_project_1": true,
+ "secrets_in_this_file": false
+}

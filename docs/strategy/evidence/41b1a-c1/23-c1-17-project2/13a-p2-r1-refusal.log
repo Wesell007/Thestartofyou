@@ -1,0 +1,78 @@
+START 2026-10-06T00:43:50.188Z
+[c2_psql] file=41b1a_family_entity_foundation_rollback.sql sha256=0d00895514b4e2dc623383436952fd534d5f879cdf4011024596dae303a36077
+[c2_psql] mode=direct host=db.dlftnirrnirlkhxpofoq.supabase.co user=postgres db=postgres port=5432 target=dlftnirrnirlkhxpofoq
+SET LOCAL lock_timeout = '5s';
+SET
+DO $$
+DECLARE
+  t text;
+  tables text[] := ARRAY[
+    'reflections', 'week_photos', 'week_media_memories', 'pregnancy_appointments',
+    'pregnancy_symptom_notes', 'baby_movement_notes', 'birth_plans', 'hospital_bag_items',
+    'midwife_questions', 'contraction_sessions', 'contraction_events', 'babies'
+  ];
+  expected_fks text[] := ARRAY[
+    'journeys_current_pregnancy_episode_owner_fkey',
+    'reflections_pregnancy_episode_owner_fkey', 'week_photos_pregnancy_episode_owner_fkey',
+    'week_media_memories_pregnancy_episode_owner_fkey', 'pregnancy_appointments_pregnancy_episode_owner_fkey',
+    'pregnancy_symptom_notes_pregnancy_episode_owner_fkey', 'baby_movement_notes_pregnancy_episode_owner_fkey',
+    'birth_plans_pregnancy_episode_owner_fkey', 'hospital_bag_items_pregnancy_episode_owner_fkey',
+    'midwife_questions_pregnancy_episode_owner_fkey', 'contraction_sessions_pregnancy_episode_owner_fkey',
+    'contraction_events_pregnancy_episode_owner_fkey', 'babies_pregnancy_episode_owner_fkey'
+  ];
+  v_count bigint;
+BEGIN
+  IF to_regclass('public.pregnancy_episodes') IS NOT NULL THEN
+    EXECUTE 'SELECT count(*) FROM public.pregnancy_episodes' INTO v_count;
+    IF v_count > 0 THEN
+      RAISE EXCEPTION 'ROLLBACK REFUSED: public.pregnancy_episodes holds % row(s). This file never destroys history.', v_count;
+    END IF;
+
+    SELECT count(*) INTO v_count
+    FROM pg_constraint
+    WHERE contype = 'f'
+      AND confrelid = 'public.pregnancy_episodes'::regclass
+      AND conname <> ALL (expected_fks);
+    IF v_count > 0 THEN
+      RAISE EXCEPTION 'ROLLBACK REFUSED: % foreign key(s) from a later phase reference pregnancy_episodes.', v_count;
+    END IF;
+  END IF;
+
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'journeys' AND column_name = 'current_pregnancy_episode_id'
+  ) THEN
+    EXECUTE 'SELECT count(*) FROM public.journeys WHERE current_pregnancy_episode_id IS NOT NULL' INTO v_count;
+    IF v_count > 0 THEN
+      RAISE EXCEPTION 'ROLLBACK REFUSED: % journeys row(s) point at a pregnancy episode.', v_count;
+    END IF;
+  END IF;
+
+  FOREACH t IN ARRAY tables LOOP
+    IF EXISTS (
+      SELECT 1 FROM information_schema.columns
+      WHERE table_schema = 'public' AND table_name = t AND column_name = 'pregnancy_episode_id'
+    ) THEN
+      EXECUTE format('SELECT count(*) FROM public.%I WHERE pregnancy_episode_id IS NOT NULL', t) INTO v_count;
+      IF v_count > 0 THEN
+        RAISE EXCEPTION 'ROLLBACK REFUSED: % row(s) in public.% are bound to a pregnancy episode.', v_count, t;
+      END IF;
+    END IF;
+  END LOOP;
+
+  -- babies (id, user_id) must have no dependants (the 41B.1D baby composite links).
+  SELECT count(*) INTO v_count
+  FROM pg_constraint f
+  JOIN pg_constraint u ON u.conindid = f.conindid
+  WHERE f.contype = 'f'
+    AND u.contype = 'u'
+    AND u.conrelid = 'public.babies'::regclass
+    AND u.conname = 'babies_id_user_id_key';
+  IF v_count > 0 THEN
+    RAISE EXCEPTION 'ROLLBACK REFUSED: % foreign key(s) depend on babies_id_user_id_key.', v_count;
+  END IF;
+END $$;
+psql:C:/Users/Administrator/.c1/src2-735a07e6/docs/strategy/migrations-pending/41b1a_family_entity_foundation_rollback.sql:88: ERROR:  ROLLBACK REFUSED: public.pregnancy_episodes holds 2 row(s). This file never destroys history.
+CONTEXT:  PL/pgSQL function inline_code_block line 23 at RAISE
+[c2_psql] exit=3
+END 2026-10-06T00:43:51.100Z rc=3

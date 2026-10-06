@@ -1,0 +1,43 @@
+[c2_psql_notx] file=c2_c1_0_marker.sql sha256=ff9de802d882630ee7067558eeb6eb16d53153b81f7c100a70bd3d5d66a2ca48
+[c2_psql_notx] mode=direct host=db.dlftnirrnirlkhxpofoq.supabase.co user=postgres db=postgres port=5432 target=dlftnirrnirlkhxpofoq
+BEGIN;
+BEGIN
+create table public.c1_rehearsal_marker (
+  project_ref text not null primary key,
+  run_label text not null,
+  created_at timestamptz not null default now()
+);
+CREATE TABLE
+alter table public.c1_rehearsal_marker enable row level security;
+ALTER TABLE
+revoke all on public.c1_rehearsal_marker from anon, authenticated, public;
+REVOKE
+grant all on public.c1_rehearsal_marker to service_role;
+GRANT
+insert into public.c1_rehearsal_marker (project_ref, run_label) values ('dlftnirrnirlkhxpofoq', '41B.1A-C1-run2');
+INSERT 0 1
+COMMIT;
+COMMIT
+select project_ref, run_label, created_at from public.c1_rehearsal_marker;
+     project_ref      |   run_label    |          created_at           
+----------------------+----------------+-------------------------------
+ dlftnirrnirlkhxpofoq | 41B.1A-C1-run2 | 2026-10-06 00:38:05.267207+00
+
+select relacl::text as acl, relrowsecurity, relforcerowsecurity from pg_class where oid = 'public.c1_rehearsal_marker'::regclass;
+                             acl                             | relrowsecurity | relforcerowsecurity 
+-------------------------------------------------------------+----------------+---------------------
+ {postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres} | t              | f
+
+select column_name, data_type, is_nullable, column_default from information_schema.columns where table_schema='public' and table_name='c1_rehearsal_marker' order by column_name;
+ column_name |        data_type         | is_nullable | column_default 
+-------------+--------------------------+-------------+----------------
+ created_at  | timestamp with time zone | NO          | now()
+ project_ref | text                     | NO          | 
+ run_label   | text                     | NO          | 
+
+select conname, pg_get_constraintdef(oid) from pg_constraint where conrelid='public.c1_rehearsal_marker'::regclass;
+         conname          |   pg_get_constraintdef    
+--------------------------+---------------------------
+ c1_rehearsal_marker_pkey | PRIMARY KEY (project_ref)
+
+[c2_psql_notx] exit=0

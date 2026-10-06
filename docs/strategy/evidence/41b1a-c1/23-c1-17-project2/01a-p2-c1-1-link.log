@@ -1,0 +1,2 @@
+[c2_cli] target=dlftnirrnirlkhxpofoq scratch=735a07e6 migrations=47 cmd=supabase link --project-ref dlftnirrnirlkhxpofoq --yes
+{"project_ref":"dlftnirrnirlkhxpofoq","message":""}

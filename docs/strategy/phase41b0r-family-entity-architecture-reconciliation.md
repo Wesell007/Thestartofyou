@@ -743,3 +743,68 @@ Consequences, recorded without changing any file in this phase:
 - 41B.1A is unaffected: nothing is bound and no pointer is populated, so RESTRICT has nothing to act on.
 - **Mandatory pre-41B.1B gate (owner decision or evidence):** one of (1) a structure-only read of production `pg_trigger` order on `auth.users` (0 customer rows) proving the episode cascade fires after every dependant cascade; (2) an owner-approved design change such as `NO ACTION DEFERRABLE INITIALLY DEFERRED` on the 13 ownership links; (3) explicit deletion ordering in the `delete-account` function. None is chosen here; none is authorised by this note.
 - Rehearsal execution contract, restated: each SQL file runs as exactly one transaction under a runner that wraps the file (Supabase CLI migration runner, or `psql -1 -v ON_ERROR_STOP=1 -f`); statement-by-statement GUI execution is forbidden; the rollback runs as the table owner, because an RLS-constrained role could see zero rows and defeat its guards.
+
+---
+
+## 30. Account deletion under RESTRICT: corrected model (approved by the owner at gate stage G2, 7 October 2026)
+
+Approved by the owner on 7 October 2026, after gate stages G0 (paper decision) and G1 (corrected model and rehearsal plan, `docs/strategy/phase41b-g1-account-deletion-gate-plan.md`). The proposal was held in `docs/strategy/phase41b0r-proposed-section-30-account-deletion-correction.md`, now marked APPLIED. Section 29 keeps its original text as the historical reasoning of 3 October 2026.
+
+**The production account-deletion gate remains OPEN. Finding N10 remains OPEN. 41B.1B is not authorised.** This section changes no architecture and no SQL.
+
+### 30.1 Historical observation (unchanged, not retracted)
+
+C1.18 (`docs/strategy/evidence/41b1a-c1/24e-c1-18-summary.md`), Project 1 `wwtcnbjhttjtklpxhrkd`, 2026-10-06: the real `auth.admin.deleteUser` path removed a fully connected synthetic graph for User D (journey pointer, a `given_birth` episode, 7 episode-bound rows, a linked baby, 4 First Year child rows). Results: HTTP 200, 0 orphans, users A, B and C unchanged, nine-section structural diff EMPTY. That observation remains valid. Every fact in that record stands.
+
+### 30.2 Causal attribution no longer established
+
+Section 29 says the RESTRICT checks queued by the nested cascade `DELETE` on `pregnancy_episodes` fire at the end of that nested statement. It concludes that the outcome depends on the name order of the RI triggers on `auth.users`. C1.18 (`24e`, "Interpretation and portability limit") attributed its success to that order. **That causal attribution is no longer considered established.** The PostgreSQL source (REL_13 to REL_18_STABLE, read 7 October 2026) shows the model in 30.3. Section 29's explanation and the C1.18 attribution are superseded as explanations. Their text is unchanged.
+
+Section 19's original sentence, withdrawn by section 29, said that Postgres "runs the restrict checks after the first round of cascades". It is substantially the model below, restored here with source citations and an explicit precondition. It is not restored as proven.
+
+### 30.3 Corrected execution model (source-supported; runtime proof still required)
+
+1. Every RI action is an AFTER ROW trigger, RESTRICT included. `RI_FKey_restrict_del` says: "In Postgres we still implement this as an AFTER trigger, but it's non-deferrable." Triggers for the same event on one relation are queued and fired in trigger-name order.
+2. RI triggers run their SQL (the cascade `DELETE`, or the RESTRICT `SELECT`) through SPI with `fire_triggers = false`. The nested statement does not fire its own AFTER triggers when it ends. The events it queues go to the outer statement's queue (`AfterTriggerEndQuery`: "Foreign key enforcement triggers do add to the current query level, thanks to their passing fire_triggers = false").
+3. When the outer statement ends, `AfterTriggerEndQuery` works in firing cycles. `afterTriggerMarkEvents` marks every event already queued; `afterTriggerInvokeEvents` fires only the marked events; the loop then repeats. Events queued during a cycle fire in a later cycle.
+4. For `DELETE FROM auth.users WHERE id = $1` (the GoTrue hard delete, one statement in upstream source):
+   - **Cycle 1:** every action trigger on that row fires, in name order. Each account cascade deletes its child rows. One of them deletes the user's `pregnancy_episodes` rows, which queues those rows' RESTRICT checks.
+   - **Cycle 2:** those RESTRICT checks run.
+5. Each of the 13 Episode-bound tables has its own `user_id → auth.users(id) ON DELETE CASCADE` with `user_id NOT NULL`, so every bound row is gone after cycle 1 in any trigger-name order. The cycle-2 checks then find nothing. On this model, whole-account deletion does not depend on the order of the RI triggers on `auth.users`.
+6. The precondition is essential. A blocking row that disappeared only through a second hop would be deleted in cycle 2, competing with the RESTRICT check, and order would matter again. AD-1 (30.4) forbids this.
+7. Deleting an Episode that still has dependants is unchanged. In that statement's first cycle the RESTRICT check finds the dependant and raises SQLSTATE 23503. History protection is not weakened.
+
+This model is **source-supported and not yet runtime-proven**. It is accepted as the gate model only when the G1 targeted rehearsal passes (favourable order, forced unfavourable order, and the mandatory sensitivity control) and the owner accepts that evidence.
+
+### 30.4 AD-1 — account-deletion cascade invariant (approved; binding on 41B.1B, 41B.1C, 41B.1D and every later migration)
+
+Some rows can block deletion of an account-owned journey/family parent through a `RESTRICT` or `NO ACTION` foreign key. Such parents include `pregnancy_episodes`, `babies`, or any later journey-owned parent. **Every such row must be guaranteed to disappear through a direct account-level cascade before the protected-parent constraint is evaluated.**
+
+Accepted implementation pattern: the referencing table must have:
+
+1. a direct FK `user_id → auth.users(id) ON DELETE CASCADE`, referencing the `auth.users` primary key;
+2. `user_id NOT NULL`, because the row is account-owned;
+3. a protected ownership FK that includes **the same `user_id` column**, paired positionally with the parent's `user_id`, for example `(pregnancy_episode_id, user_id) → pregnancy_episodes(id, user_id)`;
+4. as a result, the ownership relationship binds the account owner used by the direct cascade to the owner of the protected parent. The column that cascades from `auth.users` and the column inside the protected FK must be one and the same `user_id`. A different owner column (for example `owner_id`) in the protected FK does not satisfy AD-1, even if the table also has a cascading `user_id`.
+
+**A two-hop deletion path does not satisfy AD-1.** Being removed through another table's cascade is never enough, even if that table cascades from `auth.users`. A protected parent is any registered family parent (`public.pregnancy_episodes`, `public.babies`) and any account-owned table: one with `user_id NOT NULL` and a direct `ON DELETE CASCADE` FK to `auth.users(id)`. A registered parent whose account ownership cannot be established is itself a violation.
+
+Current schema: all 13 Episode ownership FKs satisfy AD-1. They are the only blocking FKs among public tables. Existing First Year links to `babies` are CASCADE or SET NULL, which is non-blocking. Any future blocking link to `babies` must be the composite `(baby_id, user_id) → babies(id, user_id)` on a table that itself satisfies items 1–2.
+
+Enforcement:
+
+- **Layer 1, static repository contract (implemented G2):** `src/test/accountDeletionInvariant.test.ts`, using `src/test/support/accountDeletionInvariant.ts`. It runs in CI over every migration plus the pending 41B.1A forward and validate files. Discovery is dynamic, and unrecognised SQL fails closed.
+- **Layer 2, authoritative catalogue contract (written G2, not executed):** `docs/strategy/rehearsal-support/ad1-catalogue-contract.sql`. The gate requires `fail_count = 0` and exactly 13 Episode links.
+
+### 30.5 What does not change
+
+- Architecture: unchanged. The 13 ownership FKs stay `ON DELETE RESTRICT`, NOT DEFERRABLE.
+- Frozen 41B.1A SQL: byte-identical (forward `e6ad0bc8…`, validate `8645fd67…`, rollback `0d008955…`).
+- Migrations: none added.
+- Section 29's route list (pg_trigger inspection; a deferrable FK design; explicit ordering in `delete-account`) is superseded as the closure mechanism. The gate closes only by the G1 PASS contract (plan section 14) and the owner's formal acceptance of that evidence.
+- N10 (storage removed before Auth deletion): OPEN, unaffected.
+- The production gates of section 11 (backup observation, quiet window, owner approval) are unaffected.
+
+### 30.6 Status at approval (7 October 2026)
+
+§30 approved and applied; AD-1 approved; Layer 1 static contract IMPLEMENTED and passing; Layer 2 catalogue contract WRITTEN / NOT EXECUTED against any remote database; targeted runtime rehearsal NOT STARTED; production account-deletion gate OPEN; N10 OPEN; 41B.1B NOT AUTHORISED; READY FOR 41B.1B = NO.

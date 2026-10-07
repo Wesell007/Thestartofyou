@@ -1,6 +1,8 @@
 # 41B.0-R — PROPOSED section 30: account deletion under RESTRICT, corrected model
 
-Status: **PROPOSED. NOT APPLIED TO THE 41B.0-R DOCUMENT. NOT APPROVED.** Written 7 October 2026 at gate stage G1 (paper only). The 41B.0-R convention is to append numbered sections (27, 28, 29) to `phase41b0r-family-entity-architecture-reconciliation.md`. This text is held in a separate file until the owner approves it. Once approved, it is appended there verbatim as section 30, and section 29 keeps its original text. Supporting analysis: `phase41b-g1-account-deletion-gate-plan.md`.
+Status: **APPLIED / SUPERSEDED (7 October 2026, gate stage G2).** The owner approved this proposal. It is appended to `phase41b0r-family-entity-architecture-reconciliation.md` as section 30, the authoritative text, with the AD-1 wording finalised there: same-`user_id` requirement items 1–4, registered parents, and the Layer 1/Layer 2 enforcement. This file is kept unchanged below as the G1 proposal record. Where it differs from section 30, section 30 governs. The production account-deletion gate remains OPEN.
+
+Original status (G1): **PROPOSED. NOT APPLIED TO THE 41B.0-R DOCUMENT. NOT APPROVED.** Written 7 October 2026 at gate stage G1 (paper only). The 41B.0-R convention is to append numbered sections (27, 28, 29) to `phase41b0r-family-entity-architecture-reconciliation.md`. This text is held in a separate file until the owner approves it. Once approved, it is appended there verbatim as section 30, and section 29 keeps its original text. Supporting analysis: `phase41b-g1-account-deletion-gate-plan.md`.
 
 **The production account-deletion gate remains OPEN.** Nothing in this section closes it.
 

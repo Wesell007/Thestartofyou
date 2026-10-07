@@ -4,6 +4,15 @@ Status: **PAPER / TEST DESIGN ONLY. NOT EXECUTED.** Written 7 October 2026 by Cl
 
 **PRODUCTION ACCOUNT-DELETION GATE: OPEN. READY FOR 41B.1B: NO. N10: OPEN.**
 
+**G2 status update (7 October 2026).**
+- Owner approved the corrected model, proposed 41B.0-R section 30 and AD-1.
+- Section 30 is applied to the 41B.0-R document (authoritative AD-1 wording there, including the same-`user_id` requirement).
+- The 13 Episode FKs stay `ON DELETE RESTRICT`, NOT DEFERRABLE. No change to frozen 41B.1A SQL, and no new migration.
+- **Layer 1 static contract: IMPLEMENTED and PASS.** Files: `src/test/accountDeletionInvariant.test.ts` and `src/test/support/accountDeletionInvariant.ts`. 30 tests; 13 Episode links discovered dynamically, all AD-1 PASS; negative and fail-closed fixtures included.
+- **Layer 2 catalogue contract: WRITTEN / NOT EXECUTED** against any remote database: `docs/strategy/rehearsal-support/ad1-catalogue-contract.sql`. Its SQL was checked only on an in-memory PGlite 17.5 instance in a local scratch directory, with synthetic schemas. Results: current-shape synthetic schema 13 PASS and gate PASS; negative fixtures FAIL with the expected reasons. That check is not rehearsal evidence.
+- Frozen 41B.1A hashes are unchanged and asserted by the Layer 1 suite.
+- Targeted runtime rehearsal: NOT STARTED. The hosted rehearsal project still needs owner cost and creation approval.
+
 Inputs: G0 paper decision (owner accepted the reframing in principle, 7 October 2026); proposed 41B.0-R section 30 (`phase41b0r-proposed-section-30-account-deletion-correction.md`); C1 evidence `docs/strategy/evidence/41b1a-c1/`; frozen 41B.1A SQL (`e6ad0bc8…` / `8645fd67…` / `0d008955…`); `supabase/functions/delete-account/index.ts`; `src/pages/AccountSettings.tsx`.
 
 ---
@@ -50,7 +59,7 @@ The catalogue holds 50 FKs: 34 CASCADE, 3 SET NULL and 13 RESTRICT. There are 0 
 | 41B.1D (pointer and constraint tightening) | Any constraint change on the 13 links or the pointer is re-checked by both layers. Changing an action from RESTRICT to CASCADE or SET NULL needs a separate architecture decision |
 | Every future migration | The static test runs in CI over all migrations. Every rehearsal plan's catalogue stage includes the layer-2 query |
 
-## 3. Static contract (design only; not written)
+## 3. Static contract (G1 design; Layer 1 implemented and Layer 2 written at G2, see the status update above)
 
 Two layers. Layer 1 is the early warning, and layer 2 is authoritative.
 

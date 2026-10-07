@@ -1,6 +1,8 @@
 # 41B.1A-C1 — 27 C1.19 teardown and closeout
 
-Status: **C1.19 HOLD — OWNER PAT REVOCATION REQUIRED.** Every other C1.19 action is complete: both hosted rehearsal projects were paused by the owner and deleted, local rehearsal credentials were removed, the CLI was logged out and all scratch material was removed. The plan (C1.19: "rotate the access token"; section O: "Access token rotated and projects deleted at teardown") makes token rotation part of teardown, and that is an owner dashboard action. This record serves as the plan's `99-summary.md` teardown summary.
+Status: **C1.19 PASS — C1 CLOSED.** Both hosted rehearsal projects were paused by the owner and deleted, local rehearsal credentials were removed, the CLI was logged out, all scratch material was removed, and the owner revoked the Supabase personal access token used for C1 through the dashboard (2026-10-07), completing the plan's "rotate the access token" requirement (C1.19; section O). This record serves as the plan's `99-summary.md` teardown summary.
+
+**41B.1A-C1 = COMPLETE.**
 
 **41B.1A = REHEARSAL PASS.** All 18 mandatory criteria of plan section P are evidenced (C1.0–C1.17 PASS; C1.18 exploratory observation PASS, not a criterion).
 
@@ -19,7 +21,7 @@ Status: **C1.19 HOLD — OWNER PAT REVOCATION REQUIRED.** Every other C1.19 acti
 | Remote preservation | before any destructive action, the 22 C1 commits were pushed by normal fast-forward `d4ba5617..714709f0` to `origin/feat/41b1a-family-entity-foundation`; no force | this record |
 | C1.19 teardown | both projects paused by the owner in the dashboard, then deleted by CLI with explicit refs, one attempt each | `26`–`26e` |
 | C1.19 local cleanup | complete | `26g`, this record |
-| PAT revocation | **owner dashboard action required** | — |
+| PAT revocation | owner revoked the C1 Supabase personal access token in the dashboard (Account → Access Tokens), 2026-10-07; no replacement created | this record |
 
 ## Final hosted snapshots before teardown (`25a`, `25b`, 2026-10-06T23:34:11Z)
 
@@ -44,13 +46,9 @@ Before any removal, three secret scans ran: the credential-value pattern scan ov
 
 Then: Class A files removed by name without reading and verified ABSENT; CLI logged out with the documented `supabase logout --yes` ("Access token deleted successfully. You are now logged out.", `26g`), after which `supabase projects list` fails with `AccessTokenRequiredError`; Class B removed, including both scratch clones (which also removes their CLI project links); the emptied `.c1` directory removed. No `SUPABASE_ACCESS_TOKEN` variable, no `~/.supabase/access-token` file and no `.c1/access_token` file existed. The committed application configuration was not changed and nothing was linked to production. GitHub authentication is separate and unaffected.
 
-## Owner action required to close C1.19
+## Personal access token retirement
 
-`supabase logout` deleted only the local copy of the token. The personal access token itself is still valid until revoked:
-
-1. Open the Supabase dashboard, then **Account → Access Tokens** (`https://supabase.com/dashboard/account/tokens`).
-2. Revoke the token used for the C1 CLI session (created for the 41B.1A-C1 rehearsal around 2026-10-03/04).
-3. Do not create a replacement unless a later phase needs one.
+`supabase logout` (2026-10-06) deleted the local copy of the token. The owner then revoked the token itself in the Supabase dashboard (**Account → Access Tokens**) on 2026-10-07, which closed C1.19. No replacement token was created and the CLI was not logged back in. No token value appears in this evidence.
 
 ## Open findings carried forward (not resolved by C1)
 

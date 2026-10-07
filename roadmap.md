@@ -327,7 +327,7 @@
 - [x] Final closure reconciliation: access rules verified per operation (0 existing to modify), baby composite ownership added, constraint ledger 26 new / 5 changed; 41B.1 NOT STARTED (awaiting approval)
 - [x] Closure evidence return (2026-09-27): 18 tables, 72 coverage positions, 72 distinct policy objects (no FOR ALL, no restrictive), all BOTH; 8/8 findings DESIGN-ADDRESSED. CLOSED PASS / PREGNANCY EPISODE MODEL DESIGNED / MULTI-CHILD RELATIONSHIPS DESIGNED / DESTRUCTIVE FIRST-YEAR RESET REPLACEMENT DESIGNED / LEGACY DATA MIGRATION PATH DEFINED / RLS AND CONTEXT BOUNDARIES DEFINED / ROLLBACK AND TEST STRATEGY DEFINED / READY FOR 41B.1 IMPLEMENTATION
 
-## Phase 41B.1A — Family Entity Foundation (AMENDED / NOT APPLIED / AWAITING 41B.1A-C1 REHEARSAL)
+## Phase 41B.1A — Family Entity Foundation (AMENDED / NOT APPLIED / 41B.1A-C1 REHEARSAL PASS)
 - [x] Pending additive migration: docs/strategy/migrations-pending/41b1a_family_entity_foundation.sql (19 of 26 target controls; 7 deferred)
 - [x] Static contract tests 13/13; full suite 148 files 1661/1661; typecheck PASS; build PASS
 - [x] Evidence doc: docs/strategy/phase41b1a-family-entity-foundation-implementation.md
@@ -354,7 +354,7 @@
 - [x] 41B.1A pre-push review passed and branch pushed (commit 9dbdfa46); pre-rehearsal hardening committed separately (comment fix, structural static tests, `SUPERSEDED BY 41B.0-R` markers on the five 41B.0 documents).
 - [x] 41B.1A STATIC PRE-REHEARSAL GATE = CLOSED PASS (3 October 2026). Hardening commits 68ccc6d4 and 735a07e6 independently reviewed and pushed; authoritative rehearsal source is `735a07e6` (forward e6ad0bc8…, validate 8645fd67…, rollback 0d008955…, SHA-256). No further static hardening planned.
 - [x] 41B.1A-C1 rehearsal plan written, independently reviewed (PASS, no blockers) and finalised: `docs/strategy/phase41b1a-c1-rehearsal-plan.md` (refusal reachability and guard order corrected; PostgREST authoritative for RLS; diff exclusions, version-mismatch owner gate and tooling prerequisites added).
-- [x] 41B.1A-C1 execution authorised by the owner (PostgreSQL 17.11 accepted; live version unknown). Two isolated projects exist in the owner's organisation: `tsoy-41b1a-c1-run1` (`wwtcnbjhttjtklpxhrkd`) and `tsoy-41b1a-c1-run2` (`dlftnirrnirlkhxpofoq`).
+- [x] 41B.1A-C1 execution authorised by the owner (PostgreSQL 17.11 accepted; live version unknown). Two isolated projects existed in the owner's organisation (both deleted 2026-10-06 at C1.19): `tsoy-41b1a-c1-run1` (`wwtcnbjhttjtklpxhrkd`) and `tsoy-41b1a-c1-run2` (`dlftnirrnirlkhxpofoq`).
 - [x] C1.0 PASS (identity, marker, zero users). C1.1 PASS (2026-10-04): 47 migrations from `735a07e6` replayed on Project 1 via Supabase CLI 2.119.0, history 47/47, baseline catalogue captured and classified against the live snapshot with no unexpected drift, `pregnancy_episodes` absent. Evidence: `docs/strategy/evidence/41b1a-c1/`.
 - [x] C1.2 PASS (2026-10-04): three synthetic Auth users (`@example.invalid`, confirmed, sign-in verified) and 21 legacy fixture rows per plan §F on Project 1; schema hashes identical to C1.1; history 47/47. Evidence `07-c1-2-fixture-manifest.md`, `07a-synthetic-ids.json`.
 - [x] C1.3 PASS — forced-failure transaction atomicity proven (2026-10-04): psql 17.11 `-1` + `ON_ERROR_STOP=1` on the direct endpoint ran every forward statement then the appended deliberate failure (exit 3); all nine catalogue hashes identical afterwards, no 41B.1A object, history 47/47, fixture intact. Evidence `08-c1-3-forced-failure-transcript.log`, `08a-c1-3-atomicity-summary.md`.
@@ -382,7 +382,7 @@
 - [ ] 41B.1B: NOT STARTED / NOT AUTHORISED. READY FOR 41B.1B = NO.
 - 41B.1B NOT STARTED (pre-41B.1B account-deletion gate still open)
 - [ ] PRE-41B.1B GATE (owner decision or evidence): account deletion under the 13 `ON DELETE RESTRICT` links depends on RI-trigger firing order on `auth.users`, which is OID-based and not portable from rehearsal to production. Close by structure-only production `pg_trigger` evidence, an approved design change (e.g. deferrable `NO ACTION`), or explicit deletion ordering in `delete-account`. No row may be bound before this closes. See 41B.0-R §29.
-- 41B.1A-C1 NOT STARTED
+- 41B.1A-C1 COMPLETE (C1.19 PASS — C1 CLOSED, 2026-10-07)
 - 41B.1B NOT STARTED
 - IVF-SAVE-R PARKED
 - Claude Code = canonical implementation owner; the GitHub repository is the single source of truth

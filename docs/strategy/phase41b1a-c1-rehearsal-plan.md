@@ -1,6 +1,8 @@
 # Phase 41B.1A-C1 — Isolated Hosted Supabase Rehearsal: Plan
 
-Status: **FINAL PLAN. NOT AUTHORISED FOR EXECUTION.** Independently reviewed (PASS, no blockers) and finalised on 3 October 2026 with the two non-blocking corrections from that review folded in (rollback-refusal reachability and sequencing; PostgREST as the authoritative RLS channel). Planning only; nothing in this document has been run. No project exists, no credential has been issued, no database has been connected to. C1 has NOT started.
+Current status (7 October 2026): **EXECUTED. C1.19 PASS — C1 CLOSED; 41B.1A-C1 = COMPLETE; 41B.1A = REHEARSAL PASS.** Both rehearsal projects deleted; the C1 access token revoked. See `docs/strategy/evidence/41b1a-c1/27-c1-19-closeout.md`. The pre-41B.1B account-deletion gate (section R) and finding N10 remain OPEN. The original planning-time status follows unchanged.
+
+Original status (3 October 2026): **FINAL PLAN. NOT AUTHORISED FOR EXECUTION.** Independently reviewed (PASS, no blockers) and finalised on 3 October 2026 with the two non-blocking corrections from that review folded in (rollback-refusal reachability and sequencing; PostgREST as the authoritative RLS channel). Planning only; nothing in this document has been run. No project exists, no credential has been issued, no database has been connected to. C1 has NOT started.
 
 Date: 3 October 2026. Author of record: Claude Code (implementation owner). Approver: the owner.
 

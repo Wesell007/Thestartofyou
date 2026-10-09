@@ -1,10 +1,16 @@
 # N10.1 — 99 Summary: hosted Storage/Auth semantics probe
 
-**Result: N10.1 PASS. The question it was built to answer now has a decisive answer, pending owner evidence review.** Executed 2026-10-09 (UTC) on disposable project `tsoy-n10-r1-rehearsal` (`gbhwpzofnswlryqjoumw`, eu-west-2, PostgreSQL 17.11.0.003). The predictions were committed locally (`a8c06aa6`, 05:07:12Z) before R1 (05:07:18Z).
+**Closeout (2026-10-09): N10.1 CLOSED PASS.**
+
+- Owner accepted; evidence remotely preserved (`a8c06aa6`, `bb6928c8`).
+- Project and token retired by the owner; local credentials removed (`10-teardown-and-closeout.md`).
+- N10 = OPEN. N10.2 = NOT STARTED.
+
+**Result: N10.1 PASS. The question it was built to answer now has a decisive answer.** Executed 2026-10-09 (UTC) on disposable project `tsoy-n10-r1-rehearsal` (`gbhwpzofnswlryqjoumw`, eu-west-2, PostgreSQL 17.11.0.003). The predictions were committed locally (`a8c06aa6`, 05:07:12Z) before R1 (05:07:18Z).
 
 | Question | Answer | Evidence |
 |---|---|---|
-| **R1** Can a user who owns a Storage object (uploaded with their own token; `owner_id` = their id) be hard-deleted through `auth.admin.deleteUser`? | **YES.** HTTP 200 in 0.144 s; user absent afterwards. **H2 confirmed**; the guide's H1 does not hold on hosted Supabase today. The catalogue agrees: no FK from Storage to `auth.users`; migration `drop-owner-foreign-key` applied | `04` |
+| **R1** Can a user who owns a Storage object (uploaded with their own token; `owner_id` = their id) be hard-deleted through `auth.admin.deleteUser`? | **YES.** HTTP 200 in 0.144 s; user absent afterwards. **H2 confirmed.** The official Supabase guide (H1) conflicted with behaviour observed on this hosted rehearsal environment on 9 October 2026. The catalogue agrees: no FK from Storage to `auth.users`; migration `drop-owner-foreign-key` applied | `04` |
 | **R2** Does the object remain? | **YES**, with byte-identical content. Auth deletion does no Storage cleanup | `05` |
 | **R3** What happens to `owner_id`? | **Unchanged**: `owner` and `owner_id` keep the deleted user's id | `06` |
 | **R4** Can the pre-deletion access token still upload to Storage? | **YES.** HTTP 200; a new object was created with `owner_id` = the deleted id. The same token gets 403 `user_not_found` from Auth, and the refresh token is rejected (400). Exposure lasts until the token expires (3600 s here) | `07` |
@@ -32,6 +38,6 @@
 | G3 | CLOSED PASS |
 | RI/account-deletion database gate | CLOSED / PASS (unchanged by N10.1) |
 | N10 | OPEN; direction selected (Candidate E), not implemented |
-| N10.1 | PASS, owner evidence review pending; project **not** torn down; evidence committed locally, **not pushed** |
+| N10.1 | CLOSED PASS: owner accepted, remotely preserved, project and token retired, local credentials removed |
 | 41B.1A applied to production | NO |
 | 41B.1B | NOT STARTED / NOT AUTHORISED. N10 is not a documented 41B.1B prerequisite (N10.0) |

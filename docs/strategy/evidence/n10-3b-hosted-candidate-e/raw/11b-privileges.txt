@@ -1,0 +1,403 @@
+== sequences usable by worker
+nspname | relname
+net | http_request_queue_id_seq
+== foreign servers usable
+srvname
+== database privileges
+connect_ | create_ | temp_
+t | f | t
+== effective table privileges in ANY schema the worker can use (incl. via PUBLIC)
+nspname | relname | relkind | sel | ins | upd | del
+extensions | pg_stat_statements_info | v | t | f | f | f
+extensions | pg_stat_statements | v | t | f | f | f
+net | http_request_queue | r | t | t | t | t
+net | _http_response | r | t | t | t | t
+cron | job | r | t | f | f | f
+cron | job_run_details | r | t | f | f | t
+== net table ACLs
+relname | relacl
+_http_response | {supabase_admin=arwdDxtm/supabase_admin,=arwdDxtm/supabase_admin}
+http_request_queue | {supabase_admin=arwdDxtm/supabase_admin,=arwdDxtm/supabase_admin}
+== public callable function definitions
+proname | pg_get_functiondef
+normalise_companion_memory | CREATE OR REPLACE FUNCTION public.normalise_companion_memory(p_value text)
+ RETURNS text
+ LANGUAGE sql
+ IMMUTABLE
+ SET search_path TO 'public'
+AS $function$
+  SELECT lower(regexp_replace(btrim(coalesce(p_value, '')), '\s+', ' ', 'g'))
+$function$
+
+set_updated_at | CREATE OR REPLACE FUNCTION public.set_updated_at()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public'
+AS $function$
+BEGIN NEW.updated_at = now(); RETURN NEW; END;
+$function$
+
+validate_baby_date_of_birth | CREATE OR REPLACE FUNCTION public.validate_baby_date_of_birth()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+BEGIN
+  IF NEW.date_of_birth > (now() AT TIME ZONE 'UTC')::date THEN
+    RAISE EXCEPTION 'A date of birth cannot be in the future' USING ERRCODE = '22023';
+  END IF;
+  IF NEW.date_of_birth < ((now() AT TIME ZONE 'UTC')::date - 1826) THEN
+    RAISE EXCEPTION 'That date of birth is too far in the past' USING ERRCODE = '22023';
+  END IF;
+  RETURN NEW;
+END;
+$function$
+
+validate_companion_conversation | CREATE OR REPLACE FUNCTION public.validate_companion_conversation()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+BEGIN
+  IF TG_OP = 'UPDATE' AND NEW.user_id IS DISTINCT FROM OLD.user_id THEN
+    RAISE EXCEPTION 'A conversation cannot change owner' USING ERRCODE = '42501';
+  END IF;
+  NEW.title := nullif(btrim(coalesce(NEW.title, '')), '');
+  IF NEW.title IS NOT NULL AND char_length(NEW.title) > 120 THEN
+    NEW.title := substr(NEW.title, 1, 120);
+  END IF;
+  RETURN NEW;
+END;
+$function$
+
+validate_companion_memory | CREATE OR REPLACE FUNCTION public.validate_companion_memory()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_count integer;
+BEGIN
+  IF TG_OP = 'UPDATE' AND NEW.user_id IS DISTINCT FROM OLD.user_id THEN
+    RAISE EXCEPTION 'A memory cannot change owner' USING ERRCODE = '42501';
+  END IF;
+
+  NEW.value := btrim(NEW.value);
+  IF NEW.value = '' THEN
+    RAISE EXCEPTION 'There is nothing to remember yet' USING ERRCODE = '22023';
+  END IF;
+
+  -- Structural backstop only. This rejects obvious credential-shaped values;
+  -- it is not, and is not claimed to be, a complete sensitive-data classifier.
+  -- The richer product policy lives in the application layer.
+  IF NEW.value ~* '(password|passphrase|passcode|api[ _-]?key|secret key|access token|auth token|private key|-----BEGIN|security question|security answer|one[ -]?time code|sort code|card number|cvv|cvc)' THEN
+    RAISE EXCEPTION 'That is not something the companion keeps' USING ERRCODE = '22023';
+  END IF;
+  IF NEW.value ~ '(?:[0-9][ -]?){13,19}' THEN
+    RAISE EXCEPTION 'That is not something the companion keeps' USING ERRCODE = '22023';
+  END IF;
+
+  IF TG_OP = 'INSERT' THEN
+    PERFORM pg_advisory_xact_lock(hashtextextended(NEW.user_id::text, 424242));
+    SELECT count(*) INTO v_count FROM public.companion_memories WHERE user_id = NEW.user_id;
+    IF v_count >= 50 THEN
+      RAISE EXCEPTION 'You have reached the maximum number of saved memories' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  RETURN NEW;
+END;
+$function$
+
+validate_companion_message | CREATE OR REPLACE FUNCTION public.validate_companion_message()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_owner uuid;
+BEGIN
+  IF TG_OP = 'UPDATE' THEN
+    IF NEW.user_id IS DISTINCT FROM OLD.user_id THEN
+      RAISE EXCEPTION 'A message cannot change owner' USING ERRCODE = '42501';
+    END IF;
+    IF NEW.conversation_id IS DISTINCT FROM OLD.conversation_id THEN
+      RAISE EXCEPTION 'A message cannot move to another conversation' USING ERRCODE = '42501';
+    END IF;
+  END IF;
+
+  SELECT user_id INTO v_owner FROM public.companion_conversations WHERE id = NEW.conversation_id;
+  IF v_owner IS NULL OR v_owner IS DISTINCT FROM NEW.user_id THEN
+    RAISE EXCEPTION 'That conversation could not be found on this account' USING ERRCODE = '42501';
+  END IF;
+
+  NEW.content := btrim(NEW.content);
+  IF NEW.content = '' THEN
+    RAISE EXCEPTION 'There is nothing to save yet' USING ERRCODE = '22023';
+  END IF;
+  RETURN NEW;
+END;
+$function$
+
+validate_first_year_care_event | CREATE OR REPLACE FUNCTION public.validate_first_year_care_event()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_actor uuid := auth.uid();
+  v_lifecycle text;
+  v_baby_dob date;
+  v_feed_mode text;
+  v_bottle_type text;
+BEGIN
+  IF v_actor IS NOT NULL AND NEW.user_id <> v_actor THEN
+    RAISE EXCEPTION 'You can only save your own logs' USING ERRCODE = '42501';
+  END IF;
+
+  SELECT lifecycle INTO v_lifecycle FROM public.journeys WHERE user_id = NEW.user_id;
+  IF v_lifecycle IS DISTINCT FROM 'first_year' THEN
+    RAISE EXCEPTION 'Care logs can only be saved on a First Year journey' USING ERRCODE = '22023';
+  END IF;
+
+  SELECT date_of_birth INTO v_baby_dob
+  FROM public.babies WHERE id = NEW.baby_id AND user_id = NEW.user_id;
+  IF v_baby_dob IS NULL THEN
+    RAISE EXCEPTION 'That baby could not be found on this account' USING ERRCODE = '22023';
+  END IF;
+
+  NEW.note := nullif(btrim(coalesce(NEW.note, '')), '');
+  IF NEW.metadata IS NULL OR jsonb_typeof(NEW.metadata) <> 'object' THEN
+    NEW.metadata := '{}'::jsonb;
+  END IF;
+
+  IF NEW.event_type = 'sleep' THEN
+    NEW.occurred_at := NEW.started_at;
+  ELSIF NEW.event_type = 'feed' THEN
+    IF NEW.started_at IS NOT NULL THEN
+      NEW.occurred_at := NEW.started_at;
+    END IF;
+  ELSE
+    NEW.started_at := NULL;
+    NEW.ended_at := NULL;
+  END IF;
+
+  IF NEW.occurred_at IS NULL THEN
+    RAISE EXCEPTION 'A time is needed for this log' USING ERRCODE = '22023';
+  END IF;
+  IF NEW.occurred_at > now() + interval '5 minutes' THEN
+    RAISE EXCEPTION 'A log cannot be saved for a future time' USING ERRCODE = '22023';
+  END IF;
+  IF NEW.ended_at IS NOT NULL AND NEW.ended_at > now() + interval '5 minutes' THEN
+    RAISE EXCEPTION 'A log cannot end in the future' USING ERRCODE = '22023';
+  END IF;
+  IF (NEW.occurred_at AT TIME ZONE 'UTC')::date < v_baby_dob - 1 THEN
+    RAISE EXCEPTION 'A log cannot be saved before your baby was born' USING ERRCODE = '22023';
+  END IF;
+
+  IF NEW.event_type = 'feed' THEN
+    v_feed_mode := NEW.metadata->>'feed_mode';
+    IF v_feed_mode IS NULL OR v_feed_mode NOT IN ('breast','bottle') THEN
+      RAISE EXCEPTION 'Please choose breast or bottle' USING ERRCODE = '22023';
+    END IF;
+    IF v_feed_mode = 'bottle' THEN
+      v_bottle_type := NEW.metadata->>'bottle_type';
+      IF v_bottle_type IS NULL OR v_bottle_type NOT IN ('expressed','formula','tube','other') THEN
+        RAISE EXCEPTION 'Please choose what was in the bottle' USING ERRCODE = '22023';
+      END IF;
+      NEW.started_at := NULL;
+      NEW.ended_at := NULL;
+    END IF;
+    IF NEW.metadata->>'active_side' IS NOT NULL
+       AND NEW.metadata->>'active_side' NOT IN ('left','right') THEN
+      RAISE EXCEPTION 'That feed side could not be saved' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  IF NEW.event_type = 'nappy' THEN
+    IF NEW.nappy_type IS NULL THEN
+      RAISE EXCEPTION 'Please choose a nappy type' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.metadata->>'rash_level' IS NOT NULL
+       AND NEW.metadata->>'rash_level' NOT IN ('no','little','yes','unsure') THEN
+      RAISE EXCEPTION 'That nappy detail could not be saved' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.metadata->>'poo_texture' IS NOT NULL
+       AND NEW.metadata->>'poo_texture' NOT IN ('runny','soft','formed','hard','other') THEN
+      RAISE EXCEPTION 'That nappy detail could not be saved' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.metadata->>'poo_size' IS NOT NULL
+       AND NEW.metadata->>'poo_size' NOT IN ('small','medium','large') THEN
+      RAISE EXCEPTION 'That nappy detail could not be saved' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.metadata->>'poo_colour' IS NOT NULL
+       AND NEW.metadata->>'poo_colour' NOT IN ('yellow','brown','green','other') THEN
+      RAISE EXCEPTION 'That nappy detail could not be saved' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  IF NEW.event_type = 'note' AND NEW.note IS NULL THEN
+    RAISE EXCEPTION 'There is nothing to save yet' USING ERRCODE = '22023';
+  END IF;
+
+  RETURN NEW;
+END;
+$function$
+
+validate_first_year_entry | CREATE OR REPLACE FUNCTION public.validate_first_year_entry()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_actor uuid := auth.uid();
+  v_tag text;
+  v_lifecycle text;
+  v_baby_dob date;
+  v_earliest_dob date;
+BEGIN
+  IF v_actor IS NOT NULL AND NEW.user_id <> v_actor THEN
+    RAISE EXCEPTION 'You can only save your own notes' USING ERRCODE = '42501';
+  END IF;
+
+  SELECT lifecycle INTO v_lifecycle FROM public.journeys WHERE user_id = NEW.user_id;
+  IF v_lifecycle IS DISTINCT FROM 'first_year' THEN
+    RAISE EXCEPTION 'First Year notes can only be saved on a First Year journey'
+      USING ERRCODE = '22023';
+  END IF;
+
+  IF NEW.tags IS NOT NULL THEN
+    FOREACH v_tag IN ARRAY NEW.tags LOOP
+      IF btrim(v_tag) = '' OR char_length(v_tag) > 40 THEN
+        RAISE EXCEPTION 'Tags must be short labels' USING ERRCODE = '22023';
+      END IF;
+    END LOOP;
+  END IF;
+
+  IF NEW.lane = 'baby' THEN
+    IF NEW.baby_id IS NULL THEN
+      RAISE EXCEPTION 'A baby note needs a baby' USING ERRCODE = '22023';
+    END IF;
+    SELECT date_of_birth INTO v_baby_dob
+    FROM public.babies
+    WHERE id = NEW.baby_id AND user_id = NEW.user_id;
+    IF v_baby_dob IS NULL THEN
+      RAISE EXCEPTION 'That baby could not be found on this account' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.entry_date < v_baby_dob THEN
+      RAISE EXCEPTION 'A note cannot be saved before your baby was born' USING ERRCODE = '22023';
+    END IF;
+  ELSE
+    IF NEW.baby_id IS NOT NULL THEN
+      RAISE EXCEPTION 'A note about you cannot be attached to a baby' USING ERRCODE = '22023';
+    END IF;
+    SELECT min(date_of_birth) INTO v_earliest_dob
+    FROM public.babies
+    WHERE user_id = NEW.user_id;
+    IF v_earliest_dob IS NOT NULL AND NEW.entry_date < v_earliest_dob THEN
+      RAISE EXCEPTION 'A note cannot be saved before your baby was born' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  IF NEW.entry_date > ((now() AT TIME ZONE 'UTC')::date + 1) THEN
+    RAISE EXCEPTION 'A note cannot be saved for a future date' USING ERRCODE = '22023';
+  END IF;
+
+  RETURN NEW;
+END;
+$function$
+
+validate_first_year_memory | CREATE OR REPLACE FUNCTION public.validate_first_year_memory()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_actor uuid := auth.uid();
+  v_lifecycle text;
+  v_earliest_dob date;
+  v_baby_owner uuid;
+  v_entry_owner uuid;
+BEGIN
+  IF v_actor IS NOT NULL AND NEW.user_id <> v_actor THEN
+    RAISE EXCEPTION 'You can only save your own memories' USING ERRCODE = '42501';
+  END IF;
+
+  SELECT lifecycle INTO v_lifecycle FROM public.journeys WHERE user_id = NEW.user_id;
+  IF v_lifecycle IS DISTINCT FROM 'first_year' THEN
+    RAISE EXCEPTION 'Memories can only be saved on a First Year journey' USING ERRCODE = '22023';
+  END IF;
+
+  NEW.note := btrim(NEW.note);
+  NEW.title := nullif(btrim(coalesce(NEW.title, '')), '');
+
+  IF NEW.baby_id IS NOT NULL THEN
+    SELECT user_id INTO v_baby_owner FROM public.babies WHERE id = NEW.baby_id;
+    IF v_baby_owner IS DISTINCT FROM NEW.user_id THEN
+      RAISE EXCEPTION 'That baby could not be found on this account' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  IF NEW.source_entry_id IS NOT NULL THEN
+    SELECT user_id INTO v_entry_owner FROM public.first_year_entries WHERE id = NEW.source_entry_id;
+    IF v_entry_owner IS DISTINCT FROM NEW.user_id THEN
+      RAISE EXCEPTION 'That note could not be found on this account' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  SELECT min(date_of_birth) INTO v_earliest_dob FROM public.babies WHERE user_id = NEW.user_id;
+  IF v_earliest_dob IS NOT NULL AND NEW.memory_date < v_earliest_dob THEN
+    RAISE EXCEPTION 'A memory cannot be saved before your baby was born' USING ERRCODE = '22023';
+  END IF;
+
+  IF NEW.memory_date > ((now() AT TIME ZONE 'UTC')::date + 1) THEN
+    RAISE EXCEPTION 'A memory cannot be saved for a future date' USING ERRCODE = '22023';
+  END IF;
+
+  IF NEW.photo_path IS NOT NULL THEN
+    NEW.photo_path := btrim(NEW.photo_path);
+    IF NEW.photo_path NOT LIKE (NEW.user_id::text || '/' || NEW.id::text || '/%') THEN
+      RAISE EXCEPTION 'That photo could not be saved to this memory' USING ERRCODE = '22023';
+    END IF;
+    IF NEW.photo_path LIKE '%..%' THEN
+      RAISE EXCEPTION 'That photo could not be saved to this memory' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  RETURN NEW;
+END;
+$function$
+
+validate_first_year_reminder | CREATE OR REPLACE FUNCTION public.validate_first_year_reminder()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SET search_path TO 'public', 'pg_temp'
+AS $function$
+DECLARE
+  v_actor uuid := auth.uid();
+  v_baby_owner uuid;
+BEGIN
+  IF v_actor IS NOT NULL AND NEW.user_id <> v_actor THEN
+    RAISE EXCEPTION 'You can only save your own reminders' USING ERRCODE = '42501';
+  END IF;
+
+  NEW.label := nullif(btrim(coalesce(NEW.label, '')), '');
+
+  IF NEW.baby_id IS NOT NULL THEN
+    SELECT user_id INTO v_baby_owner FROM public.babies WHERE id = NEW.baby_id;
+    IF v_baby_owner IS DISTINCT FROM NEW.user_id THEN
+      RAISE EXCEPTION 'That baby could not be found on this account' USING ERRCODE = '22023';
+    END IF;
+  END IF;
+
+  RETURN NEW;
+END;
+$function$
+
+== net C function symbols
+proname | prosrc | probin
+_encode_url_with_params_array | _encode_url_with_params_array | $libdir/pg_net
+_urlencode_string | _urlencode_string | $libdir/pg_net
+wait_until_running | wait_until_running | $libdir/pg_net
+wake | wake | $libdir/pg_net
+worker_restart | worker_restart | $libdir/pg_net

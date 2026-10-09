@@ -1,0 +1,28 @@
+requests (user|status|auth_deleted_at|final_sweep_after|completed_at|completed_not_before_window|removed|sweep_removed|anomalies):
+  P|awaiting_final_sweep|2026-10-09 09:42:07.210358+00|2026-10-09 10:57:07.210358+00||t|5|0|0
+  S|awaiting_final_sweep|2026-10-09 09:42:07.929919+00|2026-10-09 10:57:07.929919+00||t|4|0|0
+  A|awaiting_final_sweep|2026-10-09 10:01:10.998498+00|2026-10-09 11:16:10.998498+00||t|4|0|0
+  F|awaiting_final_sweep|2026-10-09 10:07:00.568546+00|2026-10-09 11:22:00.568546+00||t|4|0|0
+  B|awaiting_final_sweep|2026-10-09 10:04:56.205195+00|2026-10-09 11:19:56.205195+00||t|1112|0|0
+  D|awaiting_final_sweep|2026-10-09 10:08:00.804527+00|2026-10-09 11:23:00.804527+00||t|4|0|0
+  <anonymised>|completed|2026-10-09 07:12:00.559522+00|2026-10-09 08:27:00.559522+00|2026-10-09 10:12:52.791239+00|t|0|0|0
+  N|purge_attention|2026-10-09 10:11:42.774351+00|2026-10-09 11:26:42.774351+00||t|3|0|1
+PASS A4 no request ever completed before its final_sweep_after
+PASS A4 real-flow rows still awaiting are not yet due
+PASS C Auth user exists
+PASS C app rows unchanged (1,1)
+PASS C weekly-photos object byte-identical
+PASS C weekly-photos object byte-identical
+PASS C first-year-memories object byte-identical
+PASS C first-year-memories object byte-identical
+PASS C no request row
+non-system schemas: auth,cron,extensions,graphql,graphql_public,n103b_rehearsal,net,private,public,realtime,storage,supabase_migrations,vault
+object counts: {"public tables": "33", "private tables": "1", "private functions": "14", "n10 policies on storage.objects": "8", "all storage.objects policies": "8"}
+PASS failure-injection table absent
+PASS migrations = 50 (max 20261009091430)
+PASS buckets exactly weekly-photos + first-year-memories, both private
+PASS worker role attributes unchanged
+FAIL scratch schema n103b_rehearsal (guard marker) removed — NOTICE:  drop cascades to table n103b_rehearsal.marker
+final at 2026-10-09 10:26:46.52725+00
+
+RESULT: 1 FAIL(S)

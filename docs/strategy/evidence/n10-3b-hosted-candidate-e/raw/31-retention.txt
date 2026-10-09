@@ -1,0 +1,18 @@
+L before: status=awaiting_final_sweep (processed by cron after its lease expired)
+PASS SEEDED L due (guard re-enabled)
+PASS L completed recently (anonymised now)
+PASS SEEDED Q anonymised_at 31 days ago (guard re-enabled)
+rows before cleanup (status|anonymised|count):
+awaiting_final_sweep|f|6
+completed|t|2
+purge_attention|f|1
+PASS worker run (retention 30 configured)
+rows after cleanup:
+awaiting_final_sweep|f|6
+completed|t|1
+purge_attention|f|1
+PASS old completed anonymised row (Q, > 30 days) deleted
+PASS recent completed anonymised row (L) kept
+PASS every active / non-anonymised row kept
+
+RESULT: PASS

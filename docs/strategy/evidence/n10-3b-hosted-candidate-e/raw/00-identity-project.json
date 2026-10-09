@@ -1,0 +1,16 @@
+{
+  "id": "toqeefrwnsjuhjmobodg",
+  "ref": "toqeefrwnsjuhjmobodg",
+  "name": "tsoy-n10-3b-rehearsal",
+  "organization_id": "xzickmpbmsjgkowcqpbg",
+  "organization_slug": "xzickmpbmsjgkowcqpbg",
+  "region": "eu-west-2",
+  "status": "ACTIVE_HEALTHY",
+  "created_at": "2026-10-09T04:03:09.442228Z",
+  "database": {
+    "host": "db.toqeefrwnsjuhjmobodg.supabase.co",
+    "version": "17.11.0.003",
+    "postgres_engine": "17",
+    "release_channel": "ga"
+  }
+}

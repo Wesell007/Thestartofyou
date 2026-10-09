@@ -1,0 +1,21 @@
+?column? | count | count
+cron runs before vault | 12 | 12
+(1 row)
+?column? | count
+net responses before vault | 0
+(1 row)
+url_created
+t
+(1 row)
+invoke_created
+t
+(1 row)
+?column? | string_agg
+vault names | n10_account_deletion_worker_invoke_secret,n10_account_deletion_worker_url
+(1 row)
+?column? | count
+superseded service_key name present | 0
+(1 row)
+?column? | now
+enabled at | 2026-10-09 09:43:07.658611+00
+(1 row)

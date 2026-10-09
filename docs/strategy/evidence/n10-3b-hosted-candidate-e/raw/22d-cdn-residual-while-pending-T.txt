@@ -1,0 +1,15 @@
+PASS T upload
+T download before freeze (cache seed): HTTP 200 cache=MISS
+T download before freeze (second): HTTP 200 cache=HIT
+PASS T FAILURE-INJECTION blocker created
+T delete-account: HTTP 202 {"status":"deletion_in_progress"} at 2026-10-09 10:29:58.08876+00
+PASS T Auth deletion failed truthfully (202), Auth present
+t+    2s cached-path HTTP 200 cache=HIT age=None serves_bytes=True | origin(cache-busted) HTTP 400 cache=BYPASS | request=requested attempts=1 auth=True media=1
+t+  317s cached-path HTTP 200 cache=HIT age=None serves_bytes=True | origin(cache-busted) HTTP 400 cache=BYPASS | request=requested attempts=3 auth=True media=1
+t+  632s cached-path HTTP 200 cache=HIT age=None serves_bytes=True | origin(cache-busted) HTTP 400 cache=BYPASS | request=requested attempts=4 auth=True media=1
+t+  949s cached-path HTTP 200 cache=HIT age=None serves_bytes=True | origin(cache-busted) HTTP 400 cache=BYPASS | request=requested attempts=4 auth=True media=1
+t+ 1201s cached-path HTTP 200 cache=HIT age=None serves_bytes=True | origin(cache-busted) HTTP 400 cache=BYPASS | request=requested attempts=4 auth=True media=1
+end of pending window: cached path serves=True after 25 min; media untouched=True
+PASS T blocker removed
+
+RESULT: PASS

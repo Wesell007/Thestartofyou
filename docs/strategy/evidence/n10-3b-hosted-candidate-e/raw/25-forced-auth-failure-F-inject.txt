@@ -1,0 +1,15 @@
+PASS F0 scratch FAILURE-INJECTION blocker created (1 row) — 1
+PASS F0 download (cache seed)
+PASS F0 createSignedUrl 3600 s
+F1 delete-account: HTTP 202 body={"status":"deletion_in_progress"} in 0.9 s at 2026-10-09 10:02:21.77919+00
+PASS F1 HTTP is truthful (202 deletion_in_progress or 500 deletion_failed), never 200
+PASS F2 Auth user still exists
+PASS F2 request requested (backoff) or auth_attention — status=requested class=auth_transient attempts=1 next=2026-10-09 10:03:20.931968+00
+PASS F2: exactly the 4 original F objects (zero removed) — rows=4
+PASS F2: weekly-photos byte-identical — HTTP 200
+PASS F2: weekly-photos byte-identical — HTTP 200
+PASS F2: first-year-memories byte-identical — HTTP 200
+PASS F2: first-year-memories byte-identical — HTTP 200
+F2 pre-issued signed URL after failed deletion: HTTP 200 serves=True (D15 accepted residual: Auth deletion failed, media untouched)
+
+RESULT: PASS

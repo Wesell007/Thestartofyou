@@ -1,0 +1,12 @@
+{
+  "http": 200,
+  "read_at_utc": "2026-10-09T09:33:05.425717+00:00",
+  "jwt_exp": 3600,
+  "refresh_token_rotation_enabled": true,
+  "security_refresh_token_reuse_interval": 10,
+  "sessions_timebox": 0,
+  "sessions_inactivity_timeout": 0,
+  "mailer_autoconfirm": false,
+  "external_email_enabled": true,
+  "disable_signup": false
+}

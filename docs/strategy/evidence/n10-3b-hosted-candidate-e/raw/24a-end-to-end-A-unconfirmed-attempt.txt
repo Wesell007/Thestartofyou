@@ -1,0 +1,19 @@
+1 1
+A = 62f76265-50dd-4026-9b97-d6833fadbdb9; app rows (profiles,hospital_bag_items) = 1,1; media = 4; control C app = 1,1
+PASS A0 download (cache seed)
+PASS A0 createSignedUrl 3600 s
+t A0 sign done 09:50:29
+PASS A0 signed URL serves before deletion
+t A1 calling delete-account 09:50:29
+FAIL A1 HTTP 200 — HTTP 400 in 1.1 s
+FAIL A1 body exactly {"status":"account_deleted","cleanup":"removed"} — {"error":"Deletion must be explicitly confirmed."}
+A1 response at 2026-10-09 09:50:30.634074+00
+FAIL U1 A authenticated download (same credential, CDN) stopped serving — still serving after 600 s
+FAIL U1 A pre-issued signed URL stopped serving — still serving after 600 s
+FAIL A2 Auth user absent
+FAIL A2 app rows cascaded (0,0) — 1,1
+FAIL A2 canonical media 0
+Traceback (most recent call last):
+TypeError: 'NoneType' object is not subscriptable
+
+[exited with code 0]

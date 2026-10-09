@@ -1,0 +1,25 @@
+A = 62f76265-50dd-4026-9b97-d6833fadbdb9; app rows (profiles,hospital_bag_items) = 1,1; media = 4; control C app = 1,1
+PASS A0 download (cache seed)
+PASS A0 createSignedUrl 3600 s
+t A0 sign done 10:01:09
+PASS A0 signed URL serves before deletion
+t A1 calling delete-account 10:01:09
+PASS A1 HTTP 200 — HTTP 200 in 2.5 s
+PASS A1 body exactly {"status":"account_deleted","cleanup":"removed"} — {"status":"account_deleted","cleanup":"removed"}
+A1 response at 2026-10-09 10:01:12.295829+00
+PASS U1 A authenticated download (same credential, CDN) stopped serving — 2.9 s after the delete-account call started (HTTP 400, cache=BYPASS)
+PASS U1 A pre-issued signed URL stopped serving — 3.0 s after the delete-account call started (HTTP 400, cache=BYPASS)
+PASS A2 Auth user absent
+PASS A2 app rows cascaded (0,0) — 0,0
+PASS A2 canonical media 0
+PASS A2 request awaiting_final_sweep, NOT completed — status=awaiting_final_sweep
+A2 auth_deleted_at=2026-10-09 10:01:10.998498+00 final_sweep_after=2026-10-09 11:16:10.998498+00 objects_removed=4 next_attempt_at=2026-10-09 11:16:10.998498+00
+PASS A3 final_sweep_after - auth_deleted_at = 01:15:00 (max(3600,3600) s + 15 min); next_attempt_at = final_sweep_after — 01:15:00|t
+PASS A5 stale-JWT insert into public.hospital_bag_items rejected — HTTP 409 {"code":"23503","details":"Key is not present in table \"users\".","hint":null,"message":"insert or update on 
+PASS A5 stale-JWT insert into public.profiles rejected — HTTP 409 {"code":"23503","details":"Key is not present in table \"users\".","hint":null,"message":"insert or update on 
+A5 stale-JWT select own rows: HTTP 200 body=[]
+PASS A5 no account rows resurrected — 0,0
+PASS C unchanged: media
+PASS C unchanged: Auth + app rows — 1,1
+
+RESULT: PASS

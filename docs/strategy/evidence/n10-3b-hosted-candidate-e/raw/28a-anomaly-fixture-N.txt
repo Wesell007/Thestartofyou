@@ -1,0 +1,8 @@
+user-token move to non-canonical path: HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level security policy","c (RLS should refuse: destination not in own folder)
+PASS service-role move canonical -> non-canonical (supported API) — HTTP 200 {"message":"Successfully moved"}
+PASS service-role copy canonical -> non-canonical (supported API) — HTTP 200 {"Key":"weekly-photos/misfiled/n103b-copied-e60b8c09.jpg","Id":"7f9d5e0c-b6f2-4a7c-b102-4142b23c768d
+owner_id after move/copy: misfiled/n103b-copied-e60b8c09.jpg|<NULL>
+misfiled/n103b-moved-e60b8c09.jpg|<N>
+owner_id = N at a non-canonical path: 1 object(s) -> anomaly fixture REPRODUCED via supported APIs
+
+RESULT: PASS

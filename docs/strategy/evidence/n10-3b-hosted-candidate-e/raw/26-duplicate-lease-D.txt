@@ -1,0 +1,14 @@
+PASS precondition: no other request is due — due others=0
+D1 session results: status/acquired = requested|t ; requested|f
+PASS D1 exactly one active request row, same id for both callers
+PASS D1 exactly one caller acquired the lease — acquired=['t', 'f']
+PASS D4 duplicate delete-account during live lease: 202 deletion_in_progress — HTTP 202 {"status":"deletion_in_progress"}
+PASS D4 still one row; Auth untouched; media untouched
+PASS D2 live lease: claim_due returns nothing
+D2b ['S1 claimed|0'] / ['S2 claimed|0']
+FAIL D2b SKIP LOCKED: session 1 claimed D, session 2 (concurrent) claimed nothing
+D3 explicit reclaim returned nothing; current status=awaiting_final_sweep lease_until= (cron may have reclaimed it first)
+PASS D3 expired lease reclaimed (by cron worker)
+D3 at 2026-10-09 10:08:45.77994+00; Auth still exists=False; status=awaiting_final_sweep
+
+RESULT: 1 FAIL(S)

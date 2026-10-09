@@ -1,0 +1,66 @@
+== schemas the worker can USE
+nspname | owner | nspacl
+information_schema | supabase_admin | {supabase_admin=UC/supabase_admin,=U/supabase_admin}
+net | supabase_admin | {supabase_admin=UC/supabase_admin,=U/supabase_admin,supabase_functions_admin=U/supabase_admin,postgres=U/supabase_admin,anon=U/supabase_admin,authenticated=U/supabase_admin,service_role=U/supabase_admin}
+pg_catalog | supabase_admin | {supabase_admin=UC/supabase_admin,=U/supabase_admin}
+private | postgres | {postgres=UC/postgres,authenticated=U/postgres,account_deletion_worker=U/postgres}
+public | pg_database_owner | {pg_database_owner=UC/pg_database_owner,=U/pg_database_owner,postgres=U/pg_database_owner,anon=U/pg_database_owner,authenticated=U/pg_database_owner,service_role=U/pg_database_owner}
+== callable functions outside pg_catalog/information_schema (schema USAGE + EXECUTE)
+nspname | proname | args | secdef | vol | owner | acl | lang
+net | _await_response | request_id bigint | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | _encode_url_with_params_array | url text, params_array text[] | f | i | supabase_admin | (default PUBLIC) | c
+net | _http_collect_response | request_id bigint, async boolean | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | _urlencode_string | string character varying | f | i | supabase_admin | (default PUBLIC) | c
+net | check_worker_is_up |  | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | http_collect_response | request_id bigint, async boolean | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | http_delete | url text, params jsonb, headers jsonb, timeout_milliseconds integer, body jsonb | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | http_get | url text, params jsonb, headers jsonb, timeout_milliseconds integer | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | http_post | url text, body jsonb, params jsonb, headers jsonb, timeout_milliseconds integer | f | v | supabase_admin | (default PUBLIC) | plpgsql
+net | wait_until_running |  | f | v | supabase_admin | (default PUBLIC) | c
+net | wake |  | f | v | supabase_admin | (default PUBLIC) | c
+net | worker_restart |  | f | v | supabase_admin | (default PUBLIC) | c
+private | account_media_anomaly_count | p_user uuid | t | s | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | account_media_canonical | p_user uuid, p_limit integer | t | s | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | auth_user_exists | p_user uuid | t | s | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_claim_due | p_limit integer, p_lease_seconds integer | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_cleanup_completed | p_retention_days integer | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_confirm_auth_deleted | p_request uuid, p_lease text, p_window_seconds integer | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_open_request | p_user uuid, p_lease_seconds integer | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_record_failure | p_request uuid, p_lease text, p_expected text, p_error_class text, p_permanent boolean | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_record_purge | p_request uuid, p_lease text, p_expected text, p_removed integer | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+private | n10_release_lease | p_request uuid, p_lease text | t | v | postgres | {postgres=X/postgres,account_deletion_worker=X/postgres} | plpgsql
+public | normalise_companion_memory | p_value text | f | i | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | sql
+public | set_updated_at |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_baby_date_of_birth |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_companion_conversation |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_companion_memory |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_companion_message |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_first_year_care_event |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_first_year_entry |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_first_year_memory |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+public | validate_first_year_reminder |  | f | v | postgres | {=X/postgres,postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres} | plpgsql
+== count by schema/secdef
+nspname | prosecdef | count
+net | f | 12
+private | t | 10
+public | f | 10
+== pg_catalog SECURITY DEFINER callable by worker
+proname
+== sensitive pg_catalog functions (expect all f)
+f | has_function_privilege
+pg_read_file(text) | f
+pg_read_binary_file(text) | f
+pg_ls_dir(text) | f
+pg_stat_file(text) | f
+pg_reload_conf() | f
+pg_terminate_backend(integer,bigint) | t
+pg_cancel_backend(integer) | t
+lo_import(text) | f
+lo_export(oid,text) | f
+pg_rotate_logfile() | f
+pg_switch_wal() | f
+pg_create_restore_point(text) | f
+== predefined role memberships of worker (expect none)
+rolname
+== sequences/large objects/foreign servers usage
+psql:sql/11_privileges.sql:31: ERROR:  "saml_providers_pkey" is not a sequence

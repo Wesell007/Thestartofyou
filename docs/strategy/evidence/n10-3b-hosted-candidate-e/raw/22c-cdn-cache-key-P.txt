@@ -1,0 +1,8 @@
+object: weekly-photos/<P>/week-12/photo-1.jpg; P request status requested
+P frozen JWT (the pre-freeze downloader): HTTP 200 CF-Cache-Status=HIT Age=None P_bytes=True body='<P bytes>'
+control C live JWT (different user): HTTP 400 CF-Cache-Status=BYPASS Age=None P_bytes=False body=b'{"statusCode":"404","error":"not_found","message":"Object not found","code":"NoSuchKey"}'
+anon key only: HTTP 400 CF-Cache-Status=BYPASS Age=None P_bytes=False body=b'{"statusCode":"404","error":"not_found","message":"Object not found","code":"NoSuchKey"}'
+no credentials at all: HTTP 400 CF-Cache-Status=BYPASS Age=None P_bytes=False body=b'{"statusCode":"400","error":"Error","message":"headers must have required property \'author'
+apikey header only: HTTP 400 CF-Cache-Status=BYPASS Age=None P_bytes=False body=b'{"statusCode":"400","error":"Error","message":"headers must have required property \'author'
+
+RESULT: PASS

@@ -1,0 +1,38 @@
+S = cd7d2df8-4d2b-4273-b948-137c8bac2441; JWT issued_at 1791538461 (exact pre-delete JWT used)
+PASS S0 download one object before request (cache seed) — HTTP 200
+PASS S0 createSignedUrl before request — HTTP 200
+PASS S1 request opened (worker role) and lease released — requested|t|t
+PASS S1 Auth admin hard delete — HTTP 200
+PASS S1 Auth user absent
+PASS S1 request still requested (no purge yet)
+PASS S1 media still present (4 objects)
+S1 Auth deleted at 2026-10-09 09:41:59.807335+00
+PASS S2 list denied — HTTP 200 []
+S2 download (cache-seeded) weekly-photos: HTTP 200 bytes=S bytes (CDN same-credential residual measured separately)
+PASS S2 download (never downloaded) weekly-photos denied — HTTP 400
+PASS S2 download (never downloaded) first-year-memories denied — HTTP 400
+PASS S2 download (never downloaded) first-year-memories denied — HTTP 400
+PASS S2 INSERT denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS S2 upsert denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS S2 UPDATE denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS S2 DELETE denied (nothing removed) — HTTP 200 []
+PASS S2 createSignedUrl denied — HTTP 400 {"statusCode":"404","error":"not_found","message":"Object not found","code":"NoS
+PASS S2 createSignedUrls denied — HTTP 200 usable=0
+PASS S2 no object created/removed (4 originals) — rows=4
+PASS S2 weekly-photos byte-identical (service-role read) — HTTP 200
+PASS S2 weekly-photos byte-identical (service-role read) — HTTP 200
+PASS S2 first-year-memories byte-identical (service-role read) — HTTP 200
+PASS S2 first-year-memories byte-identical (service-role read) — HTTP 200
+PASS S3 worker response exactly {"ok":true} — HTTP 200 {"ok":true}
+PASS S3 S: request awaiting_final_sweep — status=awaiting_final_sweep removed=4
+PASS S3 S: canonical media = 0
+PASS S3 S: Auth user absent
+S3 S: auth_deleted_at=2026-10-09 09:42:07.929919+00 final_sweep_after=2026-10-09 10:57:07.929919+00 completed_at=''
+PASS S3 P: request awaiting_final_sweep — status=awaiting_final_sweep removed=5
+PASS S3 P: canonical media = 0
+PASS S3 P: Auth user absent
+S3 P: auth_deleted_at=2026-10-09 09:42:07.210358+00 final_sweep_after=2026-10-09 10:57:07.210358+00 completed_at=''
+S3 worker returned at 2026-10-09 09:42:09.091748+00; P was 'requested' before (requested)
+PASS S3 control C media intact
+
+RESULT: PASS

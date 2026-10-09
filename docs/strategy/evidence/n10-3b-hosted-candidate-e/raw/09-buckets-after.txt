@@ -1,0 +1,7 @@
+id | name | public | file_size_limit | allowed_mime_types | owner | created_at
+weekly-photos | weekly-photos | f |  |  |  | 2026-10-09 07:26:40.699578+00
+(1 row)
+id | public | file_size_limit | allowed_mime_types | owner_null
+first-year-memories | f |  |  | t
+weekly-photos | f |  |  | t
+(2 rows)

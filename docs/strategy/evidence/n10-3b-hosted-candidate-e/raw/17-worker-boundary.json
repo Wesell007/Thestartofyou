@@ -1,0 +1,128 @@
+[
+  {
+    "case": "C1 no auth at all, empty body",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C2 wrong token",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C3 token with one char changed",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C4 user JWT only (Authorization + apikey)",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C5 anon/publishable only",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C6 service_role JWT only",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C7 service_role JWT as the token header",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C8 forged JWT-shaped bearer",
+    "expected": 401,
+    "http": 401,
+    "body": "{\"error\":\"Unauthorized\"}",
+    "pass": true
+  },
+  {
+    "case": "C9 GET with correct token",
+    "expected": 405,
+    "http": 405,
+    "body": "{\"error\":\"Method not allowed\"}",
+    "pass": true
+  },
+  {
+    "case": "C10 correct token, empty body",
+    "expected": 200,
+    "http": 200,
+    "body": "{\"ok\":true}",
+    "pass": true
+  },
+  {
+    "case": "C11 correct token, {}",
+    "expected": 200,
+    "http": 200,
+    "body": "{\"ok\":true}",
+    "pass": true
+  },
+  {
+    "case": "C12 user JWT + correct token (token decides)",
+    "expected": 200,
+    "http": 200,
+    "body": "{\"ok\":true}",
+    "pass": true
+  },
+  {
+    "case": "D1 correct token + user_id",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  },
+  {
+    "case": "D2 correct token + request_id",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  },
+  {
+    "case": "D3 correct token + email/bucket/path/status",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  },
+  {
+    "case": "D4 correct token + source:pg_cron (old M2 body)",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  },
+  {
+    "case": "D5 correct token + array body",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  },
+  {
+    "case": "D6 correct token + invalid JSON",
+    "expected": 400,
+    "http": 400,
+    "body": "{\"error\":\"Bad request\"}",
+    "pass": true
+  }
+]

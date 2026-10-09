@@ -1,0 +1,12 @@
+PASS D4b replay delete-account for deleted D: 410 already_deleted — HTTP 410 {"status":"already_deleted"}
+PASS D4b still exactly one D request row
+PASS L open request with 30 s lease at 2026-10-09 10:10:06.087644+00 — t
+SKIP LOCKED race at ~:37-:47: ['S1 claimed|1'] / ['S2 claimed|0']
+PASS SKIP LOCKED: session 1 claimed L while session 2 (concurrent, row locked) claimed nothing
+L lease_until after session 1 commit: 2026-10-09 10:11:07.365033+00 (covers the next cron tick)
+PASS cron tick while leased does not take L
+PASS after the :00 cron tick L is still requested (lease respected)
+PASS expired lease is reclaimable (explicit claim) — reclaimed=yes
+FAIL lease released back to the queue (L processed by cron next) — ERROR:  permission denied for table account_deletion_requests
+
+RESULT: 1 FAIL(S)

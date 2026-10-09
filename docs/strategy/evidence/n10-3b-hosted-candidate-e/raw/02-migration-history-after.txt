@@ -1,0 +1,16 @@
+count | min | max
+49 | 20260420164527 | 20261009055322
+(1 row)
+version | name
+20261009055319 | n10_account_deletion_foundation
+20261009055322 | n10_account_deletion_worker_schedule
+(2 rows)
+extname | extversion
+pg_cron | 1.6.4
+pg_net | 0.20.4
+pgcrypto | 1.3
+supabase_vault | 0.3.1
+(4 rows)
+id | public
+weekly-photos | f
+(1 row)

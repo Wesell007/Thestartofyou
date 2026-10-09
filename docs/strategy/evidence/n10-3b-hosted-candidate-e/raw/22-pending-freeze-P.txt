@@ -1,0 +1,38 @@
+P = 0d6fc8ba-47f7-4108-9c97-7d5020e6a1fc; token issued_at 1791538461 (pre-request JWT used throughout)
+PASS P1 list (before) — HTTP 200 items=1
+PASS P1 download weekly-photos (before) — HTTP 200
+PASS P1 download weekly-photos (before) — HTTP 200
+PASS P1 download first-year-memories (before) — HTTP 200
+PASS P1 download first-year-memories (before) — HTTP 200
+PASS P1 insert (before) — HTTP 200
+PASS P1 upsert/update (before) — HTTP 200
+PASS P1 delete (before) — HTTP 200 removed=1
+PASS P1 createSignedUrl 3600 s (before) — HTTP 200
+PASS P1 createSignedUrls (before) — HTTP 200
+PASS P1 pre-issued signed URL serves (before) — HTTP 200
+PASS P2 open request (worker role): status requested, lease acquired+released — requested|t|t
+PASS P2 one durable row, requested, no lease — status=requested
+PASS P2 Auth user still exists
+P2 freeze committed at 2026-10-09 09:40:14.41211+00
+PASS P3 SELECT/list denied (empty) — HTTP 200 body=[]
+PASS P3 SELECT/list fym denied (empty) — HTTP 200 body=[]
+FAIL P3 download weekly-photos denied — HTTP 200
+FAIL P3 download weekly-photos denied — HTTP 200
+FAIL P3 download first-year-memories denied — HTTP 200
+FAIL P3 download first-year-memories denied — HTTP 200
+PASS P3 INSERT denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS P3 upsert over existing denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS P3 UPDATE (PUT) denied — HTTP 400 {"statusCode":"403","error":"Unauthorized","message":"new row violates row-level
+PASS P3 DELETE denied (nothing removed) — HTTP 200 body=[]
+PASS P3 createSignedUrl denied — HTTP 400 {"statusCode":"404","error":"not_found","message":"Object not found","code":"NoS
+PASS P3 createSignedUrls denied (no usable URL) — HTTP 200 usable=0
+PASS P4 exactly the 4 original objects remain (no insert/remove) — rows=4
+PASS P4 weekly-photos byte-identical (service-role read) — HTTP 200
+PASS P4 weekly-photos byte-identical (service-role read) — HTTP 200
+PASS P4 first-year-memories byte-identical (service-role read) — HTTP 200
+PASS P4 first-year-memories byte-identical (service-role read) — HTTP 200
+PASS P4 Auth user still exists
+PASS P4 request still requested
+P5 pre-issued signed URL after freeze: HTTP 200; bytes match=True (D15: RLS does not revoke pre-issued URLs; accepted residual while Auth exists)
+
+RESULT: 4 FAIL(S)

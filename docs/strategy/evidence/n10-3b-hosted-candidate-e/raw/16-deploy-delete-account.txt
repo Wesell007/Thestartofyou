@@ -1,0 +1,5 @@
+[n103b_cli] target=toqeefrwnsjuhjmobodg sealed=2dcab66f cmd=supabase functions deploy delete-account --project-ref toqeefrwnsjuhjmobodg --use-api
+Uploading asset (delete-account): supabase/functions/delete-account/index.ts
+Uploading asset (delete-account): supabase/functions/_shared/accountDeletionRuntime.ts
+Uploading asset (delete-account): supabase/functions/_shared/accountDeletion.ts
+{"project_ref":"toqeefrwnsjuhjmobodg","functions":["delete-account"],"dashboard_url":"https://supabase.com/dashboard/project/toqeefrwnsjuhjmobodg/functions","message":"Deployed Functions."}

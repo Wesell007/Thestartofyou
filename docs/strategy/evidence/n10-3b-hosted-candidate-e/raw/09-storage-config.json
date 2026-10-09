@@ -1,0 +1,34 @@
+{
+  "fileSizeLimit": 52428800,
+  "features": {
+    "imageTransformation": {
+      "enabled": true
+    },
+    "s3Protocol": {
+      "enabled": true
+    },
+    "purgeCache": {
+      "enabled": true
+    },
+    "icebergCatalog": {
+      "enabled": true,
+      "maxNamespaces": 10,
+      "maxTables": 10,
+      "maxCatalogs": 2
+    },
+    "vectorBuckets": {
+      "enabled": true,
+      "maxBuckets": 10,
+      "maxIndexes": 5
+    }
+  },
+  "capabilities": {
+    "list_v2": true,
+    "iceberg_catalog": true,
+    "object_versioning": false
+  },
+  "external": {
+    "upstreamTarget": "canary"
+  },
+  "migrationVersion": "drop-bucketid-objname-index"
+}

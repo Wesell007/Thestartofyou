@@ -1,0 +1,17 @@
+{
+  "create_status": 200,
+  "buckets": [
+    {
+      "id": "weekly-photos",
+      "public": false,
+      "file_size_limit": null,
+      "allowed_mime_types": null
+    },
+    {
+      "id": "first-year-memories",
+      "public": false,
+      "file_size_limit": null,
+      "allowed_mime_types": null
+    }
+  ]
+}

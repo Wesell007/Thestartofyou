@@ -1,0 +1,5 @@
+[n103b_cli] target=toqeefrwnsjuhjmobodg sealed=2dcab66f cmd=supabase functions deploy account-deletion-worker --project-ref toqeefrwnsjuhjmobodg --use-api
+Uploading asset (account-deletion-worker): supabase/functions/account-deletion-worker/index.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletionRuntime.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletion.ts
+{"project_ref":"toqeefrwnsjuhjmobodg","functions":["account-deletion-worker"],"dashboard_url":"https://supabase.com/dashboard/project/toqeefrwnsjuhjmobodg/functions","message":"Deployed Functions."}

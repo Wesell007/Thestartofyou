@@ -1,0 +1,122 @@
+== schema private
+nspname | owner | nspacl
+private | postgres | {postgres=UC/postgres,authenticated=U/postgres,account_deletion_worker=U/postgres}
+== table
+relname | owner | rls | force_rls | acl
+account_deletion_requests | postgres | t | f | {postgres=arwdDxtm/postgres}
+== FKs on request table (expect 0)
+fk_count
+0
+== constraints
+conname | contype | pg_get_constraintdef
+account_deletion_requests_anonymised_check | c | CHECK (((user_id IS NULL) = (anonymised_at IS NOT NULL)))
+account_deletion_requests_anonymised_completed_check | c | CHECK (((user_id IS NOT NULL) OR (status = 'completed'::text)))
+account_deletion_requests_completed_check | c | CHECK (((status <> 'completed'::text) OR ((purge_empty_at IS NOT NULL) AND (completed_at IS NOT NULL) AND (anomaly_count = 0) AND (user_id IS NULL))))
+account_deletion_requests_counters_check | c | CHECK (((attempt_count >= 0) AND (objects_removed >= 0) AND (sweep_objects_removed >= 0) AND (anomaly_count >= 0)))
+account_deletion_requests_error_class_check | c | CHECK (((last_error_class IS NULL) OR (last_error_class = ANY (ARRAY['auth_transient'::text, 'auth_permanent'::text, 'auth_unknown_outcome'::text, 'storage_list'::text, 'storage_remove'::text, 'storage_partial'::text, 'owner_id_path_anomaly'::text, 'db'::text, 'timeout'::text, 'config'::text]))))
+account_deletion_requests_pkey | p | PRIMARY KEY (id)
+account_deletion_requests_post_auth_check | c | CHECK (((status <> ALL (ARRAY['auth_deleted'::text, 'awaiting_final_sweep'::text, 'completed'::text, 'purge_attention'::text])) OR ((auth_deleted_at IS NOT NULL) AND (final_sweep_after IS NOT NULL))))
+account_deletion_requests_status_check | c | CHECK ((status = ANY (ARRAY['requested'::text, 'auth_deleted'::text, 'awaiting_final_sweep'::text, 'completed'::text, 'auth_attention'::text, 'purge_attention'::text, 'cancelled'::text])))
+account_deletion_requests_sweep_floor_check | c | CHECK (((final_sweep_after IS NULL) OR ((auth_deleted_at IS NOT NULL) AND (final_sweep_after >= (auth_deleted_at + '01:15:00'::interval)))))
+== indexes
+indexname | indexdef
+account_deletion_requests_claim_idx | CREATE INDEX account_deletion_requests_claim_idx ON private.account_deletion_requests USING btree (status, next_attempt_at)
+account_deletion_requests_one_active_idx | CREATE UNIQUE INDEX account_deletion_requests_one_active_idx ON private.account_deletion_requests USING btree (user_id) WHERE (status <> ALL (ARRAY['completed'::text, 'cancelled'::text]))
+account_deletion_requests_pkey | CREATE UNIQUE INDEX account_deletion_requests_pkey ON private.account_deletion_requests USING btree (id)
+== policies on request table (expect none; RLS on, no grants)
+count
+0
+== triggers
+tgname | pg_get_triggerdef
+account_deletion_requests_guard | CREATE TRIGGER account_deletion_requests_guard BEFORE INSERT OR DELETE OR UPDATE ON private.account_deletion_requests FOR EACH ROW EXECUTE FUNCTION private.account_deletion_requests_guard()
+== role
+rolname | login | super | createdb | createrole | repl | bypassrls | inherit | rolconnlimit | has_password_shadow_visible
+account_deletion_worker | t | f | f | f | f | f | f | -1 | t
+== worker role memberships (expect none)
+member_of
+== roles that are members of worker
+rolname | admin_option
+postgres | t
+== worker table privileges anywhere (expect 0)
+table_schema | table_name | privilege_type
+== worker effective table privilege on auth.users / storage.objects / storage.buckets
+t | sel | ins | upd | del
+auth.users | f | f | f | f
+storage.objects | f | f | f | f
+storage.buckets | f | f | f | f
+private.account_deletion_requests | f | f | f | f
+== worker effective DML on any public table (expect 0 rows)
+relname | sel | dml
+== worker schema usage
+nspname | usage | create_
+auth | f | f
+cron | f | f
+extensions | f | f
+graphql | f | f
+graphql_public | f | f
+net | t | f
+pgbouncer | f | f
+private | t | f
+public | t | f
+realtime | f | f
+storage | f | f
+vault | f | f
+== private functions
+proname | args | secdef | owner | config | acl
+account_deletion_requests_guard |  | f | postgres | {"search_path=\"\""} | {postgres=X/postgres}
+account_media_access_allowed |  | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,authenticated=X/postgres}
+account_media_anomaly_count | p_user uuid | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+account_media_canonical | p_user uuid, p_limit integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+auth_user_exists | p_user uuid | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_claim_due | p_limit integer, p_lease_seconds integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_cleanup_completed | p_retention_days integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_confirm_auth_deleted | p_request uuid, p_lease text, p_window_seconds integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_lock_leased | p_request uuid, p_lease text, p_expected text | t | postgres | {"search_path=\"\""} | {postgres=X/postgres}
+n10_open_request | p_user uuid, p_lease_seconds integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_record_failure | p_request uuid, p_lease text, p_expected text, p_error_class text, p_permanent boolean | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_record_purge | p_request uuid, p_lease text, p_expected text, p_removed integer | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_release_lease | p_request uuid, p_lease text | t | postgres | {"search_path=\"\""} | {postgres=X/postgres,account_deletion_worker=X/postgres}
+n10_retry_delay | p_attempt integer | f | postgres | {"search_path=\"\""} | {postgres=X/postgres}
+== private functions executable by role (expected grants)
+proname | pub_dummy_unused | anon | authn | svc | worker
+account_deletion_requests_guard | f | f | f | f | f
+account_media_access_allowed | f | f | t | f | f
+account_media_anomaly_count | f | f | f | f | t
+account_media_canonical | f | f | f | f | t
+auth_user_exists | f | f | f | f | t
+n10_claim_due | f | f | f | f | t
+n10_cleanup_completed | f | f | f | f | t
+n10_confirm_auth_deleted | f | f | f | f | t
+n10_lock_leased | f | f | f | f | f
+n10_open_request | f | f | f | f | t
+n10_record_failure | f | f | f | f | t
+n10_record_purge | f | f | f | f | t
+n10_release_lease | f | f | f | f | t
+n10_retry_delay | f | f | f | f | f
+== storage.objects policies
+policyname | cmd | roles | has_using | has_check | guarded
+n10 first year memories delete own | DELETE | {authenticated} | t | f | t
+n10 first year memories insert own | INSERT | {authenticated} | f | t | t
+n10 first year memories select own | SELECT | {authenticated} | t | f | t
+n10 first year memories update own | UPDATE | {authenticated} | t | t | t
+n10 weekly photos delete own | DELETE | {authenticated} | t | f | t
+n10 weekly photos insert own | INSERT | {authenticated} | f | t | t
+n10 weekly photos select own | SELECT | {authenticated} | t | f | t
+n10 weekly photos update own | UPDATE | {authenticated} | t | t | t
+== storage.buckets policies
+policyname | cmd | roles
+== cron
+jobid | jobname | schedule | username | active | database | cmd_md5 | cmd_len
+2 | n10-account-deletion-worker | * * * * * | postgres | t | postgres | c50c35f686a32ac33e2d055928a5c6d2 | 603
+== vault secrets by name (names only)
+name
+n10_account_deletion_worker_invoke_secret
+n10_account_deletion_worker_url
+== cron runs so far for n10
+status | count | min | max
+succeeded | 89 | 2026-10-09 09:32:00.017753+00 | 2026-10-09 11:00:00.03004+00
+== net requests so far
+count
+0
+net_responses
+77

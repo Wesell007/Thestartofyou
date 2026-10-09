@@ -1,0 +1,12 @@
+B before: canonical objects = 1112
+B delete-account: HTTP 200 body={"status":"account_deleted","cleanup":"removed"} in 10.3 s at 2026-10-09 10:05:04.816256+00
+PASS B HTTP 200 account_deleted (cleanup removed or continuing) — {"status":"account_deleted","cleanup":"removed"}
+B after immediate pass: status=awaiting_final_sweep objects_removed=1112 remaining=0 class=''
+PASS B canonical media reached 0 (no 1,000 ceiling, no OFFSET skip, no depth failure) — remaining=0
+PASS B request awaiting_final_sweep — status=awaiting_final_sweep
+PASS B objects_removed = 1,112 — objects_removed=1112
+PASS B Auth user absent
+PASS C untouched
+B done at 2026-10-09 10:05:12.602933+00; purge_empty_at=2026-10-09 10:05:03.871385+00
+
+RESULT: PASS

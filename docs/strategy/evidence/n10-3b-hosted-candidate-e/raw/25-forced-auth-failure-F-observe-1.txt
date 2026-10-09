@@ -1,0 +1,11 @@
+F observe at 2026-10-09 10:03:40.089541+00: status=requested class=auth_transient attempts=1 next=2026-10-09 10:03:20.931968+00
+PASS F still exists in Auth
+PASS F request never left the pre-Auth states
+PASS F retries: exactly the 4 original F objects (zero removed) — rows=4
+PASS F retries: weekly-photos byte-identical — HTTP 200
+PASS F retries: weekly-photos byte-identical — HTTP 200
+PASS F retries: first-year-memories byte-identical — HTTP 200
+PASS F retries: first-year-memories byte-identical — HTTP 200
+PASS C unchanged
+
+RESULT: PASS

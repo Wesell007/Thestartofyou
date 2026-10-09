@@ -1,0 +1,7 @@
+purge_empty_at: {'F': '2026-10-09 10:07:01.726584+00'}
+STOPPED F authenticated download (same credential, CDN): HTTP 400 cache=BYPASS at 2026-10-09 10:07:04.540406+00 (1 s after poll start)
+STOPPED F pre-issued signed URL: HTTP 400 cache=BYPASS at 2026-10-09 10:07:05.642629+00 (2 s after poll start)
+PASS F authenticated download (same credential, CDN) stopped serving after purge — 2026-10-09 10:07:04.540406+00
+PASS F pre-issued signed URL stopped serving after purge — 2026-10-09 10:07:05.642629+00
+
+RESULT: PASS

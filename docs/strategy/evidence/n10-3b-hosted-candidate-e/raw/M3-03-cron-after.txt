@@ -1,0 +1,30 @@
+jobid | jobname | schedule | username | active | cmd_md5 | refs_invoke | refs_url | has_token_header | refs_service_key | has_authorization | has_apikey | empty_body
+2 | n10-account-deletion-worker | * * * * * | postgres | t | c50c35f686a32ac33e2d055928a5c6d2 | t | t | t | f | f | f | t
+(1 row)
+n10_jobs
+1
+(1 row)
+version | name
+20261009091430 | n10_worker_invocation_hardening
+(1 row)
+command
+
+  SELECT net.http_post(
+    url := s.url,
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'X-N10-Worker-Token', s.invoke_token
+    ),
+    body := '{}'::jsonb,
+    timeout_milliseconds := 60000
+  )
+  FROM (
+    SELECT
+      (SELECT ds.decrypted_secret FROM vault.decrypted_secrets ds
+        WHERE ds.name = 'n10_account_deletion_worker_url') AS url,
+      (SELECT ds.decrypted_secret FROM vault.decrypted_secrets ds
+        WHERE ds.name = 'n10_account_deletion_worker_invoke_secret') AS invoke_token
+  ) s
+  WHERE s.url IS NOT NULL AND s.invoke_token IS NOT NULL;
+  
+(1 row)

@@ -1,0 +1,6 @@
+[n103b_cli] target=toqeefrwnsjuhjmobodg sealed=2dcab66f cmd=supabase db push --dry-run
+DRY RUN: migrations will *not* be pushed to the database.
+Connecting to remote database...
+Would push these migrations:
+ • 20261009091430_n10_worker_invocation_hardening.sql
+{"upToDate":false,"dryRun":true,"migrations":["20261009091430_n10_worker_invocation_hardening.sql"],"seeds":[],"roles":[],"message":"Finished supabase db push."}

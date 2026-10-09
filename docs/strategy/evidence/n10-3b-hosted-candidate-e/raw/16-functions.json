@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "delete-account",
+    "id": "dfd2f2ae-2737-46df-9b98-4446b17bf5ad",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "import_map": false,
+    "entrypoint_path": "file:///tmp/user_fn_toqeefrwnsjuhjmobodg_dfd2f2ae-2737-46df-9b98-4446b17bf5ad_1/source/supabase/functions/delete-account/index.ts",
+    "created_at": 1791538423215,
+    "updated_at": 1791538423215,
+    "ezbr_sha256": "6c37ab4e8aab4c108d2474646e40c5585c9559259531d7ba2e6f780cd0090b19"
+  },
+  {
+    "slug": "account-deletion-worker",
+    "id": "1984cf05-06c2-4252-809d-7623d5cb6b72",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": false,
+    "import_map": false,
+    "entrypoint_path": "file:///tmp/user_fn_toqeefrwnsjuhjmobodg_1984cf05-06c2-4252-809d-7623d5cb6b72_1/source/supabase/functions/account-deletion-worker/index.ts",
+    "created_at": 1791538429716,
+    "updated_at": 1791538429716,
+    "ezbr_sha256": "4cbea54dc7c9005b6ae385d18e7a94d84208ce604863d3a58ea42343b2b645e4"
+  }
+]

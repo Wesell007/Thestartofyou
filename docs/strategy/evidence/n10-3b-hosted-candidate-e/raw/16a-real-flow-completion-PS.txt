@@ -1,0 +1,16 @@
+now 2026-10-09 10:59:48.043487+00
+P: completed|2026-10-09 10:58:00.337541+00|2026-10-09 10:57:07.210358+00|t|t|t|0|0
+PASS P REAL FLOW completed by live cron after its window, anonymised — completed_at=2026-10-09 10:58:00.337541+00 window=2026-10-09 10:57:07.210358+00
+S: completed|2026-10-09 10:58:00.364493+00|2026-10-09 10:57:07.929919+00|t|t|t|0|0
+PASS S REAL FLOW completed by live cron after its window, anonymised — completed_at=2026-10-09 10:58:00.364493+00 window=2026-10-09 10:57:07.929919+00
+A: awaiting_final_sweep window 2026-10-09 11:16:10.998498+00 (window not yet reached: must not be completed)
+PASS A not completed before its window
+B: awaiting_final_sweep window 2026-10-09 11:19:56.205195+00 (window not yet reached: must not be completed)
+PASS B not completed before its window
+F: awaiting_final_sweep window 2026-10-09 11:22:00.568546+00 (window not yet reached: must not be completed)
+PASS F not completed before its window
+D: awaiting_final_sweep window 2026-10-09 11:23:00.804527+00 (window not yet reached: must not be completed)
+PASS D not completed before its window
+T after blocker removal: status=awaiting_final_sweep auth=False media=0
+
+RESULT: PASS

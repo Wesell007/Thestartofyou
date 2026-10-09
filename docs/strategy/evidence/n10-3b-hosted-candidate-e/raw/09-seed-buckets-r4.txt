@@ -1,0 +1,2 @@
+[n103b_cli] target=toqeefrwnsjuhjmobodg sealed=0007797c cmd=supabase seed buckets --linked --project-ref toqeefrwnsjuhjmobodg
+{"_tag":"Error","error":{"code":"StorageAuthTokenError","message":"Authorization failed for the access token and project ref pair: {\"message\":\"Your account does not have the necessary privileges to access this endpoint. For more details, refer to our documentation https://supabase.com/docs/guides/platform/access-control\"}"}}

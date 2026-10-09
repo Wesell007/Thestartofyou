@@ -1,0 +1,4 @@
+PASS F3 scratch blocker removed
+F3 blocker removed at 2026-10-09 10:04:35.153338+00; request requested next=2026-10-09 10:06:01.988348+00
+
+RESULT: PASS

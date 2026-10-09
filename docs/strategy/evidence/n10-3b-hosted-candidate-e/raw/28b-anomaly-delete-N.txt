@@ -1,0 +1,10 @@
+N delete-account: HTTP 200 body={"status":"account_deleted","cleanup":"continuing"} at 2026-10-09 10:11:43.789803+00
+PASS N HTTP 200 account_deleted with cleanup continuing (anomaly blocks completion) — {"status":"account_deleted","cleanup":"continuing"}
+PASS N request -> purge_attention — status=purge_attention class=owner_id_path_anomaly anomaly_count=1
+PASS N anomaly_count > 0 and error class owner_id_path_anomaly
+PASS N canonical media removed (rule A)
+PASS N anomaly object NOT auto-deleted (still present, owner_id = N)
+PASS N Auth user absent; not completed
+N next_attempt_at=2026-10-09 11:11:43.074329+00 (purge_attention cadence 60 min); objects_removed=3
+
+RESULT: PASS

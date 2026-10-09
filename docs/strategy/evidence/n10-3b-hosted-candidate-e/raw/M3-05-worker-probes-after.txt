@@ -1,0 +1,109 @@
+?column? | current_user | session_user
+whoami | account_deletion_worker | account_deletion_worker
+== NEGATIVE: direct Auth / Storage / private / app data (expect permission denied each)
+psql:sql/13_worker_probes.sql:5: ERROR:  permission denied for schema auth
+LINE 1: select count(*) from auth.users;
+                             ^
+BEGIN
+psql:sql/13_worker_probes.sql:6: ERROR:  permission denied for schema auth
+LINE 1: update auth.users set email = email where false;
+               ^
+ROLLBACK
+BEGIN
+psql:sql/13_worker_probes.sql:7: ERROR:  permission denied for schema auth
+LINE 1: delete from auth.users where false;
+                    ^
+ROLLBACK
+psql:sql/13_worker_probes.sql:8: ERROR:  permission denied for schema storage
+LINE 1: select count(*) from storage.objects;
+                             ^
+BEGIN
+psql:sql/13_worker_probes.sql:9: ERROR:  permission denied for schema storage
+LINE 1: insert into storage.objects(bucket_id, name) values ('weekly...
+                    ^
+ROLLBACK
+BEGIN
+psql:sql/13_worker_probes.sql:10: ERROR:  permission denied for schema storage
+LINE 1: update storage.objects set name = name where false;
+               ^
+ROLLBACK
+BEGIN
+psql:sql/13_worker_probes.sql:11: ERROR:  permission denied for schema storage
+LINE 1: delete from storage.objects where false;
+                    ^
+ROLLBACK
+psql:sql/13_worker_probes.sql:12: ERROR:  permission denied for schema storage
+LINE 1: select count(*) from storage.buckets;
+                             ^
+psql:sql/13_worker_probes.sql:13: ERROR:  permission denied for table account_deletion_requests
+BEGIN
+psql:sql/13_worker_probes.sql:14: ERROR:  permission denied for table account_deletion_requests
+ROLLBACK
+psql:sql/13_worker_probes.sql:15: ERROR:  permission denied for table profiles
+BEGIN
+psql:sql/13_worker_probes.sql:16: ERROR:  permission denied for table profiles
+ROLLBACK
+psql:sql/13_worker_probes.sql:17: ERROR:  permission denied for table journeys
+psql:sql/13_worker_probes.sql:18: ERROR:  permission denied for schema vault
+LINE 1: select count(*) from vault.decrypted_secrets;
+                             ^
+BEGIN
+psql:sql/13_worker_probes.sql:19: ERROR:  permission denied for schema vault
+LINE 1: select vault.create_secret('x','y');
+               ^
+ROLLBACK
+BEGIN
+psql:sql/13_worker_probes.sql:20: ERROR:  permission denied for schema cron
+LINE 1: select cron.schedule('n103b-probe','* * * * *','select 1');
+               ^
+ROLLBACK
+== NEGATIVE: internal N10 functions not granted (expect permission denied)
+psql:sql/13_worker_probes.sql:22: ERROR:  permission denied for function n10_lock_leased
+psql:sql/13_worker_probes.sql:23: ERROR:  permission denied for function n10_retry_delay
+psql:sql/13_worker_probes.sql:24: ERROR:  permission denied for function account_media_access_allowed
+== NEGATIVE: trigger function called directly (expect error)
+psql:sql/13_worker_probes.sql:26: ERROR:  trigger functions can only be called as triggers
+CONTEXT:  compilation of PL/pgSQL function "set_updated_at" near line 1
+== NEGATIVE: signal another role backend (expect permission error / no-op)
+psql:sql/13_worker_probes.sql:28: ERROR:  permission denied to terminate process
+DETAIL:  Only roles with privileges of the role whose process is being terminated or with privileges of the "pg_signal_backend" role may terminate this process.
+== PG_NET SURFACE (inherited from PUBLIC; rolled back)
+visible_queue_rows
+0
+visible_response_rows
+0
+BEGIN
+enqueued_in_txn
+t
+queue_rows_in_txn
+1
+ROLLBACK
+BEGIN
+UPDATE 0
+t
+net queue UPDATE permitted
+ROLLBACK
+BEGIN
+DELETE 0
+t
+net response DELETE permitted
+ROLLBACK
+== CRON SURFACE
+psql:sql/13_worker_probes.sql:39: ERROR:  permission denied for schema cron
+LINE 1: select jobname, schedule from cron.job;
+                                      ^
+BEGIN
+psql:sql/13_worker_probes.sql:40: ERROR:  permission denied for schema cron
+LINE 1: delete from cron.job_run_details where false;
+                    ^
+psql:sql/13_worker_probes.sql:40: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== POSITIVE: intended N10 functions
+auth_user_exists_zero
+f
+canonical_rows
+0
+anomalies
+0
+claimed
+0

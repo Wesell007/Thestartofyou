@@ -1,0 +1,11 @@
+purge_empty_at: {'P': '2026-10-09 09:42:07.8257+00', 'S': '2026-10-09 09:42:08.228692+00'}
+STOPPED P authenticated download (same credential, CDN): HTTP 400 cache=BYPASS at 2026-10-09 09:42:37.395221+00 (1 s after poll start)
+STOPPED P pre-issued signed URL: HTTP 400 cache=BYPASS at 2026-10-09 09:42:38.471435+00 (2 s after poll start)
+STOPPED S authenticated download (same credential, CDN): HTTP 400 cache=BYPASS at 2026-10-09 09:42:39.486986+00 (3 s after poll start)
+STOPPED S pre-issued signed URL: HTTP 400 cache=BYPASS at 2026-10-09 09:42:40.659316+00 (4 s after poll start)
+PASS P authenticated download (same credential, CDN) stopped serving after purge — 2026-10-09 09:42:37.395221+00
+PASS P pre-issued signed URL stopped serving after purge — 2026-10-09 09:42:38.471435+00
+PASS S authenticated download (same credential, CDN) stopped serving after purge — 2026-10-09 09:42:39.486986+00
+PASS S pre-issued signed URL stopped serving after purge — 2026-10-09 09:42:40.659316+00
+
+RESULT: PASS

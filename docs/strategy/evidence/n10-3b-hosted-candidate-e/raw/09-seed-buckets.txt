@@ -1,0 +1,2 @@
+[n103b_cli] target=toqeefrwnsjuhjmobodg sealed=0007797c cmd=supabase seed buckets --project-ref toqeefrwnsjuhjmobodg
+{"_tag":"Error","error":{"code":"SeedMutuallyExclusiveFlagsError","message":"--project-ref only applies when targeting the linked project; use it with --linked (not --local)"}}

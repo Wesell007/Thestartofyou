@@ -1,0 +1,50 @@
+PASS C upload weekly-photos/<C>/week-12/photo-1.jpg — HTTP 200
+PASS C upload weekly-photos/<C>/week-13/photo-2.jpg — HTTP 200
+PASS C upload first-year-memories/<C>/mem-1/a.jpg — HTTP 200
+PASS C upload first-year-memories/<C>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS P upload weekly-photos/<P>/week-12/photo-1.jpg — HTTP 200
+PASS P upload weekly-photos/<P>/week-13/photo-2.jpg — HTTP 200
+PASS P upload first-year-memories/<P>/mem-1/a.jpg — HTTP 200
+PASS P upload first-year-memories/<P>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS S upload weekly-photos/<S>/week-12/photo-1.jpg — HTTP 200
+PASS S upload weekly-photos/<S>/week-13/photo-2.jpg — HTTP 200
+PASS S upload first-year-memories/<S>/mem-1/a.jpg — HTTP 200
+PASS S upload first-year-memories/<S>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS A upload weekly-photos/<A>/week-12/photo-1.jpg — HTTP 200
+PASS A upload weekly-photos/<A>/week-13/photo-2.jpg — HTTP 200
+PASS A upload first-year-memories/<A>/mem-1/a.jpg — HTTP 200
+PASS A upload first-year-memories/<A>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS F upload weekly-photos/<F>/week-12/photo-1.jpg — HTTP 200
+PASS F upload weekly-photos/<F>/week-13/photo-2.jpg — HTTP 200
+PASS F upload first-year-memories/<F>/mem-1/a.jpg — HTTP 200
+PASS F upload first-year-memories/<F>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS D upload weekly-photos/<D>/week-12/photo-1.jpg — HTTP 200
+PASS D upload weekly-photos/<D>/week-13/photo-2.jpg — HTTP 200
+PASS D upload first-year-memories/<D>/mem-1/a.jpg — HTTP 200
+PASS D upload first-year-memories/<D>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS Q upload weekly-photos/<Q>/week-12/photo-1.jpg — HTTP 200
+PASS Q upload weekly-photos/<Q>/week-13/photo-2.jpg — HTTP 200
+PASS Q upload first-year-memories/<Q>/mem-1/a.jpg — HTTP 200
+PASS Q upload first-year-memories/<Q>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS N upload weekly-photos/<N>/week-12/photo-1.jpg — HTTP 200
+PASS N upload weekly-photos/<N>/week-13/photo-2.jpg — HTTP 200
+PASS N upload first-year-memories/<N>/mem-1/a.jpg — HTTP 200
+PASS N upload first-year-memories/<N>/y1/m2/d3/e4/f5/deep.jpg — HTTP 200
+PASS C has 4 canonical objects with owner_id = C — rows=4 owners=self
+PASS P has 4 canonical objects with owner_id = P — rows=4 owners=self
+PASS S has 4 canonical objects with owner_id = S — rows=4 owners=self
+PASS A has 4 canonical objects with owner_id = A — rows=4 owners=self
+PASS F has 4 canonical objects with owner_id = F — rows=4 owners=self
+PASS D has 4 canonical objects with owner_id = D — rows=4 owners=self
+PASS Q has 4 canonical objects with owner_id = Q — rows=4 owners=self
+PASS N has 4 canonical objects with owner_id = N — rows=4 owners=self
+PASS C insert public.profiles via Data API — HTTP 201 
+FAIL C insert public.midwife_questions via Data API — HTTP 400 {"code":"23514","details":null,"hint":null,"message":"new row for relation \"midwife_questions\" violates check constrai
+PASS C insert public.hospital_bag_items via Data API — HTTP 201 
+PASS A insert public.profiles via Data API — HTTP 201 
+FAIL A insert public.midwife_questions via Data API — HTTP 400 {"code":"23514","details":null,"hint":null,"message":"new row for relation \"midwife_questions\" violates check constrai
+PASS A insert public.hospital_bag_items via Data API — HTTP 201 
+app rows per user (C, A): C|2
+A|2
+
+RESULT: 2 FAIL(S)

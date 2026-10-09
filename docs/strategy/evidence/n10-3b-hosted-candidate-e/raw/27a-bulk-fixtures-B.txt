@@ -1,0 +1,11 @@
+PASS B user-token uploads (1110) — ok=1110 in 31 s
+PASS B service-role canonical upload weekly-photos — HTTP 200
+PASS B service-role canonical upload first-year-memories — HTTP 200
+B per bucket (bucket|objects|owner_id NULL|max path segments):
+first-year-memories|61|1|9
+weekly-photos|1051|1|3
+B service-role objects owner_id NULL?: <B>/svc/a/b/c/d/e/service-role-deep.jpg|t
+<B>/svc/service-role-canonical.jpg|t
+PASS B total canonical objects > 1,000 (>= 1,001) — total=1112
+
+RESULT: PASS

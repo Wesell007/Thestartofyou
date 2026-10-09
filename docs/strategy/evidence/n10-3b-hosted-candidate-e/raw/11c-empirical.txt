@@ -1,0 +1,99 @@
+== T1 worker: read pg_net request queue columns (structure only)
+BEGIN
+psql:sql/11c_empirical.sql:4: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:5: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+psql:sql/11c_empirical.sql:6: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T2 worker: enqueue an outbound HTTP request (rolled back; never sent)
+BEGIN
+psql:sql/11c_empirical.sql:9: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:10: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+psql:sql/11c_empirical.sql:11: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+queued_after_rollback
+0
+== T3 worker: tamper with queue/response rows (rolled back)
+BEGIN
+psql:sql/11c_empirical.sql:15: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:16: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+psql:sql/11c_empirical.sql:17: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+psql:sql/11c_empirical.sql:18: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T4 worker: cron history delete (rolled back)
+BEGIN
+psql:sql/11c_empirical.sql:21: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:22: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+psql:sql/11c_empirical.sql:23: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T5 worker: cron.job read
+BEGIN
+psql:sql/11c_empirical.sql:26: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:27: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T6 worker: direct auth/storage/private/public access (expect denied each)
+BEGIN
+psql:sql/11c_empirical.sql:30: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:30: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:31: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:31: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:32: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:32: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:33: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:33: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:34: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:34: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:35: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:35: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+BEGIN
+psql:sql/11c_empirical.sql:36: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:36: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T7 worker: call a trigger function directly (expect error)
+BEGIN
+psql:sql/11c_empirical.sql:38: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:38: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T8 worker: pg_terminate_backend on another role backend (expect permission error)
+BEGIN
+psql:sql/11c_empirical.sql:40: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:41: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T9 worker: net.worker_restart / wake (rolled back txn; C functions)
+BEGIN
+psql:sql/11c_empirical.sql:44: ERROR:  permission denied to set role "account_deletion_worker"
+psql:sql/11c_empirical.sql:44: ERROR:  current transaction is aborted, commands ignored until end of transaction block
+ROLLBACK
+== T10 can a postgres-run migration revoke PUBLIC on net? (rolled back)
+BEGIN
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "tableoid" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "cmax" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "xmax" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "cmin" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "xmin" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "ctid" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "id" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "method" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "url" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "headers" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "body" of relation "http_request_queue"
+psql:sql/11c_empirical.sql:47: WARNING:  no privileges could be revoked for column "timeout_milliseconds" of relation "http_request_queue"
+REVOKE
+psql:sql/11c_empirical.sql:48: WARNING:  no privileges could be revoked for "net"
+REVOKE
+relacl
+{supabase_admin=arwdDxtm/supabase_admin,=arwdDxtm/supabase_admin}
+nspacl
+{supabase_admin=UC/supabase_admin,=U/supabase_admin,supabase_functions_admin=U/supabase_admin,postgres=U/supabase_admin,anon=U/supabase_admin,authenticated=U/supabase_admin,service_role=U/supabase_admin}
+ROLLBACK

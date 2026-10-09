@@ -1,0 +1,14 @@
+PASS Q real delete-account: 200 account_deleted removed — {"status":"account_deleted","cleanup":"removed"}
+PASS Q real flow: awaiting_final_sweep, not completed
+Q real timestamps: auth_deleted_at=2026-10-09 10:12:20.321542+00 final_sweep_after=2026-10-09 11:27:20.321542+00
+PASS Q real flow: worker run before final_sweep_after leaves it awaiting_final_sweep — worker HTTP 200
+PASS SEEDED setup committed; guard trigger re-enabled (tgenabled = O) — O
+PASS SEEDED state satisfies the real M1 CHECKs (gap still 01:15:00) and is due — 01:15:00|t|t
+PASS late canonical object added (service-role Storage API) — HTTP 200
+PASS worker {"ok":true} — {"ok":true}
+Q after worker (status|completed_at set|user_id null|anonymised_at set|anomaly_count|sweep_objects_removed|purge_empty_at set): completed|t|t|t|0|1|t
+PASS final sweep executed; canonical media 0
+PASS strict completion: completed, completed_at set, user_id NULL, anonymised_at set, anomalies 0, late object counted — completed|t|t|t|0|1|t
+PASS no row for Q's user_id remains (anonymised)
+
+RESULT: PASS

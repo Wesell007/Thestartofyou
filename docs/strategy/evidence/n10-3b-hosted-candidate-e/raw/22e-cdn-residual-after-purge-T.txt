@@ -1,0 +1,4 @@
+T purge_empty_at=2026-10-09 10:56:01.925779+00; now=2026-10-09 11:00:07.788631+00
+PASS T cached authenticated download stopped after purge — HTTP 400 cache=BYPASS
+
+RESULT: PASS

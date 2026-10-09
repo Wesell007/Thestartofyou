@@ -1,0 +1,21 @@
+{
+ "remove_calls": [
+  {
+   "event_message": "toqeefrwnsjuhjmobodg | DELETE | 200 | 10.107.32.140 | a47c90642a21b843-CDG | /object/first-year-memories | Deno/2.1.4 (variant; SupabaseEdgeRuntime/1.77.0; ref=toqeefrwnsjuhjmobodg)",
+   "timestamp": "2026-10-09T10:04:57.595000"
+  },
+  {
+   "event_message": "toqeefrwnsjuhjmobodg | DELETE | 200 | 10.107.32.140 | a47c906c4a03b843-CDG | /object/weekly-photos | Deno/2.1.4 (variant; SupabaseEdgeRuntime/1.77.0; ref=toqeefrwnsjuhjmobodg)",
+   "timestamp": "2026-10-09T10:05:02.180000"
+  },
+  {
+   "event_message": "toqeefrwnsjuhjmobodg | DELETE | 200 | 10.107.0.28 | a47c908a5c77b843-CDG | /object/weekly-photos | Deno/2.1.4 (variant; SupabaseEdgeRuntime/1.77.0; ref=toqeefrwnsjuhjmobodg)",
+   "timestamp": "2026-10-09T10:05:03.776000"
+  }
+ ],
+ "removed_events": [
+  {
+   "n": 1112
+  }
+ ]
+}

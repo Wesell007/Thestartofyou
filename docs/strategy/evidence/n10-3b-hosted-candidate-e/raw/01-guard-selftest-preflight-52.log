@@ -1,0 +1,68 @@
+N10.3B GUARD REFUSED: management path not allowed: /v1/projects/zyxwvutsrqponmlkjihg
+N10.3B GUARD REFUSED: management path not allowed: /v1/projects/wogepxfipdipogyogced
+N10.3B GUARD REFUSED: management path not allowed: /v1/projects
+N10.3B GUARD REFUSED: management path not allowed: /v1/projects/abcdefghijklmnopqrst/../zyxwvutsrqponmlkjihg
+N10.3B GUARD REFUSED: only /auth/v1/, /storage/v1/ and /functions/v1/ paths are allowed
+N10.3B GUARD REFUSED: only /auth/v1/, /storage/v1/ and /functions/v1/ paths are allowed
+N10.3B GUARD REFUSED: raw URL host is not the target project
+N10.3B GUARD REFUSED: raw URL host is not the target project
+N10.3B GUARD REFUSED: a credential value appeared in output; refusing to continue
+N10.3B GUARD REFUSED: a credential value appeared in output; refusing to continue
+N10.3B GUARD REFUSED: credential-shaped value in output
+N10.3B GUARD REFUSED: credential-shaped value in output
+N10.3B GUARD REFUSED: target mismatch
+N10.3B GUARD REFUSED: N103B_EXPECT_REF not set
+PASS cli: --version accepted for target
+PASS cli: seed buckets with explicit target accepted
+PASS cli: db push accepted with internal --db-url
+PASS cli: deploy delete-account accepted
+PASS cli: deploy of a non-N10 function refused
+PASS cli: deploy-all refused
+PASS cli: command without explicit target refused
+PASS cli: other ref refused
+PASS cli: denylisted arg wogepxfipdipogyogced refused
+PASS cli: denylisted arg wwtcnbjhttjtklpxhrkd refused
+PASS cli: denylisted arg dlftnirrnirlkhxpofoq refused
+PASS cli: denylisted arg czhopceorfqxdbfvlnap refused
+PASS cli: denylisted arg gbhwpzofnswlryqjoumw refused
+PASS cli: link refused
+PASS cli: db reset refused
+PASS cli: caller-supplied --db-url refused
+PASS cli: missing N103B_EXPECT_REF refused
+PASS cli: expectation mismatch refused
+PASS cli: production target file refused
+PASS cli: N10.1 target file refused
+PASS cli: malformed target file refused
+PASS cli: empty target file refused
+PASS cli: 0-byte PAT refused
+PASS psql: owner session accepted
+PASS psql: worker session accepted
+PASS psql: worker URL with non-dedicated role refused
+PASS psql: worker URL for another project refused
+PASS psql: file with matching sha accepted
+PASS psql: file with wrong sha refused
+PASS psql: file without sha refused
+PASS psql: production host argument refused
+PASS psql: other project host argument refused
+PASS lib: mgmt GET project accepted
+PASS lib: mgmt GET config/auth accepted
+PASS lib: mgmt other project refused
+PASS lib: mgmt production refused
+PASS lib: mgmt org-wide listing refused
+PASS lib: mgmt path traversal refused
+PASS lib: project auth call goes to target host
+PASS lib: project rest/v1 refused
+PASS lib: project pg-meta refused
+PASS lib: raw_get target signed URL accepted
+PASS lib: raw_get other host refused
+PASS lib: raw_get lookalike host refused
+PASS lib: leak check catches DB password
+PASS lib: leak check catches service key
+PASS lib: leak check catches PAT shape
+PASS lib: leak check catches JWT shape
+PASS lib: leak check passes clean text
+PASS lib: expectation mismatch refused
+PASS lib: missing expectation refused
+PASS lib: no real network call made
+
+N10.3B guard self-test: 52/52 PASS

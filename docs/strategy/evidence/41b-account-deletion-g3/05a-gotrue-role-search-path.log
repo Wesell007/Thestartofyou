@@ -1,0 +1,8 @@
+       rolname       |                                    rolconfig                                    
+---------------------+---------------------------------------------------------------------------------
+ supabase_auth_admin | {search_path=auth,idle_in_transaction_session_timeout=60000,log_statement=none}
+
+ nspname | relname 
+---------+---------
+ auth    | users
+

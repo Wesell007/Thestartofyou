@@ -1,0 +1,28 @@
+SET LOCAL lock_timeout = '5s';
+SET
+ALTER TABLE public.journeys               VALIDATE CONSTRAINT journeys_current_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.reflections            VALIDATE CONSTRAINT reflections_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.week_photos            VALIDATE CONSTRAINT week_photos_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.week_media_memories    VALIDATE CONSTRAINT week_media_memories_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.pregnancy_appointments VALIDATE CONSTRAINT pregnancy_appointments_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.pregnancy_symptom_notes VALIDATE CONSTRAINT pregnancy_symptom_notes_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.baby_movement_notes    VALIDATE CONSTRAINT baby_movement_notes_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.birth_plans            VALIDATE CONSTRAINT birth_plans_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.hospital_bag_items     VALIDATE CONSTRAINT hospital_bag_items_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.midwife_questions      VALIDATE CONSTRAINT midwife_questions_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.contraction_sessions   VALIDATE CONSTRAINT contraction_sessions_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.contraction_events     VALIDATE CONSTRAINT contraction_events_pregnancy_episode_owner_fkey;
+ALTER TABLE
+ALTER TABLE public.babies                 VALIDATE CONSTRAINT babies_pregnancy_episode_owner_fkey;
+ALTER TABLE

@@ -1,0 +1,339 @@
+{
+ "classification": {
+  "episode_trigger_position": 39,
+  "total_delete_triggers": 39,
+  "dependants_before_episode": [
+   "babies",
+   "baby_movement_notes",
+   "birth_plans",
+   "contraction_events",
+   "contraction_sessions",
+   "hospital_bag_items",
+   "journeys",
+   "midwife_questions",
+   "pregnancy_appointments",
+   "pregnancy_symptom_notes",
+   "reflections",
+   "week_media_memories",
+   "week_photos"
+  ],
+  "dependants_after_episode": [],
+  "class": "FAVOURABLE: episode cascade after all 13 dependant cascades",
+  "scratch_y_parent_position": 38,
+  "episode_before_scratch_y": false
+ },
+ "order": [
+  {
+   "pos": 1,
+   "tgname": "RI_ConstraintTrigger_a_16690",
+   "oid": 16690,
+   "child": "auth.identities",
+   "constraint": "identities_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 2,
+   "tgname": "RI_ConstraintTrigger_a_16718",
+   "oid": 16718,
+   "child": "auth.sessions",
+   "constraint": "sessions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 3,
+   "tgname": "RI_ConstraintTrigger_a_16755",
+   "oid": 16755,
+   "child": "auth.mfa_factors",
+   "constraint": "mfa_factors_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 4,
+   "tgname": "RI_ConstraintTrigger_a_16946",
+   "oid": 16946,
+   "child": "auth.one_time_tokens",
+   "constraint": "one_time_tokens_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 5,
+   "tgname": "RI_ConstraintTrigger_a_17025",
+   "oid": 17025,
+   "child": "auth.oauth_authorizations",
+   "constraint": "oauth_authorizations_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 6,
+   "tgname": "RI_ConstraintTrigger_a_17044",
+   "oid": 17044,
+   "child": "auth.oauth_consents",
+   "constraint": "oauth_consents_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 7,
+   "tgname": "RI_ConstraintTrigger_a_17139",
+   "oid": 17139,
+   "child": "auth.webauthn_credentials",
+   "constraint": "webauthn_credentials_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 8,
+   "tgname": "RI_ConstraintTrigger_a_17156",
+   "oid": 17156,
+   "child": "auth.webauthn_challenges",
+   "constraint": "webauthn_challenges_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 9,
+   "tgname": "RI_ConstraintTrigger_a_17181",
+   "oid": 17181,
+   "child": "auth.scim_users",
+   "constraint": "scim_users_user_id_fkey",
+   "function": "RI_FKey_setnull_del"
+  },
+  {
+   "pos": 10,
+   "tgname": "RI_ConstraintTrigger_a_17229",
+   "oid": 17229,
+   "child": "auth.mfa_recovery_code_sets",
+   "constraint": "mfa_recovery_code_sets_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 11,
+   "tgname": "RI_ConstraintTrigger_a_17644",
+   "oid": 17644,
+   "child": "profiles",
+   "constraint": "profiles_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 12,
+   "tgname": "RI_ConstraintTrigger_a_17665",
+   "oid": 17665,
+   "child": "saved_journeys",
+   "constraint": "saved_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 13,
+   "tgname": "RI_ConstraintTrigger_a_18061",
+   "oid": 18061,
+   "child": "pregnancy_journeys",
+   "constraint": "pregnancy_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 14,
+   "tgname": "RI_ConstraintTrigger_a_18081",
+   "oid": 18081,
+   "child": "archived_journeys",
+   "constraint": "archived_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 15,
+   "tgname": "RI_ConstraintTrigger_a_18103",
+   "oid": 18103,
+   "child": "ttc_journeys",
+   "constraint": "ttc_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 16,
+   "tgname": "RI_ConstraintTrigger_a_18129",
+   "oid": 18129,
+   "child": "ttc_logs",
+   "constraint": "ttc_logs_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 17,
+   "tgname": "RI_ConstraintTrigger_a_18446",
+   "oid": 18446,
+   "child": "first_year_journeys",
+   "constraint": "first_year_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 18,
+   "tgname": "RI_ConstraintTrigger_a_18514",
+   "oid": 18514,
+   "child": "first_year_entries",
+   "constraint": "first_year_entries_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 19,
+   "tgname": "RI_ConstraintTrigger_a_18550",
+   "oid": 18550,
+   "child": "first_year_memories",
+   "constraint": "first_year_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 20,
+   "tgname": "RI_ConstraintTrigger_a_18607",
+   "oid": 18607,
+   "child": "first_year_care_events",
+   "constraint": "first_year_care_events_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 21,
+   "tgname": "RI_ConstraintTrigger_a_18645",
+   "oid": 18645,
+   "child": "first_year_reminders",
+   "constraint": "first_year_reminders_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 22,
+   "tgname": "RI_ConstraintTrigger_a_18699",
+   "oid": 18699,
+   "child": "companion_memories",
+   "constraint": "companion_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 23,
+   "tgname": "RI_ConstraintTrigger_a_18726",
+   "oid": 18726,
+   "child": "companion_conversations",
+   "constraint": "companion_conversations_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 24,
+   "tgname": "RI_ConstraintTrigger_a_18750",
+   "oid": 18750,
+   "child": "companion_messages",
+   "constraint": "companion_messages_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 25,
+   "tgname": "RI_ConstraintTrigger_a_18889",
+   "oid": 18889,
+   "child": "babies",
+   "constraint": "babies_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 26,
+   "tgname": "RI_ConstraintTrigger_a_18894",
+   "oid": 18894,
+   "child": "baby_movement_notes",
+   "constraint": "baby_movement_notes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 27,
+   "tgname": "RI_ConstraintTrigger_a_18899",
+   "oid": 18899,
+   "child": "birth_plans",
+   "constraint": "birth_plans_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 28,
+   "tgname": "RI_ConstraintTrigger_a_18904",
+   "oid": 18904,
+   "child": "contraction_events",
+   "constraint": "contraction_events_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 29,
+   "tgname": "RI_ConstraintTrigger_a_18909",
+   "oid": 18909,
+   "child": "contraction_sessions",
+   "constraint": "contraction_sessions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 30,
+   "tgname": "RI_ConstraintTrigger_a_18914",
+   "oid": 18914,
+   "child": "hospital_bag_items",
+   "constraint": "hospital_bag_items_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 31,
+   "tgname": "RI_ConstraintTrigger_a_18919",
+   "oid": 18919,
+   "child": "journeys",
+   "constraint": "journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 32,
+   "tgname": "RI_ConstraintTrigger_a_18924",
+   "oid": 18924,
+   "child": "midwife_questions",
+   "constraint": "midwife_questions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 33,
+   "tgname": "RI_ConstraintTrigger_a_18929",
+   "oid": 18929,
+   "child": "pregnancy_appointments",
+   "constraint": "pregnancy_appointments_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 34,
+   "tgname": "RI_ConstraintTrigger_a_18934",
+   "oid": 18934,
+   "child": "pregnancy_symptom_notes",
+   "constraint": "pregnancy_symptom_notes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 35,
+   "tgname": "RI_ConstraintTrigger_a_18939",
+   "oid": 18939,
+   "child": "reflections",
+   "constraint": "reflections_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 36,
+   "tgname": "RI_ConstraintTrigger_a_18944",
+   "oid": 18944,
+   "child": "week_media_memories",
+   "constraint": "week_media_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 37,
+   "tgname": "RI_ConstraintTrigger_a_18949",
+   "oid": 18949,
+   "child": "week_photos",
+   "constraint": "week_photos_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 38,
+   "tgname": "RI_ConstraintTrigger_a_18962",
+   "oid": 18962,
+   "child": "g3_scratch.y_parent",
+   "constraint": "y_parent_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 39,
+   "tgname": "RI_ConstraintTrigger_a_18982",
+   "oid": 18982,
+   "child": "pregnancy_episodes",
+   "constraint": "pregnancy_episodes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  }
+ ]
+}

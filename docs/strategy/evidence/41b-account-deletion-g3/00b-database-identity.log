@@ -1,0 +1,20 @@
+          checked_at           |    db    |   role   |                                    version                                    | server_version | port 
+-------------------------------+----------+----------+-------------------------------------------------------------------------------+----------------+------
+ 2026-10-09 03:54:34.463896+00 | postgres | postgres | PostgreSQL 17.11 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 15.2.0, 64-bit | 17.11          | 5432
+
+ auth_users | non_synthetic_users | public_tables | migrations_table | pregnancy_episodes | g3_schemas 
+------------+---------------------+---------------+------------------+--------------------+------------
+          0 |                   0 |             0 |                  |                    |          0
+
+      extname       | extversion |   schema   
+--------------------+------------+------------
+ pg_stat_statements | 1.11       | extensions
+
+             name              |                                                              setting                                                              
+-------------------------------+-----------------------------------------------------------------------------------------------------------------------------------
+ default_transaction_isolation | read committed
+ pg_stat_statements.max        | 5000
+ pg_stat_statements.track      | top
+ shared_preload_libraries      | pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault
+ track_activity_query_size     | 1024
+

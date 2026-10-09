@@ -1,0 +1,89 @@
+{
+ "reference": "02-baseline-catalogue.md",
+ "functions_mode": "prosrc",
+ "normalisation": "g3_rehearsal_marker -> c1_rehearsal_marker",
+ "sections": {
+  "columns": {
+   "reference": 289,
+   "captured": 289,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "289|089827c5211d2e8e0e34e57aa854eb49",
+   "captured_hash": "289|089827c5211d2e8e0e34e57aa854eb49"
+  },
+  "enums": {
+   "reference": 5,
+   "captured": 5,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "5|e01eb2548fddcc41e7f642a4337f3019",
+   "captured_hash": "5|e01eb2548fddcc41e7f642a4337f3019"
+  },
+  "functions": {
+   "reference": 25,
+   "captured": 25,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "25|d0cf0bcca5cd9e1d88d7903db5ac2c47",
+   "captured_hash": "25|d0cf0bcca5cd9e1d88d7903db5ac2c47"
+  },
+  "triggers": {
+   "reference": 35,
+   "captured": 35,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "35|c76db9052a48890ef16e7106f8627abf",
+   "captured_hash": "35|c76db9052a48890ef16e7106f8627abf"
+  },
+  "rls": {
+   "reference": 34,
+   "captured": 34,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "34|5c82068f66de6c08d25a0647333b2c19",
+   "captured_hash": "34|5c82068f66de6c08d25a0647333b2c19"
+  },
+  "policies": {
+   "reference": 114,
+   "captured": 114,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "114|e87cd9928f64cef637fe1798ea939fc9",
+   "captured_hash": "114|e87cd9928f64cef637fe1798ea939fc9"
+  },
+  "constraints": {
+   "reference": 141,
+   "captured": 141,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "141|ece1b4e90c32a1bf1b61202f95bf4b30",
+   "captured_hash": "141|ece1b4e90c32a1bf1b61202f95bf4b30"
+  },
+  "indexes": {
+   "reference": 86,
+   "captured": 86,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "86|b844916ed32fa546ebdc04f7f427957a",
+   "captured_hash": "86|b844916ed32fa546ebdc04f7f427957a"
+  },
+  "grants": {
+   "reference": 34,
+   "captured": 34,
+   "removed": [],
+   "added": [],
+   "empty": true,
+   "reference_hash": "34|22bb3e64a7ac85dc6565d9047b457d2a",
+   "captured_hash": "34|22bb3e64a7ac85dc6565d9047b457d2a"
+  }
+ },
+ "all_empty": true
+}

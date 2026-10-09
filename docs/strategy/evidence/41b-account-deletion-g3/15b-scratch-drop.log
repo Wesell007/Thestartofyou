@@ -1,0 +1,7 @@
+SET LOCAL lock_timeout = '5s';
+SET
+drop schema g3_scratch cascade;
+psql:work/29-scratch-drop.sql:2: NOTICE:  drop cascades to 2 other objects
+DETAIL:  drop cascades to table g3_scratch.y_parent
+drop cascades to table g3_scratch.x_dependant
+DROP SCHEMA

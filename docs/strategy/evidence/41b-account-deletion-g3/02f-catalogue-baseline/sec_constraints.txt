@@ -1,0 +1,141 @@
+ai_rate_limits|ai_rate_limits_pkey|PRIMARY KEY (rate_key)
+ai_rate_limits|ai_rate_limits_request_count_check|CHECK ((request_count >= 0))
+archived_journeys|archived_journeys_ended_reason_check|CHECK ((ended_reason = ANY (ARRAY['transitioned'::text, 'completed'::text, 'user_ended'::text])))
+archived_journeys|archived_journeys_pkey|PRIMARY KEY (id)
+archived_journeys|archived_journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+babies|babies_birth_order_range|CHECK (((birth_order >= 1) AND (birth_order <= 4)))
+babies|babies_name_length|CHECK (((name IS NULL) OR (char_length(name) <= 60)))
+babies|babies_pkey|PRIMARY KEY (id)
+babies|babies_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+baby_movement_notes|baby_movement_notes_pkey|PRIMARY KEY (id)
+baby_movement_notes|baby_movement_notes_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+birth_plans|birth_plans_completion_check|CHECK (((completion >= 0) AND (completion <= 100)))
+birth_plans|birth_plans_pkey|PRIMARY KEY (id)
+birth_plans|birth_plans_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+birth_plans|birth_plans_user_id_key|UNIQUE (user_id)
+companion_conversations|companion_conversations_pkey|PRIMARY KEY (id)
+companion_conversations|companion_conversations_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+companion_memories|companion_memories_pkey|PRIMARY KEY (id)
+companion_memories|companion_memories_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+companion_memories|companion_memories_value_length|CHECK (((char_length(btrim(value)) >= 1) AND (char_length(btrim(value)) <= 240)))
+companion_messages|companion_messages_client_message_id_check|CHECK (((client_message_id IS NULL) OR ((char_length(client_message_id) >= 8) AND (char_length(client_message_id) <= 100))))
+companion_messages|companion_messages_content_check|CHECK (((char_length(content) >= 1) AND (char_length(content) <= 8000)))
+companion_messages|companion_messages_conversation_id_fkey|FOREIGN KEY (conversation_id) REFERENCES companion_conversations(id) ON DELETE CASCADE
+companion_messages|companion_messages_pkey|PRIMARY KEY (id)
+companion_messages|companion_messages_role_check|CHECK ((role = ANY (ARRAY['user'::text, 'assistant'::text])))
+companion_messages|companion_messages_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+contraction_events|contraction_events_pkey|PRIMARY KEY (id)
+contraction_events|contraction_events_session_id_user_id_fkey|FOREIGN KEY (session_id, user_id) REFERENCES contraction_sessions(id, user_id) ON DELETE CASCADE
+contraction_events|contraction_events_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+contraction_sessions|contraction_sessions_id_user_id_key|UNIQUE (id, user_id)
+contraction_sessions|contraction_sessions_pkey|PRIMARY KEY (id)
+contraction_sessions|contraction_sessions_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+email_delivery_claims|email_delivery_claims_pkey|PRIMARY KEY (message_id)
+email_delivery_claims|email_delivery_claims_status_check|CHECK ((status = ANY (ARRAY['processing'::text, 'sent'::text])))
+email_send_log|email_send_log_pkey|PRIMARY KEY (id)
+email_send_log|email_send_log_status_check|CHECK ((status = ANY (ARRAY['pending'::text, 'sent'::text, 'suppressed'::text, 'failed'::text, 'rate_limited'::text, 'bounced'::text, 'complained'::text, 'dlq'::text])))
+email_send_state|email_send_state_id_check|CHECK ((id = 1))
+email_send_state|email_send_state_pkey|PRIMARY KEY (id)
+email_unsubscribe_tokens|email_unsubscribe_tokens_email_key|UNIQUE (email)
+email_unsubscribe_tokens|email_unsubscribe_tokens_pkey|PRIMARY KEY (id)
+email_unsubscribe_tokens|email_unsubscribe_tokens_token_key|UNIQUE (token)
+first_year_care_events|first_year_care_events_amount_range|CHECK (((amount_ml IS NULL) OR ((amount_ml > (0)::numeric) AND (amount_ml <= (2000)::numeric))))
+first_year_care_events|first_year_care_events_amount_shape|CHECK (((event_type = ANY (ARRAY['feed'::text, 'pump'::text])) OR (amount_ml IS NULL)))
+first_year_care_events|first_year_care_events_baby_id_fkey|FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+first_year_care_events|first_year_care_events_event_type_check|CHECK ((event_type = ANY (ARRAY['feed'::text, 'sleep'::text, 'nappy'::text, 'pump'::text, 'note'::text])))
+first_year_care_events|first_year_care_events_feed_method_check|CHECK (((feed_method IS NULL) OR (feed_method = ANY (ARRAY['breast'::text, 'bottle'::text, 'expressed'::text, 'formula'::text, 'solids'::text]))))
+first_year_care_events|first_year_care_events_feed_shape|CHECK (((event_type = 'feed'::text) OR (feed_method IS NULL)))
+first_year_care_events|first_year_care_events_nappy_shape|CHECK (((event_type = 'nappy'::text) OR (nappy_type IS NULL)))
+first_year_care_events|first_year_care_events_nappy_type_check|CHECK (((nappy_type IS NULL) OR (nappy_type = ANY (ARRAY['wet'::text, 'dirty'::text, 'both'::text, 'wee'::text, 'poo'::text, 'dry'::text]))))
+first_year_care_events|first_year_care_events_note_length|CHECK (((note IS NULL) OR (char_length(note) <= 2000)))
+first_year_care_events|first_year_care_events_pkey|PRIMARY KEY (id)
+first_year_care_events|first_year_care_events_range|CHECK (((ended_at IS NULL) OR (started_at IS NULL) OR (ended_at > started_at)))
+first_year_care_events|first_year_care_events_side_check|CHECK (((side IS NULL) OR (side = ANY (ARRAY['left'::text, 'right'::text, 'both'::text]))))
+first_year_care_events|first_year_care_events_side_shape|CHECK (((event_type = ANY (ARRAY['feed'::text, 'pump'::text])) OR (side IS NULL)))
+first_year_care_events|first_year_care_events_sleep_kind_check|CHECK (((sleep_kind IS NULL) OR (sleep_kind = ANY (ARRAY['nap'::text, 'night'::text]))))
+first_year_care_events|first_year_care_events_sleep_kind_shape|CHECK (((event_type = 'sleep'::text) OR (sleep_kind IS NULL)))
+first_year_care_events|first_year_care_events_sleep_shape|CHECK ((((event_type = 'sleep'::text) AND (started_at IS NOT NULL)) OR (event_type = 'feed'::text) OR ((event_type <> ALL (ARRAY['sleep'::text, 'feed'::text])) AND (started_at IS NULL) AND (ended_at IS NULL))))
+first_year_care_events|first_year_care_events_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+first_year_entries|first_year_entries_baby_id_fkey|FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+first_year_entries|first_year_entries_kind_check|CHECK ((kind = ANY (ARRAY['rhythm'::text, 'feeding'::text, 'sleep'::text, 'nappies'::text, 'recovery'::text, 'wellbeing'::text, 'rest_support'::text, 'question'::text])))
+first_year_entries|first_year_entries_lane_baby|CHECK ((((lane = 'baby'::text) AND (baby_id IS NOT NULL)) OR ((lane = 'parent'::text) AND (baby_id IS NULL))))
+first_year_entries|first_year_entries_lane_check|CHECK ((lane = ANY (ARRAY['baby'::text, 'parent'::text])))
+first_year_entries|first_year_entries_lane_kind|CHECK ((((lane = 'baby'::text) AND (kind = ANY (ARRAY['rhythm'::text, 'feeding'::text, 'sleep'::text, 'nappies'::text]))) OR ((lane = 'parent'::text) AND (kind = ANY (ARRAY['recovery'::text, 'wellbeing'::text, 'rest_support'::text, 'question'::text])))))
+first_year_entries|first_year_entries_note_length|CHECK (((note IS NULL) OR (char_length(note) <= 2000)))
+first_year_entries|first_year_entries_pkey|PRIMARY KEY (id)
+first_year_entries|first_year_entries_tags_count|CHECK (((array_length(tags, 1) IS NULL) OR (array_length(tags, 1) <= 8)))
+first_year_entries|first_year_entries_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+first_year_journeys|first_year_journeys_archived_pregnancy_journey_id_fkey|FOREIGN KEY (archived_pregnancy_journey_id) REFERENCES archived_journeys(id) ON DELETE SET NULL
+first_year_journeys|first_year_journeys_pkey|PRIMARY KEY (user_id)
+first_year_journeys|first_year_journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+first_year_memories|first_year_memories_baby_id_fkey|FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE SET NULL
+first_year_memories|first_year_memories_note_check|CHECK (((btrim(note) <> ''::text) AND (char_length(btrim(note)) <= 2000)))
+first_year_memories|first_year_memories_photo_complete|CHECK ((((photo_path IS NULL) AND (photo_mime IS NULL) AND (photo_size_bytes IS NULL)) OR ((photo_path IS NOT NULL) AND (photo_mime IS NOT NULL) AND (photo_size_bytes IS NOT NULL))))
+first_year_memories|first_year_memories_photo_dimensions|CHECK ((((photo_width IS NULL) OR ((photo_width > 0) AND (photo_width <= 20000))) AND ((photo_height IS NULL) OR ((photo_height > 0) AND (photo_height <= 20000)))))
+first_year_memories|first_year_memories_photo_mime_allowed|CHECK (((photo_mime IS NULL) OR (photo_mime = ANY (ARRAY['image/jpeg'::text, 'image/png'::text, 'image/webp'::text, 'image/heic'::text, 'image/heif'::text]))))
+first_year_memories|first_year_memories_photo_path_length|CHECK (((photo_path IS NULL) OR ((char_length(photo_path) >= 1) AND (char_length(photo_path) <= 512))))
+first_year_memories|first_year_memories_photo_size_range|CHECK (((photo_size_bytes IS NULL) OR ((photo_size_bytes > 0) AND (photo_size_bytes <= 8388608))))
+first_year_memories|first_year_memories_pkey|PRIMARY KEY (id)
+first_year_memories|first_year_memories_scope_baby_check|CHECK ((((memory_scope = 'baby'::text) AND (baby_id IS NOT NULL)) OR ((memory_scope <> 'baby'::text) AND (baby_id IS NULL))))
+first_year_memories|first_year_memories_scope_check|CHECK ((memory_scope = ANY (ARRAY['family'::text, 'baby'::text, 'all_babies'::text])))
+first_year_memories|first_year_memories_source_entry_id_fkey|FOREIGN KEY (source_entry_id) REFERENCES first_year_entries(id) ON DELETE SET NULL
+first_year_memories|first_year_memories_title_check|CHECK (((title IS NULL) OR (char_length(btrim(title)) <= 120)))
+first_year_memories|first_year_memories_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+first_year_reminders|first_year_reminders_baby_id_fkey|FOREIGN KEY (baby_id) REFERENCES babies(id) ON DELETE CASCADE
+first_year_reminders|first_year_reminders_label_length|CHECK (((label IS NULL) OR (char_length(label) <= 140)))
+first_year_reminders|first_year_reminders_pkey|PRIMARY KEY (id)
+first_year_reminders|first_year_reminders_reminder_type_check|CHECK ((reminder_type = ANY (ARRAY['feed'::text, 'sleep'::text, 'nappy'::text, 'moment'::text])))
+first_year_reminders|first_year_reminders_status_check|CHECK ((status = ANY (ARRAY['active'::text, 'done'::text])))
+first_year_reminders|first_year_reminders_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+g3_rehearsal_marker|g3_rehearsal_marker_pkey|PRIMARY KEY (project_ref)
+hospital_bag_items|hospital_bag_items_category_check|CHECK ((category = ANY (ARRAY['parent'::text, 'baby'::text, 'partner'::text, 'documents'::text, 'comfort'::text])))
+hospital_bag_items|hospital_bag_items_pkey|PRIMARY KEY (id)
+hospital_bag_items|hospital_bag_items_user_id_category_item_key_key|UNIQUE (user_id, category, item_key)
+hospital_bag_items|hospital_bag_items_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+journeys|journeys_lifecycle_check|CHECK ((lifecycle = ANY (ARRAY['ttc'::text, 'ivf'::text, 'pregnancy'::text, 'postpartum'::text, 'first_year'::text])))
+journeys|journeys_pkey|PRIMARY KEY (user_id)
+journeys|journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+midwife_questions|midwife_questions_category_check|CHECK ((category = ANY (ARRAY['symptoms_body'::text, 'baby_movements'::text, 'scans_tests'::text, 'birth_preferences'::text, 'feeding'::text, 'recovery'::text, 'practical'::text, 'other'::text])))
+midwife_questions|midwife_questions_pkey|PRIMARY KEY (id)
+midwife_questions|midwife_questions_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+pregnancy_appointments|pregnancy_appointments_pkey|PRIMARY KEY (id)
+pregnancy_appointments|pregnancy_appointments_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+pregnancy_appointments|pregnancy_appointments_week_check|CHECK (((week IS NULL) OR ((week >= 1) AND (week <= 42))))
+pregnancy_journeys|pregnancy_journeys_pkey|PRIMARY KEY (user_id)
+pregnancy_journeys|pregnancy_journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+pregnancy_symptom_notes|pregnancy_symptom_notes_personal_severity_check|CHECK (((personal_severity IS NULL) OR ((personal_severity >= 1) AND (personal_severity <= 3))))
+pregnancy_symptom_notes|pregnancy_symptom_notes_pkey|PRIMARY KEY (id)
+pregnancy_symptom_notes|pregnancy_symptom_notes_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+profiles|profiles_companion_name_check|CHECK (((companion_name IS NULL) OR ((char_length(TRIM(BOTH FROM companion_name)) >= 1) AND (char_length(TRIM(BOTH FROM companion_name)) <= 24))))
+profiles|profiles_companion_tone_check|CHECK (((companion_tone IS NULL) OR (companion_tone = ANY (ARRAY['calm'::text, 'practical'::text, 'warm'::text]))))
+profiles|profiles_pkey|PRIMARY KEY (id)
+profiles|profiles_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+profiles|profiles_user_id_key|UNIQUE (user_id)
+reflections|reflections_pkey|PRIMARY KEY (id)
+reflections|reflections_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE NOT VALID
+reflections|reflections_user_id_week_key|UNIQUE (user_id, week)
+reflections|reflections_week_check|CHECK (((week >= 1) AND (week <= 45)))
+saved_journeys|saved_journeys_pkey|PRIMARY KEY (id)
+saved_journeys|saved_journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+saved_journeys|saved_journeys_user_id_key|UNIQUE (user_id)
+suppressed_emails|suppressed_emails_email_key|UNIQUE (email)
+suppressed_emails|suppressed_emails_pkey|PRIMARY KEY (id)
+suppressed_emails|suppressed_emails_reason_check|CHECK ((reason = ANY (ARRAY['unsubscribe'::text, 'bounce'::text, 'complaint'::text])))
+ttc_journeys|ttc_journeys_ivf_transfer_paired_chk|CHECK ((((ivf_transfer_date IS NULL) AND (ivf_transfer_type IS NULL)) OR ((ivf_transfer_date IS NOT NULL) AND (ivf_transfer_type IS NOT NULL) AND (ivf_transfer_type = ANY (ARRAY['3day'::text, '5day'::text])))))
+ttc_journeys|ttc_journeys_pkey|PRIMARY KEY (id)
+ttc_journeys|ttc_journeys_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+ttc_journeys|ttc_journeys_user_id_key|UNIQUE (user_id)
+ttc_logs|ttc_logs_journey_id_fkey|FOREIGN KEY (journey_id) REFERENCES ttc_journeys(id) ON DELETE CASCADE
+ttc_logs|ttc_logs_log_type_check|CHECK ((log_type = ANY (ARRAY['period'::text, 'ovulation_test'::text, 'pregnancy_test'::text, 'mood'::text, 'cramps'::text, 'discharge'::text, 'energy'::text, 'note'::text])))
+ttc_logs|ttc_logs_pkey|PRIMARY KEY (id)
+ttc_logs|ttc_logs_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+week_media_memories|week_media_memories_duration_seconds_check|CHECK (((duration_seconds IS NULL) OR (duration_seconds > 0)))
+week_media_memories|week_media_memories_file_size_bytes_check|CHECK ((file_size_bytes > 0))
+week_media_memories|week_media_memories_media_type_check|CHECK ((media_type = ANY (ARRAY['video'::text, 'voice_note'::text])))
+week_media_memories|week_media_memories_pkey|PRIMARY KEY (id)
+week_media_memories|week_media_memories_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
+week_media_memories|week_media_memories_user_id_week_media_type_key|UNIQUE (user_id, week, media_type)
+week_media_memories|week_media_memories_week_check|CHECK (((week >= 1) AND (week <= 42)))
+week_photos|week_photos_pkey|PRIMARY KEY (id)
+week_photos|week_photos_user_id_fkey|FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE NOT VALID
+week_photos|week_photos_user_id_week_key|UNIQUE (user_id, week)

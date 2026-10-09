@@ -1,0 +1,47 @@
+-- 2026-10-09T04:00:50.848682+00:00 exit=0
+SET LOCAL lock_timeout = '5s';
+SET
+insert into public.journeys (user_id, lifecycle) values ('da1d9453-cee2-4913-b2de-a29b23ae07cf', 'first_year');
+INSERT 0 1
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, status_changed_at, outcome_date, expected_count, ended_at) values ('00000000-0000-4a3a-8000-a100000000e1', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', date '2025-12-15', date '2026-09-21', 'given_birth', timestamptz '2026-09-20T09:00:00Z', date '2026-09-20', 2, timestamptz '2026-09-20T09:00:00Z');
+INSERT 0 1
+insert into public.pregnancy_episodes (id, user_id, lmp_date, due_date, status, removed_at) values ('00000000-0000-4a3a-8000-a100000000e0', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', date '2025-01-10', date '2025-10-17', 'active', timestamptz '2025-03-01T10:00:00Z');
+INSERT 0 1
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a100000000b1', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 'G3 twin 1', date '2026-09-20', 1, true, '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.babies (id, user_id, name, date_of_birth, birth_order, is_primary, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a100000000b2', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 'G3 twin 2', date '2026-09-20', 2, false, '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.reflections (id, user_id, week, content, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000101', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 20, 'G3 synthetic reflection', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.week_photos (id, user_id, week, storage_path, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000102', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 20, 'da1d9453-cee2-4913-b2de-a29b23ae07cf/20.jpg', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.week_media_memories (id, user_id, week, media_type, mime_type, storage_path, file_size_bytes, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000103', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 20, 'voice_note', 'audio/mpeg', 'da1d9453-cee2-4913-b2de-a29b23ae07cf/20-voice.mp3', 1000, '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.pregnancy_appointments (id, user_id, week, appointment_type, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000104', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 20, 'G3 synthetic appointment', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.pregnancy_symptom_notes (id, user_id, symptom_label, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000105', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 'G3 synthetic symptom', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.baby_movement_notes (id, user_id, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000106', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.birth_plans (id, user_id, completion, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000107', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 50, '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.hospital_bag_items (id, user_id, category, item_key, label, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000108', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 'baby', 'g3_item', 'G3 synthetic item', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.midwife_questions (id, user_id, category, question, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a10000000109', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', 'other', 'G3 synthetic question', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.contraction_sessions (id, user_id, started_at, ended_at, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a1000000005e', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', timestamptz '2026-09-19T20:00:00Z', timestamptz '2026-09-19T21:00:00Z', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.contraction_events (id, user_id, session_id, started_at, ended_at, pregnancy_episode_id) values ('00000000-0000-4a3a-8000-a1000000010b', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a1000000005e', timestamptz '2026-09-19T20:10:00Z', timestamptz '2026-09-19T20:11:00Z', '00000000-0000-4a3a-8000-a100000000e1');
+INSERT 0 1
+insert into public.first_year_entries (id, user_id, baby_id, lane, kind, entry_date, note) values ('00000000-0000-4a3a-8000-a10000000115', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000b1', 'baby', 'rhythm', date '2026-10-05', 'G3 synthetic entry twin 1');
+INSERT 0 1
+insert into public.first_year_entries (id, user_id, baby_id, lane, kind, entry_date, note) values ('00000000-0000-4a3a-8000-a10000000116', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000b2', 'baby', 'rhythm', date '2026-10-05', 'G3 synthetic entry twin 2');
+INSERT 0 1
+insert into public.first_year_care_events (id, user_id, baby_id, event_type, occurred_at, note) values ('00000000-0000-4a3a-8000-a10000000117', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000b1', 'note', timestamptz '2026-10-05T10:00:00Z', 'G3 synthetic care note');
+INSERT 0 1
+insert into public.first_year_reminders (id, user_id, baby_id, reminder_type, due_at, label) values ('00000000-0000-4a3a-8000-a10000000118', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000b1', 'moment', now() + interval '1 day', 'G3 synthetic reminder');
+INSERT 0 1
+insert into public.first_year_memories (id, user_id, baby_id, memory_scope, memory_date, note) values ('00000000-0000-4a3a-8000-a10000000119', 'da1d9453-cee2-4913-b2de-a29b23ae07cf', '00000000-0000-4a3a-8000-a100000000b1', 'baby', date '2026-10-05', 'G3 synthetic memory');
+INSERT 0 1
+update public.journeys set current_pregnancy_episode_id = '00000000-0000-4a3a-8000-a100000000e1' where user_id = 'da1d9453-cee2-4913-b2de-a29b23ae07cf';
+UPDATE 1

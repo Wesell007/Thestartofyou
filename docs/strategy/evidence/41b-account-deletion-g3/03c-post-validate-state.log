@@ -1,0 +1,8 @@
+ episode_fks | restrict_n | validated_n | deferrable_n | initially_deferred_n 
+-------------+------------+-------------+--------------+----------------------
+          13 |         13 |          13 |            0 |                    0
+
+ episode_rows |                                     episode_acl                                      | episode_policies | rls | history_rows 
+--------------+--------------------------------------------------------------------------------------+------------------+-----+--------------
+            0 | {postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres,authenticated=r/postgres} |                4 | t   |           47
+

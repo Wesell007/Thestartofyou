@@ -1,0 +1,171 @@
+WITH
+auth_pk AS (
+  SELECT p.conkey
+  FROM pg_catalog.pg_constraint p
+  WHERE p.conrelid = 'auth.users'::regclass
+    AND p.contype = 'p'
+),
+direct_auth AS (
+  SELECT c.conrelid,
+         c.conname,
+         c.confdeltype,
+         ca.attname AS child_column,
+         ra.attname AS auth_column,
+         (c.confkey = (SELECT conkey FROM auth_pk)) AS targets_auth_pk
+  FROM pg_catalog.pg_constraint c
+  JOIN pg_catalog.pg_attribute ca ON ca.attrelid = c.conrelid AND ca.attnum = c.conkey[1]
+  JOIN pg_catalog.pg_attribute ra ON ra.attrelid = c.confrelid AND ra.attnum = c.confkey[1]
+  WHERE c.contype = 'f'
+    AND c.confrelid = 'auth.users'::regclass
+    AND cardinality(c.conkey) = 1
+    AND ca.attname = 'user_id'
+),
+account_owned AS (
+  SELECT d.conrelid AS relid
+  FROM direct_auth d
+  JOIN pg_catalog.pg_attribute u
+    ON u.attrelid = d.conrelid AND u.attname = 'user_id' AND NOT u.attisdropped
+  WHERE d.confdeltype = 'c'
+    AND d.targets_auth_pk
+    AND d.auth_column = 'id'
+    AND u.attnotnull
+  GROUP BY d.conrelid
+),
+registered AS (
+  SELECT r.name AS registered_name, to_regclass(r.name) AS relid
+  FROM unnest(ARRAY['public.pregnancy_episodes', 'public.babies']) AS r(name)
+),
+protected_parents AS (
+  SELECT relid FROM account_owned
+  UNION
+  SELECT relid FROM registered WHERE relid IS NOT NULL
+),
+blocking AS (
+  SELECT c.oid, c.conname, c.conrelid, c.confrelid, c.conkey, c.confkey,
+         c.confdeltype, c.condeferrable, c.condeferred
+  FROM pg_catalog.pg_constraint c
+  WHERE c.contype = 'f'
+    AND c.confdeltype IN ('r', 'a')
+    AND c.confrelid IN (SELECT relid FROM protected_parents)
+),
+evaluated AS (
+  SELECT b.conname,
+         b.confrelid,
+         b.confdeltype,
+         b.condeferrable,
+         b.condeferred,
+         pn.nspname AS parent_schema_name,
+         pc.relname AS parent_table_name,
+         cn.nspname AS referencing_schema_name,
+         cc.relname AS referencing_table_name,
+         (SELECT string_agg(a.attname::text, ', ' ORDER BY k.ord)
+            FROM unnest(b.conkey) WITH ORDINALITY AS k(attnum, ord)
+            JOIN pg_catalog.pg_attribute a ON a.attrelid = b.conrelid AND a.attnum = k.attnum) AS fk_columns,
+         (SELECT string_agg(a.attname::text, ', ' ORDER BY k.ord)
+            FROM unnest(b.confkey) WITH ORDINALITY AS k(attnum, ord)
+            JOIN pg_catalog.pg_attribute a ON a.attrelid = b.confrelid AND a.attnum = k.attnum) AS ref_columns,
+         ua.attnum AS user_attnum,
+         ua.attnotnull AS user_not_null,
+         array_position(b.conkey, ua.attnum) AS user_position,
+         pu.attname AS paired_parent_column,
+         (b.confrelid IN (SELECT relid FROM account_owned)) AS parent_account_owned,
+         d.conname AS direct_name,
+         d.child_column AS direct_column,
+         d.confdeltype AS direct_action,
+         d.targets_auth_pk,
+         d.auth_column
+  FROM blocking b
+  JOIN pg_catalog.pg_class cc ON cc.oid = b.conrelid
+  JOIN pg_catalog.pg_namespace cn ON cn.oid = cc.relnamespace
+  JOIN pg_catalog.pg_class pc ON pc.oid = b.confrelid
+  JOIN pg_catalog.pg_namespace pn ON pn.oid = pc.relnamespace
+  LEFT JOIN pg_catalog.pg_attribute ua
+    ON ua.attrelid = b.conrelid AND ua.attname = 'user_id' AND NOT ua.attisdropped
+  LEFT JOIN pg_catalog.pg_attribute pu
+    ON pu.attrelid = b.confrelid AND pu.attnum = b.confkey[array_position(b.conkey, ua.attnum)]
+  LEFT JOIN LATERAL (
+    SELECT x.*
+    FROM direct_auth x
+    WHERE x.conrelid = b.conrelid
+    ORDER BY (x.confdeltype = 'c') DESC, x.conname
+    LIMIT 1
+  ) d ON true
+),
+classified AS (
+  SELECT e.*,
+         concat_ws('; ',
+           CASE WHEN NOT e.parent_account_owned
+                THEN 'parent not account-owned (no NOT NULL user_id with direct auth.users CASCADE)' END,
+           CASE WHEN e.user_attnum IS NULL THEN 'B: referencing table has no user_id column' END,
+           CASE WHEN e.user_attnum IS NOT NULL AND e.user_position IS NULL
+                THEN 'C: protected FK does not include the referencing user_id' END,
+           CASE WHEN e.user_position IS NOT NULL AND e.paired_parent_column IS DISTINCT FROM 'user_id'
+                THEN 'D: user_id not paired with the parent user_id' END,
+           CASE WHEN e.user_attnum IS NOT NULL AND NOT e.user_not_null THEN 'E: user_id is nullable' END,
+           CASE WHEN e.direct_name IS NULL
+                THEN 'F/I: no direct user_id -> auth.users FK (two-hop paths do not satisfy AD-1)' END,
+           CASE WHEN e.direct_name IS NOT NULL AND NOT (e.targets_auth_pk AND e.auth_column = 'id')
+                THEN 'G: account FK does not target the auth.users primary key' END,
+           CASE WHEN e.direct_name IS NOT NULL AND e.direct_action <> 'c'
+                THEN 'H: account FK delete action is not CASCADE' END
+         ) AS reasons
+  FROM evaluated e
+),
+gate AS (
+  SELECT count(*) FILTER (WHERE c.reasons <> '') AS fail_count,
+         count(*) FILTER (WHERE c.confrelid = to_regclass('public.pregnancy_episodes')) AS episode_link_count,
+         count(*) AS protected_fk_count,
+         (SELECT string_agg(r.registered_name, ', ' ORDER BY r.registered_name)
+            FROM registered r
+           WHERE r.relid IS NULL OR r.relid NOT IN (SELECT relid FROM account_owned)) AS registered_problems
+  FROM classified c
+)
+SELECT 'fk' AS row_kind,
+       c.parent_schema_name::text AS parent_schema,
+       c.parent_table_name::text AS parent_table,
+       c.conname::text AS protected_constraint,
+       c.referencing_schema_name::text AS referencing_schema,
+       c.referencing_table_name::text AS referencing_table,
+       c.fk_columns || ' -> ' || c.ref_columns AS protected_fk_columns,
+       CASE c.confdeltype WHEN 'r' THEN 'RESTRICT' WHEN 'a' THEN 'NO ACTION' END AS protected_delete_action,
+       CASE WHEN c.condeferred THEN 'DEFERRABLE INITIALLY DEFERRED'
+            WHEN c.condeferrable THEN 'DEFERRABLE INITIALLY IMMEDIATE'
+            ELSE 'NOT DEFERRABLE' END AS protected_deferrable,
+       CASE WHEN c.user_attnum IS NULL THEN NULL ELSE 'user_id' END AS ownership_user_column,
+       c.direct_name::text AS direct_auth_fk_name,
+       c.direct_column::text AS direct_auth_fk_columns,
+       CASE c.direct_action WHEN 'c' THEN 'CASCADE' WHEN 'r' THEN 'RESTRICT' WHEN 'a' THEN 'NO ACTION'
+            WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END AS direct_auth_delete_action,
+       CASE WHEN c.direct_name IS NULL THEN NULL
+            ELSE 'auth.users(' || c.auth_column::text || ')'
+                 || CASE WHEN c.targets_auth_pk THEN ' primary key' ELSE ' not primary key' END END AS auth_reference_target,
+       c.user_not_null AS user_id_not_null,
+       (c.user_position IS NOT NULL AND c.paired_parent_column = 'user_id') AS same_user_column_proven,
+       CASE WHEN c.reasons = '' THEN 'PASS' ELSE 'FAIL' END AS ad1_status,
+       NULLIF(c.reasons, '') AS failure_reason
+FROM classified c
+UNION ALL
+SELECT 'gate', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+       CASE WHEN g.fail_count = 0 AND g.episode_link_count = 13 AND g.registered_problems IS NULL
+            THEN 'PASS' ELSE 'FAIL' END,
+       'fail_count=' || g.fail_count
+         || '; episode_link_count=' || g.episode_link_count
+         || '; protected_fk_count=' || g.protected_fk_count
+         || '; registered parents not account-owned: ' || coalesce(g.registered_problems, 'none')
+FROM gate g
+ORDER BY 1, 3, 6, 4;
+row_kind|parent_schema|parent_table|protected_constraint|referencing_schema|referencing_table|protected_fk_columns|protected_delete_action|protected_deferrable|ownership_user_column|direct_auth_fk_name|direct_auth_fk_columns|direct_auth_delete_action|auth_reference_target|user_id_not_null|same_user_column_proven|ad1_status|failure_reason
+fk|public|pregnancy_episodes|babies_pregnancy_episode_owner_fkey|public|babies|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|babies_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|baby_movement_notes_pregnancy_episode_owner_fkey|public|baby_movement_notes|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|baby_movement_notes_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|birth_plans_pregnancy_episode_owner_fkey|public|birth_plans|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|birth_plans_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|contraction_events_pregnancy_episode_owner_fkey|public|contraction_events|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|contraction_events_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|contraction_sessions_pregnancy_episode_owner_fkey|public|contraction_sessions|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|contraction_sessions_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|hospital_bag_items_pregnancy_episode_owner_fkey|public|hospital_bag_items|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|hospital_bag_items_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|journeys_current_pregnancy_episode_owner_fkey|public|journeys|current_pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|journeys_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|midwife_questions_pregnancy_episode_owner_fkey|public|midwife_questions|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|midwife_questions_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|pregnancy_appointments_pregnancy_episode_owner_fkey|public|pregnancy_appointments|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|pregnancy_appointments_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|pregnancy_symptom_notes_pregnancy_episode_owner_fkey|public|pregnancy_symptom_notes|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|pregnancy_symptom_notes_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|reflections_pregnancy_episode_owner_fkey|public|reflections|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|reflections_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|week_media_memories_pregnancy_episode_owner_fkey|public|week_media_memories|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|week_media_memories_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+fk|public|pregnancy_episodes|week_photos_pregnancy_episode_owner_fkey|public|week_photos|pregnancy_episode_id, user_id -> id, user_id|RESTRICT|NOT DEFERRABLE|user_id|week_photos_user_id_fkey|user_id|CASCADE|auth.users(id) primary key|t|t|PASS|
+gate||||||||||||||||PASS|fail_count=0; episode_link_count=13; protected_fk_count=13; registered parents not account-owned: none

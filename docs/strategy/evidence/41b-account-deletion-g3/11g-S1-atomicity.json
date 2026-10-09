@@ -1,0 +1,178 @@
+{
+ "shape_equal": true,
+ "owned_equal": true,
+ "fingerprint_equal": true,
+ "auth_user_present": 1,
+ "post": {
+  "shape": {
+   "reflections": 1,
+   "week_photos": 1,
+   "week_media_memories": 1,
+   "pregnancy_appointments": 1,
+   "pregnancy_symptom_notes": 1,
+   "baby_movement_notes": 1,
+   "birth_plans": 1,
+   "hospital_bag_items": 1,
+   "midwife_questions": 1,
+   "contraction_sessions": 1,
+   "contraction_events": 1,
+   "babies": 2,
+   "journeys.pointer": 1,
+   "episodes": 2,
+   "episodes.removed": 1,
+   "first_year.child_rows": 5,
+   "cross_owner_links": 0
+  },
+  "owned": {
+   "g3_scratch.x_dependant": 1,
+   "g3_scratch.y_parent": 1,
+   "public.archived_journeys": 0,
+   "public.babies": 2,
+   "public.baby_movement_notes": 1,
+   "public.birth_plans": 1,
+   "public.companion_conversations": 0,
+   "public.companion_memories": 0,
+   "public.companion_messages": 0,
+   "public.contraction_events": 1,
+   "public.contraction_sessions": 1,
+   "public.first_year_care_events": 1,
+   "public.first_year_entries": 2,
+   "public.first_year_journeys": 0,
+   "public.first_year_memories": 1,
+   "public.first_year_reminders": 1,
+   "public.hospital_bag_items": 1,
+   "public.journeys": 1,
+   "public.midwife_questions": 1,
+   "public.pregnancy_appointments": 1,
+   "public.pregnancy_episodes": 2,
+   "public.pregnancy_journeys": 0,
+   "public.pregnancy_symptom_notes": 1,
+   "public.profiles": 0,
+   "public.reflections": 1,
+   "public.saved_journeys": 0,
+   "public.ttc_journeys": 0,
+   "public.ttc_logs": 0,
+   "public.week_media_memories": 1,
+   "public.week_photos": 1,
+   "auth.users": 1
+  },
+  "fingerprint": {
+   "public.archived_journeys": [
+    0,
+    "-"
+   ],
+   "public.babies": [
+    2,
+    "53527ddd7acb173069fe5b6c21733807"
+   ],
+   "public.baby_movement_notes": [
+    1,
+    "1c8f02131747e83c13e17fe0ee8bc074"
+   ],
+   "public.birth_plans": [
+    1,
+    "2ed13a1008b7c60a6d0afa642f52e96a"
+   ],
+   "public.companion_conversations": [
+    0,
+    "-"
+   ],
+   "public.companion_memories": [
+    0,
+    "-"
+   ],
+   "public.companion_messages": [
+    0,
+    "-"
+   ],
+   "public.contraction_events": [
+    1,
+    "863bf59bf320820e54c8c9999dca0a1d"
+   ],
+   "public.contraction_sessions": [
+    1,
+    "cfe6ba9c4fba67d7e02e692ea80494dc"
+   ],
+   "public.first_year_care_events": [
+    1,
+    "64575b1c691ca9b8da70bab7c1f1ba73"
+   ],
+   "public.first_year_entries": [
+    2,
+    "fe6b9c7f6625c4bb1a9fff4c00c8c977"
+   ],
+   "public.first_year_journeys": [
+    0,
+    "-"
+   ],
+   "public.first_year_memories": [
+    1,
+    "7c8e23c42b3607ea33993a71fe645004"
+   ],
+   "public.first_year_reminders": [
+    1,
+    "c784767ae25e04371515c5eb4a4a94f9"
+   ],
+   "public.hospital_bag_items": [
+    1,
+    "7b449517955741e0e40ab2e3aea638c0"
+   ],
+   "public.journeys": [
+    1,
+    "ddc89c7726511fbc6f469fb63b706c38"
+   ],
+   "public.midwife_questions": [
+    1,
+    "ae72abe48b9b3d2093eec40f62ffdc99"
+   ],
+   "public.pregnancy_appointments": [
+    1,
+    "cd9a957580513bdee5c3127642a3c9c8"
+   ],
+   "public.pregnancy_episodes": [
+    2,
+    "3b53417193ec0b1bc5cc84a287947a01"
+   ],
+   "public.pregnancy_journeys": [
+    0,
+    "-"
+   ],
+   "public.pregnancy_symptom_notes": [
+    1,
+    "439cdb7fc98a672104080d4bf32bf37a"
+   ],
+   "public.profiles": [
+    0,
+    "-"
+   ],
+   "public.reflections": [
+    1,
+    "c1b7dd0c7a7b04923595d5b3bc6af9d9"
+   ],
+   "public.saved_journeys": [
+    0,
+    "-"
+   ],
+   "public.ttc_journeys": [
+    0,
+    "-"
+   ],
+   "public.ttc_logs": [
+    0,
+    "-"
+   ],
+   "public.week_media_memories": [
+    1,
+    "649e28bcdaae3a94aaf5ca4988c1f557"
+   ],
+   "public.week_photos": [
+    1,
+    "fad7f2da4d1202a55a42e3581b5ff4b0"
+   ],
+   "auth.users": [
+    1,
+    "dfef9e497bb9b8d11657cfe13cdcaa2e"
+   ]
+  }
+ }
+}

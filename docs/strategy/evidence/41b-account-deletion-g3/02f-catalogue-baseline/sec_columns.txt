@@ -1,0 +1,289 @@
+ai_rate_limits|rate_key|text|text|NO|
+ai_rate_limits|request_count|integer|int4|NO|0
+ai_rate_limits|updated_at|timestamp with time zone|timestamptz|NO|now()
+ai_rate_limits|window_started_at|timestamp with time zone|timestamptz|NO|now()
+archived_journeys|ended_at|timestamp with time zone|timestamptz|NO|now()
+archived_journeys|ended_reason|text|text|NO|
+archived_journeys|id|uuid|uuid|NO|gen_random_uuid()
+archived_journeys|lifecycle|text|text|NO|
+archived_journeys|snapshot|jsonb|jsonb|NO|
+archived_journeys|started_at|timestamp with time zone|timestamptz|NO|
+archived_journeys|user_id|uuid|uuid|NO|
+babies|birth_order|smallint|int2|NO|1
+babies|created_at|timestamp with time zone|timestamptz|NO|now()
+babies|date_of_birth|date|date|NO|
+babies|id|uuid|uuid|NO|gen_random_uuid()
+babies|is_primary|boolean|bool|NO|true
+babies|name|text|text|YES|
+babies|updated_at|timestamp with time zone|timestamptz|NO|now()
+babies|user_id|uuid|uuid|NO|
+baby_movement_notes|created_at|timestamp with time zone|timestamptz|NO|now()
+baby_movement_notes|id|uuid|uuid|NO|gen_random_uuid()
+baby_movement_notes|noted_at|timestamp with time zone|timestamptz|NO|now()
+baby_movement_notes|notes|text|text|YES|
+baby_movement_notes|pattern_label|text|text|YES|
+baby_movement_notes|updated_at|timestamp with time zone|timestamptz|NO|now()
+baby_movement_notes|user_id|uuid|uuid|NO|
+birth_plans|answers|jsonb|jsonb|NO|'{}'::jsonb
+birth_plans|completion|integer|int4|NO|0
+birth_plans|created_at|timestamp with time zone|timestamptz|NO|now()
+birth_plans|id|uuid|uuid|NO|gen_random_uuid()
+birth_plans|notes|text|text|YES|
+birth_plans|updated_at|timestamp with time zone|timestamptz|NO|now()
+birth_plans|user_id|uuid|uuid|NO|
+companion_conversations|archived_at|timestamp with time zone|timestamptz|YES|
+companion_conversations|created_at|timestamp with time zone|timestamptz|NO|now()
+companion_conversations|id|uuid|uuid|NO|gen_random_uuid()
+companion_conversations|last_message_at|timestamp with time zone|timestamptz|NO|now()
+companion_conversations|title|text|text|YES|
+companion_conversations|updated_at|timestamp with time zone|timestamptz|NO|now()
+companion_conversations|user_id|uuid|uuid|NO|auth.uid()
+companion_memories|category|USER-DEFINED|companion_memory_category|NO|'other'::companion_memory_category
+companion_memories|created_at|timestamp with time zone|timestamptz|NO|now()
+companion_memories|id|uuid|uuid|NO|gen_random_uuid()
+companion_memories|normalised_value|text|text|YES|
+companion_memories|source|USER-DEFINED|companion_memory_source|NO|
+companion_memories|updated_at|timestamp with time zone|timestamptz|NO|now()
+companion_memories|user_id|uuid|uuid|NO|auth.uid()
+companion_memories|value|text|text|NO|
+companion_messages|client_message_id|text|text|YES|
+companion_messages|content|text|text|NO|
+companion_messages|conversation_id|uuid|uuid|NO|
+companion_messages|created_at|timestamp with time zone|timestamptz|NO|now()
+companion_messages|id|uuid|uuid|NO|gen_random_uuid()
+companion_messages|role|text|text|NO|
+companion_messages|updated_at|timestamp with time zone|timestamptz|NO|now()
+companion_messages|user_id|uuid|uuid|NO|auth.uid()
+contraction_events|created_at|timestamp with time zone|timestamptz|NO|now()
+contraction_events|ended_at|timestamp with time zone|timestamptz|YES|
+contraction_events|id|uuid|uuid|NO|gen_random_uuid()
+contraction_events|session_id|uuid|uuid|NO|
+contraction_events|started_at|timestamp with time zone|timestamptz|NO|
+contraction_events|updated_at|timestamp with time zone|timestamptz|NO|now()
+contraction_events|user_id|uuid|uuid|NO|
+contraction_sessions|created_at|timestamp with time zone|timestamptz|NO|now()
+contraction_sessions|ended_at|timestamp with time zone|timestamptz|YES|
+contraction_sessions|id|uuid|uuid|NO|gen_random_uuid()
+contraction_sessions|notes|text|text|YES|
+contraction_sessions|started_at|timestamp with time zone|timestamptz|NO|now()
+contraction_sessions|updated_at|timestamp with time zone|timestamptz|NO|now()
+contraction_sessions|user_id|uuid|uuid|NO|
+email_delivery_claims|claimed_at|timestamp with time zone|timestamptz|NO|now()
+email_delivery_claims|completed_at|timestamp with time zone|timestamptz|YES|
+email_delivery_claims|lease_until|timestamp with time zone|timestamptz|NO|
+email_delivery_claims|message_id|text|text|NO|
+email_delivery_claims|status|text|text|NO|
+email_delivery_claims|updated_at|timestamp with time zone|timestamptz|NO|now()
+email_send_log|created_at|timestamp with time zone|timestamptz|NO|now()
+email_send_log|error_message|text|text|YES|
+email_send_log|id|uuid|uuid|NO|gen_random_uuid()
+email_send_log|message_id|text|text|YES|
+email_send_log|metadata|jsonb|jsonb|YES|
+email_send_log|recipient_email|text|text|NO|
+email_send_log|status|text|text|NO|
+email_send_log|template_name|text|text|NO|
+email_send_state|auth_email_ttl_minutes|integer|int4|NO|15
+email_send_state|batch_size|integer|int4|NO|10
+email_send_state|id|integer|int4|NO|1
+email_send_state|retry_after_until|timestamp with time zone|timestamptz|YES|
+email_send_state|send_delay_ms|integer|int4|NO|200
+email_send_state|transactional_email_ttl_minutes|integer|int4|NO|60
+email_send_state|updated_at|timestamp with time zone|timestamptz|NO|now()
+email_unsubscribe_tokens|created_at|timestamp with time zone|timestamptz|NO|now()
+email_unsubscribe_tokens|email|text|text|NO|
+email_unsubscribe_tokens|id|uuid|uuid|NO|gen_random_uuid()
+email_unsubscribe_tokens|token|text|text|NO|
+email_unsubscribe_tokens|used_at|timestamp with time zone|timestamptz|YES|
+first_year_care_events|amount_ml|numeric|numeric|YES|
+first_year_care_events|baby_id|uuid|uuid|NO|
+first_year_care_events|created_at|timestamp with time zone|timestamptz|NO|now()
+first_year_care_events|ended_at|timestamp with time zone|timestamptz|YES|
+first_year_care_events|event_type|text|text|NO|
+first_year_care_events|feed_method|text|text|YES|
+first_year_care_events|id|uuid|uuid|NO|gen_random_uuid()
+first_year_care_events|metadata|jsonb|jsonb|NO|'{}'::jsonb
+first_year_care_events|nappy_type|text|text|YES|
+first_year_care_events|note|text|text|YES|
+first_year_care_events|occurred_at|timestamp with time zone|timestamptz|NO|
+first_year_care_events|side|text|text|YES|
+first_year_care_events|sleep_kind|text|text|YES|
+first_year_care_events|started_at|timestamp with time zone|timestamptz|YES|
+first_year_care_events|updated_at|timestamp with time zone|timestamptz|NO|now()
+first_year_care_events|user_id|uuid|uuid|NO|
+first_year_entries|answered|boolean|bool|NO|false
+first_year_entries|baby_id|uuid|uuid|YES|
+first_year_entries|created_at|timestamp with time zone|timestamptz|NO|now()
+first_year_entries|entry_date|date|date|NO|
+first_year_entries|id|uuid|uuid|NO|gen_random_uuid()
+first_year_entries|kind|text|text|NO|
+first_year_entries|lane|text|text|NO|
+first_year_entries|note|text|text|YES|
+first_year_entries|tags|ARRAY|_text|NO|'{}'::text[]
+first_year_entries|updated_at|timestamp with time zone|timestamptz|NO|now()
+first_year_entries|user_id|uuid|uuid|NO|
+first_year_journeys|archived_pregnancy_journey_id|uuid|uuid|YES|
+first_year_journeys|source_pregnancy_lmp_date|date|date|YES|
+first_year_journeys|started_at|timestamp with time zone|timestamptz|NO|now()
+first_year_journeys|status_changed_at|timestamp with time zone|timestamptz|YES|
+first_year_journeys|status|USER-DEFINED|first_year_journey_status|NO|'active'::first_year_journey_status
+first_year_journeys|updated_at|timestamp with time zone|timestamptz|NO|now()
+first_year_journeys|user_id|uuid|uuid|NO|
+first_year_memories|baby_id|uuid|uuid|YES|
+first_year_memories|created_at|timestamp with time zone|timestamptz|NO|now()
+first_year_memories|id|uuid|uuid|NO|gen_random_uuid()
+first_year_memories|memory_date|date|date|NO|
+first_year_memories|memory_scope|text|text|NO|'family'::text
+first_year_memories|note|text|text|NO|
+first_year_memories|photo_height|integer|int4|YES|
+first_year_memories|photo_mime|text|text|YES|
+first_year_memories|photo_path|text|text|YES|
+first_year_memories|photo_size_bytes|bigint|int8|YES|
+first_year_memories|photo_width|integer|int4|YES|
+first_year_memories|source_entry_id|uuid|uuid|YES|
+first_year_memories|title|text|text|YES|
+first_year_memories|updated_at|timestamp with time zone|timestamptz|NO|now()
+first_year_memories|user_id|uuid|uuid|NO|
+first_year_reminders|baby_id|uuid|uuid|YES|
+first_year_reminders|created_at|timestamp with time zone|timestamptz|NO|now()
+first_year_reminders|due_at|timestamp with time zone|timestamptz|NO|
+first_year_reminders|id|uuid|uuid|NO|gen_random_uuid()
+first_year_reminders|label|text|text|YES|
+first_year_reminders|reminder_type|text|text|NO|
+first_year_reminders|status|text|text|NO|'active'::text
+first_year_reminders|updated_at|timestamp with time zone|timestamptz|NO|now()
+first_year_reminders|user_id|uuid|uuid|NO|
+g3_rehearsal_marker|created_at|timestamp with time zone|timestamptz|NO|now()
+g3_rehearsal_marker|project_ref|text|text|NO|
+g3_rehearsal_marker|run_label|text|text|NO|
+hospital_bag_items|category|text|text|NO|
+hospital_bag_items|created_at|timestamp with time zone|timestamptz|NO|now()
+hospital_bag_items|id|uuid|uuid|NO|gen_random_uuid()
+hospital_bag_items|is_custom|boolean|bool|NO|false
+hospital_bag_items|item_key|text|text|NO|
+hospital_bag_items|label|text|text|NO|
+hospital_bag_items|packed_at|timestamp with time zone|timestamptz|YES|
+hospital_bag_items|sort_order|integer|int4|NO|0
+hospital_bag_items|updated_at|timestamp with time zone|timestamptz|NO|now()
+hospital_bag_items|user_id|uuid|uuid|NO|
+journeys|lifecycle|text|text|NO|
+journeys|started_at|timestamp with time zone|timestamptz|NO|now()
+journeys|updated_at|timestamp with time zone|timestamptz|NO|now()
+journeys|user_id|uuid|uuid|NO|
+midwife_questions|answer_notes|text|text|YES|
+midwife_questions|answered|boolean|bool|NO|false
+midwife_questions|appointment_id|uuid|uuid|YES|
+midwife_questions|category|text|text|NO|
+midwife_questions|created_at|timestamp with time zone|timestamptz|NO|now()
+midwife_questions|follow_up|boolean|bool|NO|false
+midwife_questions|id|uuid|uuid|NO|gen_random_uuid()
+midwife_questions|question|text|text|NO|
+midwife_questions|updated_at|timestamp with time zone|timestamptz|NO|now()
+midwife_questions|user_id|uuid|uuid|NO|
+pregnancy_appointments|appointment_at|timestamp with time zone|timestamptz|YES|
+pregnancy_appointments|appointment_type|text|text|YES|
+pregnancy_appointments|created_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_appointments|follow_up|text|text|YES|
+pregnancy_appointments|id|uuid|uuid|NO|gen_random_uuid()
+pregnancy_appointments|location|text|text|YES|
+pregnancy_appointments|notes|text|text|YES|
+pregnancy_appointments|questions|text|text|YES|
+pregnancy_appointments|updated_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_appointments|user_id|uuid|uuid|NO|
+pregnancy_appointments|week|integer|int4|YES|
+pregnancy_journeys|due_date|date|date|NO|
+pregnancy_journeys|lmp_date|date|date|NO|
+pregnancy_journeys|outcome_date|date|date|YES|
+pregnancy_journeys|started_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_journeys|status_changed_at|timestamp with time zone|timestamptz|YES|
+pregnancy_journeys|status|USER-DEFINED|pregnancy_journey_status|NO|'active'::pregnancy_journey_status
+pregnancy_journeys|updated_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_journeys|user_id|uuid|uuid|NO|
+pregnancy_symptom_notes|created_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_symptom_notes|follow_up|text|text|YES|
+pregnancy_symptom_notes|id|uuid|uuid|NO|gen_random_uuid()
+pregnancy_symptom_notes|mention_at_appointment|boolean|bool|NO|false
+pregnancy_symptom_notes|noted_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_symptom_notes|notes|text|text|YES|
+pregnancy_symptom_notes|personal_severity|smallint|int2|YES|
+pregnancy_symptom_notes|symptom_label|text|text|NO|
+pregnancy_symptom_notes|updated_at|timestamp with time zone|timestamptz|NO|now()
+pregnancy_symptom_notes|user_id|uuid|uuid|NO|
+profiles|baby_illustration_style|USER-DEFINED|baby_illustration_style|YES|
+profiles|companion_journal_context_enabled|boolean|bool|NO|false
+profiles|companion_name|text|text|YES|
+profiles|companion_tone|text|text|YES|
+profiles|created_at|timestamp with time zone|timestamptz|NO|now()
+profiles|first_name|text|text|YES|
+profiles|id|uuid|uuid|NO|gen_random_uuid()
+profiles|updated_at|timestamp with time zone|timestamptz|NO|now()
+profiles|user_id|uuid|uuid|NO|
+reflections|content|text|text|NO|''::text
+reflections|created_at|timestamp with time zone|timestamptz|NO|now()
+reflections|first_written_at|timestamp with time zone|timestamptz|YES|
+reflections|first_written_content|text|text|YES|
+reflections|id|uuid|uuid|NO|gen_random_uuid()
+reflections|updated_at|timestamp with time zone|timestamptz|NO|now()
+reflections|user_id|uuid|uuid|NO|
+reflections|week|integer|int4|NO|
+saved_journeys|created_at|timestamp with time zone|timestamptz|NO|now()
+saved_journeys|due_date|date|date|NO|
+saved_journeys|id|uuid|uuid|NO|gen_random_uuid()
+saved_journeys|journey_type|text|text|NO|'pregnancy'::text
+saved_journeys|lmp_date|date|date|NO|
+saved_journeys|updated_at|timestamp with time zone|timestamptz|NO|now()
+saved_journeys|user_id|uuid|uuid|NO|
+suppressed_emails|created_at|timestamp with time zone|timestamptz|NO|now()
+suppressed_emails|email|text|text|NO|
+suppressed_emails|id|uuid|uuid|NO|gen_random_uuid()
+suppressed_emails|metadata|jsonb|jsonb|YES|
+suppressed_emails|reason|text|text|NO|
+ttc_journeys|actively_trying|text|text|YES|
+ttc_journeys|current_cycle_start|date|date|YES|
+ttc_journeys|cycle_length_days|integer|int4|YES|
+ttc_journeys|cycle_regularity|text|text|YES|
+ttc_journeys|expected_period_date|date|date|YES|
+ttc_journeys|fertile_window_end|date|date|YES|
+ttc_journeys|fertile_window_start|date|date|YES|
+ttc_journeys|id|uuid|uuid|NO|gen_random_uuid()
+ttc_journeys|ivf_consideration|text|text|YES|
+ttc_journeys|ivf_transfer_date|date|date|YES|
+ttc_journeys|ivf_transfer_type|text|text|YES|
+ttc_journeys|last_period_date|date|date|YES|
+ttc_journeys|likely_ovulation_date|date|date|YES|
+ttc_journeys|period_length_days|integer|int4|YES|
+ttc_journeys|positive_test_status|text|text|YES|
+ttc_journeys|possible_test_date|date|date|YES|
+ttc_journeys|stage|text|text|YES|
+ttc_journeys|started_at|timestamp with time zone|timestamptz|NO|now()
+ttc_journeys|support_status|text|text|YES|
+ttc_journeys|tracks_symptoms|text|text|YES|
+ttc_journeys|updated_at|timestamp with time zone|timestamptz|NO|now()
+ttc_journeys|user_id|uuid|uuid|NO|
+ttc_journeys|uses_ovulation_tests|text|text|YES|
+ttc_logs|created_at|timestamp with time zone|timestamptz|NO|now()
+ttc_logs|id|uuid|uuid|NO|gen_random_uuid()
+ttc_logs|journey_id|uuid|uuid|NO|
+ttc_logs|log_date|date|date|NO|
+ttc_logs|log_type|text|text|NO|
+ttc_logs|notes|text|text|YES|
+ttc_logs|updated_at|timestamp with time zone|timestamptz|NO|now()
+ttc_logs|user_id|uuid|uuid|NO|
+ttc_logs|value|text|text|YES|
+week_media_memories|caption|text|text|YES|
+week_media_memories|created_at|timestamp with time zone|timestamptz|NO|now()
+week_media_memories|duration_seconds|integer|int4|YES|
+week_media_memories|file_size_bytes|bigint|int8|NO|
+week_media_memories|id|uuid|uuid|NO|gen_random_uuid()
+week_media_memories|media_type|text|text|NO|
+week_media_memories|mime_type|text|text|NO|
+week_media_memories|storage_path|text|text|NO|
+week_media_memories|updated_at|timestamp with time zone|timestamptz|NO|now()
+week_media_memories|user_id|uuid|uuid|NO|
+week_media_memories|week|integer|int4|NO|
+week_photos|caption|text|text|YES|
+week_photos|created_at|timestamp with time zone|timestamptz|NO|now()
+week_photos|id|uuid|uuid|NO|gen_random_uuid()
+week_photos|storage_path|text|text|NO|
+week_photos|updated_at|timestamp with time zone|timestamptz|NO|now()
+week_photos|user_id|uuid|uuid|NO|
+week_photos|week|integer|int4|NO|

@@ -1,0 +1,754 @@
+{
+ "case": "sensitivity_S1",
+ "user": "S1",
+ "user_id": "9173939d-8ebd-42a2-915f-7ac6e58194d3",
+ "trigger_order": [
+  {
+   "pos": 1,
+   "tgname": "RI_ConstraintTrigger_a_16690",
+   "oid": 16690,
+   "child": "auth.identities",
+   "constraint": "identities_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 2,
+   "tgname": "RI_ConstraintTrigger_a_16718",
+   "oid": 16718,
+   "child": "auth.sessions",
+   "constraint": "sessions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 3,
+   "tgname": "RI_ConstraintTrigger_a_16755",
+   "oid": 16755,
+   "child": "auth.mfa_factors",
+   "constraint": "mfa_factors_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 4,
+   "tgname": "RI_ConstraintTrigger_a_16946",
+   "oid": 16946,
+   "child": "auth.one_time_tokens",
+   "constraint": "one_time_tokens_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 5,
+   "tgname": "RI_ConstraintTrigger_a_17025",
+   "oid": 17025,
+   "child": "auth.oauth_authorizations",
+   "constraint": "oauth_authorizations_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 6,
+   "tgname": "RI_ConstraintTrigger_a_17044",
+   "oid": 17044,
+   "child": "auth.oauth_consents",
+   "constraint": "oauth_consents_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 7,
+   "tgname": "RI_ConstraintTrigger_a_17139",
+   "oid": 17139,
+   "child": "auth.webauthn_credentials",
+   "constraint": "webauthn_credentials_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 8,
+   "tgname": "RI_ConstraintTrigger_a_17156",
+   "oid": 17156,
+   "child": "auth.webauthn_challenges",
+   "constraint": "webauthn_challenges_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 9,
+   "tgname": "RI_ConstraintTrigger_a_17181",
+   "oid": 17181,
+   "child": "auth.scim_users",
+   "constraint": "scim_users_user_id_fkey",
+   "function": "RI_FKey_setnull_del"
+  },
+  {
+   "pos": 10,
+   "tgname": "RI_ConstraintTrigger_a_17229",
+   "oid": 17229,
+   "child": "auth.mfa_recovery_code_sets",
+   "constraint": "mfa_recovery_code_sets_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 11,
+   "tgname": "RI_ConstraintTrigger_a_17644",
+   "oid": 17644,
+   "child": "profiles",
+   "constraint": "profiles_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 12,
+   "tgname": "RI_ConstraintTrigger_a_17665",
+   "oid": 17665,
+   "child": "saved_journeys",
+   "constraint": "saved_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 13,
+   "tgname": "RI_ConstraintTrigger_a_18061",
+   "oid": 18061,
+   "child": "pregnancy_journeys",
+   "constraint": "pregnancy_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 14,
+   "tgname": "RI_ConstraintTrigger_a_18081",
+   "oid": 18081,
+   "child": "archived_journeys",
+   "constraint": "archived_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 15,
+   "tgname": "RI_ConstraintTrigger_a_18103",
+   "oid": 18103,
+   "child": "ttc_journeys",
+   "constraint": "ttc_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 16,
+   "tgname": "RI_ConstraintTrigger_a_18129",
+   "oid": 18129,
+   "child": "ttc_logs",
+   "constraint": "ttc_logs_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 17,
+   "tgname": "RI_ConstraintTrigger_a_18446",
+   "oid": 18446,
+   "child": "first_year_journeys",
+   "constraint": "first_year_journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 18,
+   "tgname": "RI_ConstraintTrigger_a_18514",
+   "oid": 18514,
+   "child": "first_year_entries",
+   "constraint": "first_year_entries_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 19,
+   "tgname": "RI_ConstraintTrigger_a_18550",
+   "oid": 18550,
+   "child": "first_year_memories",
+   "constraint": "first_year_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 20,
+   "tgname": "RI_ConstraintTrigger_a_18607",
+   "oid": 18607,
+   "child": "first_year_care_events",
+   "constraint": "first_year_care_events_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 21,
+   "tgname": "RI_ConstraintTrigger_a_18645",
+   "oid": 18645,
+   "child": "first_year_reminders",
+   "constraint": "first_year_reminders_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 22,
+   "tgname": "RI_ConstraintTrigger_a_18699",
+   "oid": 18699,
+   "child": "companion_memories",
+   "constraint": "companion_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 23,
+   "tgname": "RI_ConstraintTrigger_a_18726",
+   "oid": 18726,
+   "child": "companion_conversations",
+   "constraint": "companion_conversations_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 24,
+   "tgname": "RI_ConstraintTrigger_a_18750",
+   "oid": 18750,
+   "child": "companion_messages",
+   "constraint": "companion_messages_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 25,
+   "tgname": "RI_ConstraintTrigger_a_18797",
+   "oid": 18797,
+   "child": "pregnancy_episodes",
+   "constraint": "pregnancy_episodes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 26,
+   "tgname": "RI_ConstraintTrigger_a_18889",
+   "oid": 18889,
+   "child": "babies",
+   "constraint": "babies_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 27,
+   "tgname": "RI_ConstraintTrigger_a_18894",
+   "oid": 18894,
+   "child": "baby_movement_notes",
+   "constraint": "baby_movement_notes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 28,
+   "tgname": "RI_ConstraintTrigger_a_18899",
+   "oid": 18899,
+   "child": "birth_plans",
+   "constraint": "birth_plans_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 29,
+   "tgname": "RI_ConstraintTrigger_a_18904",
+   "oid": 18904,
+   "child": "contraction_events",
+   "constraint": "contraction_events_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 30,
+   "tgname": "RI_ConstraintTrigger_a_18909",
+   "oid": 18909,
+   "child": "contraction_sessions",
+   "constraint": "contraction_sessions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 31,
+   "tgname": "RI_ConstraintTrigger_a_18914",
+   "oid": 18914,
+   "child": "hospital_bag_items",
+   "constraint": "hospital_bag_items_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 32,
+   "tgname": "RI_ConstraintTrigger_a_18919",
+   "oid": 18919,
+   "child": "journeys",
+   "constraint": "journeys_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 33,
+   "tgname": "RI_ConstraintTrigger_a_18924",
+   "oid": 18924,
+   "child": "midwife_questions",
+   "constraint": "midwife_questions_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 34,
+   "tgname": "RI_ConstraintTrigger_a_18929",
+   "oid": 18929,
+   "child": "pregnancy_appointments",
+   "constraint": "pregnancy_appointments_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 35,
+   "tgname": "RI_ConstraintTrigger_a_18934",
+   "oid": 18934,
+   "child": "pregnancy_symptom_notes",
+   "constraint": "pregnancy_symptom_notes_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 36,
+   "tgname": "RI_ConstraintTrigger_a_18939",
+   "oid": 18939,
+   "child": "reflections",
+   "constraint": "reflections_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 37,
+   "tgname": "RI_ConstraintTrigger_a_18944",
+   "oid": 18944,
+   "child": "week_media_memories",
+   "constraint": "week_media_memories_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 38,
+   "tgname": "RI_ConstraintTrigger_a_18949",
+   "oid": 18949,
+   "child": "week_photos",
+   "constraint": "week_photos_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  },
+  {
+   "pos": 39,
+   "tgname": "RI_ConstraintTrigger_a_18962",
+   "oid": 18962,
+   "child": "g3_scratch.y_parent",
+   "constraint": "y_parent_user_id_fkey",
+   "function": "RI_FKey_cascade_del"
+  }
+ ],
+ "order_classification": {
+  "episode_trigger_position": 25,
+  "total_delete_triggers": 39,
+  "dependants_before_episode": [],
+  "dependants_after_episode": [
+   "babies",
+   "baby_movement_notes",
+   "birth_plans",
+   "contraction_events",
+   "contraction_sessions",
+   "hospital_bag_items",
+   "journeys",
+   "midwife_questions",
+   "pregnancy_appointments",
+   "pregnancy_symptom_notes",
+   "reflections",
+   "week_media_memories",
+   "week_photos"
+  ],
+  "class": "UNFAVOURABLE: episode cascade before all 13 dependant cascades",
+  "scratch_y_parent_position": 39,
+  "episode_before_scratch_y": true
+ },
+ "graph_shape_pre": {
+  "reflections": 1,
+  "week_photos": 1,
+  "week_media_memories": 1,
+  "pregnancy_appointments": 1,
+  "pregnancy_symptom_notes": 1,
+  "baby_movement_notes": 1,
+  "birth_plans": 1,
+  "hospital_bag_items": 1,
+  "midwife_questions": 1,
+  "contraction_sessions": 1,
+  "contraction_events": 1,
+  "babies": 2,
+  "journeys.pointer": 1,
+  "episodes": 2,
+  "episodes.removed": 1,
+  "first_year.child_rows": 5,
+  "cross_owner_links": 0
+ },
+ "owned_pre": {
+  "g3_scratch.x_dependant": 1,
+  "g3_scratch.y_parent": 1,
+  "public.archived_journeys": 0,
+  "public.babies": 2,
+  "public.baby_movement_notes": 1,
+  "public.birth_plans": 1,
+  "public.companion_conversations": 0,
+  "public.companion_memories": 0,
+  "public.companion_messages": 0,
+  "public.contraction_events": 1,
+  "public.contraction_sessions": 1,
+  "public.first_year_care_events": 1,
+  "public.first_year_entries": 2,
+  "public.first_year_journeys": 0,
+  "public.first_year_memories": 1,
+  "public.first_year_reminders": 1,
+  "public.hospital_bag_items": 1,
+  "public.journeys": 1,
+  "public.midwife_questions": 1,
+  "public.pregnancy_appointments": 1,
+  "public.pregnancy_episodes": 2,
+  "public.pregnancy_journeys": 0,
+  "public.pregnancy_symptom_notes": 1,
+  "public.profiles": 0,
+  "public.reflections": 1,
+  "public.saved_journeys": 0,
+  "public.ttc_journeys": 0,
+  "public.ttc_logs": 0,
+  "public.week_media_memories": 1,
+  "public.week_photos": 1,
+  "auth.users": 1
+ },
+ "control_fingerprint_pre": {
+  "public.archived_journeys": [
+   0,
+   "-"
+  ],
+  "public.babies": [
+   2,
+   "b3b170b05b01c158736b94ce2e3122ea"
+  ],
+  "public.baby_movement_notes": [
+   1,
+   "dba6add6a59c7169f36af2bd868f4264"
+  ],
+  "public.birth_plans": [
+   1,
+   "fd390a5ff9e4f5dec391ccb47dbddc4a"
+  ],
+  "public.companion_conversations": [
+   0,
+   "-"
+  ],
+  "public.companion_memories": [
+   0,
+   "-"
+  ],
+  "public.companion_messages": [
+   0,
+   "-"
+  ],
+  "public.contraction_events": [
+   1,
+   "85d8efd3e38f5193cd8f6fdba44477b4"
+  ],
+  "public.contraction_sessions": [
+   1,
+   "2541fc91070f78f4dce345d10a0af2fc"
+  ],
+  "public.first_year_care_events": [
+   1,
+   "5c4cc7cba62344c08dc88c49cdcdf681"
+  ],
+  "public.first_year_entries": [
+   2,
+   "0ba0613f7ccbfa5d1628a78959f5fc91"
+  ],
+  "public.first_year_journeys": [
+   0,
+   "-"
+  ],
+  "public.first_year_memories": [
+   1,
+   "130666ec1da6ee4984b70c581916f4f9"
+  ],
+  "public.first_year_reminders": [
+   1,
+   "bcc8dae3fde1cb6797c5811ce67edf46"
+  ],
+  "public.hospital_bag_items": [
+   1,
+   "24c6f45212b87908200448a341585834"
+  ],
+  "public.journeys": [
+   1,
+   "d40112aa9e45bf95b87418c8305ad9f8"
+  ],
+  "public.midwife_questions": [
+   1,
+   "fff782507ec0eb1cc7774f92f534a52c"
+  ],
+  "public.pregnancy_appointments": [
+   1,
+   "287aff24063ab9d0ea5c05f3f259fb41"
+  ],
+  "public.pregnancy_episodes": [
+   2,
+   "b39788453ab17b77a6456eed77b8bc53"
+  ],
+  "public.pregnancy_journeys": [
+   0,
+   "-"
+  ],
+  "public.pregnancy_symptom_notes": [
+   1,
+   "74a8a3db5dac676fa071e63b7d3b3e4c"
+  ],
+  "public.profiles": [
+   0,
+   "-"
+  ],
+  "public.reflections": [
+   1,
+   "8ad7219e8411f22d0df06aa530f17a17"
+  ],
+  "public.saved_journeys": [
+   0,
+   "-"
+  ],
+  "public.ttc_journeys": [
+   0,
+   "-"
+  ],
+  "public.ttc_logs": [
+   0,
+   "-"
+  ],
+  "public.week_media_memories": [
+   1,
+   "529bc1b76c0206b675d431e12cae165b"
+  ],
+  "public.week_photos": [
+   1,
+   "88580cb7d8c0acdbfc426a16b8b8bada"
+  ],
+  "auth.users": [
+   1,
+   "ff0caf5a7e048a7534f989473133ae21"
+  ]
+ },
+ "delete": {
+  "user": "S1",
+  "user_id": "9173939d-8ebd-42a2-915f-7ac6e58194d3",
+  "path": "DELETE /auth/v1/admin/users/{id} with service role, body {should_soft_delete:false} (auth.admin.deleteUser hard delete)",
+  "started_at": "2026-10-09T04:03:35.628829+00:00",
+  "finished_at": "2026-10-09T04:03:35.796679+00:00",
+  "elapsed_s": 0.168,
+  "http_status": 500,
+  "response": {
+   "code": "23503",
+   "message": "update or delete on table \"pregnancy_episodes\" violates foreign key constraint \"x_dependant_episode_owner_fkey\" on table \"x_dependant\"",
+   "detail": "Key is still referenced from table \"x_dependant\"."
+  },
+  "attempts": 1
+ },
+ "gotrue_statement_delta": [
+  {
+   "calls_delta": 1,
+   "query": "SELECT identities.created_at, identities.email, identities.id, identities.identity_data, identities.last_sign_in_at, identities.provider, identities.provider_id, identities.updated_at, identities.user_id FROM identities AS identities WHERE user_id = $1"
+  },
+  {
+   "calls_delta": 1,
+   "query": "SELECT mfa_factors.created_at, mfa_factors.factor_type, mfa_factors.friendly_name, mfa_factors.id, mfa_factors.last_challenged_at, mfa_factors.last_webauthn_challenge_data, mfa_factors.phone, mfa_factors.secret, mfa_factors.status, mfa_factors.updated_at, mfa_factors.user_id, mfa_factors.web_authn_a"
+  },
+  {
+   "calls_delta": 1,
+   "query": "SELECT users.aud, users.banned_until, users.confirmation_sent_at, users.confirmation_token, users.confirmed_at, users.created_at, users.deleted_at, users.email, users.email_change, users.email_change_confirm_status, users.email_change_sent_at, users.email_change_token_current, users.email_change_tok"
+  },
+  {
+   "calls_delta": 1,
+   "query": "begin"
+  },
+  {
+   "calls_delta": 1,
+   "query": "rollback"
+  }
+ ],
+ "auth_users_delete_calls_delta": 0,
+ "gotrue_delete_like_statements": [],
+ "gotrue_public_dml_delta": [],
+ "owned_post": {
+  "g3_scratch.x_dependant": 1,
+  "g3_scratch.y_parent": 1,
+  "public.archived_journeys": 0,
+  "public.babies": 2,
+  "public.baby_movement_notes": 1,
+  "public.birth_plans": 1,
+  "public.companion_conversations": 0,
+  "public.companion_memories": 0,
+  "public.companion_messages": 0,
+  "public.contraction_events": 1,
+  "public.contraction_sessions": 1,
+  "public.first_year_care_events": 1,
+  "public.first_year_entries": 2,
+  "public.first_year_journeys": 0,
+  "public.first_year_memories": 1,
+  "public.first_year_reminders": 1,
+  "public.hospital_bag_items": 1,
+  "public.journeys": 1,
+  "public.midwife_questions": 1,
+  "public.pregnancy_appointments": 1,
+  "public.pregnancy_episodes": 2,
+  "public.pregnancy_journeys": 0,
+  "public.pregnancy_symptom_notes": 1,
+  "public.profiles": 0,
+  "public.reflections": 1,
+  "public.saved_journeys": 0,
+  "public.ttc_journeys": 0,
+  "public.ttc_logs": 0,
+  "public.week_media_memories": 1,
+  "public.week_photos": 1,
+  "auth.users": 1
+ },
+ "orphans_post": {
+  "no_auth_user:public.archived_journeys": 0,
+  "no_auth_user:public.babies": 0,
+  "no_auth_user:public.baby_movement_notes": 0,
+  "no_auth_user:public.birth_plans": 0,
+  "no_auth_user:public.companion_conversations": 0,
+  "no_auth_user:public.companion_memories": 0,
+  "no_auth_user:public.companion_messages": 0,
+  "no_auth_user:public.contraction_events": 0,
+  "no_auth_user:public.contraction_sessions": 0,
+  "no_auth_user:public.first_year_care_events": 0,
+  "no_auth_user:public.first_year_entries": 0,
+  "no_auth_user:public.first_year_journeys": 0,
+  "no_auth_user:public.first_year_memories": 0,
+  "no_auth_user:public.first_year_reminders": 0,
+  "no_auth_user:public.hospital_bag_items": 0,
+  "no_auth_user:public.journeys": 0,
+  "no_auth_user:public.midwife_questions": 0,
+  "no_auth_user:public.pregnancy_appointments": 0,
+  "no_auth_user:public.pregnancy_episodes": 0,
+  "no_auth_user:public.pregnancy_journeys": 0,
+  "no_auth_user:public.pregnancy_symptom_notes": 0,
+  "no_auth_user:public.profiles": 0,
+  "no_auth_user:public.reflections": 0,
+  "no_auth_user:public.saved_journeys": 0,
+  "no_auth_user:public.ttc_journeys": 0,
+  "no_auth_user:public.ttc_logs": 0,
+  "no_auth_user:public.week_media_memories": 0,
+  "no_auth_user:public.week_photos": 0,
+  "missing_episode:reflections": 0,
+  "missing_episode:week_photos": 0,
+  "missing_episode:week_media_memories": 0,
+  "missing_episode:pregnancy_appointments": 0,
+  "missing_episode:pregnancy_symptom_notes": 0,
+  "missing_episode:baby_movement_notes": 0,
+  "missing_episode:birth_plans": 0,
+  "missing_episode:hospital_bag_items": 0,
+  "missing_episode:midwife_questions": 0,
+  "missing_episode:contraction_sessions": 0,
+  "missing_episode:contraction_events": 0,
+  "missing_episode:babies": 0,
+  "missing_episode:journeys.pointer": 0,
+  "missing_baby:first_year_entries": 0,
+  "missing_baby:first_year_care_events": 0,
+  "missing_baby:first_year_reminders": 0,
+  "missing_baby:first_year_memories": 0,
+  "missing_session:contraction_events": 0
+ },
+ "control_fingerprint_post": {
+  "public.archived_journeys": [
+   0,
+   "-"
+  ],
+  "public.babies": [
+   2,
+   "b3b170b05b01c158736b94ce2e3122ea"
+  ],
+  "public.baby_movement_notes": [
+   1,
+   "dba6add6a59c7169f36af2bd868f4264"
+  ],
+  "public.birth_plans": [
+   1,
+   "fd390a5ff9e4f5dec391ccb47dbddc4a"
+  ],
+  "public.companion_conversations": [
+   0,
+   "-"
+  ],
+  "public.companion_memories": [
+   0,
+   "-"
+  ],
+  "public.companion_messages": [
+   0,
+   "-"
+  ],
+  "public.contraction_events": [
+   1,
+   "85d8efd3e38f5193cd8f6fdba44477b4"
+  ],
+  "public.contraction_sessions": [
+   1,
+   "2541fc91070f78f4dce345d10a0af2fc"
+  ],
+  "public.first_year_care_events": [
+   1,
+   "5c4cc7cba62344c08dc88c49cdcdf681"
+  ],
+  "public.first_year_entries": [
+   2,
+   "0ba0613f7ccbfa5d1628a78959f5fc91"
+  ],
+  "public.first_year_journeys": [
+   0,
+   "-"
+  ],
+  "public.first_year_memories": [
+   1,
+   "130666ec1da6ee4984b70c581916f4f9"
+  ],
+  "public.first_year_reminders": [
+   1,
+   "bcc8dae3fde1cb6797c5811ce67edf46"
+  ],
+  "public.hospital_bag_items": [
+   1,
+   "24c6f45212b87908200448a341585834"
+  ],
+  "public.journeys": [
+   1,
+   "d40112aa9e45bf95b87418c8305ad9f8"
+  ],
+  "public.midwife_questions": [
+   1,
+   "fff782507ec0eb1cc7774f92f534a52c"
+  ],
+  "public.pregnancy_appointments": [
+   1,
+   "287aff24063ab9d0ea5c05f3f259fb41"
+  ],
+  "public.pregnancy_episodes": [
+   2,
+   "b39788453ab17b77a6456eed77b8bc53"
+  ],
+  "public.pregnancy_journeys": [
+   0,
+   "-"
+  ],
+  "public.pregnancy_symptom_notes": [
+   1,
+   "74a8a3db5dac676fa071e63b7d3b3e4c"
+  ],
+  "public.profiles": [
+   0,
+   "-"
+  ],
+  "public.reflections": [
+   1,
+   "8ad7219e8411f22d0df06aa530f17a17"
+  ],
+  "public.saved_journeys": [
+   0,
+   "-"
+  ],
+  "public.ttc_journeys": [
+   0,
+   "-"
+  ],
+  "public.ttc_logs": [
+   0,
+   "-"
+  ],
+  "public.week_media_memories": [
+   1,
+   "529bc1b76c0206b675d431e12cae165b"
+  ],
+  "public.week_photos": [
+   1,
+   "88580cb7d8c0acdbfc426a16b8b8bada"
+  ],
+  "auth.users": [
+   1,
+   "ff0caf5a7e048a7534f989473133ae21"
+  ]
+ },
+ "control_unchanged": true,
+ "orphans_total": 0,
+ "owned_post_total": 24
+}

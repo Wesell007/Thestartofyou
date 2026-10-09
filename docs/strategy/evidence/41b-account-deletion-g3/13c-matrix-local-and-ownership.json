@@ -1,0 +1,336 @@
+{
+ "local": [
+  {
+   "k": 1,
+   "table": "journeys",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "journeys_current_pregnancy_episode_owner_fkey",
+   "expected_constraint": "journeys_current_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 2,
+   "table": "reflections",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "reflections_pregnancy_episode_owner_fkey",
+   "expected_constraint": "reflections_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 3,
+   "table": "week_photos",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "week_photos_pregnancy_episode_owner_fkey",
+   "expected_constraint": "week_photos_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 4,
+   "table": "week_media_memories",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "week_media_memories_pregnancy_episode_owner_fkey",
+   "expected_constraint": "week_media_memories_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 5,
+   "table": "pregnancy_appointments",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey",
+   "expected_constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 6,
+   "table": "pregnancy_symptom_notes",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey",
+   "expected_constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 7,
+   "table": "baby_movement_notes",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "baby_movement_notes_pregnancy_episode_owner_fkey",
+   "expected_constraint": "baby_movement_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 8,
+   "table": "birth_plans",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "birth_plans_pregnancy_episode_owner_fkey",
+   "expected_constraint": "birth_plans_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 9,
+   "table": "hospital_bag_items",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "hospital_bag_items_pregnancy_episode_owner_fkey",
+   "expected_constraint": "hospital_bag_items_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 10,
+   "table": "midwife_questions",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "midwife_questions_pregnancy_episode_owner_fkey",
+   "expected_constraint": "midwife_questions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 11,
+   "table": "contraction_sessions",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "contraction_sessions_pregnancy_episode_owner_fkey",
+   "expected_constraint": "contraction_sessions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 12,
+   "table": "contraction_events",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "contraction_events_pregnancy_episode_owner_fkey",
+   "expected_constraint": "contraction_events_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 13,
+   "table": "babies",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "babies_pregnancy_episode_owner_fkey",
+   "expected_constraint": "babies_pregnancy_episode_owner_fkey"
+  }
+ ],
+ "control": {
+  "k": 0,
+  "table": "no_dependant_control",
+  "outcome": "ACCEPTED",
+  "sqlstate": "",
+  "constraint": "",
+  "expected_constraint": null
+ },
+ "same": [
+  {
+   "k": 1,
+   "table": "journeys",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "journeys_current_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 2,
+   "table": "reflections",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "reflections_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 3,
+   "table": "week_photos",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "week_photos_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 4,
+   "table": "week_media_memories",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "week_media_memories_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 5,
+   "table": "pregnancy_appointments",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 6,
+   "table": "pregnancy_symptom_notes",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 7,
+   "table": "baby_movement_notes",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "baby_movement_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 8,
+   "table": "birth_plans",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "birth_plans_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 9,
+   "table": "hospital_bag_items",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "hospital_bag_items_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 10,
+   "table": "midwife_questions",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "midwife_questions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 11,
+   "table": "contraction_sessions",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "contraction_sessions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 12,
+   "table": "contraction_events",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "contraction_events_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 13,
+   "table": "babies",
+   "outcome": "ACCEPTED",
+   "sqlstate": "",
+   "constraint": "",
+   "expected_constraint": "babies_pregnancy_episode_owner_fkey"
+  }
+ ],
+ "cross": [
+  {
+   "k": 1,
+   "table": "journeys",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "journeys_current_pregnancy_episode_owner_fkey",
+   "expected_constraint": "journeys_current_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 2,
+   "table": "reflections",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "reflections_pregnancy_episode_owner_fkey",
+   "expected_constraint": "reflections_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 3,
+   "table": "week_photos",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "week_photos_pregnancy_episode_owner_fkey",
+   "expected_constraint": "week_photos_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 4,
+   "table": "week_media_memories",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "week_media_memories_pregnancy_episode_owner_fkey",
+   "expected_constraint": "week_media_memories_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 5,
+   "table": "pregnancy_appointments",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey",
+   "expected_constraint": "pregnancy_appointments_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 6,
+   "table": "pregnancy_symptom_notes",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey",
+   "expected_constraint": "pregnancy_symptom_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 7,
+   "table": "baby_movement_notes",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "baby_movement_notes_pregnancy_episode_owner_fkey",
+   "expected_constraint": "baby_movement_notes_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 8,
+   "table": "birth_plans",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "birth_plans_pregnancy_episode_owner_fkey",
+   "expected_constraint": "birth_plans_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 9,
+   "table": "hospital_bag_items",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "hospital_bag_items_pregnancy_episode_owner_fkey",
+   "expected_constraint": "hospital_bag_items_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 10,
+   "table": "midwife_questions",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "midwife_questions_pregnancy_episode_owner_fkey",
+   "expected_constraint": "midwife_questions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 11,
+   "table": "contraction_sessions",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "contraction_sessions_pregnancy_episode_owner_fkey",
+   "expected_constraint": "contraction_sessions_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 12,
+   "table": "contraction_events",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "contraction_events_pregnancy_episode_owner_fkey",
+   "expected_constraint": "contraction_events_pregnancy_episode_owner_fkey"
+  },
+  {
+   "k": 13,
+   "table": "babies",
+   "outcome": "REFUSED",
+   "sqlstate": "23503",
+   "constraint": "babies_pregnancy_episode_owner_fkey",
+   "expected_constraint": "babies_pregnancy_episode_owner_fkey"
+  }
+ ],
+ "exit": 0,
+ "residue": [
+  "0 |            0"
+ ],
+ "local_pass": 13,
+ "same_pass": 13,
+ "cross_pass": 13,
+ "setup_errors": []
+}

@@ -1,0 +1,2 @@
+[g3_cli] target=czhopceorfqxdbfvlnap scratch=735a07e6 migrations=47 cmd=supabase link --project-ref czhopceorfqxdbfvlnap
+{"project_ref":"czhopceorfqxdbfvlnap","message":""}

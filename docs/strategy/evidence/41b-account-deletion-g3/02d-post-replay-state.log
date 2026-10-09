@@ -1,0 +1,4 @@
+                       marker                        | auth_users | non_synthetic | history_rows |         history_range          | public_tables | pregnancy_episodes | g3_scratch_schemas | idle_in_tx 
+-----------------------------------------------------+------------+---------------+--------------+--------------------------------+---------------+--------------------+--------------------+------------
+ czhopceorfqxdbfvlnap / 41B-AD1-G3-runtime-rehearsal |          0 |             0 |           47 | 20260420164527..20260915224603 |            34 |                    |                  0 |          0
+

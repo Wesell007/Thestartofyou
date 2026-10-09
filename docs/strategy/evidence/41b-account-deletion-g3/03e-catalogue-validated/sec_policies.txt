@@ -1,0 +1,118 @@
+archived_journeys|Users insert own archived journeys|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+archived_journeys|Users view own archived journeys|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+babies|Users can create their own babies|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+babies|Users can delete their own babies|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+babies|Users can update their own babies|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+babies|Users can view their own babies|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+baby_movement_notes|baby_movement_notes_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+baby_movement_notes|baby_movement_notes_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+baby_movement_notes|baby_movement_notes_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+baby_movement_notes|baby_movement_notes_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+birth_plans|Users can delete their own birth plan|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+birth_plans|Users can insert their own birth plan|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+birth_plans|Users can update their own birth plan|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+birth_plans|Users can view their own birth plan|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+companion_conversations|Owners create their conversations|INSERT|{authenticated}|PERMISSIVE||(user_id = auth.uid())
+companion_conversations|Owners delete their conversations|DELETE|{authenticated}|PERMISSIVE|(user_id = auth.uid())|
+companion_conversations|Owners read their conversations|SELECT|{authenticated}|PERMISSIVE|(user_id = auth.uid())|
+companion_conversations|Owners update their conversations|UPDATE|{authenticated}|PERMISSIVE|(user_id = auth.uid())|(user_id = auth.uid())
+companion_memories|Users can create their own companion memories|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+companion_memories|Users can delete their own companion memories|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+companion_memories|Users can read their own companion memories|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+companion_memories|Users can update their own companion memories|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+companion_messages|Owners create their messages|INSERT|{authenticated}|PERMISSIVE||((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))
+companion_messages|Owners delete their messages|DELETE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|
+companion_messages|Owners read their messages|SELECT|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|
+companion_messages|Owners update their messages|UPDATE|{authenticated}|PERMISSIVE|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))|((user_id = auth.uid()) AND (EXISTS ( SELECT 1 FROM companion_conversations c WHERE ((c.id = companion_messages.conversation_id) AND (c.user_id = auth.uid())))))
+contraction_events|contraction_events_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+contraction_events|contraction_events_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+contraction_events|contraction_events_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+contraction_events|contraction_events_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+contraction_sessions|contraction_sessions_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+contraction_sessions|contraction_sessions_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+contraction_sessions|contraction_sessions_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+contraction_sessions|contraction_sessions_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+email_send_log|Service role can insert send log|INSERT|{}|PERMISSIVE||(auth.role() = 'service_role'::text)
+email_send_log|Service role can read send log|SELECT|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|
+email_send_log|Service role can update send log|UPDATE|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|(auth.role() = 'service_role'::text)
+email_send_state|Service role can manage send state|ALL|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|(auth.role() = 'service_role'::text)
+email_unsubscribe_tokens|Service role can insert tokens|INSERT|{}|PERMISSIVE||(auth.role() = 'service_role'::text)
+email_unsubscribe_tokens|Service role can mark tokens as used|UPDATE|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|(auth.role() = 'service_role'::text)
+email_unsubscribe_tokens|Service role can read tokens|SELECT|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|
+first_year_care_events|Users can create their own care events|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+first_year_care_events|Users can delete their own care events|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_care_events|Users can update their own care events|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+first_year_care_events|Users can view their own care events|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_entries|Users can create their own first year entries|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+first_year_entries|Users can delete their own first year entries|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_entries|Users can update their own first year entries|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+first_year_entries|Users can view their own first year entries|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_journeys|Users can create their own first year journey|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+first_year_journeys|Users can delete their own first year journey|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_journeys|Users can update their own first year journey|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+first_year_journeys|Users can view their own first year journey|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_memories|Users can create their own memories|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+first_year_memories|Users can remove their own memories|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_memories|Users can update their own memories|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+first_year_memories|Users can view their own memories|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_reminders|Users can create their own reminders|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+first_year_reminders|Users can delete their own reminders|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+first_year_reminders|Users can update their own reminders|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+first_year_reminders|Users can view their own reminders|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+hospital_bag_items|own rows delete|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+hospital_bag_items|own rows insert|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+hospital_bag_items|own rows select|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+hospital_bag_items|own rows update|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+journeys|Users delete own journey pointer|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+journeys|Users insert own journey pointer|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+journeys|Users update own journey pointer|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+journeys|Users view own journey pointer|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+midwife_questions|midwife_questions_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+midwife_questions|midwife_questions_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+midwife_questions|midwife_questions_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+midwife_questions|midwife_questions_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+pregnancy_appointments|Users can delete their own appointments|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_appointments|Users can insert their own appointments|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+pregnancy_appointments|Users can update their own appointments|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+pregnancy_appointments|Users can view their own appointments|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_episodes|pregnancy_episodes_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_episodes|pregnancy_episodes_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+pregnancy_episodes|pregnancy_episodes_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_episodes|pregnancy_episodes_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+pregnancy_journeys|Users delete own pregnancy journey|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_journeys|Users insert own pregnancy journey|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+pregnancy_journeys|Users update own pregnancy journey|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_journeys|Users view own pregnancy journey|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_symptom_notes|pregnancy_symptom_notes_delete_own|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_symptom_notes|pregnancy_symptom_notes_insert_own|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+pregnancy_symptom_notes|pregnancy_symptom_notes_select_own|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+pregnancy_symptom_notes|pregnancy_symptom_notes_update_own|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+profiles|Users insert own profile|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+profiles|Users update own profile|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+profiles|Users view own profile|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+reflections|Users delete own reflections|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+reflections|Users insert own reflections|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+reflections|Users update own reflections|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+reflections|Users view own reflections|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+saved_journeys|Users delete own journey|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+saved_journeys|Users insert own journey|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+saved_journeys|Users update own journey|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+saved_journeys|Users view own journey|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+suppressed_emails|Service role can insert suppressed emails|INSERT|{}|PERMISSIVE||(auth.role() = 'service_role'::text)
+suppressed_emails|Service role can read suppressed emails|SELECT|{}|PERMISSIVE|(auth.role() = 'service_role'::text)|
+ttc_journeys|Users delete own ttc journey|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+ttc_journeys|Users insert own ttc journey|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+ttc_journeys|Users update own ttc journey|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+ttc_journeys|Users view own ttc journey|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|
+ttc_logs|Users can delete their own ttc logs|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+ttc_logs|Users can insert their own ttc logs|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+ttc_logs|Users can update their own ttc logs|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+ttc_logs|Users can view their own ttc logs|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+week_media_memories|Users delete own week media|DELETE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+week_media_memories|Users insert own week media|INSERT|{authenticated}|PERMISSIVE||(auth.uid() = user_id)
+week_media_memories|Users update own week media|UPDATE|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|(auth.uid() = user_id)
+week_media_memories|Users view own week media|SELECT|{authenticated}|PERMISSIVE|(auth.uid() = user_id)|
+week_photos|Users delete own week photos|DELETE|{}|PERMISSIVE|(auth.uid() = user_id)|
+week_photos|Users insert own week photos|INSERT|{}|PERMISSIVE||(auth.uid() = user_id)
+week_photos|Users update own week photos|UPDATE|{}|PERMISSIVE|(auth.uid() = user_id)|
+week_photos|Users view own week photos|SELECT|{}|PERMISSIVE|(auth.uid() = user_id)|

@@ -1,0 +1,27 @@
+PASS [refuse] psql: no target file
+PASS [refuse] psql: target = production
+PASS [refuse] psql: target = C1 run1
+PASS [refuse] psql: target = C1 run2
+PASS [refuse] psql: malformed target
+PASS [refuse] psql: caller expectation unset
+PASS [refuse] psql: caller expects a different ref
+PASS [refuse] psql: argument names production
+PASS [refuse] psql: --file without --sha256
+PASS [refuse] psql: --file hash mismatch
+PASS [reach] psql: G3 target reaches psql stub
+PASS [reach] psql: hash-gated file reaches stub
+PASS [refuse] psql: marker check fails (stub returns no marker)
+PASS [refuse] cli: projects delete production
+PASS [refuse] cli: projects delete without ref
+PASS [refuse] cli: projects delete other ref
+PASS [refuse] cli: api-keys without --project-ref
+PASS [refuse] cli: api-keys for C1 ref
+PASS [refuse] cli: unlisted command
+PASS [refuse] cli: --linked with no link file
+PASS [reach] cli: --version reaches stub
+PASS [refuse] cli: teardown without owner acceptance
+PASS [refuse] cli: link to another ref
+PASS [refuse] http: non-auth path
+PASS [refuse] http: target = production
+PASS [reach] http: G3 admin path reaches stub
+SELFTEST: 26 passed, 0 failed

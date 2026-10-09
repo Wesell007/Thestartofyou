@@ -1,0 +1,89 @@
+BEGIN
+SET
+INSERT 0 2
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+DO
+ROLLBACK
+ residue_episodes | residue_rows 
+------------------+--------------
+                0 |            0
+(1 row)
+
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:21: NOTICE:  G3|LOCAL|1|journeys|REFUSED|23503|journeys_current_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:38: NOTICE:  G3|LOCAL|2|reflections|REFUSED|23503|reflections_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:55: NOTICE:  G3|LOCAL|3|week_photos|REFUSED|23503|week_photos_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:72: NOTICE:  G3|LOCAL|4|week_media_memories|REFUSED|23503|week_media_memories_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:89: NOTICE:  G3|LOCAL|5|pregnancy_appointments|REFUSED|23503|pregnancy_appointments_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:106: NOTICE:  G3|LOCAL|6|pregnancy_symptom_notes|REFUSED|23503|pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:123: NOTICE:  G3|LOCAL|7|baby_movement_notes|REFUSED|23503|baby_movement_notes_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:140: NOTICE:  G3|LOCAL|8|birth_plans|REFUSED|23503|birth_plans_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:157: NOTICE:  G3|LOCAL|9|hospital_bag_items|REFUSED|23503|hospital_bag_items_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:174: NOTICE:  G3|LOCAL|10|midwife_questions|REFUSED|23503|midwife_questions_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:191: NOTICE:  G3|LOCAL|11|contraction_sessions|REFUSED|23503|contraction_sessions_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:208: NOTICE:  G3|LOCAL|12|contraction_events|REFUSED|23503|contraction_events_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:225: NOTICE:  G3|LOCAL|13|babies|REFUSED|23503|babies_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:242: NOTICE:  G3|LOCAL|0|no_dependant_control|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:259: NOTICE:  G3|SAME|1|journeys|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:276: NOTICE:  G3|CROSS|1|journeys|REFUSED|23503|journeys_current_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:293: NOTICE:  G3|SAME|2|reflections|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:310: NOTICE:  G3|CROSS|2|reflections|REFUSED|23503|reflections_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:327: NOTICE:  G3|SAME|3|week_photos|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:344: NOTICE:  G3|CROSS|3|week_photos|REFUSED|23503|week_photos_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:361: NOTICE:  G3|SAME|4|week_media_memories|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:378: NOTICE:  G3|CROSS|4|week_media_memories|REFUSED|23503|week_media_memories_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:395: NOTICE:  G3|SAME|5|pregnancy_appointments|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:412: NOTICE:  G3|CROSS|5|pregnancy_appointments|REFUSED|23503|pregnancy_appointments_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:429: NOTICE:  G3|SAME|6|pregnancy_symptom_notes|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:446: NOTICE:  G3|CROSS|6|pregnancy_symptom_notes|REFUSED|23503|pregnancy_symptom_notes_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:463: NOTICE:  G3|SAME|7|baby_movement_notes|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:480: NOTICE:  G3|CROSS|7|baby_movement_notes|REFUSED|23503|baby_movement_notes_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:497: NOTICE:  G3|SAME|8|birth_plans|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:514: NOTICE:  G3|CROSS|8|birth_plans|REFUSED|23503|birth_plans_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:531: NOTICE:  G3|SAME|9|hospital_bag_items|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:548: NOTICE:  G3|CROSS|9|hospital_bag_items|REFUSED|23503|hospital_bag_items_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:565: NOTICE:  G3|SAME|10|midwife_questions|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:582: NOTICE:  G3|CROSS|10|midwife_questions|REFUSED|23503|midwife_questions_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:599: NOTICE:  G3|SAME|11|contraction_sessions|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:616: NOTICE:  G3|CROSS|11|contraction_sessions|REFUSED|23503|contraction_sessions_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:633: NOTICE:  G3|SAME|12|contraction_events|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:650: NOTICE:  G3|CROSS|12|contraction_events|REFUSED|23503|contraction_events_pregnancy_episode_owner_fkey
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:667: NOTICE:  G3|SAME|13|babies|ACCEPTED||
+psql:C:/Users/Administrator/.g3/work/sql/matrix_local_ownership.sql:684: NOTICE:  G3|CROSS|13|babies|REFUSED|23503|babies_pregnancy_episode_owner_fkey

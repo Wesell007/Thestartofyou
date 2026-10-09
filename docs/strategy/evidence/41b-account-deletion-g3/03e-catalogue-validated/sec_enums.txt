@@ -1,0 +1,5 @@
+baby_illustration_style|default,light,medium,deep
+companion_memory_category|preference,personal_detail,plan,relationship,support_preference,other
+companion_memory_source|explicit_command,settings
+first_year_journey_status|active,paused,completed
+pregnancy_journey_status|active,given_birth,no_longer_pregnant,pregnancy_loss,paused

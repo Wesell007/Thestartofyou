@@ -1,0 +1,18 @@
+-- G3 sensitivity scratch (disposable project only). Deliberately VIOLATES AD-1:
+-- x_dependant protects an Episode through RESTRICT but has NO direct auth.users FK;
+-- it disappears only through the two-hop path auth.users -> y_parent -> x_dependant.
+SET LOCAL lock_timeout = '5s';
+create schema g3_scratch;
+revoke all on schema g3_scratch from public, anon, authenticated;
+create table g3_scratch.y_parent (
+  id uuid primary key,
+  user_id uuid not null,
+  constraint y_parent_user_id_fkey foreign key (user_id) references auth.users (id) on delete cascade,
+  constraint y_parent_id_user_id_key unique (id, user_id));
+create table g3_scratch.x_dependant (
+  id uuid primary key,
+  user_id uuid not null,
+  y_id uuid not null,
+  pregnancy_episode_id uuid not null,
+  constraint x_dependant_y_fkey foreign key (y_id, user_id) references g3_scratch.y_parent (id, user_id) on delete cascade,
+  constraint x_dependant_episode_owner_fkey foreign key (pregnancy_episode_id, user_id) references public.pregnancy_episodes (id, user_id) on delete restrict);

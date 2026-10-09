@@ -1,0 +1,8 @@
+CREATE TABLE
+ALTER TABLE
+REVOKE
+INSERT 0 1
+     project_ref      |          run_label           |          created_at           |                             acl                             
+----------------------+------------------------------+-------------------------------+-------------------------------------------------------------
+ czhopceorfqxdbfvlnap | 41B-AD1-G3-runtime-rehearsal | 2026-10-09 03:54:46.622621+00 | {postgres=arwdDxtm/postgres,service_role=arwdDxtm/postgres}
+

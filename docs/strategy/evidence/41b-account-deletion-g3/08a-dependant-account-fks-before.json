@@ -1,0 +1,80 @@
+[
+ {
+  "table": "babies",
+  "constraint": "babies_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "baby_movement_notes",
+  "constraint": "baby_movement_notes_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "birth_plans",
+  "constraint": "birth_plans_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "contraction_events",
+  "constraint": "contraction_events_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "contraction_sessions",
+  "constraint": "contraction_sessions_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "hospital_bag_items",
+  "constraint": "hospital_bag_items_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "journeys",
+  "constraint": "journeys_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "midwife_questions",
+  "constraint": "midwife_questions_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "pregnancy_appointments",
+  "constraint": "pregnancy_appointments_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "pregnancy_symptom_notes",
+  "constraint": "pregnancy_symptom_notes_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "reflections",
+  "constraint": "reflections_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE NOT VALID",
+  "validated": "f"
+ },
+ {
+  "table": "week_media_memories",
+  "constraint": "week_media_memories_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+  "validated": "t"
+ },
+ {
+  "table": "week_photos",
+  "constraint": "week_photos_user_id_fkey",
+  "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE NOT VALID",
+  "validated": "f"
+ }
+]

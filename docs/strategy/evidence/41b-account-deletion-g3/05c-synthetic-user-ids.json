@@ -1,0 +1,65 @@
+{
+ "C": {
+  "id": "c5b55398-558f-4f64-a3f8-d32532edb509",
+  "email": "g3-c-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:41.576906+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "A": {
+  "id": "da1d9453-cee2-4913-b2de-a29b23ae07cf",
+  "email": "g3-a-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:41.933541+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "B": {
+  "id": "a72ca68a-5909-4c7c-9761-d6038856e8b9",
+  "email": "g3-b-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:42.283352+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "S1": {
+  "id": "9173939d-8ebd-42a2-915f-7ac6e58194d3",
+  "email": "g3-s1-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:42.563178+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "S2": {
+  "id": "d5555f85-e8c2-4052-bc2e-24caf6812efb",
+  "email": "g3-s2-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:42.844386+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "D": {
+  "id": "8b59a3d8-ae96-4d7a-9349-39f75dd0d3e0",
+  "email": "g3-d-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:43.142325+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ },
+ "E": {
+  "id": "381185db-4888-4002-bcaa-369ccde2b9af",
+  "email": "g3-e-ad1@example.invalid",
+  "created_at": "2026-10-09T04:00:43.541357+00:00",
+  "create_http": 200,
+  "login_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated"
+ }
+}

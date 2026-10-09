@@ -2,7 +2,7 @@
 
 Status: **PAPER / TEST DESIGN ONLY. NOT EXECUTED.** Written 7 October 2026 by Claude Code (implementation owner) for the owner. Nothing in this document has been run. No environment exists, no credential has been issued, production has not been accessed and the 13 FKs are unchanged.
 
-**PRODUCTION ACCOUNT-DELETION GATE: OPEN. READY FOR 41B.1B: NO. N10: OPEN.**
+**Current status (9 October 2026): PRE-41B.1B RI/ACCOUNT-DELETION DATABASE GATE: CLOSED / PASS (G3, owner accepted). N10: OPEN. READY FOR 41B.1B: NO.** The status line above is the original G1 planning status and is kept as written.
 
 **G3 closeout (9 October 2026).**
 - The targeted hosted runtime rehearsal ran and PASSED on disposable project `czhopceorfqxdbfvlnap`. Evidence is in `docs/strategy/evidence/41b-account-deletion-g3/` (`99-g3-summary.md`, `18-teardown-and-closeout.md`).

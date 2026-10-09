@@ -1,5 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "npm:@supabase/supabase-js@2.49.4";
+import {
+  isDeletedUserError,
+  readVerifiedTokenWindow,
+  RESPONSES,
+  runDeleteAccount,
+  type DeleteAccountResponse,
+} from "../_shared/accountDeletion.ts";
+import { createN10Runtime, n10Log } from "../_shared/accountDeletionRuntime.ts";
+
+// N10 Candidate E (frozen contract: docs/strategy/n10-candidate-e-account-first-deletion-architecture.md).
+// Account first, media second. This function never removes Storage objects before the database has
+// confirmed the Auth user is gone; the durable request row, not this HTTP request, owns correctness.
 
 const allowedOrigins = new Set([
   "https://thestartofyou.com",
@@ -27,15 +39,16 @@ const json = (req: Request, body: Record<string, unknown>, status: number) =>
     headers: { ...headersFor(req), "Content-Type": "application/json" },
   });
 
+const respond = (req: Request, r: DeleteAccountResponse) => json(req, { ...r.body }, r.httpStatus);
+
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: headersFor(req) });
   if (req.method !== "POST") return json(req, { error: "Method not allowed." }, 405);
 
   const supabaseUrl = Deno.env.get("SUPABASE_URL");
   const anonKey = Deno.env.get("SUPABASE_ANON_KEY");
-  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
   const authorization = req.headers.get("authorization");
-  if (!supabaseUrl || !anonKey || !serviceKey) return json(req, { error: "Account deletion is unavailable." }, 503);
+  if (!supabaseUrl || !anonKey) return respond(req, RESPONSES.unavailable());
   if (!authorization?.startsWith("Bearer ")) return json(req, { error: "Authentication required." }, 401);
 
   const body = await req.json().catch(() => null);
@@ -43,66 +56,39 @@ serve(async (req) => {
     return json(req, { error: "Deletion must be explicitly confirmed." }, 400);
   }
 
-  const caller = createClient(supabaseUrl, anonKey, {
-    global: { headers: { Authorization: authorization } },
-    auth: { persistSession: false },
-  });
-  const { data: userData, error: userError } = await caller.auth.getUser();
-  if (userError || !userData.user) return json(req, { error: "Authentication required." }, 401);
-
-  const admin = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false } });
-  const userId = userData.user.id;
-
-  // Storage objects are not covered by auth.users foreign-key cascades.
-  // Media memories are nested under {userId}/{week}/{media_type}/{uuid}.{ext},
-  // so we recurse (bounded depth) to collect direct photos AND nested media.
-  // First Year memory photos live in their own private bucket at
-  // {userId}/{memoryId}/{uuid}.{ext}, so both buckets are swept the same way.
-  const MEDIA_BUCKETS = ["weekly-photos", "first-year-memories"];
-
-  const listAllUnder = async (
-    bucket: string,
-    prefix: string,
-    depth: number,
-  ): Promise<string[] | { error: string }> => {
-    if (depth > 3) return [];
-    const { data, error } = await admin.storage.from(bucket).list(prefix, { limit: 1000 });
-    if (error) return { error: error.message };
-    const out: string[] = [];
-    for (const entry of data ?? []) {
-      // Supabase returns folders as entries with id === null.
-      if (entry.id === null) {
-        const nested = await listAllUnder(bucket, `${prefix}/${entry.name}`, depth + 1);
-        if (!Array.isArray(nested)) return nested;
-        out.push(...nested);
-      } else {
-        out.push(`${prefix}/${entry.name}`);
-      }
-    }
-    return out;
-  };
-
-  for (const bucket of MEDIA_BUCKETS) {
-    const walked = await listAllUnder(bucket, userId, 0);
-    if (!Array.isArray(walked)) {
-      console.error("delete-account could not list storage", bucket, walked.error);
-      return json(req, { error: "We could not remove all account data. Nothing else was deleted." }, 502);
-    }
-    if (walked.length) {
-      const { error: storageError } = await admin.storage.from(bucket).remove(walked);
-      if (storageError) {
-        console.error("delete-account could not remove storage objects", bucket, storageError.message);
-        return json(req, { error: "We could not remove all account data. Nothing else was deleted." }, 502);
-      }
-    }
+  // Fail closed before anything durable happens: the verified token window and the dedicated
+  // database role are both required to run the account-first workflow.
+  const tokenWindow = readVerifiedTokenWindow((name) => Deno.env.get(name));
+  if (!tokenWindow.ok) {
+    n10Log.error("n10_config_invalid", { reason: tokenWindow.reason });
+    return respond(req, RESPONSES.unavailable());
+  }
+  const runtime = createN10Runtime();
+  if (!runtime) {
+    n10Log.error("n10_config_invalid", { reason: "runtime_unavailable" });
+    return respond(req, RESPONSES.unavailable());
   }
 
+  try {
+    // Caller identity from the caller's own token (this client is never used for admin work).
+    const caller = createClient(supabaseUrl, anonKey, {
+      global: { headers: { Authorization: authorization } },
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    });
+    const { data: userData, error: userError } = await caller.auth.getUser();
+    if (userError || !userData.user) {
+      if (isDeletedUserError(userError as { status?: number; code?: string; message?: string } | null)) {
+        return respond(req, RESPONSES.gone());
+      }
+      return json(req, { error: "Authentication required." }, 401);
+    }
 
-  const { error: deleteError } = await admin.auth.admin.deleteUser(userId);
-  if (deleteError) {
-    console.error("delete-account auth deletion failed", deleteError.message);
-    return json(req, { error: "We could not delete your account. Please try again." }, 502);
+    const result = await runDeleteAccount(runtime.deps, {
+      userId: userData.user.id,
+      tokenWindowSeconds: tokenWindow.seconds,
+    });
+    return respond(req, result);
+  } finally {
+    await runtime.close();
   }
-
-  return json(req, { deleted: true }, 200);
 });

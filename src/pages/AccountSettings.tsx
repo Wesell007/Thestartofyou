@@ -10,6 +10,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { deletePregnancyJourney } from "@/lib/savedJourney";
 import { deleteTTCJourney } from "@/lib/savedTTCJourney";
 import { toast } from "@/hooks/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  accountDeletionMessage,
+  interpretDeleteAccountResult,
+  shouldLeaveAccount,
+  type AccountDeletionOutcome,
+} from "@/lib/accountDeletion";
 import JourneyStatusSection from "@/components/journey-status/JourneyStatusSection";
 import BabyIllustrationStyleField from "@/components/settings/BabyIllustrationStyleField";
 import CompanionMemorySection from "@/components/settings/CompanionMemorySection";
@@ -33,6 +40,7 @@ const suggestedFromName = (name: string | null): CompanionChoice => {
 
 const AccountSettings = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [userId, setUserId] = useState<string | null>(null);
   const [lifecycle, setLifecycle] = useState<Lifecycle>(null);
   const [pregnancyDates, setPregnancyDates] = useState<{ lmp: string; due: string } | null>(null);
@@ -232,15 +240,24 @@ const AccountSettings = () => {
     if (busy) return;
     setConfirming(null);
     setBusy("account");
+    let outcome: AccountDeletionOutcome;
     try {
-      const { error } = await supabase.functions.invoke("delete-account", { body: { confirmed: true } });
-      if (error) throw error;
-      await supabase.auth.signOut();
-      navigate("/", { replace: true });
+      const { data, error } = await supabase.functions.invoke("delete-account", { body: { confirmed: true } });
+      outcome = interpretDeleteAccountResult(data, error as { context?: { status?: number } } | null);
     } catch {
-      toast({ title: "Could not delete your account", description: "Please try again. Your account is still available.", variant: "destructive" });
-      setBusy(null);
+      outcome = { kind: "unknown" };
     }
+    const message = accountDeletionMessage(outcome);
+    if (shouldLeaveAccount(outcome)) {
+      // Client sign-out is UX only; Storage RLS and the deleted Auth user are the security boundary.
+      await supabase.auth.signOut({ scope: "local" }).catch(() => undefined);
+      queryClient.clear();
+      toast({ title: message.title, description: message.description });
+      navigate("/", { replace: true });
+      return;
+    }
+    toast({ title: message.title, description: message.description, variant: "destructive" });
+    setBusy(null);
   };
 
 

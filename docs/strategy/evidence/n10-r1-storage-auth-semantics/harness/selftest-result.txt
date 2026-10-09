@@ -1,0 +1,23 @@
+PASS [refuse] psql: no target file
+PASS [refuse] psql: production
+PASS [refuse] psql: C1 run1
+PASS [refuse] psql: C1 run2
+PASS [refuse] psql: retired G3
+PASS [refuse] psql: malformed
+PASS [refuse] psql: caller expectation unset
+PASS [refuse] psql: expectation mismatch
+PASS [refuse] psql: production named in args
+PASS [refuse] psql: G3 ref named in args
+PASS [refuse] psql: file hash mismatch
+PASS [refuse] psql: marker check fails
+PASS [reach] psql: N10 target reaches stub
+PASS [refuse] py: production target
+PASS [refuse] py: retired G3 target
+PASS [refuse] py: expectation unset
+PASS [refuse] py: non-auth/storage path
+PASS [refuse] py: mgmt path for another ref
+PASS [refuse] py: mgmt non-project path
+PASS [reach] py: auth admin path reaches stub
+PASS [reach] py: storage path reaches stub
+PASS [reach] py: mgmt own project reaches stub
+SELFTEST: 22 passed, 0 failed

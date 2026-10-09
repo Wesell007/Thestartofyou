@@ -1,0 +1,40 @@
+         checked_at          |   role   |                                    version                                    
+-----------------------------+----------+-------------------------------------------------------------------------------
+ 2026-10-09 05:05:46.5495+00 | postgres | PostgreSQL 17.11 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 15.2.0, 64-bit
+
+ auth_users | buckets | objects | public_tables 
+------------+---------+---------+---------------
+          0 |       0 |       0 |             0
+
+=== storage.objects foreign keys (any FK to auth.users would block Auth deletion)
+        conname        |                          def                           
+-----------------------+--------------------------------------------------------
+ objects_bucketId_fkey | FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)
+
+ fks_from_storage_to_auth_users 
+--------------------------------
+                              0
+
+=== owner columns
+ column_name | data_type | is_nullable | column_default 
+-------------+-----------+-------------+----------------
+ owner       | uuid      | YES         | 
+ owner_id    | text      | YES         | 
+
+=== triggers on auth.users that are not internal RI triggers
+ tgname | tgfoid 
+--------+--------
+
+=== storage migration history (latest 5)
+ id |                 name                  
+----+---------------------------------------
+ 72 | drop-bucketid-objname-index
+ 71 | objects-delete-marker-index
+ 70 | list-objects-with-versions
+ 69 | validate-bucket-lifecycle-constraints
+ 68 | bucket-lifecycle-configuration
+
+ storage_migrations | has_0017_drop_owner_fk 
+--------------------+------------------------
+                 73 | t
+

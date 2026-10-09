@@ -1,0 +1,17 @@
+{
+ "create_http": 200,
+ "create_response": {
+  "name": "n10-probe"
+ },
+ "get_http": 200,
+ "bucket": {
+  "id": "n10-probe",
+  "name": "n10-probe",
+  "public": false,
+  "owner": "",
+  "owner_id": null,
+  "file_size_limit": null,
+  "allowed_mime_types": null,
+  "created_at": "2026-10-09T05:06:46.639Z"
+ }
+}

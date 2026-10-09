@@ -1,0 +1,24 @@
+[
+ {
+  "label": "A original (user JWT)",
+  "as_user": "A",
+  "path": "n10-probe/b99b0708-6f47-474e-bab1-c546fe66fd35/r1-original.txt",
+  "http": 200,
+  "response": {
+   "Key": "n10-probe/b99b0708-6f47-474e-bab1-c546fe66fd35/r1-original.txt",
+   "Id": "76db5bed-4673-46f2-b69e-1cf7ee1bdfc5"
+  },
+  "at": "2026-10-09T05:06:48.166664+00:00"
+ },
+ {
+  "label": "C control (user JWT)",
+  "as_user": "C",
+  "path": "n10-probe/e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d/control.txt",
+  "http": 200,
+  "response": {
+   "Key": "n10-probe/e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d/control.txt",
+   "Id": "bdb02152-eb9f-4c66-af5a-57ff5c3dbd8d"
+  },
+  "at": "2026-10-09T05:06:48.317596+00:00"
+ }
+]

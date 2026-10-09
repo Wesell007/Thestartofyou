@@ -1,0 +1,58 @@
+{
+ "path": "DELETE /auth/v1/admin/users/{id} (service role, body {should_soft_delete:false}) = auth.admin.deleteUser hard delete",
+ "user_id": "b99b0708-6f47-474e-bab1-c546fe66fd35",
+ "started_at": "2026-10-09T05:07:18.401155+00:00",
+ "elapsed_s": 0.144,
+ "http": 200,
+ "response": {},
+ "attempts": 1,
+ "auth_A_after": {
+  "http": 404,
+  "present": false
+ },
+ "auth_users_rows_after": "                  id                  |          email          \n--------------------------------------+-------------------------\n e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d | n10r1-c@example.invalid\n\n",
+ "objects_after": [
+  {
+   "name": "b99b0708-6f47-474e-bab1-c546fe66fd35/r1-original.txt",
+   "owner": "b99b0708-6f47-474e-bab1-c546fe66fd35",
+   "owner_id": "b99b0708-6f47-474e-bab1-c546fe66fd35",
+   "size": "61",
+   "id": "76db5bed-4673-46f2-b69e-1cf7ee1bdfc5"
+  },
+  {
+   "name": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d/control.txt",
+   "owner": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+   "owner_id": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+   "size": "63",
+   "id": "bdb02152-eb9f-4c66-af5a-57ff5c3dbd8d"
+  }
+ ],
+ "A_original_api_after": {
+  "http": 200,
+  "sha256": "00e2cefcca4015a5105704d94a98db22d05ff7fe3c0a6759ee9880ac22d3b0da",
+  "bytes": 61
+ },
+ "control_C_after": {
+  "auth_http": 200,
+  "auth_fields": {
+   "id": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+   "email": "n10r1-c@example.invalid",
+   "created_at": "2026-10-09T05:06:47.452605Z",
+   "email_confirmed_at": "2026-10-09T05:06:47.455725Z"
+  },
+  "objects": [
+   {
+    "name": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d/control.txt",
+    "owner": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+    "owner_id": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+    "size": "63",
+    "id": "bdb02152-eb9f-4c66-af5a-57ff5c3dbd8d"
+   }
+  ],
+  "object_api": {
+   "http": 200,
+   "sha256": "39dbcba787e9696a174c901f37c424e86310482a8a7428e33a305a1848fca129",
+   "bytes": 63
+  }
+ }
+}

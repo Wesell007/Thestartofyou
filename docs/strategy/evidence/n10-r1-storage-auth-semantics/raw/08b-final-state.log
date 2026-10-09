@@ -1,0 +1,4 @@
+ auth_users | non_synthetic | objects | objects_owned_by_deleted_a | idle_in_tx |                       marker                        
+------------+---------------+---------+----------------------------+------------+-----------------------------------------------------
+          1 |             0 |       1 |                          0 |          0 | gbhwpzofnswlryqjoumw / N10.1-storage-auth-semantics
+

@@ -1,0 +1,20 @@
+{
+ "A": {
+  "id": "b99b0708-6f47-474e-bab1-c546fe66fd35",
+  "email": "n10r1-a@example.invalid",
+  "signin_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated",
+  "access_token_expires_at": 1791526007,
+  "expires_in": 3600
+ },
+ "C": {
+  "id": "e2d9e14c-9ca2-406a-ab72-4d7d20d91e9d",
+  "email": "n10r1-c@example.invalid",
+  "signin_http": 200,
+  "session_user_matches": true,
+  "role": "authenticated",
+  "access_token_expires_at": 1791526007,
+  "expires_in": 3600
+ }
+}

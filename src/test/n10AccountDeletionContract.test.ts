@@ -29,7 +29,7 @@ const STORAGE_DML = /\b(insert\s+into|update|delete\s+from)\s+storage\.(objects|
 describe("migrations (E7, E13, E16, H1)", () => {
   it("were created by the Supabase CLI naming scheme and sort after every existing migration", () => {
     const names = readdirSync(resolve(root, migrationDir)).sort();
-    expect(names.slice(-2)).toEqual([m1.name, m2.name]);
+    expect(names.slice(-3, -1)).toEqual([m1.name, m2.name]);
     for (const n of [m1.name, m2.name]) expect(n).toMatch(/^\d{14}_n10_account_deletion_[a-z_]+\.sql$/);
   });
 
@@ -131,9 +131,8 @@ describe("Edge Functions (E1, E7, E13, E17, H2)", () => {
     expect(total).toBeGreaterThanOrEqual(10);
   });
 
-  it("the worker is JWT-verified at the gateway and checks the service_role claim", () => {
-    expect(read("supabase/config.toml")).toMatch(/\[functions\.account-deletion-worker\]\r?\nverify_jwt = true/);
-    expect(read("supabase/functions/account-deletion-worker/index.ts")).toMatch(/isServiceRoleBearer\(req\.headers\.get\("Authorization"\)\)/);
+  it("delete-account keeps the gateway user-JWT boundary (the worker boundary is covered by n10WorkerInvocation)", () => {
+    expect(read("supabase/config.toml")).toMatch(/\[functions\.delete-account\]\r?\nverify_jwt = true/);
   });
 });
 

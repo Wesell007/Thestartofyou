@@ -93,21 +93,107 @@ export function isDedicatedRoleUrl(url: string | undefined): boolean {
   }
 }
 
-/**
- * Worker caller check, mirroring process-email-queue: the gateway (verify_jwt = true) verifies the
- * signature; this asserts the verified token's role claim is service_role, so only pg_cron (holding the
- * service-role JWT in Vault) can trigger the worker.
- */
-export function isServiceRoleBearer(authorization: string | null): boolean {
-  if (!authorization?.startsWith("Bearer ")) return false;
-  const parts = authorization.slice("Bearer ".length).trim().split(".");
-  if (parts.length !== 3) return false;
+// ---------------------------------------------------------------------------
+// Worker invocation (N10.3A security patch, M3). Hosted pg_net grants its request queue to PUBLIC,
+// so anything placed in a pg_net request is readable by every database login role. The scheduler
+// therefore carries ONLY an invocation-only secret: it lets a caller start the normal durable-job loop
+// and nothing else. It never selects a target, never reaches Auth/Storage/data, and no privileged
+// Supabase or database credential ever travels through pg_net.
+// ---------------------------------------------------------------------------
+export const WORKER_TOKEN_HEADER = "x-n10-worker-token";
+/** >= 32 random bytes encoded base64url (43 chars) or hex (64 chars); anything weaker fails closed. */
+const INVOKE_SECRET_RE = /^[A-Za-z0-9_-]{43,512}$/;
+const MAX_WORKER_BODY_BYTES = 1024;
+
+/** The configured invocation-only secret, or null (fail closed) when missing or too weak. */
+export function readInvokeSecret(env: EnvReader): string | null {
+  const raw = env("N10_WORKER_INVOKE_SECRET");
+  return raw && INVOKE_SECRET_RE.test(raw) ? raw : null;
+}
+
+/** Timing-resistant comparison: no early exit; runtime depends only on the longer input's length. */
+export function constantTimeEqual(a: string, b: string): boolean {
+  const x = new TextEncoder().encode(a);
+  const y = new TextEncoder().encode(b);
+  let diff = x.length ^ y.length;
+  const n = Math.max(x.length, y.length);
+  for (let i = 0; i < n; i++) diff |= (x[i] ?? 0) ^ (y[i] ?? 0);
+  return diff === 0;
+}
+
+/** The worker accepts no caller input: an empty body or exactly `{}`. Any key (user_id, request_id, ...) is rejected. */
+export function isEmptyWorkerBody(bodyText: string): boolean {
+  const trimmed = bodyText.trim();
+  if (trimmed === "") return true;
+  if (trimmed.length > MAX_WORKER_BODY_BYTES) return false;
   try {
-    const payload = parts[1].replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(parts[1].length / 4) * 4, "=");
-    const claims = JSON.parse(atob(payload)) as Record<string, unknown>;
-    return claims.role === "service_role";
+    const parsed: unknown = JSON.parse(trimmed);
+    return typeof parsed === "object" && parsed !== null && !Array.isArray(parsed) && Object.keys(parsed).length === 0;
   } catch {
     return false;
+  }
+}
+
+export type WorkerHttpResult = { httpStatus: 200 | 400 | 401 | 405 | 500 | 503; body: Record<string, unknown> };
+
+export const WORKER_RESPONSES = {
+  ok: { httpStatus: 200, body: { ok: true } },
+  badRequest: { httpStatus: 400, body: { error: "Bad request" } },
+  unauthorized: { httpStatus: 401, body: { error: "Unauthorized" } },
+  methodNotAllowed: { httpStatus: 405, body: { error: "Method not allowed" } },
+  failed: { httpStatus: 500, body: { error: "Worker run failed" } },
+  misconfigured: { httpStatus: 503, body: { error: "Server configuration error" } },
+} as const satisfies Record<string, WorkerHttpResult>;
+
+export type WorkerInvocation = { method: string; token: string | null; bodyText: () => Promise<string> };
+export type WorkerRuntime = { deps: N10Deps; close: () => Promise<void> };
+
+/**
+ * account-deletion-worker request handling (verify_jwt = false; this is the only authentication).
+ * Order matters: method, then the invocation secret, then the (empty) body, and only then is the
+ * dedicated database connection or any privileged client opened. Responses never carry user ids,
+ * request ids, states, paths or error details.
+ */
+export async function handleWorkerInvocation(
+  inv: WorkerInvocation,
+  env: EnvReader,
+  openRuntime: () => WorkerRuntime | null,
+  log: N10Logger,
+): Promise<WorkerHttpResult> {
+  if (inv.method !== "POST") return WORKER_RESPONSES.methodNotAllowed;
+  const secret = readInvokeSecret(env);
+  if (secret === null) {
+    log.error("n10_config_invalid", { reason: "invoke_secret_unavailable" });
+    return WORKER_RESPONSES.misconfigured;
+  }
+  const token = inv.token ?? "";
+  // Compare even when the header is absent so both paths take the same route through the code.
+  const match = constantTimeEqual(token, secret);
+  if (!inv.token || !match) return WORKER_RESPONSES.unauthorized;
+  let bodyText: string;
+  try {
+    bodyText = await inv.bodyText();
+  } catch {
+    return WORKER_RESPONSES.badRequest;
+  }
+  if (!isEmptyWorkerBody(bodyText)) return WORKER_RESPONSES.badRequest;
+
+  const runtime = openRuntime();
+  if (!runtime) {
+    log.error("n10_config_invalid", { reason: "runtime_unavailable" });
+    return WORKER_RESPONSES.misconfigured;
+  }
+  try {
+    const tokenWindow = readVerifiedTokenWindow(env);
+    const retentionDays = readRetentionDays(env);
+    const { processed } = await runWorker(runtime.deps, { tokenWindow, retentionDays });
+    log.info("n10_worker_run", { processed, token_window_ok: tokenWindow.ok, retention_configured: retentionDays !== null });
+    return WORKER_RESPONSES.ok;
+  } catch {
+    log.error("n10_worker_run_failed", { phase: "run" });
+    return WORKER_RESPONSES.failed;
+  } finally {
+    await runtime.close();
   }
 }
 

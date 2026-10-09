@@ -13,7 +13,7 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.account-deletion-worker]
-verify_jwt = true
+verify_jwt = false
 
 # N10.3A: version-controlled bucket declaration (no Storage SQL). Applies to the local stack;
 # a hosted project is seeded only through the Storage API (supabase seed buckets) at an approved step.

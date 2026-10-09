@@ -5,7 +5,6 @@ import {
   isCanonicalMediaPath,
   isDedicatedRoleUrl,
   isDeletedUserError,
-  isServiceRoleBearer,
   readRetentionDays,
   readVerifiedTokenWindow,
   RESPONSES,
@@ -79,13 +78,6 @@ describe("Auth delete classification and caller checks", () => {
     expect(classifyAuthDelete({ status: 429 })).toBe("transient");
     expect(classifyAuthDelete({ name: "AuthRetryableFetchError" })).toBe("transient");
     expect(classifyAuthDelete({ status: 400, name: "AuthApiError" })).toBe("permanent");
-  });
-  it("worker accepts only a service_role bearer", () => {
-    const tok = (payload: object) => `Bearer h.${btoa(JSON.stringify(payload)).replace(/=+$/, "")}.s`;
-    expect(isServiceRoleBearer(tok({ role: "service_role" }))).toBe(true);
-    expect(isServiceRoleBearer(tok({ role: "authenticated" }))).toBe(false);
-    expect(isServiceRoleBearer("Bearer not-a-jwt")).toBe(false);
-    expect(isServiceRoleBearer(null)).toBe(false);
   });
   it("recognises the deleted-user caller error observed in N10.1 R4", () => {
     expect(isDeletedUserError({ status: 403, code: "user_not_found", message: "User from sub claim in JWT does not exist" })).toBe(true);

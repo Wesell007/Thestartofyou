@@ -10,6 +10,7 @@
 | N10.3B (hosted rehearsal) | **CLOSED / PASS** (9 October 2026) on `toqeefrwnsjuhjmobodg` — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and SUPABASE PG_NET PLATFORM RESIDUAL; §11 HOLD raised the M3 patch below; a later HOLD for the CDN finding was resolved by owner classification (architecture §8.3 G–K, §26). Evidence `docs/strategy/evidence/n10-3b-hosted-candidate-e/` |
 | N10.3A security patch (M3) | COMPLETE; hosted proof PASS in N10.3B |
 | Candidate E hosted-runtime proven | YES |
+| N10.3B infrastructure | RETIRED — disposable rehearsal infrastructure retired after the CLOSED/PASS evidence push (owner-confirmed project deletion and PAT revocation; evidence 21) |
 | 30-day retention | technically proven (functional rehearsal) / legally unapproved (D14) |
 | Production accessed | NO |
 | Hosted project created | NO |

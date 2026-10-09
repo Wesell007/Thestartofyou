@@ -7,7 +7,8 @@
 | Item | State |
 |---|---|
 | N10 | OPEN |
-| N10.3B (hosted rehearsal) | NOT STARTED |
+| N10.3B (hosted rehearsal) | IN PROGRESS on `toqeefrwnsjuhjmobodg`; §11 HOLD raised the security patch below (M3) |
+| N10.3A security patch (M3) | LOCAL COMPLETE (9 October 2026); hosted proof in N10.3B |
 | Production accessed | NO |
 | Hosted project created | NO |
 | Remote Supabase accessed | NO |
@@ -133,7 +134,21 @@ The six signing files (10 calls) are unchanged: new signing is denied by the gua
 - **Cron/Vault:** that M2 schedules on a hosted project and is a no-op without secrets.
 - **Deno type-check and lock:** no Deno runtime locally, so `deno check` and lockfile generation happen with the CLI bundling/deploy in N10.3B. Imports are exactly pinned in source.
 - **Residual noted for review:** the worker role inherits PostgreSQL's default PUBLIC EXECUTE on existing `public` functions (Supabase defaults). It has no table privileges, and those RPCs gate on `auth.uid()`; to be reviewed by advisors in N10.3B.
+  - **Resolved by N10.3B §11 + M3 (see below):** the hosted inventory found no callable non-N10 SECURITY DEFINER function and only SECURITY INVOKER trigger/pure functions in `public`, but did find that hosted pg_net grants its queue and schema to PUBLIC.
 - **D14** human privacy/legal review (production release gate), and an **operator-alert destination** (production activation blocker).
+
+## Security patch M3 — invocation-only scheduler credential (9 October 2026)
+
+N10.3B §11 (hosted, `toqeefrwnsjuhjmobodg`) found that hosted pg_net grants `net.http_request_queue`, `net._http_response` and schema `net` to PUBLIC (owned by `supabase_admin`; `postgres` cannot revoke). M2 put the service-role JWT into that queue, so the dedicated worker credential could have been escalated. The owner rejected that design; the full decision is in the architecture document §25.
+
+| Change | Where |
+|---|---|
+| M3 replaces the cron job: URL + `Content-Type` + `X-N10-Worker-Token` (Vault `n10_account_deletion_worker_invoke_secret`) + `{}`; fails if the installed command references the service-role name, `Authorization` or `apikey`. M1 and M2 unchanged. | `supabase/migrations/20261009091430_n10_worker_invocation_hardening.sql` |
+| `account-deletion-worker` `verify_jwt = false`; `delete-account` stays `true` | `supabase/config.toml` |
+| `handleWorkerInvocation`: POST only → invocation secret (fail closed if missing/weak, timing-resistant compare, generic 401) → body must be empty or `{}` (else 400) → only then open the runtime; responds `{"ok":true}` or a generic error. `isServiceRoleBearer` removed. | `supabase/functions/_shared/accountDeletion.ts`, `supabase/functions/account-deletion-worker/index.ts` |
+| Tests (21): boundary (method, missing/wrong/JWT-shaped tokens, missing/weak secret, caller targets, generic errors, nothing opened before auth); real M1 in PGlite (no request creation or victim selection, minimal response, duplicate/concurrent calls → one Auth delete); real M2→M3 against stand-in cron/Vault/pg_net (only URL, Content-Type, token and `{}` are sent; nothing without the invoke secret; no service-role or `sb_secret_` value); static contracts (config, M1/M2 hashes, no hardcoded credentials, N10_DB_URL only). Mutation checks (always-true comparison; bearer header re-added to M3) made the suite fail. | `src/test/n10WorkerInvocation.test.ts` |
+
+Platform residual (accepted only under the six conditions in architecture §25): any login role can still queue outbound HTTP and read pg_net rows; no privileged credential is ever placed there. Deployment additions for N10.3B: Vault `n10_account_deletion_worker_invoke_secret` and function secret `N10_WORKER_INVOKE_SECRET` (same value, out-of-band); never populate `n10_account_deletion_worker_service_key`.
 
 ## 41B
 

@@ -9,6 +9,7 @@
 | N10.2 | 9 October 2026 | `d4db73a5` | paper architecture, accepted in principle by the owner |
 | N10.2A | 9 October 2026 | `443bf9f5` | owner decisions D1–D15 resolved in §24; the strict COMPLETED predicate and invariants E1–E25 integrated throughout; holds H1 and H2 raised |
 | N10.2A closeout | 9 October 2026 | this revision | H1 (sweep anchor `auth_deleted_at`) and H2 (HTTP 200 = Auth deletion confirmed committed, not workflow completed) owner-confirmed and applied |
+| N10.3A security patch | 9 October 2026 | M3 `20261009091430_n10_worker_invocation_hardening.sql` | N10.3B §11 found hosted pg_net exposes queued request headers to every login role; the service-role scheduler credential is rejected and replaced by an invocation-only secret (§25) |
 
 Written by Claude Code (implementation owner). Where this revision differs from the N10.2 text, this revision governs; the N10.2 text remains in Git history.
 
@@ -290,7 +291,7 @@ The pass is safe for 0, 1, 1,001 and many thousands of objects; covers both buck
 
 ## 11. Worker and retries
 
-- **Trigger:** pg_cron calls `net.http_post` every minute with Vault-held credentials, invoking `account-deletion-worker` (OFFICIAL DOCS pattern; TSOY already uses it for email).
+- **Trigger:** pg_cron calls `net.http_post` every minute, invoking `account-deletion-worker` (OFFICIAL DOCS pattern; TSOY already uses it for email). **Superseded detail (§25):** the request carries only the invocation-only secret `X-N10-Worker-Token`, never the service-role JWT or any other privileged credential.
 - **D10:**
   - The **cron definition and schedule are version-controlled** (migration or infrastructure definition) and may reference **Vault secret names**.
   - **Secret values stay out-of-band**, never in migrations or Git.
@@ -379,6 +380,8 @@ Status: ARCHITECTURAL INFERENCE; the rehearsal spot-checks it.
 | `delete-account`, `account-deletion-worker` | trusted backend; the only holders of the secret key and the `account_deletion_worker` credential |
 | `account_deletion_worker` role | least privilege: `private` table grants plus EXECUTE on three read-only definer helpers; **no** grants on `auth` or `storage`; **no** `public` writes; **no** BYPASSRLS |
 | Secret / service-role key | backend only; never sent with a user session |
+| Worker invocation secret (`N10_WORKER_INVOKE_SECRET`) | invocation-only: may start the worker's durable-job loop and nothing else; travels through pg_net (§25) |
+| pg_net queue | readable and writable by every database login role on hosted Supabase (platform grants to PUBLIC); **no privileged credential may ever be placed in it** (§25) |
 | Storage metadata | **read-only, through definer helpers; no SQL mutation of `storage.objects`, ever** |
 
 ## 15. Failure matrix
@@ -598,3 +601,31 @@ No incompatibility with current Supabase or TSOY code was found. Two contract in
 - **HTTP 200 never means the durable workflow is COMPLETED.** Durable `completed` is governed only by the strict predicate in §12.3. After it holds: `status = completed`, `completed_at` set, `user_id` nulled and `anonymised_at` set.
 
 With H1 and H2 resolved, **N10.2A is fully frozen and Candidate E is fully frozen for N10.3.**
+
+## 25. N10.3A security patch — invocation-only scheduler credential (9 October 2026)
+
+**Finding (N10.3B §11, hosted, `toqeefrwnsjuhjmobodg`).** Hosted Supabase pg_net grants `net.http_request_queue`, `net._http_response` and USAGE on schema `net` to PUBLIC. Those objects are owned by `supabase_admin`, so a `postgres`-run migration cannot revoke the grants (`REVOKE` returned "no privileges could be revoked"). Every database login role, including `account_deletion_worker`, can therefore queue outbound HTTP requests and read, alter or delete queued requests, headers included. M2 placed `Authorization: Bearer <service-role JWT>` in each queued scheduler request, so the dedicated worker credential could have been escalated to service-role access.
+
+**Decision (owner, 9 October 2026).** The service-role scheduler credential is **rejected**; it is not an accepted residual. D10 still stands as pg_cron + pg_net + Vault, with this change:
+
+- **M3** (`20261009091430_n10_worker_invocation_hardening.sql`) replaces the `n10-account-deletion-worker` job. M1 and M2 stay byte-identical (applied history). The effective request carries only the worker URL, `Content-Type: application/json`, `X-N10-Worker-Token: <invocation-only secret>` and a fixed `{}` body. M3 fails if the installed command references the service-role Vault name, `Authorization` or `apikey`.
+- **Vault names:** `n10_account_deletion_worker_url` and `n10_account_deletion_worker_invoke_secret`. The M2 name `n10_account_deletion_worker_service_key` is **superseded and must never be populated**.
+- **Invocation-only secret** `N10_WORKER_INVOKE_SECRET`: at least 32 cryptographically random bytes, held only in Vault and in the worker's Edge Function secrets; never committed, printed, logged or exposed to frontend code. The worker fails closed (503) when it is missing or weaker than 43 base64url characters.
+- **`account-deletion-worker`: `verify_jwt = false`.** Authentication happens first inside the function: POST only; the `X-N10-Worker-Token` header is compared with the secret using a timing-resistant comparison; any mismatch returns a generic 401. Nothing (database connection, privileged client, body processing) happens before that. `delete-account` keeps `verify_jwt = true` and its user-JWT boundary.
+- **No caller-controlled target.** The worker accepts only an empty body or `{}`; any key (user id, request id, email, bucket, path, status, …) is a 400. Due work is chosen exclusively by `private.n10_claim_due` (lease + SKIP LOCKED). Possessing the secret cannot create a request, choose a victim, reach Auth, Storage or application data, or read the request table.
+- **Response minimisation.** Success is `{"ok":true}`; errors are generic. No user ids, request ids, states, object names or database details are returned; operational detail stays in redacted server logs.
+- **Replay.** Repeated or concurrent valid calls only run the normal loop; existing leases and idempotent state transitions prevent duplicate destructive operations, and calls with no due work are harmless. No nonce protocol is added.
+- The worker's backend-only Supabase admin credential is unchanged and stays inside the Edge Function runtime; it never travels through pg_net, cron command text, Vault scheduler headers, HTTP bodies, logs or evidence.
+
+**PLATFORM RESIDUAL — NO PRIVILEGE ESCALATION THROUGH N10 SCHEDULER CREDENTIAL.** `account_deletion_worker` (like any login role) can still technically read pg_net queue rows and queue outbound HTTP. This is accepted only while all of the following hold, and N10.3B must prove them on the hosted project:
+
+1. no privileged Supabase credential ever enters pg_net;
+2. no database credential ever enters pg_net;
+3. the only N10 scheduler credential visible in pg_net is the invocation-only secret;
+4. that secret cannot select or create deletion work;
+5. the worker database credential keeps every proven Auth, Storage and private-data denial;
+6. `net` stays outside the exposed Data API schemas.
+
+The residual is outbound pg_net capability, **not** privileged credential exposure.
+
+Status after the patch: N10 = OPEN. D14 (privacy/legal) remains the production release gate and the unconfigured operator-alert destination remains a production activation blocker. 41B.1B = NOT STARTED / NOT AUTHORISED.

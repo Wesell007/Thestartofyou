@@ -1,6 +1,8 @@
 # 08 — Pending-deletion freeze — P (§22), and the CDN finding
 
-**Result: PASS at the Storage origin for every operation; one CDN residual found and measured — OWNER CLASSIFICATION REQUIRED (see below).** Raw: `raw/22-pending-freeze-P.txt`, `raw/22b-download-diagnosis-P.txt`, `raw/22c-cdn-cache-key-P.txt`, `raw/22d-cdn-residual-while-pending-T.txt`, `raw/22e-cdn-residual-after-purge-T.txt`.
+**Final result (after owner classification, 9 October 2026): PASS — origin denied every operation; the CDN behaviour is an ACCEPTED D15 PLATFORM RESIDUAL — PRE-AUTHORISED AUTHENTICATED-DOWNLOAD CDN CACHE (see "Owner classification" below).**
+
+*Result as originally recorded at evidence time (kept for history): PASS at the Storage origin for every operation; one CDN residual found and measured — OWNER CLASSIFICATION REQUIRED (see below).* Raw: `raw/22-pending-freeze-P.txt`, `raw/22b-download-diagnosis-P.txt`, `raw/22c-cdn-cache-key-P.txt`, `raw/22d-cdn-residual-while-pending-T.txt`, `raw/22e-cdn-residual-after-purge-T.txt`.
 
 ## P (pre-request JWT used throughout; first run aborted on a harness bug before any request existed — rerun from clean state)
 
@@ -29,3 +31,13 @@
 | After the JWT expires | **not measured** (would require holding a frozen user > 60 min) |
 
 **Classification (for the owner, not self-accepted):** Storage RLS and the N10 guard hold at the origin for every operation. Supabase's Smart CDN serves a cached copy of an *authenticated* download only to the **same credential that already received those exact bytes before the freeze**; it never discloses anything new, never accepts a write, and ends when the object is purged (consistent with the documented CDN invalidation on object deletion). This is the same class as the frozen D15 residual for pre-issued signed URLs, but D15 as written covers signed URLs only. Its duration while a deletion is pending but purge is withheld (Auth failure / `auth_attention`) is bounded by the CDN's retention of an unchanged object, measured ≥ 25 min, and possibly beyond JWT expiry (unmeasured). Recommended: owner decision on extending D15 to cover authenticated-download CDN caching, and on whether a post-expiry measurement or an origin-side cache-control change (outside N10's frozen scope) is required before production.
+
+## Owner classification (9 October 2026) — ACCEPTED
+
+The owner reviewed this evidence and classified the behaviour as **ACCEPTED D15 PLATFORM RESIDUAL — PRE-AUTHORISED AUTHENTICATED-DOWNLOAD CDN CACHE**. D15 was extended to cover pre-authorised media access residuals: pre-issued signed URLs, authenticated downloads legitimately served before the freeze and still cached at the CDN edge, and browser/client/device copies already delivered (architecture §8.3 G–K).
+
+The authoritative boundary is **origin access** versus **already-delivered / already-cached bytes**. This evidence shows the origin boundary held in full: origin and cache-busted requests denied; another user's token, anon and unauthenticated requests did not receive the cached bytes; the residual used only the same previously authorised access context; purge invalidated the CDN path and post-purge access stopped within seconds. It is **not** an origin RLS bypass, cross-user exposure, a stale-JWT origin bypass, or a failure of account-first ordering, purge or completion gating.
+
+- A beyond-JWT-expiry measurement of the cached entry was **considered and deliberately not required** for closure: token expiry is not a cache revocation mechanism and cannot revoke bytes already delivered to a browser or device.
+- Candidate E is **not** changed for this residual (no freeze-time CDN purge, no M4, no change to `delete-account` or the worker).
+- Non-blocking follow-up (not an N10.3B or production blocker): *Storage privacy hardening — evaluate shorter `cacheControl` values and/or targeted CDN invalidation for sensitive user media.*

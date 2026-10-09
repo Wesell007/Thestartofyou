@@ -7,8 +7,10 @@
 | Item | State |
 |---|---|
 | N10 | OPEN |
-| N10.3B (hosted rehearsal) | IN PROGRESS on `toqeefrwnsjuhjmobodg`; §11 HOLD raised the security patch below (M3) |
-| N10.3A security patch (M3) | LOCAL COMPLETE (9 October 2026); hosted proof in N10.3B |
+| N10.3B (hosted rehearsal) | **CLOSED / PASS** (9 October 2026) on `toqeefrwnsjuhjmobodg` — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and SUPABASE PG_NET PLATFORM RESIDUAL; §11 HOLD raised the M3 patch below; a later HOLD for the CDN finding was resolved by owner classification (architecture §8.3 G–K, §26). Evidence `docs/strategy/evidence/n10-3b-hosted-candidate-e/` |
+| N10.3A security patch (M3) | COMPLETE; hosted proof PASS in N10.3B |
+| Candidate E hosted-runtime proven | YES |
+| 30-day retention | technically proven (functional rehearsal) / legally unapproved (D14) |
 | Production accessed | NO |
 | Hosted project created | NO |
 | Remote Supabase accessed | NO |
@@ -123,6 +125,8 @@ The six signing files (10 calls) are unchanged: new signing is denied by the gua
 | E25 G3/AD-1 unchanged | AD-1 30/30; 41B.1A 47/47; frozen hashes | PASS | — |
 
 ## Deferred to N10.3B (hosted rehearsal) or later
+
+*All items below were exercised in N10.3B (see the evidence package). D14 and the operator-alert destination remain open production activation blockers.*
 
 - **Hosted runtime:** Storage API, GoTrue, Supavisor, pg_cron, pg_net and Vault behaviour; applying M1/M2 on a fresh hosted project; Supabase security/performance advisors.
 - **Dedicated role:**

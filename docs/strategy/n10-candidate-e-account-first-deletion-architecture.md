@@ -217,6 +217,14 @@ Replace the 8 existing media policies (4 per bucket) with `TO authenticated` pol
 - **E.** Any CDN or browser-cache propagation after object deletion must be documented and, where possible, rehearsed (REQUIRES N10.3 REHEARSAL).
 - **F.** COMPLETED never depends on signed-URL expiry. It depends on object removal and the final sweep (§12.3).
 
+**D15 extension — owner classification after N10.3B (9 October 2026).** D15 now covers **PRE-AUTHORISED MEDIA ACCESS RESIDUALS**, not only signed URLs:
+
+- **G.** Residuals: (1) pre-issued signed URLs; (2) authenticated Storage downloads legitimately served before the freeze and still cached at the CDN edge; (3) browser/client/device copies already delivered before the freeze.
+- **H.** The authoritative distinction is **origin access** versus **already-delivered / already-cached bytes**. After deletion is requested, N10 guarantees at the origin: Storage reads denied by policy; new signing denied; new writes denied; cross-user, anon and unauthenticated access denied; stale-JWT origin access after Auth deletion denied.
+- **I.** N10's revocation boundary is authoritative origin access **plus** eventual object purge. Deletion invalidates CDN entries, subject to platform propagation. Browser and device caches cannot be guaranteed revoked, and N10 makes no claim that bytes legitimately delivered before the freeze can be recalled.
+- **J.** Hosted measurement (N10.3B, `docs/strategy/evidence/n10-3b-hosted-candidate-e/08`, `15`): the Storage CDN served a frozen user's own pre-freeze authenticated downloads back to the **same credential only** (cache keyed on `Authorization`); another user's token, anon and unauthenticated requests reached the origin and were denied; purge ended the cached path within seconds (≤ 3 s measured); while purge was withheld by a forced Auth failure it served for the full 25-minute measurement. **No cross-user cache access was observed.** Classified **ACCEPTED D15 PLATFORM RESIDUAL — PRE-AUTHORISED AUTHENTICATED-DOWNLOAD CDN CACHE**. A beyond-JWT-expiry measurement was considered and deliberately **not required**: token expiry is not a cache revocation mechanism and cannot revoke delivered bytes.
+- **K.** Candidate E is **not** changed for this residual: no CDN purge during the freeze, no M4, no change to `delete-account` or the worker. Non-blocking follow-up (not part of Candidate E correctness, not a production activation blocker): *Storage privacy hardening — evaluate shorter `cacheControl` values and/or targeted CDN invalidation for sensitive user media.*
+
 ## 9. Deletion flow (`delete-account`, synchronous part)
 
 1. Keep today's checks: `POST`, `{confirmed: true}`, Bearer token. Resolve the caller with `auth.getUser()` using their token. `user_not_found` → **410** (no row created).
@@ -539,7 +547,7 @@ Paths contain UUIDs, week numbers and memory ids, not names; the media is sensit
 | D12 | Rule A purge / rule B anomaly blocks completion / rule C never touched | FROZEN |
 | D13 | `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`; W ≥ verified lifetime; fail closed; lifetime increases require re-verification (§12.2) | **FULLY FROZEN** (H1 resolved) |
 | D14 | Human privacy/legal review | **OPEN: production release gate** |
-| D15 | Signed-URL / cache residual policy (§8.3 A–F) | FROZEN |
+| D15 | Pre-authorised media access residual policy (§8.3 A–K; G–K added by owner classification after N10.3B, 9 October 2026) | FROZEN |
 
 ## 23. Final verdict
 
@@ -629,3 +637,11 @@ With H1 and H2 resolved, **N10.2A is fully frozen and Candidate E is fully froze
 The residual is outbound pg_net capability, **not** privileged credential exposure.
 
 Status after the patch: N10 = OPEN. D14 (privacy/legal) remains the production release gate and the unconfigured operator-alert destination remains a production activation blocker. 41B.1B = NOT STARTED / NOT AUTHORISED.
+
+## 26. N10.3B closeout — owner decisions (9 October 2026)
+
+- **N10.3B = CLOSED / PASS** — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and PASS WITH DOCUMENTED SUPABASE PG_NET PLATFORM RESIDUAL. **Candidate E hosted-runtime proven = YES.** Evidence: `docs/strategy/evidence/n10-3b-hosted-candidate-e/`.
+- The rehearsal first returned HOLD for owner classification of the authenticated-download CDN residual; the owner accepted it as a D15-class residual (§8.3 G–K). That HOLD and its evidence remain part of the record.
+- The service-role-in-pg_net scheduler design remains rejected; M3 (§25) remains authoritative.
+- The 30-day retention cleanup was a **functional rehearsal** of the D14-proposed behaviour: technically proven, **legally unapproved**.
+- N10 = OPEN. Production activation blockers: (1) D14 human privacy/legal approval; (2) a real operator-alert destination/configuration. PRODUCTION READY = NO. 41B.1B = NOT STARTED / NOT AUTHORISED.

@@ -1,6 +1,8 @@
 # N10.3B — Hosted Candidate E rehearsal — summary
 
-**Verdict: N10.3B = HOLD — OWNER CLASSIFICATION REQUIRED for one D15-class finding (authenticated-download CDN residual, 08). Every other required property was proven on hosted Supabase.** Evidence committed locally only; not pushed. Project, PAT and `.n103b` retained for owner review.
+**Authoritative verdict (owner decision, 9 October 2026): N10.3B = CLOSED / PASS — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and PASS WITH DOCUMENTED SUPABASE PG_NET PLATFORM RESIDUAL. CANDIDATE E HOSTED-RUNTIME PROVEN = YES.**
+
+*History (kept visible): the evidence was first returned as "N10.3B = HOLD — OWNER CLASSIFICATION REQUIRED for one D15-class finding (authenticated-download CDN residual, 08)", committed locally (`76c75c2d`) and not pushed. The owner reviewed it, accepted the finding as a D15-class residual (D15 extended to pre-authorised media access residuals, architecture §8.3 G–K, §26), declined a beyond-JWT-expiry measurement as unnecessary, and authorised the closeout push.*
 
 ## Environment
 
@@ -34,13 +36,13 @@
 | 10 | Real W verified | PASS — `jwt_exp = 3600` via Management API (07) |
 | 11 | Edge Functions deploy and execute | PASS (02) |
 | 12 | Worker auth boundary | PASS — 18/18 (05) |
-| 13 | Pending blocks SELECT/INSERT/UPDATE/DELETE/signing | PASS at the origin; **same-credential CDN copies of pre-freeze downloads keep serving until purge — owner classification (08)** |
-| 14 | Stale deleted-user JWT blocked | PASS at the origin; same CDN note (09) |
+| 13 | Pending blocks SELECT/INSERT/UPDATE/DELETE/signing | PASS at the origin; same-credential CDN copies of pre-freeze downloads serve until purge — **accepted D15 residual** (08) |
+| 14 | Stale deleted-user JWT blocked | PASS at the origin; same accepted D15 residual (09) |
 | 15 | Account-first delete-account | PASS — 200 `removed`, Auth absent before purge, graph cascaded, not falsely completed (10) |
 | 16 | Forced Auth failure removes ZERO media | PASS — 202, three failed attempts, 0 removed, byte-identical (11) |
 | 17 | Duplicate / lease | PASS — one row, one lease, SKIP LOCKED, expiry reclaim, 410 replay (12) |
 | 18 | >1,000 / deep / both buckets | PASS — 1,112 objects, 3 remove calls ≤ 1,000, 9-segment paths, NULL-owner service-role objects (13) |
-| 19 | Signed URLs under D15 | PASS — new signing denied after freeze; pre-issued URLs end at purge (≤ 3 s measured for A) (15) |
+| 19 | Signed URLs / pre-authorised access under D15 | PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL — new signing denied after freeze; pre-issued URLs and cached downloads end at purge (≤ 3 s measured for A); no cross-user cache access (15) |
 | 20 | Final sweep cannot run early | PASS — 0 early completions; real P/S completed by live cron at the first tick after the window (16) |
 | 21 | Due final sweep completes + anonymises | PASS — SYNTHETIC seeded Q case (16) |
 | 22 | Cron / Vault | PASS — every minute, pg_net 200 `{"ok":true}`, no-op while Vault empty (17) |
@@ -49,15 +51,15 @@
 | 25 | Control user unchanged | PASS (20) |
 | 26 | Frozen 41B evidence unchanged | PASS — hashes unchanged |
 
-Also: OWNER_ID_PATH_ANOMALY **reproduced through supported APIs** (service-role move preserves `owner_id`) → `purge_attention`, alert, not auto-deleted, completion blocked (14). Retention cleanup behaves as specified (16).
+Also: OWNER_ID_PATH_ANOMALY **reproduced through supported APIs** (service-role move preserves `owner_id`) → `purge_attention`, alert, not auto-deleted, completion blocked (14). Retention cleanup behaves as specified (16) — a functional rehearsal only: technically proven / legally unapproved (D14).
 
-## Items for the owner
+## Items for the owner (as raised; item 1 now decided)
 
-1. **Authenticated-download CDN residual (08)** — Storage's CDN serves a frozen/deleted user's *own* previously downloaded bytes back to the *same* credential until purge (cache keyed on `Authorization`; other callers denied; ends at purge; ≥ 25 min measured while purge was withheld; behaviour after JWT expiry unmeasured). Decide whether D15 is extended to cover it, whether a post-expiry measurement is required, and whether any origin cache-control change is wanted (outside the frozen N10 scope).
+1. **Authenticated-download CDN residual (08)** — Storage's CDN serves a frozen/deleted user's *own* previously downloaded bytes back to the *same* credential until purge (cache keyed on `Authorization`; other callers denied; ends at purge; ≥ 25 min measured while purge was withheld; behaviour after JWT expiry unmeasured). **DECIDED 9 October 2026: ACCEPTED D15 PLATFORM RESIDUAL — PRE-AUTHORISED AUTHENTICATED-DOWNLOAD CDN CACHE**; no post-expiry measurement required; no Candidate E change and no M4; non-blocking follow-up *Storage privacy hardening — evaluate shorter cacheControl values and/or targeted CDN invalidation for sensitive user media*.
 2. **PG_NET platform residual (05)** — accepted only under the six §25 conditions, all proven here.
 3. Rehearsal data left in place for review (20), including N's `purge_attention` anomaly object.
 4. Harness issues recorded honestly (10, 11, 12, 22): missing confirmation body, a comment-encoding error, a cron/test timing collision, a worker-side lookup refused by least privilege — none changed product state outside the intended tests.
 
 ## Status (unchanged blockers)
 
-G3 = CLOSED PASS · RI/account-deletion database gate = CLOSED / PASS · N10 = OPEN · N10.3A = LOCAL IMPLEMENTATION COMPLETE (+ M3 security patch) · N10.3B = HOLD (owner classification) · Candidate E hosted-runtime proven = YES, subject to item 1 · Production ready = NO (D14 privacy/legal release gate OPEN; operator-alert destination NOT CONFIGURED) · Production accessed = NO · 41B.1A applied to production = NO · 41B.1B = NOT STARTED / NOT AUTHORISED.
+G3 = CLOSED / PASS · RI/account-deletion database gate = CLOSED / PASS · N10.3A = LOCAL IMPLEMENTATION COMPLETE + M3 SECURITY PATCH · **N10.3B = CLOSED / PASS** · Candidate E hosted-runtime proven = **YES** · N10 = OPEN · Production activation blockers: (1) D14 human privacy/legal approval; (2) real operator-alert destination/configuration · 30-day retention = technically proven / legally unapproved · Production ready = NO · Production accessed = NO · 41B.1A applied to production = NO · 41B.1B = NOT STARTED / NOT AUTHORISED.

@@ -19,6 +19,8 @@ Q was deleted through the real `delete-account` flow (200 `removed`), then **pri
 
 `status = completed`, `completed_at` set, `user_id` NULL, `anonymised_at` set, `anomaly_count = 0`, `sweep_objects_removed = 1`, canonical media 0, no row left with Q's user id.
 
-## §31 Retention (functional only; 30 days is D14-proposed, not approved)
+## §31 Retention — FUNCTIONAL REHEARSAL of the proposed D14 behaviour
+
+**30-day retention = technically proven / legally unapproved.** This test does **not** mean human privacy/legal approval (D14) has been granted; D14 remains an open production activation blocker.
 
 Synthetic rows: L completed recently (seeded the same way), Q's completed row aged 31 days (privileged setup, trigger re-enabled). Worker run with `N10_COMPLETED_ROW_RETENTION_DAYS = 30`: the >30-day completed anonymised row (Q) was **deleted**; the recent completed row (L) **kept**; every active / non-anonymised row (6 `awaiting_final_sweep`, 1 `purge_attention`) **kept**. Non-anonymised completed rows cannot exist (M1 CHECK `anonymised ⇔ user_id NULL`).

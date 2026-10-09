@@ -86,6 +86,8 @@ describe("N10 M1 catalogue, grants and role (E13, E16, E22)", () => {
       "private.n10_open_request(uuid,integer)", "private.n10_claim_due(integer,integer)", "private.n10_release_lease(uuid,text)",
       "private.n10_record_failure(uuid,text,text,text,boolean)", "private.n10_confirm_auth_deleted(uuid,text,integer)",
       "private.n10_record_purge(uuid,text,text,integer)", "private.n10_cleanup_completed(integer)",
+      // M4 operator-alert ledger (N10.4)
+      "private.n10_alerts_due(integer,integer)", "private.n10_record_alert(uuid,text,text,text,boolean)", "private.n10_alerts_pending_count()",
     ]);
     for (const { sig } of r as { sig: string }[]) {
       const p = await h.su(

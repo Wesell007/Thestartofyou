@@ -45,9 +45,10 @@ const silentLog = { info: () => undefined, error: () => undefined };
 // Static contracts
 // ---------------------------------------------------------------------------
 describe("M3 and configuration contracts", () => {
-  it("M3 is the newest migration, CLI-named; M1 and M2 are byte-identical to their applied versions", () => {
+  it("M3 precedes only M4 (N10.4), CLI-named; M1 and M2 are byte-identical to their applied versions", () => {
     const names = readdirSync(resolve(root, "supabase/migrations")).sort();
-    expect(names.at(-1)).toBe(m3.name);
+    expect(names.at(-2)).toBe(m3.name);
+    expect(names.at(-1)).toMatch(/^\d{14}_n10_operator_alert_ledger\.sql$/);
     expect(m3.name).toMatch(/^\d{14}_n10_worker_invocation_hardening\.sql$/);
     expect(sha256Lf(m1.sql)).toBe("bc73c4275e00f1a671363590bae96115655183586c5cb7722a15ad356282c2bd");
     expect(sha256Lf(m2.sql)).toBe("99c42be0f2c735c5754bc1d3cae2f267357e778b20400e3692f9664a7349fdc4");

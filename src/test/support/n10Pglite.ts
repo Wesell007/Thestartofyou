@@ -2,7 +2,7 @@
 // Builds a minimal stand-in for the Supabase-managed pieces the N10 migration depends on (roles
 // anon/authenticated/service_role, auth.users + auth.uid(), storage.buckets/objects + foldername,
 // the historical media policies taken verbatim from the repository migrations), then applies the
-// real N10 M1 migration file unchanged. It cannot prove hosted Supabase behaviour (N10.3B does).
+// real N10 M1 and M4 migration files unchanged (M2/M3 are cron-only; see n10WorkerInvocation). It cannot prove hosted Supabase behaviour (N10.3B does).
 import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { PGlite } from "@electric-sql/pglite";
@@ -71,6 +71,7 @@ export async function createN10Harness(): Promise<N10Harness> {
   await db.exec(STUB);
   for (const policy of historicalPolicies()) await db.exec(policy);
   await db.exec(n10MigrationFile("_n10_account_deletion_foundation.sql").sql);
+  await db.exec(n10MigrationFile("_n10_operator_alert_ledger.sql").sql);
 
   const run = async (prefix: string[], sql: string, params: unknown[] = []) => {
     for (const p of prefix) await db.exec(p);

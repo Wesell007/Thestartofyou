@@ -29,7 +29,7 @@ const STORAGE_DML = /\b(insert\s+into|update|delete\s+from)\s+storage\.(objects|
 describe("migrations (E7, E13, E16, H1)", () => {
   it("were created by the Supabase CLI naming scheme and sort after every existing migration", () => {
     const names = readdirSync(resolve(root, migrationDir)).sort();
-    expect(names.slice(-3, -1)).toEqual([m1.name, m2.name]);
+    expect(names.slice(-4, -2)).toEqual([m1.name, m2.name]);
     for (const n of [m1.name, m2.name]) expect(n).toMatch(/^\d{14}_n10_account_deletion_[a-z_]+\.sql$/);
   });
 
@@ -95,7 +95,7 @@ describe("Edge Functions (E1, E7, E13, E17, H2)", () => {
 
   it("new runtime imports are exactly pinned", () => {
     for (const { p, src } of n10Code) {
-      for (const spec of src.match(/"npm:[^"]+"/g) ?? []) expect(spec, p).toMatch(/^"npm:(@[a-z0-9-]+\/)?[a-z0-9.-]+@\d+\.\d+\.\d+"$/);
+      for (const spec of src.match(/"npm:[^"]+"/g) ?? []) expect(spec, p).toMatch(/^"npm:(@[a-z0-9.-]+\/)?[a-z0-9.-]+@\d+\.\d+\.\d+"$/);
       expect(src, p).not.toMatch(/esm\.sh/);
     }
   });
@@ -124,7 +124,7 @@ describe("Edge Functions (E1, E7, E13, E17, H2)", () => {
       for (const call of calls) {
         const keys = [...call.matchAll(/([a-z_]+):/g)].map((m) => m[1]);
         for (const k of keys) {
-          expect(["request_id", "outcome", "phase", "reason", "status", "auth_confirmed", "kind", "error_class", "processed", "token_window_ok", "retention_configured", "removed_rows"], `${p}: ${call.slice(0, 80)}`).toContain(k);
+          expect(["request_id", "outcome", "phase", "reason", "status", "auth_confirmed", "kind", "error_class", "processed", "token_window_ok", "retention_configured", "removed_rows", "pending", "alerts_sent", "alerts_failed"], `${p}: ${call.slice(0, 80)}`).toContain(k);
         }
       }
     }

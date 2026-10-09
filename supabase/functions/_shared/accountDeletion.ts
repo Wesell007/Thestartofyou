@@ -146,7 +146,7 @@ export const WORKER_RESPONSES = {
 } as const satisfies Record<string, WorkerHttpResult>;
 
 export type WorkerInvocation = { method: string; token: string | null; bodyText: () => Promise<string> };
-export type WorkerRuntime = { deps: N10Deps; close: () => Promise<void> };
+export type WorkerRuntime = { deps: N10Deps; close: () => Promise<void>; notifier?: OperatorNotifier };
 
 /**
  * account-deletion-worker request handling (verify_jwt = false; this is the only authentication).
@@ -187,7 +187,15 @@ export async function handleWorkerInvocation(
     const tokenWindow = readVerifiedTokenWindow(env);
     const retentionDays = readRetentionDays(env);
     const { processed } = await runWorker(runtime.deps, { tokenWindow, retentionDays });
-    log.info("n10_worker_run", { processed, token_window_ok: tokenWindow.ok, retention_configured: retentionDays !== null });
+    // Operator alerts run after, and independently of, the durable-job loop (N10.4 / M4).
+    const alerts = await dispatchOperatorAlerts(runtime.deps, readOperatorAlertConfig(env, Boolean(runtime.notifier)), runtime.notifier);
+    log.info("n10_worker_run", {
+      processed,
+      token_window_ok: tokenWindow.ok,
+      retention_configured: retentionDays !== null,
+      alerts_sent: alerts.sent,
+      alerts_failed: alerts.failed,
+    });
     return WORKER_RESPONSES.ok;
   } catch {
     log.error("n10_worker_run_failed", { phase: "run" });
@@ -275,6 +283,23 @@ export interface N10Db {
   authUserExists(userId: string): Promise<boolean>;
   canonicalMedia(userId: string, limit: number): Promise<MediaObject[]>;
   cleanupCompleted(retentionDays: number): Promise<number>;
+  /** M4 operator-alert ledger (out-of-band from every deletion transition). */
+  alertsDue(limit: number, leaseSeconds: number): Promise<DueOperatorAlert[]>;
+  recordAlert(requestId: string, lease: string, kind: OperatorAlertKind, alertKey: string, delivered: boolean): Promise<boolean>;
+  alertsPendingCount(): Promise<number>;
+}
+
+export type OperatorAlertKind = "attention" | "escalation";
+export interface DueOperatorAlert {
+  requestId: string;
+  kind: OperatorAlertKind;
+  alertKey: string;
+  status: N10State;
+  errorClass: string | null;
+  attemptCount: number;
+  requestedAt: string;
+  attentionSince: string | null;
+  lease: string;
 }
 
 const asState = (value: unknown): N10State => {
@@ -358,6 +383,37 @@ export function createN10Db(exec: SqlExecutor): N10Db {
       const r = await one("select private.n10_cleanup_completed($1::int) as n", [retentionDays]);
       return Number(r.n);
     },
+    async alertsDue(limit, leaseSeconds) {
+      const rows = await exec(
+        "select o_request_id, o_kind, o_alert_key, o_status, o_error_class, o_attempt_count, o_requested_at::text as o_requested_at, o_attention_since::text as o_attention_since, o_lease from private.n10_alerts_due($1::int, $2::int)",
+        [limit, leaseSeconds],
+      );
+      return rows.map((r) => ({
+        requestId: String(r.o_request_id),
+        kind: r.o_kind === "escalation" ? "escalation" : "attention",
+        alertKey: String(r.o_alert_key),
+        status: asState(r.o_status),
+        errorClass: r.o_error_class === null || r.o_error_class === undefined ? null : String(r.o_error_class),
+        attemptCount: Number(r.o_attempt_count),
+        requestedAt: String(r.o_requested_at),
+        attentionSince: r.o_attention_since === null || r.o_attention_since === undefined ? null : String(r.o_attention_since),
+        lease: String(r.o_lease),
+      }));
+    },
+    async recordAlert(requestId, lease, kind, alertKey, delivered) {
+      const r = await one("select private.n10_record_alert($1::uuid, $2::text, $3::text, $4::text, $5::boolean) as ok", [
+        requestId,
+        lease,
+        kind,
+        alertKey,
+        delivered,
+      ]);
+      return r.ok === true;
+    },
+    async alertsPendingCount() {
+      const r = await one("select private.n10_alerts_pending_count() as n", []);
+      return Number(r.n);
+    },
   };
 }
 
@@ -398,6 +454,128 @@ export function createLoggingAlertHook(log: N10Logger): AlertHook {
       error_class: event.errorClass ?? null,
     });
   };
+}
+
+// ---------------------------------------------------------------------------
+// Operator alerts (N10.4, M4). Delivered out-of-band after the worker's durable-job loop: the
+// database decides which attention rows need an alert (dedup + 24 h escalation), the notifier sends a
+// minimal message, and the outcome is recorded. Deletion state never depends on delivery.
+// ---------------------------------------------------------------------------
+export const ALERT_CLAIM_LIMIT = 10;
+export const ALERT_LEASE_SECONDS = 120;
+const EMAIL_RE = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const ENVIRONMENT_RE = /^[a-z0-9-]{1,32}$/;
+
+export type OperatorAlertConfig =
+  | { ok: true; to: string; from: string; environment: string }
+  | { ok: false; reason: "destination_unconfigured" | "sender_unconfigured" | "provider_unconfigured" };
+
+/**
+ * N10_OPERATOR_ALERT_EMAIL (destination) and N10_OPERATOR_ALERT_FROM (verified sender) are deployment
+ * configuration; no address is ever hardcoded. Missing or malformed values fail closed (nothing is sent,
+ * the pending count is logged, and the ledger keeps every alert pending).
+ */
+export function readOperatorAlertConfig(env: EnvReader, providerAvailable: boolean): OperatorAlertConfig {
+  const to = env("N10_OPERATOR_ALERT_EMAIL")?.trim();
+  const from = env("N10_OPERATOR_ALERT_FROM")?.trim();
+  if (!to || !EMAIL_RE.test(to)) return { ok: false, reason: "destination_unconfigured" };
+  if (!from || !EMAIL_RE.test(from)) return { ok: false, reason: "sender_unconfigured" };
+  if (!providerAvailable) return { ok: false, reason: "provider_unconfigured" };
+  const rawEnv = env("N10_ENVIRONMENT")?.trim();
+  return { ok: true, to, from, environment: rawEnv && ENVIRONMENT_RE.test(rawEnv) ? rawEnv : "unspecified" };
+}
+
+export type OperatorAlertMessage = { to: string; from: string; subject: string; text: string; html: string; idempotencyKey: string };
+export type OperatorNotifier = (message: OperatorAlertMessage) => Promise<{ ok: true } | { ok: false; reason: string }>;
+
+const ALERT_CLASS: Record<string, string> = {
+  auth_attention: "Auth deletion needs operator attention",
+  purge_attention: "Media purge needs operator attention",
+};
+
+const escapeHtml = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/**
+ * The only fields an alert may carry: environment, alert class, opaque request id, status, attempt
+ * count, first-requested time, age / escalation duration, high-level error class, alert time. Never a
+ * user id, e-mail, name, path, journey or health data, token or secret.
+ */
+export function renderOperatorAlert(alert: DueOperatorAlert, environment: string, nowMs: number): Omit<OperatorAlertMessage, "to" | "from"> {
+  const ageHours = Math.max(0, Math.floor((nowMs - Date.parse(alert.requestedAt)) / 3_600_000));
+  const cls = ALERT_CLASS[alert.status] ?? "Account deletion needs operator attention";
+  const escalation = alert.kind === "escalation";
+  const fields: [string, string][] = [
+    ["Environment", environment],
+    ["Alert", escalation ? `${cls} (unresolved after 24 hours)` : cls],
+    ["Deletion request", alert.requestId],
+    ["Status", alert.status],
+    ["Error class", alert.errorClass ?? "none"],
+    ["Attempts", String(alert.attemptCount)],
+    ["Requested at (UTC)", new Date(Date.parse(alert.requestedAt)).toISOString()],
+    ["Age", `${ageHours} h`],
+    ...(escalation && alert.attentionSince ? ([["First alerted at (UTC)", new Date(Date.parse(alert.attentionSince)).toISOString()]] as [string, string][]) : []),
+    ["Alert time (UTC)", new Date(nowMs).toISOString()],
+  ];
+  const subject = `[TSOY ${environment}] ${escalation ? "ESCALATION: " : ""}${cls} — request ${alert.requestId.slice(0, 8)}`;
+  const footer = "Look up the request by its id in private.account_deletion_requests. This message intentionally contains no personal data.";
+  const text = [...fields.map(([k, v]) => `${k}: ${v}`), "", footer].join("\n");
+  const html = `<table>${fields.map(([k, v]) => `<tr><th align="left">${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`).join("")}</table><p>${escapeHtml(footer)}</p>`;
+  const idempotencyKey = `n10-alert-${alert.requestId}-${alert.kind}-${alert.alertKey}`.replace(/[^A-Za-z0-9:_-]/g, "-").slice(0, 200);
+  return { subject, text, html, idempotencyKey };
+}
+
+export type AlertDispatchResult = { sent: number; failed: number; pending: number | null; configured: boolean };
+
+/** Drains due alerts. Never throws into the caller; never touches deletion state. */
+export async function dispatchOperatorAlerts(
+  deps: N10Deps,
+  config: OperatorAlertConfig,
+  notifier: OperatorNotifier | undefined,
+): Promise<AlertDispatchResult> {
+  if (!config.ok || !notifier) {
+    let pending: number | null = null;
+    try {
+      pending = await deps.db.alertsPendingCount();
+    } catch {
+      pending = null;
+    }
+    if (pending !== 0) {
+      deps.log.error("n10_operator_alert_unconfigured", { reason: config.ok ? "provider_unconfigured" : (config as { reason: string }).reason, pending });
+    }
+    return { sent: 0, failed: 0, pending, configured: false };
+  }
+  let sent = 0;
+  let failed = 0;
+  let due: DueOperatorAlert[];
+  try {
+    due = await deps.db.alertsDue(ALERT_CLAIM_LIMIT, ALERT_LEASE_SECONDS);
+  } catch {
+    deps.log.error("n10_operator_alert_claim_failed", { phase: "alerts" });
+    return { sent, failed, pending: null, configured: true };
+  }
+  for (const alert of due) {
+    let delivered = false;
+    try {
+      const rendered = renderOperatorAlert(alert, config.environment, deps.now());
+      const result = await notifier({ to: config.to, from: config.from, ...rendered });
+      delivered = result.ok;
+      if (!result.ok) deps.log.error("n10_operator_alert_delivery_failed", { request_id: alert.requestId, kind: alert.kind, reason: "provider_rejected" });
+    } catch {
+      deps.log.error("n10_operator_alert_delivery_failed", { request_id: alert.requestId, kind: alert.kind, reason: "provider_error" });
+    }
+    try {
+      await deps.db.recordAlert(alert.requestId, alert.lease, alert.kind, alert.alertKey, delivered);
+    } catch {
+      deps.log.error("n10_operator_alert_record_failed", { request_id: alert.requestId, kind: alert.kind });
+    }
+    if (delivered) {
+      sent += 1;
+      deps.log.info("n10_operator_alert_sent", { request_id: alert.requestId, kind: alert.kind, status: alert.status });
+    } else {
+      failed += 1;
+    }
+  }
+  return { sent, failed, pending: null, configured: true };
 }
 
 // ---------------------------------------------------------------------------

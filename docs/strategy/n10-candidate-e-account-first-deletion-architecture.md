@@ -1,462 +1,589 @@
-# N10.2 — Candidate E: account-first deletion with durable media purge
+# N10.2 / N10.2A — Candidate E: account-first deletion with durable media purge
 
 ## 1. Status
 
-**PAPER DESIGN, FROZEN FOR N10.3 SUBJECT TO OWNER DECISIONS (§20). NOT IMPLEMENTED.** Written 9 October 2026 by Claude Code (implementation owner).
+**N10.2A — IMPLEMENTATION CONTRACT FROZEN, EXCEPT TWO HOLD ITEMS (§24.2). NOT IMPLEMENTED.**
+
+| Stage | Date | Commit | What it was |
+|---|---|---|---|
+| N10.2 | 9 October 2026 | `d4db73a5` | paper architecture, accepted in principle by the owner |
+| N10.2A | 9 October 2026 | this revision | owner decisions D1–D15 resolved in §24; the strict COMPLETED predicate and invariants E1–E25 integrated throughout |
+
+Written by Claude Code (implementation owner). Where this revision differs from the N10.2 text, this revision governs; the N10.2 text remains in Git history.
 
 - No migration, runtime code, Storage policy, Edge Function or cron job was created or changed. No hosted project was used, and production was not accessed.
 - N10 = OPEN. N10.3 = NOT STARTED.
 - The RI/account-deletion database gate stays CLOSED / PASS (G3); this design does not reopen it.
 - 41B.1B = NOT STARTED / NOT AUTHORISED.
+- **D14 (human privacy/legal review) is a release gate for production activation.** It does not block local implementation or disposable rehearsal.
+- **The missing operator-alert destination is a PRODUCTION ACTIVATION BLOCKER (D5).**
 
-Status-consistency check (§0 of the N10.2 brief): one active roadmap item still described the original trigger-order gate as open ("no row may be bound before this closes"). It was marked SUPERSEDED / CLOSED BY G3 in a separate documentation-only commit (`9d1dd974`). No other current line contradicted the G3 / N10.1 state.
+Status-consistency check (N10.2 §0): the original trigger-order gate item in `roadmap.md` was marked SUPERSEDED / CLOSED BY G3 (`9d1dd974`).
 
 ## 2. Source evidence
 
-Claim classes used below: **OFFICIAL DOCS**, **N10.1 RUNTIME-PROVEN** (that hosted environment only), **SOURCE-PROVEN**, **ARCHITECTURAL INFERENCE**, **REQUIRES FUTURE REHEARSAL**.
+Claim classes: **OFFICIAL DOCS**, **N10.1 RUNTIME-PROVEN** (that hosted environment only), **SOURCE-PROVEN**, **ARCHITECTURAL INFERENCE**, **REQUIRES N10.3 VERIFICATION / REHEARSAL**.
 
 | Source | Use |
 |---|---|
-| G3 evidence `docs/strategy/evidence/41b-account-deletion-g3/` | Hard Auth deletion removes the whole account graph atomically, independent of trigger order. One GoTrue `DELETE` on `auth.users`, no GoTrue DML on `public` (runtime-proven on that project) |
-| N10.1 evidence `docs/strategy/evidence/n10-r1-storage-auth-semantics/` | R1–R4 below |
-| N10.0 paper review (report of 9 October 2026) | Candidates A–D; current implementation defects |
-| Current code | `supabase/functions/delete-account/index.ts`, `src/pages/AccountSettings.tsx` (`deleteAccount`), `src/components/myweek/SlotPhotoMemory.tsx`, `src/hooks/useWeekMedia.ts`, `src/lib/weekMedia.ts` (`buildMediaStoragePath`), `src/lib/firstYearMemories.ts`, `src/lib/firstYearMemoryPhoto.ts` (`buildMemoryPhotoPath`, `isMemoryPhotoPathOwned`), migrations `20260420185521` (weekly-photos bucket and policies), `20260813213029` (first-year-memories policies), `20260720110000` (internal-table pattern: `email_delivery_claims`), `20260421114636` (pg_cron/pg_net/Vault email worker; the cron job and Vault secret themselves are out-of-band, per 41B.0-R) |
-| Supabase guidance (fetched 9 October 2026) | Database functions (prefer SECURITY INVOKER; definer functions need `search_path = ''`, restricted EXECUTE); RLS (initPlan wrapping; definer functions never in exposed schemas; a secret key bypasses RLS only when no user token is sent); scheduling Edge Functions (pg_cron + pg_net + Vault); sessions (access-token expiry configured in Auth > Sessions; default and recommended maximum 1 hour); Edge Function default secrets (`SUPABASE_DB_URL`, secret keys); Storage (delete limit 1,000 per `remove`; deleting rows by SQL orphans objects) |
+| G3 evidence `docs/strategy/evidence/41b-account-deletion-g3/` | Hard Auth deletion removes the whole account graph atomically, independent of trigger order. One GoTrue `DELETE` on `auth.users`, no GoTrue DML on `public`. All 28 `public` tables with `user_id` carry a direct FK to `auth.users` (`03e-catalogue-validated`, checked 28/28) |
+| N10.1 evidence `docs/strategy/evidence/n10-r1-storage-auth-semantics/` | §3 |
+| N10.0 paper review (9 October 2026) | Candidates A–D; current implementation defects |
+| Current code (re-read at N10.2A) | `supabase/functions/delete-account/index.ts`; `src/pages/AccountSettings.tsx` `deleteAccount`; uploads with standard `.upload()` in `SlotPhotoMemory.tsx`, `useWeekMedia.ts` (2 calls) and `firstYearMemories.ts`; signed URLs in §8.3; path builders `weekMedia.ts buildMediaStoragePath`, `firstYearMemoryPhoto.ts buildMemoryPhotoPath` / `isMemoryPhotoPathOwned`, weekly photo `{userId}/{week}.{ext}`; bucket and policies in migrations `20260420185521` and `20260813213029`; internal-table pattern `20260720110000` (`email_delivery_claims`); email worker `20260421114636` (the cron job and Vault secret are out-of-band, per 41B.0-R) |
+| Supabase guidance (fetched 9 October 2026) | Database functions (prefer SECURITY INVOKER; definer functions need `search_path = ''` and restricted EXECUTE); RLS (initPlan wrapping; definer functions never in exposed schemas; a secret key bypasses RLS only without a user token); scheduling Edge Functions (pg_cron + pg_net + Vault); sessions (JWT expiry configured in Auth > Sessions; default and recommended maximum 1 hour); Edge Function default secrets; Storage (`remove` ≤ 1,000 objects; deleting rows by SQL orphans objects) |
+| Alerting | no operator-alert channel exists in `supabase/functions/` or `package.json` (checked at N10.2A) |
 
 ## 3. Runtime facts (N10.1, `gbhwpzofnswlryqjoumw`, 9 October 2026)
 
-1. Auth hard deletion **succeeded** while the user owned a Storage object uploaded with their own token (N10.1 RUNTIME-PROVEN). The official Supabase guide conflicted with this observed behaviour.
-2. The object **remained**, byte-identical; Auth deletion did no Storage cleanup (N10.1 RUNTIME-PROVEN).
-3. `owner` and `owner_id` **kept the deleted id** (N10.1 RUNTIME-PROVEN).
-4. The deleted user's still-unexpired access token **was accepted by Storage**: an upload created a new object owned by the deleted id. Auth rejected the same token (`user_not_found`) and the refresh token was invalid (N10.1 RUNTIME-PROVEN).
+1. Auth hard deletion **succeeded** while the user owned a Storage object uploaded with their own token. The official Supabase guide conflicted with this observed behaviour.
+2. The object **remained**, byte-identical; Auth deletion did no Storage cleanup.
+3. `owner` and `owner_id` **kept the deleted id**.
+4. The deleted user's unexpired access token **was accepted by Storage**: an upload created a new object owned by the deleted id. Auth rejected the token (`user_not_found`), and the refresh token was invalid.
 
-Generalisation limit: facts 1–4 are proven for that project only. Production behaviour **REQUIRES FUTURE REHEARSAL** on a fresh project of the same platform generation, and production itself is never tested.
+All four are N10.1 RUNTIME-PROVEN for that project only. Production behaviour REQUIRES N10.3 REHEARSAL on a fresh project; production itself is never tested.
 
 ## 4. Problem statement
 
-The current function removes Storage first and calls `auth.admin.deleteUser` second. Any failure after the Storage step leaves media permanently destroyed while the account and its database graph survive (N10).
+Today's function removes Storage first and calls `auth.admin.deleteUser` second. Any failure after the Storage step leaves media destroyed while the account survives (N10).
 
-The current function also:
+It also:
 
-- lists at most 1,000 entries per folder with no paging, and stops at a fixed depth (`depth > 3`), so extra objects are silently left behind;
+- lists at most 1,000 entries per folder without paging, and stops at a fixed depth;
 - removes each bucket in one `remove` call, which fails above 1,000 objects;
-- returns "Nothing else was deleted" even after the first bucket was removed;
-- keeps no durable state and has no retry path;
+- can say "Nothing else was deleted" after the first bucket was removed;
+- keeps no durable state;
 - does not block uploads during deletion.
 
-N10.1 adds a security finding: Storage folder rules (`auth.uid()::text = foldername[1]`) accept a deleted user's live token.
+N10.1 adds that Storage folder rules accept a deleted user's live token.
 
-## 5. Selected architecture
+## 5. Selected architecture (core principle, preserved)
 
 ```
-REQUEST (durable row committed)  ── freezes user media access (Storage RLS)
-   ↓
-HARD AUTH DELETE (GoTrue)  ── database graph cascades atomically (G3)
-   ↓  confirmed: auth.users row absent
-IMMEDIATE MEDIA PURGE  ── Storage API removes, batches ≤ 1,000, re-query until empty
-   ↓  retry until empty (worker)
-FINAL SWEEP after auth_deleted_at + token window + margin
-   ↓  empty
-COMPLETED
+ACCOUNT DELETION REQUEST (durable row committed)
+  → MEDIA ACCESS FREEZE (Storage RLS: all four commands)
+  → HARD AUTH DELETE (GoTrue; graph cascades atomically per G3)
+  → CONFIRM AUTH USER GONE (database check, not HTTP status)
+  → IMMEDIATE MEDIA PURGE (Storage API, batches ≤ 1,000)
+  → DURABLE RETRIES (worker)
+  → FINAL POST-TOKEN-WINDOW SWEEP (+ anomaly scan)
+  → COMPLETE (strict predicate, §12.3) → ANONYMISE
 ```
 
-**Core invariant (N10-E1):** no user media is removed by this workflow until the Auth/database account deletion is confirmed committed. Confirmation means the `auth.users` row is absent, verified directly in the database, not inferred from an HTTP status.
+**Core invariant (N10-E1):** no user media is permanently removed by this workflow before the Auth/database account deletion is confirmed committed. Candidate B is not reopened.
 
 ## 6. State machine
 
-Retry, "in progress" and backoff are carried by lease and attempt columns, not by extra states. That keeps the transition graph small while covering every case in the brief: `auth_deleting`/`auth_retry` are `requested` with a lease or backoff; `purge_pending`/`purging`/`purge_retry` are `auth_deleted` with a lease or backoff; `final_sweep` is `awaiting_final_sweep` under a lease.
+Retries, in-progress work and backoff are carried by lease and attempt columns, not by extra states.
 
-| State | Entered by | Required fields | Next valid states | Retry | Auth user exists | Media may exist | User media access | New request allowed | After a crash |
-|---|---|---|---|---|---|---|---|---|---|
-| `requested` | `delete-account` only (first transaction) | `user_id`, `requested_at`, `next_attempt_at` | `auth_deleted`, `requested` (retry), `auth_attention`, `cancelled` | automatic, with backoff, for transient Auth errors | yes (until delete commits) | yes, untouched | **denied** (all commands) | no: the existing row is returned | lease expires; worker re-checks `auth.users` then continues |
-| `auth_deleted` | function or worker, **only after** confirming the `auth.users` row is absent | + `auth_deleted_at`, `final_sweep_after` | `awaiting_final_sweep`, `auth_deleted` (retry), `purge_attention` | automatic purge retries | **no** | yes, being purged | denied (no Auth user) | n/a (account gone) | worker resumes purge (idempotent) |
-| `awaiting_final_sweep` | function or worker after a purge pass verifies 0 objects | + `purge_empty_at` | `completed`, `awaiting_final_sweep` (retry), `purge_attention` | automatic | no | none expected | denied | n/a | worker re-runs the sweep when due |
-| `completed` | worker only, when `now() ≥ final_sweep_after` and a sweep verifies 0 objects | + `completed_at` | none (terminal; later anonymisation per §14) | none | no | none | denied | n/a | n/a |
-| `auth_attention` | function or worker, on a permanent Auth error or exhausted transient retries | `last_error_class` | `requested` (operator retry), `cancelled` (operator) | none automatic; alert raised | yes | yes, **untouched** | denied by default (owner decision D7) | no | stays; operator acts |
-| `purge_attention` | worker, after the purge escalation threshold | `last_error_class` | `auth_deleted` (operator re-arm) | **continues hourly** while alerting (owner decision D4) | no | some may remain | denied | n/a | worker keeps retrying |
-| `cancelled` | operator only (owner decision D7) | — | none (terminal) | none | yes | yes, untouched | **restored** (the helper ignores `cancelled`) | yes | n/a |
+| State | Entered by | Next valid | Retry | Auth user | Media | User media access | New request |
+|---|---|---|---|---|---|---|---|
+| `requested` | `delete-account` (first transaction) only | `auth_deleted`, `requested`, `auth_attention`, `cancelled`* | automatic, D4 schedule | exists | untouched | **denied** | no (existing row returned) |
+| `auth_deleted` | function or worker, only after the database confirms the `auth.users` row is absent | `awaiting_final_sweep`, `auth_deleted`, `purge_attention` | automatic | absent | being purged | denied | n/a |
+| `awaiting_final_sweep` | function or worker, after a pass verifies 0 canonical objects **and** 0 anomalies | `completed`, `awaiting_final_sweep`, `purge_attention` | automatic | absent | none expected | denied | n/a |
+| `completed` | worker only, under the strict predicate (§12.3) | none (row is anonymised, then deleted after retention, §7.3) | — | absent | none | denied | n/a |
+| `auth_attention` | permanent Auth error, or an unresolved Auth outcome after escalation | `requested` (operator retry), `cancelled`* | none automatic; alert | exists | **byte-intact** | **denied** (D7) | no |
+| `purge_attention` | purge failing beyond 24 h, **or any OWNER_ID_PATH_ANOMALY** | `auth_deleted` (operator re-arm after resolution) | continues automatically at a bounded cadence while alerting | absent | some may remain | denied | n/a |
+| `cancelled` | operator only, explicitly (D7) | none | — | exists | untouched | restored | yes |
 
-**Invalid transitions,** rejected by a transition-guard trigger and by worker preconditions:
+\* **Cancellation boundary (D7):** allowed only when all three hold:
 
-- any state back to `requested` except from `auth_attention`;
-- `auth_deleted` / `awaiting_final_sweep` / `completed` / `purge_attention` to `cancelled`, `requested` or `auth_attention` (the account is already gone);
+1. the Auth user is confirmed to still exist;
+2. Auth deletion is confirmed not to have committed;
+3. no object was ever purged under this request (`objects_removed = 0`; the row never reached `auth_deleted`).
+
+Cancellation is never automatic, and never a consequence of exhausted retries.
+
+**Invalid transitions,** rejected by the guard trigger (§7.4) and by worker preconditions:
+
+- any return to `requested` except from `auth_attention`;
+- from any post-Auth state (`auth_deleted`, `awaiting_final_sweep`, `completed`, `purge_attention`) to `cancelled`, `requested` or `auth_attention`;
 - `completed` to anything;
 - `requested` straight to `awaiting_final_sweep` or `completed`;
-- any Storage removal while the row is in `requested`, `auth_attention` or `cancelled`.
-
-The last rule is a worker precondition, re-checked against `auth.users` immediately before each purge pass.
+- any Storage removal while the row is in `requested`, `auth_attention` or `cancelled`. The worker re-confirms the `auth.users` row is absent immediately before each purge pass.
 
 ## 7. Schema (paper only)
 
-**Placement.** A new non-exposed schema `private`:
+### 7.1 Placement and access
 
-- The Data API exposes `public` and `graphql_public`; `private` is not exposed, so a later mis-grant cannot turn the table into a user-reachable API surface.
-- TSOY's existing internal pattern (a `public` table with RLS and REVOKE, plus SECURITY DEFINER RPCs with `search_path = public`) predates the current guidance. N10 does not copy it.
-- Both Edge Functions reach the table through `SUPABASE_DB_URL` (OFFICIAL DOCS: a default secret). No RPC is exposed.
+- **Schema:** a new non-exposed schema `private`. The Data API exposes `public` and `graphql_public`, so a mis-grant cannot turn the table into a user-reachable API.
+- **Not copied:** TSOY's older internal pattern (SECURITY DEFINER RPCs in `public` with `search_path = public`). It predates current guidance.
+- **Runtime access (D9):**
+  - Both Edge Functions use a **dedicated least-privilege login role**, `account_deletion_worker`. Its connection string is an Edge Function secret (for example `N10_DB_URL`); the password is set out-of-band and never in Git.
+  - They do **not** use the unrestricted `SUPABASE_DB_URL` / `postgres` credentials for normal work.
+  - Verifying that a custom login role can connect from Edge Functions through the pooler is REQUIRES N10.3 VERIFICATION.
 
-**`private.account_deletion_requests`** (minimum set):
+### 7.2 `private.account_deletion_requests`
 
-| Column | Type / rule | Why |
+| Column | Rule | Why |
 |---|---|---|
-| `id` | uuid PK, `gen_random_uuid()` | request identity; returned to the caller as an opaque id |
-| `user_id` | uuid, **no FK**; NOT NULL until anonymised | must survive the `auth.users` deletion to locate media (N10.1 fact 3) |
+| `id` | uuid PK | opaque request id |
+| `user_id` | uuid, **no FK**, NOT NULL until anonymised | survives `auth.users` deletion to locate media (N10-E16) |
 | `status` | text, CHECK in the 7 states | state machine |
-| `requested_at` | timestamptz NOT NULL default `now()` | audit and escalation clock |
-| `auth_deleted_at` | timestamptz | proof of commit; starts the token window |
-| `final_sweep_after` | timestamptz, CHECK ≥ `auth_deleted_at` + window + margin | prevents an early sweep (N10-E10) |
+| `requested_at` | timestamptz NOT NULL | audit; escalation clock |
+| `auth_deleted_at` | timestamptz | commit proof; anchor for the sweep window (§12.2) |
+| `final_sweep_after` | timestamptz, CHECK per §12.2 | prevents an early sweep |
 | `purge_empty_at` | timestamptz | first verified-empty pass |
 | `completed_at` | timestamptz | completion proof |
+| `anonymised_at` | timestamptz | when `user_id` was nulled |
 | `attempt_count` | int NOT NULL default 0, reset on each state change | backoff and escalation |
-| `next_attempt_at` | timestamptz NOT NULL | retry scheduling |
-| `lease_until` | timestamptz | crash-safe claim (§11) |
-| `last_error_class` | text, CHECK in a fixed list (`auth_transient`, `auth_permanent`, `auth_unknown_outcome`, `storage_list`, `storage_remove`, `storage_partial`, `db`, `timeout`) | observability without free text or PII |
-| `objects_removed` | int NOT NULL default 0 | completion evidence |
-| `sweep_objects_removed` | int NOT NULL default 0 | shows whether the final sweep caught anything |
-| `anomaly_count` | int NOT NULL default 0 | objects with `owner_id` = user outside the canonical prefix (§10) |
+| `next_attempt_at` | timestamptz NOT NULL | scheduling |
+| `lease_until` | timestamptz | crash-safe claim |
+| `last_error_class` | text, CHECK in a fixed list (`auth_transient`, `auth_permanent`, `auth_unknown_outcome`, `storage_list`, `storage_remove`, `storage_partial`, `owner_id_path_anomaly`, `db`, `timeout`, `config`) | observability without free text or PII |
+| `objects_removed` | int NOT NULL default 0 | evidence; the cancellation boundary |
+| `sweep_objects_removed` | int NOT NULL default 0 | a non-zero value signals a policy regression |
+| `anomaly_count` | int NOT NULL default 0 | current unresolved OWNER_ID_PATH_ANOMALIES (counts only; **no filenames stored**) |
 | `updated_at` | timestamptz NOT NULL | operations |
 
-Per-bucket found/removed counters, `auth_delete_started_at` and separate auth/purge attempt counters were considered and rejected as unnecessary: a single counter per state, plus log lines per bucket, suffices.
+- **Consistency CHECKs:**
+  - post-Auth states ⇒ `auth_deleted_at` and `final_sweep_after` NOT NULL;
+  - `completed` ⇒ `purge_empty_at`, `completed_at` NOT NULL and `anomaly_count = 0`;
+  - `user_id` IS NULL ⇔ `anonymised_at` IS NOT NULL;
+  - `user_id` IS NULL ⇒ `status = 'completed'`.
+- **Indexes:** a unique partial index on `(user_id)` WHERE `status NOT IN ('completed','cancelled')`; `(status, next_attempt_at)`.
+- **Security:** RLS on with no policies. `REVOKE ALL … FROM PUBLIC, anon, authenticated`. Table privileges for `account_deletion_worker` only: SELECT, INSERT, UPDATE, plus DELETE for retention cleanup of anonymised rows only (§7.3). An even narrower function-only surface may replace the direct grants at N10.3 if it creates no unsafe definer surface (D9).
 
-Consistency CHECKs:
+### 7.3 UUID and row retention (D2/D3)
 
-- `status ∈ {auth_deleted, awaiting_final_sweep, completed, purge_attention}` ⇒ `auth_deleted_at` and `final_sweep_after` NOT NULL;
-- `completed` ⇒ `purge_empty_at` and `completed_at` NOT NULL;
-- `user_id` IS NULL only when `completed` (anonymised).
+- `user_id` stays while the workflow is active, through the final sweep and any anomaly resolution.
+- On `completed` (same transaction): set `user_id = NULL` and `anonymised_at = now()`. **No hash of the UUID is retained by default.** Only non-identifying operational fields remain: status, timestamps, counts, error class.
+- The anonymised row is deleted after a retention period, held as a deployment parameter (`N10_COMPLETED_ROW_RETENTION_DAYS`) so it can change without redesign.
+- **Proposed value: 30 days. PROPOSED / REQUIRES HUMAN PRIVACY-LEGAL APPROVAL BEFORE PRODUCTION (D14).**
 
-Indexes:
+### 7.4 Functions (definer surfaces minimised)
 
-- unique partial index on `(user_id)` WHERE `status NOT IN ('completed','cancelled')`: one active workflow per account;
-- `(status, next_attempt_at)` for claiming.
+| Function | Kind | Callers (EXECUTE) | Purpose |
+|---|---|---|---|
+| `private.account_media_access_allowed()` | SECURITY DEFINER, owner `postgres`, `search_path = ''`, STABLE, no args | `authenticated` only (+ USAGE on `private`) | the Storage RLS guard (§8) |
+| `private.auth_user_exists(p_user uuid)` | SECURITY DEFINER, same hardening | `account_deletion_worker` only | Auth commit confirmation without granting the role any access to `auth.users` |
+| `private.account_media_canonical(p_user uuid, p_limit int)` | SECURITY DEFINER, same hardening; returns `(bucket_id, name)` | `account_deletion_worker` only | read-only discovery (§10) without granting any `storage.objects` privilege |
+| `private.account_media_anomaly_count(p_user uuid)` | SECURITY DEFINER, same hardening; returns a count | `account_deletion_worker` only | anomaly scan (§10.3) |
+| `private.account_deletion_requests_guard()` | SECURITY INVOKER trigger | (trigger) | rejects invalid transitions; stamps `updated_at` |
 
-Grants: RLS on with no policies; `REVOKE ALL … FROM PUBLIC, anon, authenticated`; `USAGE ON SCHEMA private` granted only to `authenticated` (needed to call the helper in §8; gives no table access). The functions connect as the database owner role through `SUPABASE_DB_URL`. A dedicated least-privilege login role is an owner option (D9).
+**Why the definer helpers:**
 
-**Transition guard.** `private.account_deletion_requests_guard()` is a SECURITY INVOKER trigger function (BEFORE UPDATE). It rejects invalid transitions (§6) and stamps `updated_at`.
+- The worker role must not receive table grants in the Supabase-managed `auth` and `storage` schemas.
+- Whether such grants are even possible for a custom role is uncertain (REQUIRES N10.3 VERIFICATION).
+- `postgres` already reads both: it did so in G3 and N10.1.
 
-## 8. Storage authorisation (stale-token hard requirement)
+Each helper is read-only, takes only the target UUID (worker callers are trusted backend), returns minimal data, and lives in the non-exposed schema with PUBLIC execute revoked.
 
-**Helper `private.account_media_access_allowed()`** returns a boolean.
+## 8. Storage authorisation
 
-- SECURITY DEFINER, owned by `postgres`, `SET search_path = ''`, STABLE, every name schema-qualified, no arguments: the caller is derived from `auth.uid()` internally, so no caller-supplied UUID is trusted.
-- Body, conceptually:
-  - `auth.uid() IS NOT NULL`
-  - AND `EXISTS (SELECT 1 FROM auth.users u WHERE u.id = auth.uid() AND u.deleted_at IS NULL)`, the **live-account check**
-  - AND `NOT EXISTS (SELECT 1 FROM private.account_deletion_requests r WHERE r.user_id = auth.uid() AND r.status <> 'cancelled')`, the **pending-deletion check**
-- No mutation, no rows returned, no data beyond one boolean.
-- `REVOKE EXECUTE … FROM PUBLIC`; `GRANT EXECUTE … TO authenticated` only, because policy evaluation runs as the caller.
-- **Why SECURITY INVOKER cannot work:** `authenticated` must not gain SELECT on `auth.users` or on the deletion table, and both reads are required. Definer is therefore the least-privileged correct form, kept in a non-exposed schema per the guidance. It must be checked with the security advisors at N10.3.
+### 8.1 Guard helper
 
-**Policies.** Replace the 8 existing media policies (4 per bucket) with policies `TO authenticated` of the form:
+`private.account_media_access_allowed()` returns true only when **all** hold:
+
+- `auth.uid() IS NOT NULL`;
+- the caller's `auth.users` row exists with `deleted_at IS NULL` (the **live-account check**);
+- no request row for the caller has `status <> 'cancelled'` (the **pending-deletion check**).
+
+The caller is derived internally; no argument is accepted. The helper does not read `storage.objects`, so there is **no RLS recursion**. The requests table is owned by the definer, which bypasses its RLS.
+
+**Why SECURITY INVOKER cannot work:** `authenticated` must never read `auth.users` or the requests table.
+
+### 8.2 Policies
+
+Replace the 8 existing media policies (4 per bucket) with `TO authenticated` policies:
 
 `bucket_id = '<bucket>' AND auth.uid()::text = (storage.foldername(name))[1] AND (SELECT private.account_media_access_allowed())`
 
-The scalar subquery gives initPlan caching (OFFICIAL DOCS).
+- **INSERT, UPDATE (with an identical WITH CHECK), DELETE and SELECT are all guarded.** A stale token after deletion, or any token while deletion is pending, cannot write, change, delete, list, read or sign media. This also fixes today's missing WITH CHECK on the `weekly-photos` UPDATE policy.
+- Service-role purge requests carry no user token, so they bypass RLS (OFFICIAL DOCS). The worker's Storage and Auth clients must never carry a user session (N10-E17).
 
-- **INSERT:** guarded. Closes N10.1 fact 4.
-- **UPDATE:** guarded, with the same WITH CHECK. This also fixes the missing WITH CHECK on the current `weekly-photos` UPDATE policy.
-- **DELETE:** guarded. A user must not change media while a deletion is pending; this preserves N10-E1 and E8 if Auth deletion then fails.
-- **SELECT:** guarded. **Decision: a stale token must NOT read private pregnancy or baby media after account deletion, or while deletion is pending.** The data is sensitive, and the user has asked for it to be gone.
+### 8.3 Signed URLs and caches (D15)
 
-Residual, by design:
+**Inventory of the current code** (read at N10.2A):
 
-- Signed URLs issued **before** the freeze are bearer capabilities that keep working until their TTL (the app signs for 3,600 s) or until the object is purged. The immediate purge closes them in practice. This is recorded, and the rehearsal checks it.
+| Location | Mechanism | Bucket | Expiry |
+|---|---|---|---|
+| `SlotPhotoMemory.tsx:91`, `:164` | `createSignedUrl` | `weekly-photos` | 3,600 s |
+| `useWeekMedia.ts:99`, `:198`, `:288` | `createSignedUrl` | `weekly-photos` | `SIGN_TTL_SECONDS` = 3,600 s |
+| `firstYearMemories.ts:278` (`signMemoryPhotoUrl`) | `createSignedUrl` | `first-year-memories` | `MEMORY_PHOTO_SIGN_TTL_SECONDS` = 3,600 s |
+| `MyPregnancyChapter.tsx:168` | `createSignedUrl` | `weekly-photos` | `SIGNED_URL_SECONDS` = 3,600 s |
+| `KeptChapter.tsx:197`, `:211` | `createSignedUrl` | `weekly-photos` | 3,600 s |
+| `MyJourney.tsx:180` | `createSignedUrls` (batch) | `weekly-photos` | 3,600 s |
 
-Unaffected:
+- **Caching:** URLs are held only in component state, and `firstYearMemories.ts` documents them as never stored, exported or placed in a route. There is no persistent cache in the code.
+- **Not present:** no `createSignedUploadUrl` / `uploadToSignedUrl`, no resumable/TUS upload, no `getPublicUrl` on these buckets. All uploads are standard `.upload()`.
 
-- Service-role purge requests send no user token, so they bypass RLS (OFFICIAL DOCS). The worker's Storage client must never carry a user session (N10-E12).
+**Frozen policy:**
 
-## 9. Deletion flow (synchronous part, `delete-account`)
+- **A.** Once deletion is pending, no new signed media URL is issued for that account. Signing goes through the user's token and is governed by the SELECT policy. That this denies signing is REQUIRES N10.3 REHEARSAL.
+- **B.** Changing RLS does not revoke an already-issued signed URL. **No claim is made that RLS revokes existing signed URLs.**
+- **C.** The immediate purge after confirmed Auth deletion is the primary way to end access through existing URLs: deleting the object is what terminates access to the media.
+- **D.** If Auth deletion fails, existing URLs keep working until they expire (≤ 3,600 s today). This is an **acknowledged residual condition**, because media must not be destroyed before Auth deletion commits.
+- **E.** Any CDN or browser-cache propagation after object deletion must be documented and, where possible, rehearsed (REQUIRES N10.3 REHEARSAL).
+- **F.** COMPLETED never depends on signed-URL expiry. It depends on object removal and the final sweep (§12.3).
 
-1. Keep today's checks: method `POST`, `{confirmed: true}`, Bearer token. Resolve the caller with `auth.getUser()` using the caller's token. A `user_not_found` result returns **410 `already_deleted`** and creates nothing.
-2. **One database transaction (the freeze):**
-   - `INSERT` a `requested` row with `lease_until = now() + 2 min`, `ON CONFLICT` on the unique active index `DO NOTHING`;
-   - then `SELECT … FOR UPDATE` the active row.
-   - If another holder's lease is active, return **202** with its state.
-   - Commit.
-   - From this commit, every new Storage operation by this user is denied (READ COMMITTED: a later statement sees the row).
-3. **Auth delete** with an admin client (secret key, no user session): `auth.admin.deleteUser(userId)`, hard delete.
-4. **Confirm by database query, never by HTTP status alone:** `SELECT 1 FROM auth.users WHERE id = $1`.
+## 9. Deletion flow (`delete-account`, synchronous part)
 
-   | Auth response | Database check | Outcome |
-   |---|---|---|
-   | 2xx or 404 | row absent | → `auth_deleted` (`auth_deleted_at = now()`, `final_sweep_after` per §12) |
-   | 2xx or 404 | row present (unexpected) | → `auth_attention` (`auth_unknown_outcome`) |
-   | 5xx or timeout | row absent | → `auth_deleted` (the delete committed despite the error) |
-   | 5xx or timeout | row present | stay `requested`, `attempt_count += 1`, `next_attempt_at` = backoff, release the lease → **202 `deletion_in_progress`** |
-   | other 4xx or unexpected error | row present | → `auth_attention` (`auth_permanent`) → **500 `deletion_failed_nothing_removed`** |
+1. Keep today's checks: `POST`, `{confirmed: true}`, Bearer token. Resolve the caller with `auth.getUser()` using their token. `user_not_found` → **410** (no row created).
+2. **Freeze transaction** (as `account_deletion_worker`):
+   - `INSERT … ON CONFLICT` on the unique active index `DO NOTHING`;
+   - `SELECT … FOR UPDATE` the active row;
+   - take a 2-minute lease, or return **202** if another holder's lease is active;
+   - commit. From this commit every new Storage operation by the user is denied.
+3. **Auth hard delete** with an admin client (secret key, no user session).
+4. **Confirm with `private.auth_user_exists`**, never by HTTP status alone:
+   - absent → `auth_deleted` (`auth_deleted_at`, `final_sweep_after` per §12.2);
+   - present after a 5xx or timeout → stay `requested` with D4 backoff;
+   - present after a permanent error → `auth_attention`.
+5. If `auth_deleted`: run the **immediate purge** under a hard **~20 s budget** (D1). Correctness never depends on finishing within the request; unfinished work belongs to the worker.
+6. Respond per §9.1, then release the lease.
 
-5. If `auth_deleted`: run the **immediate purge** (§10) within a time budget (proposed 20 s). If it verifies empty, move to `awaiting_final_sweep`.
-6. Respond:
-   - **200 `account_deleted`**, with `media: "removed"` or `"removal_in_progress"`.
-   - Release the lease. The worker owns everything that remains.
+### 9.1 Response contract (D6)
 
-**Synchronous vs 202-only.** Synchronous is chosen. G3 measured Auth deletion at about 0.2 s, so the user gets a truthful immediate answer in the common case. Correctness lives in the durable row, not in the HTTP request: a crash at any step leaves a row the worker completes. A pure "202 then worker" design adds latency and uncertainty for no safety gain.
+**HOLD H2 applies (§24.2).**
 
-**Response contract** (replaces today's misleading messages):
-
-| Code | Meaning |
+| Code | Frozen meaning |
 |---|---|
-| 200 `account_deleted` | the account is gone; media removed or being removed |
-| 202 `deletion_in_progress` | request recorded; account not yet deleted; retrying automatically; media frozen and untouched |
-| 410 `already_deleted` | the caller's account no longer exists |
-| 500 `deletion_failed_nothing_removed` | the account still exists; no media was removed; support is alerted |
+| 202 | durable request accepted; the workflow continues (covers "Auth deletion retrying" and "account deleted, purge or sweep continuing") |
+| 410 | account already deleted, or an idempotent terminal situation where applicable |
+| 5xx | the request could not be safely accepted or persisted |
+| 200 | **HOLD H2:** the owner's wording "fully completed during the request" cannot occur under the strict COMPLETED predicate |
 
-Never claim "nothing was deleted" unless the database confirms the account and media are untouched.
+- Never claim "nothing was deleted" unless it is structurally true. It is true only for a 5xx before the freeze commits, and for a row still in `requested` or `auth_attention`.
+- **After a durable request is accepted, the client signs out locally, clears cached user state and redirects.** Final wording is a later UX decision.
+- Sign-out is UX only; the boundary is RLS plus the deleted Auth user.
 
-**App behaviour** (`AccountSettings`, design only):
+### 9.2 Synchronous vs 202-only
 
-- On 200, 202 or 410: sign out locally, clear cached user and query state, redirect, and show the truthful message.
-- On 500: show the failure message.
-- Disable the delete button while a request is in flight. A repeated click is idempotent server-side anyway.
-- Client sign-out is UX only; the security boundary is Storage RLS plus the deleted Auth user.
+Synchronous Auth deletion plus a best-effort immediate purge is retained. G3 measured Auth deletion at about 0.2 s, and the durable row, not the request lifetime, owns correctness.
 
-## 10. Media enumeration and purge
+## 10. Media discovery and purge
 
-**Discovery: approach B.** Read-only SQL on `storage.objects` metadata, through the worker's database connection. Removal happens only through the Storage API.
+### 10.1 Discovery
 
-Rejected: approach A (recursive Storage `list` with offset paging). It needs folder recursion, and offset paging skips entries while removals shrink the set. The flat metadata query has no depth concept and no 1,000 ceiling.
+Discovery is a read-only metadata query through `private.account_media_canonical` (§7.4). Removal goes only through the Storage API.
 
-Reading Storage metadata is not documented as forbidden. Writing or deleting rows is (it orphans objects). Status of the read: ARCHITECTURAL INFERENCE, exercised in N10.1.
+- Recursive Storage `list` with offset paging is rejected: it needs recursion, and offsets skip entries while removals shrink the set.
+- Reading Storage metadata is not documented as forbidden; mutating it is. The status of reading is ARCHITECTURAL INFERENCE, exercised in N10.1.
 
-**Canonical ownership rule.** An object belongs to the deleted account if and only if:
+### 10.2 Ownership rule (D12)
 
-- `bucket_id IN ('weekly-photos','first-year-memories')`
-- AND `starts_with(name, user_id::text || '/')`
+| Case | Rule | Action |
+|---|---|---|
+| **A. Canonical** | bucket ∈ {`weekly-photos`, `first-year-memories`} **and** the first path segment **exactly equals** the deleted UUID: `split_part(name, '/', 1) = user_id::text` and `strpos(name, '/') > 0`. No substring or `LIKE` matching. For index use, the query may add the range `name >= uuid || '/' AND name < uuid || '0'`, but the exact segment equality is the authority | **auto-purge**, regardless of `owner_id` (including NULL and service-role uploads) |
+| **B. OWNER_ID_PATH_ANOMALY** | same two buckets, `owner_id = user_id::text`, first segment ≠ UUID | **never auto-deleted**; counted in `anomaly_count`; `last_error_class = owner_id_path_anomaly`; → `purge_attention`; alert; **blocks COMPLETED**; resolved only through the supported Storage API after investigation |
+| **C. Neither** | — | **never touched** |
 
-Every TSOY upload path starts with the owner's UUID folder (`buildMediaStoragePath`, `buildMemoryPhotoPath`, the weekly photo path), and RLS enforces it. UUIDs cannot collide or prefix one another, so this **cannot select another user's object**. 41B.0-R already requires that "Storage paths stay prefixed by the owner id", and 41B.1C must keep that.
+UUIDs cannot collide, so rule A cannot select another user's object. 41B.0-R already requires paths to stay prefixed by the owner id, and 41B.1C must keep that.
 
-**`owner_id`: detection only.** Objects with `owner_id = user_id::text` **outside** the canonical set are counted in `anomaly_count` and alerted, never auto-deleted. Objects inside the canonical prefix with `owner_id IS NULL` (service-role uploads) **are** purged, because the path is authoritative. This avoids false negatives on the path rule, and avoids deleting by `owner_id` alone, which no app path should produce.
+### 10.3 Purge pass
 
-**Purge pass** (worker or function; service role; only in `auth_deleted`, `awaiting_final_sweep` or `purge_attention`, and only after re-confirming the `auth.users` row is absent):
+Run by the worker or function, as the service role for Storage. Allowed only in `auth_deleted`, `awaiting_final_sweep` or `purge_attention`, and only after `private.auth_user_exists` returns false.
 
-1. `SELECT bucket_id, name FROM storage.objects WHERE <canonical rule> ORDER BY bucket_id, name LIMIT 1000`. There is no OFFSET: removals shrink the set, so each query naturally returns the next batch.
-2. For each bucket in the batch: Storage API `remove(names)` (≤ 1,000, OFFICIAL DOCS).
-3. Re-select those exact names. Any still present means `storage_partial`: stop the pass, increment `attempt_count`, back off. This also prevents an infinite loop on a silently failing remove.
-4. Repeat until step 1 returns 0 rows (or the time budget ends, leaving the lease to expire for the next run).
-5. On 0 rows: run the anomaly count, set `purge_empty_at` and the next state.
+1. `account_media_canonical(user_id, 1000)`, ordered by `(bucket_id, name)`, **no OFFSET**. Removals shrink the set, so each call returns the next batch.
+2. Per bucket: Storage API `remove(names)`, ≤ 1,000.
+3. Re-check those exact names. Any still present → `storage_partial`: stop the pass, back off. This prevents an infinite loop.
+4. Repeat until step 1 returns 0 rows, or the time budget ends (the lease then expires to the next run).
+5. On 0 canonical rows: `anomaly_count = account_media_anomaly_count(user_id)`.
+   - If 0: set `purge_empty_at` → `awaiting_final_sweep`.
+   - If > 0: → `purge_attention` + alert.
 
-Properties: safe for 0, 1, 1,001 and many thousands of objects; covers both buckets; no depth limit; idempotent (removing missing objects is harmless); a partial failure resumes from the remaining set.
+The pass is safe for 0, 1, 1,001 and many thousands of objects; covers both buckets; has no depth limit; and is idempotent.
 
-**Bucket versioning** (Storage migrations include object versions and delete markers): the rehearsal must confirm both media buckets are unversioned, or that `remove` leaves no recoverable version (REQUIRES FUTURE REHEARSAL).
+**Bucket versioning:** Storage now has object versions and delete markers. The rehearsal must confirm both buckets are unversioned, or that `remove` leaves no recoverable version (REQUIRES N10.3 REHEARSAL).
 
 ## 11. Worker and retries
 
-**Reuse the TSOY pattern:** pg_cron calls `net.http_post` every minute with Vault-held credentials, invoking a new Edge Function `account-deletion-worker` (OFFICIAL DOCS pattern; already used for `process-email-queue`). The cron entry belongs in a migration that names Vault secrets; the secret values stay out-of-band (D10).
+- **Trigger:** pg_cron calls `net.http_post` every minute with Vault-held credentials, invoking `account-deletion-worker` (OFFICIAL DOCS pattern; TSOY already uses it for email).
+- **D10:**
+  - The **cron definition and schedule are version-controlled** (migration or infrastructure definition) and may reference **Vault secret names**.
+  - **Secret values stay out-of-band**, never in migrations or Git.
+  - The current Supabase-supported deployment method is to be verified at N10.3.
+- **Claim:** `… FOR UPDATE SKIP LOCKED LIMIT 5` plus a 5-minute lease. Duplicate cron fires, overlapping runs and the synchronous function never work the same row. A crashed holder's lease expires and the row is reclaimed.
+- **Retry schedule (D4, parametric):**
+  - **Auth transient or unknown outcome:** about 1 m, 2 m, 5 m, 15 m, 30 m, then at most hourly. **Unresolved after 24 h →** `auth_attention` with escalation.
+  - **Confirmed permanent Auth failure →** `auth_attention` immediately. Media stays byte-intact and access stays frozen; an operator alert is required.
+  - **Purge after Auth deletion:** keep retrying automatically; **never restore the account**. After 24 h → `purge_attention`, continuing at a bounded cadence (proposed hourly) while alerting. **Never COMPLETE with media remaining.**
+- **Budget:** about 50 s of work per invocation. The Edge Function wall-clock limit is REQUIRES N10.3 VERIFICATION.
+- **First worker retry:** normally eligible within 1 minute (D1).
 
-**Claiming:**
+### 11.1 Alerting contract (D5)
 
-```
-UPDATE … SET lease_until = now() + interval '5 minutes'
-WHERE id IN (
-  SELECT id FROM … WHERE status IN (requested, auth_deleted, awaiting_final_sweep, purge_attention)
-    AND next_attempt_at <= now() AND (lease_until IS NULL OR lease_until < now())
-  ORDER BY next_attempt_at LIMIT 5 FOR UPDATE SKIP LOCKED)
-RETURNING …
-```
+`auth_attention`, `purge_attention` and any OWNER_ID_PATH_ANOMALY must produce all four of:
 
-- Duplicate cron fires, overlapping runs and the synchronous function never work the same row concurrently.
-- A crashed holder's lease expires and the row is reclaimed.
-- `awaiting_final_sweep` rows are eligible only when `now() ≥ final_sweep_after`.
+1. durable database state;
+2. a structured `last_error_class`;
+3. a server log line (no PII beyond the request id);
+4. **a configured operator notification**.
 
-**Per state:**
+No operator-alert channel exists in the repository today. N10.3 implements an alert interface or hook without choosing a provider.
 
-- `requested`: the same Auth step and database confirmation as §9.
-- `auth_deleted`: a purge pass.
-- `awaiting_final_sweep`: a purge pass. If it verifies empty: `completed`, with `sweep_objects_removed` recorded.
+**PRODUCTION ACTIVATION BLOCKER — OPERATOR ALERT DESTINATION REQUIRED.**
 
-**Backoff:** `min(2^attempt minutes, 60 minutes)`.
+## 12. Stale token, final sweep and completion
 
-**Escalation:**
+### 12.1 Primary control
 
-- `requested` → `auth_attention` after 24 h of transient failures, or immediately on a permanent error.
-- `auth_deleted` / `awaiting_final_sweep` → `purge_attention` after 24 h without reaching the next state.
-- `purge_attention` keeps retrying hourly while alerting (D4, D5).
+The §8 guard denies every Storage command from the moment the freeze commits, and permanently once the Auth user is absent. That closes N10.1 fact 4. **D8: no separate Auth ban is introduced**:
 
-**Wall-clock budget:** about 50 s of work per invocation. Edge Function limits need confirming at N10.3 (REQUIRES FUTURE REHEARSAL).
+- the guard already freezes media;
+- hard deletion is attempted immediately;
+- a ban adds a lifecycle state and does not replace the stale-token RLS control.
 
-## 12. Stale-token handling and the final sweep
+### 12.2 Final sweep window (D13)
 
-- **Primary control:** the §8 helper denies every Storage command once the request row exists, and again once the Auth user is absent. That closes N10.1 fact 4 at the boundary.
-- **Final sweep: KEEP** as defence in depth, because:
-  1. an upload whose permission check passed just before the freeze can insert its row just after it;
-  2. resumable or multipart uploads started before the freeze;
-  3. a future policy regression or migration mistake;
-  4. token-setting drift.
+**HOLD H1 applies (§24.2).**
 
-  The sweep is cheap: one empty query in the normal case.
-- **`final_sweep_after = auth_deleted_at + W + M`**:
-  - **W** is the maximum access-token lifetime in force during the preceding W period. Source: the project's Auth "JWT expiry" setting (Auth > Sessions; OFFICIAL DOCS), carried into the functions as the configuration value `ACCOUNT_DELETION_TOKEN_WINDOW_SECONDS`. The release checklist verifies W ≥ the dashboard value.
-  - Governance rule: when lowering JWT expiry, keep W at the old value for one old lifetime. When raising it, raise W **before** the change.
-  - **M** = 15 minutes (clock skew, in-flight and resumable uploads).
-  - The value is snapshotted into the row at `auth_deleted`, and a CHECK enforces `final_sweep_after ≥ auth_deleted_at + interval '1 hour'` as a floor. Not hard-coded to N10.1's 3,600 s: the floor exists only to catch misconfiguration.
-- **COMPLETED requires all of:**
-  - `auth.users` row absent;
-  - the account graph absent (G3 cascade; spot-checked by the rehearsal, not per request);
-  - `purge_empty_at` set;
-  - `now() ≥ final_sweep_after`;
-  - a final sweep that verified 0 canonical objects;
-  - no active lease or error.
+- **Window W:** `verified_token_window_seconds`, a deployment configuration that **must be ≥ the project's actual Auth access-token lifetime**. Never hard-coded to N10.1's 3,600 s.
+- **Owner's frozen formula:** `requested_at + max(W, 3600 s) + 15 min`.
+- **Release invariant (N10-E14):** a production deployment **must not proceed** if W is shorter than the project's actual Auth access-token lifetime. If the value cannot be verified: **FAIL CLOSED**.
+  - Candidate verification sources, to be confirmed at N10.3: the Auth "JWT expiry" setting (Auth > Sessions; OFFICIAL DOCS) and the Management API project Auth config.
+  - Any later increase in the JWT lifetime requires updating and re-verifying W before release.
+- **Snapshot:** the value is captured into `final_sweep_after` when the row reaches `auth_deleted`. A CHECK enforces the floor `final_sweep_after ≥ <anchor> + interval '1 hour 15 minutes'`.
+- **Why the sweep stays even with RLS fixed:**
+  - an upload whose permission check passed just before the freeze can commit just after it;
+  - policy regressions;
+  - future token or configuration drift.
+
+  It is cheap (one empty query) and is retained as defence in depth.
+
+### 12.3 Strict COMPLETED predicate
+
+`completed` is set only when **all** of the following hold, in one transaction:
+
+1. The Auth user is confirmed absent (`private.auth_user_exists` = false).
+2. The database deletion outcome is accepted per the G3-backed design: the single GoTrue delete cascades the graph. The rehearsal spot-checks this; it is not re-proven per request.
+3. The immediate or retry purge left **zero canonical objects** in both media buckets (`purge_empty_at` set).
+4. **Zero unresolved OWNER_ID_PATH_ANOMALIES** in both media buckets.
+5. `now() ≥ final_sweep_after`.
+6. A final sweep again finds zero canonical objects, removing and re-verifying any it found.
+7. A final anomaly scan finds zero.
+8. No active lease, retry or error is pending.
+9. The transition is valid (the guard trigger).
+
+Only then: `status = 'completed'`, `completed_at`, and in the same transaction `user_id = NULL` and `anonymised_at` (§7.3).
 
 ## 13. Other data writes after deletion
 
 No app-wide write freeze is needed:
 
-- All 28 `public` tables holding `user_id` carry a direct FK to `auth.users` (C1/G3 catalogue). After deletion, any insert with the deleted `user_id` fails with 23503, and reads return nothing because the rows cascaded.
-- Writes during `requested` (account still alive) are harmless: the single GoTrue `DELETE` removes everything committed before it, and the FK locks serialise a concurrent insert against the delete (G3 model).
-- Status: ARCHITECTURAL INFERENCE; the rehearsal spot-checks it.
-- Storage is the only surface with no FK, which is why §8 exists.
+- all 28 `public` tables with `user_id` carry a direct FK to `auth.users` (checked 28/28), so post-deletion inserts fail with 23503 and reads find nothing;
+- writes during `requested` are removed by the single cascading delete (G3).
+
+Status: ARCHITECTURAL INFERENCE; the rehearsal spot-checks it.
 
 ## 14. Security model
 
-| Element | Trust |
+| Element | Trust / rule |
 |---|---|
-| Browser | untrusted |
-| User access token | may stay cryptographically valid after deletion (N10.1); never treated as proof of a live account |
-| Storage RLS + helper | the security boundary for media |
-| `delete-account`, `account-deletion-worker` | trusted backend; the only holders of the secret key and `SUPABASE_DB_URL` |
-| `private.account_deletion_requests` | internal operational data; not exposed; no user grants |
+| Browser | untrusted; sign-out is UX only |
+| User access token | may stay cryptographically valid after deletion (N10.1); never proof of a live account |
+| Storage RLS + guard | the media boundary for API access; **does not revoke pre-issued signed URLs** (§8.3) |
+| `delete-account`, `account-deletion-worker` | trusted backend; the only holders of the secret key and the `account_deletion_worker` credential |
+| `account_deletion_worker` role | least privilege: `private` table grants plus EXECUTE on three read-only definer helpers; **no** grants on `auth` or `storage`; **no** `public` writes; **no** BYPASSRLS |
 | Secret / service-role key | backend only; never sent with a user session |
+| Storage metadata | **read-only, through definer helpers; no SQL mutation of `storage.objects`, ever** |
 
 ## 15. Failure matrix
 
-Auth = Auth user; DB = account graph; Media = the user's objects; Row = request state; Retry = automatic; Loss = media lost while the account survives; Retention = media of a deleted account persists (privacy timing).
+Auth = Auth user; DB = account graph; Loss = media lost while the account survives; Retention = media of a deleted account persists.
 
-| Scenario | Auth | DB | Media | Row | Retry | Loss | Retention | Operator |
+| Scenario | Auth | DB | Media | Row | Auto retry | Loss | Retention | Operator |
 |---|---|---|---|---|---|---|---|---|
 | No media | gone | gone | none | → completed after sweep | — | no | no | none |
-| One file | gone | gone | purged | completed | — | no | until purge (seconds) | none |
-| 1,001+ files | gone | gone | purged in batches | completed | yes, across runs if over budget | no | minutes | none |
+| One file | gone | gone | purged | completed | — | no | seconds | none |
+| 1,001+ files | gone | gone | batched | completed | across runs | no | minutes | none |
 | Deep nested paths | gone | gone | purged (flat query) | completed | — | no | — | none |
 | Both buckets | gone | gone | both purged | completed | — | no | — | none |
-| Duplicate delete request | — | — | — | single active row; 202 or the same state | — | no | — | none |
-| Upload racing the request | alive → gone | — | pre-freeze object purged; post-freeze upload denied | normal | — | no | until sweep at worst | none |
-| Stale token upload after deletion | gone | gone | **denied** (live check) | — | — | no | — | none |
-| Stale token read after deletion | gone | gone | **denied**; pre-issued signed URLs die when the object is purged | — | — | no | — | none |
-| Auth delete 500 | alive | alive | **untouched**, frozen | requested (backoff) | yes | no | n/a | after 24 h |
-| Auth timeout, unknown outcome | per DB check | per DB check | untouched until confirmed | auth_deleted or requested | yes | no | — | none |
+| Duplicate request | — | — | — | one active row; 202 | — | no | — | none |
+| Upload racing the request | alive → gone | — | pre-freeze object purged; post-freeze denied | normal | — | no | until sweep at worst | none |
+| Stale token upload or read after deletion | gone | gone | **denied** | — | — | no | — | none |
+| Pre-issued signed URL | — | — | readable until purge (or expiry) | — | — | no | until purge | none (D15 residual) |
+| Auth delete 500 | alive | alive | **byte-intact**, frozen | requested | yes (D4) | no | n/a | after 24 h |
+| Auth timeout, unknown outcome | per the database check | per check | untouched until confirmed | auth_deleted or requested | yes | no | — | after 24 h if unresolved |
 | Auth already gone | gone | gone | purged | auth_deleted → … | — | no | — | none |
-| Crash before Auth deletion | alive | alive | untouched, frozen | requested (lease expires) | yes | no | — | none |
-| Crash right after Auth deletion | gone | gone | present | requested → worker confirms absence → auth_deleted | yes | no | minutes | none |
+| Crash before Auth deletion | alive | alive | intact, frozen | requested (lease expires) | yes | no | — | none |
+| Crash right after Auth deletion | gone | gone | present | worker confirms → auth_deleted | yes | no | minutes | none |
 | Crash halfway through purge | gone | gone | partly purged | auth_deleted | yes | no | minutes | none |
-| One bucket succeeds, second fails | gone | gone | second bucket remains | auth_deleted, `storage_remove` | yes | no | until retry | after 24 h |
+| One bucket succeeds, second fails | gone | gone | second remains | `storage_remove` | yes | no | until retry | after 24 h |
 | Remove partial or error | gone | gone | some remain | `storage_partial` | yes | no | until retry | after 24 h |
-| Worker runs twice | — | — | — | SKIP LOCKED + lease: one holder | — | no | — | none |
-| Worker crashes holding a lease | — | — | — | reclaimed after lease expiry | yes | no | +5 min | none |
-| Final sweep fails | gone | gone | possibly a late object | awaiting_final_sweep (backoff) | yes | no | until success | after 24 h |
-| Database deletion fails | alive | alive | **untouched** | requested or auth_attention | transient: yes | no | n/a | yes |
-| Object with `owner_id` = user outside prefix | gone | gone | anomaly left in place | `anomaly_count` > 0 | — | no | **yes, until operator** | review (D12) |
-| Prefix object with NULL `owner_id` | gone | gone | purged (path authoritative) | normal | — | no | — | none |
-| Service-role object under the user's prefix | gone | gone | purged | normal | — | no | — | none |
-| Token lifetime raised after deployment | gone | gone | RLS still denies; sweep window snapshotted | normal | — | no | — | the governance rule in §12 prevents an early sweep |
+| Worker runs twice | — | — | — | SKIP LOCKED + lease | — | no | — | none |
+| Worker crashes holding a lease | — | — | — | reclaimed after expiry | yes | no | +5 min | none |
+| Final sweep fails | gone | gone | possibly a late object | awaiting_final_sweep | yes | no | until success | after 24 h |
+| Database deletion fails | alive | alive | **byte-intact** | requested or auth_attention | transient: yes | no | n/a | yes |
+| `owner_id` = user outside prefix | gone | gone | anomaly left untouched | **purge_attention; COMPLETED blocked** | sweep re-checks | no | **yes, until resolved** | **required** (alert) |
+| Prefix object with NULL `owner_id` | gone | gone | purged (rule A) | normal | — | no | — | none |
+| Service-role object under the prefix | gone | gone | purged (rule A) | normal | — | no | — | none |
+| Token lifetime changed after deployment | gone | gone | RLS still denies | W snapshotted per row | — | no | — | release blocked if W < lifetime (N10-E14) |
+| Permanent Auth failure | alive | alive | byte-intact, frozen | auth_attention | no | no | n/a | **required**; explicit cancel only within the §6 boundary |
 
-No row shows media loss with a surviving account. That is N10's resolution criterion.
+No row loses media while the account survives.
 
-## 16. Privacy and retention decisions (human review; no legal conclusions)
+## 16. Privacy and retention (D14: human review, release gate)
 
-| # | Decision | Proposal (for review only) |
-|---|---|---|
-| A | Expected time from Auth deletion to immediate purge | seconds in the synchronous path; worst case one worker cycle (about 1 min) plus backoff |
-| B | How long the row with the deleted UUID may remain | until `completed`, plus N days for operational audit (N to be decided) |
-| C | After completion | null `user_id` and keep timestamps, status and counts; or delete the row (decide) |
-| D | Purge failure for 1 h / 24 h / several days | 1 h: automatic retries; 24 h: `purge_attention` + alert; days: hourly retries continue with manual investigation |
-| E | When operators are alerted | any `*_attention`; `anomaly_count` > 0; `sweep_objects_removed` > 0 (a policy regression signal) |
-| F | What the user is told | the truthful response contract (§9); any confirmation channel is a product decision |
+| Item | Technical default (for review) |
+|---|---|
+| Media-purge timing | starts immediately after confirmed Auth deletion; ordinarily finishes within minutes (engineering target, not an SLA or legal claim) |
+| UUID retention while active | required through the final sweep and anomaly resolution |
+| After COMPLETED | UUID nulled immediately; no hash kept |
+| Operational-row retention | 30 days non-identifying, then deleted (PROPOSED) |
+| Persistent media when purges fail | retried at a bounded cadence and alerted; never marked complete |
+| Operator access to failed records | to be defined |
+| User-facing wording | to be defined (backend contract in §9.1) |
+| Signed-URL residual | §8.3 D15 |
 
-Paths contain UUIDs, week numbers and memory ids, not names. The media itself is sensitive and health-adjacent.
+Paths contain UUIDs, week numbers and memory ids, not names; the media is sensitive and health-adjacent. **D14 stays OPEN FOR HUMAN PRIVACY/LEGAL REVIEW.** It blocks production activation, not local implementation or disposable rehearsal. No legal conclusion is made here.
 
 ## 17. Invariants (for automated tests)
 
 - **N10-E1** No Storage object is removed by the workflow before the `auth.users` row is confirmed absent.
-- **N10-E2** An active request denies user media INSERT, UPDATE, DELETE and SELECT.
+- **N10-E2** A pending request denies user media INSERT, UPDATE, DELETE and SELECT.
 - **N10-E3** A deleted Auth identity denies media access while an old token is unexpired.
 - **N10-E4** The purge is idempotent.
 - **N10-E5** Enumeration has no 1,000-object ceiling.
 - **N10-E6** Enumeration has no fixed-depth ceiling.
-- **N10-E7** Every object deletion uses the Storage API. There is no SQL mutation of `storage.objects`, and the workflow never writes to the `storage` schema. Bucket creation is a one-time deployment step (§18).
+- **N10-E7** Every object deletion uses the Storage API. There is never SQL mutation of `storage.objects`, and the workflow never writes to the `storage` schema.
 - **N10-E8** A failed Auth deletion leaves media byte-identical.
 - **N10-E9** A failed purge leaves the account deleted and schedules a retry.
-- **N10-E10** `completed` requires a verified-empty sweep at or after `final_sweep_after`.
-- **N10-E11** The request row survives Auth deletion: no FK, no cascade.
-- **N10-E12** Admin Storage and Auth calls never carry a user session.
-- **N10-E13** The purge never touches objects outside `{user_id}/` in the two media buckets.
-- **N10-E14** At most one active request per account.
-- **N10-E15** `final_sweep_after` ≥ `auth_deleted_at` + configured window + margin, and is never before the 1-hour floor.
-- **N10-E16** Other users' media and accounts are unchanged by any deletion.
-- **N10-E17** The helper is not callable by `anon` or `PUBLIC`, takes no arguments, and lives in a non-exposed schema with `search_path = ''`.
-- **N10-E18** G3 and AD-1 are unchanged: the 13 Episode FKs stay RESTRICT and the Layer 1/2 contracts stay green.
+- **N10-E10** COMPLETED requires a verified-empty sweep at or after `final_sweep_after`.
+- **N10-E11** COMPLETED is impossible while an owner_id/path anomaly remains unresolved.
+- **N10-E12** No new signed media URL is issued once account deletion is pending.
+- **N10-E13** Runtime database access uses the dedicated least-privilege role, not unrestricted `postgres` credentials.
+- **N10-E14** The configured stale-token window is never shorter than the project's verified Auth access-token lifetime; unverifiable means fail closed.
+- **N10-E15** `user_id` is retained only while active deletion and anomaly resolution need it, then nulled at COMPLETED, subject to the approved retention contract.
+- **N10-E16** The request row survives Auth deletion: no FK, no cascade.
+- **N10-E17** Admin Storage and Auth calls never carry a user session.
+- **N10-E18** The purge never touches objects outside rule A (§10.2), and OWNER_ID_PATH_ANOMALIES are never auto-deleted.
+- **N10-E19** At most one active request per account.
+- **N10-E20** `final_sweep_after` respects the §12.2 formula and its CHECK floor.
+- **N10-E21** Other users' media and accounts are unchanged by any deletion.
+- **N10-E22** Definer helpers are not callable by `anon` or `PUBLIC`; each lives in `private` with `search_path = ''`, and the RLS guard takes no arguments.
+- **N10-E23** Cancellation happens only within the §6 boundary and never automatically.
+- **N10-E24** Anomaly and log records store counts and error classes, not filenames or PII.
+- **N10-E25** G3 and AD-1 are unchanged: the 13 Episode FKs stay RESTRICT and the Layer 1/2 contracts stay green.
 
 ## 18. Future surface (paper only)
 
 | Kind | Objects |
 |---|---|
-| Schema | `private` (new, not exposed) |
-| Table | `private.account_deletion_requests` (+ unique active index, claim index, CHECKs) |
-| Functions | `private.account_media_access_allowed()` (definer, as in §8); `private.account_deletion_requests_guard()` (invoker trigger) |
-| Edge Functions | `delete-account` (rewritten orchestration); `account-deletion-worker` (new); `supabase/functions/_shared/accountDeletion.ts` (pure state and purge logic, unit-testable) |
-| Storage policies | replace the 4 `weekly-photos` and 4 `first-year-memories` policies with guarded versions (`TO authenticated`; UPDATE with WITH CHECK) |
-| Bucket | bring `first-year-memories` (today created out-of-band, per 41B.0-R) under version control idempotently. The method is to be verified at N10.3: either the `INSERT INTO storage.buckets … ON CONFLICT DO NOTHING` pattern the existing `weekly-photos` migration already uses, or the Storage API at deploy time. Never by touching `storage.objects` |
-| Cron | `account-deletion-worker`, every minute (pg_cron + pg_net) |
-| Vault | worker URL and secret key (values out-of-band) |
-| Configuration | `ACCOUNT_DELETION_TOKEN_WINDOW_SECONDS` (function secret) |
-| App | `src/pages/AccountSettings.tsx` `deleteAccount` response handling and copy |
-| Migrations eventually | M1: schema, table, guard, helper, policies, bucket. M2: cron schedule referencing Vault names |
-| Tests | unit (shared logic), static contracts (policies include the helper; no `storage.objects` mutation; no fixed 1,000 or depth constants), AD-1 Layer 1 unchanged |
+| Schema | `private` (not exposed) |
+| Role | `account_deletion_worker` (LOGIN; password out-of-band; no BYPASSRLS) |
+| Table | `private.account_deletion_requests` (+ indexes, CHECKs, guard trigger) |
+| Functions | `private.account_media_access_allowed()`, `private.auth_user_exists(uuid)`, `private.account_media_canonical(uuid, int)`, `private.account_media_anomaly_count(uuid)` (definer, hardened); `private.account_deletion_requests_guard()` (invoker) |
+| Edge Functions | `delete-account` (rewritten); `account-deletion-worker` (new); `_shared/accountDeletion.ts` (pure state, purge and backoff logic); an alert hook interface |
+| Storage policies | 8 replaced (guarded, `TO authenticated`; UPDATE with WITH CHECK) |
+| Bucket | `first-year-memories` brought under version control idempotently. Method to be verified at N10.3: the existing `INSERT INTO storage.buckets … ON CONFLICT DO NOTHING` pattern, or the Storage API at deploy time; never by touching `storage.objects` |
+| Cron / Vault | worker schedule version-controlled; Vault secret names only |
+| Configuration | `verified_token_window_seconds`, `N10_COMPLETED_ROW_RETENTION_DAYS`, `N10_DB_URL`, alert destination (all out-of-band values) |
+| App | `AccountSettings` `deleteAccount`: response handling, sign-out, repeat-click guard |
+| Migrations eventually | M1: schema, role grants, table, functions, policies, bucket. M2: cron (role password and Vault values out-of-band) |
+| Tests | unit tests (shared logic); static contracts (policies call the guard; no `storage.objects` mutation; no fixed 1,000 or depth constants; the helper is not in an exposed schema); AD-1 Layer 1 unchanged |
 
 ## 19. N10.3 implementation boundary
 
-- **Step 1 (isolated, additive, can ship first):** M1 (table, helper, guarded policies). This alone closes the stale-token Storage hole (N10.1 fact 4), while the current function keeps working. With no request rows, the pending check is inert.
-  - **Ordering hazard:** while the old function remains, a deletion still runs Storage-first. Steps 1 and 2 therefore need to ship close together, or with an owner-accepted interim.
-- **Step 2 (one unit):** the `delete-account` orchestration, the worker, the shared module, the caller changes and M2 (cron). These depend on each other and ship together.
-- **Isolated throughout:** unit and static tests; no change to 41B.1A files or to AD-1 contracts.
-- **Before any production release:** the hosted rehearsal (§20 below) PASS and owner acceptance.
+1. **M1 (additive):** schema, role, table, helpers, guarded policies. This alone closes the stale-token Storage hole.
+   - **Ordering hazard:** while the old Storage-first function remains live, a deletion still destroys media first. M1 and step 2 must ship close together, or with an owner-accepted interim.
+2. **One unit:** the `delete-account` orchestration, the worker, the shared module, the alert hook, M2 (cron) and the caller changes.
+3. **Isolated throughout:** unit and static tests; no change to 41B.1A or AD-1.
+4. **Before production activation:**
+   - hosted rehearsal PASS;
+   - owner acceptance;
+   - **D14 approval**;
+   - **an operator-alert destination**;
+   - W verified (N10-E14).
 
 ## 20. Hosted rehearsal plan (not created)
 
-- **Environment:** one disposable hosted project (owner-created; new credentials; denylist production, C1, G3 and N10.1). Hosted Storage, Auth, pg_cron, pg_net, Vault and Edge Functions are required, and Edge Functions are deployed to the rehearsal project only.
-- **Baseline:** replay the 47 TSOY migrations plus M1 and M2. Whether to include frozen 41B.1A is decision D11. Production is never involved.
-- **Cases, each PASS by observation:**
-  1. Failed Auth deletion: inject it with a scratch RESTRICT FK, the G3 S1 technique. 0 media touched; row `requested` / `auth_attention`.
-  2. Successful deletion: immediate purge; 0 canonical objects remain.
-  3. A pending row blocks upload, update, delete and read.
-  4. A stale token after deletion cannot INSERT, UPDATE, DELETE or SELECT (repeat of N10.1 R4, expecting denial).
-  5. A pre-issued signed URL stops working after the purge.
-  6. 1,001+ objects in one folder, paths 6+ levels deep, both buckets, and a service-role object under the prefix: all purged.
-  7. An `owner_id` anomaly outside the prefix is counted, not deleted.
-  8. Crash and retry by state seeding (expired lease in each state; no test hooks in production code): idempotent.
+- **Environment:** one disposable hosted project (owner-created; new credentials; denylist production, C1, G3 and N10.1).
+- **Baseline:** the 47 TSOY migrations plus M1 and M2. **Frozen 41B.1A is not replayed (D11).** G3 already owns the RI model, and keeping them separate keeps failures attributable. A later integrated pre-production rehearsal may combine both.
+- **Cases (each PASS by observation):**
+  1. Failed Auth deletion (scratch RESTRICT FK, the G3 S1 technique): 0 media touched; `requested` / `auth_attention`.
+  2. Successful deletion: immediate purge; 0 canonical objects.
+  3. Pending blocks upload, update, delete, read and **signing**.
+  4. A stale token after deletion cannot INSERT, UPDATE, DELETE, SELECT or sign.
+  5. A pre-issued signed URL stops serving after the purge, with any cache residual measured (D15).
+  6. 1,001+ objects in one folder; 6+ levels deep; both buckets; a service-role object under the prefix: all purged.
+  7. An OWNER_ID_PATH_ANOMALY is not deleted, is counted, leads to `purge_attention`, is alerted through the hook, and **blocks COMPLETED**.
+  8. Crash and retry by state seeding (expired lease in each state): idempotent.
   9. Duplicate and concurrent requests: one active row.
   10. Worker double-fire: SKIP LOCKED holds.
-  11. Final sweep only after the configured window (use a short test window with the CHECK floor relaxed only in the rehearsal migration variant, or wait the real window).
-  12. Bucket versioning confirmed off, or no recoverable versions.
-  13. Control user unchanged; AD-1 Layer 2 PASS; G3 graph cascade intact; secret scan clean.
+  11. The final sweep is not eligible before `final_sweep_after`.
+  12. COMPLETED anonymises `user_id`.
+  13. Retention cleanup deletes only anonymised rows past retention.
+  14. The W verification fails closed when unverifiable.
+  15. Bucket versioning is confirmed off, or no recoverable version remains.
+  16. The `account_deletion_worker` role cannot write `storage.objects` or `auth.users`, and cannot read `public` data.
+  17. Control user unchanged; AD-1 Layer 2 PASS; secret scan clean.
 
 ## 21. Relationship to 41B
 
-- The RI/account-deletion database gate remains **CLOSED / PASS**. N10 does not reopen G3, and Candidate E relies on G3.
+- The RI/account-deletion database gate remains **CLOSED / PASS**. N10 does not reopen G3, and Candidate E relies on it.
 - N10 is **not** a documented prerequisite for 41B.1B (N10.0). 41B.1B remains **NOT AUTHORISED** here.
 - N10 must be resolved before any production release of the account-deletion redesign.
-- 41B.1C changes Storage paths. The roadmap and 41B.0-R set no N10 gate before 41B.1C, but 41B.0-R §17 and §19 require paths to stay prefixed by the owner id. Candidate E's canonical rule depends on that, and it removes the depth and 1,000 limits 41B.0-R §19 warned about. **No new 41B gate is invented.**
+- No N10 gate exists before 41B.1C. 41B.0-R requires owner-id-prefixed paths, which rule A depends on. **No new 41B gate is invented.**
 
-## 22. Open owner decisions
+## 22. Decision register
 
-| # | Decision |
-|---|---|
-| D1 | Purge time target (§16 A) |
-| D2 | Retention of the UUID-bearing row (§16 B) |
-| D3 | Post-completion handling of the row (§16 C) |
-| D4 | Purge-failure escalation timings (§16 D) |
-| D5 | Alert channel and on-call ownership (§16 E) |
-| D6 | User-facing copy and any confirmation channel (§16 F) |
-| D7 | After `auth_attention`: keep media frozen, or allow an operator to cancel and restore access; whether users may cancel |
-| D8 | Whether to also ban the Auth user at request time (blocks new sign-ins and refreshes during `requested`) |
-| D9 | `SUPABASE_DB_URL` vs a dedicated least-privilege database role for the two functions |
-| D10 | Cron schedule and Vault secret names in-repo (values out-of-band) vs fully out-of-band, as today |
-| D11 | Include frozen 41B.1A in the N10.3 rehearsal baseline |
-| D12 | Handling of `owner_id` anomalies outside the prefix |
-| D13 | The token-window value and its governance rule (§12) |
-| D14 | Privacy/legal review of §16 as a whole |
+| # | Decision | Status |
+|---|---|---|
+| D1 | Purge target: ~20 s synchronous budget; worker owns the rest; first retry within ~1 min; ordinarily minutes (engineering target) | FROZEN |
+| D2/D3 | UUID kept while active; nulled at COMPLETED; no hash; 30-day non-identifying row (proposed), then deleted; duration parametric | FROZEN (30 days needs D14) |
+| D4 | Backoff ~1/2/5/15/30 m then hourly; permanent → `auth_attention`; 24 h escalation; purge never restores the account and never completes with media | FROZEN |
+| D5 | Durable state + error class + log + operator notification; alert hook interface | FROZEN; **destination is a PRODUCTION ACTIVATION BLOCKER** |
+| D6 | 202 / 410 / 5xx as in §9.1; client signs out after acceptance | FROZEN except **200: HOLD H2** |
+| D7 | No silent restore; `auth_attention` keeps the freeze; explicit cancel within the §6 boundary only | FROZEN |
+| D8 | No Auth ban | FROZEN |
+| D9 | Dedicated least-privilege role; definer helpers instead of `auth` / `storage` grants | FROZEN (connectivity: N10.3 verification) |
+| D10 | Cron version-controlled; Vault names only | FROZEN (method: N10.3 verification) |
+| D11 | No 41B.1A in the N10.3 rehearsal | FROZEN |
+| D12 | Rule A purge / rule B anomaly blocks completion / rule C never touched | FROZEN |
+| D13 | W ≥ verified lifetime; fail closed; floor `max(W, 3600)` + 15 m | FROZEN except **anchor: HOLD H1** |
+| D14 | Human privacy/legal review | **OPEN: production release gate** |
+| D15 | Signed-URL / cache residual policy (§8.3 A–F) | FROZEN |
 
 ## 23. Final verdict
 
-- **N10 = OPEN.** N10.2 = PAPER DESIGN COMPLETE.
-- **Candidate E = FROZEN** (architecture), subject to D1–D14, which do not change the safety ordering.
+- **N10 = OPEN.** N10.2 = COMPLETE.
+- **N10.2A = IMPLEMENTATION CONTRACT FROZEN, except H1 and H2, which need one owner confirmation each.**
+- Candidate E = frozen for N10.3 once H1 and H2 are confirmed.
+- D14 = human release gate. The alert destination is a production activation blocker.
 - N10.3 = NOT STARTED.
 - Production accessed = NO. 41B.1A applied to production = NO. 41B.1B = NOT STARTED.
+
+## 24. N10.2A — implementation contract freeze record
+
+### 24.1 Applied (owner brief, 9 October 2026)
+
+- Core architecture preserved; Candidate B not reopened.
+- OWNER_ID_PATH_ANOMALY semantics and their completion block (§10.2, §12.3).
+- D15 signed-URL / cache policy, with the code inventory (§8.3).
+- D1–D13 resolved (§22); D14 kept as the human release gate.
+- Strict COMPLETED predicate (§12.3).
+- Invariants E11–E15 as specified by the owner. The earlier N10.2 extra invariants are renumbered E16–E25.
+
+Implementability review (§20 of the brief), each item checked against current Supabase guidance and TSOY code:
+
+- private-schema access from Edge Functions (direct database connection; nothing exposed);
+- worker connection method (dedicated role; pooler connectivity: N10.3 verification);
+- helper grants (`authenticated` gets USAGE plus EXECUTE only);
+- SECURITY DEFINER hardening (`postgres` owner, `search_path = ''`, PUBLIC revoked);
+- no RLS recursion (the guard never reads `storage.objects`);
+- exact first-segment matching;
+- anomaly blocking;
+- signed URLs (the inventory found no signed-upload or resumable paths);
+- the cancellation boundary;
+- cron/Vault reproducibility;
+- the lease model.
+
+No incompatibility with current Supabase or TSOY code was found, apart from the two contract inconsistencies below.
+
+### 24.2 HOLD items (smallest change proposed; not silently applied)
+
+**N10.2A HOLD — H1: the D13 sweep anchor `requested_at` under-covers tokens minted while deletion is pending.**
+
+- D8 introduces no Auth ban. Until Auth deletion commits, the user still exists and can refresh or sign in, and Auth retries under D4 can keep the row in `requested` for up to 24 h or more.
+- A token minted during that period expires up to W after its issue time, which can be after `requested_at + max(W, 3600) + 15 m`. The final sweep could then run while such a token is still valid.
+- The RLS guard still denies that token, so only the defence-in-depth sweep is weakened. But the stated purpose ("cover any token issued before the deletion freeze") is not met for this case.
+- **Smallest change:** anchor on `auth_deleted_at`, the latest moment any token for the account can be minted: `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`.
+  - This is never earlier than the `requested_at` formula, because `auth_deleted_at ≥ requested_at`, so it strictly widens coverage.
+  - It needs no schema change: both columns exist.
+
+**N10.2A HOLD — H2: "200 = account deletion fully completed during the request" is unreachable under the strict COMPLETED predicate.** COMPLETED requires `now() ≥ final_sweep_after`, at least 1 h 15 m after the anchor. Two smallest options:
+
+- **(a) Recommended.** 200 = the Auth/account deletion is confirmed committed during the request, with the body reporting the workflow state (`auth_deleted` or `awaiting_final_sweep`) and the immediate-purge result. 202 = accepted, but Auth deletion not yet confirmed.
+- **(b)** Never return 200: every accepted request returns 202 with the workflow state.
+
+Either keeps the "truthful response" principle. Until confirmed, N10.3 must not implement a 200 path.

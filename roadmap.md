@@ -390,6 +390,13 @@
   - Results: R1 Auth hard delete succeeded while the user owned a Storage object; the object and its `owner_id` (the deleted id) remained; a pre-deletion access token could still upload to Storage until expiry, while Auth rejected it.
   - The official Supabase guide conflicted with behaviour observed on this hosted rehearsal environment.
   - Candidate E selected; Candidate B not required. Project and token retired by the owner; local credentials removed.
+- [x] N10.2 Candidate E paper architecture (2026-10-09, `d4db73a5`) and N10.2A implementation contract freeze (2026-10-09): `docs/strategy/n10-candidate-e-account-first-deletion-architecture.md`.
+  - D1–D13 and D15 resolved; strict COMPLETED predicate; invariants E1–E25.
+  - OWNER_ID_PATH_ANOMALIES block completion.
+  - Dedicated least-privilege database role; no Auth ban; no 41B.1A in the N10.3 rehearsal.
+  - HOLD H1 (final-sweep anchor) and H2 (meaning of 200) await owner confirmation.
+  - D14 privacy/legal review = production release gate; operator-alert destination = production activation blocker.
+  - N10.3 NOT STARTED.
 - [ ] Storage-first finding N10: OPEN. Direction is Candidate E; N10.2 NOT STARTED. Mandatory N10.2 requirements: durable deletion state surviving Auth deletion; Storage writes blocked while pending and after the Auth user is gone; complete pagination; no fixed-depth traversal; removals in batches of at most 1,000; retryable purge worker; final sweep after maximum token lifetime; explicit completion state; privacy/retention decision. Original finding: (`delete-account` removes storage before `auth.admin.deleteUser`; not exercised by C1.18 or G3; G3 proves only the RI/database deletion).
 - [ ] 41B.1B: NOT STARTED / NOT AUTHORISED. READY FOR 41B.1B = NO.
 - 41B.1B NOT STARTED (pre-41B.1B RI/account-deletion database gate closed by G3; N10 open; 41B.1B not authorised)

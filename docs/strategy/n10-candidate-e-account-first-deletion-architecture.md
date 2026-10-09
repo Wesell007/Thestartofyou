@@ -2,12 +2,13 @@
 
 ## 1. Status
 
-**N10.2A — IMPLEMENTATION CONTRACT FROZEN, EXCEPT TWO HOLD ITEMS (§24.2). NOT IMPLEMENTED.**
+**N10.2A — IMPLEMENTATION CONTRACT FULLY FROZEN. CANDIDATE E FULLY FROZEN FOR N10.3. NOT IMPLEMENTED.** The owner confirmed holds H1 and H2 on 9 October 2026 (§24.2).
 
 | Stage | Date | Commit | What it was |
 |---|---|---|---|
 | N10.2 | 9 October 2026 | `d4db73a5` | paper architecture, accepted in principle by the owner |
-| N10.2A | 9 October 2026 | this revision | owner decisions D1–D15 resolved in §24; the strict COMPLETED predicate and invariants E1–E25 integrated throughout |
+| N10.2A | 9 October 2026 | `443bf9f5` | owner decisions D1–D15 resolved in §24; the strict COMPLETED predicate and invariants E1–E25 integrated throughout; holds H1 and H2 raised |
+| N10.2A closeout | 9 October 2026 | this revision | H1 (sweep anchor `auth_deleted_at`) and H2 (HTTP 200 = Auth deletion confirmed committed, not workflow completed) owner-confirmed and applied |
 
 Written by Claude Code (implementation owner). Where this revision differs from the N10.2 text, this revision governs; the N10.2 text remains in Git history.
 
@@ -226,22 +227,24 @@ Replace the 8 existing media policies (4 per bucket) with `TO authenticated` pol
 3. **Auth hard delete** with an admin client (secret key, no user session).
 4. **Confirm with `private.auth_user_exists`**, never by HTTP status alone:
    - absent → `auth_deleted` (`auth_deleted_at`, `final_sweep_after` per §12.2);
-   - present after a 5xx or timeout → stay `requested` with D4 backoff;
-   - present after a permanent error → `auth_attention`.
+   - present after a 5xx or timeout → stay `requested` with D4 backoff (response **202**);
+   - present after a permanent error → `auth_attention` (response **5xx**).
 5. If `auth_deleted`: run the **immediate purge** under a hard **~20 s budget** (D1). Correctness never depends on finishing within the request; unfinished work belongs to the worker.
 6. Respond per §9.1, then release the lease.
 
 ### 9.1 Response contract (D6)
 
-**HOLD H2 applies (§24.2).**
+**Fully frozen: H2 resolved, owner confirmed option (a), §24.2.**
 
 | Code | Frozen meaning |
 |---|---|
-| 202 | durable request accepted; the workflow continues (covers "Auth deletion retrying" and "account deleted, purge or sweep continuing") |
-| 410 | account already deleted, or an idempotent terminal situation where applicable |
-| 5xx | the request could not be safely accepted or persisted |
-| 200 | **HOLD H2:** the owner's wording "fully completed during the request" cannot occur under the strict COMPLETED predicate |
+| 200 | **The Auth/account deletion is confirmed committed during this request** (`private.auth_user_exists` = false). The body states the truthful cleanup state, conceptually `{status: "account_deleted", cleanup: "removed"}` when the immediate purge verified empty, or `{status: "account_deleted", cleanup: "continuing"}` otherwise. **200 never means the durable workflow is `completed`**; that needs the final sweep, which is at least 1 h 15 m after `auth_deleted_at` |
+| 202 | The request was durably accepted, but Auth/account deletion is **not yet confirmed committed**: Auth retrying, or another holder's lease is active. Media stays frozen and untouched; the worker owns continuation |
+| 410 | Account already deleted, or the applicable idempotent deleted condition |
+| 5xx | The request could not be safely accepted or persisted, **or** a confirmed pre-Auth permanent failure occurred (row → `auth_attention`; media byte-intact and frozen) |
 
+- Exact production copy and body shape are finalised at implementation. The semantics above are frozen.
+- Durable `completed` is governed only by the strict predicate in §12.3.
 - Never claim "nothing was deleted" unless it is structurally true. It is true only for a 5xx before the freeze commits, and for a row still in `requested` or `auth_attention`.
 - **After a durable request is accepted, the client signs out locally, clears cached user state and redirects.** Final wording is a later UX decision.
 - Sign-out is UX only; the boundary is RLS plus the deleted Auth user.
@@ -325,14 +328,15 @@ The §8 guard denies every Storage command from the moment the freeze commits, a
 
 ### 12.2 Final sweep window (D13)
 
-**HOLD H1 applies (§24.2).**
+**Fully frozen: H1 resolved, owner confirmed, §24.2.**
 
 - **Window W:** `verified_token_window_seconds`, a deployment configuration that **must be ≥ the project's actual Auth access-token lifetime**. Never hard-coded to N10.1's 3,600 s.
-- **Owner's frozen formula:** `requested_at + max(W, 3600 s) + 15 min`.
+- **Authoritative formula:** `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`.
+  - **Why `auth_deleted_at`:** D8 introduces no Auth ban, so while a request is pending the Auth user still exists and can obtain or refresh a token. `auth_deleted_at` is the point after which no new token can legitimately be minted for the account. It is never earlier than the request time, so it only widens stale-token coverage.
 - **Release invariant (N10-E14):** a production deployment **must not proceed** if W is shorter than the project's actual Auth access-token lifetime. If the value cannot be verified: **FAIL CLOSED**.
   - Candidate verification sources, to be confirmed at N10.3: the Auth "JWT expiry" setting (Auth > Sessions; OFFICIAL DOCS) and the Management API project Auth config.
   - Any later increase in the JWT lifetime requires updating and re-verifying W before release.
-- **Snapshot:** the value is captured into `final_sweep_after` when the row reaches `auth_deleted`. A CHECK enforces the floor `final_sweep_after ≥ <anchor> + interval '1 hour 15 minutes'`.
+- **Snapshot:** the value is captured into `final_sweep_after` when the row reaches `auth_deleted`. A CHECK enforces the floor `final_sweep_after ≥ auth_deleted_at + interval '1 hour 15 minutes'` (the 3,600 s floor plus the 15-minute margin).
 - **Why the sweep stays even with RLS fixed:**
   - an upload whose permission check passed just before the freeze can commit just after it;
   - policy regressions;
@@ -491,7 +495,7 @@ Paths contain UUIDs, week numbers and memory ids, not names; the media is sensit
 - **Baseline:** the 47 TSOY migrations plus M1 and M2. **Frozen 41B.1A is not replayed (D11).** G3 already owns the RI model, and keeping them separate keeps failures attributable. A later integrated pre-production rehearsal may combine both.
 - **Cases (each PASS by observation):**
   1. Failed Auth deletion (scratch RESTRICT FK, the G3 S1 technique): 0 media touched; `requested` / `auth_attention`.
-  2. Successful deletion: immediate purge; 0 canonical objects.
+  2. Successful deletion: HTTP 200 with the truthful cleanup state; immediate purge; 0 canonical objects; the durable row is not `completed` until the strict predicate holds.
   3. Pending blocks upload, update, delete, read and **signing**.
   4. A stale token after deletion cannot INSERT, UPDATE, DELETE, SELECT or sign.
   5. A pre-issued signed URL stops serving after the purge, with any cache residual measured (D15).
@@ -500,7 +504,7 @@ Paths contain UUIDs, week numbers and memory ids, not names; the media is sensit
   8. Crash and retry by state seeding (expired lease in each state): idempotent.
   9. Duplicate and concurrent requests: one active row.
   10. Worker double-fire: SKIP LOCKED holds.
-  11. The final sweep is not eligible before `final_sweep_after`.
+  11. The final sweep is not eligible before `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`, including for a request that waited in `requested` (a token refreshed during pending is covered).
   12. COMPLETED anonymises `user_id`.
   13. Retention cleanup deletes only anonymised rows past retention.
   14. The W verification fails closed when unverifiable.
@@ -523,22 +527,22 @@ Paths contain UUIDs, week numbers and memory ids, not names; the media is sensit
 | D2/D3 | UUID kept while active; nulled at COMPLETED; no hash; 30-day non-identifying row (proposed), then deleted; duration parametric | FROZEN (30 days needs D14) |
 | D4 | Backoff ~1/2/5/15/30 m then hourly; permanent → `auth_attention`; 24 h escalation; purge never restores the account and never completes with media | FROZEN |
 | D5 | Durable state + error class + log + operator notification; alert hook interface | FROZEN; **destination is a PRODUCTION ACTIVATION BLOCKER** |
-| D6 | 202 / 410 / 5xx as in §9.1; client signs out after acceptance | FROZEN except **200: HOLD H2** |
+| D6 | 200 = Auth deletion confirmed committed (body reports cleanup state; never means `completed`); 202 = accepted, Auth not yet confirmed; 410; 5xx; client signs out after acceptance (§9.1) | **FULLY FROZEN** (H2 resolved) |
 | D7 | No silent restore; `auth_attention` keeps the freeze; explicit cancel within the §6 boundary only | FROZEN |
 | D8 | No Auth ban | FROZEN |
 | D9 | Dedicated least-privilege role; definer helpers instead of `auth` / `storage` grants | FROZEN (connectivity: N10.3 verification) |
 | D10 | Cron version-controlled; Vault names only | FROZEN (method: N10.3 verification) |
 | D11 | No 41B.1A in the N10.3 rehearsal | FROZEN |
 | D12 | Rule A purge / rule B anomaly blocks completion / rule C never touched | FROZEN |
-| D13 | W ≥ verified lifetime; fail closed; floor `max(W, 3600)` + 15 m | FROZEN except **anchor: HOLD H1** |
+| D13 | `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`; W ≥ verified lifetime; fail closed; lifetime increases require re-verification (§12.2) | **FULLY FROZEN** (H1 resolved) |
 | D14 | Human privacy/legal review | **OPEN: production release gate** |
 | D15 | Signed-URL / cache residual policy (§8.3 A–F) | FROZEN |
 
 ## 23. Final verdict
 
 - **N10 = OPEN.** N10.2 = COMPLETE.
-- **N10.2A = IMPLEMENTATION CONTRACT FROZEN, except H1 and H2, which need one owner confirmation each.**
-- Candidate E = frozen for N10.3 once H1 and H2 are confirmed.
+- **N10.2A = IMPLEMENTATION CONTRACT FULLY FROZEN** (H1 and H2 resolved and owner confirmed).
+- **Candidate E = FULLY FROZEN FOR N10.3.**
 - D14 = human release gate. The alert destination is a production activation blocker.
 - N10.3 = NOT STARTED.
 - Production accessed = NO. 41B.1A applied to production = NO. 41B.1B = NOT STARTED.
@@ -568,22 +572,29 @@ Implementability review (§20 of the brief), each item checked against current S
 - cron/Vault reproducibility;
 - the lease model.
 
-No incompatibility with current Supabase or TSOY code was found, apart from the two contract inconsistencies below.
+No incompatibility with current Supabase or TSOY code was found. Two contract inconsistencies were raised as holds and are now resolved (§24.2).
 
-### 24.2 HOLD items (smallest change proposed; not silently applied)
+### 24.2 Holds H1 and H2 — RESOLVED / OWNER CONFIRMED (9 October 2026)
 
-**N10.2A HOLD — H1: the D13 sweep anchor `requested_at` under-covers tokens minted while deletion is pending.**
+**H1 — RESOLVED.** The final-sweep anchor is `auth_deleted_at`:
 
-- D8 introduces no Auth ban. Until Auth deletion commits, the user still exists and can refresh or sign in, and Auth retries under D4 can keep the row in `requested` for up to 24 h or more.
-- A token minted during that period expires up to W after its issue time, which can be after `requested_at + max(W, 3600) + 15 m`. The final sweep could then run while such a token is still valid.
-- The RLS guard still denies that token, so only the defence-in-depth sweep is weakened. But the stated purpose ("cover any token issued before the deletion freeze") is not met for this case.
-- **Smallest change:** anchor on `auth_deleted_at`, the latest moment any token for the account can be minted: `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`.
-  - This is never earlier than the `requested_at` formula, because `auth_deleted_at ≥ requested_at`, so it strictly widens coverage.
-  - It needs no schema change: both columns exist.
+`final_sweep_after = auth_deleted_at + max(verified_token_window_seconds, 3600 s) + 15 minutes` (§12.2)
 
-**N10.2A HOLD — H2: "200 = account deletion fully completed during the request" is unreachable under the strict COMPLETED predicate.** COMPLETED requires `now() ≥ final_sweep_after`, at least 1 h 15 m after the anchor. Two smallest options:
+- An earlier proposal anchored on the request time. It was **rejected as too early**: D8 introduces no Auth ban, so while a request is pending the Auth user still exists and can obtain or refresh tokens. Auth retries can keep a request pending for 24 h or more.
+- `auth_deleted_at` is the point after which no new token can legitimately be minted for the account, and it only widens coverage.
+- Preserved:
+  - W ≥ the verified Auth access-token lifetime;
+  - an unverifiable lifetime fails release closed;
+  - the 3,600 s floor;
+  - the 15-minute margin;
+  - later lifetime increases require N10 configuration to be updated and verified before release.
 
-- **(a) Recommended.** 200 = the Auth/account deletion is confirmed committed during the request, with the body reporting the workflow state (`auth_deleted` or `awaiting_final_sweep`) and the immediate-purge result. 202 = accepted, but Auth deletion not yet confirmed.
-- **(b)** Never return 200: every accepted request returns 202 with the workflow state.
+**H2 — RESOLVED, option (a).** As set out in §9.1:
 
-Either keeps the "truthful response" principle. Until confirmed, N10.3 must not implement a 200 path.
+- HTTP 200 means the Auth/account deletion is **confirmed committed during this request**, and the body exposes the truthful cleanup state (`removed` or `continuing`).
+- 202 means durably accepted but Auth deletion not yet confirmed; media is frozen and untouched, and the worker continues.
+- 410 means already deleted.
+- 5xx means the request could not be safely accepted or persisted, or a confirmed pre-Auth permanent failure occurred.
+- **HTTP 200 never means the durable workflow is COMPLETED.** Durable `completed` is governed only by the strict predicate in §12.3. After it holds: `status = completed`, `completed_at` set, `user_id` nulled and `anonymised_at` set.
+
+With H1 and H2 resolved, **N10.2A is fully frozen and Candidate E is fully frozen for N10.3.**

@@ -394,7 +394,9 @@
   - D1–D13 and D15 resolved; strict COMPLETED predicate; invariants E1–E25.
   - OWNER_ID_PATH_ANOMALIES block completion.
   - Dedicated least-privilege database role; no Auth ban; no 41B.1A in the N10.3 rehearsal.
-  - HOLD H1 (final-sweep anchor) and H2 (meaning of 200) await owner confirmation.
+  - H1 resolved (owner confirmed): `final_sweep_after = auth_deleted_at + max(W, 3600 s) + 15 min`.
+  - H2 resolved (owner confirmed): HTTP 200 = Auth deletion confirmed committed, never workflow COMPLETED.
+  - N10.2A IMPLEMENTATION CONTRACT FULLY FROZEN; Candidate E FULLY FROZEN FOR N10.3.
   - D14 privacy/legal review = production release gate; operator-alert destination = production activation blocker.
   - N10.3 NOT STARTED.
 - [ ] Storage-first finding N10: OPEN. Direction is Candidate E; N10.2 NOT STARTED. Mandatory N10.2 requirements: durable deletion state surviving Auth deletion; Storage writes blocked while pending and after the Auth user is gone; complete pagination; no fixed-depth traversal; removals in batches of at most 1,000; retryable purge worker; final sweep after maximum token lifetime; explicit completion state; privacy/retention decision. Original finding: (`delete-account` removes storage before `auth.admin.deleteUser`; not exercised by C1.18 or G3; G3 proves only the RI/database deletion).

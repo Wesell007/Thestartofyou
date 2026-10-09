@@ -4,6 +4,13 @@ Status: **PAPER / TEST DESIGN ONLY. NOT EXECUTED.** Written 7 October 2026 by Cl
 
 **PRODUCTION ACCOUNT-DELETION GATE: OPEN. READY FOR 41B.1B: NO. N10: OPEN.**
 
+**G3 closeout (9 October 2026).**
+- The targeted hosted runtime rehearsal ran and PASSED on disposable project `czhopceorfqxdbfvlnap`. Evidence is in `docs/strategy/evidence/41b-account-deletion-g3/` (`99-g3-summary.md`, `18-teardown-and-closeout.md`).
+- The owner accepted the evidence. It is remotely preserved, the project and its token were retired by the owner, and local credentials were removed.
+- Corrected §30 model and AD-1 runtime-proven.
+- **Pre-41B.1B RI/account-deletion database gate: CLOSED / PASS.**
+- N10: OPEN, so full account deletion is not declared solved. 41B.1B: NOT STARTED. 41B.1A not applied to production.
+
 **G2 status update (7 October 2026).**
 - Owner approved the corrected model, proposed 41B.0-R section 30 and AD-1.
 - Section 30 is applied to the 41B.0-R document (authoritative AD-1 wording there, including the same-`user_id` requirement).

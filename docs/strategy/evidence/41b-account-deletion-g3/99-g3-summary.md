@@ -1,5 +1,12 @@
 # G3 — 99 Gate summary: hosted runtime rehearsal of the corrected account-deletion model
 
+**Closeout (2026-10-09): G3 CLOSED PASS.**
+
+- Owner accepted the evidence; both commits remotely preserved (`211b7253`, `8af50b00`).
+- The owner retired the G3 project and revoked the G3 token; local G3 credentials and harness were removed (`18-teardown-and-closeout.md`).
+- **Pre-41B.1B RI/account-deletion database gate = CLOSED / PASS.**
+- N10 = OPEN. 41B.1B = NOT STARTED. 41B.1A applied to production = NO.
+
 **Result: G3 PASS.** All mandatory criteria of the G3 brief §18 and the G1 plan §14 are met on the disposable hosted project `tsoy-ad1-g3-rehearsal` (`czhopceorfqxdbfvlnap`, eu-west-2, PostgreSQL 17.11.0.003). Executed 2026-10-09 (UTC).
 
 **PRE-41B.1B RI/ACCOUNT-DELETION DATABASE GATE = EVIDENCE PASS, subject to owner evidence acceptance.**

@@ -2,21 +2,24 @@
 
 ## Status
 
-**N10.3A = LOCAL IMPLEMENTATION COMPLETE / HOSTED VERIFICATION PENDING.** 9 October 2026, Claude Code.
+**Current status: N10.3A = COMPLETE + M3 SECURITY PATCH; hosted verification done in N10.3B = CLOSED / PASS / RETIRED.**
+
+*Originally recorded 9 October 2026 (Claude Code): N10.3A = LOCAL IMPLEMENTATION COMPLETE / HOSTED VERIFICATION PENDING.*
 
 | Item | State |
 |---|---|
 | N10 | OPEN |
-| N10.3B (hosted rehearsal) | **CLOSED / PASS** (9 October 2026) on `toqeefrwnsjuhjmobodg` — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and SUPABASE PG_NET PLATFORM RESIDUAL; §11 HOLD raised the M3 patch below; a later HOLD for the CDN finding was resolved by owner classification (architecture §8.3 G–K, §26). Evidence `docs/strategy/evidence/n10-3b-hosted-candidate-e/` |
+| N10.3B (hosted rehearsal) | **CLOSED / PASS / RETIRED** (9 October 2026) on `toqeefrwnsjuhjmobodg` — PASS WITH DOCUMENTED D15 CDN/BROWSER CACHE RESIDUAL and SUPABASE PG_NET PLATFORM RESIDUAL; §11 HOLD raised the M3 patch below; a later HOLD for the CDN finding was resolved by owner classification (architecture §8.3 G–K, §26). Evidence `docs/strategy/evidence/n10-3b-hosted-candidate-e/` |
 | N10.3A security patch (M3) | COMPLETE; hosted proof PASS in N10.3B |
 | Candidate E hosted-runtime proven | YES |
 | N10.3B infrastructure | RETIRED — disposable rehearsal infrastructure retired after the CLOSED/PASS evidence push (owner-confirmed project deletion and PAT revocation; evidence 21) |
 | 30-day retention | technically proven (functional rehearsal) / legally unapproved (D14) |
 | Production accessed | NO |
-| Hosted project created | NO |
-| Remote Supabase accessed | NO |
-| Migrations applied remotely | NO |
-| Functions deployed | NO |
+| Hosted rehearsal project | YES — disposable N10.3B project created, used, then retired |
+| Remote Supabase accessed | YES — disposable N10.3B rehearsal only |
+| Migrations applied remotely | YES — disposable N10.3B rehearsal only (49, then M3 = 50) |
+| Functions deployed | YES — disposable N10.3B rehearsal only (`delete-account`, `account-deletion-worker`) |
+| Production modified | NO |
 | D14 (human privacy/legal review) | OPEN; production release gate |
 | Operator-alert destination | none; production activation blocker |
 | 41B.1A applied to production | NO |

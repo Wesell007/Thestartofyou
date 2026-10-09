@@ -2,6 +2,8 @@
 
 ## 1. Status
 
+**Current status (9 October 2026, after N10.3B):** Candidate E IMPLEMENTED (N10.3A + M3 security patch, §25) and HOSTED-RUNTIME PROVEN — N10.3B = CLOSED / PASS / RETIRED (§26). N10 = OPEN only for D14 human privacy/legal approval and a real operator-alert destination. Production accessed = NO. The paragraphs below record the N10.2A freeze as written at the time.
+
 **N10.2A — IMPLEMENTATION CONTRACT FULLY FROZEN. CANDIDATE E FULLY FROZEN FOR N10.3. NOT IMPLEMENTED.** The owner confirmed holds H1 and H2 on 9 October 2026 (§24.2).
 
 | Stage | Date | Commit | What it was |

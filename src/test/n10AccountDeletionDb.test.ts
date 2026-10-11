@@ -340,7 +340,7 @@ describe("N10 discovery, anomalies and strict completion (E5, E6, E10, E11, E15,
     expect((await h.asWorker("select private.n10_cleanup_completed(30) as n"))[0].n).toBe(0);
     await h.timeTravel(id, "anonymised_at = now() - interval '31 days'");
     expect((await h.asWorker("select private.n10_cleanup_completed(30) as n"))[0].n).toBe(1);
-    for (const bad of [0, 3651]) {
+    for (const bad of [-1, 3651]) { // 0 is D14 option C since M6
       expect(await errorCode(() => h.asWorker("select private.n10_cleanup_completed($1::int)", [bad]))).toBe("22023");
     }
   });

@@ -29,7 +29,8 @@ const STORAGE_DML = /\b(insert\s+into|update|delete\s+from)\s+storage\.(objects|
 describe("migrations (E7, E13, E16, H1)", () => {
   it("were created by the Supabase CLI naming scheme and sort after every existing migration", () => {
     const names = readdirSync(resolve(root, migrationDir)).sort();
-    expect(names.slice(-4, -2)).toEqual([m1.name, m2.name]);
+    // N10 and N10.4 migrations, in order, are the newest in the repository.
+    expect(names.slice(names.indexOf(m1.name)).map((n) => n.replace(/^\d{14}_/, ""))).toEqual(["n10_account_deletion_foundation.sql", "n10_account_deletion_worker_schedule.sql", "n10_worker_invocation_hardening.sql", "n10_operator_alert_ledger.sql", "email_queue_invocation_hardening.sql", "n10_privacy_minimisation.sql"]);
     for (const n of [m1.name, m2.name]) expect(n).toMatch(/^\d{14}_n10_account_deletion_[a-z_]+\.sql$/);
   });
 

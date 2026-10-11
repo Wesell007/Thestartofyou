@@ -1,6 +1,7 @@
 import { sendLovableEmail } from 'npm:@lovable.dev/email-js'
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { parseEmailQueuePayload, type EmailQueuePayload } from '../_shared/validation.ts'
+import { checkQueueInvocation, EMAIL_QUEUE_TOKEN_HEADER } from '../_shared/queueInvocation.ts'
 
 const MAX_RETRIES = 5
 const DEFAULT_BATCH_SIZE = 10
@@ -35,24 +36,6 @@ function getRetryAfterSeconds(error: unknown): number {
     return (error as { retryAfterSeconds: number | null }).retryAfterSeconds ?? 60
   }
   return 60
-}
-
-function parseJwtClaims(token: string): Record<string, unknown> | null {
-  const parts = token.split('.')
-  if (parts.length < 2) {
-    return null
-  }
-
-  try {
-    const payload = parts[1]
-      .replaceAll('-', '+')
-      .replaceAll('_', '/')
-      .padEnd(Math.ceil(parts[1].length / 4) * 4, '=')
-
-    return JSON.parse(atob(payload)) as Record<string, unknown>
-  } catch {
-    return null
-  }
 }
 
 // Move a message to the dead letter queue and log the reason.
@@ -94,10 +77,31 @@ async function moveToDlq(
 }
 
 Deno.serve(async (req) => {
-  if (req.method !== 'POST') {
+  // N10.4 / M5: invoked by pg_cron through pg_net with ONLY an invocation secret (X-Email-Queue-Token).
+  // verify_jwt = false; this check runs before any configuration, client or queue access. No JWT or
+  // service-role key is accepted from the caller (pg_net headers are readable by every login role).
+  const invocation = checkQueueInvocation(
+    req.method,
+    req.headers.get(EMAIL_QUEUE_TOKEN_HEADER),
+    Deno.env.get('EMAIL_QUEUE_INVOKE_SECRET'),
+  )
+  if (invocation === 'method_not_allowed') {
     return new Response(
       JSON.stringify({ error: 'Method not allowed' }),
       { status: 405, headers: { 'Content-Type': 'application/json', Allow: 'POST' } }
+    )
+  }
+  if (invocation === 'misconfigured') {
+    console.error('Email queue invocation secret is not configured')
+    return new Response(
+      JSON.stringify({ error: 'Server configuration error' }),
+      { status: 503, headers: { 'Content-Type': 'application/json' } }
+    )
+  }
+  if (invocation !== 'ok') {
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized' }),
+      { status: 401, headers: { 'Content-Type': 'application/json' } }
     )
   }
 
@@ -110,26 +114,6 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({ error: 'Server configuration error' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
-    )
-  }
-
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader?.startsWith('Bearer ')) {
-    return new Response(
-      JSON.stringify({ error: 'Unauthorized' }),
-      { status: 401, headers: { 'Content-Type': 'application/json' } }
-    )
-  }
-
-  // Defense in depth: verify_jwt=true already requires a valid JWT at the
-  // gateway layer. This adds an explicit role check so only service-role
-  // callers can trigger queue processing.
-  const token = authHeader.slice('Bearer '.length).trim()
-  const claims = parseJwtClaims(token)
-  if (claims?.role !== 'service_role') {
-    return new Response(
-      JSON.stringify({ error: 'Forbidden' }),
-      { status: 403, headers: { 'Content-Type': 'application/json' } }
     )
   }
 

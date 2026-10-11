@@ -86,7 +86,9 @@ describe("Auth delete classification and caller checks", () => {
   it("retention is optional and bounded (proposed 30 days is D14-gated)", () => {
     expect(readRetentionDays(env({ N10_COMPLETED_ROW_RETENTION_DAYS: "30" }))).toBe(30);
     expect(readRetentionDays(env({}))).toBeNull();
-    expect(readRetentionDays(env({ N10_COMPLETED_ROW_RETENTION_DAYS: "0" }))).toBeNull();
+    expect(readRetentionDays(env({ N10_COMPLETED_ROW_RETENTION_DAYS: "0" }))).toBe(0); // D14 option C (M6)
+    expect(readRetentionDays(env({ N10_COMPLETED_ROW_RETENTION_DAYS: "3651" }))).toBeNull();
+    expect(readRetentionDays(env({ N10_COMPLETED_ROW_RETENTION_DAYS: "-1" }))).toBeNull();
   });
   it("documentation mirror of the database retry schedule", () => {
     expect([...RETRY_SCHEDULE_MINUTES, RETRY_CAP_MINUTES]).toEqual([1, 2, 5, 15, 30, 60]);

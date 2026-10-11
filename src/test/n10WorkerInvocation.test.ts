@@ -47,14 +47,13 @@ const silentLog = { info: () => undefined, error: () => undefined };
 describe("M3 and configuration contracts", () => {
   it("M3 precedes only M4 (N10.4), CLI-named; M1 and M2 are byte-identical to their applied versions", () => {
     const names = readdirSync(resolve(root, "supabase/migrations")).sort();
-    expect(names.at(-2)).toBe(m3.name);
-    expect(names.at(-1)).toMatch(/^\d{14}_n10_operator_alert_ledger\.sql$/);
+    expect(names.slice(names.indexOf(m3.name)).map((n) => n.replace(/^\d{14}_/, ""))).toEqual(["n10_worker_invocation_hardening.sql", "n10_operator_alert_ledger.sql", "email_queue_invocation_hardening.sql", "n10_privacy_minimisation.sql"]);
     expect(m3.name).toMatch(/^\d{14}_n10_worker_invocation_hardening\.sql$/);
     expect(sha256Lf(m1.sql)).toBe("bc73c4275e00f1a671363590bae96115655183586c5cb7722a15ad356282c2bd");
     expect(sha256Lf(m2.sql)).toBe("99c42be0f2c735c5754bc1d3cae2f267357e778b20400e3692f9664a7349fdc4");
   });
 
-  it("only account-deletion-worker has verify_jwt = false; delete-account stays true", () => {
+  it("account-deletion-worker has verify_jwt = false; delete-account stays true", () => {
     const config = read("supabase/config.toml");
     expect(config).toMatch(/\[functions\.account-deletion-worker\]\r?\nverify_jwt = false/);
     expect(config).toMatch(/\[functions\.delete-account\]\r?\nverify_jwt = true/);

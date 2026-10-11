@@ -211,12 +211,15 @@ export function isDeletedUserError(error: { status?: number; code?: string; mess
   return error.code === "user_not_found" || error.status === 404 || /sub claim in JWT does not exist/i.test(error.message ?? "");
 }
 
-/** D2/D3: retention of anonymised completed rows (proposed 30 days, D14-gated). Missing means skip cleanup. */
+/**
+ * D2/D3: retention of anonymised completed rows (proposed 30 days, D14-gated). Missing or malformed means
+ * skip cleanup (rows are kept). 0 = D14 option C: remove completed rows on the next worker run (M6).
+ */
 export function readRetentionDays(env: EnvReader): number | null {
   const raw = env("N10_COMPLETED_ROW_RETENTION_DAYS");
   if (!raw || !/^\d{1,4}$/.test(raw.trim())) return null;
   const days = Number(raw.trim());
-  return days >= 1 && days <= 3650 ? days : null;
+  return days >= 0 && days <= 3650 ? days : null;
 }
 
 // ---------------------------------------------------------------------------

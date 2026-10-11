@@ -4,6 +4,12 @@
 
 Phase: N10.4 — Production Readiness: Privacy/Legal + Operator Alert. Production has not been accessed; Candidate E is not active in production.
 
+**Revision 2 (11 October 2026) — engineering changes made since the first draft (all local, not deployed; D14 still OPEN):**
+- **M6 `20261011050647_n10_privacy_minimisation.sql`:** when an Auth user is deleted, the account's rows in `public.email_send_log` and `public.email_unsubscribe_tokens` (matched by e-mail address, case-insensitive) are deleted in the same transaction (rows K and M). `public.suppressed_emails` is **kept** pending your decision (row L). The minimisation can never block the Auth deletion.
+- **M6 + worker:** completed-row retention now also accepts **0 days** (option C), so every option in §5 is implementable by configuration alone.
+- **M5 `20261011050645_email_queue_invocation_hardening.sql`:** the e-mail queue no longer sends a service-role key through pg_net (security fix).
+- **Operator alerts:** destination `contact@thestartofyou.com`, sender `contact@wesellproducts.co.uk` (owner decision); alerts contain no personal data.
+
 ## 1. Executive summary
 
 - Account deletion (Candidate E) is **account-first**: the Auth account is hard-deleted and confirmed by the database **before** any media is removed; the user's database records cascade away with the Auth row; private media is then purged; a final sweep runs after the longest valid access-token lifetime; the operational deletion record is anonymised on completion.
@@ -51,10 +57,10 @@ Legend — *Direct*: identifies a person on its own. *Indirect*: could identify 
 | H | pg_cron / pg_net records | cron run history (no user data); pg_net responses (`{"ok":true}`); the N10 request carries no user data (M3) | no | no | pg_cron history / pg_net response TTL | platform default | operations | partly | operations | automatic |
 | I | Database backups / PITR (Supabase-managed) | full database snapshots taken before deletion still contain the deleted account until they expire | yes | yes | backup expiry | per Supabase plan (daily backups / PITR window) | disaster recovery | via plan | resilience | backup rotation |
 | J | Copies already delivered (D15) | pre-issued signed URLs, CDN-cached authenticated responses (until purge), browser/device caches, files the user downloaded | yes | yes | CDN: invalidated on purge (measured within seconds); browser/device: never recallable | — | — | no | — | outside server control |
-| K | `public.email_send_log` (pre-existing e-mail infrastructure) | `recipient_email`, template, status, errors | **yes (e-mail)** | yes | **not deleted by account deletion today** | none defined | e-mail delivery audit | — | — | **NEEDS DECISION** |
-| L | `public.suppressed_emails` | e-mail address + reason (unsubscribe/bounce/complaint) | **yes** | yes | **not deleted today** | none defined | honouring unsubscribes/bounces | — | possibly legally useful to keep a suppression record — **LEGAL REVIEW REQUIRED** | **NEEDS DECISION** |
-| M | `public.email_unsubscribe_tokens` | e-mail + token | **yes** | yes | **not deleted today** | none defined | unsubscribe links | — | — | **NEEDS DECISION** |
-| N | PostHog analytics (only for users who gave analytics consent) | events and a person profile keyed by the user id (`identify`) | pseudonymous | yes | **not deleted by account deletion today** | PostHog project retention | product analytics | in PostHog | — | **NEEDS DECISION** (e.g. PostHog person deletion on account deletion) |
+| K | `public.email_send_log` (pre-existing e-mail infrastructure) | `recipient_email`, template, status, errors | **yes (e-mail)** | yes | **deleted with the Auth user (M6)**; rows logged under an *earlier* e-mail address (before an address change) are not matched | none after deletion | e-mail delivery audit | — | — | M6 trigger — **confirm acceptable** |
+| L | `public.suppressed_emails` | e-mail address + reason (unsubscribe/bounce/complaint) | **yes** | yes | **kept** (not touched by M6) | indefinite unless decided | honouring unsubscribes/bounces so the address is never e-mailed again | — | possibly legally useful to keep a suppression record — **LEGAL REVIEW REQUIRED** | **NEEDS DECISION** (keep and disclose, or delete — a one-line change to M6) |
+| M | `public.email_unsubscribe_tokens` | e-mail + token | **yes** | yes | **deleted with the Auth user (M6)** | none after deletion | unsubscribe links | — | — | M6 trigger — **confirm acceptable** |
+| N | PostHog analytics (only for users who gave analytics consent) | events and a person profile keyed by the user id (`identify`) | pseudonymous | yes | the browser's PostHog identity is reset at sign-out after deletion; **server-side person data is not deleted** | PostHog project retention | product analytics | in PostHog | — | **NEEDS DECISION**: (a) accept PostHog retention and disclose it, (b) an operator deletes the person in PostHog per request, or (c) implement server-side deletion (needs a new PostHog personal API key — not added without your approval) |
 | O | Lovable Email provider logs (third party) | recipient e-mail of past transactional/auth e-mails; operator-alert recipients | yes | yes | provider retention | provider-defined | delivery | provider | — | provider expiry — **VERIFY** |
 | P | AI providers (third party, via the AI gateway) | content of past AI requests as processed by the provider | possibly | yes | provider retention | provider-defined | — | provider | — | **VERIFY** provider terms |
 | Q | `public.ai_rate_limits` | salted hash of IP address + user agent, short counting window; no user id | no | weak | rolling window | short | abuse protection | — | security | overwritten |
@@ -71,7 +77,7 @@ Confirmed against the real schema (M1 + M4): after completion the row contains o
 |---|---|---|
 | **A. APPROVE 30 days** | keep completed anonymised rows 30 days | set `N10_COMPLETED_ROW_RETENTION_DAYS = 30` at activation |
 | **B. APPROVE a different number of days (1–3650)** | e.g. 7 or 90 | set the variable to the approved number; no code change; update the privacy copy (§8 E) |
-| **C. REJECT post-completion retention** | delete on completion | today the minimum is 1 day (cleanup runs on the worker cadence for rows older than N days). Deleting at completion would need a small code/migration change (e.g. allow 0 days, or delete inside the completion step) and the loss of the post-incident audit trail; estimated a small, testable change |
+| **C. REJECT post-completion retention** | delete on completion | **implemented (M6):** set `N10_COMPLETED_ROW_RETENTION_DAYS = 0`; completed anonymised rows are removed on the next worker run (about a minute). The post-incident audit trail is then limited to operator alerts and platform logs |
 
 If the variable is **unset**, completed rows are kept **indefinitely** (cleanup skipped). Activation must therefore set an approved value.
 
@@ -117,7 +123,7 @@ N10 enforces **origin access**: once deletion is requested the account's media c
 > You can permanently delete your account from Account settings. When you do, we delete your sign-in account and the information saved to it, and we remove the private photos, videos and voice notes stored with your account. Some of this removal continues in the background for a short time after your account is gone; during that time your files can't be viewed.
 
 **E. Retention**
-> After deletion we keep a minimal technical record that a deletion took place — when it was requested and completed, and whether it succeeded — for [N] days. It doesn't include your name, email address, profile, journey details or any content you saved. [If approved: Records needed to respect an email unsubscribe may be kept so we don't email you again.] Our hosting provider keeps backups and system logs for a limited time under its own retention schedule, after which they are deleted.
+> After deletion we keep a minimal technical record that a deletion took place — when it was requested and completed, and whether it succeeded — for [N] days. It doesn't include your name, email address, profile, journey details or any content you saved. Our email delivery records for your address are deleted with your account. [If approved: If you had unsubscribed from our emails, or an email to you bounced, we keep your address on a do-not-email list so we never email you again.] Our hosting provider keeps backups and system logs for a limited time under its own retention schedule, after which they are deleted.
 
 **F. Downloaded and cached copies**
 > Deleting your account can't reach copies that already left our service — for example files you downloaded, screenshots, or copies your browser saved. Links to your photos that were created before you deleted your account stop working once the files are removed.
@@ -127,7 +133,7 @@ These drafts avoid guarantees N10 cannot make (no claim of instant purge, no cla
 ## 9. Unresolved legal / privacy questions
 
 1. Lawful basis and necessity of keeping the completed deletion record, and for how long (§5, §6). **LEGAL REVIEW REQUIRED.**
-2. Whether `email_send_log`, `suppressed_emails`, `email_unsubscribe_tokens` (K–M) must be deleted or minimised at account deletion, or may be retained (and disclosed) — e.g. a suppression list to honour unsubscribes. **LEGAL REVIEW REQUIRED.** (If deletion is required, that is an engineering change outside the frozen N10 scope and is not made in this phase.)
+2. `email_send_log` and `email_unsubscribe_tokens` (K, M) are now deleted with the Auth user (M6) — confirm this is acceptable. Whether `suppressed_emails` (L) may be kept to honour unsubscribes/bounces (and disclosed) or must be deleted. **LEGAL REVIEW REQUIRED.**
 3. Whether PostHog person data (N) must be deleted on account deletion. **LEGAL REVIEW REQUIRED.**
 4. Supabase backup/PITR and log retention for the production plan, and whether the disclosure in §8 E is sufficient. **VERIFY plan settings + LEGAL REVIEW.**
 5. GoTrue audit log content and retention (A2). **VERIFY + LEGAL REVIEW.**
@@ -138,7 +144,7 @@ These drafts avoid guarantees N10 cannot make (no claim of instant purge, no cla
 
 - [ ] Read the deletion sequence (§3) and the hosted evidence summary (`docs/strategy/evidence/n10-3b-hosted-candidate-e/99-summary.md`).
 - [ ] Decide the completed-row retention (§5: A / B / C).
-- [ ] Decide items K–N (pre-existing e-mail and analytics records).
+- [ ] Confirm K and M (now deleted with the account, M6); decide L (suppression list) and N (PostHog).
 - [ ] Confirm backup/log/third-party retention statements are accurate for the production plan.
 - [ ] Approve or amend the UI copy (§8 A–C) and the privacy wording (§8 D–F).
 - [ ] Confirm the D15 residual disclosure is acceptable.

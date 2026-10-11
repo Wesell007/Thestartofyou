@@ -1,6 +1,6 @@
 # N10 — Operator alerting (D5)
 
-**Status: IMPLEMENTED LOCALLY (N10.4, M4 + worker). Operator-alert blocker = OPEN** until a real destination and sender are configured and the production smoke test (§8) passes. No production change has been made.
+**Status: IMPLEMENTED LOCALLY (N10.4, M4 + worker). Destination and sender DECIDED by the owner (11 October 2026, §2). Operator-alert blocker = OPEN** until the values are set as production secrets at controlled activation and the production smoke test (§8) passes. No production change has been made.
 
 ## 1. Design
 
@@ -18,7 +18,15 @@
 | `LOVABLE_API_KEY` | existing project secret | same, `reason = provider_unconfigured` |
 | `N10_ENVIRONMENT` | label in the subject/body (`[a-z0-9-]{1,32}`, e.g. `production`) | `unspecified` |
 
-**No existing operational/admin inbox was found in the repository** (no ops/admin/support address or alert variable anywhere). Both the destination and the sender therefore need owner input.
+**Owner decision (11 October 2026) — planned production configuration** (to be set as Edge Function secrets only at controlled activation; never hardcoded in source):
+
+| Variable | Value | Notes |
+|---|---|---|
+| `N10_OPERATOR_ALERT_EMAIL` | `contact@thestartofyou.com` | dedicated The Start of You brand mailbox; **receives** operational account-deletion alerts |
+| `N10_OPERATOR_ALERT_FROM` | `contact@wesellproducts.co.uk` | existing Lovable-connected / verified business sender; **sends** the alerts |
+| `N10_ENVIRONMENT` | `production` | |
+
+Delivery stays on Lovable Email (not Hostinger); `thestartofyou.com` sender verification is not required for N10. Before activation, confirm in the Lovable Email settings that `contact@wesellproducts.co.uk` is a verified sender for this project (a rejected sender would surface as `n10_operator_alert_delivery_failed` and alerts would stay pending).
 
 ## 3. Event matrix
 

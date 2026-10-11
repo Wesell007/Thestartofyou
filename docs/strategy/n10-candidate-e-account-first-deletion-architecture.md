@@ -655,3 +655,10 @@ Status after the patch: N10 = OPEN. D14 (privacy/legal) remains the production r
 - **Platform guidance divergence (recorded):** current Supabase guidance recommends that cron/pg_net callers send a secret API key in the `apikey` header. On hosted projects pg_net's queue is readable by every login role (§25), so N10 keeps M3's invocation-only secret instead.
 - **Pre-existing finding outside N10 code (owner decision before activation):** the historical e-mail queue dispatcher `public.email_queue_dispatch` (migration `20260720110000`) sends `Authorization: Bearer <service-role key>` through pg_net. If configured in production, that key passes through the same PUBLIC-readable queue, so any database login role — including `account_deletion_worker` once activated — could read it. Not changed in N10.4.
 - **Retention findings for D14 (pre-existing, not changed):** `email_send_log`, `suppressed_emails`, `email_unsubscribe_tokens` (e-mail addresses, no FK to Auth) and PostHog person data (consenting users) are not removed by account deletion today.
+
+### 27.1 N10.4 continued (11 October 2026)
+
+- **Alert configuration decided by the owner:** destination `contact@thestartofyou.com`, sender `contact@wesellproducts.co.uk`, environment `production` (to be set only at activation). The smoke test remains pending.
+- **M5 `20261011050645_email_queue_invocation_hardening.sql` (security fix):** `public.email_queue_dispatch` and the `process-email-queue` cron job now send only `X-Email-Queue-Token` (Vault `email_queue_invoke_secret`); `process-email-queue` (`verify_jwt = false`) authenticates it first. The pre-existing service-role-in-pg_net exposure (§27) is removed in the repository; production changes only at activation.
+- **M6 `20261011050647_n10_privacy_minimisation.sql`:** e-mail log and unsubscribe-token rows for an address are deleted with its Auth user (never blocking the Auth deletion); `suppressed_emails` kept pending D14; completed-row retention accepts 0 days (D14 option C).
+- D14 = OPEN. Activation checklist: `docs/strategy/n10-production-activation-checklist.md`.

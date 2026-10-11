@@ -43,8 +43,13 @@ describe("D14 approval pack", () => {
     for (const table of ["email_send_log", "suppressed_emails", "email_unsubscribe_tokens", "PostHog"]) expect(doc).toContain(table);
   });
 
-  it("the operator-alert blocker is not claimed closed and no destination address is written down", () => {
+  it("the operator-alert blocker is not claimed closed and only the owner-approved addresses appear", () => {
     expect(alerting).toMatch(/Operator-alert blocker = OPEN/);
-    expect(alerting + doc).not.toMatch(/[A-Za-z0-9._%+-]+@(?!example\.invalid)[A-Za-z0-9-]+\.[A-Za-z]{2,}/);
+    // Only the two owner-approved addresses (destination / sender) may appear, as documented configuration.
+    const approved = new Set(["contact@thestartofyou.com", "contact@wesellproducts.co.uk"]);
+    const found = (alerting + doc).match(/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g) ?? [];
+    for (const address of found) expect(approved.has(address) || address.endsWith("@example.invalid"), address).toBe(true);
+    expect(alerting).toMatch(/\| `N10_OPERATOR_ALERT_EMAIL` \| `contact@thestartofyou\.com` \|/);
+    expect(alerting).toMatch(/\| `N10_OPERATOR_ALERT_FROM` \| `contact@wesellproducts\.co\.uk` \|/);
   });
 });

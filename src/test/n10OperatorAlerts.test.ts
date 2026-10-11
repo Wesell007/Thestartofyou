@@ -98,11 +98,32 @@ describe("M4 static contract", () => {
   it("no alert address is hardcoded and the provider is reached only from the runtime, exactly pinned, without pg_net", () => {
     const shared = read("supabase/functions/_shared/accountDeletion.ts");
     const runtime = read("supabase/functions/_shared/accountDeletionRuntime.ts");
-    for (const src of [shared, runtime, m4.sql]) expect(src).not.toMatch(/[A-Za-z0-9._%+-]+@(?!example\.invalid)[A-Za-z0-9-]+\.[A-Za-z]{2,}/);
-    expect(runtime).toMatch(/from "npm:@lovable\.dev\/email-js@0\.3\.1"/);
-    expect(runtime).toMatch(/Deno\.env\.get\("LOVABLE_API_KEY"\)/);
-    expect(shared).not.toMatch(/LOVABLE_API_KEY|sendLovableEmail/);
-    expect(runtime).not.toMatch(/net\.http|enqueue_email|Authorization/);
+    const adapter = read("supabase/functions/_shared/operatorAlertProvider.ts");
+    for (const src of [shared, runtime, adapter, m4.sql]) expect(src).not.toMatch(/[A-Za-z0-9._%+-]+@(?!example\.invalid)[A-Za-z0-9-]+\.[A-Za-z]{2,}/);
+    for (const src of [runtime, adapter]) expect(src).not.toMatch(/net\.http|enqueue_email|Authorization/);
+    for (const spec of adapter.match(/"npm:[^"]+"/g) ?? []) expect(spec).toMatch(/^"npm:(@[a-z0-9.-]+\/)?[a-z0-9.-]+@\d+\.\d+\.\d+"$/);
+  });
+
+  it("portability: the provider is an isolated, swappable adapter behind the neutral OperatorNotifier boundary", () => {
+    const PROVIDER = /lovable|email-js|resend|postmark|sendgrid|mailgun|hostinger|\bses\b|nodemailer/i;
+    const neutral = {
+      "accountDeletion.ts (core)": read("supabase/functions/_shared/accountDeletion.ts"),
+      "accountDeletionRuntime.ts (wiring)": read("supabase/functions/_shared/accountDeletionRuntime.ts"),
+      "account-deletion-worker": read("supabase/functions/account-deletion-worker/index.ts"),
+      "delete-account": read("supabase/functions/delete-account/index.ts"),
+      M4: m4.sql,
+    };
+    const code = (src: string) => src.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/(^|[^:])\/\/[^\n]*/g, "$1").replace(/--[^\n]*/g, " ");
+    for (const [name, src] of Object.entries(neutral)) expect(code(src), name).not.toMatch(PROVIDER);
+    const runtime = read("supabase/functions/_shared/accountDeletionRuntime.ts");
+    expect(runtime).toMatch(/import \{ createConfiguredOperatorNotifier \} from "\.\/operatorAlertProvider\.ts";/);
+    expect(runtime).toMatch(/notifier: createConfiguredOperatorNotifier\(\)/);
+    const adapter = read("supabase/functions/_shared/operatorAlertProvider.ts");
+    expect(adapter).toMatch(/export function createConfiguredOperatorNotifier\(\): OperatorNotifier \| undefined/);
+    expect(adapter).toMatch(/import type \{ OperatorNotifier \} from "\.\/accountDeletion\.ts";/);
+    // provider-neutral configuration stays in the core; only the provider credential lives in the adapter
+    expect(read("supabase/functions/_shared/accountDeletion.ts")).toMatch(/N10_OPERATOR_ALERT_EMAIL[\s\S]*N10_OPERATOR_ALERT_FROM[\s\S]*N10_ENVIRONMENT/);
+    expect(code(adapter)).not.toMatch(/N10_OPERATOR_ALERT_EMAIL|N10_OPERATOR_ALERT_FROM|N10_ENVIRONMENT/);
   });
 });
 

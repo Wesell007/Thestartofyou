@@ -1,0 +1,56 @@
+{
+ "storage": {
+  "fail_window_2026-10-13T23:42:50Z..23:46:00Z": {
+   "http": [
+    200,
+    200
+   ],
+   "object_removed_events_for_user": 0,
+   "delete_calls_project_wide": 0,
+   "errors": [
+    null,
+    null
+   ]
+  },
+  "retry_window_23:46:00Z..23:47:30Z": {
+   "http": [
+    200,
+    200
+   ],
+   "object_removed_events_for_user": 2,
+   "delete_calls_project_wide": 2,
+   "errors": [
+    null,
+    null
+   ]
+  }
+ },
+ "auth_logs": [
+  {
+   "t": "2026-10-13T23:42:54.000000",
+   "level": "error",
+   "msg": "request completed",
+   "status": 500,
+   "path": "/admin/users/<uuid>",
+   "method": "DELETE",
+   "error": "ERROR: N10.5 TEST-ONLY forced e-mail cleanup failure (SQLSTATE P0001)"
+  },
+  {
+   "t": "2026-10-13T23:44:00.000000",
+   "level": "error",
+   "msg": "request completed",
+   "status": 500,
+   "path": "/admin/users/<uuid>",
+   "method": "DELETE",
+   "error": "ERROR: N10.5 TEST-ONLY forced e-mail cleanup failure (SQLSTATE P0001)"
+  },
+  {
+   "t": "2026-10-13T23:46:00.000000",
+   "level": "info",
+   "msg": "request completed",
+   "status": 200,
+   "path": "/admin/users/<uuid>",
+   "method": "DELETE"
+  }
+ ]
+}

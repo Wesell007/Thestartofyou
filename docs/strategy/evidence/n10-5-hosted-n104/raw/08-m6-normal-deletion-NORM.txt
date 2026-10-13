@@ -1,0 +1,16 @@
+NORM before: {'auth': 1, 'app_rows': 1, 'email_log': 2, 'unsub_tokens': 1, 'suppressed': 1, 'media': 2, 'media_byte_identical': True}
+PASS NORM fixtures present
+delete-account at 2026-10-13 23:42:30.650466+00: HTTP 200 {"status":"account_deleted","cleanup":"removed"}
+PASS HTTP 200 account_deleted / removed — {"status":"account_deleted","cleanup":"removed"}
+NORM after: {'auth': 0, 'app_rows': 0, 'email_log': 0, 'unsub_tokens': 0, 'suppressed': 1, 'media': 0, 'media_byte_identical': False}
+PASS Auth row gone (real GoTrue admin delete committed)
+PASS app row cascaded
+PASS both email_send_log rows deleted (mixed case) by M6 in the same transaction
+PASS unsubscribe token deleted
+PASS suppression row KEPT
+PASS media purged (after Auth absence confirmed)
+request: {'status': 'awaiting_final_sweep', 'error_class': '', 'attempts': '0', 'auth_deleted_at': '2026-10-13 23:42:32.107607+00', 'final_sweep_after': '2026-10-14 00:57:32.107607+00', 'window': '01:15:00', 'completed_at': '', 'objects_removed': '2', 'next_attempt_at': '2026-10-14 00:57:32.107607+00', 'id': '82201f9d-1fa7-4885-98ef-9ec2bb05cec1'}
+PASS request awaiting_final_sweep, not completed; window 01:15:00 — awaiting_final_sweep 01:15:00
+PASS CTRL unchanged
+
+RESULT: PASS

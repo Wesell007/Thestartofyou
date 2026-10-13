@@ -1,0 +1,53 @@
+N10.5 GUARD REFUSED: management path not allowed: /v1/projects/wogepxfipdipogyogced
+N10.5 GUARD REFUSED: management path not allowed: /v1/projects
+N10.5 GUARD REFUSED: management path not allowed: /v1/projects/abcdefghijklmnopqrst/../zyxwvutsrqponmlkjihg
+N10.5 GUARD REFUSED: only /auth/v1/, /storage/v1/, /functions/v1/ and /rest/v1/ paths are allowed
+N10.5 GUARD REFUSED: a credential value appeared in output; refusing to continue
+N10.5 GUARD REFUSED: credential-shaped value in output
+N10.5 GUARD REFUSED: target mismatch
+PASS cli --version accepted
+PASS cli db push accepted (internal --db-url)
+PASS cli deploy delete-account accepted
+PASS cli deploy account-deletion-worker accepted
+PASS cli deploy process-email-queue accepted
+PASS cli deploy ai-search refused
+PASS cli deploy-all refused
+PASS cli link refused
+PASS cli db reset refused
+PASS cli caller --db-url refused
+PASS cli other ref refused
+PASS cli denylisted arg wogepxfipdipogyogced refused
+PASS cli denylisted target file wogepxfipdipogyogced refused
+PASS cli denylisted arg wwtcnbjhttjtklpxhrkd refused
+PASS cli denylisted target file wwtcnbjhttjtklpxhrkd refused
+PASS cli denylisted arg dlftnirrnirlkhxpofoq refused
+PASS cli denylisted target file dlftnirrnirlkhxpofoq refused
+PASS cli denylisted arg czhopceorfqxdbfvlnap refused
+PASS cli denylisted target file czhopceorfqxdbfvlnap refused
+PASS cli denylisted arg gbhwpzofnswlryqjoumw refused
+PASS cli denylisted target file gbhwpzofnswlryqjoumw refused
+PASS cli denylisted arg toqeefrwnsjuhjmobodg refused
+PASS cli denylisted target file toqeefrwnsjuhjmobodg refused
+PASS cli missing expectation refused
+PASS cli expectation mismatch refused
+PASS cli empty target refused
+PASS cli 0-byte PAT refused
+PASS cli foreign link metadata refused
+PASS cli other sealed commit refused
+PASS psql owner accepted
+PASS psql worker accepted
+PASS psql worker URL wrong role refused
+PASS psql production host arg refused
+PASS lib mgmt target accepted
+PASS lib mgmt production refused
+PASS lib mgmt org listing refused
+PASS lib mgmt traversal refused
+PASS lib project call to target host
+PASS lib graphql refused
+PASS lib leak check: password
+PASS lib leak check: JWT shape
+PASS lib leak check: clean text passes
+PASS lib expectation mismatch refused
+PASS lib no real network
+
+N10.5 guard self-test: 44/44 PASS

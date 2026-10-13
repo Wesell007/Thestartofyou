@@ -1,0 +1,9 @@
+PASS service-role move canonical -> misfiled (supported Storage API) — HTTP 200
+PASS owner_id preserved = ANOM at a non-canonical path
+delete-account at 2026-10-13 23:48:09.859646+00: HTTP 200 {"status":"account_deleted","cleanup":"continuing"}
+PASS 200 account_deleted / continuing
+request {'status': 'purge_attention', 'error_class': 'owner_id_path_anomaly', 'attempts': '0', 'auth_deleted_at': '2026-10-13 23:48:09.321453+00', 'final_sweep_after': '2026-10-14 01:03:09.321453+00', 'window': '01:15:00', 'completed_at': '', 'objects_removed': '1', 'next_attempt_at': '2026-10-14 00:48:09.507332+00', 'id': '59b8405d-ae87-4e9d-9137-317d4c227c2e'}
+PASS purge_attention / owner_id_path_anomaly
+ledger before worker tick: alert_key|failures = <null>|0
+
+RESULT: PASS

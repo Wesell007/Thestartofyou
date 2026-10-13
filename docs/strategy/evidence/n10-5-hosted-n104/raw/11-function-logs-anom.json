@@ -1,0 +1,38 @@
+[
+ {
+  "event_message": "{\"event\":\"n10_retention_cleanup\",\"removed_rows\":0}\n",
+  "timestamp": "2026-10-13T23:48:00.396000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_worker_run\",\"processed\":0,\"token_window_ok\":true,\"retention_configured\":true,\"alerts_sent\":0,\"alerts_failed\":0}\n",
+  "timestamp": "2026-10-13T23:48:00.400000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_operator_notification_required\",\"kind\":\"purge_attention\",\"request_id\":\"59b8405d-ae87-4e9d-9137-317d4c227c2e\",\"error_class\":null}\n",
+  "timestamp": "2026-10-13T23:48:09.514000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_retention_cleanup\",\"removed_rows\":0}\n",
+  "timestamp": "2026-10-13T23:49:00.549000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_worker_run\",\"processed\":0,\"token_window_ok\":true,\"retention_configured\":true,\"alerts_sent\":0,\"alerts_failed\":0}\n",
+  "timestamp": "2026-10-13T23:49:00.554000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_operator_alert_unconfigured\",\"reason\":\"provider_unconfigured\",\"pending\":1}\n",
+  "timestamp": "2026-10-13T23:49:00.554000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_retention_cleanup\",\"removed_rows\":0}\n",
+  "timestamp": "2026-10-13T23:50:00.405000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_worker_run\",\"processed\":0,\"token_window_ok\":true,\"retention_configured\":true,\"alerts_sent\":0,\"alerts_failed\":0}\n",
+  "timestamp": "2026-10-13T23:50:00.410000"
+ },
+ {
+  "event_message": "{\"event\":\"n10_operator_alert_unconfigured\",\"reason\":\"provider_unconfigured\",\"pending\":1}\n",
+  "timestamp": "2026-10-13T23:50:00.410000"
+ }
+]

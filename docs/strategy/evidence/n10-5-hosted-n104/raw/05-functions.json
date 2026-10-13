@@ -1,0 +1,23 @@
+[
+ {
+  "slug": "delete-account",
+  "version": 1,
+  "status": "ACTIVE",
+  "verify_jwt": true,
+  "ezbr_sha256": "760e6d917766b67d383f6d07a9e6bad412ae8621e9af01e401d3ec4e62faf164"
+ },
+ {
+  "slug": "account-deletion-worker",
+  "version": 1,
+  "status": "ACTIVE",
+  "verify_jwt": false,
+  "ezbr_sha256": "8b28fe2706ccdc5a3bc25f3b4b5e03f06b1b9b1dc9eb10979fa0c995b33bc762"
+ },
+ {
+  "slug": "process-email-queue",
+  "version": 1,
+  "status": "ACTIVE",
+  "verify_jwt": false,
+  "ezbr_sha256": "6b8cda96269e52c347a514c6f5a528e8837140c4545b2268e05fdc5bbfc868e1"
+ }
+]

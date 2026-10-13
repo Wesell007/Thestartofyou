@@ -1,0 +1,4 @@
+[n105_cli] target=mwlryyionkpjbecnbsiq sealed=945677ec cmd=supabase db advisors --type security
+Connecting to remote database...
+No issues found
+{"results":[],"message":"db advisors"}

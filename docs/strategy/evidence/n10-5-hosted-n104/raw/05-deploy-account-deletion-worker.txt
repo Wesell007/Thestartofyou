@@ -1,0 +1,6 @@
+[n105_cli] target=mwlryyionkpjbecnbsiq sealed=945677ec cmd=supabase functions deploy account-deletion-worker --project-ref mwlryyionkpjbecnbsiq --use-api
+Uploading asset (account-deletion-worker): supabase/functions/account-deletion-worker/index.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletionRuntime.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/operatorAlertProvider.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletion.ts
+{"project_ref":"mwlryyionkpjbecnbsiq","functions":["account-deletion-worker"],"dashboard_url":"https://supabase.com/dashboard/project/mwlryyionkpjbecnbsiq/functions","message":"Deployed Functions."}

@@ -1,0 +1,34 @@
+harmless_messages_before
+1
+(1 row)
+send
+(0 rows)
+BEGIN
+?column?
+t
+(1 row)
+?column?
+t
+(1 row)
+email_queue_dispatch
+2
+(1 row)
+queued_requests
+1
+(1 row)
+method | is_email_queue | header_keys | token_is_invocation_only | service_role_jwt | anon_jwt | db_password | worker_password | n10_db_url | credential_shape | body
+POST | t | Content-Type,X-Email-Queue-Token | t | f | f | f | f | f | f | {}
+(1 row)
+ROLLBACK
+?column? | count
+deleted harmless messages | 1
+(1 row)
+?column? | count
+after: queue | 0
+(1 row)
+?column? | count
+after: vault | 0
+(1 row)
+?column? | count
+after: mail queue | 0
+(1 row)

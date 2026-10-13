@@ -1,0 +1,38 @@
+?column? | current_user
+whoami | account_deletion_worker
+== denied: Auth / Storage / private / app / e-mail / vault / cron
+psql:sql/worker_probes.sql:5: ERROR:  permission denied for schema auth
+LINE 1: select count(*) from auth.users;
+                             ^
+psql:sql/worker_probes.sql:6: ERROR:  permission denied for schema storage
+LINE 1: select count(*) from storage.objects;
+                             ^
+psql:sql/worker_probes.sql:7: ERROR:  permission denied for table account_deletion_requests
+psql:sql/worker_probes.sql:8: ERROR:  permission denied for table profiles
+psql:sql/worker_probes.sql:9: ERROR:  permission denied for table email_send_log
+psql:sql/worker_probes.sql:10: ERROR:  permission denied for table email_unsubscribe_tokens
+psql:sql/worker_probes.sql:11: ERROR:  permission denied for table suppressed_emails
+BEGIN
+psql:sql/worker_probes.sql:12: ERROR:  permission denied for table email_send_log
+ROLLBACK
+psql:sql/worker_probes.sql:13: ERROR:  permission denied for schema vault
+LINE 1: select count(*) from vault.decrypted_secrets;
+                             ^
+psql:sql/worker_probes.sql:14: ERROR:  permission denied for schema cron
+LINE 1: select cron.schedule('n105-probe','* * * * *','select 1');
+               ^
+psql:sql/worker_probes.sql:15: ERROR:  permission denied for function n10_lock_leased
+psql:sql/worker_probes.sql:16: ERROR:  permission denied for function n10_forget_email_records
+psql:sql/worker_probes.sql:17: ERROR:  permission denied for function email_queue_dispatch
+== pg_net (documented platform residual; rolled back)
+visible_queue_rows
+0
+BEGIN
+enqueued_in_txn
+t
+ROLLBACK
+== allowed N10 surface
+auth_user_exists_zero
+f
+alerts_pending
+0

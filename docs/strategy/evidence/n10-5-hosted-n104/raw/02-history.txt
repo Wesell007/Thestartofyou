@@ -1,0 +1,12 @@
+count | max
+53 | 20261011050647
+(1 row)
+extname | extversion
+pg_cron | 1.6.4
+pg_net | 0.20.4
+pgmq | 1.5.1
+supabase_vault | 0.3.1
+(4 rows)
+id | public
+weekly-photos | f
+(1 row)

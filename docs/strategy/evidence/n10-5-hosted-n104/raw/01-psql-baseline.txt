@@ -1,0 +1,15 @@
+?column? | current_database | current_user | current_setting
+db | postgres | postgres | 17.11
+(1 row)
+?column? | count
+auth users | 0
+(1 row)
+?column? | ?column?
+migrations table | f
+(1 row)
+?column? | count
+public tables | 0
+(1 row)
+?column? | count
+buckets | 0
+(1 row)

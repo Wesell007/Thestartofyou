@@ -1,0 +1,5 @@
+at 2026-10-13 23:44:17.229059+00: {'auth': 1, 'app_rows': 1, 'email_log': 2, 'unsub_tokens': 1, 'suppressed': 1, 'media': 2, 'media_byte_identical': True}; request requested auth_transient attempts=2 next=2026-10-13 23:46:00.561558+00
+PASS live cron retries keep failing: everything unchanged
+PASS still requested, never completed
+
+RESULT: PASS

@@ -1,0 +1,1 @@
+{"source": "claude.ai Supabase connector get_project (PAT lacks project_admin_read)", "ref": "mwlryyionkpjbecnbsiq", "name": "tsoy-n10-5-rehearsal", "organization_id": "xzickmpbmsjgkowcqpbg", "region": "eu-west-2", "status": "ACTIVE_HEALTHY", "database": {"version": "17.11.0.003", "postgres_engine": "17"}, "created_at": "2026-10-13T20:41:10.737033Z"}

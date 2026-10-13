@@ -1,0 +1,10 @@
+PASS FAIL fixtures present — {'auth': 1, 'app_rows': 1, 'email_log': 2, 'unsub_tokens': 1, 'suppressed': 1, 'media': 2, 'media_byte_identical': True}
+blocker installed 1
+delete-account 2026-10-13 23:42:53.954498+00 .. 2026-10-13 23:42:54.71455+00: HTTP 202 {"status":"deletion_in_progress"}
+PASS HTTP 202 deletion_in_progress (GoTrue deletion failed; not 200) — {"status":"deletion_in_progress"}
+FAIL after failed attempt: {'auth': 1, 'app_rows': 1, 'email_log': 2, 'unsub_tokens': 1, 'suppressed': 1, 'media': 2, 'media_byte_identical': True}
+PASS Auth row STILL EXISTS; app row, e-mail log, token, suppression, media all unchanged and byte-identical
+request: {'status': 'requested', 'error_class': 'auth_transient', 'attempts': '1', 'auth_deleted_at': '', 'final_sweep_after': '', 'window': '', 'completed_at': '', 'objects_removed': '0', 'next_attempt_at': '2026-10-13 23:43:54.356938+00', 'id': '6d5ef6d6-610b-4217-b621-ab8f5456ea5a'}
+PASS request requested / auth_transient / not completed
+
+RESULT: PASS

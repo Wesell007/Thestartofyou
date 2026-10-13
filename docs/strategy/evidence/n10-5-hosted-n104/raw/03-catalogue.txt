@@ -1,0 +1,66 @@
+== M4 alert columns
+column_name | data_type | is_nullable | column_default
+alert_key | text | YES | 
+alert_sent_at | timestamp with time zone | YES | 
+alert_escalated_at | timestamp with time zone | YES | 
+alert_failure_count | integer | NO | 0
+alert_next_attempt_at | timestamp with time zone | YES | 
+alert_lease_until | timestamp with time zone | YES | 
+== M4 constraints
+conname
+account_deletion_requests_alert_failures_check
+account_deletion_requests_alert_key_check
+== private functions: definer / search_path / owner / EXECUTE matrix
+proname | args | secdef | cfg | owner | pub | anon | authn | svc | worker
+account_deletion_requests_guard |  | f | {"search_path=\"\""} | postgres | f | f | f | f | f
+account_media_access_allowed |  | t | {"search_path=\"\""} | postgres | f | f | t | f | f
+account_media_anomaly_count | p_user uuid | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+account_media_canonical | p_user uuid, p_limit integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+auth_user_exists | p_user uuid | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_alerts_due | p_limit integer, p_lease_seconds integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_alerts_pending_count |  | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_claim_due | p_limit integer, p_lease_seconds integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_cleanup_completed | p_retention_days integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_confirm_auth_deleted | p_request uuid, p_lease text, p_window_seconds integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_forget_email_records |  | t | {"search_path=\"\""} | postgres | f | f | f | f | f
+n10_lock_leased | p_request uuid, p_lease text, p_expected text | t | {"search_path=\"\""} | postgres | f | f | f | f | f
+n10_open_request | p_user uuid, p_lease_seconds integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_record_alert | p_request uuid, p_lease text, p_kind text, p_alert_key text, p_delivered boolean | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_record_failure | p_request uuid, p_lease text, p_expected text, p_error_class text, p_permanent boolean | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_record_purge | p_request uuid, p_lease text, p_expected text, p_removed integer | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_release_lease | p_request uuid, p_lease text | t | {"search_path=\"\""} | postgres | f | f | f | f | t
+n10_retry_delay | p_attempt integer | f | {"search_path=\"\""} | postgres | f | f | f | f | f
+== worker role + direct table privileges
+rolname | rolcanlogin | rolsuper | rolcreatedb | rolcreaterole | rolreplication | rolbypassrls | rolinherit
+account_deletion_worker | t | f | f | f | f | f | f
+worker_table_grants
+0
+t | sel | dml
+auth.users | f | f
+storage.objects | f | f
+private.account_deletion_requests | f | f
+public.email_send_log | f | f
+public.email_unsubscribe_tokens | f | f
+public.suppressed_emails | f | f
+== M5 email dispatcher definition checks
+secdef | cfg | has_token | reads_invoke | has_privileged | pub | anon | authn | svc | worker
+t | {"search_path=\"\""} | t | t | f | f | f | f | t | f
+== cron jobs
+jobid | jobname | schedule | active | md5 | privileged_text | calls_dispatch | n10_token
+2 | n10-account-deletion-worker | * * * * * | t | c50c35f686a32ac33e2d055928a5c6d2 | f | f | t
+3 | process-email-queue | 5 seconds | t | 4647b2a0a44a20239bb8f1201ff5b210 | f | t | f
+== M6 trigger and function
+tgname | tgenabled | pg_get_triggerdef
+n10_forget_email_records | O | CREATE TRIGGER n10_forget_email_records AFTER DELETE ON auth.users FOR EACH ROW EXECUTE FUNCTION private.n10_forget_email_records()
+prosecdef | proconfig | owner | swallows
+t | {"search_path=\"\""} | postgres | t
+== M6 indexes
+indexname | indexdef
+email_send_log_recipient_lower_idx | CREATE INDEX email_send_log_recipient_lower_idx ON public.email_send_log USING btree (lower(recipient_email))
+email_unsubscribe_tokens_email_lower_idx | CREATE INDEX email_unsubscribe_tokens_email_lower_idx ON public.email_unsubscribe_tokens USING btree (lower(email))
+== Storage policies
+n10 | total
+8 | 8
+has_exception_when_clause | has_raise_warning | code_without_comments_mentions
+f | f | f
+(1 row)

@@ -1,0 +1,161 @@
+== pre-M5 Lovable-style job recreated with a dummy bearer (rc 0)
+unschedule
+t
+(1 row)
+old_shape_scheduled
+t
+(1 row)
+old_shape_has_bearer
+t
+(1 row)
+
+== unchanged M5 SQL re-run (sha256 b6899e9a...) (rc 0)
+CREATE FUNCTION
+REVOKE
+GRANT
+DO
+schedule
+5
+(1 row)
+DO
+
+== after M5: effective process-email-queue job (rc 0)
+jobid | schedule | md5 | privileged | calls_dispatch
+5 | 5 seconds | 4647b2a0a44a20239bb8f1201ff5b210 | f | t
+(1 row)
+
+== rolled-back pg_net credential proof (N10 + e-mail crons) (rc 0)
+BEGIN
+?column?
+t
+(1 row)
+?column?
+t
+(1 row)
+?column?
+t
+(1 row)
+?column?
+t
+(1 row)
+queued_mail
+t
+(1 row)
+http_post
+1
+(1 row)
+email_queue_dispatch
+(0 rows)
+queued_requests
+1
+(1 row)
+is_email_queue | header_keys | token_is_invocation_only | service_role_jwt | anon_jwt | db_password | worker_password | n10_db_url | credential_shape | body
+f | Content-Type,X-N10-Worker-Token | t | f | f | f | f | f | f | {}
+(1 row)
+ROLLBACK
+?column? | count
+after rollback: queue | 0
+(1 row)
+?column? | count
+after rollback: vault | 0
+(1 row)
+
+== boundary
+[
+ {
+  "function": "process-email-queue",
+  "case": "no token",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "wrong token",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "anon JWT only",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "service_role JWT only (no invocation token)",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "service_role JWT as the token header",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "forged JWT bearer",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "process-email-queue",
+  "case": "correct invocation token",
+  "http": 500,
+  "body": "{\"error\":\"Server configuration error\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "no token",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "wrong token",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "anon JWT only",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "service_role JWT only (no invocation token)",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "service_role JWT as the token header",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "forged JWT bearer",
+  "http": 401,
+  "body": "{\"error\":\"Unauthorized\"}"
+ },
+ {
+  "function": "account-deletion-worker",
+  "case": "correct invocation token",
+  "http": 200,
+  "body": "{\"ok\":true}"
+ },
+ {
+  "function": "rest/v1",
+  "case": "e-mail invoke secret as apikey+bearer on Data API",
+  "http": 401,
+  "body": "{\"hint\":\"Double check your Supabase `anon` or `service_role` API key.\",\"message\":\"Invalid API key\"}"
+ },
+ {
+  "function": "rest/v1",
+  "case": "N10 invoke secret as apikey+bearer on Data API",
+  "http": 401,
+  "body": "{\"message\":\"Invalid API key\",\"hint\":\"Double check your Supabase `anon` or `service_role` API key.\"}"
+ }
+]

@@ -1,0 +1,16 @@
+PASS first claim returns exactly ANOM's attention alert — ['attention|purge_attention:owner_id_path_anomaly|purge_attention']
+PASS immediate second claim returns nothing (lease / SKIP LOCKED)
+PASS record delivered=false: failure count 1, next attempt ~ +5 min, no key recorded — 1|true|<null>
+PASS backoff: not claimable before the retry time
+PASS after the backoff the same attention alert is claimable again
+PASS record delivered=true: key + sent_at recorded, failures reset — purge_attention:owner_id_path_anomaly|0|true
+PASS dedup: claim 1 after delivery returns nothing
+PASS dedup: claim 2 after delivery returns nothing
+PASS dedup: claim 3 after delivery returns nothing
+PASS pending count = 0 after delivery
+PASS 24 h unresolved: exactly one escalation claim — ['escalation|purge_attention:owner_id_path_anomaly|purge_attention']
+PASS after escalation: silence
+PASS deletion state untouched by every ledger operation (status, class, attempts, auth_deleted_at, user_id)
+PASS worker still cannot read the table directly
+
+RESULT: PASS

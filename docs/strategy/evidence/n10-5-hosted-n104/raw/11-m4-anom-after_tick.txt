@@ -1,0 +1,5 @@
+ledger after live worker ticks: alert_key|failures|sent_at = <null>|0|<null>
+PASS no provider credential -> nothing recorded as sent (fail closed, ledger unchanged)
+PASS request still purge_attention (alerting never changes deletion state)
+
+RESULT: PASS

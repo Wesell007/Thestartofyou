@@ -1,0 +1,10 @@
+[n105_cli] target=mwlryyionkpjbecnbsiq sealed=945677ec cmd=supabase functions deploy process-email-queue --project-ref mwlryyionkpjbecnbsiq --use-api
+Uploading asset (process-email-queue): supabase/functions/process-email-queue/deno.json
+Uploading asset (process-email-queue): supabase/functions/process-email-queue/index.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/queueInvocation.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/validation.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/journalEntryRefContract.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/journeyContextContract.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/aiModes.ts
+Uploading asset (process-email-queue): supabase/functions/_shared/aiAnswerWording.ts
+{"project_ref":"mwlryyionkpjbecnbsiq","functions":["process-email-queue"],"dashboard_url":"https://supabase.com/dashboard/project/mwlryyionkpjbecnbsiq/functions","message":"Deployed Functions."}

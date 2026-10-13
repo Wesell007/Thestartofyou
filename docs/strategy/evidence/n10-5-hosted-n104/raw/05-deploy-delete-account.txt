@@ -1,0 +1,6 @@
+[n105_cli] target=mwlryyionkpjbecnbsiq sealed=945677ec cmd=supabase functions deploy delete-account --project-ref mwlryyionkpjbecnbsiq --use-api
+Uploading asset (delete-account): supabase/functions/delete-account/index.ts
+Uploading asset (delete-account): supabase/functions/_shared/accountDeletionRuntime.ts
+Uploading asset (delete-account): supabase/functions/_shared/operatorAlertProvider.ts
+Uploading asset (delete-account): supabase/functions/_shared/accountDeletion.ts
+{"project_ref":"mwlryyionkpjbecnbsiq","functions":["delete-account"],"dashboard_url":"https://supabase.com/dashboard/project/mwlryyionkpjbecnbsiq/functions","message":"Deployed Functions."}

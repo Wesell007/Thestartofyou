@@ -1,0 +1,11 @@
+now 2026-10-13 23:51:31.21691+00; awaiting rows (window end): awaiting_final_sweep@00:57,awaiting_final_sweep@01:01
+PASS no request ever completed before its final_sweep_after (live cron has been running)
+PASS real-flow rows still awaiting (windows not reached)
+PASS SYNTHETIC completed anonymised row seeded (guard disabled in ONE transaction, re-enabled = O)
+PASS 30-day retention keeps a fresh completed row
+PASS 0-day retention (D14 option C) removes it
+PASS -1 rejected
+PASS active rows untouched by cleanup
+D14 remains OPEN: technical retention proof is not legal approval.
+
+RESULT: PASS

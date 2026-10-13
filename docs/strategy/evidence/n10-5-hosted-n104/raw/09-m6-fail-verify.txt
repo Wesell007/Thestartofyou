@@ -1,0 +1,5 @@
+at 2026-10-13 23:47:30.076752+00: {'auth': 0, 'app_rows': 0, 'email_log': 0, 'unsub_tokens': 0, 'suppressed': 1, 'media': 0, 'media_byte_identical': False}; request {'status': 'awaiting_final_sweep', 'error_class': '', 'attempts': '0', 'auth_deleted_at': '2026-10-13 23:46:01.008948+00', 'final_sweep_after': '2026-10-14 01:01:01.008948+00', 'window': '01:15:00', 'completed_at': '', 'objects_removed': '2', 'next_attempt_at': '2026-10-14 01:01:01.008948+00', 'id': '6d5ef6d6-610b-4217-b621-ab8f5456ea5a'}
+PASS retry committed: Auth gone, app cascaded, e-mail log + token deleted, suppression kept, media purged
+PASS request awaiting_final_sweep, window 01:15:00
+
+RESULT: PASS

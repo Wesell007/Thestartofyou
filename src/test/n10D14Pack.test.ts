@@ -32,6 +32,12 @@ describe("D14 approval pack", () => {
     for (const option of ["**A. APPROVE 30 days**", "**B. APPROVE a different number of days", "**C. REJECT post-completion retention**"]) expect(doc).toContain(option);
   });
 
+  it("states that required e-mail cleanup is transactional with Auth deletion (old non-blocking wording only as superseded)", () => {
+    expect(doc).toMatch(/Required same-database e-mail cleanup is transactional with Auth deletion/);
+    const stale = doc.match(/[^\n]*never block the Auth deletion[^\n]*/g) ?? [];
+    for (const line of stale) expect(line).toMatch(/Superseded/);
+  });
+
   it("does not assert a lawful basis as fact and flags pseudonymity", () => {
     expect((doc.match(/LEGAL REVIEW REQUIRED/g) ?? []).length).toBeGreaterThanOrEqual(5);
     expect(doc).toMatch(/pseudonymous, not anonymous/);

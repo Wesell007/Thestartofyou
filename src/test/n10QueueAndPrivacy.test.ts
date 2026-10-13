@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { PGlite } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
 import { checkQueueInvocation, EMAIL_QUEUE_TOKEN_HEADER, timingSafeEqualStrings } from "../../supabase/functions/_shared/queueInvocation";
-import { createN10Db, readRetentionDays, runDeleteAccount, type N10Deps } from "../../supabase/functions/_shared/accountDeletion";
+import { createN10Db, readRetentionDays, runDeleteAccount, runWorker, type N10Deps } from "../../supabase/functions/_shared/accountDeletion";
 import { createN10Harness, n10MigrationFile, uuid, type N10Harness } from "./support/n10Pglite";
 
 // N10.4: M5 (e-mail queue invocation hardening) and M6 (account-deletion privacy minimisation).
@@ -144,10 +144,7 @@ describe("M6 privacy minimisation (real M1 + M4 + M6)", () => {
 
   beforeAll(async () => {
     h = await createN10Harness();
-    await h.db.exec(`
-      create table public.email_send_log (id uuid primary key default gen_random_uuid(), recipient_email text not null, template_name text not null default 't', status text not null default 'sent');
-      create table public.email_unsubscribe_tokens (id uuid primary key default gen_random_uuid(), token text not null unique, email text not null unique);
-      create table public.suppressed_emails (id uuid primary key default gen_random_uuid(), email text not null unique, reason text not null)`);
+    // e-mail tables come from the shared harness (they must exist before M6 is applied)
   }, 120_000);
 
   it("is additive and changes no earlier migration", () => {
@@ -171,16 +168,84 @@ describe("M6 privacy minimisation (real M1 + M4 + M6)", () => {
     expect(await count("select count(*)::int as n from public.email_unsubscribe_tokens where email = 'other@example.invalid'", [])).toBe(1);
   });
 
-  it("a failure inside the minimisation never blocks Auth deletion", async () => {
+  it("the cleanup trigger has no exception handler and never downgrades a failure to a warning", () => {
+    const sql = m6.sql.replace(/--[^\n]*/g, " ");
+    const fn = sql.slice(sql.indexOf("FUNCTION private.n10_forget_email_records"), sql.indexOf("$$;", sql.indexOf("FUNCTION private.n10_forget_email_records")));
+    expect(fn).toMatch(/DELETE FROM public\.email_send_log l WHERE lower\(l\.recipient_email\) = lower\(OLD\.email\)/);
+    expect(fn).toMatch(/DELETE FROM public\.email_unsubscribe_tokens t WHERE lower\(t\.email\) = lower\(OLD\.email\)/);
+    expect(fn).not.toMatch(/EXCEPTION|WARNING|NOTICE/i);
+  });
+
+  it("forced cleanup failure: Auth deletion rolls back with its cascades, e-mail rows and media untouched, no purge; retry then succeeds", async () => {
     const U = uuid(0x603);
-    await h.su("insert into auth.users (id, email) values ($1, 'third@example.invalid')", [U]);
-    await h.su("alter table public.email_unsubscribe_tokens rename to email_unsubscribe_tokens_away");
-    try {
-      await h.su("delete from auth.users where id = $1", [U]);
-    } finally {
-      await h.su("alter table public.email_unsubscribe_tokens_away rename to email_unsubscribe_tokens");
-    }
-    expect(await count("select count(*)::int as n from auth.users where id = $1", [U])).toBe(0);
+    const email = "Third.Person@example.invalid";
+    await h.db.exec("create table if not exists public.n10_test_app_rows (user_id uuid not null references auth.users(id) on delete cascade, note text)");
+    await h.su("insert into auth.users (id, email) values ($1, $2)", [U, email]);
+    await h.su("insert into public.n10_test_app_rows (user_id, note) values ($1, 'journey row')", [U]);
+    await h.su("insert into storage.objects (bucket_id, name, owner_id) values ('weekly-photos', $1, $2), ('first-year-memories', $3, $2)", [`${U}/a.jpg`, U, `${U}/deep/b.jpg`]);
+    await h.su("insert into public.email_send_log (recipient_email) values ('third.person@example.invalid'), ('THIRD.PERSON@example.invalid')");
+    await h.su("insert into public.email_unsubscribe_tokens (token, email) values ('t3', 'third.person@example.invalid')");
+    await h.su("insert into public.suppressed_emails (email, reason) values ('third.person@example.invalid', 'bounce')");
+    const snapshot = async () => ({
+      auth: await count("select count(*)::int as n from auth.users where id = $1", [U]),
+      app: await count("select count(*)::int as n from public.n10_test_app_rows where user_id = $1", [U]),
+      media: await count("select count(*)::int as n from storage.objects where split_part(name, '/', 1) = $1", [U]),
+      log: await count("select count(*)::int as n from public.email_send_log where lower(recipient_email) = 'third.person@example.invalid'", []),
+      tokens: await count("select count(*)::int as n from public.email_unsubscribe_tokens where email = 'third.person@example.invalid'", []),
+      suppressed: await count("select count(*)::int as n from public.suppressed_emails where email = 'third.person@example.invalid'", []),
+    });
+    const removes: string[][] = [];
+    const gotrueLike = (): N10Deps => ({
+      ...deps(),
+      auth: {
+        async deleteUser(userId) {
+          try {
+            await h.su("delete from auth.users where id = $1", [userId]);
+            return { error: null };
+          } catch {
+            return { error: { status: 500, name: "AuthApiError", message: "Database error deleting user" } };
+          }
+        },
+      },
+      storage: {
+        async remove(bucket, names) {
+          removes.push(names);
+          await h.su("delete from storage.objects where bucket_id = $1 and name = any($2::text[])", [bucket, names]);
+          return { error: null };
+        },
+      },
+    });
+    const before = await snapshot();
+    expect(before).toEqual({ auth: 1, app: 1, media: 2, log: 2, tokens: 1, suppressed: 1 });
+
+    // Force the e-mail cleanup to fail inside the Auth deletion transaction.
+    await h.db.exec(`
+      create function public.n10_test_block_cleanup() returns trigger language plpgsql as $$ begin raise exception 'forced e-mail cleanup failure'; end $$;
+      create trigger n10_test_block_cleanup before delete on public.email_send_log for each row execute function public.n10_test_block_cleanup();`);
+    await expect(h.su("delete from auth.users where id = $1", [U])).rejects.toThrow(/forced e-mail cleanup failure/);
+    expect(await snapshot()).toEqual(before);
+
+    const res = await runDeleteAccount(gotrueLike(), { userId: U, tokenWindowSeconds: 3600 });
+    expect(res).toEqual({ httpStatus: 202, body: { status: "deletion_in_progress" } });
+    expect(await snapshot()).toEqual(before); // Auth, cascaded rows, e-mail rows, media: all unchanged
+    expect(removes).toHaveLength(0); // no purge was attempted
+    const r1 = (await h.su("select status, last_error_class, completed_at from private.account_deletion_requests where user_id = $1", [U]))[0];
+    expect(r1).toEqual({ status: "requested", last_error_class: "auth_transient", completed_at: null });
+
+    // A worker retry while the failure persists still deletes nothing.
+    await h.su("update private.account_deletion_requests set next_attempt_at = now() - interval '1 second' where user_id = $1", [U]);
+    await runWorker(gotrueLike(), { tokenWindow: { ok: true, seconds: 3600 }, retentionDays: null });
+    expect(await snapshot()).toEqual(before);
+    expect(removes).toHaveLength(0);
+    expect((await h.su("select status from private.account_deletion_requests where user_id = $1", [U]))[0].status).toBe("requested");
+
+    // Remove the failure: the next retry commits Auth deletion, cleans the e-mail records and purges media.
+    await h.db.exec("drop trigger n10_test_block_cleanup on public.email_send_log; drop function public.n10_test_block_cleanup()");
+    await h.su("update private.account_deletion_requests set next_attempt_at = now() - interval '1 second' where user_id = $1", [U]);
+    await runWorker(gotrueLike(), { tokenWindow: { ok: true, seconds: 3600 }, retentionDays: null });
+    expect(await snapshot()).toEqual({ auth: 0, app: 0, media: 0, log: 0, tokens: 0, suppressed: 1 });
+    expect(removes.flat().sort()).toEqual([`${U}/a.jpg`, `${U}/deep/b.jpg`]);
+    expect((await h.su("select status from private.account_deletion_requests where user_id = $1", [U]))[0].status).toBe("awaiting_final_sweep");
   });
 
   it("retention option C: 0 days removes completed anonymised rows only; negative is rejected", async () => {

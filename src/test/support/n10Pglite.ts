@@ -47,6 +47,10 @@ grant usage on schema storage to anon, authenticated, service_role;
 grant all on storage.objects to anon, authenticated, service_role;
 grant execute on function storage.foldername(text) to public;
 insert into storage.buckets values ('weekly-photos', 'weekly-photos'), ('first-year-memories', 'first-year-memories'), ('other-bucket', 'other-bucket');
+-- Address-keyed e-mail tables from the historical e-mail migration (minimal columns M6 relies on).
+create table public.email_send_log (id uuid primary key default gen_random_uuid(), recipient_email text not null, template_name text not null default 't', status text not null default 'sent');
+create table public.email_unsubscribe_tokens (id uuid primary key default gen_random_uuid(), token text not null unique, email text not null unique);
+create table public.suppressed_emails (id uuid primary key default gen_random_uuid(), email text not null unique, reason text not null);
 `;
 
 /** Historical media policies, extracted verbatim from the two repository migrations that created them. */

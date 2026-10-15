@@ -2,7 +2,7 @@
 // Builds a minimal stand-in for the Supabase-managed pieces the N10 migration depends on (roles
 // anon/authenticated/service_role, auth.users + auth.uid(), storage.buckets/objects + foldername,
 // the historical media policies taken verbatim from the repository migrations), then applies the
-// real N10 M1, M4 and M6 migration files unchanged (M2/M3/M5 are cron-only; see their own tests). It cannot prove hosted Supabase behaviour (N10.3B does).
+// real N10 M1, M4, M6 and M7 migration files unchanged (M2/M3/M5 are cron-only; see their own tests). It cannot prove hosted Supabase behaviour (N10.3B does).
 import { readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { PGlite } from "@electric-sql/pglite";
@@ -70,13 +70,15 @@ export type N10Harness = {
   timeTravel: (requestId: string, set: string) => Promise<void>;
 };
 
-export async function createN10Harness(): Promise<N10Harness> {
+/** opts.m7Sql replaces the M7 file text (mutation tests only). */
+export async function createN10Harness(opts: { m7Sql?: string } = {}): Promise<N10Harness> {
   const db = new PGlite();
   await db.exec(STUB);
   for (const policy of historicalPolicies()) await db.exec(policy);
   await db.exec(n10MigrationFile("_n10_account_deletion_foundation.sql").sql);
   await db.exec(n10MigrationFile("_n10_operator_alert_ledger.sql").sql);
   await db.exec(n10MigrationFile("_n10_privacy_minimisation.sql").sql);
+  await db.exec(opts.m7Sql ?? n10MigrationFile("_n10_analytics_erasure.sql").sql);
 
   const run = async (prefix: string[], sql: string, params: unknown[] = []) => {
     for (const p of prefix) await db.exec(p);
@@ -94,13 +96,13 @@ export async function createN10Harness(): Promise<N10Harness> {
     asWorker: (sql, params) => run(["set role account_deletion_worker"], sql, params),
     asUser: (userId, sql, params) =>
       run([`select set_config('request.jwt.claim.sub', '${userId ?? ""}', false)`, "set role authenticated"], sql, params),
-    // Test-only clock movement: the guard trigger forbids these edits, so it is disabled for the update.
+    // Test-only clock movement: the guard triggers forbid these edits, so they are disabled for the update.
     timeTravel: async (requestId, set) => {
-      await db.exec("alter table private.account_deletion_requests disable trigger account_deletion_requests_guard");
+      await db.exec("alter table private.account_deletion_requests disable trigger user");
       try {
         await db.query(`update private.account_deletion_requests set ${set} where id = $1`, [requestId]);
       } finally {
-        await db.exec("alter table private.account_deletion_requests enable trigger account_deletion_requests_guard");
+        await db.exec("alter table private.account_deletion_requests enable trigger user");
       }
     },
   };

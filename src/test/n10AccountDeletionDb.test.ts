@@ -66,7 +66,7 @@ describe("N10 M1 catalogue, grants and role (E13, E16, E22)", () => {
   });
 
   it("definer helpers are hardened: SECURITY DEFINER, search_path empty, owner postgres, private schema", async () => {
-    const fns = ["account_media_access_allowed", "auth_user_exists", "account_media_canonical", "account_media_anomaly_count", "n10_open_request", "n10_claim_due", "n10_lock_leased", "n10_release_lease", "n10_record_failure", "n10_confirm_auth_deleted", "n10_record_purge", "n10_cleanup_completed"];
+    const fns = ["account_media_access_allowed", "auth_user_exists", "account_media_canonical", "account_media_anomaly_count", "n10_open_request", "n10_claim_due", "n10_lock_leased", "n10_release_lease", "n10_record_failure", "n10_confirm_auth_deleted", "n10_record_purge", "n10_cleanup_completed", "n10_analytics_due", "n10_record_analytics"];
     const r = await h.su(
       "select p.proname, p.prosecdef, p.proconfig, pg_get_userbyid(p.proowner) as owner from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'private' order by 1",
     );
@@ -77,6 +77,8 @@ describe("N10 M1 catalogue, grants and role (E13, E16, E22)", () => {
     }
     expect(byName.account_deletion_requests_guard.prosecdef).toBe(false);
     expect(byName.account_deletion_requests_guard.proconfig).toEqual(['search_path=""']);
+    expect(byName.n10_analytics_guard.prosecdef).toBe(false);
+    expect(byName.n10_analytics_guard.proconfig).toEqual(['search_path=""']);
   });
 
   it("EXECUTE: PUBLIC/anon/service_role never; authenticated only the guard; worker only its surface", async () => {
@@ -88,6 +90,8 @@ describe("N10 M1 catalogue, grants and role (E13, E16, E22)", () => {
       "private.n10_record_purge(uuid,text,text,integer)", "private.n10_cleanup_completed(integer)",
       // M4 operator-alert ledger (N10.4)
       "private.n10_alerts_due(integer,integer)", "private.n10_record_alert(uuid,text,text,text,boolean)", "private.n10_alerts_pending_count()",
+      // M7 analytics-identity erasure (D14.1)
+      "private.n10_analytics_due(integer,integer)", "private.n10_record_analytics(uuid,text,text,text,integer)",
     ]);
     for (const { sig } of r as { sig: string }[]) {
       const p = await h.su(
@@ -324,6 +328,9 @@ describe("N10 discovery, anomalies and strict completion (E5, E6, E10, E11, E15,
     const stays = await h.asWorker("select private.n10_record_purge($1::uuid, $2::text, 'awaiting_final_sweep', 0) as s", [id, mine?.o_lease]);
     expect(stays[0].s).toBe("awaiting_final_sweep");
     await h.su("delete from storage.objects where name = $1", [`${U}/late.jpg`]);
+    // D14.1 (M7): completion also needs resolved analytics erasure.
+    const a = (await h.asWorker("select * from private.n10_analytics_due(5, 120)")).find((c) => c.o_request_id === id);
+    expect((await h.asWorker("select private.n10_record_analytics($1::uuid, $2::text, 'resolved', null, 1) as s", [id, a?.o_lease]))[0].s).toBe("resolved");
     const done = await h.asWorker("select private.n10_record_purge($1::uuid, $2::text, 'awaiting_final_sweep', 1) as s", [id, mine?.o_lease]);
     expect(done[0].s).toBe("completed");
     const r = await row(id);

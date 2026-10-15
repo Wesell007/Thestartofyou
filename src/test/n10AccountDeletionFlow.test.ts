@@ -3,6 +3,7 @@ import {
   createN10Db,
   PURGE_BATCH_LIMIT,
   runDeleteAccount,
+  runAnalyticsErasure,
   runWorker,
   type AlertEvent,
   type AuthErrorLike,
@@ -253,6 +254,12 @@ describe("account-deletion worker (E4, E9, E10, E14)", () => {
     await h.timeTravel(id, "auth_deleted_at = auth_deleted_at - interval '3 hours', final_sweep_after = final_sweep_after - interval '3 hours', next_attempt_at = now() - interval '1 second'");
     await addObjects("weekly-photos", [`${U}/stale-upload.jpg`], U);
     const { deps, calls } = makeDeps();
+    await runWorker(deps, workerConfig);
+    // D14.1 (M7): the sweep is done but COMPLETED waits for analytics erasure.
+    expect((await h.su("select status, user_id from private.account_deletion_requests where id = $1", [id]))[0]).toEqual({ status: "awaiting_final_sweep", user_id: U });
+    const erased: string[] = [];
+    await runAnalyticsErasure(deps, async (distinctId) => (erased.push(distinctId), { ok: true, personsFound: 1 }), Date.now() + 10_000);
+    expect(erased).toEqual([U]);
     await runWorker(deps, workerConfig);
     const done = (await h.su("select * from private.account_deletion_requests where id = $1", [id]))[0];
     expect(done.status).toBe("completed");

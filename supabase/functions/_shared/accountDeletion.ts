@@ -146,7 +146,7 @@ export const WORKER_RESPONSES = {
 } as const satisfies Record<string, WorkerHttpResult>;
 
 export type WorkerInvocation = { method: string; token: string | null; bodyText: () => Promise<string> };
-export type WorkerRuntime = { deps: N10Deps; close: () => Promise<void>; notifier?: OperatorNotifier };
+export type WorkerRuntime = { deps: N10Deps; close: () => Promise<void>; notifier?: OperatorNotifier; analyticsEraser?: AnalyticsEraser | null };
 
 /**
  * account-deletion-worker request handling (verify_jwt = false; this is the only authentication).
@@ -187,12 +187,17 @@ export async function handleWorkerInvocation(
     const tokenWindow = readVerifiedTokenWindow(env);
     const retentionDays = readRetentionDays(env);
     const { processed } = await runWorker(runtime.deps, { tokenWindow, retentionDays });
+    // Analytics-identity erasure (D14.1 / M7) runs after the media loop, so media purge never waits for
+    // the analytics provider; a missing eraser is recorded as a durable config failure (fail closed).
+    const analytics = await runAnalyticsErasure(runtime.deps, runtime.analyticsEraser ?? null, runtime.deps.now() + ANALYTICS_BUDGET_MS);
     // Operator alerts run after, and independently of, the durable-job loop (N10.4 / M4).
     const alerts = await dispatchOperatorAlerts(runtime.deps, readOperatorAlertConfig(env, Boolean(runtime.notifier)), runtime.notifier);
     log.info("n10_worker_run", {
       processed,
       token_window_ok: tokenWindow.ok,
       retention_configured: retentionDays !== null,
+      analytics_resolved: analytics.resolved,
+      analytics_failed: analytics.failed,
       alerts_sent: alerts.sent,
       alerts_failed: alerts.failed,
     });
@@ -290,7 +295,22 @@ export interface N10Db {
   alertsDue(limit: number, leaseSeconds: number): Promise<DueOperatorAlert[]>;
   recordAlert(requestId: string, lease: string, kind: OperatorAlertKind, alertKey: string, delivered: boolean): Promise<boolean>;
   alertsPendingCount(): Promise<number>;
+  /** M7 analytics-identity erasure queue (own lease; independent of the media lease). */
+  analyticsDue(limit: number, leaseSeconds: number): Promise<DueAnalyticsErasure[]>;
+  recordAnalytics(requestId: string, lease: string, outcome: AnalyticsRecordOutcome): Promise<AnalyticsRecordState>;
 }
+
+export interface DueAnalyticsErasure {
+  requestId: string;
+  userId: string;
+  lease: string;
+  attemptCount: number;
+}
+export type AnalyticsErrorClass = "analytics_config" | "analytics_transient" | "analytics_permanent";
+export type AnalyticsRecordOutcome = { resolved: true; personsFound: number } | { resolved: false; errorClass: AnalyticsErrorClass };
+export type AnalyticsRecordState = "resolved" | "pending" | "attention";
+const outcomeErrorClass = (o: AnalyticsRecordOutcome): AnalyticsErrorClass | null =>
+  o.resolved ? null : (o as { errorClass: AnalyticsErrorClass }).errorClass;
 
 export type OperatorAlertKind = "attention" | "escalation";
 export interface DueOperatorAlert {
@@ -417,6 +437,29 @@ export function createN10Db(exec: SqlExecutor): N10Db {
       const r = await one("select private.n10_alerts_pending_count() as n", []);
       return Number(r.n);
     },
+    async analyticsDue(limit, leaseSeconds) {
+      const rows = await exec("select o_request_id, o_user_id, o_lease, o_attempt_count from private.n10_analytics_due($1::int, $2::int)", [
+        limit,
+        leaseSeconds,
+      ]);
+      return rows.map((r) => ({
+        requestId: String(r.o_request_id),
+        userId: String(r.o_user_id),
+        lease: String(r.o_lease),
+        attemptCount: Number(r.o_attempt_count),
+      }));
+    },
+    async recordAnalytics(requestId, lease, outcome) {
+      const r = await one("select private.n10_record_analytics($1::uuid, $2::text, $3::text, $4::text, $5::int) as s", [
+        requestId,
+        lease,
+        outcome.resolved ? "resolved" : "failed",
+        outcomeErrorClass(outcome),
+        outcome.resolved ? outcome.personsFound : null,
+      ]);
+      if (r.s !== "resolved" && r.s !== "pending" && r.s !== "attention") throw new Error("n10: unexpected analytics state from database");
+      return r.s;
+    },
   };
 }
 
@@ -495,6 +538,7 @@ const ALERT_CLASS: Record<string, string> = {
   auth_attention: "Auth deletion needs operator attention",
   purge_attention: "Media purge needs operator attention",
 };
+const ANALYTICS_ALERT_CLASS = "Analytics identity erasure needs operator attention";
 
 const escapeHtml = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -505,7 +549,7 @@ const escapeHtml = (v: string) => v.replace(/&/g, "&amp;").replace(/</g, "&lt;")
  */
 export function renderOperatorAlert(alert: DueOperatorAlert, environment: string, nowMs: number): Omit<OperatorAlertMessage, "to" | "from"> {
   const ageHours = Math.max(0, Math.floor((nowMs - Date.parse(alert.requestedAt)) / 3_600_000));
-  const cls = ALERT_CLASS[alert.status] ?? "Account deletion needs operator attention";
+  const cls = ALERT_CLASS[alert.status] ?? (alert.errorClass?.startsWith("analytics_") ? ANALYTICS_ALERT_CLASS : "Account deletion needs operator attention");
   const escalation = alert.kind === "escalation";
   const fields: [string, string][] = [
     ["Environment", environment],
@@ -812,6 +856,78 @@ export async function processClaimed(
   // auth_attention, completed and cancelled are never claimed (operator-only or terminal).
   await deps.db.releaseLease(req.requestId, req.lease);
   return req.status;
+}
+
+// ---------------------------------------------------------------------------
+// Analytics-identity erasure (D14.1 / M7). Provider-neutral: the configured adapter (currently
+// _shared/analyticsErasureProvider.ts) receives only the analytics distinct id (the user UUID) and
+// returns a classified outcome; its credential never reaches this module, the database or pg_net.
+// The database decides retry, attention and the completion gate.
+// ---------------------------------------------------------------------------
+export const ANALYTICS_CLAIM_LIMIT = 10;
+export const ANALYTICS_LEASE_SECONDS = 120;
+export const ANALYTICS_BUDGET_MS = 30_000;
+
+export type AnalyticsEraseResult = { ok: true; personsFound: number } | { ok: false; failure: "transient" | "permanent" };
+/** Requests deletion of the analytics person for this distinct id and of that person's events. */
+export type AnalyticsEraser = (distinctId: string) => Promise<AnalyticsEraseResult>;
+
+export type AnalyticsRunResult = { resolved: number; failed: number; attention: number };
+
+/** Drains due erasures within the budget. Never throws into the caller; never touches media or Auth. */
+export async function runAnalyticsErasure(deps: N10Deps, eraser: AnalyticsEraser | null, deadlineMs: number): Promise<AnalyticsRunResult> {
+  const result: AnalyticsRunResult = { resolved: 0, failed: 0, attention: 0 };
+  const seen = new Set<string>();
+  while (deps.now() < deadlineMs) {
+    let due: DueAnalyticsErasure[];
+    try {
+      due = await deps.db.analyticsDue(ANALYTICS_CLAIM_LIMIT, ANALYTICS_LEASE_SECONDS);
+    } catch {
+      deps.log.error("n10_analytics_claim_failed", { phase: "analytics" });
+      return result;
+    }
+    const fresh = due.filter((d) => !seen.has(d.requestId));
+    if (fresh.length === 0) break;
+    for (const item of fresh) {
+      seen.add(item.requestId);
+      let outcome: AnalyticsRecordOutcome;
+      if (!eraser) {
+        outcome = { resolved: false, errorClass: "analytics_config" };
+      } else if (deps.now() >= deadlineMs) {
+        // Out of budget after claiming: recorded as transient so the item backs off and is retried.
+        outcome = { resolved: false, errorClass: "analytics_transient" };
+      } else {
+        try {
+          const r = await eraser(item.userId);
+          outcome = r.ok
+            ? { resolved: true, personsFound: r.personsFound }
+            : { resolved: false, errorClass: (r as { failure: string }).failure === "permanent" ? "analytics_permanent" : "analytics_transient" };
+        } catch {
+          outcome = { resolved: false, errorClass: "analytics_transient" };
+        }
+      }
+      try {
+        const state = await deps.db.recordAnalytics(item.requestId, item.lease, outcome);
+        if (state === "resolved") {
+          result.resolved += 1;
+          deps.log.info("n10_analytics_erasure_resolved", { request_id: item.requestId });
+        } else {
+          result.failed += 1;
+          if (state === "attention") result.attention += 1;
+          deps.log.error("n10_analytics_erasure_failed", {
+            request_id: item.requestId,
+            error_class: outcomeErrorClass(outcome),
+            attention: state === "attention",
+          });
+        }
+      } catch {
+        // Lease expiry returns the item to the queue; nothing is resolved without a recorded outcome.
+        result.failed += 1;
+        deps.log.error("n10_analytics_record_failed", { request_id: item.requestId });
+      }
+    }
+  }
+  return result;
 }
 
 export async function runWorker(

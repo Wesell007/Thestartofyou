@@ -30,7 +30,7 @@ describe("migrations (E7, E13, E16, H1)", () => {
   it("were created by the Supabase CLI naming scheme and sort after every existing migration", () => {
     const names = readdirSync(resolve(root, migrationDir)).sort();
     // N10 and N10.4 migrations, in order, are the newest in the repository.
-    expect(names.slice(names.indexOf(m1.name)).map((n) => n.replace(/^\d{14}_/, ""))).toEqual(["n10_account_deletion_foundation.sql", "n10_account_deletion_worker_schedule.sql", "n10_worker_invocation_hardening.sql", "n10_operator_alert_ledger.sql", "email_queue_invocation_hardening.sql", "n10_privacy_minimisation.sql"]);
+    expect(names.slice(names.indexOf(m1.name)).map((n) => n.replace(/^\d{14}_/, ""))).toEqual(["n10_account_deletion_foundation.sql", "n10_account_deletion_worker_schedule.sql", "n10_worker_invocation_hardening.sql", "n10_operator_alert_ledger.sql", "email_queue_invocation_hardening.sql", "n10_privacy_minimisation.sql", "n10_analytics_erasure.sql"]);
     for (const n of [m1.name, m2.name]) expect(n).toMatch(/^\d{14}_n10_account_deletion_[a-z_]+\.sql$/);
   });
 
@@ -125,7 +125,7 @@ describe("Edge Functions (E1, E7, E13, E17, H2)", () => {
       for (const call of calls) {
         const keys = [...call.matchAll(/([a-z_]+):/g)].map((m) => m[1]);
         for (const k of keys) {
-          expect(["request_id", "outcome", "phase", "reason", "status", "auth_confirmed", "kind", "error_class", "processed", "token_window_ok", "retention_configured", "removed_rows", "pending", "alerts_sent", "alerts_failed"], `${p}: ${call.slice(0, 80)}`).toContain(k);
+          expect(["request_id", "outcome", "phase", "reason", "status", "auth_confirmed", "kind", "error_class", "processed", "token_window_ok", "retention_configured", "removed_rows", "pending", "alerts_sent", "alerts_failed", "analytics_resolved", "analytics_failed", "attention"], `${p}: ${call.slice(0, 80)}`).toContain(k);
         }
       }
     }

@@ -45,6 +45,30 @@ describe("D14 approval pack", () => {
     expect(doc).toMatch(/\*\*NOT AUTHORISED \/ NOT IMPLEMENTED\*\*; needs a backend credential/);
   });
 
+  it("Revision 4 records the owner decisions as engineering direction, keeps D open and D14 OPEN", () => {
+    const rev4 = doc.slice(doc.indexOf("## 0A. Revision 4"), doc.indexOf("## 0. Owner decision packet"));
+    expect(rev4).toMatch(/\*\*D14 = OPEN\.\*\*/);
+    expect(rev4).toMatch(/This is owner approval of engineering direction, not formal legal approval/);
+    for (const row of [
+      /\| A \| Completed deletion record \| \*\*APPROVED\*\*/,
+      /\| B \| `email_send_log` \| \*\*APPROVED\*\*/,
+      /\| C \| `email_unsubscribe_tokens` \| \*\*APPROVED\*\*/,
+      /\| D \| `suppressed_emails` \| \*\*OPEN \/ VERIFY REQUIREMENT\*\*/,
+      /\| E \| PostHog \| \*\*APPROVED ENGINEERING DIRECTION\*\*/,
+      /\| F \| Provider backups \/ logs \| \*\*APPROVED\*\*/,
+      /\| G \| UI \/ Privacy wording \| \*\*APPROVED AS WORKING DRAFT \/ NOT PUBLISHED\*\*/,
+    ]) expect(rev4).toMatch(row);
+    expect(rev4).toMatch(/Production accessed\/modified = \*\*NO\*\*/);
+    expect(rev4).toMatch(/41B\.1B = \*\*NOT STARTED \/ NOT AUTHORISED\*\*/);
+    expect(rev4).toMatch(/scoped to the single TSOY project only\*\*, with the \*\*`person:write`\*\* scope only/);
+  });
+
+  it("no wording lets the owner clear a legal-review item on their own authority (except as withdrawn)", () => {
+    const lines = doc.split("\n").filter((l) => /own authority|explicitly accepted by the owner/i.test(l));
+    expect(lines.length).toBeGreaterThan(0);
+    for (const line of lines) expect(line).toMatch(/does \*\*not\*\* clear|withdrawn in Revision 4|owner acceptance alone does not clear/);
+  });
+
   it("does not assert a lawful basis as fact and flags pseudonymity", () => {
     expect((doc.match(/LEGAL REVIEW REQUIRED/g) ?? []).length).toBeGreaterThanOrEqual(5);
     expect(doc).toMatch(/pseudonymous, not anonymous/);

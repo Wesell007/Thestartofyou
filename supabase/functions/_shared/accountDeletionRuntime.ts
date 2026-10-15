@@ -5,24 +5,29 @@
 // - Operator alerts (N10.4) go through the provider-neutral OperatorNotifier; the provider adapter is
 //   isolated in operatorAlertProvider.ts and is called directly from this runtime — never through
 //   pg_net or the e-mail queue.
+// - Analytics-identity erasure (D14.1 / M7) goes through the provider-neutral AnalyticsEraser; the
+//   provider adapter is isolated in analyticsErasureProvider.ts, reads its backend-only secrets here and
+//   is called directly from this runtime — never through pg_net. Missing secrets fail closed (null).
 import postgres from "npm:postgres@3.4.5";
 import { createClient } from "npm:@supabase/supabase-js@2.49.4";
 import {
   createLoggingAlertHook,
   createN10Db,
   isDedicatedRoleUrl,
+  type AnalyticsEraser,
   type N10Deps,
   type N10Logger,
   type OperatorNotifier,
 } from "./accountDeletion.ts";
 import { createConfiguredOperatorNotifier } from "./operatorAlertProvider.ts";
+import { createAnalyticsEraserFromEnv } from "./analyticsErasureProvider.ts";
 
 export const n10Log: N10Logger = {
   info: (event, fields) => console.log(JSON.stringify({ event, ...fields })),
   error: (event, fields) => console.error(JSON.stringify({ event, ...fields })),
 };
 
-export type N10Runtime = { deps: N10Deps; close: () => Promise<void>; notifier?: OperatorNotifier };
+export type N10Runtime = { deps: N10Deps; close: () => Promise<void>; notifier?: OperatorNotifier; analyticsEraser: AnalyticsEraser | null };
 
 /** Returns null (fail closed) when the dedicated database URL or admin credentials are missing. */
 export function createN10Runtime(): N10Runtime | null {
@@ -57,5 +62,10 @@ export function createN10Runtime(): N10Runtime | null {
     log: n10Log,
     now: () => Date.now(),
   };
-  return { deps, close: () => sql.end({ timeout: 5 }), notifier: createConfiguredOperatorNotifier() };
+  return {
+    deps,
+    close: () => sql.end({ timeout: 5 }),
+    notifier: createConfiguredOperatorNotifier(),
+    analyticsEraser: createAnalyticsEraserFromEnv((name) => Deno.env.get(name), fetch),
+  };
 }

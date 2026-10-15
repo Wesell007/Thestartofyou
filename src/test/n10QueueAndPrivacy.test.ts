@@ -253,7 +253,7 @@ describe("M6 privacy minimisation (real M1 + M4 + M6)", () => {
     await h.su("insert into auth.users (id, email) values ($1, 'four@example.invalid')", [U]);
     await runDeleteAccount(deps(), { userId: U, tokenWindowSeconds: 3600 });
     const id = String((await h.su("select id from private.account_deletion_requests where user_id = $1", [U]))[0].id);
-    await h.timeTravel(id, "status = 'completed', completed_at = now(), anonymised_at = now(), user_id = null");
+    await h.timeTravel(id, "status = 'completed', completed_at = now(), anonymised_at = now(), user_id = null, analytics_status = 'resolved', analytics_resolved_at = now()");
     const active = await count("select count(*)::int as n from private.account_deletion_requests where status <> 'completed'", []);
     expect(await deps().db.cleanupCompleted(0)).toBeGreaterThanOrEqual(1);
     expect(await count("select count(*)::int as n from private.account_deletion_requests where id = $1", [id])).toBe(0);

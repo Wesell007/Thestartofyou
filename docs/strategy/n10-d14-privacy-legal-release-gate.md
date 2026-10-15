@@ -10,7 +10,90 @@ Phase: N10.4 — Production Readiness: Privacy/Legal + Operator Alert. Productio
 - **M5 `20261011050645_email_queue_invocation_hardening.sql`:** the e-mail queue no longer sends a service-role key through pg_net (security fix).
 - **Operator alerts:** destination `contact@thestartofyou.com`, sender `contact@wesellproducts.co.uk` (owner decision); alerts contain no personal data.
 
+## 0A. Revision 4 — owner direction recorded + D14.1 privacy hardening (15 October 2026)
+
+**D14 = OPEN.** The owner accepted the Revision 3 packet as the decision basis and gave the direction below. **This is owner approval of engineering direction, not formal legal approval.** D14 closes only when every item marked **LEGAL REVIEW REQUIRED** has received the required human privacy/legal review and the formal block in §11 is completed. Owner acceptance on the owner's own authority does **not** clear a legal-review item (this supersedes the contrary wording previously in 0.8 and 0.11). Production accessed/modified = **NO**. 41B.1B = **NOT STARTED / NOT AUTHORISED**. Real Lovable delivery proof remains pending controlled production activation.
+
+### 0A.1 Owner decisions (recorded 15 October 2026)
+
+| | Item | Owner decision | State after D14.1 |
+|---|---|---|---|
+| A | Completed deletion record | **APPROVED** — 30 days, then automatic deletion; set `N10_COMPLETED_ROW_RETENTION_DAYS=30` at activation; described as **pseudonymous, not anonymous**; no name, e-mail, journey/health data, media path/content or durable user identifier after completion | implemented; value set at activation. LEGAL REVIEW REQUIRED remains (0.9 Q1) |
+| B | `email_send_log` | **APPROVED** — deleted atomically with Auth deletion (M6) | implemented, hosted-proven (N10.5) |
+| C | `email_unsubscribe_tokens` | **APPROVED** — deleted atomically with Auth deletion (M6) | implemented, hosted-proven (N10.5) |
+| D | `suppressed_emails` | **OPEN / VERIFY REQUIREMENT** — retention *not* approved. Preference: if the local table is not required for enforcement, delete the account's row with account deletion; if required, keep only the minimum representation and assess a normalised/hash key | investigated (0A.3); not implemented; narrow read-only check defined for activation |
+| E | PostHog | **APPROVED ENGINEERING DIRECTION** — remove the server-side analytics identity and request deletion of its events, durably, gating COMPLETED | **implemented locally (M7 + worker + adapter, 0A.2)**; not deployed; credential not created |
+| F | Provider backups / logs | **APPROVED** — disclose provider-managed residual retention; exact periods only where documentation and the actual production plan prove them | wording rule applied (0A.4) |
+| G | UI / Privacy wording | **APPROVED AS WORKING DRAFT / NOT PUBLISHED** — subject to legal review and to D/E | 0.7 + deltas in 0A.4; not published |
+
+### 0A.2 E — durable analytics-identity erasure (D14.1, implemented locally)
+
+**Mechanism (re-verified 15 October 2026 against PostHog's published OpenAPI schema, operation `persons_bulk_delete_create`):** `POST {host}/api/projects/{project_id}/persons/bulk_delete/` with body `{"distinct_ids": ["<user uuid>"], "delete_events": true, "delete_recordings": true, "keep_person": false}`, header `Authorization: Bearer <personal API key>`, required scope **`person:write`**, success **202** reporting `persons_found`, `persons_queued_for_deletion`, `events_queued_for_deletion`, `deletion_errors`. PostHog states that person records are removed in the background shortly after the request, that **only events captured before the request are deleted**, and (privacy docs) that event data is deleted **asynchronously during non-peak times**, not instantly. This replaces the 0.5 two-call design (list + `DELETE persons/<uuid>`): one call by distinct id, so no `person:read` scope is needed. The distinct id is the Supabase user UUID (`src/App.tsx` → `identify(uid)`).
+
+**Credential and minimum permission**
+
+| Item | Requirement |
+|---|---|
+| `POSTHOG_PERSONAL_API_KEY` | PostHog **personal** API key (`phx_…`) created by the owner, **scoped to the single TSOY project only**, with the **`person:write`** scope only (no other scope, no organisation-wide access). Supabase **Edge Function secret** only — never `VITE_*`, client code, Git, the database, Vault or pg_net. Do not paste it into chat |
+| `POSTHOG_PROJECT_ID` | numeric project id (Edge Function secret / config) |
+| `POSTHOG_API_HOST` | the private API host of the project's region: exactly `https://eu.posthog.com` or `https://us.posthog.com` (not the `*.i.posthog.com` ingestion host). Any other value fails closed. The production region is **VERIFY** at activation (the client default is US; `.env.example` shows EU) |
+
+**Architecture (smallest auditable change; no new status).** Separate columns are enough; an explicit `privacy_attention` state is **not** required, because analytics erasure is independent of the media state machine: a new status would have to be combined with every media state (`auth_deleted`, `awaiting_final_sweep`, `purge_attention`), would change the frozen transition graph and claim predicates, and would block media work while waiting for analytics. `purge_attention` is **not** reused (its meaning stays "media purge"). Migration **M7 `20261015053138_n10_analytics_erasure.sql`** (created with `supabase migration new`; M1–M6 and frozen 41B.1A unchanged — hashes pinned in tests):
+
+1. `analytics_*` columns on the request row: `analytics_status` (`pending` → `resolved`; `not_tracked` only for rows that were already terminal when M7 ran), attempt count, next attempt, **its own lease**, last error class (`analytics_config` / `analytics_transient` / `analytics_permanent`), `analytics_attention_since`, `analytics_resolved_at`, `analytics_persons_found` (a count; no identifier).
+2. `n10_analytics_due` / `n10_record_analytics` (worker-only, hardened definer functions). Claimable only **after** `auth_deleted_at` is set and while `user_id` is still present; first attempt 15 minutes after Auth deletion so PostHog has ingested the last client events. Retry: 1, 2, 5, 15, 30 min, then hourly. `analytics_config` (missing/malformed credential) and `analytics_permanent` (provider 4xx) become **attention immediately**; transient failures (408/429/5xx/network/timeout/malformed or partial response) become attention after **24 hours** since Auth deletion; attention keeps retrying hourly.
+3. **Completion gate, three independent layers:** `n10_record_purge` (M1 body unchanged except the gate) keeps the request in `awaiting_final_sweep` until erasure is resolved; a CHECK constraint forbids `completed` unless resolved; the `n10_analytics_guard` trigger forbids completing, or clearing `user_id`, while unresolved, allows only `pending → resolved`, and only while the Auth user is absent. When erasure resolves after the window, the final sweep is brought forward so completion follows on the next worker tick.
+4. **Alerts:** persistent failure is the durable condition `analytics_attention_since`; the M4 ledger alerts it under the key `analytics_attention:<error class>` ("Analytics identity erasure needs operator attention"), deduplicated and escalated after 24 h exactly like auth/purge attention, with no personal data. (`n10_alerts_due` / `n10_alerts_pending_count` bodies replaced in M7; behaviour for auth/purge attention rows unchanged.)
+
+**Runtime.** `account-deletion-worker` runs the media loop first, then the analytics loop (30 s budget, 10 s per provider call), then alerts. The provider call is made from the Edge Function runtime with `fetch` — never pg_net — through the provider-neutral `AnalyticsEraser` boundary; the PostHog adapter is isolated in `_shared/analyticsErasureProvider.ts` (swappable like the alert adapter). A missing or malformed credential produces **no eraser** and is recorded as a durable `analytics_config` failure (fails closed, request stays pending). Logs and alerts carry the opaque request id and error class only — never the user id, the credential or provider messages. `delete-account`'s synchronous path does not call PostHog.
+
+**Invariants preserved.** Auth deletion stays account-first (erasure is never claimed before `auth_deleted_at`). **Media purge is independent of PostHog availability**: the immediate purge in `delete-account` never consults analytics, the worker's media loop runs before and separately from the analytics loop with separate leases, and an analytics failure never changes the media status. **COMPLETED / anonymisation cannot occur while erasure is unresolved**, and the user id needed for erasure is retained until then. No silent best-effort: every failure is recorded, retried and, if persistent, alerted.
+
+**Semantics to state accurately.** "Resolved" means PostHog accepted the deletion request (person queued, event deletion requested) or found no person for the id (a user who never consented to analytics, or a retry after an earlier accepted request). It does **not** mean events are physically erased at that moment: PostHog processes event deletion asynchronously. Events captured *after* the request (for example from a stale browser tab) are not covered by that request.
+
+**Tests** (`src/test/n10AnalyticsErasure.test.ts`, real M1+M4+M6+M7 in PGlite, fake PostHog fetch): successful cleanup; missing credential fails closed/pending; 4xx permanent; 5xx/network/timeout transient and 24 h attention; partial/malformed 202 retries; only UUIDs sent; host allow-list; no secret leakage; media purge independent and first; COMPLETED gated (worker and direct writes); user id not anonymised early; resolution refused while the Auth user exists or with a wrong lease; idempotent repeated runs and lease exclusion; persistent failure → one alert, no duplicate, new key on class change, cleared on resolution. **Mutation tests:** database gate layers removed one at a time (each remaining layer still refuses; all three removed → completes, detected); 10 TypeScript mutants (classification, fail-closed config, ordering, record mapping, alert class, request body, host allow-list) — all killed.
+
+**Hosted rehearsal.** M7 alters the hosted request table, replaces three function bodies and adds a trigger; PGlite cannot prove hosted behaviour (hosted PostgreSQL 17 privileges, the pooler, the real worker role). A short hosted rehearsal of M7 on a disposable project (fake PostHog endpoint, or a PostHog test project with a test-only key) is **recommended before production**; the owner decides.
+
+### 0A.3 D — suppression-table investigation (no production access)
+
+| Evidence | Finding |
+|---|---|
+| Repository code | No Edge Function, trigger, migration or client code writes **or reads** `public.suppressed_emails`; `process-email-queue` sends without consulting it. The 21 April 2026 e-mail migration's comments refer to a "suppression edge function"; **no such function is in this repository** (nor `auth-email-hook`, `send-transactional-email` or an unsubscribe page) |
+| Provider SDK (`@lovable.dev/email-js` 0.3.1, the version used) | Lovable Email keeps **its own** unsubscribe state per recipient and sender-domain apex (`getEmailUnsubscribe` / `setEmailUnsubscribe`); spam complaints cannot be lifted (409 `complaint_not_liftable`); unsubscribed or bounced cc/bcc recipients are dropped by the API itself. Bounce/complaint/unsubscribe events are delivered to the project only if a webhook handler (`createEmailWebhookHandler`) is deployed — the place a project-side mirror would be written |
+| Lovable docs (custom emails, 15 Oct 2026) | "When a user unsubscribes, their email is added to a suppression list and future app emails to that address are blocked automatically before sending." Projects created before 9 July 2026 include the unsubscribe page in the app; none exists here, consistent with the project sending **auth e-mails only** (which carry no unsubscribe) |
+
+**Conclusion:** the evidence indicates that the local table is **not** the enforcement point — Lovable's provider-side state is — and that nothing in this codebase populates it. It **cannot be fully established without production** whether a Lovable-managed function deployed outside Git writes or reads it, or whether it holds rows. **D stays OPEN.** Nothing was implemented.
+
+**Narrow read-only production check (only during the later, owner-authorised activation phase):**
+1. Edge Function **names** deployed in production (Management API list; names only) — is any suppression/webhook/transactional function deployed that is not in Git?
+2. `select reason, count(*), min(created_at), max(created_at) from public.suppressed_emails group by reason;` (aggregates only, no addresses).
+3. `select p.oid::regprocedure from pg_proc p where p.prosrc ilike '%suppressed_emails%';` and `select tgname from pg_trigger where tgrelid = 'public.suppressed_emails'::regclass and not tgisinternal;` (any in-database consumer).
+
+**Decision rule after the check:** no external consumer → delete the account's row with Auth deletion (a new migration replacing `private.n10_forget_email_records` to add one `DELETE … WHERE lower(email) = lower(OLD.email)`, atomic like M6), and the Privacy Policy suppression sentence is removed. An external consumer that genuinely enforces suppression → keep the minimum (`email`, `reason`, `created_at`; review `metadata`), assess a keyed hash of the normalised address with that writer, and keep the disclosure. Either path is **LEGAL REVIEW REQUIRED** (0.9 Q2).
+
+### 0A.4 F and G — wording rules after D14.1 (draft, not published)
+
+- F: no exact period is published unless current provider documentation **and** the confirmed production plan prove it; otherwise "for a limited period under their own retention schedules". No claim of immediate deletion from Supabase backups/PITR, platform/Auth logs, Lovable Email logs, Lovable AI Gateway logs, or PostHog systems.
+- G, Privacy Policy "Analytics" bullet (replaces the 0.7 bullet once M7 is activated): *"If you allowed analytics, we ask our analytics provider to delete the analytics profile linked to your account and the events recorded with it. The provider completes this deletion in the background, so it isn't instant."*
+- G, the 0.7 suppression sentence stays **conditional on D**; it is removed if D resolves to deletion.
+- G, confirmation dialog: no change required by E (it does not mention analytics); optional addition for legal review: *"If you allowed analytics, your analytics profile is deleted too."*
+
+### 0A.5 Remaining privacy/legal questions (LEGAL REVIEW REQUIRED; D14 stays OPEN)
+
+1. **A:** purpose and necessity of the 30-day pseudonymous completed record (owner-approved direction; legal review still required).
+2. **D:** lawful basis for any suppression record after deletion; whether a project-side copy is necessary given provider-side suppression (after the 0A.3 check).
+3. **E:** whether PostHog's asynchronous deletion (and its own backup/retention behaviour) is sufficient, and the exact Privacy Policy wording for it.
+4. **F/G:** accuracy of the Privacy Policy text, including "backups aren't used to restore deleted accounts" (an operational commitment the owner must keep).
+5. **Processors:** data-processing terms, regions and retention for Lovable Email, Lovable AI Gateway, PostHog and Supabase.
+
+### 0A.6 Engineering status and what remains
+
+Done locally in D14.1: M7, worker analytics loop, PostHog adapter, alert integration, tests and mutations, this documentation. Remaining before controlled activation: owner decision on a hosted rehearsal of M7; owner creates the PostHog key (project-scoped, `person:write`) and sets `POSTHOG_PERSONAL_API_KEY` / `POSTHOG_PROJECT_ID` / `POSTHOG_API_HOST` as Edge Function secrets at activation; the D read-only check and the resulting D change; legal review of 0A.5; implementing the approved wording (UI + Privacy page) after legal review; then controlled activation with the Lovable delivery proofs (real alert to `contact@thestartofyou.com` from `contact@wesellproducts.co.uk` with sender acceptance verified; one real e-mail-queue delivery; proof that no privileged credential passes through pg_net). If production turns out not to use PostHog at all, activation must not proceed with M7 until the owner decides how that is recorded — M7 deliberately has no bypass.
+
 ## 0. Owner decision packet — Revision 3 (15 October 2026)
+
+*Historical decision basis, accepted by the owner on 15 October 2026. Where it differs from §0A (Revision 4), §0A governs.*
 
 **D14 = OPEN.** This section turns the owner's proposed direction into individually approvable decisions. Approving them is an **owner decision**, not formal legal approval; items marked **LEGAL REVIEW REQUIRED** still need a qualified privacy/legal reviewer. Nothing here has been deployed; production has not been accessed. Sections 1–11 below are the earlier analysis and drafts, kept for history; where they differ, this section governs.
 
@@ -58,7 +141,7 @@ Proposed: **D1** for now, explicitly classified as suppression (not account/prof
 
 **Supported mechanism (PostHog docs, checked 15 Oct 2026):** `DELETE /api/projects/<project_id>/persons/<person_uuid>` with a personal API key returns 202 and removes the person; **events are deleted only with `delete_events=true`**, asynchronously during off-peak hours (status via `persons/deletion_status`). The person is found by listing persons filtered by the user's distinct id.
 
-**Preferred option (NOT AUTHORISED):** in the N10 worker, after Auth deletion is confirmed and **before** the request is anonymised (the user id is still on the row), look up the person by distinct id and delete it with `delete_events=true`, through a provider adapter isolated like the e-mail adapter. Failure retries on the worker schedule; whether a persistent PostHog failure should block `completed` or raise an operator alert is an owner choice (recommended: alert, not block, since analytics is not account data held by TSOY).
+*(Superseded by §0A.2: the owner approved the engineering direction; the implemented design uses one `bulk_delete` call and gates COMPLETED instead of "alert, not block".)* **Preferred option (Revision 3 text):** in the N10 worker, after Auth deletion is confirmed and **before** the request is anonymised (the user id is still on the row), look up the person by distinct id and delete it with `delete_events=true`, through a provider adapter isolated like the e-mail adapter. Failure retries on the worker schedule; whether a persistent PostHog failure should block `completed` or raise an operator alert is an owner choice (recommended: alert, not block, since analytics is not account data held by TSOY).
 
 | Credential | Value |
 |---|---|
@@ -138,7 +221,7 @@ G. Adopt the 0.7 UI copy                                                   [ ] A
 Owner: ________________   Date: ________________
 ```
 
-This owner block does **not** close D14. D14 closes when the owner block is approved **and** the LEGAL REVIEW REQUIRED items in 0.9 are cleared (or the owner records an explicit decision to proceed on their own authority), and the formal block in §11 is completed.
+This owner block does **not** close D14. D14 closes when the owner block is approved **and** the LEGAL REVIEW REQUIRED items in 0.9 have received the required human privacy/legal review, and the formal block in §11 is completed. *(Superseded wording, withdrawn in Revision 4: an alternative allowing the owner to proceed on their own authority. Owner approval authorises engineering direction only; it does not clear a legal-review item.)*
 
 ### 0.9 Questions that genuinely need external privacy/legal review
 
@@ -159,7 +242,7 @@ This owner block does **not** close D14. D14 closes when the owner block is appr
 
 ### 0.11 Readiness
 
-Ready for the **controlled production activation phase** once: the owner block (0.8) is approved; the legal-review items (0.9) are cleared or explicitly accepted by the owner; the approved wording is implemented; and — if E is authorised — the PostHog step is implemented, tested and rehearsed. **Not ready today: D14 = OPEN.**
+Ready for the **controlled production activation phase** once: the owner block (0.8) is approved; the legal-review items (0.9) have received the required human privacy/legal review *(Revision 4: owner acceptance alone does not clear them)*; the approved wording is implemented; and — if E is authorised — the PostHog step is implemented, tested and rehearsed. **Not ready today: D14 = OPEN.**
 
 ## 1. Executive summary
 

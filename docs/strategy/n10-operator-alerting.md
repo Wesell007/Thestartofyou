@@ -55,6 +55,9 @@ Delivery stays on Lovable Email (not Hostinger); `thestartofyou.com` sender veri
 | Alert delivery fails | attention state unchanged | retried after 5, 15, then every 60 min; each failure logged (`n10_operator_alert_delivery_failed`, no secret) |
 | No destination configured | attention state unchanged | none; pending count logged every run |
 | Late object found by the final sweep | completes normally | log only (`final_sweep_regression`), no e-mail |
+| Analytics-identity erasure (D14.1 / M7): missing/malformed PostHog credential, or provider 4xx | request stays in its media state; `analytics_attention_since` set immediately (`analytics_config` / `analytics_permanent`); COMPLETED blocked | first alert, key `analytics_attention:<class>` ("Analytics identity erasure needs operator attention") |
+| Analytics erasure transient failures (408/429/5xx/network) unresolved 24 h after Auth deletion | `analytics_attention_since` set (`analytics_transient`); COMPLETED blocked | first alert; escalation and class-change rules as above |
+| Analytics erasure resolves | attention cleared | none (no further alerts) |
 
 Residual: if the worker or cron itself stops running, no alert can be sent; uptime monitoring of the worker is outside N10 (recommended at activation).
 

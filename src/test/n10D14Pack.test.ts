@@ -38,6 +38,13 @@ describe("D14 approval pack", () => {
     for (const line of stale) expect(line).toMatch(/Superseded/);
   });
 
+  it("has the Revision 3 owner decision block with every decision A–G visible and unticked", () => {
+    const block = doc.slice(doc.indexOf("N10 D14 OWNER DECISION"));
+    for (const line of ["A. Completed deletion record", "B. email_send_log", "C. email_unsubscribe_tokens", "D. suppressed_emails", "E. PostHog", "F. Disclose provider backup/log retention", "G. Adopt the 0.7 UI copy"]) expect(block, line).toContain(line);
+    expect(doc).toMatch(/This owner block does \*\*not\*\* close D14/);
+    expect(doc).toMatch(/\*\*NOT AUTHORISED \/ NOT IMPLEMENTED\*\*; needs a backend credential/);
+  });
+
   it("does not assert a lawful basis as fact and flags pseudonymity", () => {
     expect((doc.match(/LEGAL REVIEW REQUIRED/g) ?? []).length).toBeGreaterThanOrEqual(5);
     expect(doc).toMatch(/pseudonymous, not anonymous/);

@@ -10,6 +10,157 @@ Phase: N10.4 — Production Readiness: Privacy/Legal + Operator Alert. Productio
 - **M5 `20261011050645_email_queue_invocation_hardening.sql`:** the e-mail queue no longer sends a service-role key through pg_net (security fix).
 - **Operator alerts:** destination `contact@thestartofyou.com`, sender `contact@wesellproducts.co.uk` (owner decision); alerts contain no personal data.
 
+## 0. Owner decision packet — Revision 3 (15 October 2026)
+
+**D14 = OPEN.** This section turns the owner's proposed direction into individually approvable decisions. Approving them is an **owner decision**, not formal legal approval; items marked **LEGAL REVIEW REQUIRED** still need a qualified privacy/legal reviewer. Nothing here has been deployed; production has not been accessed. Sections 1–11 below are the earlier analysis and drafts, kept for history; where they differ, this section governs.
+
+Evidence base: N10.3B (`docs/strategy/evidence/n10-3b-hosted-candidate-e/`) and N10.5 (`docs/strategy/evidence/n10-5-hosted-n104/`) — hosted core PASS; real Lovable e-mail delivery **HOLD** (the Lovable-managed `LOVABLE_API_KEY` cannot exist in a disposable project; not a core N10 failure — to be proven in controlled activation).
+
+### 0.1 Decision summary
+
+| | Item | Proposed owner decision | Implementation state | External review |
+|---|---|---|---|---|
+| A | Completed deletion record | **Keep 30 days after completion, then delete automatically** | implemented; set `N10_COMPLETED_ROW_RETENTION_DAYS=30` at activation | LEGAL REVIEW REQUIRED (purpose/necessity) |
+| B | `email_send_log` | **Delete atomically with the account** | implemented (M6), hosted-proven (N10.5) | confirm only |
+| C | `email_unsubscribe_tokens` | **Delete atomically with the account** | implemented (M6), hosted-proven (N10.5) | confirm only |
+| D | `suppressed_emails` | **Keep only a minimum suppression record** (not account data) | current table kept untouched; see 0.4 finding | LEGAL REVIEW REQUIRED (basis + whether a repository copy is needed at all) |
+| E | PostHog person data | **Delete server-side as part of the deletion workflow** | **NOT AUTHORISED / NOT IMPLEMENTED**; needs a backend credential (0.5) | LEGAL REVIEW REQUIRED (events retention) |
+| F | Backups / platform logs / providers | **Disclose provider-managed retention; no claim of immediate deletion** | documentation only | VERIFY plan values + provider terms |
+| G | UI + Privacy Policy wording | **Adopt §0.7 wording** | not published | LEGAL REVIEW REQUIRED (Privacy Policy text) |
+
+### 0.2 A — Completed deletion record (30 days)
+
+After completion the row contains only: random request `id`; `status = completed`; `requested_at`, `auth_deleted_at`, `final_sweep_after`, `purge_empty_at`, `completed_at`, `anonymised_at`, `updated_at`; `attempt_count`, `next_attempt_at`, `lease_until`; `last_error_class` (NULL at completion); `objects_removed`, `sweep_objects_removed`, `anomaly_count = 0`; M4 alert metadata (`alert_key` such as `purge_attention:storage_remove`, alert timestamps, failure count). **`user_id` is NULL** (enforced by CHECK constraints). No name, e-mail, hash of the user, journey/health data, Storage path or content.
+
+It is **pseudonymous, not anonymous**: during the retention window its request id and exact timestamps could be correlated with platform/Auth logs, backups or the operator alert e-mail. Deletion after 30 days is automatic (`n10_cleanup_completed(30)`, hosted-proven; 0-day option also proven). If the variable were unset, rows would be kept indefinitely — activation must set it.
+
+### 0.3 B and C — e-mail delivery log and unsubscribe tokens (implemented)
+
+Wording check against the code (M6 `20261011050647_n10_privacy_minimisation.sql`, sha256 `9f9acf6f…`): the rows whose address matches the account's **current** e-mail address, case-insensitively, are deleted **inside the Auth deletion transaction**. If that cleanup fails, the Auth deletion and all its cascades roll back and N10 retries (hosted-proven: GoTrue returned 500 with the forced error; zero media removed; retry succeeded). Limitation to state accurately: rows logged under an **earlier** address (before an e-mail change) are not matched.
+
+### 0.4 D — suppression records: what exists and what it is for
+
+| Fact | Detail |
+|---|---|
+| Fields | `id` (uuid), **`email` (clear text, unique)**, `reason` (`unsubscribe` / `bounce` / `complaint`), `metadata` (jsonb — written outside this repository; contents unknown), `created_at` |
+| Access | RLS on; service role may SELECT and INSERT; no UPDATE/DELETE policies (append-only by design) |
+| **Who writes it** | **no code in this repository** (no Edge Function, trigger or migration inserts rows); if populated, it is by Lovable-managed e-mail tooling outside the repo — **VERIFY at activation** (read-only count and source; owner-authorised) |
+| **Who enforces it** | **nothing in this repository reads it**: `process-email-queue` sends without consulting it. Suppression appears to be enforced **provider-side** by Lovable Email (the send call carries an `unsubscribe_token`; the provider SDK exposes its own unsubscribe state keyed by recipient + domain) |
+| Clear e-mail required? | not by any repository code |
+| Hash design feasible? | yes for equality checks (e.g. a keyed hash of the normalised address), **but** it needs a migration (hash column, backfill, drop clear column, change the uniqueness rule), every writer to compute the same keyed hash (the writer is outside the repo), and a key held server-side. Provider-side suppression lists hold clear addresses regardless |
+| Options | **D1** keep the current minimal record and disclose it (owner's proposed direction); **D2** convert to a keyed hash (engineering + coordination with the external writer); **D3** delete the account's row with the account (one-line M6 change) and rely on provider-side suppression |
+
+Proposed: **D1** for now, explicitly classified as suppression (not account/profile data), with the finding above put to the reviewer: if the repository copy does not enforce anything, its necessity is questionable. **LEGAL REVIEW REQUIRED.**
+
+### 0.5 E — PostHog: current implementation and preferred option
+
+**Current:** PostHog loads only after analytics consent (`autocapture`, page views, session recording and surveys disabled; `person_profiles: "identified_only"`; host default `https://us.i.posthog.com`). On sign-in the browser calls `identify(<user id>)`, creating a person profile keyed by the user's UUID; events carry no names, e-mails or health data by policy (`src/lib/analyticsEvents.ts`). Sign-out after deletion calls `posthog.reset()` (browser identity cleared). **Server-side person data and events remain today.**
+
+**Supported mechanism (PostHog docs, checked 15 Oct 2026):** `DELETE /api/projects/<project_id>/persons/<person_uuid>` with a personal API key returns 202 and removes the person; **events are deleted only with `delete_events=true`**, asynchronously during off-peak hours (status via `persons/deletion_status`). The person is found by listing persons filtered by the user's distinct id.
+
+**Preferred option (NOT AUTHORISED):** in the N10 worker, after Auth deletion is confirmed and **before** the request is anonymised (the user id is still on the row), look up the person by distinct id and delete it with `delete_events=true`, through a provider adapter isolated like the e-mail adapter. Failure retries on the worker schedule; whether a persistent PostHog failure should block `completed` or raise an operator alert is an owner choice (recommended: alert, not block, since analytics is not account data held by TSOY).
+
+| Credential | Value |
+|---|---|
+| Name | `POSTHOG_PERSONAL_API_KEY` (plus non-secret `POSTHOG_PROJECT_ID`, `POSTHOG_API_HOST` e.g. `https://us.posthog.com`) |
+| Where | Supabase **Edge Function secret** (backend-only); never `VITE_*`, never client code, never pg_net |
+| Minimum permission | a personal API key **limited to the single TSOY PostHog project** with person **read + write** scopes only (exact scope names to be confirmed in PostHog at implementation) |
+| Owner action | create it in PostHog yourself and save it as the Edge Function secret at activation — **do not paste it into chat** |
+
+Historical events: if `delete_events=true` is used, events are deleted asynchronously (not instantly); if not, events remain under the UUID (pseudonymous). Privacy wording must say analytics data is deleted "after a short processing delay", not instantly. PostHog's own backup/retention terms: **VERIFY**. **LEGAL REVIEW REQUIRED** on whether event deletion is required or pseudonymous retention is acceptable.
+
+### 0.6 F — what is deleted, what expires, what cannot be recalled
+
+| Category | What | Retention / behaviour | Source |
+|---|---|---|---|
+| **A. Removed from the active application** | Auth account; all account-owned database rows (cascade); private photos/videos/voice notes; e-mail delivery log + unsubscribe tokens for the current address | at deletion (media purge may take a short time in the background; a final sweep follows after about 1 h 15 min) | N10.3B / N10.5 evidence |
+| **B. Temporary provider-managed retention** | Supabase daily backups | Pro 7 days, Team 14 days, Enterprise custom; PITR add-on in 7-day steps (7/14/28, >28 on Enterprise). Individual records are not removed from backups | Supabase pricing + backups docs (15 Oct 2026) |
+| | Supabase platform logs (API, database, Auth, Storage, Edge Functions) | Free 1 day, Pro 7 days, Team 28 days, Enterprise 90 days | Supabase pricing (15 Oct 2026) |
+| | Supabase Auth audit trail (`auth.audit_log_entries`) | platform-managed; not deleted by N10; retention **not documented — VERIFY** | — |
+| | Lovable Email delivery logs | plan-dependent retention window ("history_starts_at" in the provider SDK); exact period **not publicly documented — VERIFY with Lovable** | `@lovable.dev/email-js` 0.3.1 types |
+| | Lovable AI Gateway (all AI features call `ai.gateway.lovable.dev`) | request/response retention **not publicly documented — VERIFY with Lovable** (EU inference option exists) | Lovable Cloud docs |
+| | PostHog (consenting users only) | until deleted per 0.5; provider retention **VERIFY** | PostHog docs |
+| | Operator alert e-mails (`contact@thestartofyou.com`) | request id + timestamps only; mailbox retention is the operator's | n10-operator-alerting.md |
+| | Completed deletion record | 30 days (A) | — |
+| | Suppression record | indefinite unless decided (D) | — |
+| **C. Already delivered (D15)** | files the user downloaded, screenshots, browser/device caches, CDN copies already served to that browser | cannot be remotely recalled; CDN copies end when the files are purged | D15 (owner-accepted) |
+
+The production Supabase plan determines the B values — **confirm the plan** before publishing numbers; the wording below avoids fixed numbers.
+
+### 0.7 G — final proposed wording (not published)
+
+**Account settings — Delete account**
+> **Delete account**
+> Permanently deletes your account and everything saved to it — your journeys, logs and reflections, baby details, First Year notes and memories, and every private photo, video and voice note. This can't be undone. If you'd like a copy first, download your data before you continue.
+
+**Confirmation dialog**
+> **Permanently delete your account?**
+> Your account is deleted first and you'll be signed out straight away — you won't be able to sign in to it again. Your private photos, videos and voice notes are then removed in the background, usually within a few minutes.
+> We keep a short technical record that the deletion happened — with no name, email address, profile or content — for 30 days so we can confirm it finished, then delete it. Our email delivery records for your address are deleted with your account.
+> Copies you've already downloaded, or that your browser has saved, stay on your devices — we can't remove those.
+> [Cancel] [Delete my account]
+
+**After the request**
+- *Deleted (200):* "Your account has been deleted. Any remaining photos and files are being removed in the background — you don't need to do anything."
+- *In progress (202):* "We've received your request and your account is being deleted. Your photos and files are locked and can't be viewed while this finishes. You don't need to do anything."
+- *Already deleted (410):* "This account has already been deleted."
+- *Not started (5xx):* "We couldn't start the deletion just now. Nothing has been deleted. Please try again in a few minutes."
+
+**Privacy Policy — Deleting your account** *(LEGAL REVIEW REQUIRED)*
+> You can permanently delete your account from Account settings. When you do:
+> - **Your account is removed first.** You're signed out and can no longer sign in, and the information saved to your account is deleted with it.
+> - **Your private files are deleted.** Photos, videos and voice notes are removed from our storage, usually within a few minutes; a final check runs shortly afterwards to remove anything left behind.
+> - **Email records.** Our record of emails we sent you, and your unsubscribe link, are deleted with your account. If you had unsubscribed from our emails, or an email to you bounced or was reported, we may keep your email address on a do-not-email list solely so we never email you again.
+> - **A short technical record.** We keep a minimal record that the deletion took place — when it was requested and completed, and whether it succeeded — for 30 days, then delete it automatically. It contains no name, email address, profile or content.
+> - **Analytics.** If you allowed analytics, the analytics profile linked to your account is deleted after a short processing delay. *(Include only once E is implemented and approved.)*
+> - **Backups and system logs.** Our hosting and service providers keep encrypted backups and system logs for a limited period under their own retention schedules, after which they are deleted. We can't remove individual records from backups, but backups aren't used to restore deleted accounts.
+> - **Copies you already have.** Deleting your account can't reach copies that already left our service, such as files you downloaded or copies saved by your browser.
+
+*Check before publishing:* the "not used to restore deleted accounts" statement is an operational commitment the owner must be willing to keep.
+
+### 0.8 OWNER DECISION — approve in one message (D14 stays OPEN until legal review items are cleared)
+
+```
+N10 D14 OWNER DECISION
+
+A. Completed deletion record kept 30 days, then deleted automatically      [ ] APPROVE  [ ] CHANGE: ____ days
+B. email_send_log deleted atomically with the account (M6)                 [ ] APPROVE  [ ] CHANGE
+C. email_unsubscribe_tokens deleted atomically with the account (M6)       [ ] APPROVE  [ ] CHANGE
+D. suppressed_emails: keep minimum suppression record (D1)                 [ ] APPROVE D1  [ ] D2 hash  [ ] D3 delete
+E. PostHog: authorise server-side person + event deletion (0.5);
+   I will create POSTHOG_PERSONAL_API_KEY myself                          [ ] AUTHORISE  [ ] NOT NOW
+   persistent PostHog failure should:                                      [ ] ALERT ONLY  [ ] BLOCK COMPLETION
+F. Disclose provider backup/log retention as in 0.6 (no immediate-deletion
+   claim); production Supabase plan = ________                            [ ] APPROVE
+G. Adopt the 0.7 UI copy                                                   [ ] APPROVE  [ ] CHANGE
+   Adopt the 0.7 Privacy Policy text subject to legal review               [ ] APPROVE  [ ] CHANGE
+
+Owner: ________________   Date: ________________
+```
+
+This owner block does **not** close D14. D14 closes when the owner block is approved **and** the LEGAL REVIEW REQUIRED items in 0.9 are cleared (or the owner records an explicit decision to proceed on their own authority), and the formal block in §11 is completed.
+
+### 0.9 Questions that genuinely need external privacy/legal review
+
+1. Lawful basis and necessity for keeping the completed deletion record for 30 days (A).
+2. Lawful basis for keeping a suppression list after account deletion, and whether a repository copy is needed when the provider enforces suppression (D).
+3. Whether PostHog events must be deleted, or pseudonymous retention under the UUID is acceptable for consenting users (E).
+4. Whether the Privacy Policy text in 0.7 is accurate and sufficient, including the backup statement (G).
+5. Provider/processor terms: Lovable Email, Lovable AI Gateway, PostHog, Supabase (data-processing agreements, regions, retention) (F).
+
+### 0.10 Engineering work after approval (not started)
+
+1. Set `N10_COMPLETED_ROW_RETENTION_DAYS` to the approved value at activation.
+2. If E is authorised: implement the PostHog deletion adapter in the worker (isolated adapter, backend-only secret, retries, alert or block per decision), tests with a fake provider, a hosted rehearsal of that step, and a privacy-wording toggle.
+3. If D2 or D3 is chosen: a new migration (hash conversion or deletion in M6's successor) plus tests; D2 also needs coordination with the external writer.
+4. Update the UI copy in `AccountSettings.tsx` and `src/lib/accountDeletion.ts` messages, and the Privacy page, to the approved wording (with tests).
+5. Read-only production checks at activation: plan tier (for F), `suppressed_emails` row count/source, `LOVABLE_API_KEY` present (name only).
+6. Controlled activation itself (`n10-production-activation-checklist.md`), including the **real Lovable proofs that N10.5 could not do**: one non-sensitive N10 alert to `contact@thestartofyou.com` from `contact@wesellproducts.co.uk` (sender acceptance verified), one real e-mail-queue delivery, and proof that no privileged credential passes through pg_net.
+
+### 0.11 Readiness
+
+Ready for the **controlled production activation phase** once: the owner block (0.8) is approved; the legal-review items (0.9) are cleared or explicitly accepted by the owner; the approved wording is implemented; and — if E is authorised — the PostHog step is implemented, tested and rehearsed. **Not ready today: D14 = OPEN.**
+
 ## 1. Executive summary
 
 - Account deletion (Candidate E) is **account-first**: the Auth account is hard-deleted and confirmed by the database **before** any media is removed; the user's database records cascade away with the Auth row; private media is then purged; a final sweep runs after the longest valid access-token lifetime; the operational deletion record is anonymised on completion.
@@ -101,7 +252,7 @@ If the variable is **unset**, completed rows are kept **indefinitely** (cleanup 
 
 N10 enforces **origin access**: once deletion is requested the account's media cannot be newly read, written, deleted or signed at the Storage origin, by the user's old token or anyone else. N10 does **not** claim to recall bytes already delivered: pre-issued signed URLs (≤ 1 h), CDN copies of earlier authenticated downloads (served only back to the same credential, ended by purge within seconds), browser/device caches and downloaded files. No cross-user cache access was observed. This needs plain disclosure (§8 F).
 
-## 8. User-facing copy (DRAFT — not published)
+## 8. User-facing copy (earlier DRAFT — superseded by §0.7)
 
 **A. Account settings — Delete account section**
 > **Delete account**

@@ -7,7 +7,7 @@
 | # | Gate | State | Owner of the action |
 |---|---|---|---|
 | A0 | **D14.1 (15 Oct 2026):** owner decisions recorded (A, B, C, F approved; E approved engineering direction, implemented locally as M7; G approved as draft, not published; **D OPEN / VERIFY**) — `n10-d14-privacy-legal-release-gate.md` §0A. Owner approval does not clear LEGAL REVIEW REQUIRED items | recorded | owner |
-| A0b | Hosted rehearsal of **M7** (`20261015053138_n10_analytics_erasure.sql`) on a disposable project — recommended; owner decides | **NOT DONE** | owner / Claude Code |
+| A0b | Hosted rehearsal of **M7** (`20261015053138_n10_analytics_erasure.sql`) on a disposable project — recommended; owner decides | **DONE: D14.2 CLOSED / PASS / RETIRED (23 Oct 2026)**. Hosted M7 core PASS (`docs/strategy/evidence/d14-2-hosted-m7/`, `4072bf27`, `76cf7726`). PostHog live HTTP **deferred** to activation (step 8a) | owner / Claude Code |
 | A1 | **D14 human privacy/legal approval** (`n10-d14-privacy-legal-release-gate.md` decision block signed): retention days (A/B/C), K/M confirmation, L (suppression list), N (PostHog), backup/log/third-party statements, UI + privacy wording | **OPEN** | human reviewer |
 | A2 | Hosted rehearsal of the **N10.4 migrations M4, M5, M6** on a fresh disposable project (they are tested locally on PGlite only). Must prove: M4 ledger + real alert e-mail to the approved mailbox; **M6 trigger can be created on hosted `auth.users`, runs inside GoTrue's deletion transaction (normal deletion commits and removes the e-mail rows), and a forced cleanup failure makes GoTrue's delete fail and roll back (Auth user, cascades, e-mail rows and media all intact) until the failure is removed**; M5 replaces a Lovable-style `process-email-queue` job and the e-mail queue still delivers with the invocation token | **NOT DONE** | **DONE (N10.5, 14 Oct 2026): core PASS**; Lovable delivery (real alert e-mail, queue delivery) still **HOLD** — must be proven at activation (smoke test) or in an owner-approved Lovable-provisioned rehearsal |
 | A3 | Owner decision on the order of the e-mail-queue switch (A2 must show the gap; see C4) | open | owner |
@@ -41,6 +41,7 @@
 6. Catalogue + worker privilege gate + worker boundary checks (as in N10.3B §10–§17), read-only where possible.
 7. Populate the N10 Vault values → cron starts.
 8. **Operator-alert smoke test** (`n10-operator-alerting.md` §8): one synthetic non-user attention row → exactly one e-mail to `contact@thestartofyou.com` from `contact@wesellproducts.co.uk`, no personal data, no duplicate on the next tick → privileged cleanup of the synthetic row. Only then is the operator-alert blocker CLOSED.
+8a. **PostHog live erasure smoke test** (deferred from D14.2): with the three `POSTHOG_*` secrets set, one synthetic test deletion is resolved by a real `bulk_delete` (202, classified `resolved`). The key must not appear in logs, the database, pg_net or the client. A wrong key or project must give a permanent failure and attention. No real user's analytics person is used.
 9. Publish the D14-approved UI copy and privacy-policy wording.
 10. Record activation evidence; secret scan; owner review.
 

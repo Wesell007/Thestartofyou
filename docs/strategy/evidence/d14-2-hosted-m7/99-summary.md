@@ -1,5 +1,7 @@
 # 99 — D14.2 summary: hosted rehearsal of M7 analytics-identity erasure
 
+**D14.2 = CLOSED / PASS / RETIRED** (owner confirmed the teardown on 23 October 2026; see 16).
+
 **D14.2 HOSTED M7 CORE = PASS.**
 **POSTHOG LIVE HTTP E2E = NOT RUN / DEFERRED TO CONTROLLED ACTIVATION.**
 **D = OPEN / VERIFY REQUIREMENT. D14 = OPEN. 41B.1B = NOT STARTED / NOT AUTHORISED.** This is engineering proof only, not legal approval; no Privacy Policy or UI copy was published.
@@ -70,4 +72,4 @@ Fixture user ids and e-mails in evidence: **0**.
 
 ## Retirement
 
-Evidence pushed at `4072bf27`. The project was then **paused (INACTIVE)**. Deletion with the scoped PAT was **refused** (`project_admin_write` missing), and no broader credential was requested. Locally derived secrets were deleted. **Owner action:** delete the paused project in the Dashboard, revoke the D14.2 PAT and delete the two credential files (`16-retirement.md`).
+Evidence pushed at `4072bf27`. The project was then **paused (INACTIVE)**. Deletion with the scoped PAT was **refused** (`project_admin_write` missing), and no broader credential was requested. Locally derived secrets were deleted. The owner then deleted the project, revoked the PAT and deleted the credential files. **Retired** (`16-retirement.md`).

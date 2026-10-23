@@ -16,3 +16,18 @@ Evidence was pushed first (`4072bf27`, fast-forward to `origin/feat/41b1a-family
 3. Delete `C:\Users\Administrator\.d142\d142.dbpass` and `C:\Users\Administrator\.d142\d142.pat`. The whole `C:\Users\Administrator\.d142\` folder can go once you no longer need the harness.
 
 Until step 1 is done, the paused project still holds synthetic fixtures only (no real user data), its function secrets and the worker role. Its database password, worker password and invocation secret are useless outside it.
+
+## Teardown confirmation (23 October 2026)
+
+**D14.2 = CLOSED / PASS / RETIRED.**
+
+The owner confirmed:
+- project `tsoy-d14-2-m7-rehearsal` (`jjrhizafpikmyvfapcic`) was **deleted manually**;
+- the D14.2 scoped PAT was **revoked**;
+- `d142.dbpass` and `d142.pat` were **deleted**.
+
+Independent checks:
+- the connector's `get_project(jjrhizafpikmyvfapcic)` now returns a permission error, consistent with the project being gone;
+- `C:\Users\Administrator\.d142\` no longer contains the credential files. The rest of that folder (harness, raw copies, sealed clone; no secrets) was then removed entirely.
+
+Production was not contacted at any point. D14.2 must not be repeated. D = OPEN / VERIFY REQUIREMENT; D14 = OPEN; 41B.1B = NOT STARTED / NOT AUTHORISED.

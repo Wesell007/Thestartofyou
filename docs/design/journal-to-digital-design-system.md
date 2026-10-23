@@ -81,7 +81,7 @@ The physical journal and packaging remain the design authority. Design only: no 
    - Covered from the print PDF and the box mockup: typefaces, file colour values, layout, illustration, prompts, packaging, the digital gap analysis, principles and three proposed directions.
    - Physical confirmation (paper, finish, printed colour, trim size) is still pending.
    - The insert card does not exist yet and is a new deliverable.
-2. **Taste reference system**: curated references with like/dislike notes (`docs/design/tsoy-visual-direction.md` §3).
+2. **Taste reference system**: **DONE (23 October 2026)**, see `docs/design/references/` (seven categories, anti-reference board, A/B/C scorecard, synthesis recommendation: B + A + limited C as one system under three rules; Kidproducts recommended as provenance only). Awaiting founder decision.
 3. **Two to three visual directions** for the founder to choose from, each shown on the same flagship screens.
 4. **Flagship screens** in the chosen direction: homepage, one hub, an article, Companion, My Week, journal entry, plus mobile.
 5. **Shared design system**: tokens (colour, type, space, radius, elevation, motion), core components and patterns, implemented in `src/index.css` / `tailwind.config.ts` / `src/components/ui/`. It replaces the Lovable-era tokens through a planned migration with visual QA, not a big-bang swap.

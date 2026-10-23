@@ -31,7 +31,7 @@ Rules:
 - whether it applies to web, app or both;
 - the decision.
 
-Kept in `docs/design/references/` (to be created in Gate 2). Images there must have rights cleared or be stored as links only.
+Kept in `docs/design/references/` (created in Gate 2 Step 2, 23 October 2026: category files, `anti-references.md`, `direction-scorecard.md`, `synthesis-recommendation.md`). Entries are links and notes only; no screenshots are stored in Git. The 21st.dev catalog tooling was unavailable during the round, so references were grounded by web research and attributed per entry.
 
 ## 3. Higgsfield: premium visual-production layer
 

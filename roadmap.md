@@ -20,6 +20,10 @@ Authoritative programme sequence: `docs/strategy/tsoy-v1-product-rebaseline.md`.
 - [x] Gate 2, step 1: physical journal and packaging audit (23 October 2026), documentation only: `docs/design/journal-audit/`.
   - Covered: typefaces from the file (Adorn Story Serif, Aileron, Source Serif, Savoye LET, Arima Koshi, Augie), file colour values, layout, illustration, prompts, packaging mockup, insert card (absent; new deliverable), KEEP/EVOLVE/REMOVE/REBUILD gap analysis, principles, three proposed directions (A faithful / B editorial keepsake / C woodland companion).
   - Physical confirmation pending. No runtime change.
+- [x] Gate 2, step 2: Taste reference and design critique round (23 October 2026), documentation only: `docs/design/references/`.
+  - Seven reference categories with attributed sources, an 18-row anti-reference board, A/B/C and synthesis scorecards (criteria: A 36, B 50, C 31, synthesis 50 of 60; surfaces: synthesis 38 of 40).
+  - Recommendation for founder decision: B Editorial Keepsake as master system + A patterns reserved for journal/My Week/activation/memory + C art only at chapter, keepsake, empty and welcome states, governed by three rules (one type and palette; art by surface state; keepsake devices only where the user writes). Kidproducts recommended as manufacturer provenance only. Fonts not locked.
+  - No runtime, Supabase or schema change. Next: Step 3 flagship screens after founder approval.
 - Owner model: GitHub = single source of truth; Claude Code = implementation owner; Lovable = optional hosting layer only, not the builder or design authority; Supabase = independent platform infrastructure. Design: `docs/design/journal-to-digital-design-system.md`, `docs/design/tsoy-visual-direction.md`. Companion: `docs/ai/companion-v1-expanded-roadmap.md`. App: `docs/mobile/tsoy-native-app-roadmap.md`.
 
 ## Phase 34C — Small IVF new-article batch — CLOSED PASS (preview only)

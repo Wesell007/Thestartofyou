@@ -1,0 +1,17 @@
+2026-10-23T07:02:39Z
+== nslookup via 8.8.8.8
+Server:  dns.google
+Address:  8.8.8.8
+
+== nslookup via 1.1.1.1
+Server:  one.one.one.one
+Address:  1.1.1.1
+
+== dns.google A
+{"Status":3,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"wogepxfipdipogyogced.supabase.co.","type":1}],"Authority":[{"name":"supabase.co.","type":6,"TTL":30,"data":"christina.ns.cloudflare.com. dns.cloudflare.com. 2418224659 10000 2400 604800 30"}],"Comment":"Response from 172.64.34.193."}
+== control: supabase.co
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"supabase.co.","type":1}],"Answer":[{"name":"supabase.co.","type":1,"TTL":300,"data":"76.76.21.21"}],"Comment":"Response from 172.64.33.211."}
+== thestartofyou.com
+{"Status":0,"TC":false,"RD":true,"RA":true,"AD":false,"CD":false,"Question":[{"name":"thestartofyou.com.","type":1}],"Answer":[{"name":"thestartofyou.com.","type":1,"TTL":14400,"data":"185.158.133.1"}],"Comment":"Response from 162.159.24.201."}
+GET https://thestartofyou.com -> 404
+page title: <title>Project not found</title>

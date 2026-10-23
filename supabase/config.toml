@@ -1,4 +1,6 @@
-project_id = "wogepxfipdipogyogced"
+# Local-stack identifier only ("distinguishes Supabase projects on the same host"); it does not select
+# a remote project. Remote targets are always named explicitly (supabase link / --project-ref / --db-url).
+project_id = "thestartofyou"
 
 [functions.ai-search]
 verify_jwt = false

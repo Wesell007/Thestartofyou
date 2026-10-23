@@ -92,7 +92,9 @@ describe("phase 34H.2 feature flag resolution", () => {
 
   it("does not inject the flag through the Vite define map", () => {
     expect(readText("vite.config.ts")).not.toContain(FLAG_NAME);
-    expect(readText("scripts/public-backend-defaults.ts")).not.toContain(FLAG_NAME);
+    // Gate 1 removed the committed backend defaults; the explicit resolver and registry carry no flags.
+    expect(readText("scripts/public-backend-env.ts")).not.toContain(FLAG_NAME);
+    expect(readText("scripts/backend-environments.ts")).not.toContain(FLAG_NAME);
   });
 });
 

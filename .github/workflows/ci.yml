@@ -13,8 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      # CI exercises the frontend with mocked backend boundaries. Production
-      # deployment must provide the real public Supabase values separately.
+      # CI exercises the frontend with mocked backend boundaries and placeholder
+      # backend values; it never targets a real project (scripts/public-backend-env.ts).
+      VITE_TSOY_ENVIRONMENT: ci
       VITE_SUPABASE_URL: https://ci-test.supabase.co
       VITE_SUPABASE_PUBLISHABLE_KEY: ci-test-public-key
     steps:

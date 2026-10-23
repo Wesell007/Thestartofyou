@@ -35,6 +35,7 @@ Nothing in this folder changes runtime behaviour. It is documentation plus one e
 | `grounding-approvals/` | Phase 30K evidence store for the five-article initial batch: digest specification, full SHA-256 fingerprints, per-article evidence packages, append-only human-decision and source-validation logs (0 real events each). **Stage 1 complete, Stage 2 DEFERRED pending the human editorial/medical governance team**; owner and grounding reviewer TBD, nobody assigned or inferred, all five still `blocked_missing_metadata` |
 | `versioning.md` | The AI version constants, prompt fingerprints and the rules for bumping them |
 
+| `companion-v1-expanded-roadmap.md` | Gate 0 (October 2026) map of the expanded V1 Companion: provenance, answer → action, continuity, memory, journal continuity, proactive intelligence, real-time voice, family modes, multimodal, safe agentic actions; links existing designs, implements nothing |
 | `roadmap.md` | Phases 29D to 29L and the grounding track 30A to 30L plus 31A, with entry and exit criteria, plus the separate audit and redesign track |
 
 ## Closed AI phases

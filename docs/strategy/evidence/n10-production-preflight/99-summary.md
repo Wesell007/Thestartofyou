@@ -1,5 +1,7 @@
 # N10 production preflight (READ ONLY): summary
 
+> **Reclassified at Gate 0 (23 October 2026):** HOLD / ACTIVE PRODUCTION TARGET DOES NOT CURRENTLY EXIST OR IS NOT OWNER-APPROVED. The owner had intentionally unpublished the Lovable site, and no production target is approved. This was not an infrastructure incident. The evidence below is unchanged. See `docs/strategy/tsoy-environment-strategy.md`.
+
 **Result: HOLD at step 1. Production identity could not be verified, so none of the read-only checks A–E were run.**
 **Production writes: 0. No SQL reached the production database. Nothing was restored, woken, published, deployed or configured.**
 D = OPEN / VERIFY REQUIREMENT · D14 = OPEN · 41B.1B = NOT STARTED / NOT AUTHORISED.

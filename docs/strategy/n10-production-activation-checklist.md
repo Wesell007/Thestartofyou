@@ -1,6 +1,6 @@
 # N10 — Controlled production activation checklist
 
-**Status: NOT STARTED. Production has not been accessed or modified.** This is the ordered list of everything that must happen before and during controlled activation of Candidate E. Nothing here may be executed without explicit owner authorisation of the activation phase.
+**Status: NOT STARTED. Production has not been accessed or modified.** **Gate 0 (23 October 2026):** activation is **DEFERRED** to Gates 7–9 of `docs/strategy/tsoy-v1-product-rebaseline.md`. The target is the future clean `tsoy-production`, not the historical project `wogepxfipdipogyogced` (no longer verified; see `docs/strategy/tsoy-environment-strategy.md`). Every "production" step below applies to `tsoy-production` once it exists and is owner-approved; the D read-only check (2a) runs there. This is the ordered list of everything that must happen before and during controlled activation of Candidate E. Nothing here may be executed without explicit owner authorisation of the activation phase.
 
 ## A. Gates that must close first
 

@@ -70,4 +70,4 @@ Fixture user ids and e-mails in evidence: **0**.
 
 ## Retirement
 
-Recorded in `16-retirement.md` after the evidence push.
+Evidence pushed at `4072bf27`. The project was then **paused (INACTIVE)**. Deletion with the scoped PAT was **refused** (`project_admin_write` missing), and no broader credential was requested. Locally derived secrets were deleted. **Owner action:** delete the paused project in the Dashboard, revoke the D14.2 PAT and delete the two credential files (`16-retirement.md`).

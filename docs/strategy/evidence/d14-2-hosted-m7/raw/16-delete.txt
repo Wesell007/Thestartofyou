@@ -1,0 +1,5 @@
+[d142_delete] 2026-10-23T06:48:05.029Z supabase projects delete jjrhizafpikmyvfapcic --yes
+{"_tag":"Error","error":{"code":"ProjectsDeleteUnexpectedStatusError","message":"Failed to delete project jjrhizafpikmyvfapcic: {\"message\":\"Missing required permission(s): project_admin_write\",\"error\":{\"missing_permissions\":[\"project_admin_write\"]}}"}}
+Do you want to delete project jjrhizafpikmyvfapcic? This action is irreversible. [y/N] y
+
+exit=1

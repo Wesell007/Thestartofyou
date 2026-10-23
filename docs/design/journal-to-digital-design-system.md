@@ -77,7 +77,10 @@ The physical journal and packaging remain the design authority. Design only: no 
 
 ## 6. Gate 2 deliverables (in order, each owner-reviewed)
 
-1. **Physical journal audit** (`docs/design/journal-audit/` when started): photographs, measured colours, type identification, grid and spacing notes, packaging notes.
+1. **Physical journal audit**: **DONE from the supplied files (23 October 2026)**, see `docs/design/journal-audit/`.
+   - Covered from the print PDF and the box mockup: typefaces, file colour values, layout, illustration, prompts, packaging, the digital gap analysis, principles and three proposed directions.
+   - Physical confirmation (paper, finish, printed colour, trim size) is still pending.
+   - The insert card does not exist yet and is a new deliverable.
 2. **Taste reference system**: curated references with like/dislike notes (`docs/design/tsoy-visual-direction.md` §3).
 3. **Two to three visual directions** for the founder to choose from, each shown on the same flagship screens.
 4. **Flagship screens** in the chosen direction: homepage, one hub, an article, Companion, My Week, journal entry, plus mobile.

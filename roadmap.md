@@ -17,6 +17,9 @@ Authoritative programme sequence: `docs/strategy/tsoy-v1-product-rebaseline.md`.
   - OFFICIAL V1 WORKSTREAM / DESIGN NOT STARTED / IMPLEMENTATION NOT STARTED.
   - Schema: CONCEPT ONLY / NOT AUTHORISED. QR/token: NOT STARTED. Journal owner onboarding: DESIGN IN GATE 2. App integration: PLANNED.
   - Acquisition source ≠ ownership ≠ entitlement ≠ journey.
+- [x] Gate 2, step 1: physical journal and packaging audit (23 October 2026), documentation only: `docs/design/journal-audit/`.
+  - Covered: typefaces from the file (Adorn Story Serif, Aileron, Source Serif, Savoye LET, Arima Koshi, Augie), file colour values, layout, illustration, prompts, packaging mockup, insert card (absent; new deliverable), KEEP/EVOLVE/REMOVE/REBUILD gap analysis, principles, three proposed directions (A faithful / B editorial keepsake / C woodland companion).
+  - Physical confirmation pending. No runtime change.
 - Owner model: GitHub = single source of truth; Claude Code = implementation owner; Lovable = optional hosting layer only, not the builder or design authority; Supabase = independent platform infrastructure. Design: `docs/design/journal-to-digital-design-system.md`, `docs/design/tsoy-visual-direction.md`. Companion: `docs/ai/companion-v1-expanded-roadmap.md`. App: `docs/mobile/tsoy-native-app-roadmap.md`.
 
 ## Phase 34C — Small IVF new-article batch — CLOSED PASS (preview only)

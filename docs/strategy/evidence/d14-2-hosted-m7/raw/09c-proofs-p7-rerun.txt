@@ -1,0 +1,7 @@
+[proofs3] start 2026-10-23T06:36:46.148Z
+C before: analytics_lease_until=2026-10-23T06:36:11.48842+00:00 next_attempt_at=2026-10-23T06:49:10.09984+00:00 final_sweep_after=2026-10-23T05:43:48.705734+00:00
+[log.info] {"event":"n10_analytics_erasure_resolved","request_id":"74af678e-f954-42d6-8791-fb5082167a1f"}
+P7 runAnalyticsErasure -> {"resolved":1,"failed":0,"attention":0}
+FAIL P7 C resolved, persons_found=1, error/attention cleared, next_attempt brought forward from the gate's +15m to ~now (= max(now, final_sweep_after)) — next_attempt_at 2026-10-23T06:49:10.09984+00:00 -> 2026-10-23T06:36:46.655061+00:00
+PASS P7/G next worker tick completes C (completed_at, anonymised_at set, user_id NULL) — worker=["completed"]
+SUMMARY 1/2 PASS

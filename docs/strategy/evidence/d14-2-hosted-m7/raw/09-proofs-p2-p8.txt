@@ -1,0 +1,56 @@
+[proofs] start 2026-10-23T06:34:07.953Z
+PASS P4 worker current_user over pooler 6543 (prepare:false) — account_deletion_worker
+PASS P4 worker table select refused
+PASS P4 worker direct UPDATE refused
+PASS P2/P6 nothing analytics-claimable yet (B,C < auth_deleted_at+15m; D requested; E auth_attention; A completed) — claimed=0
+P2 runWorker tick -> {"processed":2,"results":["awaiting_final_sweep","awaiting_final_sweep"]}
+PASS P2 B media purged with analytics pending -> awaiting_final_sweep — status=awaiting_final_sweep media=0 objects_removed=3 analytics=pending
+PASS P2 D processed by the media worker only (requested -> Auth deleted -> purged); analytics still pending — status=awaiting_final_sweep
+PASS P2 E untouched (auth_attention, Auth user present, media present, analytics pending)
+[time-shift] request 74af678e-f954-42d6-8791-fb5082167a1f: requested_at = requested_at - interval '2 hours', auth_deleted_at = auth_deleted_at - interval '2 hours', final_sweep_after = final_sweep_after - interval '2 hours', purge_empty_at = purge_empty_at - interval '2 hours', next_attempt_at = now() - interval '1 minute'
+PASS P2/P5 C final sweep #1 past window with analytics pending -> gate holds — results=["awaiting_final_sweep"] next_attempt≈+15.0m
+[time-shift] request 74af678e-f954-42d6-8791-fb5082167a1f: next_attempt_at = now() - interval '1 minute'
+PASS P2/P5 C final sweep #2 past window with analytics pending -> gate holds — results=["awaiting_final_sweep"] next_attempt≈+15.0m
+[fixture G] user created (synthetic @example.invalid) with 2 media objects via the user's session
+G runDeleteAccount -> {"httpStatus":200,"body":{"status":"account_deleted","cleanup":"removed"}}
+PASS P6 G not claimable immediately after Auth deletion — claimed=1
+  (unexpected extra claim 74af678e-f954-42d6-8791-fb5082167a1f)
+[time-shift] request b4db08f9-5c85-4d56-87de-695f44e05efd: auth_deleted_at = auth_deleted_at - interval '16 minutes'
+PASS P6 two concurrent worker connections: exactly one receives G (SKIP LOCKED + lease) — conn1=1 conn2=0
+[time-shift] request b4db08f9-5c85-4d56-87de-695f44e05efd: next_attempt_at = now() - interval '1 minute'
+FAIL P6 media lease and analytics lease held on the same row at once — media_claimed=0
+PASS P6 wrong lease -> 55000
+P6 GoTrue admin create with the same id: status=200 same_id=true
+PASS P6 resolution while an Auth user with the same id exists -> 23514 — 23514 n10: analytics erasure resolves only after Auth deletion
+P6 re-appeared Auth user deleted: error=none
+PASS P6 valid lease -> resolved — resolved
+[fixture F] user created (synthetic @example.invalid) with 2 media objects via the user's session
+PASS P5 delete-account 200, all media removed immediately, analytics pending — {"httpStatus":200,"body":{"status":"account_deleted","cleanup":"removed"}}
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: requested_at = requested_at - interval '2 hours', auth_deleted_at = auth_deleted_at - interval '2 hours', final_sweep_after = final_sweep_after - interval '2 hours', purge_empty_at = purge_empty_at - interval '2 hours', next_attempt_at = now() - interval '1 minute'
+[log.error] {"event":"n10_analytics_erasure_failed","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22","error_class":"analytics_transient","attention":false}
+P5 analytics transient #1: {"resolved":0,"failed":1,"attention":0} F analytics=pending attempts=1 last_error=analytics_transient attention=null
+FAIL P5 F tick #1 after transient analytics failure -> still awaiting_final_sweep, user kept, not completed, media counters unchanged — results=["awaiting_final_sweep"]
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: next_attempt_at = now() - interval '1 minute', analytics_next_attempt_at = now() - interval '1 minute'
+[log.error] {"event":"n10_analytics_erasure_failed","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22","error_class":"analytics_transient","attention":false}
+P5 analytics transient #2: {"resolved":0,"failed":1,"attention":0} F analytics=pending attempts=2 last_error=analytics_transient attention=null
+FAIL P5 F tick #2 after transient analytics failure -> still awaiting_final_sweep, user kept, not completed, media counters unchanged — results=["awaiting_final_sweep"]
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: next_attempt_at = now() - interval '1 minute', analytics_next_attempt_at = now() - interval '1 minute'
+PASS P5 direct completion (triggers on: M7 guard) -> 23514 — 23514 n10: user_id kept until analytics erasure is resolved
+PASS P5 direct completion with user triggers disabled (CHECK layer) -> 23514 — 23514 new row for relation "account_deletion_requests" violates check constraint "account_deletion_requests_analytics_completed_check"
+PASS P5 direct anonymisation without completion -> 23514 — 23514 n10: user_id may only be nulled at completion
+PASS P5 direct analytics_status = 'not_tracked' -> 23514 — 23514 n10: invalid analytics transition pending -> not_tracked
+FAIL P5 direct analytics_status = 'resolved' (bypassing the function) -> 23514 — ACCEPTED rollback: write was accepted
+PASS P5 F unchanged by the refused writes
+[time-shift] request 74af678e-f954-42d6-8791-fb5082167a1f: analytics_next_attempt_at = null
+[log.error] {"event":"n10_analytics_erasure_failed","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22","error_class":"analytics_transient","attention":false}
+P7 runAnalyticsErasure -> {"resolved":0,"failed":1,"attention":0}
+FAIL P7 C resolved, persons_found=1, error/attention cleared, next_attempt brought forward to <= max(now, final_sweep_after) — next_attempt_at=2026-10-23T06:49:10.09984+00:00
+FAIL P7/G next worker tick completes C (completed_at, anonymised_at set, user_id NULL) — results=["awaiting_final_sweep"]
+P8 runAnalyticsErasure -> {"resolved":0,"failed":0,"attention":0}
+FAIL P8 F resolved with persons_found=0
+PASS P8 no further analytics claim for F — claimed=0
+FAIL P8 completion follows (completed, user_id NULL) — results=[]
+[time-shift] request 5c804027-ed58-42ae-b1bf-4b6f5bf1ec0f: completed_at = completed_at - interval '31 days'
+FAIL P2 A (not_tracked, completed) never claimed and still removed by 30-day retention cleanup — removed=0
+[proofs] end 2026-10-23T06:34:13.892Z
+SUMMARY 21/30 PASS

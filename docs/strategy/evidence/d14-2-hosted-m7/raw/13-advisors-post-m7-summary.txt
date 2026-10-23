@@ -1,0 +1,3 @@
+post-m7 security status=200 total=4 {"INFO rls_enabled_no_policy":3,"WARN auth_leaked_password_protection":1}
+  INFO rls_enabled_no_policy :: Table \`private.account_deletion_requests\` has RLS enabled, but no policies exist
+post-m7 performance status=200 total=134 {"INFO unindexed_foreign_keys":7,"WARN auth_rls_initplan":114,"INFO unused_index":13}

@@ -1,0 +1,4 @@
+identity {"current_user":"account_deletion_worker","session_user":"account_deletion_worker","v":"17.11","port":5432}
+alerts_pending_count {"n":0}
+table select: 42501 permission denied for table account_deletion_requests
+auth.users select: 42501 permission denied for schema auth

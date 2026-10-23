@@ -1,0 +1,20 @@
+[p9] start 2026-10-23T06:37:58.463Z
+deployed function: status=ACTIVE version=1 verify_jwt=false
+PASS P9 no POSTHOG_* secret exists on the project — secret names=13
+[fixture H] user created (synthetic @example.invalid) with 2 media objects via the user's session
+H runDeleteAccount -> {"httpStatus":200,"body":{"status":"account_deleted","cleanup":"removed"}}
+[time-shift] request b2794a2b-5de2-4c6f-bb96-8c1918ef2d9d: auth_deleted_at = auth_deleted_at - interval '16 minutes'
+[fixture I] user created (synthetic @example.invalid) with 2 media objects via the user's session
+I Storage move canonical -> misfiled: error=none
+[log.error] {"event":"n10_operator_notification_required","kind":"purge_attention","request_id":"c071b441-dcfb-479f-99e4-94f960aabb6f","error_class":null}
+I runDeleteAccount -> {"httpStatus":200,"body":{"status":"account_deleted","cleanup":"continuing"}}; status=purge_attention last_error=owner_id_path_anomaly anomaly=1
+[time-shift] request c071b441-dcfb-479f-99e4-94f960aabb6f: auth_deleted_at = auth_deleted_at - interval '16 minutes'
+invoke without token -> 401 {"error":"Unauthorized"}
+invoke 2026-10-23T06:38:04.394Z -> 200 {"ok":true} (966 ms)
+PASS P9 hosted worker returns {"ok":true} — 200 {"ok":true}
+PASS P9 H: analytics_config recorded, attention set on first attempt, next ≈ +60m, status/media/user unchanged, not completed — status=awaiting_final_sweep attempts=1 next≈+60.0m
+PASS P9 I: analytics_config recorded, attention set on first attempt, next ≈ +60m, status/media/user unchanged, not completed — status=purge_attention attempts=1 next≈+60.0m
+P9 B not yet analytics-due at invocation (auth_deleted_at+15m > now): analytics_attempt_count=0
+P9 D not yet analytics-due at invocation (auth_deleted_at+15m > now): analytics_attempt_count=0
+[p9] invocation window 2026-10-23T06:38:04.394Z .. 2026-10-23T06:38:05.360Z
+SUMMARY 4/4 PASS

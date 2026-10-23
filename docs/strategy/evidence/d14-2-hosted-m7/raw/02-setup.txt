@@ -1,0 +1,10 @@
+api-keys status 200
+key name=anon type=legacy has_value=true
+key name=service_role type=legacy has_value=true
+key name=default type=publishable has_value=true
+key name=default type=secret has_value=true
+anon: role=anon ref=jjrhizafpikmyvfapcic iss=supabase
+service: role=service_role ref=jjrhizafpikmyvfapcic iss=supabase
+config/auth status 200 jwt_exp=3600
+create bucket first-year-memories status 200 {"name":"first-year-memories"}
+worker password file length 43; verifier sql written (not printed)

@@ -1,0 +1,11 @@
+[d142_cli] target=jjrhizafpikmyvfapcic sealed=4b561385 cmd=supabase functions deploy account-deletion-worker --project-ref jjrhizafpikmyvfapcic --use-api
+{"project_ref":"jjrhizafpikmyvfapcic","functions":["account-deletion-worker"],"dashboard_url":"https://supabase.com/dashboard/project/jjrhizafpikmyvfapcic/functions","message":"Deployed Functions."}
+Uploading asset (account-deletion-worker): supabase/functions/account-deletion-worker/index.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletionRuntime.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/analyticsErasureProvider.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/accountDeletion.ts
+Uploading asset (account-deletion-worker): supabase/functions/_shared/operatorAlertProvider.ts
+A new version of Supabase CLI is available: v2.121.0 (currently installed v2.120.0)
+We recommend updating regularly for new features and bug fixes: https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli
+
+exit=0

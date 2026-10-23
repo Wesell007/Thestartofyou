@@ -1,0 +1,9 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../d142.workerverifier.sql
+ALTER ROLE
+         rolname         | rolcanlogin | rolbypassrls 
+-------------------------+-------------+--------------
+ account_deletion_worker | t           | f
+(1 row)
+
+
+exit=0

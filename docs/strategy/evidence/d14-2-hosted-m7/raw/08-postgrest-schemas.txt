@@ -1,0 +1,4 @@
+anon /rest/v1/account_deletion_requests Accept-Profile: private -> 406 PGRST106 Invalid schema: private
+anon /rest/v1/rpc/n10_alerts_pending_count Accept-Profile: private -> 406 PGRST106 Invalid schema: private
+service_role /rest/v1/account_deletion_requests Accept-Profile: private -> 406 PGRST106 Invalid schema: private
+service_role /rest/v1/rpc/n10_alerts_pending_count Accept-Profile: private -> 406 PGRST106 Invalid schema: private

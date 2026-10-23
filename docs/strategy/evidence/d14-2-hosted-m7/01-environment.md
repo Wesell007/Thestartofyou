@@ -1,0 +1,18 @@
+# 01 — Environment, identity, guard, credentials
+
+| Item | Value |
+|---|---|
+| Project | `tsoy-d14-2-m7-rehearsal`, ref `jjrhizafpikmyvfapcic`, WesellProducts (`xzickmpbmsjgkowcqpbg`), eu-west-2 |
+| PostgreSQL | 17.11.0.003 (engine 17, GA channel); `psql` 17.11 client |
+| Created | by the claude.ai Supabase connector (`create_project`, organisation level) during D14.2 preparation on 15 October 2026, after predictions were committed (`7c10c065`). **Recorded discrepancy:** the API reports `created_at 2026-10-15T00:50:02Z`, about 5 h 20 min earlier than the create call (≈06:09Z server time); the Postgres server had started at ≈00:53Z, so this looks like a pre-provisioned instance. The database was empty at hand-over (no users, public tables, buckets, roles or migration history). |
+| Interruption | The workstation was shut down after preparation. On resume (22 October) the project was `INACTIVE` (paused for inactivity) and SQL timed out; `restore_project` was requested ≈18:16Z and Postgres was up at 18:18:55Z. A read-only reconciliation (connector `execute_sql`) showed it still empty, so **no hosted D14.2 step had been completed**. The credential files were then empty (0 bytes); the owner repopulated them and execution resumed on 23 October 2026 at 06:23Z (`ACTIVE_HEALTHY`, still empty: 0 users / 0 public tables / 0 buckets / no `private` schema / no worker role / no migration history). |
+| Credentials | owner-saved DB password (11 bytes) and project-scoped PAT (44 bytes) in `C:\Users\Administrator\.d142\` — checked by existence/size only, never printed. Legacy anon/service-role JWTs read from the **non-reveal** key listing into a local file (claims verified: `role`, `ref = jjrhizafpikmyvfapcic`, `iss = supabase`; `raw/02-setup.txt`). Worker password and worker invocation secret generated locally (32 random bytes each). Nothing outside Git; nothing in evidence. |
+| Source | sealed clone of `4b561385` (clean, remote removed). Files were exported with `git -c core.autocrlf=false archive` so the pushed bytes equal the committed blobs (the Windows working copy has CRLF; see 02). |
+| Guard | `.d142/h/guard.mjs` (copied to `raw/harness/`): only `jjrhizafpikmyvfapcic` allowed; denylist production `wogepxfipdipogyogced` and retired `wwtcnbjhttjtklpxhrkd`, `dlftnirrnirlkhxpofoq`, `czhopceorfqxdbfvlnap`, `gbhwpzofnswlryqjoumw`, `toqeefrwnsjuhjmobodg`, `mwlryyionkpjbecnbsiq`. Every harness URL / pooler user / CLI `--project-ref` passes `assertTarget`; the CLI wrapper refuses `link` and `reset`. Offline self-test **28/28** before and after resume (`raw/01-guard-selftest.log`). |
+| Tools | Supabase CLI 2.120.0 (`npx`), Node 24 + `tsx`, Postgres.js 3.4.x, `@supabase/supabase-js` 2.x, `psql` 17.11 |
+| Connections | `postgres` via the Supavisor **session** pooler `aws-0-eu-west-2.pooler.supabase.com:5432` (CLI `--db-url` built by the guard; psql with `PGPASSWORD` env). Worker via the **transaction** pooler `:6543` as `account_deletion_worker.jjrhizafpikmyvfapcic` (pooler host read from the Management API, non-secret fields only). |
+| Production | **not contacted**, not even read-only |
+
+Baseline (psql, `raw/01-psql-baseline.txt`): `current_user = postgres`, 0 users, 0 public tables, 0 buckets, no migration history.
+
+**Supabase documentation:** the docs check was performed during preparation on 15 October 2026 (before the predictions). The behaviours this rehearsal depends on (Supavisor pooler login for a custom LOGIN role, `prepare:false`, PostgREST exposed schemas, GoTrue admin create/delete, Storage API) were observed directly on the hosted project below rather than inferred from documentation.

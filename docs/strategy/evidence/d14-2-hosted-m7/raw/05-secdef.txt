@@ -1,0 +1,28 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/05-secdef.sql
+             proname             | prosecdef |      proconfig       |  owner   | public_execute 
+---------------------------------+-----------+----------------------+----------+----------------
+ account_deletion_requests_guard | f         | {"search_path=\"\""} | postgres | f
+ account_media_access_allowed    | t         | {"search_path=\"\""} | postgres | f
+ account_media_anomaly_count     | t         | {"search_path=\"\""} | postgres | f
+ account_media_canonical         | t         | {"search_path=\"\""} | postgres | f
+ auth_user_exists                | t         | {"search_path=\"\""} | postgres | f
+ n10_alerts_due                  | t         | {"search_path=\"\""} | postgres | f
+ n10_alerts_pending_count        | t         | {"search_path=\"\""} | postgres | f
+ n10_analytics_due               | t         | {"search_path=\"\""} | postgres | f
+ n10_analytics_guard             | f         | {"search_path=\"\""} | postgres | f
+ n10_claim_due                   | t         | {"search_path=\"\""} | postgres | f
+ n10_cleanup_completed           | t         | {"search_path=\"\""} | postgres | f
+ n10_confirm_auth_deleted        | t         | {"search_path=\"\""} | postgres | f
+ n10_forget_email_records        | t         | {"search_path=\"\""} | postgres | f
+ n10_lock_leased                 | t         | {"search_path=\"\""} | postgres | f
+ n10_open_request                | t         | {"search_path=\"\""} | postgres | f
+ n10_record_alert                | t         | {"search_path=\"\""} | postgres | f
+ n10_record_analytics            | t         | {"search_path=\"\""} | postgres | f
+ n10_record_failure              | t         | {"search_path=\"\""} | postgres | f
+ n10_record_purge                | t         | {"search_path=\"\""} | postgres | f
+ n10_release_lease               | t         | {"search_path=\"\""} | postgres | f
+ n10_retry_delay                 | f         | {"search_path=\"\""} | postgres | f
+(21 rows)
+
+
+exit=0

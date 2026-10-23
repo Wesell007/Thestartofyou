@@ -1,0 +1,10 @@
+[d142_cli] target=jjrhizafpikmyvfapcic sealed=4b561385 cmd=supabase db push --dry-run --db-url @DBURL
+{"upToDate":false,"dryRun":true,"migrations":["20261015053138_n10_analytics_erasure.sql"],"seeds":[],"roles":[],"message":"Finished supabase db push."}
+DRY RUN: migrations will *not* be pushed to the database.
+Connecting to remote database...
+Would push these migrations:
+ • 20261015053138_n10_analytics_erasure.sql
+A new version of Supabase CLI is available: v2.121.0 (currently installed v2.120.0)
+We recommend updating regularly for new features and bug fixes: https://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli
+
+exit=0

@@ -1,0 +1,118 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/08-p1-p3.sql
+== history
+ history |      max       
+---------+----------------
+      54 | 20261015053138
+(1 row)
+
+== new columns
+        column_name        |        data_type         | column_default  | is_nullable 
+---------------------------+--------------------------+-----------------+-------------
+ analytics_status          | text                     | 'pending'::text | NO
+ analytics_attempt_count   | integer                  | 0               | NO
+ analytics_next_attempt_at | timestamp with time zone |                 | YES
+ analytics_lease_until     | timestamp with time zone |                 | YES
+ analytics_last_error      | text                     |                 | YES
+ analytics_attention_since | timestamp with time zone |                 | YES
+ analytics_resolved_at     | timestamp with time zone |                 | YES
+ analytics_persons_found   | integer                  |                 | YES
+(8 rows)
+
+== P1 rows: old-column projection md5 (compare to 06-pre-m7-snapshot) + analytics state
+                  id                  |        status        | has_user |           old_cols_md5           | analytics_status | analytics_attempt_count | other_analytics_non_null 
+--------------------------------------+----------------------+----------+----------------------------------+------------------+-------------------------+--------------------------
+ 5c804027-ed58-42ae-b1bf-4b6f5bf1ec0f | completed            | f        | 0bb3d2f891666257ad4caa70c8a4dce8 | not_tracked      |                       0 |                        0
+ 0146f2c7-706a-49a5-b58c-3d6eea36ff0e | auth_deleted         | t        | a5313e64c1a5d03914d6aa3ea4fb46be | pending          |                       0 |                        0
+ 74af678e-f954-42d6-8791-fb5082167a1f | awaiting_final_sweep | t        | 392b5ebfff5bec62ac12b75a8fcdd98b | pending          |                       0 |                        0
+ b5d15b8a-9a69-4cd2-b523-e515788661a0 | requested            | t        | 06198d5b3605a7311be92305c85bd0f3 | pending          |                       0 |                        0
+ 29602413-d7f4-483d-ac34-15ccb0816fb1 | auth_attention       | t        | 3dc066c5629c3fcd49b6b03392417324 | pending          |                       0 |                        0
+(5 rows)
+
+== constraints
+                        conname                        | convalidated 
+-------------------------------------------------------+--------------
+ account_deletion_requests_alert_failures_check        | t
+ account_deletion_requests_alert_key_check             | t
+ account_deletion_requests_analytics_completed_check   | t
+ account_deletion_requests_analytics_counters_check    | t
+ account_deletion_requests_analytics_error_check       | t
+ account_deletion_requests_analytics_not_tracked_check | t
+ account_deletion_requests_analytics_resolved_check    | t
+ account_deletion_requests_analytics_status_check      | t
+ account_deletion_requests_anonymised_check            | t
+ account_deletion_requests_anonymised_completed_check  | t
+ account_deletion_requests_completed_check             | t
+ account_deletion_requests_counters_check              | t
+ account_deletion_requests_error_class_check           | t
+ account_deletion_requests_post_auth_check             | t
+ account_deletion_requests_status_check                | t
+ account_deletion_requests_sweep_floor_check           | t
+(16 rows)
+
+== triggers
+             tgname              | tgenabled 
+---------------------------------+-----------
+ account_deletion_requests_guard | O
+ n10_analytics_guard             | O
+(2 rows)
+
+== P3 function attributes
+         proname          | secdef |      proconfig       |  owner   
+--------------------------+--------+----------------------+----------
+ n10_alerts_due           | t      | {"search_path=\"\""} | postgres
+ n10_alerts_pending_count | t      | {"search_path=\"\""} | postgres
+ n10_analytics_due        | t      | {"search_path=\"\""} | postgres
+ n10_analytics_guard      | f      | {"search_path=\"\""} | postgres
+ n10_record_analytics     | t      | {"search_path=\"\""} | postgres
+ n10_record_purge         | t      | {"search_path=\"\""} | postgres
+(6 rows)
+
+== P3 EXECUTE matrix over every private function
+             proname             | anon | authn | service | worker | public_grant 
+---------------------------------+------+-------+---------+--------+--------------
+ account_deletion_requests_guard | f    | f     | f       | f      | f
+ account_media_access_allowed    | f    | t     | f       | f      | f
+ account_media_anomaly_count     | f    | f     | f       | t      | f
+ account_media_canonical         | f    | f     | f       | t      | f
+ auth_user_exists                | f    | f     | f       | t      | f
+ n10_alerts_due                  | f    | f     | f       | t      | f
+ n10_alerts_pending_count        | f    | f     | f       | t      | f
+ n10_analytics_due               | f    | f     | f       | t      | f
+ n10_analytics_guard             | f    | f     | f       | f      | f
+ n10_claim_due                   | f    | f     | f       | t      | f
+ n10_cleanup_completed           | f    | f     | f       | t      | f
+ n10_confirm_auth_deleted        | f    | f     | f       | t      | f
+ n10_forget_email_records        | f    | f     | f       | f      | f
+ n10_lock_leased                 | f    | f     | f       | f      | f
+ n10_open_request                | f    | f     | f       | t      | f
+ n10_record_alert                | f    | f     | f       | t      | f
+ n10_record_analytics            | f    | f     | f       | t      | f
+ n10_record_failure              | f    | f     | f       | t      | f
+ n10_record_purge                | f    | f     | f       | t      | f
+ n10_release_lease               | f    | f     | f       | t      | f
+ n10_retry_delay                 | f    | f     | f       | f      | f
+(21 rows)
+
+== worker surface count
+ count 
+-------
+    15
+(1 row)
+
+== worker table privileges / attributes
+ sel | upd | ins | del 
+-----+-----+-----+-----
+ f   | f   | f   | f
+(1 row)
+
+         rolname         | rolcanlogin | rolbypassrls | rolsuper | rolinherit 
+-------------------------+-------------+--------------+----------+------------
+ account_deletion_worker | t           | f            | f        | f
+(1 row)
+
+ member_of 
+-----------
+(0 rows)
+
+
+exit=0

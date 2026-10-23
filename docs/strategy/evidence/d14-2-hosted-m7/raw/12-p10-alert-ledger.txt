@@ -1,0 +1,22 @@
+[p10] start 2026-10-23T06:39:03.057Z
+PASS P10 hosted worker left the ledger untouched (nothing falsely recorded as sent) — {"k":null,"f":0}
+pending count before = 3
+claim 1: [{"id":"b2794a2b-5de2-4c6f-bb96-8c1918ef2d9d","kind":"attention","key":"analytics_attention:analytics_config","status":"awaiting_final_sweep","cls":"analytics_config","attempts":1},{"id":"c071b441-dcfb-479f-99e4-94f960aabb6f","kind":"attention","key":"purge_attention:owner_id_path_anomaly","status":"purge_attention","cls":"owner_id_path_anomaly","attempts":0},{"id":"29602413-d7f4-483d-ac34-15ccb0816fb1","kind":"attention","key":"auth_attention:auth_permanent","status":"auth_attention","cls":"auth_permanent","attempts":0}]
+PASS P10 H returned once: kind attention, key analytics_attention:analytics_config, status = its media status
+PASS P10 I (purge_attention with analytics attention also set) keeps purge_attention:<class> key
+PASS P10 E keeps auth_attention:auth_permanent
+PASS P10 claim 1 contains exactly E, H, I — n=3
+PASS P10 second claim during the lease returns nothing — n=0
+PASS P10 record(delivered=false) -> failure count 1, next ≈ +5m, no key, no sent_at — +5.00m
+PASS P10 not claimable before the backoff — n=0
+[time-shift] request b2794a2b-5de2-4c6f-bb96-8c1918ef2d9d: alert_next_attempt_at = now() - interval '1 minute'
+PASS P10 claimable after the backoff (attention again)
+PASS P10 record(delivered=true) -> key + sent_at, failures reset
+PASS P10 three further claims return nothing for H (dedup)
+PASS P10 pending count drops by exactly H (E and I remain pending) — 3 -> 2
+[time-shift] request b2794a2b-5de2-4c6f-bb96-8c1918ef2d9d: alert_sent_at = alert_sent_at - interval '25 hours'
+PASS P10 sent_at shifted 25 h -> exactly one escalation
+PASS P10 after the recorded escalation: silence
+PASS P10 deletion/analytics columns of H untouched by the ledger throughout
+PASS P10 ran as the worker role
+SUMMARY 16/16 PASS

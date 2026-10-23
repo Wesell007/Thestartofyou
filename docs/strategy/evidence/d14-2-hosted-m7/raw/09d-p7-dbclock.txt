@@ -1,0 +1,8 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/09d-p7-dbclock.sql
+                  id                  |  status   | anonymised | analytics_persons_found |     analytics_resolved_at     |        next_attempt_at        | brought_forward_to_resolution_now | not_before_window |        _         |           db_clock            
+--------------------------------------+-----------+------------+-------------------------+-------------------------------+-------------------------------+-----------------------------------+-------------------+------------------+-------------------------------
+ 74af678e-f954-42d6-8791-fb5082167a1f | completed | t          |                       1 | 2026-10-23 06:36:46.655061+00 | 2026-10-23 06:36:46.655061+00 | t                                 | t                 | -00:00:00.001159 | 2026-10-23 06:36:57.645274+00
+(1 row)
+
+
+exit=0

@@ -1,0 +1,33 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/06-pre-m7-snapshot.sql
+                  id                  |        status        | has_user |             row_md5              | attempt_count |        next_attempt_at        | last_error_class 
+--------------------------------------+----------------------+----------+----------------------------------+---------------+-------------------------------+------------------
+ 5c804027-ed58-42ae-b1bf-4b6f5bf1ec0f | completed            | f        | 0bb3d2f891666257ad4caa70c8a4dce8 |             0 | 2026-10-23 06:27:46.932662+00 | 
+ 0146f2c7-706a-49a5-b58c-3d6eea36ff0e | auth_deleted         | t        | 4367ea4f18d5f863ced29aff49a0d800 |             0 | 2026-10-23 06:28:48.0044+00   | 
+ 74af678e-f954-42d6-8791-fb5082167a1f | awaiting_final_sweep | t        | 601eaee9b799eed4b2b8198418c4c4a6 |             0 | 2026-10-23 07:43:48.705734+00 | 
+ b5d15b8a-9a69-4cd2-b523-e515788661a0 | requested            | t        | b9b5afcb20993be5f9a0aba5deb09102 |             0 | 2026-10-23 06:28:49.885143+00 | 
+ 29602413-d7f4-483d-ac34-15ccb0816fb1 | auth_attention       | t        | 91febd4f60f2ff2f33c3c30fa4048cbe |             0 | 2026-10-23 06:29:50.469938+00 | auth_permanent
+(5 rows)
+
+ users 
+-------
+     2
+(1 row)
+
+      bucket_id      | count 
+---------------------+-------
+ first-year-memories |     3
+ weekly-photos       |     4
+(2 rows)
+
+           jobname           | schedule  | active 
+-----------------------------+-----------+--------
+ n10-account-deletion-worker | * * * * * | t
+ process-email-queue         | 5 seconds | t
+(2 rows)
+
+ name | has_value 
+------+-----------
+(0 rows)
+
+
+exit=0

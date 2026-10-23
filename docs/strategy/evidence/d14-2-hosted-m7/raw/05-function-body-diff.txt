@@ -1,0 +1,85 @@
+hosted functions parsed: ['n10_alerts_due', 'n10_alerts_pending_count', 'n10_analytics_due', 'n10_analytics_guard', 'n10_record_analytics', 'n10_record_purge']
+hosted n10_record_purge body == committed M7 body: True
+hosted n10_alerts_due body == committed M7 body: True
+hosted n10_alerts_pending_count body == committed M7 body: True
+hosted n10_analytics_due body == committed M7 body: True
+hosted n10_record_analytics body == committed M7 body: True
+hosted n10_analytics_guard body == committed M7 body: True
+
+===== n10_record_purge: M1 -> M7 (hosted)
+--- accepted
++++ M7(hosted)
+@@ -76,2 +76,11 @@
+ 
++  -- D14.1 gate: no COMPLETED (and so no anonymisation) until analytics erasure is resolved. The final
++  -- sweep is re-run later; n10_record_analytics brings it forward as soon as erasure resolves.
++  IF v_row.analytics_status <> 'resolved' THEN
++    UPDATE private.account_deletion_requests r
++    SET next_attempt_at = v_now + interval '15 minutes', lease_until = NULL
++    WHERE r.id = v_row.id;
++    RETURN 'awaiting_final_sweep';
++  END IF;
++
+   UPDATE private.account_deletion_requests r
+
+===== n10_alerts_due: M4 -> M7 (hosted)
+--- accepted
++++ M7(hosted)
+@@ -6,12 +6,24 @@
+   RETURN QUERY
+-    WITH due AS (
++    WITH keyed AS (
+       SELECT r.id,
+-             r.status || ':' || COALESCE(r.last_error_class, '-') AS k,
+-             CASE WHEN r.alert_key IS DISTINCT FROM r.status || ':' || COALESCE(r.last_error_class, '-')
+-                  THEN 'attention' ELSE 'escalation' END AS kind
++             CASE WHEN r.status IN ('auth_attention', 'purge_attention')
++                  THEN r.status || ':' || COALESCE(r.last_error_class, '-')
++                  ELSE 'analytics_attention:' || COALESCE(r.analytics_last_error, '-') END AS k,
++             CASE WHEN r.status IN ('auth_attention', 'purge_attention')
++                  THEN r.last_error_class ELSE r.analytics_last_error END AS cls,
++             CASE WHEN r.status IN ('auth_attention', 'purge_attention')
++                  THEN r.attempt_count ELSE r.analytics_attempt_count END AS attempts
+       FROM private.account_deletion_requests r
+       WHERE r.status IN ('auth_attention', 'purge_attention')
+-        AND (r.alert_lease_until IS NULL OR r.alert_lease_until < now())
++         OR (r.status IN ('auth_deleted', 'awaiting_final_sweep')
++             AND r.analytics_status = 'pending' AND r.analytics_attention_since IS NOT NULL)
++    ),
++    due AS (
++      SELECT r.id, keyed.k, keyed.cls, keyed.attempts,
++             CASE WHEN r.alert_key IS DISTINCT FROM keyed.k THEN 'attention' ELSE 'escalation' END AS kind
++      FROM private.account_deletion_requests r
++      JOIN keyed ON keyed.id = r.id
++      WHERE (r.alert_lease_until IS NULL OR r.alert_lease_until < now())
+         AND (r.alert_next_attempt_at IS NULL OR r.alert_next_attempt_at <= now())
+-        AND (r.alert_key IS DISTINCT FROM r.status || ':' || COALESCE(r.last_error_class, '-')
++        AND (r.alert_key IS DISTINCT FROM keyed.k
+              OR (r.alert_escalated_at IS NULL AND r.alert_sent_at <= now() - interval '24 hours'))
+@@ -25,3 +37,3 @@
+     WHERE r.id = due.id
+-    RETURNING r.id, due.kind, due.k, r.status, r.last_error_class, r.attempt_count, r.requested_at,
++    RETURNING r.id, due.kind, due.k, r.status, due.cls, due.attempts, r.requested_at,
+               CASE WHEN due.kind = 'escalation' THEN r.alert_sent_at END, r.alert_lease_until::text;
+
+===== n10_alerts_pending_count: M4 -> M7 (hosted)
+--- accepted
++++ M7(hosted)
+@@ -1,5 +1,13 @@
+   SELECT count(*)::integer
+-  FROM private.account_deletion_requests r
+-  WHERE r.status IN ('auth_attention', 'purge_attention')
+-    AND (r.alert_key IS DISTINCT FROM r.status || ':' || COALESCE(r.last_error_class, '-')
+-         OR (r.alert_escalated_at IS NULL AND r.alert_sent_at <= now() - interval '24 hours'));
++  FROM (
++    SELECT r.alert_key, r.alert_sent_at, r.alert_escalated_at,
++           CASE WHEN r.status IN ('auth_attention', 'purge_attention')
++                THEN r.status || ':' || COALESCE(r.last_error_class, '-')
++                ELSE 'analytics_attention:' || COALESCE(r.analytics_last_error, '-') END AS k
++    FROM private.account_deletion_requests r
++    WHERE r.status IN ('auth_attention', 'purge_attention')
++       OR (r.status IN ('auth_deleted', 'awaiting_final_sweep')
++           AND r.analytics_status = 'pending' AND r.analytics_attention_since IS NOT NULL)
++  ) a
++  WHERE a.alert_key IS DISTINCT FROM a.k
++     OR (a.alert_escalated_at IS NULL AND a.alert_sent_at <= now() - interval '24 hours');

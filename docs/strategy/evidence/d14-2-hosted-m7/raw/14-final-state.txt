@@ -1,0 +1,58 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/14-final-state.sql
+== history
+ history |      max       
+---------+----------------
+      54 | 20261015053138
+(1 row)
+
+== requests (no user ids)
+   req    |        status        | has_user | analytics_status | att | analytics_last_error | attention | pf |              alert_key               | completed 
+----------+----------------------+----------+------------------+-----+----------------------+-----------+----+--------------------------------------+-----------
+ 74af678e | completed            | f        | resolved         |   1 |                      | f         |  1 |                                      | t
+ 038445c5 | completed            | f        | resolved         |   6 |                      | f         |  0 |                                      | t
+ 0146f2c7 | awaiting_final_sweep | t        | pending          |   0 |                      | f         |    |                                      | f
+ b5d15b8a | awaiting_final_sweep | t        | pending          |   0 |                      | f         |    |                                      | f
+ 29602413 | auth_attention       | t        | pending          |   0 |                      | f         |    |                                      | f
+ b4db08f9 | awaiting_final_sweep | t        | resolved         |   1 |                      | f         |  1 |                                      | f
+ b2794a2b | awaiting_final_sweep | t        | pending          |   1 | analytics_config     | t         |    | analytics_attention:analytics_config | f
+ c071b441 | purge_attention      | t        | pending          |   1 | analytics_config     | t         |    |                                      | f
+(8 rows)
+
+== worker surface
+                                                                                                                                                       string_agg                                                                                                                                                       | count 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------
+ account_media_anomaly_count, account_media_canonical, auth_user_exists, n10_alerts_due, n10_alerts_pending_count, n10_analytics_due, n10_claim_due, n10_cleanup_completed, n10_confirm_auth_deleted, n10_open_request, n10_record_alert, n10_record_analytics, n10_record_failure, n10_record_purge, n10_release_lease |    15
+(1 row)
+
+== non-worker roles with EXECUTE on any private function
+    rolname    | count 
+---------------+-------
+ authenticated |     1
+(1 row)
+
+== vault / cron
+ vault_secrets 
+---------------
+             0
+(1 row)
+
+           jobname           | active 
+-----------------------------+--------
+ n10-account-deletion-worker | t
+ process-email-queue         | t
+(2 rows)
+
+== auth users / storage
+ auth_users 
+------------
+          1
+(1 row)
+
+      bucket_id      | count 
+---------------------+-------
+ first-year-memories |     1
+ weekly-photos       |     2
+(2 rows)
+
+
+exit=0

@@ -1,0 +1,24 @@
+[proofs2] start 2026-10-23T06:35:30.722Z
+[time-shift] request 5c804027-ed58-42ae-b1bf-4b6f5bf1ec0f: completed_at = completed_at - interval '31 days', anonymised_at = anonymised_at - interval '31 days'
+PASS P2 A (not_tracked, completed, never analytics-claimed) removed by 30-day retention cleanup — removed=1
+PASS P5 direct analytics_status='resolved' while the Auth user exists (E) -> 23514 — 23514 n10: analytics erasure resolves only after Auth deletion
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: next_attempt_at = now() - interval '1 minute', analytics_next_attempt_at = now() - interval '1 minute'
+[log.error] {"event":"n10_analytics_erasure_failed","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22","error_class":"analytics_transient","attention":false}
+PASS P5 F transient analytics failure + worker tick #1 -> gate holds (awaiting_final_sweep, user kept, not completed, media columns unchanged, no attention <24h) — analytics={"resolved":0,"failed":1,"attention":0} attempts=4 worker=["awaiting_final_sweep"] next_attempt≈+15.0m
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: next_attempt_at = now() - interval '1 minute', analytics_next_attempt_at = now() - interval '1 minute'
+[log.error] {"event":"n10_analytics_erasure_failed","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22","error_class":"analytics_transient","attention":false}
+PASS P5 F transient analytics failure + worker tick #2 -> gate holds (awaiting_final_sweep, user kept, not completed, media columns unchanged, no attention <24h) — analytics={"resolved":0,"failed":1,"attention":0} attempts=5 worker=["awaiting_final_sweep"] next_attempt≈+15.0m
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: next_attempt_at = now() - interval '1 minute', analytics_next_attempt_at = now() - interval '1 minute'
+PASS P6 media lease and analytics lease held on the same row at once — analytics_claimed=1 media_claimed=1
+P6 media leases released; waiting 32 s for the 30 s analytics leases to expire
+[time-shift] request 74af678e-f954-42d6-8791-fb5082167a1f: analytics_next_attempt_at = now() - interval '1 minute'
+[time-shift] request 038445c5-c265-4abf-b005-9f0df3f75a22: analytics_next_attempt_at = now() - interval '1 minute'
+[log.info] {"event":"n10_analytics_erasure_resolved","request_id":"038445c5-c265-4abf-b005-9f0df3f75a22"}
+P7/P8 runAnalyticsErasure -> {"resolved":1,"failed":0,"attention":0}
+FAIL P7 C resolved, persons_found=1, error/attention cleared, next_attempt brought forward to <= max(now, final_sweep_after) — attempts=0 next_attempt_at=2026-10-23T06:49:10.09984+00:00
+FAIL P8 F resolved, persons_found=0, error/attention cleared, next_attempt brought forward to <= max(now, final_sweep_after) — attempts=6 next_attempt_at=2026-10-23T06:34:32.348303+00:00
+PASS P8 no further analytics claims for C or F — other claims=0
+FAIL P7/G next worker tick completes C (completed_at, anonymised_at set, user_id NULL, analytics resolved) — worker=["completed"]
+PASS P8 next worker tick completes F (completed_at, anonymised_at set, user_id NULL, analytics resolved) — worker=["completed"]
+[proofs2] end 2026-10-23T06:36:04.833Z
+SUMMARY 7/10 PASS

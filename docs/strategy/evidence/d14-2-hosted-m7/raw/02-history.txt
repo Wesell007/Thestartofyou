@@ -1,0 +1,57 @@
+[d142_sql] target=jjrhizafpikmyvfapcic file=../raw/02-history.sql
+ history |      min       |      max       
+---------+----------------+----------------
+      53 | 20260420164527 | 20261011050647
+(1 row)
+
+    version     
+----------------
+ 20261009055319
+ 20261009055322
+ 20261009091430
+ 20261009140726
+ 20261011050645
+ 20261011050647
+(6 rows)
+
+         rolname         | rolcanlogin | rolbypassrls | rolsuper | rolinherit 
+-------------------------+-------------+--------------+----------+------------
+ account_deletion_worker | t           | f            | f        | f
+(1 row)
+
+    extname     | extversion 
+----------------+------------
+ pg_cron        | 1.6.4
+ pg_net         | 0.20.4
+ pgmq           | 1.5.1
+ supabase_vault | 0.3.1
+(4 rows)
+
+      id       | public 
+---------------+--------
+ weekly-photos | f
+(1 row)
+
+ column_name 
+-------------
+(0 rows)
+
+           proname           
+-----------------------------
+ account_media_anomaly_count
+ account_media_canonical
+ auth_user_exists
+ n10_alerts_due
+ n10_alerts_pending_count
+ n10_claim_due
+ n10_cleanup_completed
+ n10_confirm_auth_deleted
+ n10_open_request
+ n10_record_alert
+ n10_record_failure
+ n10_record_purge
+ n10_release_lease
+(13 rows)
+
+
+exit=0

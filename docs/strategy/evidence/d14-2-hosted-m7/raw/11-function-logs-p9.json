@@ -1,0 +1,9 @@
+[{"timestamp":"2026-10-23T06:38:04.489000","event_message":"booted (time: 33ms)"},
+{"timestamp":"2026-10-23T06:38:04.541000","event_message":"Listening on http://localhost:9999/\n"},
+{"timestamp":"2026-10-23T06:38:05.376000","event_message":"booted (time: 39ms)"},
+{"timestamp":"2026-10-23T06:38:05.408000","event_message":"Listening on http://localhost:9999/\n"},
+{"timestamp":"2026-10-23T06:38:05.466000","event_message":"{\"event\":\"n10_retention_cleanup\",\"removed_rows\":0}\n"},
+{"timestamp":"2026-10-23T06:38:05.486000","event_message":"{\"event\":\"n10_analytics_erasure_failed\",\"request_id\":\"b2794a2b-5de2-4c6f-bb96-8c1918ef2d9d\",\"error_class\":\"analytics_config\",\"attention\":true}\n"},
+{"timestamp":"2026-10-23T06:38:05.494000","event_message":"{\"event\":\"n10_analytics_erasure_failed\",\"request_id\":\"c071b441-dcfb-479f-99e4-94f960aabb6f\",\"error_class\":\"analytics_config\",\"attention\":true}\n"},
+{"timestamp":"2026-10-23T06:38:05.509000","event_message":"{\"event\":\"n10_operator_alert_unconfigured\",\"reason\":\"destination_unconfigured\",\"pending\":3}\n"},
+{"timestamp":"2026-10-23T06:38:05.509000","event_message":"{\"event\":\"n10_worker_run\",\"processed\":0,\"token_window_ok\":true,\"retention_configured\":true,\"analytics_resolved\":0,\"analytics_failed\":2,\"alerts_sent\":0,\"alerts_failed\":0}\n"}]

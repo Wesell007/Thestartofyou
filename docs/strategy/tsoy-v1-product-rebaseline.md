@@ -52,6 +52,13 @@ Existing work: content phases 31–39 and grounding governance (`docs/ai/README.
 
 Private Companion conversations and private journal content **stay private unless explicitly shared**.
 
+**Physical product activation and journal owner experience** (cross-cutting; `docs/product/physical-product-activation-and-journal-owner-experience.md`)
+- Principle: **acquisition source ≠ product ownership ≠ entitlement ≠ journey**.
+- A unique per-copy activation claim on the insert card bridges the physical journal to the account that actually uses TSOY, including Amazon buyers and gifts.
+- Digital-first users claim later on the same account.
+- Ownership enhances the experience but is never a paywall for essential support.
+- Status: OFFICIAL V1 WORKSTREAM / DESIGN NOT STARTED / IMPLEMENTATION NOT STARTED. Schema: CONCEPT ONLY / NOT AUTHORISED. Owner onboarding is designed in Gate 2.
+
 **Agentic actions** (architecture designed now; activation later). Examples:
 - save a memory;
 - create a journal entry;
@@ -70,7 +77,7 @@ Every action is user-scoped, logged and reversible where possible. External or h
 |---|---|---|
 | **0** | Infrastructure / product rebaseline (this document set) | **THIS PHASE** |
 | **1** | Create permanent `tsoy-staging`; explicit fail-closed backend selection (no committed fallback); staging guard; replay migrations | **PASS (23 October 2026)**: `aeeprivmakalcbnefwwm`, evidence `docs/strategy/evidence/gate1-permanent-staging/` |
-| **2** | Journal-to-Digital visual design foundation: physical journal audit, Taste reference system, visual directions, flagship screens, shared design system, web and app design principles (`docs/design/`) | PLANNED / **NEXT MAJOR PRODUCT WORKSTREAM** |
+| **2** | Journal-to-Digital visual design foundation: physical journal audit, Taste reference system, visual directions, flagship screens, shared design system, web and app design principles (`docs/design/`); **includes visitor and journal-owner onboarding, activation and claim states, and the physical/digital journal bridge** (`docs/product/physical-product-activation-and-journal-owner-experience.md` §12) | PLANNED / **NEXT MAJOR PRODUCT WORKSTREAM** |
 | **3** | Resume platform architecture: **41B.1B → 41B.1C → 41B.1D** (numbers unchanged; first on staging) | 41B.1B NOT STARTED / NOT AUTHORISED |
 | **4** | **42A** provenance/trust · **42B** answer → action · **43** continuity · **44** permissioned memory · **45** journal continuity | PLANNED |
 | **5** | Expanded capabilities: proactive intelligence, multimodal journal, family/co-parent, real-time voice, safe agentic actions | PLANNED (architecture may start earlier) |
@@ -118,8 +125,11 @@ Every action is user-scoped, logged and reversible where possible. External or h
 | Redesign | **PLANNED / NEXT MAJOR PRODUCT WORKSTREAM** |
 | 41B.1B | **NOT STARTED / NOT AUTHORISED** |
 | Native app | **OFFICIAL ROADMAP / DESIGN NOT STARTED / IMPLEMENTATION NOT STARTED** |
+| Physical product activation & journal owner experience | **OFFICIAL V1 WORKSTREAM / DESIGN NOT STARTED / IMPLEMENTATION NOT STARTED**; schema CONCEPT ONLY / NOT AUTHORISED; QR/token NOT STARTED; owner onboarding = DESIGN IN GATE 2; app integration PLANNED |
 
 ## 6. Document map
+
+- Physical product activation and journal owner experience: `docs/product/physical-product-activation-and-journal-owner-experience.md`
 
 - Environments: `docs/strategy/tsoy-environment-strategy.md`
 - Design: `docs/design/journal-to-digital-design-system.md`, `docs/design/tsoy-visual-direction.md`

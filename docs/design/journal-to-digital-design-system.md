@@ -60,6 +60,21 @@ Each item is captured by a **physical journal audit** (Gate 2, step 1): photogra
 - over-rounded dashboard UI;
 - template-like visual hierarchy.
 
+### 4a. Journal owner and activation scope (added 23 October 2026)
+
+Source: `docs/product/physical-product-activation-and-journal-owner-experience.md` §12. Gate 2 also designs:
+- normal visitor onboarding and journal-owner onboarding;
+- the activation screen and the insert-card QR experience;
+- account creation after a scan, and claiming with an existing account;
+- linking the journal to a pregnancy;
+- owner home/dashboard treatment and "In your journal this week";
+- the physical/digital journal bridge;
+- Companion journal-awareness states;
+- mobile/app activation concepts;
+- **claimed / unclaimed / already-claimed / invalid-code / support** states.
+
+The physical journal and packaging remain the design authority. Design only: no routes, tokens or schema.
+
 ## 6. Gate 2 deliverables (in order, each owner-reviewed)
 
 1. **Physical journal audit** (`docs/design/journal-audit/` when started): photographs, measured colours, type identification, grid and spacing notes, packaging notes.

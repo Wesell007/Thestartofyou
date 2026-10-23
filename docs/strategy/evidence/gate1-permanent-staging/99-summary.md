@@ -116,9 +116,14 @@ No migration contacts the historical backend, sends e-mail or contains a privile
 
 ## 9. Residuals (not blocking Gate 1)
 
-1. **`first-year-memories` bucket** not created. By design it comes from `config.toml` through the Storage API (no Storage SQL), which needs the secret key or a Dashboard action. Create it before First Year media work.
+1. **`first-year-memories` bucket** not created. By design it comes from `config.toml` through the Storage API (no Storage SQL), which needs the secret key or a Dashboard action. Create it **only when an authorised journal/media phase requires it**.
 2. **Access-token lifetime (`jwt_exp`)**: **RESOLVED.** 3600 seconds, VERIFIED BY OWNER FROM SUPABASE DASHBOARD (Gate 1 closeout, 23 October 2026).
-3. **Auth on staging:** sign-up is enabled with e-mail confirmation through the default Supabase sender. Before inviting testers, consider disabling public sign-up or configuring a staging SMTP. Auth config was not changed in Gate 1.
+3. **Auth on staging:** sign-up is enabled with e-mail confirmation through the default Supabase sender. **No testers are authorised.** Auth config was not changed.
+   - *Recommendation only (closeout):* disable public sign-up with the project's global Auth sign-up setting in the Dashboard. It is GoTrue's `DISABLE_SIGNUP`, which config.toml exposes as `[auth] enable_signup`.
+   - It is Auth configuration only and has no effect on migrations or their history.
+   - Do **not** use `supabase config push` for this: it pushes the whole local Auth configuration.
+   - Do not use the per-provider `[auth.email] enable_signup` either, which can disable e-mail sign-in entirely.
+   - Invited testers can be created by an admin when needed.
 4. **Lovable:** builds without explicit environment values now fail closed, which is intended while the site is unpublished. Hosting configuration is decided before Gate 10.
 5. **N10 runtime** (functions, secrets, worker password, Vault): a later, separately authorised staging phase.
 

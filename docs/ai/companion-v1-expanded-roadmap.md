@@ -17,6 +17,7 @@
 | Family / co-parent modes | none (new); depends on 41B family entity | Gate 5 | private conversations stay private unless explicitly shared |
 | Multimodal understanding | none (new) | Gate 5 | media privacy; owner-prefixed storage paths (N10 rule A); no diagnostic interpretation of scans or images |
 | Safe agentic actions | Phase 40A priority 2 (smallest version) | architecture now, activation Gate 5 | see below |
+| Journal ownership awareness | `docs/product/physical-product-activation-and-journal-owner-experience.md` §9; today only a device-level tone hint (`src/lib/journalOwner.ts`, never proof of purchase) | after verified activation exists | ownership is permitted context (product, edition, linked journey, physical week); never sell an owned product; never exposes private entries or sensitive data; memory/permission rules still apply |
 
 ## Agentic actions: architecture principles (design now, build later)
 

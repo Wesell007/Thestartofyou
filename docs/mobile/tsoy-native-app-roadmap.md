@@ -50,6 +50,14 @@ The app and the website share:
 
 **Potential first navigation (conceptual):** Today · Journey · Companion · Journal · Family · You.
 
+## 3a. Physical product ownership (planned)
+
+The app inherits the same physical-product ownership model and backend (`docs/product/physical-product-activation-and-journal-owner-experience.md`):
+- a future activation URL opens the web flow when the app is absent and deep-links into the app when it is installed;
+- the Journal area connects the **physical journal** (current week, reflection prompt, contextual scan) with the **digital journal** (photos, video, voice, memories, milestones, Companion reflection support).
+
+No native code now.
+
 ## 4. Open decisions (for the app architecture stage)
 
 These are not decided in Gate 0:

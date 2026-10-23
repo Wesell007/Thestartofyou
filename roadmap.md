@@ -10,6 +10,13 @@ Authoritative programme sequence: `docs/strategy/tsoy-v1-product-rebaseline.md`.
   - Explicit fail-closed backend selection; `scripts/public-backend-defaults.ts` removed; staging guard added.
   - N10 engineering present on staging / production NOT ACTIVATED. Lovable unpublished; production writes 0.
   - Evidence `docs/strategy/evidence/gate1-permanent-staging/`.
+- [x] Gate 1 closeout (23 October 2026):
+  - `tsoy-staging` jwt_exp = 3600 s, VERIFIED BY OWNER FROM SUPABASE DASHBOARD (`1968439d`).
+  - Residuals, not blockers: the `first-year-memories` bucket is not created (only when an authorised journal/media phase needs it); staging public sign-up exists, with no testers authorised.
+- [ ] Physical Product Activation & Journal Owner Experience (cross-cutting V1 workstream, `docs/product/physical-product-activation-and-journal-owner-experience.md`):
+  - OFFICIAL V1 WORKSTREAM / DESIGN NOT STARTED / IMPLEMENTATION NOT STARTED.
+  - Schema: CONCEPT ONLY / NOT AUTHORISED. QR/token: NOT STARTED. Journal owner onboarding: DESIGN IN GATE 2. App integration: PLANNED.
+  - Acquisition source ≠ ownership ≠ entitlement ≠ journey.
 - Owner model: GitHub = single source of truth; Claude Code = implementation owner; Lovable = optional hosting layer only, not the builder or design authority; Supabase = independent platform infrastructure. Design: `docs/design/journal-to-digital-design-system.md`, `docs/design/tsoy-visual-direction.md`. Companion: `docs/ai/companion-v1-expanded-roadmap.md`. App: `docs/mobile/tsoy-native-app-roadmap.md`.
 
 ## Phase 34C — Small IVF new-article batch — CLOSED PASS (preview only)

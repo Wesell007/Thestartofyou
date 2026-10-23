@@ -1,0 +1,37 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3 flagship prototypes: founder review index. Not part of the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSOY flagship review</title>
+<link rel="stylesheet" href="css/tsoy.css">
+<style>
+  .review { max-width: 900px; margin: 0 auto; padding: 56px var(--gutter) 96px; }
+  .review ol { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--rule-strong); }
+  .review li { display: grid; grid-template-columns: 2.2fr 3fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .review li a.name { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--ink); text-decoration: none; }
+  .review li .states { font: 400 15px/1.6 var(--font-ui); color: var(--ink-soft); }
+  .review li .states a { margin-right: 14px; white-space: nowrap; }
+  .note { font: 400 15px/1.6 var(--font-ui); color: var(--ink-soft); max-width: 66ch; }
+  @media (max-width: 720px) { .review li { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+</head>
+<body>
+<main class="review">
+  <p class="label">The Start of You · Gate 2 Step 3</p>
+  <h1 class="display-1" style="margin-top:14px">Flagship review</h1>
+  <hr class="title-rule">
+  <p class="deck" style="margin-top:22px">Five proposed screens in the approved system: Editorial Keepsake as the master, journal patterns where you write and remember, woodland art only at chapter and keepsake moments. Resize the window to 390 px for the mobile composition, or open the compare view.</p>
+  <p class="note" style="margin-top:18px">Static prototypes. Nothing is connected: no accounts, no data, no Supabase. Fonts are self-hosted stand-ins with the approved character; production fonts are not locked. Photography is the real journal from the existing shoot and the real cover artwork.</p>
+  <ol>
+    <li><a class="name" href="article.html">1. Article</a><span class="states">Editorial Keepsake baseline · real copy (nausea in early pregnancy)</span></li>
+    <li><a class="name" href="my-week.html">2. My Week</a><span class="states"><a href="my-week.html#state-a-owner-active">A owner</a><a href="my-week.html#state-b-digital-active">B digital-only</a><a href="my-week.html#state-c-ttc-ivf">C TTC / IVF</a><a href="my-week.html#state-d-historical">D historical</a><a href="my-week.html#state-e-paused">E paused</a></span></li>
+    <li><a class="name" href="companion.html">3. Companion</a><span class="states"><a href="companion.html#state-answer">answer</a><a href="companion.html#state-not-found">not found</a><a href="companion.html#state-escalation">seek help</a><a href="companion.html#state-owner-cue">owner cue</a></span></li>
+    <li><a class="name" href="activation.html">4. Journal-owner activation</a><span class="states"><a href="activation.html#state-scan">scan</a><a href="activation.html#state-account">account</a><a href="activation.html#state-claim">claim + connect</a><a href="activation.html#state-outcomes">outcomes</a></span></li>
+    <li><a class="name" href="homepage.html">5. Homepage</a><span class="states">manifesto hero · journey entry · guidance · Companion · the journal · continuity · app</span></li>
+  </ol>
+  <p class="note" style="margin-top:32px"><a href="compare.html">Compare view</a>: each concept at 390 px and 1440 px side by side. Review captures are in the <code>review/</code> folder.</p>
+</main>
+</body>
+</html>

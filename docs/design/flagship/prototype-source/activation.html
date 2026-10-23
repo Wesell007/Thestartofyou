@@ -1,0 +1,148 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY flagship concept 4: journal-owner activation. Thirteen states on four sheets.
+     The activation code is synthetic. The cover image is the real journal cover artwork (print file, crop marks removed);
+     the corner art is a crop of that same artwork (journal illustration rights to confirm). No activation system exists yet;
+     this is the future TSOY touchpoint designed from the new system. Not imported, referenced or bundled by the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your journal continues here · The Start of You (concept)</title>
+<link rel="stylesheet" href="css/tsoy.css">
+</head>
+<body>
+
+<!-- ============ SHEET 1: scan -> recognition (initial scan, code recognised, not signed in) ============ -->
+<section class="state" id="state-scan" aria-label="Activation: recognition">
+  <p class="state-label">Sheet 1 · Initial scan · Code recognised · Not signed in · Recognition and reassurance</p>
+  <header class="masthead"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><div class="nav-actions"><a class="text-link" href="#">Sign in</a></div></div></header>
+  <section class="ceremony">
+    <img class="art" src="assets/cover-art-branches.jpg" alt="" aria-hidden="true">
+    <div class="wrap">
+      <div class="cover"><img src="assets/cover-front.jpg" alt="The Start of You, One Year Pregnancy Journal: the printed cover with a fawn and a rabbit among eucalyptus" width="1482" height="1165"></div>
+      <div>
+        <span class="label">Your journal</span>
+        <h1 class="headline">Your journal continues here.</h1>
+        <p class="deck">We recognised the code on your card. It belongs to this one copy of The Start of You. Claiming it connects the printed pages to your account, so the week in your hands and the week on your screen are the same page.</p>
+        <div class="btn-row"><a class="btn btn-primary" href="#state-account">Continue</a><a class="btn btn-quiet" href="#state-outcomes">Enter the code by hand instead</a></div>
+        <p class="meta">Code recognised · TSOY-····-····-K7Q · Not claimed yet · Nothing happens until you confirm.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ============ SHEET 2: account (create account, existing account, gifted journal) ============ -->
+<section class="state" id="state-account" aria-label="Activation: account">
+  <p class="state-label">Sheet 2 · Create account · Existing account · Gifted journal</p>
+  <header class="masthead"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><div class="nav-actions"><span class="meta">Step 1 of 2</span></div></div></header>
+  <main class="sheet">
+    <span class="label">Your journal · TSOY-····-····-K7Q</span>
+    <h1 class="display-2" style="margin-top:14px">Who is this journal for?</h1>
+    <hr class="title-rule">
+    <p class="deck" style="margin-top:20px">The code belongs to whoever uses the journal, not to whoever bought it. If it was a gift, make it yours.</p>
+    <div class="panels">
+      <section class="panel" aria-labelledby="new-h">
+        <h3 id="new-h">I'm new here</h3>
+        <p>We'll send a sign-in link to your email. No password to remember.</p>
+        <form onsubmit="return false">
+          <label class="field"><span>Email</span><input type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label class="field"><span>What should we call you?</span><input type="text" autocomplete="given-name" placeholder="First name"></label>
+          <button class="btn btn-primary" type="submit">Create my account and continue</button>
+        </form>
+        <p class="meta" style="margin-top:16px">We only use your email to sign you in and for the messages you choose. <a href="#">Privacy</a></p>
+      </section>
+      <section class="panel" aria-labelledby="existing-h">
+        <h3 id="existing-h">I already have an account</h3>
+        <p>Sign in and we'll add this journal to it. Your journey, memories and settings stay as they are.</p>
+        <form onsubmit="return false">
+          <label class="field"><span>Email</span><input type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <button class="btn btn-secondary" type="submit">Send me a sign-in link</button>
+        </form>
+        <h3 style="margin-top:36px">Given as a gift?</h3>
+        <p>Lovely. Create your own account above; the person who gave it doesn't need to do anything. If you're the giver and want to check the code works, you can do that without claiming it.</p>
+        <p class="quiet-link" style="margin:0"><a href="#state-outcomes">Check the code without claiming</a></p>
+      </section>
+    </div>
+  </main>
+</section>
+
+<!-- ============ SHEET 3: claim confirmation + connect to pregnancy ============ -->
+<section class="state" id="state-claim" aria-label="Activation: claim and connect">
+  <p class="state-label">Sheet 3 · Claim confirmation · Connect journal to pregnancy · Signed in</p>
+  <header class="masthead"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><div class="nav-actions"><span class="meta">Step 2 of 2 · Amara</span></div></div></header>
+  <main class="sheet">
+    <span class="label">Your journal · TSOY-····-····-K7Q</span>
+    <h1 class="display-2" style="margin-top:14px">Add this journal to your account?</h1>
+    <hr class="title-rule">
+    <p class="deck" style="margin-top:20px">One copy, one account. Once claimed, the code can't be used by anyone else. You can connect it to a pregnancy now, or later.</p>
+    <div class="panels">
+      <section class="panel" aria-labelledby="connect-h">
+        <h3 id="connect-h">Connect it to</h3>
+        <ul class="choice">
+          <li><label><input type="radio" name="c" checked><span>Your current pregnancy<small>Due 14 April · week 12 · this week's page will match the journal's Week Twelve</small></span></label></li>
+          <li><label><input type="radio" name="c"><span>A pregnancy I'll add now<small>For a past pregnancy, or one you haven't set up yet</small></span></label></li>
+          <li><label><input type="radio" name="c"><span>Not now<small>Keep the journal on your account without connecting it</small></span></label></li>
+        </ul>
+        <div class="btn-row"><button class="btn btn-primary" type="button">Claim my journal</button><a class="btn btn-quiet" href="#">Not this journal</a></div>
+      </section>
+      <section class="panel" aria-labelledby="what-h">
+        <h3 id="what-h">What claiming does</h3>
+        <p>It records that this copy is yours, shows "In your journal this week" on your week page, and lets the Companion mention the journal when that's useful.</p>
+        <p>It does not read what you write in the journal, share anything with anyone, or change the guidance you see. You can disconnect it at any time.</p>
+      </section>
+    </div>
+  </main>
+</section>
+
+<!-- ============ SHEET 4: outcomes (claimed, already claimed, invalid, typed fallback, support) ============ -->
+<section class="state" id="state-outcomes" aria-label="Activation: outcomes">
+  <p class="state-label">Sheet 4 · Claimed successfully · Already claimed · Invalid code · Typed fallback · Support route</p>
+  <header class="masthead"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><div class="nav-actions"><a class="text-link" href="#">Amara</a></div></div></header>
+  <main class="sheet">
+
+    <section class="outcome" aria-labelledby="ok-h">
+      <div class="grid">
+        <div>
+          <span class="state-tag">Claimed successfully · quiet completion</span>
+          <h2 class="display-2" id="ok-h">It's yours</h2>
+          <hr class="title-rule">
+          <p style="margin-top:18px">Your journal is connected to this pregnancy. From now on, Week Twelve here is the same page as Week Twelve in your hands.</p>
+          <div class="btn-row"><a class="btn btn-primary" href="my-week.html">Open this week's page</a><a class="btn btn-quiet" href="#">Keep the card somewhere safe</a></div>
+        </div>
+        <div class="frame" style="max-width:360px"><img src="assets/journal-firsts-page.jpg" alt="The printed journal open at the Firsts page" width="1920" height="1280"><p class="caption">Connected · The Start of You, One Year Pregnancy Journal</p></div>
+      </div>
+    </section>
+
+    <section class="outcome" aria-labelledby="dup-h">
+      <div class="grid">
+        <div>
+          <span class="state-tag">Already claimed · support route</span>
+          <h2 class="headline" id="dup-h" style="font-size:34px">This code is already in use</h2>
+          <p style="margin-top:14px">Another account claimed this journal. If it's yours, or it was passed on to you, we can sort it out; we'll never move a journal without checking with both of you.</p>
+          <div class="btn-row"><a class="btn btn-secondary" href="#">Ask us to help</a><a class="btn btn-quiet" href="#">Try a different code</a></div>
+        </div>
+        <p class="meta">What we'll ask: the code, roughly when and where the journal was bought, and whether you'd like your own account connected instead. Nothing from inside the journal.</p>
+      </div>
+    </section>
+
+    <section class="outcome" aria-labelledby="bad-h">
+      <div class="grid">
+        <div>
+          <span class="state-tag">Invalid code · typed fallback</span>
+          <h2 class="headline" id="bad-h" style="font-size:34px">We couldn't recognise that code</h2>
+          <p style="margin-top:14px">Codes have three groups of four letters and numbers. We never use the letter O or the digit 0 together, so if one looks like the other, try the other one.</p>
+          <form onsubmit="return false">
+            <div class="code" role="group" aria-label="Activation code"><span class="pre">TSOY</span><input type="text" maxlength="4" aria-label="Group 1" value="7K3M"><input type="text" maxlength="4" aria-label="Group 2" value="PQ2A"><input type="text" maxlength="4" aria-label="Group 3" value="X8?"></div>
+            <p class="meta" style="color:var(--notice-soon);margin:0 0 14px">The third group is one character short.</p>
+            <div class="btn-row"><button class="btn btn-secondary" type="submit">Check the code</button><a class="btn btn-quiet" href="#">Scan the card instead</a></div>
+          </form>
+        </div>
+        <p class="meta">Still not working after a couple of tries? <a href="#">Send us a photo of the card</a> and we'll check it by hand. Your account and journey are unaffected either way.</p>
+      </div>
+    </section>
+
+  </main>
+</section>
+
+</body>
+</html>

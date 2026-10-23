@@ -82,8 +82,8 @@ The physical journal and packaging remain the design authority. Design only: no 
    - Physical confirmation (paper, finish, printed colour, trim size) is still pending.
    - The insert card does not exist yet and is a new deliverable.
 2. **Taste reference system**: **DONE (23 October 2026)**, see `docs/design/references/` (seven categories, anti-reference board, A/B/C scorecard, synthesis recommendation: B + A + limited C as one system under three rules; Kidproducts = legacy/transitional physical brand only, per founder correction). **Direction approved by the founder on 23 October 2026**; Step 3 flagship screens follow.
-3. **Two to three visual directions** for the founder to choose from, each shown on the same flagship screens.
-4. **Flagship screens** in the chosen direction: homepage, one hub, an article, Companion, My Week, journal entry, plus mobile.
+3. **Visual directions**: DONE in Step 2 (A/B/C scored; B + A + limited C approved by the founder, 23 October 2026).
+4. **Flagship screens**: **STEP 3 DELIVERED FOR FOUNDER REVIEW (23 October 2026)**: article, My Week (five states), Companion (four states), journal-owner activation (thirteen states), homepage, each at 1440 and 390 px as isolated static prototypes (`docs/design/flagship/`, review captures in `docs/design/flagship/review/`, source snapshot in `docs/design/flagship/prototype-source/`, working prototypes outside Git). Provisional tokens recorded; nothing implemented in the application. Awaiting founder approval (`docs/design/flagship/founder-review.md`).
 5. **Shared design system**: tokens (colour, type, space, radius, elevation, motion), core components and patterns, implemented in `src/index.css` / `tailwind.config.ts` / `src/components/ui/`. It replaces the Lovable-era tokens through a planned migration with visual QA, not a big-bang swap.
 6. **Web and app design principles**: one token source shared where practical.
 

@@ -1,0 +1,197 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY flagship concept 2: My Week, five journey states stacked for review.
+     Synthetic user "Amara" and synthetic dates; week-12 development and reminder text is the real copy from
+     src/data/weekData.ts. Not imported, referenced or bundled by the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Week · The Start of You (concept)</title>
+<link rel="stylesheet" href="css/tsoy.css">
+</head>
+<body>
+
+<!-- ============ STATE A: active pregnancy + verified journal owner ============ -->
+<section class="state" id="state-a-owner-active" aria-label="State A: active pregnancy, journal owner">
+  <p class="state-label">State A · Active pregnancy · Verified journal owner</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs"><b>My Week</b> · Journey · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="wrap">
+    <header class="week-head">
+      <span class="label">Pregnancy · First trimester · Due 14 April</span>
+      <h1 class="display-1">Week Twelve</h1>
+      <hr class="title-rule">
+      <p class="meta">28 weeks to go · Your second trimester begins after next week</p>
+    </header>
+
+    <div class="week-grid">
+      <div>
+        <div class="block">
+          <span class="label">Baby update</span>
+          <p>The baby is fully formed in miniature. By week 12, all major organs and structures are in place. The baby is now a foetus, and from here the work is growth and refinement rather than formation.</p>
+          <p style="margin-top:14px"><span class="size-row"><span class="dot" aria-hidden="true"></span>This week, about the size of a lime (~55 mm)</span></p>
+          <p class="quiet-link" style="margin-top:10px"><a href="#">Hide size comparisons</a></p>
+        </div>
+        <div class="block">
+          <div class="frame empty"><div class="slot">Add this week's photo<br>bump, scan, or anything from the week</div><p class="caption">Week twelve</p></div>
+          <div class="field-line"><label for="bump">Bump measurement</label><span><input id="bump" class="visually-hidden" type="text"></span></div>
+        </div>
+        <div class="block">
+          <span class="label">Reminder</span>
+          <p>The 12-week point is significant, and it's okay to let it feel that way. Rest when you can, and notice what has already changed.</p>
+        </div>
+      </div>
+      <div class="prompts">
+        <div class="wash"><p class="prompt">Memories and milestones…</p><div class="ruled"><label class="visually-hidden" for="p1">Memories and milestones</label><textarea id="p1"></textarea></div></div>
+        <div class="wash blush"><p class="prompt">Exciting events that have happened this week…</p><div class="ruled"><label class="visually-hidden" for="p2">Exciting events</label><textarea id="p2"></textarea></div></div>
+        <div class="wash"><p class="prompt">How I feel about my appearance right now…</p><div class="ruled"><label class="visually-hidden" for="p3">How I feel</label><textarea id="p3"></textarea></div></div>
+        <div class="rows" role="group" aria-label="This week in a line">
+          <div><span>Highlights</span><input type="text" aria-label="Highlights"></div>
+          <div><span>Challenges</span><input type="text" aria-label="Challenges"></div>
+          <div><span>Cravings</span><input type="text" aria-label="Cravings"></div>
+          <div><span>Dislikes</span><input type="text" aria-label="Dislikes"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="band" aria-labelledby="band-a">
+      <span class="label" id="band-a">In your journal this week</span>
+      <p>Your printed journal's Week Twelve page has the same spaces: memories and milestones, a photo, your bump measurement, and the week in a line. Write there, here, or both. Nothing is copied between them unless you choose to.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="#">I wrote in my journal this week</a><a class="btn btn-quiet" href="#">Add a photo of the page</a></div>
+    </section>
+
+    <div class="week-grid" style="padding-bottom: var(--s5)">
+      <section aria-labelledby="next-a">
+        <span class="label" id="next-a" style="display:block;margin-bottom:12px">This week</span>
+        <ul class="actions">
+          <li><a href="#">Questions for your midwife</a><span class="meta">2 saved</span></li>
+          <li><a href="#">12-week scan</a><span class="meta">Thu 2 Nov, 10:20</span></li>
+          <li><a href="#">Second trimester: what changes</a><span class="meta">Read, 5 min</span></li>
+        </ul>
+      </section>
+      <section class="companion-entry" style="margin:0" aria-labelledby="ask-a">
+        <span class="label" id="ask-a">Ask the Companion</span>
+        <form class="ask" onsubmit="return false"><label class="visually-hidden" for="qa">Your question</label><input id="qa" class="ask-field" type="text" placeholder="What does the 12-week scan check for?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form>
+        <ul class="suggestions"><li><a href="#">Is it normal to still feel sick at week 12?</a></li><li><a href="#">When will I feel the baby move?</a></li></ul>
+      </section>
+    </div>
+  </main>
+  <nav class="tabbar" aria-label="App"><a href="#" aria-current="page"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE B: active pregnancy + digital-only user ============ -->
+<section class="state" id="state-b-digital-active" aria-label="State B: active pregnancy, digital-only">
+  <p class="state-label">State B · Active pregnancy · Digital-only (no journal claimed)</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs"><b>My Week</b> · Journey · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="wrap">
+    <header class="week-head">
+      <span class="label">Pregnancy · First trimester · Due 14 April</span>
+      <h1 class="display-1">Week Twelve</h1>
+      <hr class="title-rule">
+      <p class="meta">28 weeks to go · Your second trimester begins after next week</p>
+    </header>
+    <div class="week-grid">
+      <div>
+        <div class="block"><span class="label">Baby update</span><p>The baby is fully formed in miniature. By week 12, all major organs and structures are in place. The baby is now a foetus, and from here the work is growth and refinement rather than formation.</p>
+          <p style="margin-top:14px"><span class="size-row"><span class="dot" aria-hidden="true"></span>This week, about the size of a lime (~55 mm)</span></p>
+          <p class="quiet-link" style="margin-top:10px"><a href="#">Hide size comparisons</a></p></div>
+        <div class="block"><div class="frame empty"><div class="slot">Add this week's photo</div><p class="caption">Week twelve</p></div></div>
+        <div class="block"><span class="label">Reminder</span><p>The 12-week point is significant, and it's okay to let it feel that way. Rest when you can, and notice what has already changed.</p></div>
+      </div>
+      <div class="prompts">
+        <div class="wash"><p class="prompt">What do you want to remember about these first 12 weeks?</p><div class="ruled"><label class="visually-hidden" for="pb1">Reflection</label><textarea id="pb1"></textarea></div></div>
+        <div class="rows" role="group" aria-label="This week in a line"><div><span>Highlights</span><input type="text" aria-label="Highlights"></div><div><span>Challenges</span><input type="text" aria-label="Challenges"></div><div><span>Cravings</span><input type="text" aria-label="Cravings"></div><div><span>Dislikes</span><input type="text" aria-label="Dislikes"></div></div>
+        <p class="quiet-link" style="margin-top:18px">Have the printed journal? <a href="activation.html">Connect it</a> and this page follows its weekly pages.</p>
+      </div>
+    </div>
+    <div class="week-grid" style="padding-bottom: var(--s5)">
+      <section><span class="label" style="display:block;margin-bottom:12px">This week</span><ul class="actions"><li><a href="#">Questions for your midwife</a><span class="meta">2 saved</span></li><li><a href="#">12-week scan</a><span class="meta">Thu 2 Nov, 10:20</span></li><li><a href="#">Second trimester: what changes</a><span class="meta">Read, 5 min</span></li></ul></section>
+      <section class="companion-entry" style="margin:0"><span class="label">Ask the Companion</span><form class="ask" onsubmit="return false"><label class="visually-hidden" for="qb">Your question</label><input id="qb" class="ask-field" type="text" placeholder="What does the 12-week scan check for?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></section>
+    </div>
+  </main>
+  <nav class="tabbar" aria-label="App"><a href="#" aria-current="page"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE C: TTC / IVF, no pregnancy week exists ============ -->
+<section class="state" id="state-c-ttc-ivf" aria-label="State C: trying to conceive or IVF">
+  <p class="state-label">State C · Trying to conceive / IVF · No pregnancy week · Editorial system only</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs"><b>This week</b> · Journey · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="wrap">
+    <header class="week-head">
+      <span class="label">Trying to conceive · Cycle 4 · Day 18</span>
+      <h1 class="display-1">This week</h1>
+      <hr class="title-rule">
+      <p class="meta">Two-week wait · Your next period is expected around 9 November</p>
+    </header>
+    <div class="week-grid">
+      <div>
+        <div class="block"><span class="label">What is helpful now</span><p>The days after ovulation can feel long. There is nothing you need to do differently this week, and early symptoms cannot tell you either way. If a test is on your mind, the earliest reliable time is the first day of a missed period.</p></div>
+        <div class="block"><span class="label">Reading for this week</span><ul class="actions"><li><a href="#">The two-week wait: what helps</a><span class="meta">Read, 4 min</span></li><li><a href="#">Early signs and why they are unreliable</a><span class="meta">Read, 5 min</span></li></ul></div>
+      </div>
+      <div class="prompts">
+        <div class="wash blush"><p class="prompt">How are you feeling about this cycle, honestly…</p><div class="ruled"><label class="visually-hidden" for="pc1">Reflection</label><textarea id="pc1"></textarea></div></div>
+        <p class="quiet-link">Written reflections stay private. You can delete them at any time.</p>
+      </div>
+    </div>
+    <div class="week-grid" style="padding-bottom: var(--s5)">
+      <section><span class="label" style="display:block;margin-bottom:12px">Your tools</span><ul class="actions"><li><a href="#">Cycle notes</a><span class="meta">Updated today</span></li><li><a href="#">Ovulation and fertile window</a><span class="meta">Estimate</span></li></ul></section>
+      <section class="companion-entry" style="margin:0"><span class="label">Ask the Companion</span><form class="ask" onsubmit="return false"><label class="visually-hidden" for="qc">Your question</label><input id="qc" class="ask-field" type="text" placeholder="When is it worth taking a test?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></section>
+    </div>
+  </main>
+  <nav class="tabbar" aria-label="App"><a href="#" aria-current="page"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE D: historical pregnancy (read-only keepsake) ============ -->
+<section class="state" id="state-d-historical" aria-label="State D: historical pregnancy">
+  <p class="state-label">State D · Historical pregnancy · Read-only keepsake · No celebration devices</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs">Journey · <b>Looking back</b> · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="wrap">
+    <header class="week-head">
+      <span class="label">Looking back · Pregnancy, 2025 · Week twelve</span>
+      <h1 class="display-1">Week Twelve</h1>
+      <hr class="title-rule">
+      <p class="meta">Written in January 2025 · This chapter is kept as you left it</p>
+    </header>
+    <div class="week-grid">
+      <div>
+        <div class="frame"><img src="assets/journal-firsts-page.jpg" alt="A photograph of the printed journal's Firsts page with handwritten entries" width="1920" height="1280"><p class="caption">Photo of your journal page, added 11 January 2025</p></div>
+      </div>
+      <div>
+        <article class="keep-entry"><span class="meta">Memories and milestones · 11 January 2025</span><p>Heard the heartbeat on Tuesday. Everyone in the room went quiet and then laughed at the same time.</p></article>
+        <article class="keep-entry"><span class="meta">How I felt · 11 January 2025</span><p>Tired in a way I didn't have words for, and somehow still fine.</p></article>
+        <article class="keep-entry" style="border-bottom:1px solid var(--rule)"><span class="meta">The week in a line</span><p>Highlights: the scan. Challenges: ginger biscuits for breakfast, again.</p></article>
+        <p class="quiet-link" style="margin-top:18px"><a href="#">Add a reflection to this week</a> · <a href="#">Export this chapter</a></p>
+      </div>
+    </div>
+  </main>
+  <nav class="tabbar" aria-label="App"><a href="#"><span class="glyph"></span>Today</a><a href="#" aria-current="page"><span class="glyph"></span>Journey</a><a href="#"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE E: paused / sensitive ============ -->
+<section class="state" id="state-e-paused" aria-label="State E: journey paused">
+  <p class="state-label">State E · Journey paused by the user · Celebration suppressed · The system never infers loss</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs"><b>Today</b> · Journey · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="wrap">
+    <header class="week-head">
+      <span class="label">Your journey is paused</span>
+      <h1 class="display-1">Take your time</h1>
+      <hr class="title-rule">
+    </header>
+    <div class="week-grid">
+      <div>
+        <div class="pause-box">
+          <p>You paused this journey on 3 November. Weekly updates, size comparisons, reminders and anniversaries are switched off until you choose otherwise. Everything you wrote and every photo is kept exactly as it was.</p>
+          <div class="btn-row"><a class="btn btn-secondary" href="#">Resume when you are ready</a><a class="btn btn-quiet" href="#">Change what stays paused</a></div>
+        </div>
+        <ul class="actions" style="margin-top:32px"><li><a href="#">Support and someone to talk to</a><span class="meta">Always available</span></li><li><a href="#">Your journal and memories</a><span class="meta">Kept</span></li></ul>
+      </div>
+      <div class="prompts">
+        <div class="wash"><p class="prompt">If you want to write anything, this space is yours. No prompt, no expectation.</p><div class="ruled"><label class="visually-hidden" for="pe1">Write</label><textarea id="pe1"></textarea></div></div>
+        <section class="companion-entry" style="margin-top:28px"><span class="label">The Companion is here</span><form class="ask" onsubmit="return false"><label class="visually-hidden" for="qe">Your question</label><input id="qe" class="ask-field" type="text" placeholder="Ask anything, or just say how today is"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></section>
+      </div>
+    </div>
+  </main>
+  <nav class="tabbar" aria-label="App"><a href="#" aria-current="page"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+</body>
+</html>

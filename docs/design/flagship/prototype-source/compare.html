@@ -1,0 +1,39 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. Side-by-side viewport comparison for founder review. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSOY flagship compare</title>
+<link rel="stylesheet" href="css/tsoy.css">
+<style>
+  body { background: #E9E7E2; }
+  .bar { display: flex; gap: 18px; align-items: center; padding: 14px 24px; background: var(--paper); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 2; }
+  .bar a { font: 500 14px/1 var(--font-ui); color: var(--ink); text-decoration: none; padding: 8px 2px; }
+  .bar a[aria-current="true"] { box-shadow: inset 0 -1px 0 var(--ink); }
+  .stage { display: grid; grid-template-columns: 390px 1fr; gap: 32px; padding: 24px; align-items: start; }
+  .phone { width: 390px; height: 844px; border: 1px solid #CFCBC3; background: #fff; overflow: hidden; }
+  .phone iframe { width: 390px; height: 844px; border: 0; }
+  .desk { width: calc(1440px * .62); height: calc(900px * .62); border: 1px solid #CFCBC3; overflow: hidden; background: #fff; }
+  .desk iframe { width: 1440px; height: 900px; border: 0; transform: scale(.62); transform-origin: 0 0; }
+  .cap { font: 400 13px/1.5 var(--font-ui); color: var(--ink-soft); margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="Concepts">
+  <span class="label">Compare</span>
+  <a href="?c=article" data-c="article">Article</a><a href="?c=my-week" data-c="my-week">My Week</a><a href="?c=companion" data-c="companion">Companion</a><a href="?c=activation" data-c="activation">Activation</a><a href="?c=homepage" data-c="homepage">Homepage</a>
+  <a id="open" href="article.html" style="margin-left:auto">Open full size ↗</a>
+</nav>
+<div class="stage">
+  <div><div class="phone"><iframe id="m" title="Mobile 390px" src="article.html"></iframe></div><p class="cap">390 × 844, native scale</p></div>
+  <div><div class="desk"><iframe id="d" title="Desktop 1440px" src="article.html"></iframe></div><p class="cap">1440 × 900, scaled to 62%</p></div>
+</div>
+<script>
+  const c = new URLSearchParams(location.search).get("c") || "article";
+  for (const a of document.querySelectorAll("[data-c]")) a.setAttribute("aria-current", a.dataset.c === c);
+  document.getElementById("m").src = document.getElementById("d").src = c + ".html";
+  document.getElementById("open").href = c + ".html";
+</script>
+</body>
+</html>

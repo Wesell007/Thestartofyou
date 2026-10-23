@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY flagship concept 3: Companion, "a page that answers back". Four states stacked.
+     Answers are synthetic, written to TSOY tone rules and grounded in the real nausea article copy. The provenance line,
+     numbered markers and "not found in trusted sources" state are a PROPOSED contract (phase 42A); the live ai-search
+     function returns text only. Escalation shows no action (the live backend suppresses next actions on amber).
+     Not imported, referenced or bundled by the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Companion · The Start of You (concept)</title>
+<link rel="stylesheet" href="css/tsoy.css">
+</head>
+<body>
+
+<!-- ============ STATE: answer ============ -->
+<section class="state" id="state-answer" aria-label="Companion answer">
+  <p class="state-label">Companion · Answer with proposed provenance, follow-ups and one safe action</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="conv">
+    <span class="label">You asked · Week 12</span>
+    <h1 class="q">Is it normal to still feel sick at week 12?</h1>
+    <p class="q-meta">Answered using your saved week. Guidance, not diagnosis.</p>
+    <div class="answer">
+      <p>Yes, very often. For many people nausea begins to ease between weeks 12 and 14, as the placenta takes over hormone production and hCG levels settle.<a class="cite" href="#t1">1</a> That is an average, not a deadline: some feel better earlier, and some carry it a little longer without anything being wrong.</p>
+      <p>What usually helps in the meantime is small and frequent: eating something plain before you get up, keeping fluids going through the day, and resting when you can. The intensity of nausea is not a reliable indicator of how the pregnancy is going.<a class="cite" href="#t1">1</a></p>
+      <p>If you ever cannot keep fluids down for a day, are losing weight, or notice dark urine, that is the point to contact your midwife or GP the same day.</p>
+    </div>
+    <div class="trust" id="t1">
+      <b>What this answer used <span class="tag">proposed</span></b>
+      Your saved stage (week 12) and The Start of You's reviewed guidance on nausea in early pregnancy.
+      <ol><li><a href="article.html">Nausea in early pregnancy</a>, reviewed by Jenny Joines</li><li><a href="https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/">NHS: Common health problems in pregnancy</a></li></ol>
+    </div>
+    <ul class="followups" aria-label="You could ask next">
+      <li><a href="#">What can I do if nausea is affecting my daily life…</a></li>
+      <li><a href="#">When should I expect it to ease completely…</a></li>
+    </ul>
+    <p class="action-line">If you would like to raise this at your next appointment: <a href="#">add it to your questions for your midwife</a>.</p>
+  </main>
+  <div class="ask-dock"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q1">Ask the Companion</label><input id="q1" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form><p class="meta">Private to you. The Companion never replaces your midwife, GP or emergency care.</p></div></div>
+  <nav class="tabbar" aria-label="App"><a href="#"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE: not found in trusted sources ============ -->
+<section class="state" id="state-not-found" aria-label="Companion: not found in trusted sources">
+  <p class="state-label">Companion · Not found in trusted sources (proposed state) · No action offered</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="conv">
+    <span class="label">You asked · Week 12</span>
+    <h1 class="q">Can I keep taking my usual hay fever tablets?</h1>
+    <p class="q-meta">Guidance, not diagnosis.</p>
+    <div class="answer">
+      <p>I don't have trusted guidance on specific medicines in pregnancy, so I won't guess at this one.</p>
+      <p>Your pharmacist can check the exact tablets you take against pregnancy guidance in a few minutes, and your midwife can note it for your next appointment. If you have the packet to hand, take it with you.</p>
+    </div>
+    <div class="trust">
+      <b>Not found in trusted sources <span class="tag">proposed</span></b>
+      This answer uses no source. The Companion only answers health questions from The Start of You's reviewed guidance and the NHS pages it is allowed to read.
+    </div>
+    <ul class="followups" aria-label="You could ask next">
+      <li><a href="#">What usually helps with a blocked nose in pregnancy…</a></li>
+    </ul>
+  </main>
+  <div class="ask-dock"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q2">Ask the Companion</label><input id="q2" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></div></div>
+  <nav class="tabbar" aria-label="App"><a href="#"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE: escalation / seek help ============ -->
+<section class="state" id="state-escalation" aria-label="Companion: seek help">
+  <p class="state-label">Companion · Seek-help state · Fixed guidance · No follow-ups, no action (next actions suppressed)</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="conv">
+    <span class="label">You asked · Week 12</span>
+    <h1 class="q">I haven't kept any fluids down since yesterday</h1>
+    <p class="q-meta">This is fixed guidance, not a generated answer.</p>
+    <aside class="notice notice-now" aria-labelledby="esc-h" style="margin-top:0">
+      <span class="notice-kind">Contact your midwife or GP today</span>
+      <p id="esc-h" class="notice-title">Not keeping fluids down for 24 hours or more is a reason to be seen today.</p>
+      <p>Call your midwife or GP practice now. If you cannot reach them, use NHS 111. If you feel faint, confused, or very unwell, go to urgent care or call 999.</p>
+      <ul><li>Midwife or maternity unit: the number on your notes</li><li>NHS 111, any time</li></ul>
+    </aside>
+    <div class="answer">
+      <p>You are not overreacting. Severe nausea with vomiting can need medical support, and asking for it early is the right thing to do.</p>
+    </div>
+    <div class="trust"><b>Why this is fixed</b>Questions that describe possible urgent symptoms get the same guidance every time, written and reviewed by people. The Companion does not improvise here.</div>
+  </main>
+  <div class="ask-dock"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q3">Ask the Companion</label><input id="q3" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></div></div>
+  <nav class="tabbar" aria-label="App"><a href="#"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+<!-- ============ STATE: journal-owner contextual cue ============ -->
+<section class="state" id="state-owner-cue" aria-label="Companion: journal-owner cue">
+  <p class="state-label">Companion · Verified journal owner · Contextual journal cue, permission-controlled</p>
+  <header class="appbar"><div class="wrap"><a class="wordmark" href="homepage.html">The Start of You</a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
+  <main class="conv">
+    <span class="label">You asked · Week 12</span>
+    <h1 class="q">I want to write down how the scan felt</h1>
+    <p class="q-meta">Answered using your saved week and the fact that you own the journal (you allowed this).</p>
+    <div class="answer">
+      <p>That sounds like a moment worth keeping. There is no right length; even a sentence about the room, or what you said to each other on the way home, will bring it back later.</p>
+      <p>If it helps to start: what did you notice first, and what surprised you?</p>
+    </div>
+    <section class="band" style="margin:28px 0 0" aria-labelledby="cue-h">
+      <span class="label" id="cue-h">In your journal</span>
+      <p>Your printed journal's Week Twelve page has a space for memories and milestones, and the Firsts page has "first scan". Or write here and it stays in this week.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="my-week.html">Write it in this week's page</a></div>
+    </section>
+    <div class="trust"><b>What this answer used</b>Your saved stage (week 12) and your journal ownership. It did not read any of your journal entries; you can change what the Companion may use in <a href="#">Privacy</a>.</div>
+  </main>
+  <div class="ask-dock"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q4">Ask the Companion</label><input id="q4" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form></div></div>
+  <nav class="tabbar" aria-label="App"><a href="#"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
+</section>
+
+</body>
+</html>

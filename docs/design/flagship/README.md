@@ -1,6 +1,8 @@
 # Gate 2, Step 3: flagship screen design
 
-**Status: DELIVERED FOR FOUNDER REVIEW (23 October 2026). Design artefacts only. Nothing implemented in the application; no token migration; no Supabase, schema or production change; 41B.1B not started; Lovable unpublished.**
+**Status: STEP 3A DELIVERED FOR FOUNDER REVIEW (23 October 2026); STEP 3B VISUAL-EXPLORATION ROUND COMPLETE, STEP 3B PROTOTYPES NOT STARTED. Design artefacts only. Nothing implemented in the application; no token migration; no Supabase, schema or production change; 41B.1B not started; Lovable unpublished.**
+
+Step 3B (founder brief of 23 October 2026: journey colour families, baby-growth system, richer My Week / Companion / Homepage, revised card and motion rules) began with a Higgsfield visual-exploration round rather than with code: see `step-3b/higgsfield-exploration-round.md` and the compressed studies in `step-3b/explorations/`. The 3A documents below remain the current prototype record until the 3B pass is approved and executed.
 
 Five isolated static prototypes prove the approved system (B Editorial Keepsake as master; A Journal-Digitised patterns where the user writes, remembers or looks back; C woodland art only at chapter, keepsake, welcome and product-storytelling moments) on the most demanding surfaces, in the required order:
 

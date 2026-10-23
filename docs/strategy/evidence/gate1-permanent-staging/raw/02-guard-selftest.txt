@@ -1,0 +1,1 @@
+harness guard self-test 5/5

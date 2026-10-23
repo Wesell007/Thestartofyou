@@ -1,0 +1,18 @@
+== CI build (VITE_TSOY_ENVIRONMENT=ci, placeholder backend)
+[32m✓ built in 13.09s[39m
+exit 0
+== production build: none
+[backend-config] Refusing to create a production build without explicit backend configuration: VITE_SUPABASE_URL is missing; VITE_SUPABASE_PUBLISHABLE_KEY is missing or still a placeholder
+exit 1
+== production build: production identity, no production project
+[backend-config] Refusing to create a production build: no production backend is approved yet (tsoy-production is created at Gate 7).
+exit 1
+== production build: staging values in a production build
+[backend-config] Refusing to create a production build: no production backend is approved yet (tsoy-production is created at Gate 7).
+exit 1
+== production build: staging values labelled ci
+[backend-config] Refusing a CI build against a real registered backend; CI uses placeholder values only.
+exit 1
+== production build: historical backend
+[backend-config] Refusing backend wogepxfipdipogyogced: it is a historical or retired project and must not be contacted.
+exit 1

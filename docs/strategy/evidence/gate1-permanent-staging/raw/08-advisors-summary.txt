@@ -1,0 +1,6 @@
+tsoy-staging performance advisors (2026-10-23 after baseline):
+  INFO unindexed_foreign_keys: 7
+  INFO unused_index: 32
+  WARN auth_rls_initplan: 114
+security advisors: INFO rls_enabled_no_policy x3 (private.account_deletion_requests, public.ai_rate_limits, public.email_delivery_claims); no WARN/ERROR
+D14.2 baseline for the same 54 migrations (raw/../d14-2 evidence 13): performance WARN auth_rls_initplan 114, INFO unused_index 13, INFO unindexed_foreign_keys 7; security INFO rls_enabled_no_policy 3 + WARN auth_leaked_password_protection 1

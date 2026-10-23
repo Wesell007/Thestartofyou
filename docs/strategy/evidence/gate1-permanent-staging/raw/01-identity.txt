@@ -1,0 +1,6 @@
+Gate 1 identity (connector get_project + execute_sql, 2026-10-23T07:32Z)
+name=tsoy-staging ref=aeeprivmakalcbnefwwm org=xzickmpbmsjgkowcqpbg (WesellProducts) region=eu-west-2
+postgres=17.11.0.003 engine 17 release_channel=ga status=ACTIVE_HEALTHY created_at(API)=2026-10-23T03:39:41.83569Z (create call ~07:31Z; API timestamp earlier, as observed for D14.2)
+postmaster start 2026-10-23T03:43:22Z; empty: users 0, public tables 0, buckets 0, private schema 0, worker role 0, no migration history
+extensions at creation: pg_stat_statements 1.11, pgcrypto 1.3, plpgsql 1.0, supabase_vault 0.3.1, uuid-ossp 1.1
+session pooler aws-0-eu-west-2.pooler.supabase.com:5432 as postgres.<ref>: connected, current_user postgres, server 17.11

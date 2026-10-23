@@ -13,13 +13,20 @@
 | Lovable-era visual implementation | deliberately **not** to be published; the product is being redesigned (`docs/design/journal-to-digital-design-system.md`) |
 | Active production Supabase target | **NONE APPROVED** |
 | `wogepxfipdipogyogced` | **HISTORICAL / FORMER / NO-LONGER-VERIFIED** target (the Lovable-managed backend used up to early October 2026). It must **not** be treated as the active production target. On 23 October 2026 its hostname did not resolve (`docs/strategy/evidence/n10-production-preflight/`). It stays on every harness denylist |
-| Permanent staging | **PLANNED / NOT CREATED** (`tsoy-staging`, §2C) |
+| Permanent staging | **ACTIVE (Gate 1 PASS, 23 October 2026)**: `tsoy-staging`, ref `aeeprivmakalcbnefwwm`, WesellProducts, eu-west-2, PostgreSQL 17.11.0.003, the 54-migration baseline (M1–M7, no 41B.1A). Evidence `docs/strategy/evidence/gate1-permanent-staging/` |
 | Permanent production | **PLANNED / NOT CREATED** (`tsoy-production`, §2D) |
 | Disposable rehearsal projects | all retired: C1 run1/run2, G3, N10.1, N10.3B, N10.5, D14.2 (`jjrhizafpikmyvfapcic`, CLOSED / PASS / RETIRED). None may be recreated or restored |
 
 **N10 production preflight (23 October 2026)**: reclassified as **HOLD / ACTIVE PRODUCTION TARGET DOES NOT CURRENTLY EXIST OR IS NOT OWNER-APPROVED**. It was not an infrastructure incident: the owner had intentionally unpublished Lovable, and no production target is approved. Its evidence is kept unchanged.
 
-### Repository items that still name the historical ref (unchanged in Gate 0; runtime/config, not docs)
+### Repository items that named the historical ref (resolved in Gate 1)
+
+*Gate 1 update:*
+- `scripts/public-backend-defaults.ts` was **removed**. Backend selection is now explicit (`scripts/public-backend-env.ts`, `scripts/backend-environments.ts`, `VITE_TSOY_ENVIRONMENT`).
+- Production builds fail closed, and staging can never be a production backend.
+- `supabase/config.toml` `project_id` is now the local identifier `thestartofyou`.
+
+The Gate 0 text below is kept as written.
 
 - `scripts/public-backend-defaults.ts`: committed public build defaults (`VITE_SUPABASE_URL` / project id). Any build without `.env` would target the historical backend. **Gate 1 must replace these** with staging values (or remove the defaults and fail closed), with `src/test/publicBackendEnv.test.ts` updated.
 - `supabase/config.toml` `project_id`: never used as authority (every CLI run names its target explicitly). Gate 1 decides its value.
@@ -44,7 +51,7 @@
 
 **B. Claude Code**: primary implementation owner for frontend, backend, database, AI, mobile, testing and design-system implementation. Owner approval gates every environment creation, every production step and every legal/privacy decision.
 
-**C. Supabase staging, `tsoy-staging`** (future permanent project; **not created**, Gate 1). It is independent shared platform infrastructure owned by the owner's Supabase organisation, not by Lovable.
+**C. Supabase staging, `tsoy-staging`** (permanent project; **ACTIVE since Gate 1**, ref `aeeprivmakalcbnefwwm`). Select it explicitly with `VITE_TSOY_ENVIRONMENT=staging` in a gitignored `.env`; there is no fallback. Operational tooling must pass `scripts/staging-target-guard.ts`. It is independent shared platform infrastructure owned by the owner's Supabase organisation, not by Lovable.
 
 Purpose:
 - ongoing engineering;
@@ -93,7 +100,8 @@ The full list is in `docs/strategy/n10-production-activation-checklist.md`, whic
 | D14 | **OPEN** |
 | D (`suppressed_emails`) | **OPEN**, a requirement to resolve before final production activation (re-check on `tsoy-production`, not on the historical project) |
 | Active production target | **NONE APPROVED** |
-| Staging / production | PLANNED / NOT CREATED |
+| Staging | **ACTIVE** (`aeeprivmakalcbnefwwm`; N10 engineering present / not activated) |
+| Production | PLANNED / NOT CREATED |
 | Lovable | INTENTIONALLY UNPUBLISHED |
 | 41B.1B | NOT STARTED / NOT AUTHORISED |
 

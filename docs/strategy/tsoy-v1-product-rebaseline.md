@@ -69,7 +69,7 @@ Every action is user-scoped, logged and reversible where possible. External or h
 | Gate | Content | Status |
 |---|---|---|
 | **0** | Infrastructure / product rebaseline (this document set) | **THIS PHASE** |
-| **1** | Create permanent `tsoy-staging`; point build defaults and harness guards at it; replay migrations | PLANNED / NOT STARTED |
+| **1** | Create permanent `tsoy-staging`; explicit fail-closed backend selection (no committed fallback); staging guard; replay migrations | **PASS (23 October 2026)**: `aeeprivmakalcbnefwwm`, evidence `docs/strategy/evidence/gate1-permanent-staging/` |
 | **2** | Journal-to-Digital visual design foundation: physical journal audit, Taste reference system, visual directions, flagship screens, shared design system, web and app design principles (`docs/design/`) | PLANNED / **NEXT MAJOR PRODUCT WORKSTREAM** |
 | **3** | Resume platform architecture: **41B.1B → 41B.1C → 41B.1D** (numbers unchanged; first on staging) | 41B.1B NOT STARTED / NOT AUTHORISED |
 | **4** | **42A** provenance/trust · **42B** answer → action · **43** continuity · **44** permissioned memory · **45** journal continuity | PLANNED |
@@ -112,7 +112,7 @@ Every action is user-scoped, logged and reversible where possible. External or h
 | D14 | **OPEN** |
 | D | **OPEN** (resolve before final production activation) |
 | Active production Supabase target | **NONE APPROVED** (`wogepxfipdipogyogced` = historical / no longer verified) |
-| Permanent staging | PLANNED / NOT CREATED |
+| Permanent staging | **ACTIVE** (`tsoy-staging`, `aeeprivmakalcbnefwwm`; Gate 1 PASS) |
 | Permanent production | PLANNED / NOT CREATED |
 | Lovable | **INTENTIONALLY UNPUBLISHED** |
 | Redesign | **PLANNED / NEXT MAJOR PRODUCT WORKSTREAM** |

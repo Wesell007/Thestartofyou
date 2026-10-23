@@ -1,6 +1,6 @@
 # Insert card
 
-**Current state: NO FINISHED INSERT CARD EXISTS** (owner-confirmed, 23 October 2026). This is expected and **not a blocker**. The insert card is a **new design deliverable**. It is designed later from the journal-led design system and the requirements in `docs/product/physical-product-activation-and-journal-owner-experience.md`. Nothing here designs the card yet.
+**Current state: NO INSERT CARD EXISTS, because the physical-to-digital activation system has not been built yet** (founder-confirmed, 23 October 2026). This is intentional current reality, not a missing asset and not a blocker. The insert card is a **new future TSOY product touchpoint**, designed from the new TSOY system, never inferred from the current Kidproducts packaging. The intended sequence: TSOY digital ecosystem built → physical-product activation architecture built → insert-card activation experience designed → unique activation code/QR system implemented → future physical stock and packaging updated → insert card added to the product rollout. Requirements: `docs/product/physical-product-activation-and-journal-owner-experience.md`. Nothing here designs the card yet.
 
 ## What exists today (digital side)
 
@@ -34,4 +34,4 @@
 - per-copy printing capability (variable-data QR) at the printer;
 - edition labelling;
 - whether a support URL or e-mail is printed;
-- the relationship to any kidproducts card.
+- timing relative to the Kidproducts → The Start of You packaging rollover (the card is TSOY-branded from the start).

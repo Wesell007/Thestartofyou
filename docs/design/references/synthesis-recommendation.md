@@ -77,9 +77,9 @@ A page of a calm publication that answers back: a narrow reading column in the t
 
 "Your journal continues here" is the cover composition on screen: cream-blush ground, the spaced-capital title, a small rule, the journal photographed, one line, one action. After claiming, the owner's Today and My Week carry the A-budget week page and the band "In your journal this week", and the Companion may refer to the journal page. Non-owners see the same system minus the band and the physical-page references; nothing essential is withheld.
 
-## 10. Kidproducts branding recommendation
+## 10. Kidproducts (founder correction, 23 October 2026: not an open decision)
 
-**Recommendation: The Start of You is the sole consumer-facing digital master brand. Kidproducts does not appear in the digital product.**
+**Kidproducts = LEGACY / TRANSITIONAL CURRENT PHYSICAL BRAND ONLY. The Start of You = FUTURE CONSUMER MASTER BRAND. Trademark / rebrand rollout = PENDING** (approval still awaited; no further claim is made). Kidproducts is not evaluated as a competing digital brand, is not an inspiration for the digital identity, and keeps no prominence in future concepts. The notes below are retained as the analysis that preceded the correction.
 
 - **Consumer equity:** none found in the digital context. The brand appears on the box lid and the journal's back cover and letter signature as the maker; it has no presence in the digital journey and no search or social equity relevant to TSOY's audience was identified.
 - **Confusion risk:** real. The lid already shows the maker logo competing with the product title (`journal-audit/packaging.md`). Repeating it digitally would split the brand a new user is trying to learn.
@@ -110,7 +110,7 @@ A page of a calm publication that answers back: a narrow reading column in the t
 ## 12. Open decisions for the founder
 
 1. Approve or amend the recommended direction (B + A + limited C with the three rules).
-2. Confirm the Kidproducts recommendation and raise the IP questions with an adviser.
+2. *(Resolved by founder correction: Kidproducts is legacy/transitional physical branding only.)* The IP questions in §10 remain for the adviser.
 3. Decide the illustration budget for TTC, IVF, Toddler and Family, where no journal art exists today: commission matching watercolour art later, or keep those stages typographic only.
 4. Licence path for the journal's typefaces versus equivalents (Step 3 evaluation).
 5. Photography: commission, curate, or combine with Higgsfield-supported assets.

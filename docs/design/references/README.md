@@ -47,7 +47,7 @@ Each saved reference records: source / product; exact screen or interaction; wha
 | `mobile.md` | G. Premium mobile product |
 | `anti-references.md` | What TSOY must not become |
 | `direction-scorecard.md` | A / B / C and the synthesis scored on eight flagship surfaces and twelve criteria |
-| `synthesis-recommendation.md` | The recommended master direction, typography/imagery/motion/Companion character, Kidproducts recommendation, open founder decisions |
+| `synthesis-recommendation.md` | The recommended master direction, typography/imagery/motion/Companion character, Kidproducts status (legacy/transitional per founder correction), open founder decisions |
 
 ## Principle key (from `design-principles.md` §1)
 

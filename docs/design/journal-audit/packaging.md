@@ -14,7 +14,7 @@ Sources:
   - layered pale watercolour fields (blush, sage, stone);
   - eucalyptus and leaf sprigs at the corners;
   - small butterflies;
-  - a large **kidproducts** logo (a rainbow-and-cloud mark, wordmark "kid**products**", tagline "all your child needs") placed **over** the centre of the artwork in muted brown-grey.
+  - a large **kidproducts** logo (a rainbow-and-cloud mark, wordmark "kid**products**", tagline "all your child needs") placed **over** the centre of the artwork in muted brown-grey. *Legacy / transitional physical branding; not a design input (see Implications).*
 - **Side panel:** "THE START OF YOU" (spaced display caps) and "ONE YEAR PREGNANCY JOURNAL" (small spaced caps, brown), mirroring the book spine (PDF p. 148).
 - **Palette:** a warmer, greyer stone/cream than the book cover. APPROX lid sample `#D9D5D1`–`#D4CDC6` under mockup lighting, **unreliable** as a colour reference.
 - **Back cover of the book** (p. 147): blush/cream watercolour fields, a robin, and the kidproducts logo with its tagline at lower centre.
@@ -37,5 +37,5 @@ Known: box/case, then the journal (landscape cover with woodland illustration). 
 
 ## Implications for digital
 
-- The **brand on the product is The Start of You**, while **kidproducts is the maker brand** that appears on the packaging and the back cover. Digital needs an owner decision: whether kidproducts appears in the product at all (for example "Made by kidproducts" in the footer or about page) or only on packaging.
+- The **brand on the product is The Start of You**. The kidproducts marks on the lid and back cover are **LEGACY / TRANSITIONAL PHYSICAL BRANDING.** Kidproducts is the old brand; The Start of You is the future consumer master brand. The current journal and packaging still carry Kidproducts only because the rebrand has not yet been rolled out and the The Start of You trademark process is still awaiting approval (founder-provided fact; no claim is made about the outcome). Kidproducts is not part of the future TSOY digital identity and is not a design input. Future packaging is intended to roll over to The Start of You branding once the trademark and rebrand position is cleared; nothing physical is altered now.
 - The packaging's quiet centre and corner botanicals give a digital composition cue: the hero content is centred and generous, with decoration at the edges.

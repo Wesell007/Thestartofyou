@@ -13,7 +13,7 @@
 | Lovable-era visual implementation | deliberately **not** to be published; the product is being redesigned (`docs/design/journal-to-digital-design-system.md`) |
 | Active production Supabase target | **NONE APPROVED** |
 | `wogepxfipdipogyogced` | **HISTORICAL / FORMER / NO-LONGER-VERIFIED** target (the Lovable-managed backend used up to early October 2026). It must **not** be treated as the active production target. On 23 October 2026 its hostname did not resolve (`docs/strategy/evidence/n10-production-preflight/`). It stays on every harness denylist |
-| Permanent staging | **ACTIVE (Gate 1 PASS, 23 October 2026)**: `tsoy-staging`, ref `aeeprivmakalcbnefwwm`, WesellProducts, eu-west-2, PostgreSQL 17.11.0.003, the 54-migration baseline (M1–M7, no 41B.1A). Evidence `docs/strategy/evidence/gate1-permanent-staging/` |
+| Permanent staging | **ACTIVE (Gate 1 PASS, 23 October 2026)**: `tsoy-staging`, ref `aeeprivmakalcbnefwwm`, WesellProducts, eu-west-2, PostgreSQL 17.11.0.003, the 54-migration baseline (M1–M7, no 41B.1A). Auth access-token lifetime `jwt_exp` = 3600 s (verified by the owner in the Dashboard). Evidence `docs/strategy/evidence/gate1-permanent-staging/` |
 | Permanent production | **PLANNED / NOT CREATED** (`tsoy-production`, §2D) |
 | Disposable rehearsal projects | all retired: C1 run1/run2, G3, N10.1, N10.3B, N10.5, D14.2 (`jjrhizafpikmyvfapcic`, CLOSED / PASS / RETIRED). None may be recreated or restored |
 

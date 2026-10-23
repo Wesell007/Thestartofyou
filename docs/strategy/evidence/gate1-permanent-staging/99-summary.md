@@ -72,6 +72,7 @@ No migration contacts the historical backend, sends e-mail or contains a privile
 | pg_net | 0.20.4; **0 requests ever queued, 0 responses**: no outbound call happened |
 | Data API | `Accept-Profile: private` → **406 PGRST106** (table and RPC); anon `profiles` read → `[]` (RLS) |
 | Data | 0 Auth users, 0 objects, 0 N10 requests: no real or synthetic data was needed |
+| Auth access-token lifetime (`jwt_exp`) | **3600 seconds — VERIFIED BY OWNER FROM SUPABASE DASHBOARD (23 October 2026).** Not read through an API (the connector cannot, and no token was created). Not changed. For a later N10 staging phase this supports `N10_VERIFIED_TOKEN_WINDOW_SECONDS=3600` with provenance `dashboard:2026-10-23` |
 | Extensions | pg_cron 1.6.4, pg_net 0.20.4, pgmq 1.5.1, supabase_vault 0.3.1, pgcrypto, uuid-ossp, pg_stat_statements |
 
 **Advisors** (`raw/08-advisors-summary.txt`):
@@ -116,7 +117,7 @@ No migration contacts the historical backend, sends e-mail or contains a privile
 ## 9. Residuals (not blocking Gate 1)
 
 1. **`first-year-memories` bucket** not created. By design it comes from `config.toml` through the Storage API (no Storage SQL), which needs the secret key or a Dashboard action. Create it before First Year media work.
-2. **Access-token lifetime (`jwt_exp`)**: not readable through the connector. The owner chose to read it in the Dashboard; the value is still to be recorded.
+2. **Access-token lifetime (`jwt_exp`)**: **RESOLVED.** 3600 seconds, VERIFIED BY OWNER FROM SUPABASE DASHBOARD (Gate 1 closeout, 23 October 2026).
 3. **Auth on staging:** sign-up is enabled with e-mail confirmation through the default Supabase sender. Before inviting testers, consider disabling public sign-up or configuring a staging SMTP. Auth config was not changed in Gate 1.
 4. **Lovable:** builds without explicit environment values now fail closed, which is intended while the site is unpublished. Hosting configuration is decided before Gate 10.
 5. **N10 runtime** (functions, secrets, worker password, Vault): a later, separately authorised staging phase.

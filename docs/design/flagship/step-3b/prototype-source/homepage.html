@@ -1,0 +1,164 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B concept: homepage with a cinematic brand-film hero.
+     The hero background is an AI-GENERATED BRAND-FILM CONCEPT (Higgsfield draft, Kling 3.0 Omni) used as design-prototype
+     material only; it is labelled on the page and is not production footage. All copy, the real supplied logo and the
+     primary action are HTML layers above it; the page is complete on the static poster and on plain paper. Photography
+     below the hero is the real journal shoot. Not imported, referenced or bundled by the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Start of You · Step 3B concept homepage</title>
+<link rel="stylesheet" href="css/tsoy-3b.css">
+<style>
+  svg.baby { stroke: var(--preg-deep); stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="review-bar"><div class="wrap"><span>Step 3B · Homepage · review controls</span>
+  <span>Headline</span><button type="button" data-h="1" aria-pressed="true">1</button><button type="button" data-h="2" aria-pressed="false">2</button><button type="button" data-h="3" aria-pressed="false">3</button>
+  <span>Hero</span><button type="button" data-poster="0" aria-pressed="true">Film</button><button type="button" data-poster="1" aria-pressed="false">Poster fallback</button>
+  <span>Film</span><button type="button" data-film="A" aria-pressed="false">A</button><button type="button" data-film="B" aria-pressed="false">B</button><button type="button" data-film="C" aria-pressed="false">C</button>
+</div></div>
+
+<div style="position:relative">
+<header class="masthead over">
+  <div class="wrap">
+    <a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a>
+    <nav class="nav" aria-label="Journeys"><a href="#chapters">Trying to conceive</a><a href="#chapters">Pregnancy</a><a href="#chapters">First year</a><a href="#chapters">Toddler</a><a href="#chapters">Family</a><a href="#keep">Journal</a></nav>
+    <div class="nav-actions"><a class="comp-link" href="companion.html"><span class="comp-mark" aria-hidden="true"></span>Companion</a><a class="text-link" href="#">Sign in</a><button class="menu-btn" type="button" aria-expanded="false">Menu</button></div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="cine" id="hero" aria-labelledby="hero-h">
+    <video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="media/hero-poster.jpg" aria-hidden="true" tabindex="-1"><source id="heroSrc" src="media/hero-concept.mp4" type="video/mp4"></video>
+    <img class="poster" id="heroPoster" src="media/hero-poster.jpg" alt="" aria-hidden="true">
+    <div class="scrim" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="copy">
+        <p class="chapters-row" aria-label="Chapters"><i style="background:var(--ttc-mid)"></i>Trying <i style="background:var(--preg-mid)"></i>Pregnancy <i style="background:var(--fy-mid)"></i>First year <i style="background:var(--tod-mid)"></i>Toddler <i style="background:var(--fam-mid)"></i>Family</p>
+        <h1 class="headline" id="hero-h"><span id="h-line">From trying, to family life.</span><br><em>Yours to keep.</em></h1>
+        <p class="deck">Trusted guidance, a Companion that answers carefully, and a journal in print and on screen, through every chapter of becoming a family.</p>
+        <div class="btn-row"><a class="btn btn-primary" href="#chapters">Start your journey</a><a class="btn btn-quiet" href="../activation.html">Have the journal? Connect it</a></div>
+        <p class="sub">Already with us? <a href="#">Sign in</a></p>
+      </div>
+    </div>
+    <p class="film-note" id="filmNote">AI-generated brand-film concept · design prototype, not production footage</p>
+  </section>
+
+  <section class="spine" id="chapters" aria-labelledby="ch-h">
+    <div class="wrap">
+      <div class="section-head"><span class="label">Your journey has chapters</span><h2 class="display-2" id="ch-h" style="margin-top:12px">One story, told in chapters</h2><hr class="title-rule"><p class="deck">Start wherever you are. Each chapter has its own colour, its own pages and its own questions; everything you save comes with you to the next.</p></div>
+      <div class="spine-row">
+        <a href="#" data-journey="ttc"><div class="inner"><span class="num">Chapter one</span><h3>Trying to conceive</h3><p>Cycles, timing and the two-week wait, without the pressure.</p><span class="sub">IVF and treatment included</span><span class="where">Start here</span></div></a>
+        <a href="my-week.html" data-journey="pregnancy"><div class="inner"><span class="num">Chapter two</span><h3>Pregnancy</h3><p>Week by week, with a page for every week in your journal.</p><span class="sub">Your baby, visibly growing</span><span class="where">Find your week</span></div></a>
+        <a href="#" data-journey="first-year"><div class="inner"><span class="num">Chapter three</span><h3>First year</h3><p>Sleep, feeding, firsts, and the months as they come.</p><span class="sub">With space for your own recovery</span><span class="where">Find your month</span></div></a>
+        <a href="#" data-journey="toddler"><div class="inner"><span class="num">Chapter four</span><h3>Toddler</h3><p>Guidance for the walking, talking, no-saying years.</p><span class="where">Start here</span></div></a>
+        <a href="#" data-journey="family"><div class="inner"><span class="num">Chapter five</span><h3>Family</h3><p>Partners, siblings, and the next chapter when you're ready.</p><span class="where">Start here</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="where-mat" aria-labelledby="where-h">
+    <div class="wrap">
+      <div>
+        <span class="label">Where you are matters</span>
+        <h2 class="display-2" id="where-h" style="margin-top:12px">Every page knows your week</h2><hr class="title-rule">
+        <p class="deck" style="margin-top:16px">Tell us your week, your cycle day or your baby's age, and the whole site reorganises around it: what is happening, what to notice, what to ask. In pregnancy you watch your baby grow from week to week. While trying, your cycle shows as phases, in information-first colours.</p>
+        <p class="meta" style="margin-top:16px">Estimates, never confirmation. Celebration devices appear only while a pregnancy is active; you can pause everything at any time, and nothing is ever assumed.</p>
+      </div>
+      <div class="mini-week" aria-label="Example: pregnancy week 20 and a cycle view">
+        <div class="ms" aria-hidden="true"><span>18</span><span>19</span><span class="on">20</span><span>21</span><span>22</span></div>
+        <div class="mb">
+          <div class="disc"><svg class="baby" viewBox="0 0 240 240" aria-hidden="true"><use href="my-week.html#baby-20"/><g><circle cx="100" cy="84" r="29"/><path d="M124 64 C170 70 196 124 170 176 C156 198 132 208 110 198 C94 192 86 176 92 158" fill="rgba(255,255,255,.6)"/><path d="M92 158 C82 144 82 130 90 120 C94 114 96 110 92 104"/><path d="M130 116 C122 132 112 142 98 148 C92 150 90 156 94 160 C98 164 104 160 106 156"/><path d="M154 180 C142 170 120 168 104 174 C94 178 88 190 96 200 C100 204 108 202 112 196"/></g></svg></div>
+          <div><span class="label">Pregnancy · Week 20</span><h3>Halfway, gently</h3><p>The baby's anatomy can now be checked in detail. About 16.6 cm this week.</p></div>
+        </div>
+        <div class="cycle-row" aria-label="Example cycle, 28 days in phases"><span class="m">1–5</span><span class="f">6–9</span><span class="f">10–12</span><span class="o">13–16</span><span class="l">17–20</span><span class="l">21–24</span><span class="l">25–28</span></div>
+        <p class="cycle-cap">Trying to conceive: menstruation, follicular, fertile window and luteal phase as calm washes, with the estimate stated as an estimate.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-comp" aria-labelledby="comp-h">
+    <div class="wrap">
+      <div>
+        <span class="label comp-eyebrow"><span class="comp-mark" aria-hidden="true"></span>The Companion</span>
+        <h2 class="display-2" id="comp-h" style="margin-top:12px">A Companion that understands the chapter you're in</h2><hr class="title-rule">
+        <p class="deck" style="margin-top:16px">Ask what you'd ask a friend who happens to know the guidance. It answers in plain paragraphs, shows what it used and what it didn't, and says so when something is outside what it can safely answer.</p>
+        <form class="ask" style="margin-top:26px; max-width: 520px" onsubmit="return false"><label class="visually-hidden" for="hq">Your question</label><input id="hq" class="ask-field" type="text" placeholder="Is it normal to feel this tired?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-primary" type="submit">Ask</button></form>
+        <p class="meta" style="margin-top:14px">Private to you. It knows your week only if you tell it, and never reads your journal without permission. Never a substitute for your midwife, GP or emergency care.</p>
+      </div>
+      <div class="excerpt" aria-label="Example answer">
+        <span class="label">You asked · Week 12</span>
+        <p class="q" style="margin-top:10px">Is it normal to still feel sick at week 12?</p>
+        <div class="answer"><p>Yes, very often. For many people nausea begins to ease between weeks 12 and 14, as the placenta takes over hormone production and hCG levels settle. That is an average, not a deadline.</p></div>
+        <div class="trust"><b>Where this came from</b>Your saved week and the reviewed article <a href="../article.html">Nausea in early pregnancy</a>. It did not read your journal.</div>
+        <p class="quiet-link" style="margin-top:14px"><a href="companion.html">See the full answer</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="keep" id="keep" aria-labelledby="keep-h">
+    <div class="wrap">
+      <div class="section-head" style="max-width:760px"><span class="label" style="color: var(--preg-deep)">Things worth keeping</span><h2 class="display-2" id="keep-h" style="margin-top:12px">The same page, in print and on screen</h2><hr class="title-rule j" style="--j-mid: var(--preg-mid)"><p class="deck">A printed journal for pregnancy and the first year, and a digital journal that follows it week by week. Write in either, or both. Nothing is copied between them unless you choose to.</p></div>
+      <div class="pair">
+        <div><span class="label">In print</span><img src="../assets/journal-firsts-page.jpg" alt="The Start of You One Year Pregnancy Journal open at its Firsts page, photographed" width="1920" height="1280"><p class="caption">The One Year Pregnancy Journal, from the existing product shoot.</p></div>
+        <div><span class="label" style="color: var(--preg-deep)">On screen</span><div class="digital"><span class="label">Pregnancy · Week 12</span><h3>Memories and milestones</h3><div class="ruled" aria-hidden="true"></div><p class="meta">Written here, it stays in this week. Add a photo of the printed page, or a voice note instead of words.</p></div></div>
+      </div>
+      <div class="mem-row">
+        <figure class="polaroid" style="margin:0"><img src="../assets/journal-ultrasound.jpg" alt="A scan photograph kept in the journal's pocket page" width="1920" height="1280"><figcaption class="caption">Scan photo, kept in the pocket page</figcaption></figure>
+        <div class="paper-obj voice-obj" data-journey="pregnancy"><button class="play" type="button" aria-label="Play voice note"></button><div><span class="label">Voice note · 0:42</span><p>On the way home from the scan.</p></div><div class="wave" style="width:80px" aria-hidden="true"></div></div>
+        <figure class="polaroid" style="margin:0"><img src="../assets/journal-keepsakes.jpg" alt="The journal's Memories and Keepsakes pocket" width="1920" height="1280"><figcaption class="caption">Keepsakes, yours to export or delete at any time</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="moves" aria-labelledby="moves-h">
+    <div class="ribbon" aria-hidden="true"><i style="background:var(--ttc-mid)"></i><i style="background:var(--preg-mid)"></i><i style="background:var(--fy-mid)"></i><i style="background:var(--tod-mid)"></i><i style="background:var(--fam-mid)"></i></div>
+    <div class="wrap split">
+      <div>
+        <h2 class="display-2" id="moves-h">One system that moves with your family</h2><hr class="title-rule">
+        <p class="deck" style="margin-top:16px">Everything you save in one chapter comes with you to the next: your guidance, your Companion's context, your journal and your memories. One account, the same colours and the same calm, from the first hope to family life.</p>
+        <div class="btn-row" style="margin-top:28px"><a class="btn btn-primary" href="#chapters">Start your journey</a><a class="btn btn-secondary" href="#keep">See the journal</a></div>
+      </div>
+      <ul class="honest" aria-label="Where The Start of You is available">
+        <li><b>On the web</b><span>Now. Guidance, the Companion and your digital journal, on one account.</span></li>
+        <li><b>In print</b><span>Now. The One Year Pregnancy Journal; further chapters to follow.</span></li>
+        <li><b>In your pocket</b><span>Later. The app follows the web, and we'll say plainly when it is ready.</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+</div>
+
+<a class="comp-persist" href="companion.html"><span class="comp-mark" aria-hidden="true"></span>Ask the Companion</a>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>The Start of You · guidance, journal and Companion from trying to conceive to family life</span>
+    <span><a href="#">Privacy</a><a href="#">About</a><a href="#">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+const HEADLINES = { 1: "From trying, to family life.", 2: "Every chapter of becoming a family, in one place.", 3: "Wherever you are in the story." };
+const FILMS = { A: "media/concept-A-field-lifecycle-kling-o3.mp4", B: "media/concept-B-home-journal-kling-o3.mp4", C: "media/concept-C-progression-kling-o3.mp4" };
+const q = new URLSearchParams(location.search);
+const hero = document.getElementById("hero"), video = document.getElementById("heroVideo");
+function setHeadline(n) { document.getElementById("h-line").textContent = HEADLINES[n] || HEADLINES[1]; document.querySelectorAll("[data-h]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.h === String(n)))); }
+function setPoster(on) { hero.classList.toggle("use-poster", on); document.querySelectorAll("[data-poster]").forEach((b) => b.setAttribute("aria-pressed", String((b.dataset.poster === "1") === on))); if (on) video.pause(); else video.play().catch(() => {}); }
+function setFilm(k) { if (!FILMS[k]) return; document.getElementById("heroSrc").src = FILMS[k]; video.load(); video.play().catch(() => {}); document.querySelectorAll("[data-film]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.film === k))); }
+document.querySelectorAll("[data-h]").forEach((b) => b.addEventListener("click", () => setHeadline(b.dataset.h)));
+document.querySelectorAll("[data-poster]").forEach((b) => b.addEventListener("click", () => setPoster(b.dataset.poster === "1")));
+document.querySelectorAll("[data-film]").forEach((b) => b.addEventListener("click", () => setFilm(b.dataset.film)));
+setHeadline(q.get("h") || 1);
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (q.get("poster") === "1" || reduced) setPoster(true);
+if (q.get("film")) setFilm(q.get("film"));
+video.addEventListener("error", () => setPoster(true));
+</script>
+</body>
+</html>

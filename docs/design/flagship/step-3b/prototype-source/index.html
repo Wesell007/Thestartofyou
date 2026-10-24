@@ -1,0 +1,55 @@
+<!doctype html>
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B prototypes: founder review index. Not part of the application. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSOY Step 3B review</title>
+<link rel="stylesheet" href="css/tsoy-3b.css">
+<style>
+  .review { max-width: 900px; margin: 0 auto; padding: 56px var(--gutter) 96px; }
+  .review ol { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--rule-strong); }
+  .review li { display: grid; grid-template-columns: 2.2fr 3fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+  .review li a.name { font-family: var(--font-display); font-size: 28px; font-weight: 400; color: var(--ink); text-decoration: none; }
+  .review li .states { font: 400 15px/1.7 var(--font-ui); color: var(--ink-soft); }
+  .review li .states a { margin-right: 14px; white-space: nowrap; }
+  .note { font: 400 15px/1.6 var(--font-ui); color: var(--ink-soft); max-width: 66ch; }
+  .swatches { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 28px; }
+  .swatches div { padding: 14px 10px 10px; font: 500 12px/1.4 var(--font-ui); color: var(--ink); }
+  .swatches b { display: block; height: 6px; margin-bottom: 10px; }
+  @media (max-width: 720px) { .review li { grid-template-columns: 1fr; gap: 8px; } .swatches { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body>
+<main class="review">
+  <p class="label">The Start of You · Gate 2 Step 3B</p>
+  <h1 class="display-1" style="margin-top:14px">Step 3B review</h1>
+  <hr class="title-rule">
+  <p class="deck" style="margin-top:22px">Three revised prototypes: Pregnancy My Week as a living weekly progression, the homepage with a cinematic brand-film hero, and the Companion with context intelligence. Resize the window to 390 px for the mobile composition.</p>
+  <p class="note" style="margin-top:18px">Static prototypes; nothing is connected. The hero film is an AI-generated brand-film concept (design prototype, not production footage). Baby figures are concept line studies, not anatomical illustrations. Photography below the hero is the real journal shoot. The logo is the actual supplied artwork.</p>
+  <ol>
+    <li><a class="name" href="my-week.html">1. Pregnancy My Week</a><span class="states"><a href="my-week.html#week-8">week 8</a><a href="my-week.html#week-12">week 12</a><a href="my-week.html#week-20">week 20</a><a href="my-week.html#week-30">week 30</a><a href="my-week.html#week-40">week 40</a><a href="my-week.html#growth-system">growth system</a></span></li>
+    <li><a class="name" href="homepage.html">2. Homepage</a><span class="states"><a href="homepage.html">film hero</a><a href="homepage.html?poster=1">poster fallback</a><a href="homepage.html?h=2">headline 2</a><a href="homepage.html?h=3">headline 3</a><a href="homepage.html?film=B">film B</a><a href="homepage.html?film=C">film C</a></span></li>
+    <li><a class="name" href="companion.html">3. Companion</a><span class="states"><a href="companion.html#state-answer">answer</a><a href="companion.html#state-not-found">not found</a><a href="companion.html#state-seek-help">seek help</a><a href="companion.html#state-owner-cue">owner cue</a></span></li>
+  </ol>
+  <p class="label" style="margin-top:40px">Journey colour families (deep / mid / wash)</p>
+  <div class="swatches">
+    <div data-journey="ttc" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>Trying to conceive<br>sage / olive</div>
+    <div data-journey="pregnancy" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>Pregnancy<br>peach / blush</div>
+    <div data-journey="first-year" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>First year<br>mineral blue</div>
+    <div data-journey="postpartum" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>Postpartum<br>muted berry (secondary)</div>
+    <div data-journey="toddler" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>Toddler<br>apricot / terracotta</div>
+    <div data-journey="family" style="background:var(--j-wash)"><b style="background:var(--j-deep)"></b>Family<br>ochre / honey</div>
+  </div>
+  <div class="swatches" style="grid-template-columns: repeat(3, 1fr)">
+    <div style="background:var(--cycle-menses-wash)"><b style="background:var(--cycle-menses-deep)"></b>Cycle: menstruation (clay)</div>
+    <div style="background:var(--cycle-fertile-wash)"><b style="background:var(--cycle-fertile-deep)"></b>Cycle: fertile window (olive)</div>
+    <div style="background:var(--cycle-luteal-wash)"><b style="background:var(--cycle-luteal-deep)"></b>Cycle: luteal (apricot)</div>
+    <div style="background:var(--comp-wash)"><b style="background:var(--comp-deep)"></b>Companion accent (proposed, limited)</div>
+    <div style="background:var(--paper)"><b style="background:var(--ink-cta)"></b>Master primary action (ink)</div>
+    <div style="background:var(--signature-wash)"><b style="background:var(--signature-ink)"></b>Master signature (links, rules)</div>
+  </div>
+  <p class="note" style="margin-top:32px"><a href="../index.html">Step 3A review index</a> · <a href="../explorations/">Higgsfield static explorations</a> · hero-film drafts: <a href="media/concept-A-field-lifecycle-kling-o3.mp4">A</a>, <a href="media/concept-B-home-journal-kling-o3.mp4">B</a>, <a href="media/concept-C-progression-kling-o3.mp4">C</a>. Review captures are in the <code>3b/review/</code> folder.</p>
+</main>
+</body>
+</html>

@@ -1,60 +1,59 @@
 <!doctype html>
-<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B concept: Companion, "a page that answers back", four states stacked.
-     Desktop = editorial answer + context strip + collapsible "What the Companion knows" rail (07 + 08). Mobile = credible
-     single column (109's order). Journal-owner cue (107) uses a real shoot photograph. Answers are synthetic, written to
-     TSOY tone rules and grounded in the real nausea article; the provenance contract is PROPOSED (phase 42A); the live
-     ai-search function returns text only. Seek-help shows no actions (the live backend suppresses them on amber).
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B (founder refinement): Companion as "a page that answers back".
+     Primary direction 08B (two-column study: context column left, answer dominant right), 07 for editorial calm,
+     109 for the mobile order, 107 for the journal-owner cue. Four states stacked. Answers are synthetic, written to
+     TSOY tone rules and grounded in the real nausea article; the provenance contract is PROPOSED (phase 42A); the
+     live ai-search function returns text only. Seek-help shows no actions (the live backend suppresses them on amber).
      Not imported, referenced or bundled by the application. -->
 <html lang="en" data-journey="pregnancy">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Companion · Step 3B concept</title>
+<title>Companion · Step 3B refined concept</title>
 <link rel="stylesheet" href="css/tsoy-3b.css">
+<link rel="stylesheet" href="css/tsoy-3b-refine.css">
 </head>
 <body>
 
-<div class="review-bar"><div class="wrap"><span>Step 3B · Companion · four states stacked</span><span>answer · not found · seek help · owner cue</span></div></div>
+<div class="review-bar"><div class="wrap"><span>Step 3B refined · Companion · 08B two-column study · four states stacked</span><span>answer · not found · seek help · owner cue</span><span><a href="_v1/companion.html">Previous version</a></span></div></div>
 
 <!-- ============ STATE: answer ============ -->
 <section class="state" id="state-answer" aria-label="Companion answer">
-  <p class="state-label">Companion · Answer · context strip · provenance with what it used and what it did not access · one safe action · rail (desktop)</p>
+  <p class="state-label">Companion · Answer · context column: what it knows, what it did not access · sources · one safe action</p>
   <header class="appbar"><div class="wrap"><a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
-  <div class="ctx-strip"><div class="wrap"><span class="chip">Pregnancy · Week 12</span><span class="chip comp">Companion</span><span>Answers from reviewed guidance · Guidance, not diagnosis</span><a href="#privacy-1" style="margin-left:auto">What it may use</a></div></div>
-  <div class="comp-layout">
+  <div class="ctx-strip"><div class="wrap"><span class="chip">Pregnancy · Week 12</span><span class="chip comp">Companion</span><span>Answers from reviewed guidance · Guidance, not diagnosis</span><a href="#ctx-1" style="margin-left:auto">What it may use</a></div></div>
+  <div class="study-wrap"><div class="study">
+    <aside class="context" id="ctx-1" aria-label="What the Companion knows"><div class="inner"><details open>
+      <summary>What the Companion knows</summary>
+      <span class="label desk">What the Companion knows</span>
+      <dl>
+        <dt>Pregnancy · Week 12</dt><dd>First trimester, active. From the stage you saved.</dd>
+        <dt>Due 14 April</dt><dd>An estimate, from your dates.</dd>
+        <dt>You own the printed journal</dt><dd>Verified. It may point you to a page.</dd>
+      </dl>
+      <div class="not"><b>What it did not access</b><ul><li>Private journal entries</li><li>Private notes</li><li>Photos</li><li>Videos</li><li>Voice notes</li></ul></div>
+      <p class="change"><a href="#">Change what it may use</a></p>
+      <div class="asks"><span class="label">You could ask next</span><ul><li><a href="#">What can I do if nausea is affecting my daily life?</a></li><li><a href="#">When should I expect it to ease completely?</a></li></ul></div>
+      <svg class="sprig" aria-hidden="true" viewBox="0 0 150 170"><path d="M20 160 C50 120 80 80 130 20"/><ellipse class="leaf" cx="46" cy="128" rx="13" ry="8" transform="rotate(-50 46 128)"/><ellipse class="leaf" cx="78" cy="118" rx="13" ry="8" transform="rotate(40 78 118)"/><ellipse class="leaf" cx="70" cy="92" rx="12" ry="7.5" transform="rotate(-50 70 92)"/><ellipse class="leaf" cx="102" cy="84" rx="12" ry="7.5" transform="rotate(40 102 84)"/><ellipse class="leaf" cx="94" cy="58" rx="11" ry="7" transform="rotate(-50 94 58)"/><ellipse class="leaf" cx="124" cy="50" rx="11" ry="7" transform="rotate(40 124 50)"/><ellipse class="leaf" cx="118" cy="28" rx="9" ry="6" transform="rotate(-50 118 28)"/></svg>
+    </details></div></aside>
     <main class="conv">
       <span class="label comp-eyebrow"><span class="comp-mark" aria-hidden="true"></span>You asked</span>
       <h1 class="q">Is it normal to still feel sick at week 12?</h1>
-      <p class="q-meta">Answered for your saved week. Guidance, not diagnosis.</p>
+      <p class="q-meta">Answered using your saved week. Guidance, not diagnosis.</p>
       <div class="answer">
-        <p>Yes, very often. For many people nausea begins to ease between weeks 12 and 14, as the placenta takes over hormone production and hCG levels settle.<a class="cite" href="#prov-1">1</a> That is an average, not a deadline: some feel better earlier, and some carry it a little longer without anything being wrong.</p>
-        <p>What usually helps in the meantime is small and frequent: eating something plain before you get up, keeping fluids going through the day, and resting when you can. The intensity of nausea is not a reliable indicator of how the pregnancy is going.<a class="cite" href="#prov-1">1</a></p>
-        <p>If you ever cannot keep fluids down for a day, are losing weight, or notice dark urine, that is the point to contact your midwife or GP the same day.</p>
+        <p>Yes, very often. For many people nausea begins to ease between weeks 12 and 14, as the placenta takes over hormone production and hCG levels settle.<a class="cite" href="#src-1">1</a> That is an average, not a deadline: some feel better earlier, and some carry it a little longer without anything being wrong.</p>
+        <p>What usually helps in the meantime is small and frequent: eating something plain before you get up, keeping fluids going through the day, and resting when you can. The intensity of nausea is not a reliable indicator of how the pregnancy is going.<a class="cite" href="#src-1">1</a></p>
+        <p>If you ever cannot keep fluids down for a day, are losing weight, or notice dark urine, that is the point to contact your midwife or GP the same day.<a class="cite" href="#src-2">2</a></p>
       </div>
-      <div class="prov" id="prov-1">
-        <h2>Where this came from <span class="tag">proposed</span></h2>
-        <div><h3>What it used</h3><ol><li><a href="../article.html">Nausea in early pregnancy</a>, reviewed by Jenny Joines</li><li><a href="https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/">NHS: Common health problems in pregnancy</a></li><li>Your saved stage: week 12</li></ol></div>
-        <div class="no"><h3>What it did not access</h3><ul><li>Your journal entries, notes or photos</li><li>Your appointments</li><li>Anything you typed in earlier questions</li></ul></div>
-      </div>
+      <ol class="sources" id="src-1" aria-label="Sources"><li><a href="../article.html">Nausea in early pregnancy</a>, reviewed guidance, The Start of You</li><li id="src-2"><a href="https://www.nhs.uk/pregnancy/common-symptoms/common-health-problems/">NHS: Common health problems in pregnancy</a></li><li>Your saved stage: week 12 <span class="tag" style="display:inline-block;font:500 11px/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--signature-ink);border:1px solid var(--signature);padding:3px 6px;margin-left:8px;vertical-align:middle">provenance proposed</span></li></ol>
+      <div class="action-row"><span>If you would like to raise this at your scan on Thursday:</span><a class="btn btn-secondary" href="my-week.html">Add to questions for your midwife</a></div>
       <ul class="followups" aria-label="You could ask next">
         <li><a href="#">What can I do if nausea is affecting my daily life…</a></li>
         <li><a href="#">When should I expect it to ease completely…</a></li>
       </ul>
-      <p class="action-line">If you would like to raise this at your scan on Thursday: <a href="my-week.html">add it to your questions for your midwife</a>.</p>
+      <p class="trust-line">It used your saved week and the two sources above. It did not read your journal, notes, photos, videos or voice notes. Never a replacement for your midwife, GP or emergency care.</p>
     </main>
-    <aside class="rail" aria-label="What the Companion knows" id="privacy-1">
-      <details open>
-        <summary>What the Companion knows</summary>
-        <dl>
-          <dt>Your journey</dt><dd>Pregnancy, active · week 12 · first trimester</dd>
-          <dt>Your journal</dt><dd>Verified owner · One Year Pregnancy Journal</dd>
-          <dt>Where you are</dt><dd>On the web, signed in</dd>
-        </dl>
-        <div class="not"><b>Never used unless you switch it on</b><ul><li>Your written entries and voice notes</li><li>Your photos and memories</li><li>Your cycle or appointment details</li></ul></div>
-        <p class="priv">Change this any time in <a href="#">Privacy</a>. The Companion never replaces your midwife, GP or emergency care.</p>
-      </details>
-    </aside>
-  </div>
+  </div></div>
   <div class="dock-j"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q1">Ask the Companion</label><input id="q1" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-primary" type="submit">Ask</button></form><p class="meta">Private to you. Answers come from The Start of You's reviewed guidance and the NHS pages it may read.</p></div></div>
   <nav class="tabbar" aria-label="App"><a href="my-week.html"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
 </section>
@@ -64,7 +63,15 @@
   <p class="state-label">Companion · Trusted-source failure (proposed state) · says so plainly · no invented answer · no action</p>
   <header class="appbar"><div class="wrap"><a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
   <div class="ctx-strip"><div class="wrap"><span class="chip">Pregnancy · Week 12</span><span class="chip comp">Companion</span><span>Answers from reviewed guidance · Guidance, not diagnosis</span></div></div>
-  <div class="comp-layout">
+  <div class="study-wrap"><div class="study">
+    <aside class="context" aria-label="What the Companion knows"><div class="inner"><details open>
+      <summary>What the Companion knows</summary>
+      <span class="label desk">What the Companion knows</span>
+      <dl><dt>Pregnancy · Week 12</dt><dd>First trimester, active.</dd><dt>You own the printed journal</dt><dd>Verified.</dd></dl>
+      <div class="not"><b>What it did not access</b><ul><li>Private journal entries and notes</li><li>Photos, videos and voice notes</li><li>Any page outside the reviewed guidance and the NHS pages it may read</li></ul></div>
+      <p class="change"><a href="#">Change what it may use</a></p>
+      <div class="asks"><span class="label">You could ask next</span><ul><li><a href="#">What usually helps with a blocked nose in pregnancy?</a></li></ul></div>
+    </details></div></aside>
     <main class="conv">
       <span class="label comp-eyebrow"><span class="comp-mark" aria-hidden="true"></span>You asked</span>
       <h1 class="q">Can I keep taking my usual hay fever tablets?</h1>
@@ -73,54 +80,65 @@
         <p>I don't have trusted guidance on specific medicines in pregnancy, so I won't guess at this one.</p>
         <p>Your pharmacist can check the exact tablets you take against pregnancy guidance in a few minutes, and your midwife can note it for your next appointment. If you have the packet to hand, take it with you.</p>
       </div>
-      <div class="prov">
+      <div class="prov" style="grid-template-columns:1fr">
         <h2>Not found in trusted sources <span class="tag">proposed</span></h2>
         <div><h3>What it used</h3><p style="margin:0">Nothing. No source matched this question, so no answer was generated from one.</p></div>
-        <div class="no"><h3>What it did not access</h3><ul><li>Your journal, notes or photos</li><li>Any page outside the reviewed guidance and the NHS pages it may read</li></ul></div>
       </div>
-      <ul class="followups" aria-label="You could ask next"><li><a href="#">What usually helps with a blocked nose in pregnancy…</a></li></ul>
+      <p class="trust-line">It did not read your journal, notes, photos, videos or voice notes.</p>
     </main>
-    <aside class="rail" aria-label="What the Companion knows"><details><summary>What the Companion knows</summary><dl><dt>Your journey</dt><dd>Pregnancy, active · week 12</dd><dt>Your journal</dt><dd>Verified owner</dd></dl><p class="priv">Change this any time in <a href="#">Privacy</a>.</p></details></aside>
-  </div>
+  </div></div>
   <div class="dock-j"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q2">Ask the Companion</label><input id="q2" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-primary" type="submit">Ask</button></form></div></div>
   <nav class="tabbar" aria-label="App"><a href="my-week.html"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
 </section>
 
 <!-- ============ STATE: seek help ============ -->
 <section class="state" id="state-seek-help" aria-label="Companion: seek help">
-  <p class="state-label">Companion · Seek-help state · fixed, human-written guidance · rail collapsed · no follow-ups, no action</p>
+  <p class="state-label">Companion · Seek-help state · fixed, human-written guidance · context column quiet · no follow-ups, no action</p>
   <header class="appbar"><div class="wrap"><a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
   <div class="ctx-strip"><div class="wrap"><span class="chip">Pregnancy · Week 12</span><span class="chip comp">Companion</span><span>This is fixed guidance, not a generated answer</span></div></div>
-  <div class="comp-layout">
+  <div class="study-wrap"><div class="study">
+    <aside class="context" aria-label="What the Companion knows"><div class="inner"><details open>
+      <summary>What the Companion knows</summary>
+      <span class="label desk">What the Companion knows</span>
+      <dl><dt>Pregnancy · Week 12</dt><dd>First trimester, active.</dd></dl>
+      <div class="not"><b>What it did not access</b><ul><li>Private journal entries, notes, photos, videos and voice notes</li></ul></div>
+    </details></div></aside>
     <main class="conv">
       <span class="label comp-eyebrow"><span class="comp-mark" aria-hidden="true"></span>You asked</span>
       <h1 class="q">I haven't kept any fluids down since yesterday</h1>
       <p class="q-meta">This is fixed guidance, not a generated answer.</p>
-      <aside class="notice notice-now" aria-labelledby="esc-h" style="margin-top:0">
+      <aside class="notice notice-now" aria-labelledby="esc-h">
         <span class="notice-kind">Contact your midwife or GP today</span>
         <p id="esc-h" class="notice-title">Not keeping fluids down for 24 hours or more is a reason to be seen today.</p>
         <p>Call your midwife or GP practice now. If you cannot reach them, use NHS 111. If you feel faint, confused, or very unwell, go to urgent care or call 999.</p>
         <ul><li>Midwife or maternity unit: the number on your notes</li><li>NHS 111, any time</li></ul>
       </aside>
       <div class="answer"><p>You are not overreacting. Severe nausea with vomiting can need medical support, and asking for it early is the right thing to do.</p></div>
-      <div class="trust"><b>Why this is fixed</b>Questions that describe possible urgent symptoms get the same guidance every time, written and reviewed by people. The Companion does not improvise here, and it offers no other actions until you have been seen.</div>
+      <p class="trust-line"><b style="font-weight:500;color:var(--ink)">Why this is fixed.</b> Questions that describe possible urgent symptoms get the same guidance every time, written and reviewed by people. The Companion does not improvise here, and it offers no other actions until you have been seen.</p>
     </main>
-    <aside class="rail" aria-label="What the Companion knows"><details><summary>What the Companion knows</summary><dl><dt>Your journey</dt><dd>Pregnancy, active · week 12</dd></dl></details></aside>
-  </div>
+  </div></div>
   <div class="dock-j"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q3">Ask the Companion</label><input id="q3" class="ask-field" type="text" placeholder="Ask anything about this week"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-primary" type="submit">Ask</button></form></div></div>
   <nav class="tabbar" aria-label="App"><a href="my-week.html"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
 </section>
 
 <!-- ============ STATE: journal-owner contextual cue ============ -->
 <section class="state" id="state-owner-cue" aria-label="Companion: journal-owner cue">
-  <p class="state-label">Companion · Verified journal owner · points to the printed page · permission-controlled · entries never read</p>
+  <p class="state-label">Companion · Verified journal owner · points to the printed page · permission-controlled · entries never read · voice listening state</p>
   <header class="appbar"><div class="wrap"><a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a><span class="crumbs">My Week · Journey · <b>Companion</b> · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
   <div class="ctx-strip"><div class="wrap"><span class="chip">Pregnancy · Week 12</span><span class="chip comp">Companion</span><span>Knows you own the journal · You allowed this</span></div></div>
-  <div class="comp-layout">
+  <div class="study-wrap"><div class="study">
+    <aside class="context" aria-label="What the Companion knows"><div class="inner"><details open>
+      <summary>What the Companion knows</summary>
+      <span class="label desk">What the Companion knows</span>
+      <dl><dt>Pregnancy · Week 12</dt><dd>First trimester, active.</dd><dt>You own the printed journal</dt><dd>Verified. May point to its pages; you allowed this.</dd></dl>
+      <div class="not"><b>What it did not access</b><ul><li>Anything you have written, on paper or here</li><li>Photos, videos and voice notes</li><li>Your appointments</li></ul></div>
+      <p class="change"><a href="#">Change what it may use</a></p>
+      <svg class="sprig" aria-hidden="true" viewBox="0 0 150 170"><path d="M20 160 C50 120 80 80 130 20"/><ellipse class="leaf" cx="46" cy="128" rx="13" ry="8" transform="rotate(-50 46 128)"/><ellipse class="leaf" cx="78" cy="118" rx="13" ry="8" transform="rotate(40 78 118)"/><ellipse class="leaf" cx="70" cy="92" rx="12" ry="7.5" transform="rotate(-50 70 92)"/><ellipse class="leaf" cx="102" cy="84" rx="12" ry="7.5" transform="rotate(40 102 84)"/><ellipse class="leaf" cx="94" cy="58" rx="11" ry="7" transform="rotate(-50 94 58)"/><ellipse class="leaf" cx="124" cy="50" rx="11" ry="7" transform="rotate(40 124 50)"/><ellipse class="leaf" cx="118" cy="28" rx="9" ry="6" transform="rotate(-50 118 28)"/></svg>
+    </details></div></aside>
     <main class="conv">
       <span class="label comp-eyebrow"><span class="comp-mark" aria-hidden="true"></span>You asked</span>
       <h1 class="q">I want to write down how the scan felt</h1>
-      <p class="q-meta">Answered for your saved week, knowing you own the journal.</p>
+      <p class="q-meta">Answered using your saved week, knowing you own the journal.</p>
       <div class="answer">
         <p>That sounds like a moment worth keeping. There is no right length; even a sentence about the room, or what you said to each other on the way home, will bring it back later.</p>
         <p>If it helps to start: what did you notice first, and what surprised you?</p>
@@ -129,25 +147,20 @@
         <img src="../assets/journal-firsts-page.jpg" alt="The printed journal open at its Firsts page" width="1920" height="1280">
         <div>
           <span class="label" id="cue-h" style="color: var(--preg-deep); display:block; margin-bottom:8px">In your journal</span>
-          <p>Your printed Week Twelve page has a space for memories and milestones, and the Firsts page has "first scan". Or write here, and it stays in this week.</p>
-          <div class="btn-row"><a class="btn btn-quiet" href="my-week.html">Write it in this week's page</a></div>
+          <p>Your printed Week Twelve page has a space for memories and milestones, and the Firsts page has "first scan". Or write here, add a photo, a video or a voice note, and it stays in this week.</p>
+          <div class="btn-row"><a class="btn btn-quiet" href="my-week.html">Write it in this week's page</a><a class="btn btn-quiet" href="my-week.html">Record a voice note instead</a></div>
         </div>
       </section>
-      <div class="prov">
-        <h2>Where this came from</h2>
-        <div><h3>What it used</h3><ol><li>Your saved stage: week 12</li><li>That you own the journal (verified) and allowed this</li></ol></div>
-        <div class="no"><h3>What it did not access</h3><ul><li>Anything you have written in the journal, on paper or here</li><li>Your photos, voice notes or appointments</li></ul></div>
-      </div>
+      <p class="trust-line">It used your saved week and the fact that you own the journal (verified, and you allowed this). It did not read anything you have written, on paper or here, nor your photos, videos or voice notes.</p>
     </main>
-    <aside class="rail" aria-label="What the Companion knows"><details open><summary>What the Companion knows</summary><dl><dt>Your journey</dt><dd>Pregnancy, active · week 12</dd><dt>Your journal</dt><dd>Verified owner · may point to its pages</dd></dl><div class="not"><b>Switched off</b><ul><li>Reading your entries</li><li>Reading your memories</li></ul></div><p class="priv">Change this any time in <a href="#">Privacy</a>.</p></details></aside>
-  </div>
+  </div></div>
   <div class="dock-j"><div class="wrap"><form class="ask" onsubmit="return false"><label class="visually-hidden" for="q4">Ask the Companion</label><input id="q4" class="ask-field" type="text" placeholder="Ask anything about this week" value="" aria-describedby="listen"><button class="voice" type="button" aria-label="Ask by voice" aria-pressed="true">Voice</button><button class="btn btn-primary" type="submit">Ask</button></form><p class="meta">Private to you. <span class="listen" id="listen"><i aria-hidden="true"></i>Listening. Tap Voice again to stop.</span></p></div></div>
   <nav class="tabbar" aria-label="App"><a href="my-week.html"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="#" aria-current="page"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
 </section>
 
 <script>
-// Mobile: the context rail starts collapsed so the question leads (109's order); desktop keeps the authored state.
-if (matchMedia("(max-width: 720px)").matches) document.querySelectorAll(".rail details").forEach((d) => d.removeAttribute("open"));
+// Mobile (109's order): the question and answer lead; the context column follows as a compact disclosure, closed by default.
+if (matchMedia("(max-width: 720px)").matches) document.querySelectorAll(".study .context details").forEach((d) => d.removeAttribute("open"));
 </script>
 </body>
 </html>

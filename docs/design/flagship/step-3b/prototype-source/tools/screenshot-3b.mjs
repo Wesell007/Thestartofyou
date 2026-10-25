@@ -1,7 +1,7 @@
 // DESIGN-ONLY / NON-RUNTIME. Renders the Step 3B prototypes (../3b/*.html) with the repository's Playwright and writes
 // PNG review captures to ../3b/review/. Uses the Edge channel when available so the H.264 hero draft decodes; falls back
 // to open-source Chromium (poster shown instead of video). Touches no application code.
-// Usage: node screenshot-3b.mjs [my-week companion homepage]
+// Usage: node screenshot-3b.mjs [my-week companion homepage art]
 import { createRequire } from "node:module";
 import { mkdirSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
@@ -11,7 +11,7 @@ const require = createRequire("C:/Users/Administrator/Desktop/Thestartofyou/pack
 const { chromium } = require("playwright");
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..", "3b");
-const out = resolve(root, "review");
+const out = resolve(root, process.env.OUT_DIR || "review");
 mkdirSync(out, { recursive: true });
 const BASE = process.env.BASE_URL || "http://127.0.0.1:4310/3b/";
 
@@ -23,12 +23,17 @@ const CAPTURES = {
     { name: "my-week-20", url: "my-week.html#week-20", el: "main" },
     { name: "my-week-30", url: "my-week.html#week-30", el: "main" },
     { name: "my-week-40", url: "my-week.html#week-40", el: "main" },
+    { name: "my-week-spread-12", url: "my-week.html#week-12", el: ".spread" },
     { name: "my-week-growth-sheet", url: "my-week.html#week-12", el: "#growth-system" },
     { name: "my-week-plate-8", url: "my-week.html#week-8", el: ".plate" },
     { name: "my-week-plate-12", url: "my-week.html#week-12", el: ".plate" },
     { name: "my-week-plate-20", url: "my-week.html#week-20", el: ".plate" },
     { name: "my-week-plate-30", url: "my-week.html#week-30", el: ".plate" },
     { name: "my-week-plate-40", url: "my-week.html#week-40", el: ".plate" },
+    { name: "my-week-memories", url: "my-week.html#week-12", el: ".memories" },
+    { name: "my-week-memory-video", url: "my-week.html#week-12", el: ".mem-video" },
+    { name: "my-week-memory-voice", url: "my-week.html#week-12", el: ".mem-voice" },
+    { name: "my-week-journal-bridge", url: "my-week.html#week-12", el: ".bridge" },
   ],
   companion: [
     { name: "companion-answer", url: "companion.html", el: "#state-answer" },
@@ -40,9 +45,16 @@ const CAPTURES = {
   homepage: [
     { name: "homepage", url: "homepage.html" },
     { name: "homepage-hero", url: "homepage.html", el: "#hero" },
+    { name: "homepage-hero-film-c", url: "homepage.html?film=C", el: "#hero" },
     { name: "homepage-hero-poster", url: "homepage.html?poster=1", el: "#hero" },
     { name: "homepage-hero-h2", url: "homepage.html?h=2", el: "#hero" },
     { name: "homepage-hero-h3", url: "homepage.html?h=3", el: "#hero" },
+    { name: "homepage-chapters", url: "homepage.html", el: "#chapters" },
+    { name: "homepage-printweb", url: "homepage.html", el: "#printweb" },
+    { name: "homepage-memories", url: "homepage.html", el: "#memories" },
+  ],
+  art: [
+    { name: "chapter-illustrations", url: "art/chapters-test.html", el: ".fam-rows" },
   ],
 };
 const VIEWPORTS = { desktop: { width: 1440, height: 900 }, mobile: { width: 390, height: 844 } };
@@ -54,19 +66,21 @@ const channel = process.env.BROWSER_CHANNEL || "msedge";
 let browser; try { browser = await chromium.launch({ channel }); } catch { console.log("channel", channel, "unavailable, using chromium"); browser = await chromium.launch(); }
 let failures = 0;
 for (const name of names) {
-  if (!existsSync(resolve(root, `${name}.html`))) { console.log("skip (no file)", name); continue; }
+  const file0 = name === "art" ? resolve(root, "art", "chapters-test.html") : resolve(root, `${name}.html`);
+  if (!existsSync(file0)) { console.log("skip (no file)", name); continue; }
   for (const [vp, size] of Object.entries(VIEWPORTS)) {
     for (const cap of CAPTURES[name]) {
       const page = await browser.newPage({ viewport: size, deviceScaleFactor: 1 });
       await page.goto(BASE + cap.url, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
       const fontsOk = await page.evaluate((checks) => checks.map((c) => [c, document.fonts.check(c)]), FONT_CHECKS);
-      for (const [c, ok] of fontsOk) if (!ok) { console.log("FONT NOT LOADED:", c, "in", cap.name, vp); failures++; }
+      for (const [c, ok] of fontsOk) if (!ok && name !== "art") { console.log("FONT NOT LOADED:", c, "in", cap.name, vp); failures++; }
       await page.waitForTimeout(600); // let the hero video reach its first frame and the fade-swap settle
       const file = resolve(out, `${cap.name}-${vp}.png`);
       if (cap.el) {
         const el = page.locator(cap.el).first();
         if ((await el.count()) === 0) { console.log("MISSING", cap.name, cap.el); failures++; await page.close(); continue; }
+        await el.scrollIntoViewIfNeeded();
         await el.screenshot({ path: file });
       } else {
         await page.screenshot({ path: file, fullPage: true });

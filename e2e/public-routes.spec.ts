@@ -1,7 +1,7 @@
 import { expect, test } from "../playwright-fixture";
 
 const publicRoutes = [
-  ["/", /From trying to conceive/i],
+  ["/", /From trying, to family life/i],
   ["/pregnancy/week/1", /1 Week Pregnant/i],
   ["/trying-to-conceive", /Understand your cycle/i],
   ["/ivf", /Understand your stage/i],

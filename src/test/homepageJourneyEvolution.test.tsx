@@ -101,11 +101,11 @@ describe("homepage journey evolution", () => {
     renderAt(<Index />);
 
     await waitFor(() => {
-      expect(document.title).toBe("The Start of You | TTC, Pregnancy & First Year");
+      expect(document.title).toBe("The Start of You | From Trying to Family Life");
     });
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute(
       "content",
-      "Personalised guidance, journalling and a companion for trying to conceive, pregnancy and your baby's first year.",
+      "Trusted guidance and a thoughtful Companion from trying to conceive through pregnancy, the first year, toddlerhood and family life — plus a pregnancy journal.",
     );
   });
 

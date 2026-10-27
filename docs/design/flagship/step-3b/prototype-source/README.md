@@ -5,9 +5,9 @@ These files are the reproducible source of the Gate 2 Step 3B prototypes. **They
 ## Contents
 
 - `my-week.html`, `homepage.html`, `companion.html`, `index.html`: the three surfaces and the review index (every file carries a DESIGN-ONLY header).
-- `css/tsoy-3b-refine.css`: the founder-refinement layer (lighter chapter cards, cinematic hero controls, memories row, print/web pair) and, from 25 October 2026, the chapter-plate art-box rules.
+- `css/tsoy-3b-refine.css`: the founder-refinement layer (lighter chapter cards, cinematic hero controls, memories row, print/web pair) and, from 25 October 2026, the chapter-plate art-box rules; from 27 October 2026 the R9 homepage static-polish block (section scale and rhythm, progression rail, editorial Companion excerpt, keepsake weights, closing spread, mounted-print treatment, tablet range 721 to 1024).
 - `art/chapters/*-380.png`: the five approved watercolour chapter plates at 1x (380 px, transparent); the 760 px 2x exports and 1024 masters stay outside Git. `art/chapters.svg` and `tools/inject-art.py` keep the superseded SVG concept family for the comparison harness `art/chapters-test.html`. `tools/pack-fidelity.py` builds the fidelity-pass review additions.
-- `css/tsoy-3b.css`: journey colour tokens, logo, Companion mark, week strip, chapter band, baby growth plate, memory objects, Companion rail, cinematic hero, chapter spine. It imports the Step 3A base stylesheet `../../prototype-source/css/tsoy.css` by relative path (`../../css/tsoy.css` in the working folder).
+- `css/tsoy-3b.css`: journey colour tokens (Toddler re-tuned 27 October 2026 to `#8A3F1B` / `#D9823B` / `#F2CFAD`, founder decision), logo, Companion mark, week strip, chapter band, baby growth plate, memory objects, Companion rail, cinematic hero, chapter spine. It imports the Step 3A base stylesheet `../../prototype-source/css/tsoy.css` by relative path (`../../css/tsoy.css` in the working folder).
 - `tools/screenshot-3b.mjs`: Playwright capture of every view at 1440 and 390 (uses the repo's Playwright through `createRequire`; prefers the Edge channel so H.264 decodes; never touches the application).
 - `tools/frames.mjs`: still-frame extraction from a local MP4 served over the local review server.
 - `tools/pack-3b.py`: builds the compressed review pack, growth comparison, 3A-vs-3B comparison and contact sheet.

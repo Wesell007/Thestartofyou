@@ -1,28 +1,24 @@
 <!doctype html>
-<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B (founder refinement): Pregnancy My Week as the physical journal come
-     alive digitally. Primary visual direction 201 (book-spread rhythm) with 101's week progression integrated into the
-     page. Active pregnancy, verified journal owner ("Amara", synthetic). Development, body, emotional, focus, reminder,
+<!-- DESIGN-ONLY / NON-RUNTIME. TSOY Gate 2 Step 3B concept: Pregnancy My Week as a living weekly progression system.
+     Active pregnancy, verified journal owner ("Amara", synthetic). All development, body, emotional, focus, reminder,
      reflection and ask copy is the real repository content (src/data/weekData.ts, src/data/myWeekContent.ts) for weeks
-     8, 12, 20, 30 and 40. Baby figures are CONCEPT LINE STUDIES: not anatomically reviewed, not production illustration.
-     Memories (written, photo, video, voice) are synthetic examples using the real shoot photographs as stills.
-     Not imported, referenced or bundled by the application. -->
+     8, 12, 20, 30 and 40. Baby figures are CONCEPT LINE STUDIES for the design system only: not anatomically reviewed,
+     not production illustration. Not imported, referenced or bundled by the application. -->
 <html lang="en" data-journey="pregnancy">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>My Week · Step 3B refined concept</title>
+<title>My Week · Step 3B concept</title>
 <link rel="stylesheet" href="css/tsoy-3b.css">
-<link rel="stylesheet" href="css/tsoy-3b-refine.css">
 <style>
   svg.baby { stroke: var(--j-deep); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; fill: none; }
-  .growth-row svg.baby { stroke: var(--preg-deep); stroke-width: 1.3; }
+  .growth-row svg.baby, .mini-week svg.baby { stroke: var(--preg-deep); stroke-width: 1.3; }
 </style>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <!-- One figure language, five moments: same orientation (curled, facing left), same line weight. Proportion, scale and
-       line detail change by stage: head-to-body ratio falls, limbs lengthen, the curl opens a little, detail arrives as line. -->
+  <!-- One figure language, five stages: same orientation (curled, facing left), same line, changing proportion and scale. -->
   <symbol id="baby-8" viewBox="0 0 240 240"><g transform="translate(120 122) scale(.40) translate(-118 -128)">
     <circle cx="104" cy="88" r="40"/>
     <path d="M136 66 C172 80 186 128 166 168 C154 192 128 204 108 196 C94 190 86 176 90 160" fill="rgba(255,255,255,.55)"/>
@@ -30,77 +26,57 @@
     <path d="M128 132 C136 136 140 146 132 152" stroke-opacity=".6"/>
     <path d="M142 170 C150 172 154 182 146 188" stroke-opacity=".6"/>
     <path d="M114 176 C116 186 112 194 104 198" stroke-opacity=".4"/>
-    <path d="M78 90 c-1 4 1 7 4 8" stroke-opacity=".35"/>
   </g></symbol>
   <symbol id="baby-12" viewBox="0 0 240 240"><g transform="translate(120 122) scale(.58) translate(-122 -130)">
     <circle cx="102" cy="86" r="33"/>
     <path d="M128 66 C168 76 190 124 168 172 C156 194 132 204 112 196 C96 190 88 176 92 160" fill="rgba(255,255,255,.55)"/>
     <path d="M92 160 C82 146 82 132 90 122 C94 116 96 112 92 106"/>
-    <path d="M128 118 C122 132 112 140 100 146 C96 148 94 152 98 156"/>
-    <path d="M98 156 l-4 5 M101 158 l-2 6 M104 158 l0 6" stroke-opacity=".6"/>
+    <path d="M128 118 C122 132 112 140 100 146 C96 148 94 152 98 156" />
     <path d="M150 176 C140 168 120 166 106 170 C98 174 92 184 98 194 C102 198 108 196 110 192"/>
     <path d="M112 90 c4 -2 7 3 3 8" stroke-opacity=".55"/>
-    <path d="M78 86 c-1 3 0 6 3 7" stroke-opacity=".45"/>
   </g></symbol>
   <symbol id="baby-20" viewBox="0 0 240 240"><g transform="translate(120 122) scale(.78) translate(-124 -132)">
     <circle cx="100" cy="84" r="29"/>
     <path d="M124 64 C170 70 196 124 170 176 C156 198 132 208 110 198 C94 192 86 176 92 158" fill="rgba(255,255,255,.55)"/>
     <path d="M92 158 C82 144 82 130 90 120 C94 114 96 110 92 104"/>
     <path d="M130 116 C122 132 112 142 98 148 C92 150 90 156 94 160 C98 164 104 160 106 156"/>
-    <path d="M94 160 l-5 5 M98 163 l-3 6 M102 163 l-1 6" stroke-opacity=".6"/>
     <path d="M154 180 C142 170 120 168 104 174 C94 178 88 190 96 200 C100 204 108 202 112 196"/>
     <path d="M112 86 c4 -2 7 3 3 8" stroke-opacity=".55"/>
-    <path d="M78 82 c-3 3 -2 8 2 10" stroke-opacity=".6"/>
-    <path d="M86 78 c2 -1 5 -1 7 0" stroke-opacity=".5"/>
+    <path d="M84 84 c-2 3 -1 7 2 9" stroke-opacity=".55"/>
   </g></symbol>
   <symbol id="baby-30" viewBox="0 0 240 240"><g transform="translate(120 122) scale(.94) translate(-126 -134)">
     <circle cx="98" cy="84" r="28"/>
     <path d="M122 62 C176 66 206 126 176 182 C160 206 130 214 106 202 C90 194 82 176 88 158" fill="rgba(255,255,255,.55)"/>
     <path d="M88 158 C76 144 76 128 86 118 C90 112 94 108 90 102"/>
     <path d="M132 118 C124 136 112 146 96 150 C90 152 88 158 92 162 C98 166 104 162 108 156"/>
-    <path d="M92 162 l-5 5 M96 165 l-3 6 M100 165 l-1 6" stroke-opacity=".6"/>
     <path d="M160 186 C146 174 122 172 104 178 C92 184 86 196 96 206 C102 210 110 206 114 198"/>
     <path d="M110 86 c4 -2 7 3 3 8" stroke-opacity=".55"/>
-    <path d="M76 82 c-3 3 -2 8 2 10" stroke-opacity=".6"/>
-    <path d="M83 78 c3 -2 7 -2 10 0" stroke-opacity=".6"/>
-    <path d="M80 96 c3 2 7 2 10 0" stroke-opacity=".35"/>
+    <path d="M82 82 c-2 3 -1 7 2 9" stroke-opacity=".55"/>
   </g></symbol>
   <symbol id="baby-40" viewBox="0 0 240 240"><g transform="translate(120 122) scale(1.04) translate(-128 -136)">
     <circle cx="98" cy="84" r="28"/>
     <path d="M122 60 C182 64 214 128 182 186 C164 212 130 220 104 206 C88 198 80 178 86 158" fill="rgba(255,255,255,.55)"/>
     <path d="M86 158 C74 144 74 128 84 118 C88 112 92 108 88 102"/>
     <path d="M134 118 C126 138 112 148 96 152 C90 154 88 160 92 164 C98 168 104 164 108 158"/>
-    <path d="M92 164 l-5 5 M96 167 l-3 6 M100 167 l-1 6" stroke-opacity=".6"/>
     <path d="M164 190 C150 176 124 174 104 180 C92 186 84 198 94 208 C100 212 110 208 116 200"/>
     <path d="M110 86 c4 -2 7 3 3 8" stroke-opacity=".55"/>
-    <path d="M76 82 c-3 3 -2 8 2 10" stroke-opacity=".6"/>
-    <path d="M83 78 c3 -2 7 -2 10 0" stroke-opacity=".6"/>
-    <path d="M80 96 c3 2 7 2 10 0" stroke-opacity=".35"/>
-    <path d="M92 60 c6 -4 14 -5 20 -2" stroke-opacity=".4"/>
+    <path d="M82 82 c-2 3 -1 7 2 9" stroke-opacity=".55"/>
   </g></symbol>
-  <!-- eucalyptus sprig: botanical punctuation for the chapter opener only -->
-  <symbol id="sprig" viewBox="0 0 150 170">
-    <path d="M20 160 C50 120 80 80 130 20"/>
-    <ellipse class="leaf" cx="46" cy="128" rx="13" ry="8" transform="rotate(-50 46 128)"/>
-    <ellipse class="leaf" cx="78" cy="118" rx="13" ry="8" transform="rotate(40 78 118)"/>
-    <ellipse class="leaf" cx="70" cy="92" rx="12" ry="7.5" transform="rotate(-50 70 92)"/>
-    <ellipse class="leaf" cx="102" cy="84" rx="12" ry="7.5" transform="rotate(40 102 84)"/>
-    <ellipse class="leaf" cx="94" cy="58" rx="11" ry="7" transform="rotate(-50 94 58)"/>
-    <ellipse class="leaf" cx="124" cy="50" rx="11" ry="7" transform="rotate(40 124 50)"/>
-    <ellipse class="leaf" cx="118" cy="28" rx="9" ry="6" transform="rotate(-50 118 28)"/>
-  </symbol>
-  <!-- capture glyphs: one line, one weight -->
-  <symbol id="g-write" viewBox="0 0 40 40"><path class="wash" d="M6 30 C10 22 14 20 22 20 C30 20 34 24 34 30 Z"/><path d="M8 33 h24 M8 27 h12 M8 21 h8"/><path d="M30 6 l4 4 l-14 14 l-6 2 l2 -6 Z"/><path class="soft" d="M26 10 l4 4"/></symbol>
-  <symbol id="g-photo" viewBox="0 0 40 40"><path class="wash" d="M7 9 h26 v26 h-26 Z"/><rect x="7" y="7" width="26" height="28"/><rect x="10" y="10" width="20" height="17"/><circle cx="20" cy="18.5" r="4"/><path class="soft" d="M10 27 l6 -5 l4 3 l5 -4 l5 4"/></symbol>
-  <symbol id="g-video" viewBox="0 0 40 40"><path class="wash" d="M6 11 h22 v18 h-22 Z"/><rect x="6" y="11" width="22" height="18"/><path d="M28 17 l7 -4 v14 l-7 -4"/><path d="M15 15.5 v9 l7 -4.5 Z"/><path class="soft" d="M9 31.5 h16"/></symbol>
-  <symbol id="g-voice" viewBox="0 0 40 40"><path class="wash" d="M14 8 h12 v18 h-12 Z"/><rect x="14" y="7" width="12" height="18" rx="6"/><path d="M10 19 c0 6 4 10 10 10 c6 0 10 -4 10 -10"/><path d="M20 29 v5 M15 34 h10"/><path class="soft" d="M6 16 v6 M34 16 v6"/></symbol>
 </svg>
 
-<div class="review-bar"><div class="wrap"><span>Step 3B refined · My Week · Active pregnancy · Journal owner</span><span>Move through weeks 8, 12, 20, 30, 40 with the rail on the page or the growth sheet</span><span><a href="_v1/my-week.html">Previous version</a> · paused, historical and sensitive states keep the 3A logic (<a href="../my-week.html#state-b-digital-active">see 3A</a>)</span></div></div>
+<div class="review-bar"><div class="wrap"><span>Step 3B · My Week · Active pregnancy · Journal owner</span><span>Use the week strip or the growth sheet to move through weeks 8, 12, 20, 30, 40</span><span>Digital-only, historical and paused states keep the 3A logic (<a href="../my-week.html#state-b-digital-active">see 3A</a>)</span></div></div>
 
 <header class="appbar"><div class="wrap"><a class="brand" href="homepage.html"><img src="../assets/logo-tsoy-trimmed.png" alt="The Start of You" width="721" height="304"></a><span class="crumbs"><b>My Week</b> · Journey · Companion · Journal · Family</span><a class="acct" href="#">Amara</a></div></header>
 
-<main class="mw">
+<nav class="week-strip" aria-label="Weeks">
+  <div class="wrap">
+    <a class="strip-nav prev" href="#" id="prevLink"><span>Last week</span><b id="prevName">Week 11</b></a>
+    <ol class="strip" id="strip"></ol>
+    <a class="strip-nav next" href="#" id="nextLink"><span>Next week</span><b id="nextName">Week 13</b></a>
+  </div>
+</nav>
+
+<main>
   <section class="chapter-band" aria-labelledby="wk-h">
     <div class="wrap">
       <div>
@@ -108,60 +84,31 @@
         <h1 class="display-1" id="wk-h">Week Twelve</h1>
         <p class="chapter-title" id="chapter">The first turning</p>
         <p class="meta" id="theme">A turning point. · Reflexes are forming. A hand may open and close without knowing why.</p>
-        <span class="progress-cue" id="cue">Week 12 of 40 · first trimester</span>
       </div>
-      <div class="countdown">
-        <svg class="sprig" aria-hidden="true" viewBox="0 0 150 170"><path d="M20 160 C50 120 80 80 130 20"/><ellipse class="leaf" cx="46" cy="128" rx="13" ry="8" transform="rotate(-50 46 128)"/><ellipse class="leaf" cx="78" cy="118" rx="13" ry="8" transform="rotate(40 78 118)"/><ellipse class="leaf" cx="70" cy="92" rx="12" ry="7.5" transform="rotate(-50 70 92)"/><ellipse class="leaf" cx="102" cy="84" rx="12" ry="7.5" transform="rotate(40 102 84)"/><ellipse class="leaf" cx="94" cy="58" rx="11" ry="7" transform="rotate(-50 94 58)"/><ellipse class="leaf" cx="124" cy="50" rx="11" ry="7" transform="rotate(40 124 50)"/><ellipse class="leaf" cx="118" cy="28" rx="9" ry="6" transform="rotate(-50 118 28)"/></svg>
-        <span class="big" id="togo">28</span><span class="meta" id="togoLabel">weeks to go · your second trimester begins at week 14</span>
-      </div>
+      <div class="countdown"><span class="big" id="togo">28</span><span class="meta" id="togoLabel">weeks to go · your second trimester begins at week 14</span></div>
     </div>
   </section>
 
-  <div class="wrap spread-wrap">
-    <article class="spread" aria-label="This week's page">
-      <div class="page left">
-        <div class="folio"><span>The Start of You</span><b id="folioL">Week 12</b></div>
-        <aside class="plate" aria-labelledby="plate-h">
-          <span class="visually-hidden" id="plate-h">Your baby this week</span>
-          <div class="disc"><svg class="baby" id="babySvg" viewBox="0 0 240 240" role="img" aria-labelledby="babyTitle"><title id="babyTitle">Concept line study of a baby at week 12</title><use href="#baby-12" id="babyUse"/></svg><span class="wk" id="plateWk">Week 12</span></div>
-          <div class="scale" aria-label="Approximate length compared with full term">
-            <div class="bar"><i id="bar" style="width:11%"></i></div>
-            <div class="row"><span><b id="mm">about 55 mm</b> this week</span><span>about 51 cm at 40 weeks</span></div>
-          </div>
-          <div class="steps" aria-hidden="true" id="steps"></div>
-        </aside>
-        <nav class="rail-weeks" aria-label="Weeks">
-          <ol id="rail"></ol>
-          <div class="ends"><a href="#" id="prevLink"><b id="prevName">Week 11</b> · last week</a><a href="#" id="nextLink">next week · <b id="nextName">Week 13</b></a></div>
-        </nav>
-        <p class="concept-note" style="margin-top:18px">Concept line study for the growth system, not an anatomical illustration. The production illustration set will be commissioned from one illustrator and reviewed before use.</p>
+  <div class="wrap week-body">
+    <aside class="plate" aria-labelledby="plate-h">
+      <span class="visually-hidden" id="plate-h">Your baby this week</span>
+      <div class="disc"><svg class="baby" id="babySvg" viewBox="0 0 240 240" role="img" aria-labelledby="babyTitle"><title id="babyTitle">Concept line study of a baby at week 12</title><use href="#baby-12" id="babyUse"/></svg><span class="wk" id="plateWk">Week 12</span></div>
+      <div class="scale" aria-label="Approximate length compared with full term">
+        <div class="bar"><i id="bar" style="width:11%"></i></div>
+        <div class="row"><span><b id="mm">about 55 mm</b> this week</span><span>about 51 cm at 40 weeks</span></div>
       </div>
-      <div class="page right">
-        <div class="folio"><b id="folioR">First trimester</b><span>Pregnancy</span></div>
-        <section class="section-j" aria-labelledby="baby-h">
-          <span class="label">This week, your baby</span>
-          <h2 id="baby-h">The baby is fully formed in miniature</h2>
-          <p id="babyWhy">By week 12, all major organs and structures are in place. The baby is now a foetus. Fingernails, genitals, and facial muscles are developing.</p>
-          <p class="means" id="babyMeans">The shift from 'embryo' to 'foetus' at week 12 reflects the fact that the foundational structure is complete, what follows is growth.</p>
-        </section>
-        <div class="measure-row">
-          <b id="mm2">about 55 mm</b><span>approximate length this week, from the week's notes</span>
-          <span class="fruit" id="sizeLine">If it helps to picture it: about the size of a lime. <a href="#" id="hideSize">Hide size comparisons</a></span>
-        </div>
-        <section class="section-j" aria-labelledby="focus-h" style="margin-top:22px">
-          <span class="label" id="focus-h">One thing worth knowing</span>
-          <p id="reminder" style="font-family: var(--font-read); font-size: 18px; line-height: 1.5">The 12-week point is significant, and it's okay to let it feel that way. You've navigated a genuinely hard stage of pregnancy.</p>
-        </section>
-        <section class="section-j" aria-labelledby="fp-h">
-          <span class="label" id="fp-h">Your focus this week</span>
-          <div class="focus" id="focus"></div>
-        </section>
-      </div>
-    </article>
-  </div>
+      <p class="size-line" id="sizeLine">If it helps to picture it: about the size of a lime. <a href="#" id="hideSize">Hide size comparisons</a></p>
+      <div class="steps" aria-hidden="true" id="steps"></div>
+      <p class="concept-note">Concept line study for the growth system. Not an anatomical illustration; the production illustration language will be commissioned and reviewed before use.</p>
+    </aside>
 
-  <div class="wrap two-col">
-    <div class="guidance-col">
+    <div>
+      <section class="section-j" aria-labelledby="baby-h">
+        <span class="label">This week, your baby</span>
+        <h2 id="baby-h">The baby is fully formed in miniature</h2>
+        <p id="babyWhy">By week 12, all major organs and structures are in place. The baby is now a foetus. Fingernails, genitals, and facial muscles are developing.</p>
+        <p class="means" id="babyMeans">The shift from 'embryo' to 'foetus' at week 12 reflects the fact that the foundational structure is complete, what follows is growth.</p>
+      </section>
       <section class="section-j" aria-labelledby="body-h">
         <span class="label">Your body this week</span>
         <h2 id="body-h">The placenta is taking over hormone production</h2>
@@ -173,81 +120,75 @@
         <p id="emoWhy">It can bring relief, wonder, and renewed anxiety, sometimes within the same appointment.</p>
         <p class="means" id="emoMeans">Whatever you feel at the scan, including complicated or unexpected emotions, is valid. Relief and anxiety can coexist completely.</p>
       </section>
-    </div>
-    <div class="tools-col">
-      <section aria-labelledby="appt-h">
-        <span class="label" id="appt-h">Appointments and tools</span>
-        <div class="paper-obj appt" id="apptObj">
-          <div class="date"><b id="apptDay">2</b><span id="apptMon">Nov</span></div>
-          <div><span class="label" style="color: var(--j-deep)">Appointment</span><p id="apptTitle">12-week scan · 10:20 · Maternity unit</p><span class="meta">Questions for your midwife · 2 saved</span><div class="btn-row"><a class="btn btn-quiet" href="#">Open your questions</a></div></div>
-        </div>
-        <ul class="actions" style="margin-top: 22px" id="tools">
-          <li><a href="#">Due date and milestones</a><span class="meta">Estimate</span></li>
-          <li><a href="#">Appointment notes</a><span class="meta">3 notes</span></li>
-          <li><a href="#" id="nextRead">Second trimester: what changes</a><span class="meta">Read, 5 min</span></li>
-        </ul>
+      <section class="section-j" aria-labelledby="focus-h">
+        <span class="label" id="focus-h">One thing worth knowing</span>
+        <p id="reminder">The 12-week point is significant, and it's okay to let it feel that way. You've navigated a genuinely hard stage of pregnancy.</p>
+        <div class="focus" id="focus"></div>
       </section>
     </div>
   </div>
 
-  <section class="wrap memories" aria-labelledby="mem-h">
-    <div class="head">
-      <div><span class="label">Memories from this week · <span id="memWk">Week 12</span></span><h2 id="mem-h">What you want to keep</h2></div>
-      <p class="meta">Quick moments, in whatever form they come: a line, a photo, a few seconds of video, your own voice.</p>
-    </div>
-    <div class="capture" role="group" aria-label="Add a memory">
-      <button type="button"><svg aria-hidden="true"><use href="#g-write"/></svg><div><b>Write something</b><span>A line or a page. It saves as you go.</span></div></button>
-      <button type="button"><svg aria-hidden="true"><use href="#g-photo"/></svg><div><b>Add a photo</b><span>Bump, scan, or anything from the week.</span></div></button>
-      <button type="button"><svg aria-hidden="true"><use href="#g-video"/></svg><div><b>Add a video</b><span>A few seconds is enough. Kept private.</span></div></button>
-      <button type="button"><svg aria-hidden="true"><use href="#g-voice"/></svg><div><b>Record a voice note</b><span>Say it instead of writing it.</span></div></button>
-    </div>
-    <div class="saved">
-      <div class="written">
-        <div class="wash peach"><p class="prompt" id="reflect">What do you want to remember about these first 12 weeks?</p><div class="ruled"><label class="visually-hidden" for="p1">Reflection</label><textarea id="p1">The room was darker than I expected and quieter. We held hands and didn't say anything until the heartbeat.</textarea></div></div>
-        <p class="autosave" id="autosave"><span><i aria-hidden="true"></i><b>Autosaved</b> · Tuesday 21:14</span><span>Private to you</span></p>
+  <section class="wrap" aria-labelledby="mem-h" style="padding-bottom: var(--s5)">
+    <span class="label" id="mem-h" style="display:block; margin-bottom: 18px; color: var(--j-deep)">Memories and journal · <span id="memWk">Week 12</span></span>
+    <div class="objects">
+      <div>
+        <div class="photo-obj">
+          <div class="frame empty"><div class="slot">Add this week's photo<br>bump, scan, or anything from the week</div><p class="caption" id="photoCap">Week twelve</p></div>
+          <div class="field-line"><label for="bump">Bump measurement</label><span><input id="bump" class="visually-hidden" type="text"></span></div>
+        </div>
+        <div class="paper-obj voice-obj" style="margin-top: 24px" aria-label="Voice note">
+          <button class="play" type="button" aria-label="Play voice note"></button>
+          <div><span class="label">Voice note · 0:42</span><p>Recorded Tuesday, on the way home from the scan.</p></div>
+          <div class="wave" style="width:90px" aria-hidden="true"></div>
+        </div>
       </div>
-      <figure class="mem-photo"><img src="../assets/journal-ultrasound.jpg" alt="The scan photograph, kept with this week" width="1920" height="1279"><figcaption><b>Scan photo</b><span>Tuesday · Week 12</span></figcaption></figure>
-      <figure class="mem-video">
-        <div class="still"><img src="../assets/journal-couple-ultrasound.jpg" alt="" width="1279" height="1920"><button class="play" type="button" aria-label="Play video, 18 seconds"></button><span class="dur">0:18</span></div>
-        <figcaption><b>Video · after the scan</b><span>Tuesday · Week 12 · "we kept saying it's real"</span><span class="meta">Private keepsake. Not shared anywhere.</span></figcaption>
-      </figure>
-      <div class="paper-obj voice-obj mem-voice" aria-label="Voice note">
-        <button class="play" type="button" aria-label="Play voice note, 42 seconds"></button>
-        <div><span class="label">Voice note · 0:42</span><p>On the way home from the scan.</p></div>
-        <div class="bars" aria-hidden="true" id="bars"></div>
-        <span class="meta">Tuesday · Week 12</span>
+      <div class="prompts">
+        <div class="wash peach"><p class="prompt" id="reflect">What do you want to remember about these first 12 weeks?</p><div class="ruled"><label class="visually-hidden" for="p1">Reflection</label><textarea id="p1"></textarea></div></div>
+        <div class="rows" role="group" aria-label="This week in a line">
+          <div><span>Highlights</span><input type="text" aria-label="Highlights"></div>
+          <div><span>Challenges</span><input type="text" aria-label="Challenges"></div>
+          <div><span>Cravings</span><input type="text" aria-label="Cravings"></div>
+        </div>
       </div>
     </div>
-    <p class="privacy-line"><span><b>Private to you.</b> Only you can see these. The Companion does not read your reflections, photos, videos or voice notes, and nothing here is shared unless you choose to export it.</span></p>
   </section>
 
-  <div class="wrap bridge-wrap">
-    <section class="bridge" aria-labelledby="band-h">
-      <figure><img src="../assets/journal-writing.jpg" alt="Writing by hand in the printed One Year Pregnancy Journal" width="1920" height="1280"><figcaption>Your printed journal, from the existing product shoot</figcaption></figure>
-      <div>
-        <span class="label" id="band-h">In your journal this week</span>
-        <h2>Your Week <span id="bandWord">Twelve</span> page is waiting too</h2>
-        <p id="bandCopy">The printed page has the same spaces as this one: memories and milestones, a photo, your bump measurement and the week in a line. Nothing is copied between them unless you choose to.</p>
-        <p class="principle">Quick moments here. Longer stories by hand. Or both.</p>
-        <div class="btn-row"><a class="btn btn-quiet" href="#">I wrote in my journal this week</a><a class="btn btn-quiet" href="#">Add a photo of the page</a></div>
-      </div>
+  <div class="wrap">
+    <section class="band j" aria-labelledby="band-h">
+      <span class="label" id="band-h" style="color: var(--j-deep)">In your journal this week</span>
+      <p id="bandCopy">Your printed journal's Week Twelve page has the same spaces: memories and milestones, a photo, your bump measurement and the week in a line. Write there, here, or both. Nothing is copied between them unless you choose to.</p>
+      <div class="btn-row"><a class="btn btn-quiet" href="#">I wrote in my journal this week</a><a class="btn btn-quiet" href="#">Add a photo of the page</a></div>
     </section>
   </div>
 
-  <section class="wrap companion-entry" style="max-width: var(--content); margin: 0 auto var(--s6); border-bottom: 0" aria-labelledby="ask-h">
-    <span class="label comp-eyebrow" id="ask-h"><span class="comp-mark" aria-hidden="true"></span>Ask the Companion</span>
-    <form class="ask" onsubmit="return false" style="max-width: 720px"><label class="visually-hidden" for="qa">Your question</label><input id="qa" class="ask-field" type="text" placeholder="What does the 12-week scan check for?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form>
-    <ul class="suggestions" id="asks"></ul>
-    <p class="meta" style="margin-top:14px">It answers from reviewed guidance and knows your week. It does not read your reflections, photos, videos or voice notes.</p>
-  </section>
+  <div class="wrap week-grid" style="padding-bottom: var(--s6)">
+    <section class="companion-entry" style="margin:0" aria-labelledby="ask-h">
+      <span class="label comp-eyebrow" id="ask-h"><span class="comp-mark" aria-hidden="true"></span>Ask the Companion</span>
+      <form class="ask" onsubmit="return false"><label class="visually-hidden" for="qa">Your question</label><input id="qa" class="ask-field" type="text" placeholder="What does the 12-week scan check for?"><button class="voice" type="button" aria-label="Ask by voice">Voice</button><button class="btn btn-secondary" type="submit">Ask</button></form>
+      <ul class="suggestions" id="asks"></ul>
+      <p class="meta" style="margin-top:14px">It answers from reviewed guidance and knows your week. It does not read your journal.</p>
+    </section>
+    <section aria-labelledby="appt-h">
+      <span class="label" id="appt-h" style="display:block;margin-bottom:14px">Appointments and tools</span>
+      <div class="paper-obj appt" id="apptObj">
+        <div class="date"><b id="apptDay">2</b><span id="apptMon">Nov</span></div>
+        <div><span class="label" style="color: var(--j-deep)">Appointment</span><p id="apptTitle">12-week scan · 10:20 · Maternity unit</p><span class="meta">Questions for your midwife · 2 saved</span><div class="btn-row"><a class="btn btn-quiet" href="#">Open your questions</a></div></div>
+      </div>
+      <ul class="actions" style="margin-top: 22px" id="tools">
+        <li><a href="#">Due date and milestones</a><span class="meta">Estimate</span></li>
+        <li><a href="#">Appointment notes</a><span class="meta">3 notes</span></li>
+        <li><a href="#" id="nextRead">Second trimester: what changes</a><span class="meta">Read, 5 min</span></li>
+      </ul>
+    </section>
+  </div>
 
   <section class="growth-sheet" id="growth-system" aria-labelledby="gs-h">
     <div class="wrap">
-      <span class="label">Baby growth system · five representative stages</span>
+      <span class="label">Baby growth system · five canonical stages</span>
       <h2 class="display-2" id="gs-h" style="margin-top:12px">The same line, growing</h2>
-      <p class="deck" style="margin-top:14px">One illustration language, one orientation, one weight of line. Only proportion, scale and the amount of line detail change, so week 8 and week 40 read as the same baby at different moments. Shown only for an active pregnancy; paused, historical and sensitive states suppress this device.</p>
+      <p class="deck" style="margin-top:14px">One illustration language, one orientation, one weight of line. Only proportion, scale and detail change, so week 8 and week 40 read as the same baby at different moments, not as unrelated screens. Shown only for an active pregnancy; paused, historical and sensitive states suppress this device.</p>
       <div class="growth-row" id="growthRow"></div>
-      <p class="concept">Concept line studies, not anatomical illustrations: nothing here claims medical accuracy, and the production set will be commissioned from one illustrator and reviewed before use. Measurements are the approximate figures recorded in the week data (crown to rump in early weeks, crown to heel later; the mixed basis is a content finding to resolve). Familiar size comparisons stay optional and secondary.</p>
+      <p class="meta" style="margin-top:22px; max-width: 70ch">Measurements are the approximate figures recorded in the week data (crown to rump in early weeks, crown to heel later; the mixed basis is a content finding to resolve). Fruit comparisons are optional and secondary.</p>
     </div>
   </section>
 </main>
@@ -255,7 +196,7 @@
 <nav class="tabbar" aria-label="App"><a href="#" aria-current="page"><span class="glyph"></span>Today</a><a href="#"><span class="glyph"></span>Journey</a><a href="companion.html"><span class="glyph"></span>Companion</a><a href="#"><span class="glyph"></span>Journal</a><a href="#"><span class="glyph"></span>You</a></nav>
 
 <script>
-// Real repository copy (weekData.ts, myWeekContent.ts). Synthetic: appointments, dates, name, memories.
+// Real repository copy (weekData.ts, myWeekContent.ts). Synthetic: appointments, dates, name.
 const W = {
   8:  { word:"Eight", tri:"First trimester", chapter:"Soft beginnings", theme:"Becoming, quietly.", note:"Tiny limbs are taking shape, fingers and toes still webbed in the making.",
         babyWhat:"All major organ systems are beginning to form", babyWhy:"The embryo's facial features are becoming distinct, eyes, nose, and lips are developing. Fingers and toes are forming. The heart is beating and pumping blood.", babyMeans:"By week 8, the embryo has all the building blocks of a complete human body in early form. The next phase is growth and refinement, not new creation.",
@@ -305,10 +246,10 @@ const W = {
 };
 const STAGES = [8, 12, 20, 30, 40];
 const $ = (id) => document.getElementById(id);
-const triShort = (t) => t.split(" · ")[0];
+const word = (n) => W[n] ? W[n].word : String(n);
 
-function rail(n) {
-  const ol = $("rail"); ol.innerHTML = "";
+function strip(n) {
+  const ol = $("strip"); ol.innerHTML = "";
   for (let k = n - 2; k <= n + 2; k++) {
     if (k < 1 || k > 42) continue;
     const li = document.createElement("li");
@@ -321,26 +262,23 @@ function rail(n) {
     ol.appendChild(li);
   }
   $("prevName").textContent = "Week " + (n - 1); $("nextName").textContent = "Week " + (n + 1);
-  const cur = ol.querySelector("[aria-current]"); if (cur && cur.scrollIntoView && matchMedia("(max-width: 720px)").matches) cur.scrollIntoView({ inline: "center", block: "nearest" });
 }
 
 function render(n) {
   const d = W[n]; if (!d) return;
-  document.querySelectorAll(".chapter-band, .spread, .two-col").forEach((el) => el.classList.add("out"));
-  rail(n);
+  document.querySelectorAll(".chapter-band, .week-body").forEach((el) => el.classList.add("out"));
+  strip(n);
   $("ctx").textContent = "Pregnancy · " + d.tri + " · Due 14 April";
   $("wk-h").textContent = "Week " + d.word;
   $("chapter").textContent = d.chapter;
   $("theme").textContent = d.theme + " · " + d.note;
-  $("cue").textContent = "Week " + n + " of 40 · " + triShort(d.tri).toLowerCase();
   $("togo").textContent = 40 - n > 0 ? String(40 - n) : "Due";
   $("togoLabel").textContent = (40 - n > 0 ? "weeks to go · " : "") + d.togo;
-  $("folioL").textContent = "Week " + n; $("folioR").textContent = triShort(d.tri);
   $("babyUse").setAttribute("href", "#baby-" + n);
   $("babyTitle").textContent = "Concept line study of a baby at week " + n;
   $("plateWk").textContent = "Week " + n;
   $("bar").style.width = Math.round(d.mm / 510 * 100) + "%";
-  $("mm").textContent = d.mmText; $("mm2").textContent = d.mmText;
+  $("mm").textContent = d.mmText;
   $("sizeLine").firstChild.textContent = "If it helps to picture it: about the size of " + d.fruit + ". ";
   $("steps").innerHTML = STAGES.map((s) => `<span class="${s === n ? "on" : s < n ? "past" : ""}"></span>`).join("");
   $("baby-h").textContent = d.babyWhat; $("babyWhy").textContent = d.babyWhy; $("babyMeans").textContent = d.babyMeans;
@@ -348,9 +286,9 @@ function render(n) {
   $("emo-h").textContent = d.emoWhat; $("emoWhy").textContent = d.emoWhy; $("emoMeans").textContent = d.emoMeans;
   $("reminder").textContent = d.reminder;
   $("focus").innerHTML = d.focus.map(([a, r]) => `<div><b>${a}</b><span>${r}</span></div>`).join("");
-  $("memWk").textContent = "Week " + n;
+  $("memWk").textContent = "Week " + n; $("photoCap").textContent = "Week " + d.word.toLowerCase();
   $("reflect").textContent = d.reflect;
-  $("bandWord").textContent = d.word;
+  $("bandCopy").textContent = `Your printed journal's Week ${d.word} page has the same spaces: memories and milestones, a photo, your bump measurement and the week in a line. Write there, here, or both. Nothing is copied between them unless you choose to.`;
   $("qa").placeholder = d.asks[0];
   $("asks").innerHTML = d.asks.slice(1).map((q) => `<li><a href="companion.html">${q}</a></li>`).join("");
   $("apptDay").textContent = d.appt[0]; $("apptMon").textContent = d.appt[1]; $("apptTitle").textContent = d.appt[2];
@@ -364,22 +302,10 @@ $("growthRow").innerHTML = STAGES.map((s) => `<figure data-week="${s}"><div clas
 const goWeek = (n) => { render(n); window.scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); };
 document.querySelectorAll(".growth-row button").forEach((b) => b.addEventListener("click", () => goWeek(Number(b.dataset.week))));
 document.querySelectorAll(".growth-row .disc").forEach((d) => d.addEventListener("click", () => goWeek(Number(d.parentElement.dataset.week))));
-document.querySelectorAll(".chapter-band, .spread, .two-col").forEach((el) => el.classList.add("fade-swap"));
+document.querySelectorAll(".chapter-band, .week-body").forEach((el) => el.classList.add("fade-swap"));
 $("prevLink").addEventListener("click", (e) => { e.preventDefault(); });
 $("nextLink").addEventListener("click", (e) => { e.preventDefault(); });
 $("hideSize").addEventListener("click", (e) => { e.preventDefault(); const p = $("sizeLine"); p.firstChild.textContent = "Size comparisons hidden. "; e.target.textContent = "Show again"; });
-
-// voice note bars: a restrained, fixed waveform (synthetic)
-$("bars").innerHTML = [6,10,16,22,14,24,18,12,20,26,16,10,14,22,18,8,12,16,10,6,14,20,12,8,16,10,6,12,8,4].map((h) => `<i style="height:${h}px"></i>`).join("");
-
-// autosave: real digital behaviour on the writing space (prototype: local only)
-let saveTimer; const status = $("autosave").firstElementChild;
-$("p1").addEventListener("input", () => {
-  $("autosave").classList.add("saving"); status.innerHTML = '<i aria-hidden="true"></i><b>Saving</b>';
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => { $("autosave").classList.remove("saving"); status.innerHTML = '<i aria-hidden="true"></i><b>Autosaved</b> · just now'; }, 900);
-});
-
 const start = Number((location.hash.match(/week-(\d+)/) || [])[1]) || 12;
 render(W[start] ? start : 12);
 </script>

@@ -20,7 +20,10 @@
   --preg-deep: #8E5A50; --preg-mid: #D9A596; --preg-wash: #F7E6DC; --preg-support: #E3EBE4;
   --fy-deep: #4C6375; --fy-mid: #96ACB1; --fy-wash: #E4EBEF;
   --pp-deep: #773C48; --pp-mid: #B98A96; --pp-wash: #F0E2E5;
-  --tod-deep: #955537; --tod-mid: #D8A585; --tod-wash: #F6E6DA;
+  /* Toddler re-tuned 27 October 2026 (founder decision, second pass): decisively apricot / clay / terracotta so it reads as its own
+     family beside Pregnancy blush and Family honey. Original deep #955537 / mid #D8A585 / wash #F6E6DA; first pass #9C4F25 / #E09F6A /
+     #F7E0C8 judged too subtle. deep on wash 5.09:1, on paper 6.98:1; ink-soft on wash 4.76:1 */
+  --tod-deep: #8A3F1B; --tod-mid: #D9823B; --tod-wash: #F2CFAD;
   --fam-deep: #80602A; --fam-mid: #D4B36A; --fam-wash: #F4EBD8;
 
   /* Companion accent (PROPOSED, limited): the voice that is not a chapter. Mark, eyebrow, active input only. */

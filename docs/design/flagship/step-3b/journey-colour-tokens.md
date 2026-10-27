@@ -20,7 +20,7 @@ Each family has three roles:
 | Pregnancy (peach / blush) | #8E5A50 | #D9A596 | #F7E6DC (support #E3EBE4) | 5.25 | 4.64 | 13.73 |
 | First year (mineral blue) | #4C6375 | #96ACB1 | #E4EBEF | 5.85 | 5.20 | 13.82 |
 | Postpartum, secondary within First year (muted berry) | #773C48 | #B98A96 | #F0E2E5 | 7.76 | 6.62 | 13.26 |
-| Toddler (apricot / terracotta) | #955537 | #D8A585 | #F6E6DA | 5.39 | 4.75 | 13.68 |
+| Toddler (apricot / clay / terracotta; re-tuned 27 October 2026, founder decision, was #955537 / #D8A585 / #F6E6DA) | #8A3F1B | #D9823B | #F2CFAD | 6.98 | 5.09 | 11.35 |
 | Family (ochre / honey) | #80602A | #D4B36A | #F4EBD8 | 5.40 | 4.89 | 14.06 |
 | Companion accent (proposed, limited) | #6B5670 | #A893AB | #EEE8EE | 6.14 | 5.46 | 13.81 |
 

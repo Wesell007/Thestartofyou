@@ -1,6 +1,6 @@
 # Gate 2 Step 3B: isolated prototypes (end-of-round report)
 
-**Status: STEP 3B PROTOTYPES DELIVERED FOR FOUNDER REVIEW (24 October 2026); homepage chapter-illustration fidelity pass delivered 25 October 2026 (see `chapter-illustrations.md`: the SVG concept family described below is superseded by the approved watercolour family). Design artefacts only. No runtime code, no Supabase change, 41B.1B not started, Lovable unpublished, Article and Activation not redesigned, no further hubs.**
+**Status: STEP 3B PROTOTYPES DELIVERED FOR FOUNDER REVIEW (24 October 2026); homepage chapter-illustration fidelity pass delivered 25 October 2026 (see `chapter-illustrations.md`: the SVG concept family described below is superseded by the approved watercolour family); static homepage FOUNDER APPROVED AND LOCKED 27 October 2026 (see `homepage-static-lock.md`; Toddler tokens re-tuned to `#8A3F1B` / `#D9823B` / `#F2CFAD`). Design artefacts only. No runtime code, no Supabase change, 41B.1B not started, Lovable unpublished, Article and Activation not redesigned, no further hubs.**
 
 Review locally: run `C:\Users\Administrator\.tsoy-design\flagship-prototypes\tools\serve.cmd` and open `http://localhost:4310/3b/` (index), `3b/my-week.html`, `3b/homepage.html`, `3b/companion.html`. Localhost only, fully offline. Compressed captures are in `review/`; the reproducible source (DESIGN-ONLY / NON-RUNTIME) is in `prototype-source/`.
 
